@@ -16,6 +16,12 @@
     p {
         font-size: 20px
     }
+    li {
+        font-size: 20px
+    }
+    a {
+        font-size: 20px
+    }
     img {
         /* float: left; */
         margin: 2px;
@@ -34,6 +40,15 @@
         margin-left: 30px; /* Sesuaikan dengan nilai yang diinginkan */
     }
 
+    .box {
+        /* margin-block-start: 20px; */
+        background-color: #c4d0f4;
+        max-width: 1000px;
+        padding-left: 20px;
+        border: 2px solid black;
+        box-sizing: border-box;
+    }
+
     .centered-image {
         display: flex;
         justify-content: center;
@@ -44,7 +59,7 @@
 </style>
 <body>
     <!-- <font face="Open Sans Black" size="6" color="#002080"><b>BLOG DAN CERITA</b></font> -->
-    <font size="6" color="#002080"><b>BLOG DAN CERITA</b></font>
+    <font id="home" size="7" color="#146480"><b>Blog dan Cerita</b></font>
     <p style="font-size: 22px">
         Cerita dan pengalaman saya yang pernah dirasakan.<br>
         Dari masa lalu hingga kini, semua cerita sudah menjadi hal yang berharga.<br>
@@ -148,7 +163,23 @@
     <p style="font-size: 25px"><b>7. Masa depan dan impian</b></p>
     <p style="font-size: 25px"><b>8. [Under Construction]</b></p>
     <br>
-    <p>Kembali ke: <a href="index.html">Menu Utama</a></p>
-    <p>Terakhir diupdate: 13 Agustus 2023</p>
+    <p style="font-size:25px; color:#206044;"><u><b>BEBERAPA LINK:</b></u></p>
+    <div class="box">
+        <p>
+        Link halaman:<br>
+        <!-- <b>Home</b> -->
+        <b>Home</b> |
+        <a href="profil.html">Profil</a> |
+        <a href="blog.html">Blog</a> |
+        <a href="fakta.html">Fakta</a> |
+        <a href="about.html">About</a> |
+        Sejarah (Coming Soon)
+        </p>
+    </div>
+    <!-- <p>Kembali ke: <a href="index.html">Menu Utama</a></p> -->
+    <p>[Coming Soon]</p>
+    <br>
+    <a href="#home">Kembali ke awal</a>
+    <p>Terakhir diupdate: 20 Agustus 2023</p>
 </body>
 </html>
