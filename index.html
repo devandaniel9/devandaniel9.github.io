@@ -15,25 +15,40 @@
         background-color: #d0e0f8;
     }
     p {
-        font-size: 20px
+        font-size: 20px;
+        /* line-height: 1.5; */
     }
     li {
-        font-size: 20px
+        font-size: 20px;
     }
     a {
-        font-size: 20px
+        font-size: 20px;
+    }
+    a.button:link, a.button:visited {
+        background-color: #c8c8c8;
+        color: black;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border: 1px solid #404040;
+        border-radius: 6px;
+    }
+    a.button:hover, a.button:active {
+        background-color: #b0b0b0;
     }
     img {
         /* float: left; */
         margin: 2px;
     }
-    .container {
+    .box {
         /* margin-block-start: 20px; */
         background-color: #c4d0f4;
         max-width: 1000px;
         padding-left: 20px;
         border: 2px solid black;
         box-sizing: border-box;
+        border-radius: 6px;
     }
 </style>
 <body>
@@ -55,7 +70,8 @@
         <li><a href="https://devandaniel9-equation-solver3.streamlit.app/">Equation Solver Old</a> - Sudah ada program yang lebih baru</li>
         <li><a href="https://devandaniel9-shape-program-devan-7zwso4.streamlit.app/">Bangun Datar dan Bangun Ruang</a> - Sudah ada Program Geometri</li>
     </ul>
-    <p>Program baru: <b>Number Type Detection</b>, <b>Peluang</b> dan <b>Geometri</b></p>
+    <!-- <p>Program baru: <b>Number Type Detection</b>, <b>Peluang</b> dan <b>Geometri</b></p> -->
+    <p>Program baru: <b>Fakta dan Informasi</b>, <b>Blog dan Cerita</b> dan <b>Equation Solver</b></p>
     <p>Selain itu, ada juga link yang akan kita gunakan di masa depan nanti.</p>
     <p style="font-size:25px; color:#000080;"><b>Link yang akan datang:</b></p>
     <ul>
@@ -74,24 +90,26 @@
         <li><a href="https://www.python.org/">Website Python</a> - Bisa Download Python!</li>
         <li><a href="https://www.geeksforgeeks.org/">Belajar Python</a></li>
         <li><a href="https://www.w3schools.com/">Belajar HTML</a></li>
+        <li><a href="https://www.wolframalpha.com/">Website Matematika</a> - Bisa menyelesaikan soalnya</li>
     </ul>
     <p style="font-size:25px; color:#206044;"><u><b>BEBERAPA LINK:</b></u></p>
-    <div class="container">
+    <div class="box">
         <p>
         Link halaman:<br>
         <!-- <b>Home</b> -->
         <b>Home</b> |
-        <a href="profil.html">Profil</a> |
-        <a href="blog.html">Blog</a> |
-        <a href="fakta.html">Fakta</a> |
-        <a href="about.html">About</a> |
+        <a class="button" href="profil.html">Profil</a> |
+        <a class="button" href="blog.html">Blog</a> |
+        <a class="button" href="fakta.html">Fakta</a> |
+        <a class="button" href="about.html">About</a> |
         Sejarah (Coming Soon)
         </p>
     </div>
     <p>[Coming Soon]</p>
     <br>
     <a href="#home">Kembali ke awal</a>
-    <p>Terakhir diupdate: 20 Agustus 2023</p>
+    <p>Terakhir diupdate: 21 Agustus 2023</p>
+    <p>Version: 1.5</p>
     <p>Copyright © 2023 by Devan</p>
 </body>
 </html>
