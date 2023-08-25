@@ -1,86 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Website Saya</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
 </head>
-<style>
-    body {
-        /* font-family:"Open Sans Black",sans-serif; */
-        /* font-family:"Segoe UI Medium",sans-serif; */
-        /* font-family:"Tahoma",sans-serif; */
-        /* font-family:"Source Sans Pro",sans-serif; */
-        /* font-family:"Georgia",sans-serif; */
-        /* font-family:"FreeSans",sans-serif; */
-        font-family:"Open Sans",sans-serif;
-        /* background-color: #d0e0f8; */
-        
-        background-image: url('images/dark-cubes-texture.jpg');
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-size: 100% 100%;
-        /* margin: 30px; */
-        margin: 0;
-    }
-    .top-container {
-        position: -webkit-sticky;
-        position: sticky;
-        top: 0;
-        background-color: #105090;
-        padding: 10px;
-    }
-    /* .margin-left */
-    .container {
-        /* margin-left: 30px; Sesuaikan dengan nilai yang diinginkan */
-        /* margin:0 auto; */
-        margin:0 auto; /* this will center the page */
-        width:80%; /*  use your width here */
-        background-color: #d0e0f8;
-        padding: 0 20px;
-    }
-    p {
-        font-size: 20px
-    }
-    li {
-        font-size: 20px
-    }
-    a {
-        font-size: 20px
-    }
-    img {
-        /* float: left; */
-        margin: 2px;
-    }
-
-    .row {
-        display: flex;
-    }
-
-    .column {
-        flex: 50%;
-    }
-
-    /* .margin-left */
-    .container2 {
-        margin-left: 30px; /* Sesuaikan dengan nilai yang diinginkan */
-    }
-
-    .box {
-        /* margin-block-start: 20px; */
-        background-color: #c4d0f4;
-        max-width: 1000px;
-        padding-left: 20px;
-        border: 2px solid black;
-        box-sizing: border-box;
-    }
-
-    .centered-image {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh; /* Untuk mengisi seluruh tinggi viewport */
-    }
-
-</style>
 <body>
     <div class="top-container">
         <font size="6" color="white"><b>SEBUAH WEBSITE</b></font>
@@ -94,15 +19,18 @@
             Dari masa lalu hingga kini, semua cerita sudah menjadi hal yang berharga.<br>
             Inilah beberapa cerita yang ada di blog ini.
         </p>
-        <div class="image">
-            <img src="images/IMG_6228.JPG" width="300">
-            <img src="images/IMG_6168.JPG" width="300">
-            <!-- <details>
-                <summary>Klik disini</summary>
-            </details> -->
+        <p style="font-size:30px; color:#206044;"><u><b>DAFTAR ISI</b></u></p>
+        <div class="box" style="max-width: 500px;">
+            <p>
+            <b>Link cerita:</b><br>
+            1. <a href="#1">Holiday to Bromo</a><br>
+            2. <a href="#2">Descriptive Text</a><br>
+            3. <a href="#3">Memenangkan Lomba Besar</a>
+            </p>
         </div>
-        </details>
-        <p style="font-size: 25px"><b>1. Holiday to Bromo</b></p>
+        <br>
+        <p style="font-size:30px; color:#206044;"><u><b>BEBERAPA CERITA</b></u></p>
+        <p id="1" style="font-size: 25px"><b>1. Holiday to Bromo</b></p>
         <div class="container2">
             <p>
             Dengan tulisan bahasa Inggris
@@ -110,7 +38,13 @@
             In June 2018, my family and I went on vacation to <b>East Java</b>.
             <br>
             </p>
-            
+            <div class="image">
+                <img src="images/IMG_6228.JPG" width="300">
+                <img src="images/IMG_6168.JPG" width="300">
+                <!-- <details>
+                    <summary>Klik disini</summary>
+                </details> -->
+            </div>
             <!-- <div class="text"> -->
             <p>
             <font color="#000080">
@@ -138,7 +72,7 @@
             </p>
             <br>
         </div>
-        <p style="font-size: 25px"><b>2. About Me Devan - Descriptive Text</b></p>
+        <p id="2" style="font-size: 25px"><b>2. About Me Devan - Descriptive Text</b></p>
         <div class="container2">
             <p>
             Dengan tulisan bahasa Inggris
@@ -167,11 +101,11 @@
             And also continue to deepen the capabilities of the Python program. Because at this time, Mathematics and python are related to each other.
             My dream is to be a mathematician and programmer. Hopefully with the talent that God has given me, I can develop it with effort and of course only with God's help.            
             <br><br>
-            Video: <a href="https://youtu.be/AeSeyrThOVs">About Me Devan</a>
+            Video: <img src="images/Youtube-Symbol-Vector.jpg" width="20" style="vertical-align:bottom; padding:2px;"><a href="https://youtu.be/AeSeyrThOVs">About Me Devan</a>
             </p>
             <br>
         </div>
-        <p style="font-size: 25px"><b>3. Memenangkan Lomba Besar</b></p>
+        <p id="3" style="font-size: 25px"><b>3. Memenangkan Lomba Besar</b></p>
         <div class="container2">
             <div class="image">
                 <img src="images/Sertifikat OSN.jpg" width="200">
@@ -197,17 +131,16 @@
         <div class="box">
             <p>
             Link halaman:<br>
-            <!-- <b>Home</b> -->
             <a href="index.html">Home</a> |
-            <a href="profil.html">Profil</a> |
             <b>Blog</b> |
             <a href="fakta.html">Fakta</a> |
+            <a href="profil.html">Profil</a> |
+            <a href="portofolio.html">Portofolio</a> |
             <a href="about.html">About</a> |
             Timeline (Coming Soon)
             </p>
         </div>
         <!-- <p>Kembali ke: <a href="index.html">Menu Utama</a></p> -->
-        <p>[Coming Soon]</p>
         <br>
         <a href="#home">Kembali ke awal</a>
         <p>Terakhir diupdate: 25 Agustus 2023</p>
