@@ -56,10 +56,10 @@ a.button:link, a.button:visited {
 a.button:hover, a.button:active {
     background-color: #b0b0b0;
 }
-img {
+/* .image {
     /* float: left; */
-    margin: 2px;
-}
+    /* margin: 2px;
+} */
 .row {
     display: flex;
 }
@@ -84,4 +84,36 @@ img {
     justify-content: center;
     align-items: center;
     height: 100vh; /* Untuk mengisi seluruh tinggi viewport */
+}
+
+/* Table */
+table, th, td {
+    background-color: #e0e8f8;
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 10px;
+}
+
+/* Gallery */
+div.gallery {
+    margin: 5px;
+    border: 1px solid #808080;
+    float: left;
+    width: 200px;
+}
+/* div.gallery:hover {
+    border: 1px solid #777;
+} */
+div.gallery img {
+    width: 100%;
+    height: auto;
+}
+div.desc {
+    padding: 15px;
+    text-align: center;
+}
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
 }
