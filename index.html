@@ -10,7 +10,8 @@
 <body>
     <div class="top-container">
         <div class="dropdown" style="margin-right:20px; float:left;">
-            <button class="dropbtn">MENU</button>
+            <!-- <button class="dropbtn">MENU</button> -->
+            <button class="dropbtn" style="background-color:transparent; font-size:0;"><img src="images/menu-icon.jpg" width="30"></button>
             <div class="dropdown-content">
                 <a href="blog.html">Blog</a>
                 <a href="fakta.html">Fakta</a>
@@ -54,8 +55,8 @@
         <p>Selain itu, ada juga link yang akan kita gunakan di masa depan nanti.</p>
         <p style="font-size:25px; color:#000080;"><b>Link yang akan datang:</b></p>
         <ul>
-            <li>Pengukur (Python) - Sedang dibuat</li>
-            <li>Fakta dan Informasi (HTML) - Sedang dibuat</li>
+            <li style="color:darkgreen">Pengukur (Python) - Sedang dibuat</li>
+            <li style="color:darkgreen">Fakta dan Informasi (HTML) - Sedang dibuat</li>
             <li>Timeline dan Sejarah (HTML)</li>
             <li>Foto dan Kenangan (HTML)</li>
             <li>Gambar (HTML)</li>
@@ -63,6 +64,8 @@
             <li>Bangun 3 Dimensi (Python)</li>
             <li>Labirin / Maze (HTML & Python)</li>
             <li>Explore (HTML & Python)</li>
+            <li>BMI Calculator (HTML)</li>
+            <li>Input dalam Matematika (HTML)</li>
         </ul><br>
         <p>Link luar terdiri dari beberapa link yang mungkin suka, dan terkait di halaman ini.</p>
         <p style="font-size:25px; color:#000080;"><b>Link luar:</b></p>
@@ -72,6 +75,83 @@
             <li><a href="https://www.w3schools.com/">Belajar HTML</a></li>
             <li><a href="https://www.wolframalpha.com/">Website Matematika</a> - Aplikasi WolframAlpha, bisa menyelesaikan soalnya!</li>
         </ul><br>
+
+        <p>Beberapa informasi dan deskripsi dalam masing-masing halaman</p>
+        <p style="font-size:25px; color:#300080;"><b>Informasi halaman</b></p>
+        <!-- <p>
+            Hitam: Sudah ada<br>
+            Maroon: <span style="color:maroon;">Belum ada</span>
+        </p> -->
+        <table>
+            <tr>
+                <th style="width:400px;">Nama Halaman</th>
+                <th style="width:400px;">Informasi Halaman</th>
+            </tr>
+            <tr>
+                <td>Home</td>
+                <td>Berisi halaman utama di website ini.</td>
+            </tr>
+            <tr>
+                <td>Blog</td>
+                <td>Berisi cerita dan pengalaman, seperti perjalanan dan penghasilan.</td>
+            </tr>
+            <tr>
+                <td>Fakta</td>
+                <td>Berisi fakta-fakta yang menarik, seperti website lain, pemrograman, dan sejarah.</td>
+            </tr>
+            <tr>
+                <td>Profil</td>
+                <td>Berisi profil dan about me, tentang biografis dan kesukaannya.</td>
+            </tr>
+            <tr>
+                <td>Portofolio</td>
+                <td>Berisi beberapa slide portofolio dan juga QR code.<br>
+                    Bisa dibaca dan nge-scan QR code nya.</td>
+            </tr>
+            <tr>
+                <td>Hasil Karya</td>
+                <td>Berisi beberapa slide portofolio dan juga QR code.<br>
+                    Bisa dibaca dan nge-scan QR code nya.</td>
+            </tr>
+            <tr>
+                <td>About</td>
+                <td>Berisi beberapa slide portofolio dan juga QR code.<br>
+                    Bisa dibaca dan nge-scan QR code nya.</td>
+            </tr>
+        </table>
+        <br>
+
+        <p style="font-size:25px; color:#300080;"><b>Informasi halaman selanjutnya</b></p>
+        <table>
+            <tr>
+                <th style="width:400px;">Nama Halaman</th>
+                <th style="width:400px;">Informasi Halaman</th>
+            </tr>
+            <tr>
+                <td>Timeline</td>
+                <td>Berisi timeline dan juga sejarah, terdapat pengembangan website, program, dan karakter dari awal sampai akhir.</td>
+            </tr>
+            <tr>
+                <td>Updates</td>
+                <td>Berisi update-update yang terbaru hingga terlama di website ini.</td>
+            </tr>
+            <tr>
+                <td>Projects</td>
+                <td>Berisi projek-projek baik Python maupun HTML yang sudah pernah kita buat di website ini.</td>
+            </tr>
+            <tr>
+                <td>Pertanyaan</td>
+                <td>Berisi pertanyaan dan Q&A yang menarik dan berhubungan dengan website ini.</td>
+            </tr>
+            <tr>
+                <td>Guide</td>
+                <td>Berisi pengetahuan dan caranya untuk memahami website ini dan juga yang lainnya.</td>
+            </tr>
+        </table>
+        <br>
+
+        <p style="text-align:center"><b>#--#--#--#--#--#--#--# &nbsp;&nbsp; <u>UNDER CONSTRUCTION</u> &nbsp;&nbsp; #--#--#--#--#--#--#--#</b></p>
+        <br>
         <p style="font-size:25px; color:#206044;"><u><b>BEBERAPA LINK:</b></u></p>
         <div class="box">
             <p>
@@ -88,13 +168,10 @@
             </p>
             <p style="color:maroon;">
             <u>Coming soon:</u><br>
-            Timeline |
-            Updates |
-            Project |
-            Pertanyaan
+            Timeline | Updates | Projects | Pertanyaan | Guide
             </p>
         </div>
-        <p>----- Under Construction -----</p>
+        <br>
         <br>
         <a href="#home">Kembali ke awal</a>
         <br><br>
@@ -102,8 +179,8 @@
     </div>
     <footer style="background-color:#404040; padding:20px; color:white">
         <p style="line-height:2;">
-        Terakhir diupdate: 30 Agustus 2023<br>
-        Version: 1.6.4<br>
+        Terakhir diupdate: 1 Sep 2023<br>
+        Version: 1.6.5<br>
         Copyright © 2023 by Devan
         </p>
     </footer>
