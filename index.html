@@ -9,7 +9,7 @@
 <!-- <style></style> -->
 <body>
     <script src="script.js"></script>
-    <div class="top-container">
+    <div class="top-container title">
         <div class="dropdown" style="margin-right:20px; float:left;">
             <!-- <button class="dropbtn">MENU</button> -->
             <button class="dropbtn" style="background-color:transparent; font-size:0;"><img src="images/menu-icon.jpg" width="30"></button>
@@ -27,7 +27,8 @@
     </div>
     <div class="container">
         <br>
-        <font id="home" size="7" color="#004080"><b>Website Devan</b></font>
+        <!-- <font class="title" id="home" size="7" color="#004080"><b>Website Devan</b></font> -->
+        <div class="title" id="home" style="font-size:50px; color:#004080;"><b>Website Devan</b></div>
         <p>
         Ini adalah program yang sudah Devan kerjakan, jumlahnya ada 8.<br>
         Semuanya berkaitan dengan Matematika dan program tersebut Devan kerjakan selama 3 tahun, selama Devan SMP.<br>
@@ -40,9 +41,12 @@
         - Program Equation Solver versi 5<br>
         - Program Geometri versi 1.6
         </p>
-        <p style="font-size:25px; color:#000080;"><b>Link program:</b></p>
+        <p class="title" style="font-size:25px; color:#000080;">
+            <b>Link program:</b>&nbsp;
+            <img style="vertical-align:middle;" src="images/link.png" alt="Link icon" width="30">
+        </p>
         <ul>
-            <li><a href="https://devandaniel9-equation-solver-4.streamlit.app/">Equation Solver</a> (New) - Version 1.4</li>
+            <li><a href="https://devandaniel9-equation-solver-4.streamlit.app/">Equation Solver</a> - Version 1.4</li>
             <li><a href="https://devandaniel9-number-type-detection.streamlit.app/">Number Type Detection</a> - Version 1.2</li>
             <li><a href="https://devandaniel9-peluang.streamlit.app/">Program Peluang</a> - Version 1.1</li>
             <li><a href="https://devandaniel9-geometry-3.streamlit.app/">Program Geometri</a> - Version 1.5</li>
@@ -52,13 +56,17 @@
             <li><a href="https://devandaniel9-shape-program-devan-7zwso4.streamlit.app/">Bangun Datar dan Bangun Ruang</a> - Sudah ada Program Geometri</li>
         </ul><br>
         <!-- <p>Program baru: <b>Number Type Detection</b>, <b>Peluang</b> dan <b>Geometri</b></p> -->
-        <p>Website baru: <b>Portofolio</b>, <b>Fakta dan Informasi</b>, dan <b>Blog dan Cerita</b></p>
+        <!-- <p>Website baru: <b>Portofolio</b>, <b>Fakta dan Informasi</b>, dan <b>Blog dan Cerita</b></p> -->
+        <p>Website baru: <b>Updates</b>, <b>Timeline</b>, dan <b>Portofolio</b></p>
         <p>Selain itu, ada juga link yang akan kita gunakan di masa depan nanti.</p>
-        <p style="font-size:25px; color:#000080;"><b>Link yang akan datang:</b></p>
+        <p class="title" style="font-size:25px; color:#000080;">
+            <b>Link yang akan datang:</b>&nbsp;
+            <img style="vertical-align:middle;" src="images/link.png" alt="Link icon" width="30">
+        </p>
         <ul>
             <li style="color:darkgreen">
                 Pengukur (Python) - 
-                <div class="tooltip" >
+                <div class="tooltip">
                 Sedang dibuat
                 <span class="tooltiptext">Sedang dibuat website nya</span>
                 </div>
@@ -75,7 +83,10 @@
             <li>Input dalam Matematika (HTML) - <span style="color:maroon">v1.9</span></li>
         </ul><br>
         <p>Link luar terdiri dari beberapa link yang mungkin suka, dan terkait di halaman ini.</p>
-        <p style="font-size:25px; color:#000080;"><b>Link luar:</b></p>
+        <p class="title" style="font-size:25px; color:#000080;">
+            <b>Link luar:</b>&nbsp;
+            <img style="vertical-align:middle;" src="images/link.png" alt="Link icon" width="30">
+        </p>
         <ul>
             <li><a href="https://www.python.org/">Website Python</a> - Bisa Download Python!</li>
             <li><a href="https://www.geeksforgeeks.org/">Belajar Python</a></li>
@@ -83,8 +94,13 @@
             <li><a href="https://www.wolframalpha.com/">Website Matematika</a> - Aplikasi WolframAlpha, bisa menyelesaikan soalnya!</li>
         </ul><br>
 
+        <hr style="height:2px; border-width:0; background-color:gray">
+
         <p>Beberapa informasi dan deskripsi dalam masing-masing halaman</p>
-        <p style="font-size:25px; color:#300080;"><b>Informasi halaman</b></p>
+        <p class="title" style="font-size:25px; color:#300080;">
+            <b>Informasi halaman</b>&nbsp;
+            <img style="vertical-align:middle;" src="images/page.png" alt="Page icon" width="30">
+        </p>
         <!-- <p>
             Hitam: Sudah ada<br>
             Maroon: <span style="color:maroon;">Belum ada</span>
@@ -122,7 +138,10 @@
         </table>
         <br>
 
-        <p style="font-size:25px; color:#300080;"><b>Informasi halaman selanjutnya</b></p>
+        <p class="title" style="font-size:25px; color:#300080;">
+            <b>Informasi halaman selanjutnya</b>&nbsp;
+            <img style="vertical-align:middle;" src="images/page.png" alt="Page icon" width="30">
+        </p>
         <table>
             <tr>
                 <th style="width:400px;">Nama Halaman</th>
@@ -137,11 +156,11 @@
                 <td>Berisi update-update yang terbaru hingga terlama di website ini.</td>
             </tr>
             <tr>
-                <td>Projects - <span style="color:maroon">v1.7.1</span></td>
-                <td>Berisi projek-projek baik Python maupun HTML yang sudah pernah kita buat di website ini.</td>
+                <td>Projects - <span style="color:maroon">v1.7.2</span></td>
+                <td>Berisi proyek-proyek baik Python maupun HTML yang sudah pernah kita buat di website ini.</td>
             </tr>
             <tr>
-                <td>Pertanyaan - <span style="color:maroon">v1.7.2</span></td>
+                <td>Pertanyaan - <span style="color:maroon">v1.7.3</span></td>
                 <td>Berisi pertanyaan dan Q&A yang menarik dan berhubungan dengan website ini.</td>
             </tr>
             <tr>
@@ -153,8 +172,9 @@
 
         <p style="text-align:center"><b>#--#--#--#--#--#--#--# &nbsp;&nbsp; <u>UNDER CONSTRUCTION</u> &nbsp;&nbsp; #--#--#--#--#--#--#--#</b></p>
         <br>
-        <p style="font-size:25px; color:#206044;"><u><b>BEBERAPA LINK:</b></u></p>
-        <div class="box">
+        <hr style="height:2px; border-width:0; background-color:gray">
+        <p class="title" style="font-size:25px; color:#206044;"><u><b>BEBERAPA LINK:</b></u></p>
+        <div class="box title">
             <p>
             <u>Link halaman:</u><br>
             <!-- <b>Home</b> -->
@@ -166,7 +186,7 @@
             <a href="portofolio.html">Portofolio</a> |
             <a href="hasil-karya.html">Hasil Karya</a> |
             <a href="timeline.html">Timeline</a> |
-            <a href="updates.html">Updates</a><br>
+            <a href="updates.html">Updates</a>
             </p>
             <p style="color:navy;">
             <u>Coming soon:</u><br>
@@ -180,13 +200,13 @@
         </div>
         <br>
         <!-- <a href="#home">Kembali ke awal</a> -->
-        <a class="button" href="#home">Kembali ke awal</a>
+        <a class="button title" href="#home">Kembali ke awal</a>
         <br><br>
         <!-- <footer style=""> -->
     </div>
     <footer style="background-color:#404040; padding:10px; color:white">
         <p style="font-family:'Consolas'; margin-left:10px; line-height:1.5;">
-        Terakhir diupdate: 17 Sep 2023<br>
+        Terakhir diupdate: 25 Sep 2023<br>
         Version: 1.7<br>
         Copyright © 2023 by Devan
         </p>
