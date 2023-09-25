@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Website Saya</title>
+    <title>Website Devan</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="top-container">
+    <div class="top-container title">
         <div class="dropdown" style="margin-right:20px; float:left;">
             <button class="dropbtn" style="background-color:transparent; font-size:0;"><img src="images/menu-icon.jpg" width="30"></button>
             <div class="dropdown-content">
+                <a href="index.html">Home</a>
                 <a href="blog.html">Blog</a>
                 <a href="fakta.html">Fakta</a>
                 <a href="profil.html">Profil</a>
@@ -23,7 +24,7 @@
     </div>
     <div class="container">
         <br>
-        <font id="home" size="7" color="#146480"><b>Portofolio</b></font>
+        <font class="title" id="home" size="7" color="#146480"><b>Portofolio</b></font>
         <p>
         Portofolio yang berisi apa saja, dibuat di Canva<br>
         Link: <a href="https://www.canva.com">Website Canva</a>
@@ -31,7 +32,7 @@
         <p style="color:red">
         *Untuk Nomor Telepon dan Email, jangan digunakan ya!
         </p>
-        <p style="font-size:25px; color:#000080;"><b>Kumpulan Slide Portofolio</b></p>
+        <p class="title" style="font-size:25px; color:#000080;"><b>Kumpulan Slide Portofolio</b></p>
         <div class="image">
             <img src="portofolio/1.png" width="500">
             <img src="portofolio/2.png" width="500"><br>
@@ -40,12 +41,12 @@
             <img src="portofolio/5.png" width="500">
             <img src="portofolio/6.png" width="500">
         </div>
-        <p style="font-size:25px; color:#000080;"><b>QR Code</b></p>
+        <p class="title" style="font-size:25px; color:#000080;"><b>QR Code</b></p>
         <p>Scan QR Code disini ya!</p>
         <img src="portofolio/static_qr_code_without_logo.jpg" width="200">
-        <br>
-        <p style="font-size:25px; color:#206044;"><u><b>BEBERAPA LINK:</b></u></p>
-        <div class="box">
+        <br><br>
+        <p class="title" style="font-size:25px; color:#206044;"><u><b>BEBERAPA LINK:</b></u></p>
+        <div class="box title">
             <p>
             Link halaman:<br>
             <a href="index.html">Home</a> |
@@ -53,15 +54,20 @@
             <a href="fakta.html">Fakta</a> |
             <a href="profil.html">Profil</a> |
             <b>Portofolio</b> |
-            <a href="about.html">About</a> |
-            Timeline (Coming Soon)
+            <a href="hasil-karya.html">Hasil Karya</a> |
+            <a href="timeline.html">Timeline</a> |
+            <a href="updates.html">Updates</a>
             </p>
         </div>
         <br>
-        <a href="#home">Kembali ke awal</a>
-        <!-- <footer style=""> -->
-        <p>Terakhir diupdate: 5 Sep 2023</p>
-        <br>
+        <a class="button title" href="#home">Kembali ke awal</a>
+        <br><br>
     </div>
+    <footer style="background-color:#404040; padding:10px; color:white;">
+        <p style="font-family:'Consolas'; margin-left:10px; line-height:1.5;">
+        Terakhir diupdate: 19 Sep 2023<br>
+        Copyright © 2023 by Devan
+        </p>
+    </footer>
 </body>
 </html>
