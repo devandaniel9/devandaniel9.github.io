@@ -71,6 +71,16 @@ a.button:hover, a.button:active {
     /* float: left; */
     /* margin: 2px;
 } */
+.icon {
+    width: 20px;
+    vertical-align: bottom;
+    padding: 2px;
+}
+.profile {
+    width: 100px;
+    border: 2px solid black;
+    border-radius: 50%;
+}
 .row {
     display: flex;
 }
@@ -130,6 +140,31 @@ div.desc {
     clear: both;
 }
 
+/* Group Button */
+.btn-group a {
+    background-color: #f0f0f0; /* Green background */
+    border: 1px solid black;
+    color: black; /* White text */
+    padding: 8px 16px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    float: left; /* Float the buttons side by side */
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-group a:not(:last-child) {
+    border-right: none; /* Prevent double borders */
+}
+
+.selected {
+    pointer-events:none; font-weight:bold;
+}
+
+/* Add a background color on hover */
+.btn-group a:hover {
+    background-color: #d0d0d0;
+}
+
 /* Dropdown */
 .dropbtn {
     background-color: #103880;
@@ -148,6 +183,7 @@ div.desc {
     display: none;
     position: absolute;
     background-color: #f0f0f0;
+    border-radius: 6px;
     min-width: 150px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
@@ -180,7 +216,10 @@ button {
 
 .dropdown:hover .dropdown-content {display: block;}
 
-.dropdown-content a:hover {background-color: #d0d0d0;}
+.dropdown-content a:hover {
+    background-color: #d0d0d0;
+    border-radius: 6px;
+}
 
 
 /* Tooltip */
