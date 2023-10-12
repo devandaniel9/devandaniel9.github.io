@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Website Saya</title>
+</head>
+<style>
+    body {
+        background-color: lightblue;
+        font-family:"Roboto",sans-serif;
+    }
+
+    select {
+        color: #808080;
+    }
+</style>
+<body>
+    <h1>Bangun Datar</h1>
+    <p>Ini akan mencari luas dan keliling persegi panjang</p>
+
+    <h2>Jenis Bangun Datar</h2>
+
+    <label for="bentuk">Pilih jenis bangun datar:</label>
+    <select name="bentuk" id="bentuk" onchange="myFunction()">
+        <option value="value1">Persegi</option>
+        <option value="value2">Persegi Panjang</option>
+        <option value="value3">Segitiga</option>
+        <option value="value4">Lingkaran</option>
+    </select>
+
+    <h3>Input</h3>
+    <p>Panjang</p>
+    <input type="number" id="num1" value="3"><br>
+    <p>Lebar</p>
+    <input type="number" id="num2" value="2">
+    <p>Klik tombol ini!</p>
+    <button onclick="myFunction()">Selesaikan</button>
+
+    <h2 id=1></h2>
+    <p id=2></p>
+    <p id=3></p>
+    <p id=4></p>
+
+    <script>
+        function myFunction() {
+            var e = document.getElementById("bentuk");
+            var e1 = e.options[e.selectedIndex];
+            if (e1.index == 0) {
+                var input = document.createElement("input");
+                input.type = "text";
+                input.className = "css-class-name";
+                document.body.appendChild(input);
+                document += '<p>318</p>';
+
+                var x = parseInt(document.getElementById("num1").value);
+                var luas = x*x;
+                var keliling = 4*x;
+                // var c = new circle(x);
+                document.getElementById(1).innerHTML = 'Hasil Penyelesaian';
+                document.getElementById(2).innerHTML = 'Luas = ' + luas;
+                document.getElementById(3).innerHTML = 'Keliling = ' + keliling;
+            } else if (e1.index == 1) {
+                var x = parseInt(document.getElementById("num1").value);
+                var y = parseInt(document.getElementById("num2").value);
+                // const sb = document.querySelector('#color');
+                var luas = x*y;
+                var keliling = 2*(x+y);
+                // var c = new circle(x);
+                document.getElementById(1).innerHTML = 'Hasil Penyelesaian';
+                document.getElementById(2).innerHTML = 'Luas = ' + luas;
+                document.getElementById(3).innerHTML = 'Keliling = ' + keliling;
+                // document.getElementById(4).innerHTML = "Index: " + e1.index + " is " + e1.text;
+            } else if (e1.index == 3) {
+                var x = 2;
+            }
+            let btn = document.createElement("button");
+            btn.innerHTML = "Save";
+            document.body.appendChild(btn);
+        }
+    </script> 
+
+</body>
+</html>

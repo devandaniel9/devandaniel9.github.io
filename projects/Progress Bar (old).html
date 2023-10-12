@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Progress Bar</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        #myProgress {
+            width: 90%;
+            background-color: #ddd;
+        }
+        #myBar {
+            width: 10%;
+            height: 30px;
+            /* background-color: #04AA6D; */
+            background-color: green;
+            /* text-align: center; */
+            /* padding-left: 10px;
+            /* text-align: body; */
+            line-height: 30px;
+            color: white;
+        }
+        .column {
+            float: left;
+            padding-right: 10px;
+        }
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <h1>Progress Bar</h1>
+
+    <div id="myProgress">
+    <div id="myBar">&nbsp;&nbsp;10%</div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="column">
+            <label>Percent:</label><br>
+            <input type="number" id="percent" value="10" min="0" max="100">
+            <br><br>
+        </div>
+        <div class="column">
+            <label>Select color:</label><br>
+            <select name="colors" id="colors">
+                <option value="green">Green</option>
+                <option value="blue">Blue</option>
+                <option value="darkred">Dark Red</option>
+            </select>
+        </div>
+    </div>
+
+    <button onclick="move()">Set to 100</button>
+    <button onclick="change()">Change or Reset</button>
+
+    <p>Ini progress bar saya</p>
+
+    <script>
+    // var width = width2;
+    var i = 0;
+    function change() {
+        width2 = document.getElementById("percent").value;
+        var width = width2;
+        var elem = document.getElementById("myBar");
+        var color = document.getElementById("colors").value;
+        document.getElementById("myBar").style.background = color;
+        elem.style.width = width + "%";
+        elem.innerHTML = "&nbsp;&nbsp;" + width + "%";
+    }
+    function move() {
+        change();
+        var width = width2;
+        i = 0;
+        if (i == 0) {
+            var elem = document.getElementById("myBar");
+            var id = setInterval(frame, 20);
+            function frame() {
+            if (width >= 100) {
+                clearInterval(id);
+                i = 0;
+            } else {
+                width++;
+                elem.style.width = width + "%";
+                elem.innerHTML = "&nbsp;&nbsp;" + width + "%";
+            }
+            }
+        }
+    }
+    </script>
+</body>
+</html>
