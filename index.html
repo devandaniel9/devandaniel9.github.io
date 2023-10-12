@@ -5,20 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
 </head>
 <!-- <style></style> -->
 <body>
-    <script src="script.js"></script>
     <div class="top-container title">
         <div class="dropdown" style="margin-right:20px; float:left;">
             <!-- <button class="dropbtn">MENU</button> -->
             <button class="dropbtn" style="background-color:transparent; font-size:0;"><img src="images/menu-icon.jpg" width="30"></button>
-            <div class="dropdown-content">
+            <!-- <div class="dropdown-content">
                 <a href="blog.html">Blog</a>
                 <a href="fakta.html">Fakta</a>
                 <a href="profil.html">Profil</a>
                 <a href="portofolio.html">Portofolio</a>
-            </div>
+            </div> -->
+            <div class="dropdown-content" id="boxlink"></div>
+            <script src="script.js"></script>
         </div>
         <img src="images/blank-profile.jpg" width="40" style="border-radius: 50%; vertical-align:middle; margin-right:20px; float:left;">
         <!-- <font size="6" color="white"><b>SEBUAH WEBSITE</b></font> -->
@@ -145,6 +147,10 @@
                 <td>Updates - <span style="color:maroon">v1.7</span></td>
                 <td>Berisi update-update yang terbaru hingga terlama di website ini.</td>
             </tr>
+            <tr>
+                <td>Projects - <span style="color:maroon">v1.7.2</span></td>
+                <td>Berisi proyek-proyek baik Python maupun HTML yang sudah pernah kita buat di website ini.</td>
+            </tr>
         </table>
         <br>
 
@@ -156,10 +162,6 @@
             <tr>
                 <th style="width:400px;">Nama Halaman</th>
                 <th style="width:400px;">Informasi Halaman</th>
-            </tr>
-            <tr>
-                <td>Projects - <span style="color:maroon">v1.7.2</span></td>
-                <td>Berisi proyek-proyek baik Python maupun HTML yang sudah pernah kita buat di website ini.</td>
             </tr>
             <tr>
                 <td>Pertanyaan - <span style="color:maroon">v1.7.3</span></td>
@@ -176,19 +178,19 @@
         <br>
         <hr style="height:2px; border-width:0; background-color:gray">
         <p class="title" style="font-size:25px; color:#206044;"><u><b>BEBERAPA LINK:</b></u></p>
-        <div class="box title">
+        <!--
+        <div class="btn-group">
+        <a href="blog.html">Blog</a> |
+        <a href="fakta.html">Fakta</a> |
+        <a href="profil.html">Profil</a> |
+        <a href="portofolio.html">Portofolio</a> |
+        <a href="hasil-karya.html">Hasil Karya</a> |
+        <a href="timeline.html">Timeline</a> |
+        <a href="updates.html">Updates</a>
+        </div>
+        -->
+        <div class="box title" id="demo">
             <p style="font-size:22px; margin-bottom:5px;"><b>Link halaman:</b></p>
-            <!--
-            <div class="btn-group">
-            <a href="blog.html">Blog</a> |
-            <a href="fakta.html">Fakta</a> |
-            <a href="profil.html">Profil</a> |
-            <a href="portofolio.html">Portofolio</a> |
-            <a href="hasil-karya.html">Hasil Karya</a> |
-            <a href="timeline.html">Timeline</a> |
-            <a href="updates.html">Updates</a>
-            </div>
-            -->
             <div class="btn-group">
                 <a class="selected">Home</a>
                 <a href="blog.html">Blog</a>
@@ -198,10 +200,12 @@
                 <a href="hasil-karya.html">Hasil Karya</a>
                 <a href="timeline.html">Timeline</a>
                 <a href="updates.html">Updates</a>
+                <a href="projects.html">Projects</a>
             </div>
             <div class="clearfix"></div><br>
         </div>
         <br>
+        <!-- <p id="demo"></p> -->
         <!-- <a href="#home">Kembali ke awal</a> -->
         <a class="button title" href="#home">Kembali ke awal</a>
         <br><br>
@@ -209,8 +213,8 @@
     </div>
     <footer style="background-color:#404040; padding:10px; color:white">
         <p style="font-family:'Consolas'; margin-left:10px; line-height:1.5;">
-        Terakhir diupdate: 1 Okt 2023<br>
-        Version: 1.7.1<br>
+        Terakhir diupdate: 5 Okt 2023<br>
+        Version: 1.7.2<br>
         Copyright © 2023 by Devan
         </p>
     </footer>
