@@ -33,25 +33,45 @@
             clear: both;
         }
         button {
+            font-family:"Helvetica",sans-serif;
             font-size: 20px;
         }
         .button {
             background-color: #4080c0;
             border: none;
             color: white;
-            padding: 15px 32px;
+            padding: 10px 20px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
+            font-size: 18px;
+            margin: 2px 2px;
+            border-radius: 6px;
             cursor: pointer;
+        }
+        a {
+            font-size: 18px;
+        }
+        a.button2:link, a.button2:visited {
+            background-color: #f0f0f0;
+            color: black;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            border: 1px solid #404040;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+        a.button2:hover, a.button2:active {
+            background-color: #d0d0d0;
         }
     </style>
 </head>
 <body>
     <h1>Progress Bar</h1>
 
+    <p style="font-size: 18px;">Tampilan Progress Bar saat ini</p>
     <div id="myProgress">
     <div id="myBar">&nbsp;&nbsp;10%</div>
     </div>
@@ -60,12 +80,12 @@
         <div class="column">
             <label>Percent:</label><br>
             <!-- type text, number -->
-            <input type="text" id="percent" size="20" value="10" min="0" max="100">
+            <input type="number" id="percent" style="width:150px" oninput="change()" value="10" min="0" max="100">
             <br><br>
         </div>
         <div class="column">
             <label>Select color:</label><br>
-            <select name="colors" id="colors">
+            <select name="colors" id="colors" style="width:150px" onclick="change()">
                 <option value="green">Green</option>
                 <option value="blue">Blue</option>
                 <option value="darkred">Dark Red</option>
@@ -73,10 +93,23 @@
         </div>
     </div>
 
+    <label>Rounded:</label>
+    <input type="checkbox" id="round" onclick="change()"><br><br>
     <button class="button" onclick="move()">Set to 100</button>
-    <button class="button" onclick="change()">Change or Reset</button>
+    <!-- Change or Reset -->
+    <button class="button" onclick="change()">Reset</button>
 
-    <p>Ini progress bar saya</p>
+    <p>
+    Ini progress bar saya yang sudah dilengkapi dengan fitur yang ada. Disini ada percent (persen), select color (pilih warna), dan rounded.<br><br>
+    * <b>Percent (persen)</b>: Bisa mengubah jumlah persen di progress bar<br>
+    * <b>Select color (pilih warna)</b>: Mengubah warna pada progress bar<br>
+    * <b>Rounded</b>: Untuk melengkungkan di ujung progress bar
+    </p>
+
+    <a class="button2" href="../projects.html">Kembali ke menu projects</a>
+    
+    <br><br>
+    <p>Terakhir diupdate: 6 Nov 2023</p>
 
     <script>
     // var width = width2;
@@ -87,6 +120,17 @@
         var elem = document.getElementById("myBar");
         var color = document.getElementById("colors").value;
         document.getElementById("myBar").style.background = color;
+
+        var round = document.getElementById("round").checked
+
+        if (round == true) {
+            document.getElementById("myProgress").style.borderRadius = '6px';
+            document.getElementById("myBar").style.borderRadius = '6px';
+        } else {
+            document.getElementById("myProgress").style.borderRadius = '0px';
+            document.getElementById("myBar").style.borderRadius = '0px';
+        }
+
         elem.style.width = width + "%";
         elem.innerHTML = "&nbsp;&nbsp;" + width + "%";
     }
