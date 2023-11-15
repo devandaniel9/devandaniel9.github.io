@@ -65,6 +65,7 @@
 
     <h2>Jenis Bangun Datar</h2>
 
+    <!-- <label for="bentuk">Pilih jenis bangun datar:</label> -->
     <label for="bentuk">Pilih jenis bangun datar:</label>
     <select name="bentuk" id="bentuk" style="width:150px" onchange="double()">
         <option value="value1">Persegi</option>
@@ -72,15 +73,24 @@
         <option value="value3">Segitiga</option>
         <option value="value4">Lingkaran</option>
     </select>
+    </label>
+    <br><br>
+
+    <label>Jumlah digit desimal:</label>
+    <input type="range" id="digit" oninput="myFunction()" min="2" max="5" value="2">
+    <br>
+    <p id='digit2'>Digit precision: 2</p>
+    <br>
 
     <h2>Input</h2>
     Sebuah input
     <div class="row" id="bangun">
         <p>Panjang</p>
-        <input type="number" id="num1" oninput="myFunction()" value="3">
+        <input type="number" id="num1" oninput="myFunction()" min="0" value="3">
     </div>
     <p>Klik tombol ini!</p>
     <button class="button" onclick="myFunction()">Selesaikan</button>
+    <br><br>
 
     <h2 id=1></h2>
     <p id=2></p>
@@ -90,7 +100,7 @@
     <a class="button2" href="../projects.html">Kembali ke menu projects</a>
 
     <br><br>
-    <p>Terakhir diupdate: 5 Nov 2023</p>
+    <p>Terakhir diupdate: 15 Nov 2023</p>
 
     <script>
         function change() {
@@ -99,17 +109,17 @@
             if (e1.index == 0) {
                 document.getElementById('bangun').innerHTML = `
                 <p>Panjang</p>
-                <input type="number" id="num1" oninput="myFunction()" value="3">
+                <input type="number" id="num1" oninput="myFunction()" min="0" value="3">
                 `;
             } else if (e1.index == 1) {
                 document.getElementById('bangun').innerHTML = `
                 <div class="column">
                     <p>Panjang</p>
-                    <input type="number" id="num1" oninput="myFunction()" value="3">
+                    <input type="number" id="num1" oninput="myFunction()" min="0" value="3">
                 </div>
                 <div class="column">
                     <p>Lebar</p>
-                    <input type="number" id="num2" oninput="myFunction()" value="2">
+                    <input type="number" id="num2" oninput="myFunction()" min="0" value="2">
                 </div>
                 `;
             }
@@ -117,14 +127,16 @@
         function myFunction() {
             var e = document.getElementById("bentuk");
             var e1 = e.options[e.selectedIndex];
+            var digit = parseInt(document.getElementById("digit").value);
+            document.getElementById("digit2").innerHTML = 'Digit precision: ' + digit;
             if (e1.index == 0) {
                 var x = parseInt(document.getElementById("num1").value);
                 var luas = x*x;
                 var keliling = 4*x;
                 // var c = new circle(x);
                 document.getElementById(1).innerHTML = 'Hasil Penyelesaian';
-                document.getElementById(2).innerHTML = 'Luas = ' + luas;
-                document.getElementById(3).innerHTML = 'Keliling = ' + keliling;
+                document.getElementById(2).innerHTML = 'Luas = ' + luas.toFixed(digit);
+                document.getElementById(3).innerHTML = 'Keliling = ' + keliling.toFixed(digit);
             } else if (e1.index == 1) {
                 var x = parseInt(document.getElementById("num1").value);
                 var y = parseInt(document.getElementById("num2").value);
@@ -133,8 +145,8 @@
                 var keliling = 2*(x+y);
                 // var c = new circle(x);
                 document.getElementById(1).innerHTML = 'Hasil Penyelesaian';
-                document.getElementById(2).innerHTML = 'Luas = ' + luas;
-                document.getElementById(3).innerHTML = 'Keliling = ' + keliling;
+                document.getElementById(2).innerHTML = 'Luas = ' + luas.toFixed(digit);
+                document.getElementById(3).innerHTML = 'Keliling = ' + keliling.toFixed(digit);
                 // document.getElementById(4).innerHTML = "Index: " + e1.index + " is " + e1.text;
             } else if (e1.index == 2) {
                 var x = parseInt(document.getElementById("num1").value);
@@ -142,15 +154,16 @@
                 var luas = x*y/2;
                 // var c = new circle(x);
                 document.getElementById(1).innerHTML = 'Hasil Penyelesaian';
-                document.getElementById(2).innerHTML = 'Luas = ' + luas;
+                document.getElementById(2).innerHTML = 'Luas = ' + luas.toFixed(digit);
+                document.getElementById(3).innerHTML = '';
             } else if (e1.index == 3) {
                 var r = parseInt(document.getElementById("num1").value);
                 var luas = Math.PI*r**2
                 var keliling = 2*Math.PI*r;
                 // var c = new circle(x);
                 document.getElementById(1).innerHTML = 'Hasil Penyelesaian';
-                document.getElementById(2).innerHTML = 'Luas = ' + luas;
-                document.getElementById(3).innerHTML = 'Keliling = ' + keliling;
+                document.getElementById(2).innerHTML = 'Luas = ' + luas.toFixed(digit);
+                document.getElementById(3).innerHTML = 'Keliling = ' + keliling.toFixed(digit);
             }
         }
 
