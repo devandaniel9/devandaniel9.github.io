@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sebuah Permainan - Website Devan</title>
+</head>
+<style>
+    body {
+        background-color: #a0c0e0;
+        font-family:"Helvetica",sans-serif;
+    }
+    .column {
+        float: left;
+        padding-right: 10px;
+    }
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    button {
+        font-family:"Helvetica",sans-serif;
+        font-size: 20px;
+    }
+    .button {
+        background-color: #4080c0;
+        border: none;
+        color: white;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 18px;
+        margin: 2px 2px;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+    a {
+        font-size: 18px;
+    }
+    a.button2:link, a.button2:visited {
+        background-color: #f0f0f0;
+        color: black;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border: 1px solid #404040;
+        border-radius: 6px;
+        transition: 0.3s;
+    }
+    a.button2:hover, a.button2:active {
+        background-color: #d0d0d0;
+    }
+</style>
+<body>
+    <h1>Soal Pertanyaan</h1>
+    <p>
+    Soal Pertanyaan ini akan menjawab beberapa soal matematika, yaitu penjumlahan.<br>
+    Program ini bisa membuat soal baru dengan angka yang berbeda dengan tombolnya, lalu klik selesaikan.
+    <br><br>
+    </p>
+
+    <h2>Pertanyaan</h2>
+    <!-- <p id="soal">Hasil dari 2 + 3 adalah ...</p> -->
+    <p id="soal">Belum ada soal</p>
+    <button class="button" onclick="buat()">Buat soal baru</button>
+    <p>Input angka</p>
+    <input type="number" id="angka" min="0" value="0">
+    <br><br>
+    <button class="button" onclick="selesaikan()">Selesaikan</button>
+
+    <h2>Jawaban</h2>
+    <p id="jawaban">Belum ada jawaban</p>
+
+    <br><br>
+    <a class="button2" href="../projects.html">Kembali ke menu projects</a>
+
+    <br><br>
+    <p>Terakhir diupdate: 17 Nov 2023</p>
+
+    <script>
+        function buat() {
+            document.getElementById('jawaban').innerHTML = 'Belum ada jawaban';
+            document.getElementById('angka').innerHTML = '100';
+            a = Math.floor(1 + 9 * Math.random())
+            b = Math.floor(1 + 9 * Math.random())
+            document.getElementById('soal').innerHTML = 'Hasil dari ' + a + ' + ' + b + ' adalah ...';
+        }
+        function selesaikan() {
+            var angka = parseInt(document.getElementById('angka').value);
+            hasil = a+b
+            if (angka == hasil) {
+                document.getElementById('jawaban').innerHTML = 'Jawabannya benar<br><br>' + a + ' + ' + b + ' = ' + hasil;
+            } else {
+                document.getElementById('jawaban').innerHTML = 'Jawabannya salah<br>Jawaban yang diinput: ' + angka + '<br><br>' + a + ' + ' + b + ' = ' + hasil;
+            }
+        }
+    </script>
+</body>
