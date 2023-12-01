@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sebuah Website</title>
+    <!-- <link rel="stylesheet" href="fonts/"> -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+</head>
+<style>
+    body {
+        /* background-color: #a0c0e0; */
+        /* font-family:"Helvetica",sans-serif; */
+        /* font-family:"Lato",sans-serif; */
+        font-family:"Arial",sans-serif;
+    }
+    .column {
+        float: left;
+        padding-right: 10px;
+    }
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    button {
+        /* font-family:"Helvetica",sans-serif; */
+        /* src: url(https://dwl.freefontsfamily.com/download/Helvetica-Font); */
+        font-family:"Lato",sans-serif;
+        font-size: 20px;
+    }
+    .button {
+        background-color: #4080c0;
+        border: none;
+        color: white;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 18px;
+        margin: 2px 2px;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+    a {
+        font-size: 18px;
+    }
+    a.button2:link, a.button2:visited {
+        background-color: #f0f0f0;
+        color: black;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border: 1px solid #404040;
+        border-radius: 6px;
+        transition: 0.3s;
+    }
+    a.button2:hover, a.button2:active {
+        background-color: #d0d0d0;
+    }
+</style>
+<body>
+    <!-- <h1>Jumlah detik</h1> -->
+    <h1>Penghitung Waktu</h1>
+    <br>
+    <!-- <p style="font-size:30px; text-align:center;">Anda (Devan) sudah hidup di dunia selama: (dalam detik)</p>
+    <h1 id="angka3" style="font-size:50px; text-align:center;">Loading...</h1> -->
+    <p style="font-size:30px; text-align:center;">Tanpa kita sadari, tahun ini sudah berlangsung selama: (dalam detik)</p>
+    <h1 id="angka4" style="font-size:50px; text-align:center;">Loading...</h1>
+    <p style="font-size:30px; text-align:center;">Berapa detik lagi sebelum 2024</p>
+    <h1 id="angka5" style="font-size:50px; text-align:center;">Loading...</h1>
+    <h1 id="angka6" style="font-size:40px; text-align:center;">Loading...</h1>
+    <!-- <button class="button" onclick="buat()">Buat soal baru</button> -->
+
+    <script>
+        function buat() {
+            // const now = new Date();
+            var now = new Date();
+            // secondsSinceEpoch
+            var seconds = Math.round(now.getTime() / 1000);
+
+            // var now2 = new Date('2023-11-29 00:00:00');
+            var now2 = new Date('2008-06-09 07:00:00');
+            var seconds2 = Math.round(now2.getTime() / 1000);
+
+            var seconds3 = seconds - seconds2;
+            // document.getElementById('angka').innerHTML = 'Sekarang: ' + seconds;
+            // document.getElementById('angka2').innerHTML = 'Waktu awal: ' + seconds2;
+            // document.getElementById('angka3').innerHTML = 'Sekarang 2: ' + seconds3;
+            // document.getElementById('angka3').innerHTML = seconds3.toLocaleString('en-US');
+
+            var now3 = new Date('2023-01-01 00:00:00');
+            var seconds4 = seconds - Math.round(now3.getTime() / 1000);
+            document.getElementById('angka4').innerHTML = seconds4.toLocaleString('en-US');
+
+            var now4 = new Date('2024-01-01 00:00:00');
+            var seconds5 = Math.round(now4.getTime() / 1000) - seconds;
+            document.getElementById('angka5').innerHTML = seconds5.toLocaleString('en-US');
+
+            document.getElementById('angka6').innerHTML = parseInt(seconds5 / 86400) + ' hari lagi';
+        }
+        setInterval(buat, 1000);
+    </script>
+</body>
