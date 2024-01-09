@@ -1,0 +1,15 @@
+<html>
+<head>
+  <title>Paragraf</title>
+</head>
+<body bgcolor=#88BBFF>
+  <h1 align="center">Latihan 2</h1>
+  <h2 align="center">Devan Daniel 7 Carmel</h2></br>
+  <p align="left"><font size=5>Paragraf adalah rangkaian beberapa kalimat yang memiliki gagasan utama yang berisi informasi.</font></p><br>
+  <p align="left"><font size=5 face=tahoma>Ada 3 jenis paragraf, yaitu paragraf deduktif, induktif dan campuran.</font>
+  <p align="left"><font size=5 face=tahoma>Paragraf deduktif adalah paragraf yang terletak di awal paragraf.</font>
+  <p align="left"><font size=5 face=tahoma>Paragraf induktif adalah paragraf yang terletak di akhir paragraf.</font>
+  <p align="left"><font size=5 face=tahoma>Paragraf campuran adalah paragraf yang terletak di awal dan akhir paragraf.</font>
+  <p align="left"><font size=5 face=tahoma>Paragraf campuran disebut juga Paragraf Deduktif-Induktif.</font>
+</body>
+</html>

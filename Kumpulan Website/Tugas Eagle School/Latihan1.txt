@@ -1,0 +1,11 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>JUDUL ATAS</title>
+</head>
+<body background=gambar/background.jpg>
+    <h1>Judul Pembuka</h1>
+    <p>Halo nama Saya adalah ...</p>
+    <p>Saya sedang belajar HTML di website</p>
+</body>
+</html>

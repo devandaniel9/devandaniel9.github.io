@@ -1,0 +1,30 @@
+<html>
+<head>
+  <title>Paragraf</title>
+</head>
+<body bgcolor=#FFE5B4>
+	<h1 align="center">Tugas 1</h1>
+	
+	<h2 align="center">DEVAN DANIEL - 7 CARMEL</h2>
+	
+	<h2 align="center"><font color="red">PERUMPAMAAN DOMBA YANG HILANG</font></h2></br>
+  	
+	<p align="left"><font color="blue" size=4 face="arial">Perumpamaan ini menceritakan tentang seorang gembala domba yang memiliki seratus ekor domba. Pada suatu hari salah seekor dombanya hilang, dan ia meninggalkan domba yang lainnya di pegunungan dan mencari seekor yang tersesat.</font></p>
+	
+	<p align="center"><font size=3 >Diceritakan bahwa ketika gembala tersebut menemukan domba yang hilang, maka kegembiraannya atas seekor domba itu lebih dari 99 ekor domba yang tidak sesat.</font></br></br>
+  	
+	<img src="gambar/img1.jpg" />
+  	
+	<p align="center"><font size=3 >Dimasa kini, kita sering melihat lukisan Yesus mencari dan menolong domba yang tersesat dan hampir jatuh ke jurang.</font></br>
+  	
+	<p align="left"><font size=2 face=courier>Lukisan itu kadang begitu sederhana.</font>
+	
+	<p align="left"><font size=2 face=courier>Tapi mengandung makna yang sangat dalam.</font>
+	
+	<p align="left"><font size=2 face=courier>Lukisan itu hendak menggambarkan kasih Allah yang mau mencari manusia yang tersesat.</font>
+  	
+	<p align="right"><font size=3><i>Dalam bacaan kita Lukas 15:1-7 bercerita tentang domba yang tersesat memang merupakan sebuah perumpamaan yang sederhana, dan biarkanlah tetap sederhana dan jangan dipersulit.</i></font>
+  	
+	<p align="center"><font size=3 face=arial color ="blue">Secara sederhana perumpamaan ini demikian : Dari 100 ekor ada seekor domba yang hilang dan tersesat, Sang gembala pergi mencarinya dengan bersusah payah, dan akhirnya domba itu kemudian ditemukan. Sang Gembala membawanya kembali ke rumah dengan rasa senang.</font>
+</body>
+</html>
