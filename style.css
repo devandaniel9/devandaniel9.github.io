@@ -84,8 +84,12 @@ a.button:hover, a.button:active {
 .row {
     display: flex;
 }
-.column {
+/* .column {
     flex: 50%;
+} */
+.column {
+    float: left;
+    padding-right: 10px;
 }
 /* .margin-left */
 .container2 {
