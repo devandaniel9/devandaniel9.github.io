@@ -66,7 +66,7 @@
     <h1 id="angka3" style="font-size:50px; text-align:center;">Loading...</h1> -->
     <p style="font-size:30px; text-align:center;">Tanpa kita sadari, tahun ini sudah berlangsung selama: (dalam detik)</p>
     <h1 id="angka4" style="font-size:50px; text-align:center;">Loading...</h1>
-    <p style="font-size:30px; text-align:center;">Berapa detik lagi sebelum 2024</p>
+    <p style="font-size:30px; text-align:center;">Berapa detik lagi sebelum 2025</p>
     <h1 id="angka5" style="font-size:50px; text-align:center;">Loading...</h1>
     <h1 id="angka6" style="font-size:40px; text-align:center;">Loading...</h1>
     <!-- <button class="button" onclick="buat()">Buat soal baru</button> -->
@@ -94,11 +94,11 @@
             // document.getElementById('angka3').innerHTML = 'Sekarang 2: ' + seconds3;
             // document.getElementById('angka3').innerHTML = seconds3.toLocaleString('en-US');
 
-            var now3 = new Date('2023-01-01 00:00:00');
+            var now3 = new Date('2024-01-01 00:00:00');
             var seconds4 = seconds - Math.round(now3.getTime() / 1000);
             document.getElementById('angka4').innerHTML = seconds4.toLocaleString('en-US');
 
-            var now4 = new Date('2024-01-01 00:00:00');
+            var now4 = new Date('2025-01-01 00:00:00');
             var seconds5 = Math.round(now4.getTime() / 1000) - seconds;
             document.getElementById('angka5').innerHTML = seconds5.toLocaleString('en-US');
 
