@@ -9,7 +9,10 @@
     body {
         background-color: #a0c0e0;
         /* font-family:"Helvetica",sans-serif; */
-        font-family:"Lato",sans-serif;
+        font-family:"Source Sans Pro",sans-serif;
+    }
+    .heading {
+        font-family:"Raleway Medium",sans-serif;
     }
     .column {
         float: left;
@@ -23,7 +26,7 @@
     button {
         /* font-family:"Helvetica",sans-serif; */
         /* src: url(https://dwl.freefontsfamily.com/download/Helvetica-Font); */
-        font-family:"Lato",sans-serif;
+        font-family:"Source Sans Pro",sans-serif;
         font-size: 20px;
     }
     .button {
@@ -56,20 +59,40 @@
     a.button2:hover, a.button2:active {
         background-color: #d0d0d0;
     }
+    input[type=text], select {
+        width: 100%;
+        padding: 5px 10px;
+        margin: 5px 0;
+        display: inline-block;
+        font-family:"Source Sans Pro",sans-serif;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    /* Create a custom checkbox */
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #eee;
+    }
 </style>
 <body>
-    <h1>Soal Matematika</h1>
+    <h1 class="heading">Soal Pertanyaan Matematika</h1>
     <p>
-    Soal Pertanyaan ini akan menjawab beberapa soal matematika, yaitu penjumlahan.<br>
+    Soal Pertanyaan ini akan menjawab beberapa soal matematika, termasuk penjumlahan.<br>
     Program ini bisa membuat soal baru dengan angka yang berbeda dengan tombolnya, lalu klik selesaikan.
     <br><br>
     </p>
 
-    <h2>Mode pertanyaan</h2>
+    <h2 class="heading">Mode pertanyaan</h2>
     <!-- <label for="bentuk">Pilih jenis pertanyaan matematika:</label><br>
     <select name="bentuk" id="bentuk" style="width:150px"> -->
     <label>Pilih jenis pertanyaan matematika:</label><br>
-    <select id="bentuk" style="width:150px">
+    <select id="bentuk" style="width:250px">
         <option>Penjumlahan</option>
         <option>Pengurangan</option>
         <option>Perkalian</option>
@@ -85,25 +108,38 @@
         <option>Sedang</option>
         <option>Sulit</option>
     </select>
+    <br><br>
 
-    <h2>Pertanyaan</h2>
+    <label>Pilih tipe pertanyaan:</label><br>
+    <select id="tipe" style="width:150px">
+        <option>Isian</option>
+        <option>Pilihan ganda</option>
+    </select>
+    <br><br>
+
+    <label>Dengan soal cerita:</label>
+    <input type="checkbox" id="check" onclick="change()">
+    <br><br>
+
+    <h2 class="heading">Pertanyaan</h2>
     <!-- <p id="soal">Hasil dari 2 + 3 adalah ...</p> -->
     <!-- <p>Pilih pertanyaan</p> -->
     <p id="soal">Belum ada soal</p>
+    <p id="soal2"></p>
     <button class="button" onclick="buat()">Buat soal baru</button>
     <p>Input angka</p>
     <input type="number" id="angka" min="0">
     <br><br>
     <button class="button" onclick="selesaikan()">Selesaikan</button>
 
-    <h2>Jawaban</h2>
+    <h2 class="heading">Jawaban</h2>
     <p id="jawaban">Belum ada jawaban</p>
 
     <br><br>
     <a class="button2" href="../projects.html">Kembali ke menu projects</a>
 
     <br><br>
-    <p>Terakhir diupdate: 22 Nov 2023</p>
+    <p>Terakhir diupdate: 17 Jan 2024</p>
 
     <script>
         function buat() {
@@ -111,6 +147,8 @@
             var e1 = e.options[e.selectedIndex];
             var level = document.getElementById("level");
             var level2 = level.options[level.selectedIndex];
+            var tipe = document.getElementById("tipe");
+            var tipe2 = tipe.options[tipe.selectedIndex];
             var tanda = '';
             document.getElementById('jawaban').innerHTML = 'Belum ada jawaban';
             // document.getElementById('angka').innerHTML = '';
@@ -170,7 +208,11 @@
                 tanda = ' / '
             }
             document.getElementById('soal').innerHTML = 'Hasil dari ' + a + tanda + b + ' adalah ...';
+            if (tipe2.index == 1) {
+                document.getElementById('soal2').innerHTML = 'A. 12, B. 13, C. 14, D. 15, E. 16';
+            }
         }
+
         function selesaikan() {
             var angka_awal = document.getElementById('angka').value
             if (angka_awal != '') {
