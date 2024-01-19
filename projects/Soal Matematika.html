@@ -66,7 +66,7 @@
         display: inline-block;
         font-family:"Source Sans Pro",sans-serif;
         font-size: 16px;
-        border: 1px solid #ccc;
+        border: 1px solid #404040;
         border-radius: 4px;
         box-sizing: border-box;
     }
@@ -111,7 +111,7 @@
     <br><br>
 
     <label>Pilih tipe pertanyaan:</label><br>
-    <select id="tipe" style="width:150px">
+    <select id="tipe" style="width:150px" onchange="pilihan()">
         <option>Isian</option>
         <option>Pilihan ganda</option>
     </select>
@@ -126,9 +126,10 @@
     <!-- <p>Pilih pertanyaan</p> -->
     <p id="soal">Belum ada soal</p>
     <p id="soal2"></p>
-    <button class="button" onclick="buat()">Buat soal baru</button>
-    <p>Input angka</p>
-    <input type="number" id="angka" min="0">
+    <button class="button" onclick="buat();pilihan()">Buat soal baru</button>
+    <!-- <p>Input angka</p> -->
+    <!-- <input type="number" id="angka" min="0"> -->
+    <div id="tipe2"></div>
     <br><br>
     <button class="button" onclick="selesaikan()">Selesaikan</button>
 
@@ -139,9 +140,10 @@
     <a class="button2" href="../projects.html">Kembali ke menu projects</a>
 
     <br><br>
-    <p>Terakhir diupdate: 17 Jan 2024</p>
+    <p>Terakhir diupdate: 19 Jan 2024</p>
 
     <script>
+        pilihan()
         function buat() {
             var e = document.getElementById("bentuk");
             var e1 = e.options[e.selectedIndex];
@@ -208,13 +210,75 @@
                 tanda = ' / '
             }
             document.getElementById('soal').innerHTML = 'Hasil dari ' + a + tanda + b + ' adalah ...';
-            if (tipe2.index == 1) {
-                document.getElementById('soal2').innerHTML = 'A. 12, B. 13, C. 14, D. 15, E. 16';
+        }
+
+        function pilihan() {
+            var tipe = document.getElementById("tipe");
+            var tipe2 = tipe.options[tipe.selectedIndex];
+            if (tipe2.index == 0) {
+                document.getElementById('tipe2').innerHTML = `
+                <p>Input angka</p>
+                <input type="number" id="angka" min="0">
+                `;
+            } else {
+                var e = document.getElementById("bentuk");
+                var e1 = e.options[e.selectedIndex];
+                pilihan_index = Math.floor(5 * Math.random());
+                c = Math.floor(5*Math.random());
+                pilihan_list = [12,13,14,15,16];
+                if (e1.index == 0) {
+                    hasil = a+b;
+                    pilihan_list = [
+                        a+b+1+Math.floor(b/2*Math.random()),
+                        a+b-1-Math.floor(b/2*Math.random()),
+                        a+b+1+Math.floor(b/2*Math.random()),
+                        a+b-1-Math.floor(b/2*Math.random()),
+                        a+b+1+Math.floor(b/2*Math.random())
+                    ];
+                } else if (e1.index == 1) {
+                    hasil = a-b;
+                    pilihan_list = [12,13,14,15,16];
+                } else if (e1.index == 2) {
+                    hasil = a*b;
+                    pilihan_list = [12,13,14,15,16];
+                } else if (e1.index == 3) {
+                    hasil = Math.floor(a/b);
+                    pilihan_list = [12,13,14,15,16];
+                }
+                pilihan_list[pilihan_index] = hasil;
+                document.getElementById('tipe2').innerHTML = `
+                <p>Pilihan jawaban</p>
+                <div class="column">
+                    <input type="radio" id="pilihan1" name="pilihan" value="0">
+                    <label for="pilihan1">A. ` + pilihan_list[0] + `</label>
+                </div>
+                <div class="column">
+                    <input type="radio" id="pilihan2" name="pilihan" value="1">
+                    <label for="pilihan2">B. ` + pilihan_list[1] + `</label>
+                </div>
+                <div class="column">
+                    <input type="radio" id="pilihan3" name="pilihan" value="2">
+                    <label for="pilihan3">C. ` + pilihan_list[2] + `</label>
+                </div>
+                <div class="column">
+                    <input type="radio" id="pilihan4" name="pilihan" value="3">
+                    <label for="pilihan4">D. ` + pilihan_list[3] + `</label>
+                    </div>
+                <div class="column">
+                    <input type="radio" id="pilihan5" name="pilihan" value="4">
+                    <label for="pilihan5">E. ` + pilihan_list[4] + `</label>
+                </div>
+                <div class="clearfix"></div><br>
+                `;
             }
         }
 
         function selesaikan() {
-            var angka_awal = document.getElementById('angka').value
+            if (tipe2.index == 0) {
+                var angka_awal = document.getElementById('angka').value;
+            } else {
+                var angka_awal = document.getElementsByName('pilihan1').value;
+            }
             if (angka_awal != '') {
                 var e = document.getElementById("bentuk");
                 var e1 = e.options[e.selectedIndex];
