@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Progress Bar</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family:"Arial",sans-serif;
+        }
+        .progress {
+            width: 90%;
+            background-color: #ddd;
+        }
+        .bar {
+            width: 10%;
+            height: 50px;
+            /* background-color: #04AA6D; */
+            background-color: #40ff40;
+            /* text-align: center; */
+            /* padding-left: 10px;
+            /* text-align: body; */
+            line-height: 50px;
+            color: black;
+            font-size: 25px;
+        }
+        .column {
+            float: left;
+            padding-right: 10px;
+        }
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        button {
+            font-family:"Helvetica",sans-serif;
+            font-size: 20px;
+        }
+        .button {
+            background-color: #4080c0;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 18px;
+            margin: 2px 2px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        a {
+            font-size: 18px;
+        }
+        a.button2:link, a.button2:visited {
+            background-color: #f0f0f0;
+            color: black;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            border: 1px solid #404040;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+        a.button2:hover, a.button2:active {
+            background-color: #d0d0d0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Progress Bar dalam Penghitung Waktu</h1>
+    <br>
+
+    <p style="font-size:18px;">Menit berikutnya</p>
+    <div class="progress">
+    <div class="bar" id="minutes">&nbsp;&nbsp;...</div>
+    </div><br>
+    
+    <p style="font-size:18px;">Jam berikutnya</p>
+    <div class="progress">
+    <div class="bar" id="hours">&nbsp;&nbsp;...</div>
+    </div><br>
+
+    <p style="font-size:18px;">Hari berikutnya</p>
+    <div class="progress">
+    <div class="bar" id="days">&nbsp;&nbsp;...</div>
+    </div><br>
+    <br>
+
+    <a class="button2" href="Penghitung Waktu.html">Kembali ke menu penghitung waktu</a><br>
+    <a class="button2" href="../projects.html">Kembali ke menu projects</a>
+    
+    <br><br>
+    <p>Terakhir diupdate: 4 Des 2023</p>
+
+    <script>
+        // var width = width2;
+        change();
+        function change() {
+            const d = new Date();
+            // let h = 1;
+            let h = d.getHours();
+            let m = d.getMinutes();
+            let s = d.getSeconds();
+            let ms = d.getMilliseconds();
+            let time;
+
+            // width2 = document.getElementById("percent").value;
+            var elem = document.getElementById("minutes");
+            var percent = (s+ms/1000)*100/60;
+            elem.style.width = parseInt(percent) + "%";
+            elem.innerHTML = "&nbsp;&nbsp;<b>" + parseInt(percent) + "%</b>";
+
+            var elem = document.getElementById("hours");
+            var percent = (m+s/60+ms/60000)*100/60;
+            elem.style.width = percent.toFixed(1) + "%";
+            elem.innerHTML = "&nbsp;&nbsp;<b>" + percent.toFixed(1) + "%</b>";
+
+            var elem = document.getElementById("days");
+            var percent = (h+m/60+s/3600+ms/3600000)*100/24;
+            elem.style.width = percent.toFixed(2) + "%";
+            elem.innerHTML = "&nbsp;&nbsp;<b>" + percent.toFixed(2) + "%</b>";
+        }
+        setInterval(change, 200);
+    </script>
+</body>
+</html>
