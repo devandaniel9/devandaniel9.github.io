@@ -59,8 +59,9 @@
     a.button2:hover, a.button2:active {
         background-color: #d0d0d0;
     }
-    input[type=text], select {
-        width: 100%;
+    input[type=number], select {
+        /* width: 100%; */
+        width: 200px;
         padding: 5px 10px;
         margin: 5px 0;
         display: inline-block;
@@ -127,6 +128,7 @@
     <p id="soal">Belum ada soal</p>
     <p id="soal2"></p>
     <button class="button" onclick="buat();pilihan()">Buat soal baru</button>
+    <br><br>
     <!-- <p>Input angka</p> -->
     <!-- <input type="number" id="angka" min="0"> -->
     <div id="tipe2"></div>
@@ -140,7 +142,7 @@
     <a class="button2" href="../projects.html">Kembali ke menu projects</a>
 
     <br><br>
-    <p>Terakhir diupdate: 19 Jan 2024</p>
+    <p>Terakhir diupdate: 24 Jan 2024</p>
 
     <script>
         pilihan()
@@ -217,7 +219,7 @@
             var tipe2 = tipe.options[tipe.selectedIndex];
             if (tipe2.index == 0) {
                 document.getElementById('tipe2').innerHTML = `
-                <p>Input angka</p>
+                <label>Input angka</label><br>
                 <input type="number" id="angka" min="0">
                 `;
             } else {
@@ -247,26 +249,26 @@
                 }
                 pilihan_list[pilihan_index] = hasil;
                 document.getElementById('tipe2').innerHTML = `
-                <p>Pilihan jawaban</p>
+                <span>Pilihan jawaban</span><br><Br>
                 <div class="column">
                     <input type="radio" id="pilihan1" name="pilihan" value="0">
-                    <label for="pilihan1">A. ` + pilihan_list[0] + `</label>
+                    <label for="pilihan1">A. ${pilihan_list[0]}</label>
                 </div>
                 <div class="column">
                     <input type="radio" id="pilihan2" name="pilihan" value="1">
-                    <label for="pilihan2">B. ` + pilihan_list[1] + `</label>
+                    <label for="pilihan2">B. ${pilihan_list[1]}</label>
                 </div>
                 <div class="column">
                     <input type="radio" id="pilihan3" name="pilihan" value="2">
-                    <label for="pilihan3">C. ` + pilihan_list[2] + `</label>
+                    <label for="pilihan3">C. ${pilihan_list[2]}</label>
                 </div>
                 <div class="column">
                     <input type="radio" id="pilihan4" name="pilihan" value="3">
-                    <label for="pilihan4">D. ` + pilihan_list[3] + `</label>
+                    <label for="pilihan4">D. ${pilihan_list[3]}</label>
                     </div>
                 <div class="column">
                     <input type="radio" id="pilihan5" name="pilihan" value="4">
-                    <label for="pilihan5">E. ` + pilihan_list[4] + `</label>
+                    <label for="pilihan5">E. ${pilihan_list[4]}</label>
                 </div>
                 <div class="clearfix"></div><br>
                 `;
@@ -274,6 +276,8 @@
         }
 
         function selesaikan() {
+            var tipe = document.getElementById("tipe");
+            var tipe2 = tipe.options[tipe.selectedIndex];
             if (tipe2.index == 0) {
                 var angka_awal = document.getElementById('angka').value;
             } else {
