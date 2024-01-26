@@ -45,7 +45,8 @@ p {
     /* line-height: 1.5; */
 }
 .title {
-    font-family:"Raleway Medium",sans-serif;
+    /* font-family:"Raleway Medium",sans-serif; */
+    font-family:"Inter",sans-serif;
 }
 li {
     font-size: 20px;
@@ -84,8 +85,12 @@ a.button:hover, a.button:active {
 .row {
     display: flex;
 }
-.column {
+/* .column {
     flex: 50%;
+} */
+.column {
+    float: left;
+    padding-right: 10px;
 }
 /* .margin-left */
 .container2 {
