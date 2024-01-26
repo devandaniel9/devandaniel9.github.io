@@ -2,11 +2,17 @@
 <html>
 <head>
     <title>Website Saya</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
 </head>
 <style>
     body {
         background-color: lightblue;
-        font-family:"Helvetica",sans-serif;
+        font-family:"Source Sans Pro",sans-serif;
+    }
+    .heading {
+        font-family:"Inter",sans-serif;
     }
     .column {
         float: left;
@@ -18,14 +24,14 @@
         clear: both;
     }
     button {
-        font-family:"Helvetica",sans-serif;
+        font-family:"Source Sans Pro",sans-serif;
         font-size: 20px;
     }
     .button {
         background-color: #4080c0;
         border: none;
         color: white;
-        padding: 8px 16px;
+        padding: 5px 10px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
@@ -51,9 +57,21 @@
     a.button2:hover, a.button2:active {
         background-color: #d0d0d0;
     }
+    input[type=number], select {
+        /* width: 100%; */
+        width: 200px;
+        padding: 5px 10px;
+        margin: 5px 0;
+        display: inline-block;
+        font-family:"Source Sans Pro",sans-serif;
+        font-size: 16px;
+        border: 1px solid #404040;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
 </style>
 <body>
-    <h1>Bangun Datar</h1>
+    <h1 class="heading">Bangun Datar</h1>
     <img src="images/2d-shapes.png" width="300">
     <p>
     Ini akan mencari luas dan keliling pada bangun datar. Ada 3 bangun dalam bangun datar, yaitu:<br><br>
@@ -61,13 +79,13 @@
     2. <b>Persegi Panjang</b> - Terdapat panjang dan lebar<br>
     3. <b>Segitiga</b> - Ada 3 sisi<br>
     4. <b>Lingkaran</b> - Bentuknya melengkung
-    </p>
+    </p><br>
 
-    <h2>Jenis Bangun Datar</h2>
+    <h2 class="heading">Jenis Bangun Datar</h2>
 
-    <!-- <label for="bentuk">Pilih jenis bangun datar:</label> -->
-    <label for="bentuk">Pilih jenis bangun datar:</label>
-    <select name="bentuk" id="bentuk" style="width:150px" onchange="double()">
+    <!-- <label for="bentuk">Pilih jenis bangun datar:</label> double()-->
+    <label for="bentuk">Pilih jenis bangun datar:</label><br>
+    <select name="bentuk" id="bentuk" style="width:150px" onchange="change();output();">
         <option value="value1">Persegi</option>
         <option value="value2">Persegi Panjang</option>
         <option value="value3">Segitiga</option>
@@ -77,22 +95,23 @@
     <br><br>
 
     <label>Jumlah digit desimal:</label>
-    <input type="range" id="digit" oninput="myFunction()" min="2" max="5" value="2">
+    <input type="range" id="digit" oninput="output()" min="2" max="5" value="2">
     <br>
     <p id='digit2'>Digit precision: 2</p>
     <br>
 
-    <h2>Input</h2>
-    Sebuah input
-    <div class="row" id="bangun">
+    <h2 class="heading">Input</h2>
+    <!-- <span>Sebuah input</span> -->
+    <!-- <div class="row" id="bangun">
         <p>Panjang</p>
-        <input type="number" id="num1" oninput="myFunction()" min="0" value="3">
-    </div>
+        <input type="number" id="num1" oninput="output()" min="0" value="3">
+    </div> -->
+    <div class="row" id="bangun"></div>
     <p>Klik tombol ini!</p>
-    <button class="button" onclick="myFunction()">Selesaikan</button>
+    <button class="button" onclick="output()">Selesaikan</button>
     <br><br>
 
-    <h2 id=1></h2>
+    <h2 class="heading" id=1></h2>
     <p id=2></p>
     <p id=3></p>
     <p id=4></p>
@@ -100,31 +119,57 @@
     <a class="button2" href="../projects.html">Kembali ke menu projects</a>
 
     <br><br>
-    <p>Terakhir diupdate: 15 Nov 2023</p>
+    <p>Terakhir diupdate: 26 Jan 2024</p>
 
     <script>
+        change();
         function change() {
             var e = document.getElementById("bentuk");
             var e1 = e.options[e.selectedIndex];
             if (e1.index == 0) {
+                // <p>Panjang</p>
                 document.getElementById('bangun').innerHTML = `
-                <p>Panjang</p>
-                <input type="number" id="num1" oninput="myFunction()" min="0" value="3">
+                <img src="images/Bangun Datar/Persegi.png" width="200"><br>
+                <p><b>Persegi</b> dalam bangun datar adalah kedua sisi yang sama, dengan panjang dan lebar yang sama. Persegi mempunyai diagonal yang miring.<br>Disini akan mencari Luas dan Keliling persegi.</p>
+                <label>Panjang sisi</label><br>
+                <input type="number" id="num1" oninput="output()" min="0" value="3">
                 `;
             } else if (e1.index == 1) {
                 document.getElementById('bangun').innerHTML = `
+                <img src="images/Bangun Datar/Persegi Panjang.png" width="200"><br>
+                <p><b>Persegi Panjang</b> adalah bangun yang terdiri dari dua sisi, yaitu panjang (p) dan lebar (l).</p>
                 <div class="column">
-                    <p>Panjang</p>
-                    <input type="number" id="num1" oninput="myFunction()" min="0" value="3">
+                    <label>Panjang</label><br>
+                    <input type="number" id="num1" oninput="output()" min="0" value="3">
                 </div>
                 <div class="column">
-                    <p>Lebar</p>
-                    <input type="number" id="num2" oninput="myFunction()" min="0" value="2">
+                    <label>Lebar</label><br>
+                    <input type="number" id="num2" oninput="output()" min="0" value="2">
                 </div>
+                `;
+            } else if (e1.index == 2) {
+                document.getElementById('bangun').innerHTML = `
+                <img src="images/Bangun Datar/Segitiga.png" width="200"><br>
+                <p><b>Segitiga</b> adalah bangun yang terdiri dari 3 siri, yaitu alas dan 2 sisi miring. Terdapat alas (a) dan tinggi (t).<br>Ada 4 jenis segitiga, yaitu Segitiga Siku-Siku, Segitiga Sama Sisi, Segitiga Sama Kaki, dan Segitiga Sembarang</p>
+                <div class="column">
+                    <label>Alas</label><br>
+                    <input type="number" id="num1" oninput="output()" min="0" value="4">
+                </div>
+                <div class="column">
+                    <label>Tinggi</label><br>
+                    <input type="number" id="num2" oninput="output()" min="0" value="3">
+                </div>
+                `;
+            } else {
+                document.getElementById('bangun').innerHTML = `
+                <img src="images/Bangun Datar/Lingkaran.png" width="200"><br>
+                <p><b>Lingkaran</b> adalah bangun datar yang berbentuk bulat dan melengkung. Ada hubungannya dengan pi (π)<br>Bilangan pi (π) kira-kira 3.14 atau 22/7. Konstanta pi (π) = 3.14159...</p>
+                <label>Radius</label><br>
+                <input type="number" id="num1" oninput="output()" min="0" value="5">
                 `;
             }
         }
-        function myFunction() {
+        function output() {
             var e = document.getElementById("bentuk");
             var e1 = e.options[e.selectedIndex];
             var digit = parseInt(document.getElementById("digit").value);
@@ -167,10 +212,10 @@
             }
         }
 
-        function double() {
-            change();
-            myFunction();
-        }
+        // function double() {
+        //     change();
+        //     output();
+        // }
     </script>
 </body>
 </html>
