@@ -121,13 +121,22 @@
     <br><br>
 
     <label>Dengan soal cerita:</label>
-    <input type="checkbox" id="check" onclick="change()">
+    <!-- <input type="checkbox" id="check" onclick="change()"> -->
+    <input type="checkbox" id="check" onclick="pilihan()">
     <br><br>
+
+    <div id="cerita" style="display:none">
+        <label>Pilih tipe pertanyaan:</label><br>
+        <select id="cerita2" style="width:150px" onchange="pilihan()">
+            <option>Buah</option>
+            <option>Uang</option>
+        </select>
+    </div>
 
     <h2 class="heading">Pertanyaan</h2>
     <!-- <p id="soal">Hasil dari 2 + 3 adalah ...</p> -->
     <!-- <p>Pilih pertanyaan</p> -->
-    <p id="soal">Belum ada soal</p>
+    <p id="soal" style="width:500px; word-wrap:break-word;">Belum ada soal</p>
     <p id="soal2"></p>
     <button class="button" onclick="buat();pilihan()">Buat soal baru</button>
     <br><br>
@@ -144,7 +153,7 @@
     <a class="button2" href="../projects.html">Kembali ke menu projects</a>
 
     <br><br>
-    <p>Terakhir diupdate: 26 Jan 2024</p>
+    <p>Terakhir diupdate: 31 Jan 2024</p>
 
     <script>
         pilihan()
@@ -155,6 +164,7 @@
             var level2 = level.options[level.selectedIndex];
             var tipe = document.getElementById("tipe");
             var tipe2 = tipe.options[tipe.selectedIndex];
+            var cerita = document.getElementById("check").checked;
             var tanda = '';
             document.getElementById('jawaban').innerHTML = 'Belum ada jawaban';
             // document.getElementById('angka').innerHTML = '';
@@ -169,7 +179,7 @@
                     a = Math.floor(100 + 900 * Math.random());
                     b = Math.floor(100 + 900 * Math.random());
                 }
-                tanda = ' + '
+                tanda = ' + ';
             } else if (e1.index == 1) {
                 if (level2.index == 0) {
                     kecil = Math.floor(1 + 10 * Math.random());
@@ -184,7 +194,7 @@
                     a = Math.floor(100 + 400 * Math.random()) + kecil;
                     b = kecil;
                 }
-                tanda = ' - '
+                tanda = ' - ';
             } else if (e1.index == 2) {
                 if (level2.index == 0) {
                     a = Math.floor(1 + 10 * Math.random());
@@ -212,8 +222,50 @@
                 a = Math.floor(1 + 10 * Math.random()) * kecil;
                 b = kecil;
                 tanda = ' / '
+            } else if (e1.index == 4) {
+                if (Math.random() < 0.5) {
+                    if (Math.random() < 0.5) {
+                        a = Math.floor(5 + 16 * Math.random());
+                        b = Math.floor(1 + 20 * Math.random());
+                    } else {
+                        a = Math.floor(1 + 20 * Math.random());
+                        b = Math.floor(5 + 16 * Math.random());
+                    }
+                    if (a+b < 20) {
+                        c = Math.floor(1 + (a+b) * Math.random());
+                    } else {
+                        c = Math.floor(1 + 20 * Math.random());
+                    }
+                    tanda1 = ' + ';
+                    tanda2 = ' - ';
+                } else {
+                    a = Math.floor(5 + 16 * Math.random());
+                    b = Math.floor(1 + a * Math.random());
+                    c = Math.floor(1 + 20 * Math.random());
+                    tanda1 = ' - ';
+                    tanda2 = ' + ';
+                }
             }
-            document.getElementById('soal').innerHTML = 'Hasil dari ' + a + tanda + b + ' adalah ...';
+            
+            var cerita = document.getElementById("cerita");
+            if (cerita == false) {
+                cerita.style.display = "none";
+                if (e1.index < 4) {
+                    // document.getElementById('soal').innerHTML = 'Hasil dari ' + a + tanda + b + ' adalah ...';
+                    document.getElementById('soal').innerHTML = `Hasil dari ${a} ${tanda} ${b} adalah ...`;
+                } else {
+                    document.getElementById('soal').innerHTML = `Hasil dari ${a} ${tanda1} ${b} ${tanda2} ${c} adalah ...`;
+                }
+            } else {
+                cerita.style.display = "block";
+                var cerita2 = document.getElementById("cerita");
+                cerita2 = cerita2.options[cerita2.selectedIndex];
+                if (cerita2.index == 0) {
+                    document.getElementById('soal').innerHTML = `Di dalam sebuah toko buah, ibu membeli ${a} buah. Kemudian adik memberikan buahnya kepada ibu sebanyak ${b} buah. Berapa jumlah buah ibu sekarang?`;
+                } else {
+                    document.getElementById('soal').innerHTML = `Hahaha`;
+                }
+            }
         }
 
         function pilihan() {
