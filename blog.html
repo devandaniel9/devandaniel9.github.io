@@ -5,19 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
 </head>
 <body>
-    <div class="top-container title">
+    <div class="top-container heading">
         <div class="dropdown" style="margin-right:20px; float:left;">
-            <!-- <button class="dropbtn">MENU</button> -->
             <button class="dropbtn" style="background-color:transparent; font-size:0;"><img src="images/menu-icon.jpg" width="30"></button>
-            <div class="dropdown-content">
-                <a href="index.html">Home</a>
-                <a href="blog.html">Blog</a>
-                <a href="fakta.html">Fakta</a>
-                <a href="profil.html">Profil</a>
-                <a href="portofolio.html">Portofolio</a>
-            </div>
+            <div class="dropdown-content" id="boxlink"></div>
+            <script src="script.js"></script>
         </div>
         <img src="images/blank-profile.jpg" width="40" style="border-radius: 50%; vertical-align:middle; margin-right:20px; float:left;">
         <!-- <font size="6" color="white"><b>SEBUAH WEBSITE</b></font> -->
@@ -27,13 +22,13 @@
     <div class="container">
         <br>
         <!-- <font face="Open Sans Black" size="6" color="#002080"><b>BLOG DAN CERITA</b></font> -->
-        <div class="title" id="home" style="font-size:50px; color:#146480;"><b>Blog dan Cerita</b></div>
+        <div class="heading" id="home" style="font-size:50px; color:#146480;"><b>Blog dan Cerita</b></div>
         <p style="font-size: 22px">
             Cerita dan pengalaman saya yang pernah dirasakan.<br>
             Dari masa lalu hingga kini, semua cerita sudah menjadi hal yang berharga.<br>
             Inilah beberapa cerita yang ada di blog ini.
         </p>
-        <p class="title" style="font-size:30px; color:#206044;"><u><b>DAFTAR ISI</b></u></p>
+        <p class="heading" style="font-size:30px; color:#206044;"><u><b>DAFTAR ISI</b></u></p>
         <div class="box" style="max-width: 500px;">
             <p>
             <b>Link cerita:</b><br>
@@ -45,8 +40,8 @@
             </p>
         </div>
         <br>
-        <p class="title" style="font-size:30px; color:#206044;"><u><b>BEBERAPA CERITA</b></u></p>
-        <p class="title" id="1" style="font-size: 25px"><b>1. Holiday to Bromo</b></p>
+        <p class="heading" style="font-size:30px; color:#206044;"><u><b>BEBERAPA CERITA</b></u></p>
+        <p class="heading" id="1" style="font-size: 25px"><b>1. Holiday to Bromo</b></p>
         <div class="container2">
             <p>
             Dengan tulisan bahasa Inggris
@@ -94,7 +89,7 @@
             </p>
 
         </div>
-        <p class="title" id="2" style="font-size: 25px"><b>2. About Me Devan - Descriptive Text</b></p>
+        <p class="heading" id="2" style="font-size: 25px"><b>2. About Me Devan - Descriptive Text</b></p>
         <div class="container2">
             <p>
             Dengan tulisan bahasa Inggris
@@ -127,7 +122,7 @@
             </p>
             <br>
         </div>
-        <p class="title" id="3" style="font-size: 25px"><b>3. Memenangkan Lomba Besar</b></p>
+        <p class="heading" id="3" style="font-size: 25px"><b>3. Memenangkan Lomba Besar</b></p>
         <div class="container2">
             <div class="image">
                 <img src="images/Sertifikat OSN.jpg" width="200">
@@ -143,7 +138,7 @@
             </p>
             <br>
         </div>
-        <p class="title" id="4" style="font-size: 25px"><b>4. Retreat Eagle School 2023</b></p>
+        <p class="heading" id="4" style="font-size: 25px"><b>4. Retreat Eagle School 2023</b></p>
         <div class="container2">
             <p>
             <!-- <span style="font-size:22px; color:#000080;"><b>Kamis, 8 Sep 2023</b></span> -->
@@ -174,7 +169,7 @@
             </p>
             <br>
         </div>
-        <p class="title" id="5" style="font-size: 25px"><b>5. Holiday to Bali</b></p>
+        <p class="heading" id="5" style="font-size: 25px"><b>5. Holiday to Bali</b></p>
         <div class="container2">
             <p>
             Dengan tulisan bahasa Inggris
@@ -184,13 +179,13 @@
             </p>
             <br>
         </div>
-        <p class="title" id="6" style="font-size: 25px"><b>6. Holiday to Jakarta & Bandung</b></p>
-        <p class="title" id="7" style="font-size: 25px"><b>7. Cerita tentang Talent</b></p>
-        <p class="title" id="8" style="font-size: 25px"><b>8. Masa depan dan impian</b></p>
-        <p class="title" id="9" style="font-size: 25px"><b>9. [Under Construction]</b></p>
+        <p class="heading" id="6" style="font-size: 25px"><b>6. Holiday to Jakarta & Bandung</b></p>
+        <p class="heading" id="7" style="font-size: 25px"><b>7. Cerita tentang Talent</b></p>
+        <p class="heading" id="8" style="font-size: 25px"><b>8. Masa depan dan impian</b></p>
+        <p class="heading" id="9" style="font-size: 25px"><b>9. [Under Construction]</b></p>
         <br>
-        <p class="title" style="font-size:25px; color:#206044;"><u><b>BEBERAPA LINK:</b></u></p>
-        <div class="box title">
+        <p class="heading" style="font-size:25px; color:#206044;"><u><b>BEBERAPA LINK:</b></u></p>
+        <div class="box heading">
             <p style="font-size:22px; margin-bottom:5px;"><b>Link halaman:</b></p>
             <div class="btn-group">
                 <a href="index.html">Home</a>
@@ -201,12 +196,13 @@
                 <a href="hasil-karya.html">Hasil Karya</a>
                 <a href="timeline.html">Timeline</a>
                 <a hred="updates.html">Updates</a>
+                <a href="projects.html">Projects</a>
             </div>
             <div class="clearfix"></div><br>
         </div>
         <!-- <p>Kembali ke: <a href="index.html">Menu Utama</a></p> -->
         <br>
-        <a class="button title" href="#home">Kembali ke awal</a>
+        <a class="button heading" href="#home">Kembali ke awal</a>
         <br><br>
     </div>
     <footer style="background-color:#404040; padding:10px; color:white;">
