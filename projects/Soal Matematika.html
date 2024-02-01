@@ -122,12 +122,12 @@
 
     <label>Dengan soal cerita:</label>
     <!-- <input type="checkbox" id="check" onclick="change()"> -->
-    <input type="checkbox" id="check" onclick="pilihan()">
+    <input type="checkbox" id="check" onclick="tampilkan()">
     <br><br>
 
     <div id="cerita" style="display:none">
         <label>Pilih tipe pertanyaan:</label><br>
-        <select id="cerita2" style="width:150px" onchange="pilihan()">
+        <select id="cerita2" style="width:150px" onchange="tampilkan()">
             <option>Buah</option>
             <option>Uang</option>
         </select>
@@ -153,10 +153,19 @@
     <a class="button2" href="../projects.html">Kembali ke menu projects</a>
 
     <br><br>
-    <p>Terakhir diupdate: 31 Jan 2024</p>
+    <p>Terakhir diupdate: 1 Feb 2024</p>
 
     <script>
         pilihan()
+        function tampilkan() {
+            var cerita_check = document.getElementById("check");
+            var cerita = document.getElementById("cerita");
+            if (cerita_check.checked == false) {
+                cerita.style.display = "none";
+            } else {
+                cerita.style.display = "block";
+            }
+        }
         function buat() {
             var e = document.getElementById("bentuk");
             var e1 = e.options[e.selectedIndex];
@@ -164,7 +173,6 @@
             var level2 = level.options[level.selectedIndex];
             var tipe = document.getElementById("tipe");
             var tipe2 = tipe.options[tipe.selectedIndex];
-            var cerita = document.getElementById("check").checked;
             var tanda = '';
             document.getElementById('jawaban').innerHTML = 'Belum ada jawaban';
             // document.getElementById('angka').innerHTML = '';
@@ -247,9 +255,9 @@
                 }
             }
             
+            var cerita_check = document.getElementById("check");
             var cerita = document.getElementById("cerita");
-            if (cerita == false) {
-                cerita.style.display = "none";
+            if (cerita_check.checked == false) {
                 if (e1.index < 4) {
                     // document.getElementById('soal').innerHTML = 'Hasil dari ' + a + tanda + b + ' adalah ...';
                     document.getElementById('soal').innerHTML = `Hasil dari ${a} ${tanda} ${b} adalah ...`;
@@ -257,8 +265,7 @@
                     document.getElementById('soal').innerHTML = `Hasil dari ${a} ${tanda1} ${b} ${tanda2} ${c} adalah ...`;
                 }
             } else {
-                cerita.style.display = "block";
-                var cerita2 = document.getElementById("cerita");
+                var cerita2 = document.getElementById("cerita2");
                 cerita2 = cerita2.options[cerita2.selectedIndex];
                 if (cerita2.index == 0) {
                     document.getElementById('soal').innerHTML = `Di dalam sebuah toko buah, ibu membeli ${a} buah. Kemudian adik memberikan buahnya kepada ibu sebanyak ${b} buah. Berapa jumlah buah ibu sekarang?`;
