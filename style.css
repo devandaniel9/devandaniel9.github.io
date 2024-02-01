@@ -44,9 +44,12 @@ p {
     font-size: 20px;
     /* line-height: 1.5; */
 }
-.title {
+.heading {
     /* font-family:"Raleway Medium",sans-serif; */
     font-family:"Inter",sans-serif;
+}
+.title {
+	font-family:"Bebas Neue",sans-serif;
 }
 li {
     font-size: 20px;
