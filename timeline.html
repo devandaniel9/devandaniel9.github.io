@@ -5,32 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
 </head>
 <body>
-    <div class="top-container title">
+    <div class="top-container heading">
         <div class="dropdown" style="margin-right:20px; float:left;">
-            <!-- <button class="dropbtn">MENU</button> -->
             <button class="dropbtn" style="background-color:transparent; font-size:0;"><img src="images/menu-icon.jpg" width="30"></button>
-            <div class="dropdown-content">
-                <a href="index.html">Home</a>
-                <a href="blog.html">Blog</a>
-                <a href="fakta.html">Fakta</a>
-                <a href="profil.html">Profil</a>
-                <a href="portofolio.html">Portofolio</a>
-            </div>
+            <div class="dropdown-content" id="boxlink"></div>
+            <script src="script.js"></script>
         </div>
         <img src="images/blank-profile.jpg" width="40" style="border-radius: 50%; vertical-align:middle; margin-right:20px; float:left;">
-        <!-- <font size="6" color="white"><b>SEBUAH WEBSITE</b></font> -->
         <div style="font-size:30px; color:white;"><b>SEBUAH WEBSITE</b></div>
         <div class="clearfix"></div>
     </div>
     <div class="container">
         <br>
-        <font class="title" id="home" size="7" color="#146480"><b>Timeline dan Sejarah</b></font>
+        <div class="heading" id="home" style="font-size:50px; color:#146480;"><b>Timeline dan Sejarah</b></div>
         <p>
         Timeline dan Sejarah berisi kejadian timeline yang sudah terjadi, baik dalam hal sekolah maupun perjalanan.
         </p>
-        <p class="title" style="font-size:30px; color:#206044;"><u><b>DAFTAR ISI</b></u></p>
+        <p class="heading" style="font-size:30px; color:#206044;"><u><b>DAFTAR ISI</b></u></p>
         <div class="box" style="max-width: 500px;">
             <p>
             1. <a href="#1">Sebelum Tahun 2020</a><br>
@@ -41,35 +35,37 @@
             </p>
         </div>
         <br>
-        <p class="title" style="font-size:30px; color:#206044;"><u><b>ISI HALAMAN</b></u></p>
-        <p class="title" id="1" style="font-size: 25px"><b>1. Sebelum 2020</b></p>
-        <p class="title" id="2" style="font-size: 25px"><b>2. Tahun 2020</b></p>
-        <p class="title" id="3" style="font-size: 25px"><b>3. Tahun 2021</b></p>
-        <p class="title" id="4" style="font-size: 25px"><b>4. Tahun 2022</b></p>
-        <p class="title" id="5" style="font-size: 25px"><b>5. Tahun 2023</b></p>
+        <p class="heading" style="font-size:30px; color:#206044;"><u><b>ISI HALAMAN</b></u></p>
+        <p class="heading" id="1" style="font-size: 25px"><b>1. Sebelum 2020</b></p>
+        <p class="heading" id="2" style="font-size: 25px"><b>2. Tahun 2020</b></p>
+        <p class="heading" id="3" style="font-size: 25px"><b>3. Tahun 2021</b></p>
+        <p class="heading" id="4" style="font-size: 25px"><b>4. Tahun 2022</b></p>
+        <p class="heading" id="5" style="font-size: 25px"><b>5. Tahun 2023</b></p>
         <br>
-        <p class="title" style="font-size:30px; color:#206044;"><u><b>BEBERAPA LINK:</b></u></p>
-        <div class="box title">
-            <p>
-            Link halaman:<br>
-            <a href="index.html">Home</a> |
-            <a href="blog.html">Blog</a> |
-            <a href="fakta.html">Fakta</a> |
-            <a href="profil.html">Profil</a> |
-            <a href="portofolio.html">Portofolio</a> |
-            <a href="hasil-karya.html">Hasil Karya</a> |
-            <b>Timeline</b> |
-            <a href="updates.html">Updates</a>
-            </p>
+        <p class="heading" style="font-size:30px; color:#206044;"><u><b>BEBERAPA LINK:</b></u></p>
+        <div class="box heading">
+            <p style="font-size:22px; margin-bottom:5px;"><b>Link halaman:</b></p>
+            <div class="btn-group">
+                <a href="index.html">Home</a>
+                <a href="blog.html">Blog</a>
+                <a href="fakta.html">Fakta</a>
+                <a href="profil.html">Profil</a>
+                <a href="portofolio.html">Portofolio</a>
+                <a href="hasil-karya.html">Hasil Karya</a>
+                <a class="selected">Timeline</a>
+                <a href="updates.html">Updates</a>
+				<a href="projects.html">Projects</a>
+            </div>
+            <div class="clearfix"></div><br>
         </div>
         <br>
-        <a class="button title" href="#home">Kembali ke awal</a>
+        <a class="button heading" href="#home">Kembali ke awal</a>
         <br><br>
     </div>
     <footer style="background-color:#404040; padding:10px; color:white;">
         <p style="font-family:'Consolas'; margin-left:10px; line-height:1.5;">
-        Terakhir diupdate: 25 Sep 2023<br>
-        Copyright © 2023 by Devan
+        Terakhir diupdate: 26 Jan 2024<br>
+        Copyright © 2024 by Devan
         </p>
     </footer>
 </body>
