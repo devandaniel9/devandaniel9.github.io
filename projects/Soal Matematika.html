@@ -82,12 +82,21 @@
         width: 25px;
         background-color: #eee;
     }
+    .box {
+        background-color: #b0c8e8;
+        width: 200px;
+        padding: 10px;
+    }
 </style>
 <body>
     <h1 class="heading">Soal Pertanyaan Matematika</h1>
     <p>
-    Soal Pertanyaan ini akan menjawab beberapa soal matematika, termasuk penjumlahan.<br>
+    <b>Soal Pertanyaan</b> ini akan menjawab beberapa soal matematika, termasuk <b>Penjumlahan.</b><br>
     Program ini bisa membuat soal baru dengan angka yang berbeda dengan tombolnya, lalu klik selesaikan.
+    <br><br>
+    Ada yang baru di program ini, yaitu:<br>
+    - <b>Penjumlahan dan Pengurangan</b><br>
+    - <b>Soal Cerita</b>
     <br><br>
     </p>
 
@@ -125,7 +134,8 @@
     <input type="checkbox" id="check" onclick="tampilkan()">
     <br><br>
 
-    <div id="cerita" style="display:none">
+    <div class="box" id="cerita" style="background-color:#a0b0c0; width:200px; display:none">
+        <span style="font-size:20px"><b>Soal cerita</b></span><br><br>
         <label>Pilih tipe pertanyaan:</label><br>
         <select id="cerita2" style="width:150px" onchange="tampilkan()">
             <option>Buah</option>
@@ -153,7 +163,7 @@
     <a class="button2" href="../projects.html">Kembali ke menu projects</a>
 
     <br><br>
-    <p>Terakhir diupdate: 1 Feb 2024</p>
+    <p>Terakhir diupdate: 2 Feb 2024</p>
 
     <script>
         pilihan()
@@ -166,6 +176,7 @@
                 cerita.style.display = "block";
             }
         }
+        
         function buat() {
             var e = document.getElementById("bentuk");
             var e1 = e.options[e.selectedIndex];
@@ -173,7 +184,7 @@
             var level2 = level.options[level.selectedIndex];
             var tipe = document.getElementById("tipe");
             var tipe2 = tipe.options[tipe.selectedIndex];
-            var tanda = '';
+            // var tanda = '';
             document.getElementById('jawaban').innerHTML = 'Belum ada jawaban';
             // document.getElementById('angka').innerHTML = '';
             if (e1.index == 0) {
@@ -188,6 +199,7 @@
                     b = Math.floor(100 + 900 * Math.random());
                 }
                 tanda = ' + ';
+                hasil = a+b;
             } else if (e1.index == 1) {
                 if (level2.index == 0) {
                     kecil = Math.floor(1 + 10 * Math.random());
@@ -203,6 +215,7 @@
                     b = kecil;
                 }
                 tanda = ' - ';
+                hasil = a-b;
             } else if (e1.index == 2) {
                 if (level2.index == 0) {
                     a = Math.floor(1 + 10 * Math.random());
@@ -225,11 +238,13 @@
                     }
                 }
                 tanda = ' x '
+                hasil = a*b;
             } else if (e1.index == 3) {
                 kecil = Math.floor(1 + 10 * Math.random());
                 a = Math.floor(1 + 10 * Math.random()) * kecil;
                 b = kecil;
-                tanda = ' / '
+                tanda = ' : '
+                hasil = Math.floor(a/b);
             } else if (e1.index == 4) {
                 if (Math.random() < 0.5) {
                     if (Math.random() < 0.5) {
@@ -244,14 +259,16 @@
                     } else {
                         c = Math.floor(1 + 20 * Math.random());
                     }
-                    tanda1 = ' + ';
+                    tanda = ' + ';
                     tanda2 = ' - ';
+                    hasil = a+b-c;
                 } else {
                     a = Math.floor(5 + 16 * Math.random());
                     b = Math.floor(1 + a * Math.random());
                     c = Math.floor(1 + 20 * Math.random());
-                    tanda1 = ' - ';
+                    tanda = ' - ';
                     tanda2 = ' + ';
+                    hasil = a-b+c;
                 }
             }
             
@@ -262,15 +279,19 @@
                     // document.getElementById('soal').innerHTML = 'Hasil dari ' + a + tanda + b + ' adalah ...';
                     document.getElementById('soal').innerHTML = `Hasil dari ${a} ${tanda} ${b} adalah ...`;
                 } else {
-                    document.getElementById('soal').innerHTML = `Hasil dari ${a} ${tanda1} ${b} ${tanda2} ${c} adalah ...`;
+                    document.getElementById('soal').innerHTML = `Hasil dari ${a} ${tanda} ${b} ${tanda2} ${c} adalah ...`;
                 }
             } else {
                 var cerita2 = document.getElementById("cerita2");
                 cerita2 = cerita2.options[cerita2.selectedIndex];
-                if (cerita2.index == 0) {
-                    document.getElementById('soal').innerHTML = `Di dalam sebuah toko buah, ibu membeli ${a} buah. Kemudian adik memberikan buahnya kepada ibu sebanyak ${b} buah. Berapa jumlah buah ibu sekarang?`;
-                } else {
-                    document.getElementById('soal').innerHTML = `Hahaha`;
+                if (e1.index == 0) {
+                    if (cerita2.index == 0) {
+                        document.getElementById('soal').innerHTML = `Di dalam sebuah toko buah, ibu membeli ${a} buah. Kemudian adik memberikan buahnya kepada ibu sebanyak ${b} buah. Berapa jumlah buah ibu sekarang?`;
+                    } else {
+                        document.getElementById('soal').innerHTML = `Di dalam sebuah pusat perbelanjaan, ibu membeli sesuatu seharga ${a} ribu. Kemudian adik membeli lagi seharga ${b} ribu, lalu dikumpulkan ke keranjang ibu. Berapa jumlah uang ibu sekarang? (dalam ribuan)`;
+                    }
+                } else if (e1.index == 1) {
+                    document.getElementById('soal').innerHTML = `Di dalam sebuah toko buah, ibu sudah membeli apel sebanyak ${a} buah. Lalu adik memakan buah apelnya sebanyak ${b} apel. Berapa sisa buah apel sekarang?`;
                 }
             }
         }
@@ -280,7 +301,7 @@
             var tipe2 = tipe.options[tipe.selectedIndex];
             if (tipe2.index == 0) {
                 document.getElementById('tipe2').innerHTML = `
-                <label>Input angka</label><br>
+                <label>Input jawaban</label><br>
                 <input type="number" id="angka" min="0">
                 `;
             } else {
@@ -290,7 +311,7 @@
                 c = Math.floor(5*Math.random());
                 pilihan_list = [12,13,14,15,16];
                 if (e1.index == 0) {
-                    hasil = a+b;
+                    // hasil = a+b;
                     pilihan_list = [
                         a+b+1+Math.floor(b/2*Math.random()),
                         a+b-1-Math.floor(b/2*Math.random()),
@@ -299,18 +320,15 @@
                         a+b+1+Math.floor(b/2*Math.random())
                     ];
                 } else if (e1.index == 1) {
-                    hasil = a-b;
                     pilihan_list = [12,13,14,15,16];
                 } else if (e1.index == 2) {
-                    hasil = a*b;
                     pilihan_list = [12,13,14,15,16];
                 } else if (e1.index == 3) {
-                    hasil = Math.floor(a/b);
                     pilihan_list = [12,13,14,15,16];
                 }
                 pilihan_list[pilihan_index] = hasil;
                 document.getElementById('tipe2').innerHTML = `
-                <span>Pilihan jawaban</span><br><Br>
+                <span>Pilihan jawaban</span><br><br>
                 <div class="column">
                     <input type="radio" id="pilihan1" name="pilihan" value="0">
                     <label for="pilihan1">A. ${pilihan_list[0]}</label>
@@ -347,25 +365,19 @@
             if (angka_awal != '') {
                 var e = document.getElementById("bentuk");
                 var e1 = e.options[e.selectedIndex];
-                var tanda = '';
+                // var tanda = '';
                 angka = parseInt(angka_awal);
-                if (e1.index == 0) {
-                    hasil = a+b;
-                    tanda = ' + ';
-                } else if (e1.index == 1) {
-                    hasil = a-b;
-                    tanda = ' - ';
-                } else if (e1.index == 2) {
-                    hasil = a*b;
-                    tanda = ' x ';
-                } else if (e1.index == 3) {
-                    hasil = Math.floor(a/b);
-                    tanda = ' / ';
+                // if (e1.index == 0) {
+                //     tanda = ' + ';
+                if (e1.index <= 3) {
+                    soal = a + tanda + b;
+                } else {
+                    soal = a + tanda + b + tanda2 + c;
                 }
                 if (angka == hasil) {
-                    document.getElementById('jawaban').innerHTML = 'Jawabannya benar<br><br>' + a + tanda + b + ' = ' + hasil;
+                    document.getElementById('jawaban').innerHTML = `Jawabannya benar<br><br> ${soal} = ${hasil}`;
                 } else {
-                    document.getElementById('jawaban').innerHTML = 'Jawabannya salah<br>Jawaban yang diinput: ' + angka + '<br><br>' + a + tanda + b + ' = ' + hasil;
+                    document.getElementById('jawaban').innerHTML = `Jawabannya salah<br>Jawaban yang diinput: ${angka}<br><br>${soal} = ${hasil}`;
                 }
             } else {
                 document.getElementById('jawaban').innerHTML = 'Input angka harus diisi';
