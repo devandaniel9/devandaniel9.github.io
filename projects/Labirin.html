@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>BMI Calculator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
+</head>
+<body>
+    <h1>Permainan Labirin</h1>
+
+    <canvas id="myCanvas" width="450" height="400"></canvas>
+
+	<script>
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2d");
+        // ctx.strokeStyle = "red";
+        // ctx.strokeStyle = "black";
+        class Player {
+            constructor(height, size) {
+                this.x = 0;
+                this.y = 0;
+                this.size = size;
+                this.inc = height/size;
+                this.hasWon = false;
+            }
+            move(x, y) {
+                this.y += x;
+                this.x +=y;
+                this.draw();
+            }
+            checkWon() { 
+                if (this.x>=this.size && this.y>=this.size-1) {
+                    this.hasWon=true;
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x*this.inc + this.inc/2,this.y * this.inc + this.inc/2,7, 0,2*Math.PI);
+                ctx.fillStyle = 'red';
+                ctx.fill();
+                // ctx.stroke();
+                ctx.closePath();
+                this.checkWon();
+            }
+        }
+
+        class Maze {
+            constructor(size, height, width) {
+                this.size = size;
+                this.height = height;
+                this.width = width;
+
+                this.maze = [];
+                this.player = new Player (height, size);
+            }
+            makeMaze() {
+                for(var i =0; i<this.size; i++){
+                        var row = [];
+                        for(var w=0; w<this.size; w++){
+                            row[w] = (new Cell(w, i, this.width, this.height, this.size));
+                        }
+                        this.maze[i] = row;
+                }
+                this.mazeAlgorithm();
+                this.drawMaze();
+            }
+            drawMaze() {
+                for(var i=0; i<this.size; i++){
+                for(var w=0; w<this.size; w++){
+                    this.maze[i][w].draw();
+                }
+                }
+            }
+            findNeighbors(cell) {
+                var n = [];
+                var c;
+                if(cell.x != 0){
+                    c = this.maze[cell.x-1][cell.y];
+                    if(c.visited==false){
+                    n.push(c);
+                    }
+                }
+                if(cell.x < this.size-1){
+                    c = this.maze[cell.x+1][cell.y];
+                    if(c.visited==false){
+                    n.push(c);
+                    }
+                }
+                if(cell.y != 0){
+                    c = this.maze[cell.x][cell.y-1];
+                    if(c.visited == false){
+                    n.push(c);
+                    }
+                }
+                if(cell.y < this.size-1){
+                c = this.maze[cell.x][cell.y+1];
+                if(c.visited==false){
+                    n.push(c);
+                }
+                }
+                //   alert(n.length);
+
+                if(n.length==0){
+                return "banana";
+                }
+                var numN = n.length;
+                var rand = Math.floor(Math.random() * numN);
+                return n[rand];
+            }
+            mazeAlgorithm() {
+                var stack = new MStack();
+
+                var firstCell = this.maze[0][0];
+                firstCell.visited=true;
+                stack.push(firstCell);
+                var count=0;
+                while (stack.size !=0) {
+                    var currCell = stack.pop();
+                    var randomNeighbor = this.findNeighbors(currCell);
+                    if (randomNeighbor == "banana") {
+                        stack.pop();
+                    }
+                    else{
+                    if (randomNeighbor.x>currCell.x) {
+                        currCell.walls.bottomWall = false;
+                        randomNeighbor.walls.topWall = false;
+                    //  alert("down");
+                    }
+                    else if (randomNeighbor.x<currCell.x) {
+                        currCell.walls.topWall = false;
+                        randomNeighbor.walls.bottomWall = false;
+                    //  alert("up");
+                    }
+                    else if (randomNeighbor.y<currCell.y) {
+                        currCell.walls.leftWall = false;
+                        randomNeighbor.walls.rightWall = false;
+                    //   alert("left");
+                    }
+                    else if (randomNeighbor.y>currCell.y) {
+                        currCell.walls.rightWall = false;
+                        randomNeighbor.walls.leftWall = false;
+                    //   alert("right");
+                    }
+                    
+                    randomNeighbor.visited = true;
+                    stack.push(currCell);
+                    stack.push(randomNeighbor);
+                    }
+                }
+                this.maze[0][0].walls.leftWall = false;
+                this.maze[this.size-1][this.size-1].walls.rightWall = false;
+                this.maze[0][0].hasPlayer = true;
+                this.player.draw();
+            }
+            moveDown() {
+            if(this.maze[this.player.y][this.player.x].walls.bottomWall==false){
+                ctx.clearRect(0,0, 500, 500);
+                this.drawMaze();
+                this.player.move(1, 0);
+
+                }   
+            } 
+            moveUp() {
+                if (this.maze[this.player.y][this.player.x].walls.topWall==false) {
+                    ctx.clearRect(0,0, 500, 500);
+                    this.drawMaze();
+                    this.player.move(-1, 0);
+                }   
+            } 
+            moveLeft() {
+                if (this.maze[this.player.y][this.player.x].walls.leftWall==false) {
+                    ctx.clearRect(0,0, 500, 500);
+                    this.drawMaze();
+                    this.player.move(0, -1);
+                }
+            }
+            moveRight() {
+                if (this.maze[this.player.y][this.player.x].walls.rightWall==false) {
+                    ctx.clearRect(0,0, 500, 500);
+                    this.drawMaze();
+                    this.player.move(0, 1);
+                }
+            }
+        }
+        
+        class MStack {
+            constructor() {
+                this.data = [];
+                this.size = 0;
+            }
+            push(obj) {
+                this.data.push(obj);
+                this.size=this.size+1;
+            }
+            pop() {
+                if (this.data.length != 0) {
+                    this.size= this.size-1;
+                    return this.data.pop();
+                }
+            }
+        }
+
+        class Cell {
+            constructor(x, y, mazeWidth, mazeHeight, mazeSize) {
+                var inc = mazeHeight/mazeSize;
+                this.x1 = x * inc;
+                this.x2 = this.x1 + inc;
+                this.y1 = y * inc;
+                this.y2 = this.y1 + inc;
+                this.hasPlayer = false;
+
+                this.x = y;
+                this.y = x;
+
+                this.visited = false;
+
+                this.walls = {
+                    topWall: true,
+                    rightWall: true,
+                    bottomWall: true,
+                    leftWall: true
+                };
+            }
+            draw() {
+                var inc = this.mazeHeight/this.mazeSize;
+                if (this.walls.bottomWall == true) {
+                    ctx.beginPath();
+                    ctx.moveTo(this.x1, this.y2);
+                    ctx.lineTo(this.x2, this.y2);
+                    ctx.stroke();
+                    ctx.closePath();
+                }
+                if (this.walls.topWall == true) {
+                    ctx.beginPath();
+                    ctx.moveTo(this.x1, this.y1);
+                    ctx.lineTo(this.x2, this.y1);
+                    ctx.stroke();
+                    ctx.closePath();
+                }
+                if (this.walls.leftWall == true) {
+                    ctx.beginPath();
+                    ctx.moveTo(this.x1, this.y1);
+                    ctx.lineTo(this.x1, this.y2);
+                    ctx.stroke();
+                    ctx.closePath();
+                }
+                if (this.walls.rightWall == true) {
+                    ctx.beginPath();
+                    ctx.moveTo(this.x2, this.y1);
+                    ctx.lineTo(this.x2, this.y2);
+                    ctx.stroke();
+                    ctx.closePath();
+                }
+            }
+        }
+        // var maze = new Maze(20, 400, 400);
+        var maze = new Maze(10, 400, 400);
+        maze.makeMaze();
+
+        document.onkeypress = function(evt) {
+            evt = evt || window.event;
+            var charCode = evt.keyCode || evt.which;
+            var charStr = String.fromCharCode(charCode);
+
+            // alert(maze.player.hasWon);
+            if (maze.player.hasWon == true) {
+                ctx.clearRect(0, 0, c.width, c.height);
+                ctx.font = "50px Arial";
+                ctx.strokeText("You Won!", c.width/4, c.height/2);
+            } else if (charStr == 'd' || charStr == 'D') {
+                maze.moveRight();
+            } else if (charStr == 'a' || charStr == 'A') {
+                maze.moveLeft();
+            } else if (charStr == 'w' || charStr == 'W') {
+                maze.moveUp();
+            } else if (charStr == 's' || charStr == 'S') {
+                maze.moveDown();
+            }
+        };
+	</script>
+</body>
+</html>
