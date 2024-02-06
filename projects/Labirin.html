@@ -6,10 +6,100 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
 </head>
+<style>
+    body {
+        background-color: #a0e0d0;
+        /* font-family:"Helvetica",sans-serif; */
+        font-family:"Source Sans Pro",sans-serif;
+    }
+	p {
+	    font-size: 18px;
+	}
+    .heading {
+        /* font-family:"Raleway Medium",sans-serif; */
+        font-family:"Inter",sans-serif;
+    }
+    .column {
+        float: left;
+        padding-right: 10px;
+    }
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    button {
+        /* font-family:"Helvetica",sans-serif; */
+        /* src: url(https://dwl.freefontsfamily.com/download/Helvetica-Font); */
+        font-family:"Source Sans Pro",sans-serif;
+        font-size: 20px;
+    }
+    .button {
+        background-color: #4080c0;
+        border: none;
+        color: white;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 18px;
+        margin: 2px 2px;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+    a {
+        font-size: 18px;
+    }
+    a.button2:link, a.button2:visited {
+        background-color: #f0f0f0;
+        color: black;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border: 1px solid #404040;
+        border-radius: 6px;
+        transition: 0.3s;
+    }
+    a.button2:hover, a.button2:active {
+        background-color: #d0d0d0;
+    }
+    /* input[type=text], select { */
+    input, select {
+        /* width: 100%; */
+        width: 200px;
+        padding: 5px 10px;
+        margin: 5px 0;
+        display: inline-block;
+        font-family:"Source Sans Pro",sans-serif;
+        font-size: 16px;
+        border: 1px solid #404040;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    /* Create a custom checkbox */
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #eee;
+    }
+</style>
 <body>
-    <h1>Permainan Labirin</h1>
+    <h1 class="heading">Permainan Labirin</h1>
 
-    <canvas id="myCanvas" width="450" height="400"></canvas>
+    <canvas id="myCanvas" width="450" height="400" style="background-color:#b0f0e0"></canvas>
+	
+	<p style="font-size:20px"><b>Tombol Keyboard</b></p>
+	<p>W = Ke atas<br>A = Ke kiri<br>S = Ke bawah<br>D = Ke kanan</p>
+	<br><br>
+    
+    <a class="button2" href="../projects.html">Kembali ke menu projects</a>
+
+    <br><br>
+    <p>Terakhir diupdate: 6 Feb 2024</p>
 
 	<script>
         var c = document.getElementById("myCanvas");
