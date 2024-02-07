@@ -89,23 +89,48 @@
 </style>
 <body>
     <h1 class="heading">Permainan Labirin</h1>
+    <p>
+    <b>Permainan Labirin</b> adalah permainan yang bertujuan untuk mencari jalan keluar dari jalan yang berbelok-belok.<br>
+    Disini ada 3 level, yaitu mudah, sedang, dan sulit.
+    <br><br>
+    </p>
 
-    <canvas id="myCanvas" width="450" height="400" style="background-color:#b0f0e0"></canvas>
+    <h2 class="heading">Mode Labirin</h2>
+    <!-- <label for="bentuk">Pilih jenis pertanyaan matematika:</label><br>
+    <select name="bentuk" id="bentuk" style="width:150px"> -->
+    <label>Pilih tingkat kesulitan:</label><br>
+    <select id="tingkat" style="width:250px" onchange="change()">
+        <option>Sangat Mudah</option>
+        <option>Mudah</option>
+        <option>Sedang</option>
+        <option>Sulit</option>
+        <option>Ekstrim</option>
+    </select>
+    <br><br>
+
+    <!-- <canvas id="myCanvas" width="450" height="400" style="background-color:#b0f0e0"></canvas> -->
+    <h2 class="heading">Tampilan</h2>
+    <canvas id="myCanvas" width="450" height="400"></canvas>
 	
-	<p style="font-size:20px"><b>Tombol Keyboard</b></p>
+	<!-- <p style="font-size:20px"><b>Tombol Keyboard</b></p> -->
+    <h2 class="heading">Tombol Keyboard</h2>
 	<p>W = Ke atas<br>A = Ke kiri<br>S = Ke bawah<br>D = Ke kanan</p>
 	<br><br>
     
     <a class="button2" href="../projects.html">Kembali ke menu projects</a>
-
     <br><br>
-    <p>Terakhir diupdate: 6 Feb 2024</p>
+
+    <p>Terakhir diupdate: 7 Feb 2024</p>
 
 	<script>
         var c = document.getElementById("myCanvas");
         var ctx = c.getContext("2d");
         // ctx.strokeStyle = "red";
         // ctx.strokeStyle = "black";
+        var maze_size = 15;
+        player_size = parseInt(100 / maze_size);
+        line_size = 1;
+
         class Player {
             constructor(height, size) {
                 this.x = 0;
@@ -116,18 +141,17 @@
             }
             move(x, y) {
                 this.y += x;
-                this.x +=y;
+                this.x += y;
                 this.draw();
             }
-            checkWon() { 
+            checkWon() {
                 if (this.x>=this.size && this.y>=this.size-1) {
-                    this.hasWon=true;
+                    this.hasWon = true;
                 }
             }
-
             draw() {
                 ctx.beginPath();
-                ctx.arc(this.x*this.inc + this.inc/2,this.y * this.inc + this.inc/2,7, 0,2*Math.PI);
+                ctx.arc(this.x*this.inc + this.inc/2, this.y * this.inc + this.inc/2, player_size, 0, 2*Math.PI);
                 ctx.fillStyle = 'red';
                 ctx.fill();
                 // ctx.stroke();
@@ -141,59 +165,50 @@
                 this.size = size;
                 this.height = height;
                 this.width = width;
-
                 this.maze = [];
                 this.player = new Player (height, size);
             }
             makeMaze() {
-                for(var i =0; i<this.size; i++){
-                        var row = [];
-                        for(var w=0; w<this.size; w++){
-                            row[w] = (new Cell(w, i, this.width, this.height, this.size));
-                        }
-                        this.maze[i] = row;
+                for (var i=0; i<this.size; i++) {
+                    var row = [];
+                    for (var w=0; w<this.size; w++) {
+                        row[w] = (new Cell(w, i, this.width, this.height, this.size));
+                    }
+                    this.maze[i] = row;
                 }
                 this.mazeAlgorithm();
                 this.drawMaze();
             }
             drawMaze() {
-                for(var i=0; i<this.size; i++){
-                for(var w=0; w<this.size; w++){
-                    this.maze[i][w].draw();
-                }
+                for (var i=0; i<this.size; i++) {
+                    for (var w=0; w<this.size; w++) {
+                        this.maze[i][w].draw();
+                    }
                 }
             }
             findNeighbors(cell) {
                 var n = [];
                 var c;
-                if(cell.x != 0){
+                if (cell.x != 0) {
                     c = this.maze[cell.x-1][cell.y];
-                    if(c.visited==false){
-                    n.push(c);
-                    }
+                    if (c.visited==false) {n.push(c);}
                 }
-                if(cell.x < this.size-1){
+                if (cell.x < this.size-1) {
                     c = this.maze[cell.x+1][cell.y];
-                    if(c.visited==false){
-                    n.push(c);
-                    }
+                    if (c.visited==false) {n.push(c);}
                 }
-                if(cell.y != 0){
+                if (cell.y != 0) {
                     c = this.maze[cell.x][cell.y-1];
-                    if(c.visited == false){
-                    n.push(c);
-                    }
+                    if (c.visited == false) {n.push(c);}
                 }
-                if(cell.y < this.size-1){
-                c = this.maze[cell.x][cell.y+1];
-                if(c.visited==false){
-                    n.push(c);
-                }
+                if (cell.y < this.size-1) {
+                    c = this.maze[cell.x][cell.y+1];
+                    if (c.visited==false) {n.push(c);}
                 }
                 //   alert(n.length);
 
-                if(n.length==0){
-                return "banana";
+                if (n.length == 0) {
+                    return "banana";
                 }
                 var numN = n.length;
                 var rand = Math.floor(Math.random() * numN);
@@ -203,35 +218,35 @@
                 var stack = new MStack();
 
                 var firstCell = this.maze[0][0];
-                firstCell.visited=true;
+                firstCell.visited = true;
                 stack.push(firstCell);
-                var count=0;
-                while (stack.size !=0) {
+                var count = 0;
+                while (stack.size != 0) {
                     var currCell = stack.pop();
                     var randomNeighbor = this.findNeighbors(currCell);
                     if (randomNeighbor == "banana") {
                         stack.pop();
                     }
-                    else{
+                    else {
                     if (randomNeighbor.x>currCell.x) {
                         currCell.walls.bottomWall = false;
                         randomNeighbor.walls.topWall = false;
-                    //  alert("down");
+                        // alert("down");
                     }
                     else if (randomNeighbor.x<currCell.x) {
                         currCell.walls.topWall = false;
                         randomNeighbor.walls.bottomWall = false;
-                    //  alert("up");
+                        // alert("up");
                     }
                     else if (randomNeighbor.y<currCell.y) {
                         currCell.walls.leftWall = false;
                         randomNeighbor.walls.rightWall = false;
-                    //   alert("left");
+                        // alert("left");
                     }
                     else if (randomNeighbor.y>currCell.y) {
                         currCell.walls.rightWall = false;
                         randomNeighbor.walls.leftWall = false;
-                    //   alert("right");
+                        // alert("right");
                     }
                     
                     randomNeighbor.visited = true;
@@ -245,32 +260,31 @@
                 this.player.draw();
             }
             moveDown() {
-            if(this.maze[this.player.y][this.player.x].walls.bottomWall==false){
-                ctx.clearRect(0,0, 500, 500);
-                this.drawMaze();
-                this.player.move(1, 0);
-
-                }   
+                if (this.maze[this.player.y][this.player.x].walls.bottomWall==false) {
+                    ctx.clearRect(0,0,500,500);
+                    this.drawMaze();
+                    this.player.move(1,0);
+                }
             } 
             moveUp() {
                 if (this.maze[this.player.y][this.player.x].walls.topWall==false) {
-                    ctx.clearRect(0,0, 500, 500);
+                    ctx.clearRect(0,0,500,500);
                     this.drawMaze();
-                    this.player.move(-1, 0);
-                }   
+                    this.player.move(-1,0);
+                }
             } 
             moveLeft() {
                 if (this.maze[this.player.y][this.player.x].walls.leftWall==false) {
-                    ctx.clearRect(0,0, 500, 500);
+                    ctx.clearRect(0,0,500,500);
                     this.drawMaze();
-                    this.player.move(0, -1);
+                    this.player.move(0,-1);
                 }
             }
             moveRight() {
                 if (this.maze[this.player.y][this.player.x].walls.rightWall==false) {
-                    ctx.clearRect(0,0, 500, 500);
+                    ctx.clearRect(0,0,500,500);
                     this.drawMaze();
-                    this.player.move(0, 1);
+                    this.player.move(0,1);
                 }
             }
         }
@@ -315,6 +329,8 @@
             }
             draw() {
                 var inc = this.mazeHeight/this.mazeSize;
+                ctx.lineWidth = line_size;
+                ctx.lineCap = "round";
                 if (this.walls.bottomWall == true) {
                     ctx.beginPath();
                     ctx.moveTo(this.x1, this.y2);
@@ -345,30 +361,60 @@
                 }
             }
         }
-        // var maze = new Maze(20, 400, 400);
-        var maze = new Maze(10, 400, 400);
-        maze.makeMaze();
 
-        document.onkeypress = function(evt) {
-            evt = evt || window.event;
-            var charCode = evt.keyCode || evt.which;
-            var charStr = String.fromCharCode(charCode);
-
-            // alert(maze.player.hasWon);
-            if (maze.player.hasWon == true) {
-                ctx.clearRect(0, 0, c.width, c.height);
-                ctx.font = "50px Arial";
-                ctx.strokeText("You Won!", c.width/4, c.height/2);
-            } else if (charStr == 'd' || charStr == 'D') {
-                maze.moveRight();
-            } else if (charStr == 'a' || charStr == 'A') {
-                maze.moveLeft();
-            } else if (charStr == 'w' || charStr == 'W') {
-                maze.moveUp();
-            } else if (charStr == 's' || charStr == 'S') {
-                maze.moveDown();
+        // var playersize = 7;
+        var maze_size = 10;
+        change();
+        function change() {
+            var tingkat = document.getElementById("tingkat");
+            tingkat = tingkat.options[tingkat.selectedIndex];
+            if (tingkat.index == 0) {
+                maze_size = 5;
+                line_size = 5;
+            } else if (tingkat.index == 1) {
+                maze_size = 10;
+                line_size = 4;
+            } else if (tingkat.index == 2) {
+                maze_size = 20;
+                line_size = 3;
+            } else if (tingkat.index == 3) {
+                maze_size = 30;
+                line_size = 2;
+            } else {
+                maze_size = 50;
+                line_size = 1;
             }
-        };
+
+            player_size = parseInt(100 / maze_size);
+
+            ctx.clearRect(0, 0, 450, 400);
+        
+            // var maze = new Maze(20, 400, 400);
+            var maze = new Maze(maze_size, 400, 400);
+            maze.makeMaze();
+
+            document.onkeypress = function(evt) {
+                evt = evt || window.event;
+                var charCode = evt.keyCode || evt.which;
+                var charStr = String.fromCharCode(charCode);
+
+                // alert(maze.player.hasWon);
+                if (maze.player.hasWon == true) {
+                    ctx.clearRect(0, 0, c.width, c.height);
+                    ctx.font = "50px Arial";
+                    // ctx.strokeText("You Won!", c.width/4, c.height/2);
+                    ctx.fillText("You Won!", c.width/4, c.height/2);
+                } else if (charStr == 'd' || charStr == 'D') {
+                    maze.moveRight();
+                } else if (charStr == 'a' || charStr == 'A') {
+                    maze.moveLeft();
+                } else if (charStr == 'w' || charStr == 'W') {
+                    maze.moveUp();
+                } else if (charStr == 's' || charStr == 'S') {
+                    maze.moveDown();
+                }
+            };
+        }
 	</script>
 </body>
 </html>
