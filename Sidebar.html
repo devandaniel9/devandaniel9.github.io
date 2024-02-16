@@ -1,0 +1,69 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<style>
+    body {
+        font-family:"Arial",sans-serif;
+    }
+    .sidebar {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: lightblue;
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 50px;
+    }
+    .sidebar span {
+        padding: 8px 8px 8px 20px;
+        font-size: 18px;
+        display: block;
+        transition: 0.5s;
+        cursor: pointer;
+    }
+    .sidebar .closebtn {
+        padding: 8px 8px 8px 20px;
+        position: absolute;
+        top: 0;
+        /* right: 25px; */
+        font-size: 30px;
+    }
+    .openbtn {
+        font-size: 24px;
+        cursor: pointer;
+        background-color: lightblue;
+    }
+    #main {
+        transition: margin-left .5s;
+    }
+</style>
+<body>
+    <div class="sidebar" id="mySidebar">
+        <div class="closebtn" onclick="closeNav()">x</div>
+        <span style="font-size:20px;"><b>Main Menu</b></span><br>
+        <span>About</span>
+        <span>Services</span>
+        <span>Clients</span>
+    </div>
+
+    <div id="main">
+        <button class="openbtn" onclick="openNav()">Open Sidebar</button>
+        <p>Your body text here</p>
+    </div>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidebar").style.width = "200px";
+            document.getElementById("main").style.marginLeft = "200px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidebar").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+        }
+    </script>
+</body>
+</html>
