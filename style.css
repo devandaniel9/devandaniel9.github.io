@@ -1,5 +1,9 @@
 /* Style di Website */
 
+/* Fonts */
+@import url("https://fonts.googleapis.com/css?family=Inter");
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
+
 body {
     /* font-family:"Open Sans Black",sans-serif; */
     /* font-family:"Segoe UI Medium",sans-serif; */
