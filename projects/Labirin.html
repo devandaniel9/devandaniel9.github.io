@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>BMI Calculator</title>
+    <title>Permainan Labirin</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter"> -->
 </head>
 <style>
+    /* Fonts */
+    @import url("https://fonts.googleapis.com/css?family=Inter");
+    @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
+    
     body {
         background-color: #a0e0d0;
         /* font-family:"Helvetica",sans-serif; */
@@ -64,8 +68,8 @@
     a.button2:hover, a.button2:active {
         background-color: #d0d0d0;
     }
-    /* input[type=text], select { */
-    input, select {
+	/* input, select { */
+    input[type=text], select {
         /* width: 100%; */
         width: 200px;
         padding: 5px 10px;
@@ -86,6 +90,16 @@
         width: 25px;
         background-color: #eee;
     }
+	.box {
+        background-color: #b0c8e8;
+        width: 200px;
+        padding: 10px;
+    }
+	.clearfix:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
 </style>
 <body>
     <h1 class="heading">Permainan Labirin</h1>
@@ -105,12 +119,38 @@
         <option>Sedang</option>
         <option>Sulit</option>
         <option>Ekstrim</option>
+		<option>Kustom</option>
     </select>
     <br><br>
+	
+	<label>Aktifkan Stopwatch:</label>
+    <!-- <input type="checkbox" id="check" onclick="change()"> -->
+    <input type="checkbox" id="check" onclick="tampilkan()">
+    <br><br>
+	
+	<div class="box" id="ukuran" style="background-color:#c0f0e0; width:300px; display:none">
+        <span style="font-size:20px"><b>Ukuran Labirin</b></span><br><br>
+		<div class="column">
+			<label>Panjang</label><br>
+			<input type="number" id="panjang" style="width:100px" value="10" min="3">
+			<span style="font-size:20px">&nbsp;x&nbsp;</span>
+		</div>
+		<div class="column">
+			<label>Lebar (x)</label><br>
+			<input type="number" id="lebar" style="width:100px" value="10" min="3">
+		</div>
+		<div class="clearfix"></div>
+    </div><br>
+	
+	<span style="font-size:20px"><b>Tombol</b></span><br><br>
+	<button class="button" onclick="change()">Buat Labirin</button>
+	<button class="button" onclick="change2()">Atur ulang player</button>
+	<br><br>
 
     <!-- <canvas id="myCanvas" width="450" height="400" style="background-color:#b0f0e0"></canvas> -->
     <h2 class="heading">Tampilan</h2>
-    <canvas id="myCanvas" width="450" height="400"></canvas>
+    <canvas id="myCanvas" width="550" height="400"></canvas>
+	<br><br>
 	
 	<!-- <p style="font-size:20px"><b>Tombol Keyboard</b></p> -->
     <h2 class="heading">Tombol Keyboard</h2>
@@ -120,7 +160,7 @@
     <a class="button2" href="../projects.html">Kembali ke menu projects</a>
     <br><br>
 
-    <p>Terakhir diupdate: 7 Feb 2024</p>
+    <p>Terakhir diupdate: 22 Feb 2024</p>
 
 	<script>
         var c = document.getElementById("myCanvas");
@@ -287,6 +327,12 @@
                     this.player.move(0,1);
                 }
             }
+			reset() {
+			    ctx.clearRect(0,0,500,500);
+                this.player = new Player (this.height, this.size);
+				this.drawMaze();
+				this.player.draw();
+            }
         }
         
         class MStack {
@@ -368,29 +414,47 @@
         function change() {
             var tingkat = document.getElementById("tingkat");
             tingkat = tingkat.options[tingkat.selectedIndex];
+			var ukuran = document.getElementById("ukuran");
             if (tingkat.index == 0) {
                 maze_size = 5;
                 line_size = 5;
+				ukuran.style.display = "none";
             } else if (tingkat.index == 1) {
                 maze_size = 10;
-                line_size = 4;
+                line_size = 3;
+				ukuran.style.display = "none";
             } else if (tingkat.index == 2) {
                 maze_size = 20;
-                line_size = 3;
+                line_size = 2;
+				ukuran.style.display = "none";
             } else if (tingkat.index == 3) {
                 maze_size = 30;
-                line_size = 2;
-            } else {
+                line_size = 1;
+				ukuran.style.display = "none";
+            } else if (tingkat.index == 4) {
                 maze_size = 50;
                 line_size = 1;
-            }
+				ukuran.style.display = "none";
+            } else {
+				ukuran.style.display = "block";
+				maze_size = document.getElementById("panjang").value;
+				if (maze_size < 10) {
+					line_size = 5;
+				} else if (maze_size < 20) {
+					line_size = 3;
+				} else if (maze_size < 30) {
+					line_size = 2;
+				} else {
+					line_size = 1;
+				}
+			}
 
             player_size = parseInt(100 / maze_size);
 
             ctx.clearRect(0, 0, 450, 400);
         
             // var maze = new Maze(20, 400, 400);
-            var maze = new Maze(maze_size, 400, 400);
+            maze = new Maze(maze_size, 400, 400);
             maze.makeMaze();
 
             document.onkeypress = function(evt) {
@@ -414,7 +478,11 @@
                     maze.moveDown();
                 }
             };
-        }
+		}
+		
+		function change2() {
+			maze.reset();
+		}
 	</script>
 </body>
 </html>
