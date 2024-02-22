@@ -4,12 +4,16 @@
     <title>Kumpulan Animasi - Bola</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter"> -->
 </head>
 <style>
+    /* Fonts */
+    @import url("https://fonts.googleapis.com/css?family=Inter");
+    @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
+
     body {
         /* background-color: #a0e0d0; */
-        background-color: #f0e0a0;
+        background-color: #f0e8b0;
         /* font-family:"Helvetica",sans-serif; */
         font-family:"Source Sans Pro",sans-serif;
     }
@@ -54,7 +58,11 @@
         margin: 2px 2px;
         border: 1px solid #404040;
         border-radius: 6px;
+        transition: 0.3s;
         cursor: pointer;
+    }
+    .button:hover {
+        background-color: #e0e0e0;
     }
     a {
         font-size: 18px;
@@ -100,6 +108,23 @@
 		display: table;
 		clear: both;
 	}
+    /* Button color */
+    #mulai, #apply {
+        background-color: #80ff80;
+        color: black;
+        transition: 0.3s;
+    }
+    #mulai:hover, #apply:hover {
+        background-color: #70e070;
+    }
+    #hapus, #reset {
+        background-color: #ff8080;
+        color: black;
+        transition: 0.3s;
+    }
+    #hapus:hover, #reset:hover {
+        background-color: #ff6060;
+    }
 </style>
 <body>
     <h1 class="heading">Kumpulan Animasi - Bola</h1>
@@ -110,27 +135,38 @@
     <canvas id="myCanvas" width="500" height="300" onclick="startGame()"></canvas>
     <br><br>
 
-    <button class="button" id="mulai" onclick="startGame()" style="background-color:#80ff80; color:black">Mulai</button>
-    <button class="button" id="hapus" onclick="clearGame()" style="background-color:#ff8080; color:black">Hapus</button><br>
+    <button class="button" id="left" onclick="moveleft()">Left</button>
+    <button class="button" id="right" onclick="moveright()">Right</button>
+    <button class="button" id="up" onclick="moveup()">Up</button>
+    <button class="button" id="down" onclick="movedown()">Down</button><br>
+
+    <button class="button" id="mulai" onclick="startGame()">Mulai</button>
+    <button class="button" id="hapus" onclick="clearGame()">Hapus</button><br>
 
     <h2 class="heading">Pengaturan</h2>
     <div class="column">
-        <label>Gravitasi</label><br>
+        <label>Gravitasi / Gravity</label><br>
         <input type="number" id="gravity" value="1" min="0"><br>
     </div>
     <div class="column">
         <label>Bounce</label><br>
         <input type="number" id="bounce" value="0.6" min="0"><br>
     </div>
+    <div class="column">
+        <label>Friction</label><br>
+        <input type="number" id="friction" value="2" min="0"><br>
+    </div>
     <div class="clearfix"></div>
 
-    <button class="button" id="apply" onclick="applySettings()" style="background-color:#80ff80; color:black">Apply</button>
-    <button class="button" id="reset" onclick="resetSettings()" style="background-color:#ff8080; color:black">Reset</button>
+    <p><b>Enter</b> = Apply settings atau menerapkan pengaturan</p>
+
+    <button class="button" id="apply" onclick="applySettings()">Apply</button>
+    <button class="button" id="reset" onclick="resetSettings()">Reset</button>
     <br><br>
 
     <h2 class="heading">Deskripsi</h2>
 
-    <p>The bouncing property indicates how strong a component will bounce back, after hitting the ground.</p>
+    <p><b>The bouncing</b> property indicates how strong a component will bounce back, after hitting the ground.</p>
     <p>Set the bouncing property to a decimal number between 0 and 1.</p>
 
     <p>0 = no bouncing.</p>
@@ -140,7 +176,7 @@
     <a class="button2" href="../projects.html">Kembali ke menu projects</a>
     <br><br>
     
-    <p>Terakhir diupdate: 21 Feb 2024</p>
+    <p>Terakhir diupdate: 22 Feb 2024</p>
 
     <script>
         var myGamePiece;
@@ -149,7 +185,7 @@
 
         function startGame() {
             if (mulai == 0) {
-                myGamePiece = new component(30, 30, "red", 80, 75);
+                myGamePiece = new component(30, 30, "red", 100, 60);
                 // myGameArea.interval = 0;
                 myGameArea.start();
                 document.getElementById('mulai').innerHTML = "Stop";
@@ -203,17 +239,19 @@
             this.height = height;
             this.x = x;
             this.y = y;
-            this.speedX = 0;
-            this.speedY = 0;    
+            this.speedX = 1;
+            this.speedY = 0;
             // this.gravity = 0.1;
             this.gravity = document.getElementById("gravity").value / 10;
             this.gravitySpeed = 0;
             // this.bounce = 0.6;
             this.bounce = document.getElementById("bounce").value;
+            this.friction = document.getElementById("friction").value;
 
             this.apply = function() {
                 this.gravity = document.getElementById("gravity").value / 10;
                 this.bounce = document.getElementById("bounce").value;
+                this.friction = document.getElementById("friction").value;
             }
             this.update = function() {
                 ctx = myGameArea.context;
@@ -236,14 +274,17 @@
                 if (this.y > rockbottom - 50) {
                     this.y = rockbottom - 50;
                     this.gravitySpeed = -(this.gravitySpeed * this.bounce);
+                    this.speedX -= this.speedX * this.friction / 100;
+                    if (this.speedX <= 0) {
+                        this.speedX = 0;
+                    }
                 }
             }
             this.background = function() {
                 var rockbottom = canvas.height - this.height;
-                if (this.y > rockbottom - 50) {
-                    this.y = rockbottom - 50;
-                    this.gravitySpeed = -(this.gravitySpeed * this.bounce);
-                }
+            }
+            this.moveup = function() {
+                this.speedY -= 1;
             }
         }
 
@@ -263,6 +304,33 @@
             document.getElementById('bounce').value = "0.6";
             myGamePiece.apply();
         }
+
+        function moveleft() {
+            myGamePiece.speedX -= 1;
+        }
+
+        function moveright() {
+            myGamePiece.speedX += 1;
+        }
+
+        function moveup() {
+            myGamePiece.moveup();
+        }
+
+        function movedown() {
+            myGamePiece.speedY += 1;
+        }
+
+        // var settingsInput = document.getElementById("gravity");
+        // settingsInput.addEventListener("keypress", function(event) {
+        document.addEventListener("keypress", function(event) {
+            // if (event.key == "Enter")
+            if (event.key === "Enter") {
+                event.preventDefault();
+                document.getElementById("apply").click()
+            }
+        })
+        
     </script>
 </body>
 </html>
