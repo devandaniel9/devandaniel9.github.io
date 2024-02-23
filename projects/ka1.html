@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Kumpulan Animasi - Bola</title>
     <meta charset="UTF-8">
@@ -131,38 +131,70 @@
 
     <p>Sebuah animasi dengan bola</p><br>
 
-    <h2 class="heading">Tampilan</h2>
-    <canvas id="myCanvas" width="500" height="300" onclick="startGame()"></canvas>
-    <br><br>
+    <div class="column" style="padding-right:100px;">
+        <h2 class="heading">Tampilan</h2>
+        <canvas id="myCanvas" width="500" height="300" onclick="startGame()"></canvas>
+        <br><br>
 
-    <button class="button" id="left" onclick="moveleft()">Left</button>
-    <button class="button" id="right" onclick="moveright()">Right</button>
-    <button class="button" id="up" onclick="moveup()">Up</button>
-    <button class="button" id="down" onclick="movedown()">Down</button><br>
+        <h3 class="heading">Tombol Komponen</h3>
 
-    <button class="button" id="mulai" onclick="startGame()">Mulai</button>
-    <button class="button" id="hapus" onclick="clearGame()">Hapus</button><br>
+        <button class="button" id="left" onclick="moveleft()">Left</button>
+        <button class="button" id="right" onclick="moveright()">Right</button>
+        <button class="button" id="up" onclick="moveup()">Up</button>
+        <!-- <button class="button" id="down" style="background-color:#808080" onclick="movedown()">Down</button> -->
+        <button class="button" id="down" onclick="movedown()">Down</button><br>
 
-    <h2 class="heading">Pengaturan</h2>
-    <div class="column">
-        <label>Gravitasi / Gravity</label><br>
-        <input type="number" id="gravity" value="1" min="0"><br>
+        <button class="button" id="mulai" onclick="startGame()">Mulai</button>
+        <button class="button" id="hapus" onclick="clearGame()">Hapus</button>
+        <br><br>
     </div>
+
     <div class="column">
-        <label>Bounce</label><br>
-        <input type="number" id="bounce" value="0.6" min="0"><br>
-    </div>
-    <div class="column">
-        <label>Friction</label><br>
-        <input type="number" id="friction" value="2" min="0"><br>
+        <h2 class="heading">Pengaturan</h2>
+        <!-- <img src="images/settings-icon.png" width="40"> -->
+        <h3 class="heading">Gaya dan Gravitasi</h3>
+        <div class="column">
+            <label><b>Gravitasi / Gravity</b><br>Min: 0, Max: 10</label><br>
+            <input type="number" id="gravity" value="1" min="0" max="10"><br>
+        </div>
+        <div class="column">
+            <label><b>Bounce</b><br>Min: 0, Max: 2</label><br>
+            <input type="number" id="bounce" value="0.6" min="0" max="2"><br>
+        </div>
+        <div class="column">
+            <label><b>Friction</b><br>Min: 0, Max: 20</label><br>
+            <input type="number" id="friction" value="2" min="0" max="20"><br>
+        </div>
+        <div class="clearfix"></div><br>
+
+        <h3 class="heading">Komponen</h3>
+        <div class="column">
+            <label><b>Ukuran player</b><br>Min: 0.1, Max: 50</label><br>
+            <input type="number" id="boxsize" value="30" min="5" max="50"><br>
+        </div>
+        <div class="column">
+            <label><b>Warna player</b><br>Default: Merah</label><br>
+            <select id="boxcolor" onchange="applySettings()">
+                <option>Merah</option>
+                <option>Orange</option>
+                <option>Biru</option>
+                <option>Hitam</option>
+                <option>Coklat</option>
+            </select>
+        </div>
+        <div class="column">
+            <label><b>Kecepatan</b><br>Min: 5, Max: 100</label><br>
+            <input type="number" id="comspeed" style="width:180px" value="1" min="0.1" max="5">&nbsp;x<br>
+        </div>
+        <div class="clearfix"></div>
+
+        <p><b>Enter</b> = Apply settings atau menerapkan pengaturan</p>
+
+        <button class="button" id="apply" onclick="applySettings()">Apply</button>
+        <button class="button" id="reset" onclick="resetSettings()">Reset</button>
+        <br><br>
     </div>
     <div class="clearfix"></div>
-
-    <p><b>Enter</b> = Apply settings atau menerapkan pengaturan</p>
-
-    <button class="button" id="apply" onclick="applySettings()">Apply</button>
-    <button class="button" id="reset" onclick="resetSettings()">Reset</button>
-    <br><br>
 
     <h2 class="heading">Deskripsi</h2>
 
@@ -176,7 +208,7 @@
     <a class="button2" href="../projects.html">Kembali ke menu projects</a>
     <br><br>
     
-    <p>Terakhir diupdate: 22 Feb 2024</p>
+    <p>Terakhir diupdate: 23 Feb 2024</p>
 
     <script>
         var myGamePiece;
@@ -185,7 +217,9 @@
 
         function startGame() {
             if (mulai == 0) {
+                // boxsize = document.getElementById("boxsize").value;
                 myGamePiece = new component(30, 30, "red", 100, 60);
+                // myGamePiece = new component(boxsize, boxsize, "red", 100, 60);
                 // myGameArea.interval = 0;
                 myGameArea.start();
                 document.getElementById('mulai').innerHTML = "Stop";
@@ -214,19 +248,21 @@
         canvas = document.getElementById("myCanvas");
         canvas.width = 500;
         canvas.height = 300;
+        // ms = 20;
+        ms = parseInt(20 * 1 / document.getElementById("comspeed").value);
         var myGameArea = {
             // canvas : document.createElement("canvas"),
             start : function() {
                 clearInterval(this.interval);
                 this.context = canvas.getContext("2d");
                 // document.body.insertBefore(canvas, document.body.childNodes[0]);
-                this.interval = setInterval(updateGameArea, 20);
+                this.interval = setInterval(updateGameArea, ms);
             },
             stop : function() {
                 clearInterval(this.interval);
             },
             resume : function() {
-                this.interval = setInterval(updateGameArea, 20);
+                this.interval = setInterval(updateGameArea, ms);
             },
             clear : function() {
                 this.context.clearRect(0, 0, canvas.width, canvas.height);
@@ -239,7 +275,8 @@
             this.height = height;
             this.x = x;
             this.y = y;
-            this.speedX = 1;
+            // this.speedX = 1;
+            this.speedX = 0;
             this.speedY = 0;
             // this.gravity = 0.1;
             this.gravity = document.getElementById("gravity").value / 10;
@@ -252,14 +289,20 @@
                 this.gravity = document.getElementById("gravity").value / 10;
                 this.bounce = document.getElementById("bounce").value;
                 this.friction = document.getElementById("friction").value;
+                this.boxsize = document.getElementById("boxsize").value;
+                this.width = this.boxsize;
+                this.height = this.boxsize;
+                var bcindex = document.getElementById("boxcolor");
+                bcindex = bcindex.options[bcindex.selectedIndex].index;
+                if (bcindex == 0) {color = "red"}
+                // else if (bcindex == 1) {color = "orange"}
+                else if (bcindex == 1) {color = "#ff8000"}
+                else if (bcindex == 2) {color = "blue"}
+                else if (bcindex == 3) {color = "black"}
+                else {color = "brown"}
             }
             this.update = function() {
                 ctx = myGameArea.context;
-                ctx.fillStyle = "lightblue";
-                // ctx.fillRect(0,0,500,300);
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                ctx.fillStyle = "green";
-                ctx.fillRect(0, canvas.height-50, canvas.width, canvas.height);
                 ctx.fillStyle = color;
                 ctx.fillRect(this.x, this.y, this.width, this.height);
             }
@@ -274,34 +317,49 @@
                 if (this.y > rockbottom - 50) {
                     this.y = rockbottom - 50;
                     this.gravitySpeed = -(this.gravitySpeed * this.bounce);
+                    this.prevspeedX = this.speedX;
                     this.speedX -= this.speedX * this.friction / 100;
-                    if (this.speedX <= 0) {
+                    // if (this.speedX <= 0) {
+                    if ((this.speedX <= 0 & this.prevspeedX >= 0) | (this.speedX >= 0 & this.prevspeedX <= 0)) {
                         this.speedX = 0;
                     }
                 }
             }
             this.background = function() {
-                var rockbottom = canvas.height - this.height;
+                ctx = myGameArea.context;
+                ctx.fillStyle = "lightblue";
+                // ctx.fillRect(0,0,500,300);
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = "green";
+                ctx.fillRect(0, canvas.height-50, canvas.width, canvas.height);
             }
             this.moveup = function() {
-                this.speedY -= 1;
+                this.gravitySpeed = -5;
+            }
+            this.movedown = function() {
+                this.speedY = 5;
             }
         }
 
         function updateGameArea() {
             myGameArea.clear();
+            myGamePiece.background();
             myGamePiece.newPos();
             myGamePiece.update();
-            myGamePiece.background();
         }
 
         function applySettings() {
             myGamePiece.apply();
+            ms = parseInt(20 * 1 / document.getElementById("comspeed").value);
         }
 
         function resetSettings() {
             document.getElementById('gravity').value = "1";
             document.getElementById('bounce').value = "0.6";
+            document.getElementById('friction').value = "2";
+            document.getElementById('boxsize').value = "30";
+            document.getElementById('comspeed').value = "1";
+            // document.getElementById('boxcolor').index = 0;
             myGamePiece.apply();
         }
 
@@ -314,11 +372,13 @@
         }
 
         function moveup() {
-            myGamePiece.moveup();
+            // myGamePiece.moveup();
+            myGamePiece.gravitySpeed = -5;
         }
 
         function movedown() {
-            myGamePiece.speedY += 1;
+            // myGamePiece.speedY += 1;
+            myGamePiece.gravitySpeed = 5;
         }
 
         // var settingsInput = document.getElementById("gravity");
