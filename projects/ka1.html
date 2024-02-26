@@ -147,6 +147,9 @@
         <button class="button" id="mulai" onclick="startGame()">Mulai</button>
         <button class="button" id="hapus" onclick="clearGame()">Hapus</button>
         <br><br>
+
+        <h3 class="heading">Properties</h3>
+        <div id="ppts"></div><br>
     </div>
 
     <div class="column">
@@ -154,8 +157,8 @@
         <!-- <img src="images/settings-icon.png" width="40"> -->
         <h3 class="heading">Gaya dan Gravitasi</h3>
         <div class="column">
-            <label><b>Gravitasi / Gravity</b><br>Min: 0, Max: 10</label><br>
-            <input type="number" id="gravity" value="1" min="0" max="10"><br>
+            <label><b>Gravitasi / Gravity</b><br>Min: 0, Max: 100</label><br>
+            <input type="number" id="gravity" style="width:160px" value="9.8" min="0" max="100">&nbsp;m/s2<br>
         </div>
         <div class="column">
             <label><b>Bounce</b><br>Min: 0, Max: 2</label><br>
@@ -170,7 +173,7 @@
         <h3 class="heading">Komponen</h3>
         <div class="column">
             <label><b>Ukuran player</b><br>Min: 0.1, Max: 50</label><br>
-            <input type="number" id="boxsize" value="30" min="5" max="50"><br>
+            <input type="number" id="boxsize" value="50" min="5" max="100"><br>
         </div>
         <div class="column">
             <label><b>Warna player</b><br>Default: Merah</label><br>
@@ -208,7 +211,7 @@
     <a class="button2" href="../projects.html">Kembali ke menu projects</a>
     <br><br>
     
-    <p>Terakhir diupdate: 23 Feb 2024</p>
+    <p>Terakhir diupdate: 26 Feb 2024</p>
 
     <script>
         var myGamePiece;
@@ -218,7 +221,8 @@
         function startGame() {
             if (mulai == 0) {
                 // boxsize = document.getElementById("boxsize").value;
-                myGamePiece = new component(30, 30, "red", 100, 60);
+                // myGamePiece = new component(30, 30, "red", 100, 60);
+                myGamePiece = new component(50, 50, "red", 100, 60);
                 // myGamePiece = new component(boxsize, boxsize, "red", 100, 60);
                 // myGameArea.interval = 0;
                 myGameArea.start();
@@ -279,14 +283,16 @@
             this.speedX = 0;
             this.speedY = 0;
             // this.gravity = 0.1;
-            this.gravity = document.getElementById("gravity").value / 10;
+            this.gravity = document.getElementById("gravity").value;
+            this.gravity2 = this.gravity / 50;
             this.gravitySpeed = 0;
             // this.bounce = 0.6;
             this.bounce = document.getElementById("bounce").value;
             this.friction = document.getElementById("friction").value;
 
             this.apply = function() {
-                this.gravity = document.getElementById("gravity").value / 10;
+                this.gravity = document.getElementById("gravity").value;
+                this.gravity2 = this.gravity / 50;
                 this.bounce = document.getElementById("bounce").value;
                 this.friction = document.getElementById("friction").value;
                 this.boxsize = document.getElementById("boxsize").value;
@@ -304,10 +310,24 @@
             this.update = function() {
                 ctx = myGameArea.context;
                 ctx.fillStyle = color;
-                ctx.fillRect(this.x, this.y, this.width, this.height);
+                // ctx.fillRect(this.x, this.y, this.width, this.height);
+                // ctx.arc(100,50,50,0,2*Math.PI);
+                ctx.beginPath();
+                ctx.arc(this.x+this.width/2, this.y+this.width/2, this.width/2, 0, 2*Math.PI);
+                ctx.fill();
+                ctx.closePath();
+                // Properties
+                document.getElementById("ppts").innerHTML = `
+                <div class="column" style="padding-right:50px;font-size:18px">
+                    Gravity: ${this.gravity} m/s2<br>Bounce: ${this.bounce}<br>Friction: ${this.friction}
+                </div>
+                <div class="column" style="padding-right:50px;font-size:18px">
+                    Speed Y: ${this.gravitySpeed.toFixed(2)} m/s
+                </div>
+                <div class="clearfix"></div><br>`
             }
             this.newPos = function() {
-                this.gravitySpeed += this.gravity;
+                this.gravitySpeed += this.gravity2;
                 this.x += this.speedX;
                 this.y += this.speedY + this.gravitySpeed;
                 this.hitBottom();
@@ -332,6 +352,17 @@
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 ctx.fillStyle = "green";
                 ctx.fillRect(0, canvas.height-50, canvas.width, canvas.height);
+                // Line
+                ctx.beginPath();
+                ctx.moveTo(25, 265);
+                ctx.lineTo(75, 265);
+                ctx.fillStyle = "black";
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                ctx.font = "15px Arial";
+                ctx.fillText("1 m", 30, 285);
+                ctx.fill();
+                ctx.closePath();
             }
             this.moveup = function() {
                 this.gravitySpeed = -5;
@@ -354,10 +385,10 @@
         }
 
         function resetSettings() {
-            document.getElementById('gravity').value = "1";
+            document.getElementById('gravity').value = "9.8";
             document.getElementById('bounce').value = "0.6";
             document.getElementById('friction').value = "2";
-            document.getElementById('boxsize').value = "30";
+            document.getElementById('boxsize').value = "50";
             document.getElementById('comspeed').value = "1";
             // document.getElementById('boxcolor').index = 0;
             myGamePiece.apply();
