@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Contoh Sidebar</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="sidebar.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
+</head>
+<body>
+    <div class="sidebar heading" id="mySidebar">
+        <div class="closebtn" onclick="closeNav()">x</div>
+        <span style="font-size:20px;"><b>Main Menu</b></span><br>
+        <a href="index.html">Home</a>
+        <a href="blog.html">Blog</a>
+        <a href="fakta.html">Fakta</a>
+        <a href="profil.html">Profil</a>
+        <a href="portofolio.html">Portofolio</a>
+        <a href="hasil-karya.html">Hasil Karya</a>
+        <a href="timeline.html">Timeline</a>
+        <a href="updates.html">Updates</a>
+        <a href="projects.html">Projects</a>
+    </div>
+    <div class="backsidebar" id="mybacksidebar" on="closeNav"></div>
+
+    <div id="main">
+        <h2 class="heading">Contoh Sidebar</h2>
+        <button class="openbtn" onclick="openNav()">Menu</button>
+        <p>Inilah contoh sidebar ini. Your body text here</p>
+    </div>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidebar").style.width = "250px";
+            document.getElementById("mybacksidebar").style.display = "block";
+            document.getElementById("mybacksidebar").style.width = "100%";
+            document.getElementById("mybacksidebar").style.height = "100%";
+            // document.body.style.backgroundColor = "rgba(0,0,0,0.5)";
+        }
+        function closeNav() {
+            document.getElementById("mySidebar").style.width = "0";
+            document.getElementById("mybacksidebar").style.display = "none";
+            document.getElementById("mybacksidebar").style.width = "0";
+            document.getElementById("mybacksidebar").style.height = "0";
+            // document.body.style.backgroundColor = "rgba(0,0,0,0)";
+        }
+    </script>
+</body>
+</html>

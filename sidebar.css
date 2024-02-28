@@ -1,0 +1,70 @@
+/* Sidebar with Style */
+
+/* Fonts */
+@import url("https://fonts.googleapis.com/css?family=Inter");
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
+
+body {
+    font-family:"Source Sans Pro",sans-serif;
+    background-color: #d0e0f8;
+}
+.heading {
+    font-family:"Inter",sans-serif;
+}
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    /* background-color: lightblue; */
+    background-color: #f0f0f0;
+    overflow-x: hidden;
+    /* transition: 0s; */
+    transition: 0.5s;
+    padding-top: 50px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.backsidebar {
+    background-color: rgb(0,0,0,0.3);
+    display: none;
+    width: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.sidebar span {
+    padding: 8px 8px 8px 20px;
+    font-size: 18px;
+    display: block;
+}
+.sidebar a {
+    color: black;
+    padding: 8px 8px 8px 20px;
+    font-size: 18px;
+    text-decoration: none;
+    display: block;
+    transition: 0.3s;
+}
+.sidebar a:hover {
+    background-color: #d0d0d0;
+    border-radius: 6px;
+}
+.sidebar .closebtn {
+    padding: 8px 8px 8px 20px;
+    /* position: absolute;
+    top: 0;
+    font-size: 30px;
+    cursor: pointer; */
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 30px;
+    margin-left: 50px;
+}
+.openbtn {
+    font-size: 24px;
+    cursor: pointer;
+    background-color: lightblue;
+}
