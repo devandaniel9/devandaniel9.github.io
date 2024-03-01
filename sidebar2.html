@@ -9,8 +9,9 @@
 </head>
 <body>
     <div class="sidebar heading" id="mySidebar">
-        <div class="closebtn" onclick="closeNav()">x</div>
-        <span style="font-size:20px;"><b>Main Menu</b></span><br>
+        <div class="closebtn" onclick="closeNav()"><img src="images/close-icon.png" width="20"></div>
+        <span style="font-size:22px;"><b>Main Menu</b></span>
+        <hr style="height:2px; border-width:0; background-color:gray">
         <a href="index.html">Home</a>
         <a href="blog.html">Blog</a>
         <a href="fakta.html">Fakta</a>
@@ -21,11 +22,12 @@
         <a href="updates.html">Updates</a>
         <a href="projects.html">Projects</a>
     </div>
-    <div class="backsidebar" id="mybacksidebar" on="closeNav"></div>
+    <div class="backsidebar" id="mybacksidebar" onclick="closeNav()"></div>
 
     <div id="main">
         <h2 class="heading">Contoh Sidebar</h2>
-        <button class="openbtn" onclick="openNav()">Menu</button>
+        <!-- <button class="openbtn" onclick="openNav()">Menu</button> -->
+        <div class="closebtn" onclick="openNav()"><img src="images/menu-icon.jpg" width="30"></div>
         <p>Inilah contoh sidebar ini. Your body text here</p>
     </div>
 
