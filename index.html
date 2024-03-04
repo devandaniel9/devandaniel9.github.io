@@ -10,20 +10,18 @@
 <!-- <style></style> -->
 <body>
     <div class="top-container heading">
-        <div class="dropdown" style="margin-right:20px; float:left;">
-            <!-- <button class="dropbtn">MENU</button> -->
-            <button class="dropbtn" style="background-color:transparent; font-size:0;"><img src="images/menu-icon.jpg" width="30"></button>
-            <!-- <div class="dropdown-content">
-                <a href="blog.html">Blog</a>
-                <a href="fakta.html">Fakta</a>
-                <a href="profil.html">Profil</a>
-                <a href="portofolio.html">Portofolio</a>
-            </div> -->
+        <div class="sidebar" id="mySidebar">
+            <div class="closebtn" onclick="closeNav()"><img src="images/close-icon.png" width="20"></div>
+            <span style="font-size:22px;"><b>Main Menu</b></span>
+            <hr style="height:2px; border-width:0; background-color:gray">
             <div class="dropdown-content" id="boxlink"></div>
             <script src="script.js"></script>
         </div>
+        <div class="backsidebar" id="mybacksidebar" onclick="closeNav()"></div>
+        <div class="column" style="padding-right:30px;">
+        <div class="openbtn" onclick="openNav()"><img src="images/menu-icon.jpg" width="30"></div>
+        </div>
         <img src="images/blank-profile.jpg" width="40" style="border-radius: 50%; vertical-align:middle; margin-right:20px; float:left;">
-        <!-- <font size="6" color="white"><b>SEBUAH WEBSITE</b></font> -->
         <div style="font-size:30px; color:white;"><b>SEBUAH WEBSITE</b></div>
         <div class="clearfix"></div>
     </div>
@@ -217,7 +215,7 @@
     </div>
     <footer style="background-color:#404040; padding:10px; color:white">
         <p style="font-family:'Consolas'; margin-left:10px; line-height:1.5;">
-        Terakhir diupdate: 26 Jan 2024<br>
+        Terakhir diupdate: 4 Mar 2024<br>
         Version: 1.7.4<br>
         Copyright © 2024 by Devan
         </p>
