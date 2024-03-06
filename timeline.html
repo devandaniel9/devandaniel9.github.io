@@ -9,10 +9,16 @@
 </head>
 <body>
     <div class="top-container heading">
-        <div class="dropdown" style="margin-right:20px; float:left;">
-            <button class="dropbtn" style="background-color:transparent; font-size:0;"><img src="images/menu-icon.jpg" width="30"></button>
+        <div class="sidebar" id="mySidebar">
+            <div class="closebtn" onclick="closeNav()"><img src="images/close-icon.png" width="20"></div>
+            <span style="font-size:22px;"><b>Main Menu</b></span>
+            <hr style="height:2px; border-width:0; background-color:gray">
             <div class="dropdown-content" id="boxlink"></div>
             <script src="script.js"></script>
+        </div>
+        <div class="backsidebar" id="mybacksidebar" onclick="closeNav()"></div>
+        <div class="column" style="padding-right:30px;">
+        <div class="openbtn" onclick="openNav()"><img src="images/menu-icon.jpg" width="30"></div>
         </div>
         <img src="images/blank-profile.jpg" width="40" style="border-radius: 50%; vertical-align:middle; margin-right:20px; float:left;">
         <div style="font-size:30px; color:white;"><b>SEBUAH WEBSITE</b></div>
@@ -38,7 +44,26 @@
         <p class="heading" style="font-size:30px; color:#206044;"><u><b>ISI HALAMAN</b></u></p>
         <p class="heading" id="1" style="font-size: 25px"><b>1. Sebelum 2020</b></p>
         <p class="heading" id="2" style="font-size: 25px"><b>2. Tahun 2020</b></p>
+        <div class="container2">
+            <p>Pada tahun 2020 ini</p>
+            <ul>
+                <li>Juli 2020<br>Naik ke kelas 7<br>Mengerjakan Dream Board</li><br>
+                <li>Agustus 2020<br>Membuat program Number Type Detection</li><br>
+                <li>Desember 2020</li>
+            </ul>
+        </div><br>
+
         <p class="heading" id="3" style="font-size: 25px"><b>3. Tahun 2021</b></p>
+        <div class="container2">
+            <p>Pada tahun 2021 ini</p>
+            <ul>
+                <li>Januari 2021</li>
+                <li>April 2021<br>Membuat program Equation Solver</li><br>
+                <li>Juli 2021</li>
+                <li>September 2021</li>
+            </ul>
+        </div><br>
+
         <p class="heading" id="4" style="font-size: 25px"><b>4. Tahun 2022</b></p>
         <p class="heading" id="5" style="font-size: 25px"><b>5. Tahun 2023</b></p>
         <br>
@@ -54,7 +79,7 @@
                 <a href="hasil-karya.html">Hasil Karya</a>
                 <a class="selected">Timeline</a>
                 <a href="updates.html">Updates</a>
-		<a href="projects.html">Projects</a>
+		        <a href="projects.html">Projects</a>
             </div>
             <div class="clearfix"></div><br>
         </div>
@@ -64,7 +89,7 @@
     </div>
     <footer style="background-color:#404040; padding:10px; color:white;">
         <p style="font-family:'Consolas'; margin-left:10px; line-height:1.5;">
-        Terakhir diupdate: 26 Jan 2024<br>
+        Terakhir diupdate: 6 Mar 2024<br>
         Copyright © 2024 by Devan
         </p>
     </footer>
