@@ -17,27 +17,27 @@
             <div class="dropdown-content" id="boxlink"></div>
             <script src="script.js"></script>
         </div> -->
-        <div class="sidebar" id="mySidebar">
-            <div class="closebtn" onclick="closeNav()"><img src="images/close-icon.png" width="20"></div>
-            <span style="font-size:22px;"><b>Main Menu</b></span>
-            <hr style="height:2px; border-width:0; background-color:gray">
-            <div class="dropdown-content" id="boxlink"></div>
-            <script src="script.js"></script>
-        </div>
-        <div class="backsidebar" id="mybacksidebar" onclick="closeNav()"></div>
+        <div class="sidebar" id="sidebar"></div>
+		<script src="script.js"></script>
+        <div class="backsidebar" id="backsidebar" onclick="closeNav()"></div>
         <div class="column" style="padding-right:30px;">
-        <div class="openbtn" onclick="openNav()"><img src="images/menu-icon.jpg" width="30"></div>
+			<div class="openbtn" onclick="openNav()"><img src="images/menu-icon.jpg" width="30"></div>
         </div>
-        <img src="images/blank-profile.jpg" width="40" style="border-radius: 50%; vertical-align:middle; margin-right:20px; float:left;">
+		<div class="column" style="padding-right:20px;">
+			<img src="images/blank-profile.jpg" width="40" style="border-radius:50%; padding-top:2px">
+		</div>
         <!-- <font size="6" color="white"><b>SEBUAH WEBSITE</b></font> -->
-        <div style="font-size:30px; color:white;"><b>SEBUAH WEBSITE</b></div>
+        <div style="font-size:30px; color:white; padding"><b>SEBUAH WEBSITE</b></div>
         <div class="clearfix"></div>
     </div>
     <div class="container">
         <br>
         <div class="heading" id="home" style="font-size:50px; color:#146480;"><b>Projects</b></div>
         <p>
-        Timeline dan Sejarah berisi kejadian timeline yang sudah terjadi, baik dalam hal sekolah maupun perjalanan.
+        Halaman Projects ini berisi kumpulan Project yang sudah dibuat sebelumnya, seperti program Streamlit, halaman website kecil, menghitung BMI, penghitung waktu, permainan, dan kumpulan animasi.
+		<br><br>
+		Ada juga beberapa program yang masih belum dimasukkan, jadi akan diperbanyak lagi isi websitenya.<br>
+		Di halaman ini terdapat 10 project nya, yang sudah ditampilkan di bawah ini:
         </p>
         <p class="heading" style="font-size:30px; color:#206044;"><u><b>DAFTAR ISI</b></u></p>
         <div class="box" style="max-width: 500px;">
@@ -50,9 +50,14 @@
             6. <a href="#6">Penghitung Waktu</a><br>
             7. <a href="#7">Labirin</a><br>
             8. <a href="#8">Kumpulan Animasi</a><br>
+			9. <a href="#9">Kalkulator Sederhana</a><br>
+			10. <a href="#10">Project dari Website Lain</a><br>
             </p>
         </div>
-        <br>
+		<br><br>
+		
+		<hr style="height:2px; border-width:0; background-color:gray">
+		
         <p class="heading" style="font-size:30px; color:#206044;"><u><b>ISI HALAMAN</b></u></p>
         <p class="heading" id="1" style="font-size: 25px"><b>1. Program Streamlit</b></p>
         <div class="container2">
@@ -61,7 +66,7 @@
             <div class="clearfix"></div>
             <p>Inilah beberapa program yang sudah dibuat di Streamlit<br>Berikut ini ada 8 program yang sudah pernah buat:</p>
             <ul>
-                <li><a href="https://devandaniel9-equation-solver-4.streamlit.app/">Equation Solver</a> (New) - Version 1.4</li>
+                <li><a href="https://devandaniel9-equation-solver-4.streamlit.app/">Equation Solver</a> - Version 1.4</li>
                 <li><a href="https://devandaniel9-number-type-detection.streamlit.app/">Number Type Detection</a> - Version 1.2</li>
                 <li><a href="https://devandaniel9-peluang.streamlit.app/">Program Peluang</a> - Version 1.1</li>
                 <li><a href="https://devandaniel9-geometry-3.streamlit.app/">Program Geometri</a> - Version 1.5</li>
@@ -75,8 +80,13 @@
         <div class="container2">
             <img src="images/2d-shapes.png" width="250">
             <div class="clearfix"></div>
-            <p>Ada program bangun datar, cuma bukan Streamlit</p>
-            <p><a href="projects/Bangun Datar.html">Bangun Datar</a> (versi HTML)</p>
+            <p>Ada program bangun datar, cuma bukan Streamlit.<br>Nanti akan mencoba untuk menambahkan bangun ruang di websitenya.</p>
+			<!-- <p><a href="projects/Bangun Datar.html">Bangun Datar</a> (versi HTML)</p> -->
+			<ul>
+				<li><a href="projects/Bangun Datar.html">Bangun Datar</a> (versi HTML)</li>
+				<li>Bangun Ruang (coming soon)</li>
+				<li>Grafik (coming soon)</li>
+			</ul>
         </div><br>
         <p class="heading" id="3" style="font-size: 25px"><b>3. Progress Bar</b></p>
         <div class="container2">
@@ -92,6 +102,8 @@
         </div><br>
         <p class="heading" id="5" style="font-size: 25px"><b>5. Soal Matematika</b></p>
         <div class="container2">
+			<img src="images/soal-matematika.jpg" width="200">
+            <div class="clearfix"></div>
             <p>Soal Pertanyaan dalam Matematika</p>
             <a href="projects/Soal Matematika.html">Soal Matematika</a>
         </div>
@@ -110,8 +122,14 @@
             <p>Kumpulan Animasi<br>Tanggal dibuat: 21 Feb 2024</p>
             <a href="projects/Kumpulan Animasi.html">Kumpulan Animasi</a>
         </div>
+		<p class="heading" id="9" style="font-size: 25px"><b>9. Kalkulator Sederhana (v1.8.1)</b></p>
+        <div class="container2"><p><i>Coming Soon</i></p></div>
+		<p class="heading" id="10" style="font-size: 25px"><b>10. Project dari Website Lain (v1.9)</b></p>
+        <div class="container2"><p><i>Coming Soon</i></p></div>
 
         <p style="text-align:center"><b>#--#--#--#--#--#--#--# &nbsp;&nbsp; <u>UNDER CONSTRUCTION</u> &nbsp;&nbsp; #--#--#--#--#--#--#--#</b></p>
+		
+		<hr style="height:2px; border-width:0; background-color:gray">
 
         <p class="heading" style="font-size:30px; color:#206044;"><u><b>BEBERAPA LINK:</b></u></p>
         <div class="box heading">
@@ -135,7 +153,7 @@
     </div>
     <footer style="background-color:#404040; padding:10px; color:white;">
         <p style="font-family:'Consolas'; margin-left:10px; line-height:1.5;">
-        Terakhir diupdate: 4 Mar 2024<br>
+        Terakhir diupdate: 7 Mar 2024<br>
         Copyright © 2024 by Devan
         </p>
     </footer>
