@@ -22,7 +22,7 @@ body {
     margin: 0;
 }
 .top-container {
-    position: -webkit-sticky;
+    /* position: -webkit-sticky; */
     position: sticky;
     top: 0;
     background-color: #105090;
@@ -212,7 +212,7 @@ div.desc {
 .sidebar a {
     color: black;
     padding: 8px 8px 8px 20px;
-    font-size: 18px;
+    font-size: 20px;
     text-decoration: none;
     display: block;
     transition: 0.3s;
@@ -254,6 +254,26 @@ div.desc {
 }
 .openbtn img {
     padding: 8px;
+}
+
+
+/* Search */
+#mySearch {
+	width: 100%;
+	font-family:"Inter",sans-serif;
+	font-size: 18px;
+	padding: 11px;
+	border: 1px solid #ddd;
+	border-radius: 6px;
+	margin-left: 16px;
+	width: 240px;
+}
+
+/* Style the navigation menu inside the left column */
+#myMenu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
 
 
