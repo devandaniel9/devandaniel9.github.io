@@ -6,23 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bebas Neue">
 </head>
 <!-- <style></style> -->
 <body>
     <div class="top-container heading">
-        <div class="sidebar" id="mySidebar">
-            <div class="closebtn" onclick="closeNav()"><img src="images/close-icon.png" width="20"></div>
-            <span style="font-size:22px;"><b>Main Menu</b></span>
-            <hr style="height:2px; border-width:0; background-color:gray">
-            <div class="dropdown-content" id="boxlink"></div>
-            <script src="script.js"></script>
-        </div>
-        <div class="backsidebar" id="mybacksidebar" onclick="closeNav()"></div>
+        <div class="sidebar" id="sidebar"></div>
+		<script src="script.js"></script>
+        <div class="backsidebar" id="backsidebar" onclick="closeNav()"></div>
         <div class="column" style="padding-right:30px;">
-        <div class="openbtn" onclick="openNav()"><img src="images/menu-icon.jpg" width="30"></div>
+			<div class="openbtn" onclick="openNav()"><img src="images/menu-icon.jpg" width="30"></div>
         </div>
-        <img src="images/blank-profile.jpg" width="40" style="border-radius: 50%; vertical-align:middle; margin-right:20px; float:left;">
-        <div style="font-size:30px; color:white;"><b>SEBUAH WEBSITE</b></div>
+		<div class="column" style="padding-right:20px;">
+			<img src="images/blank-profile.jpg" width="40" style="border-radius:50%; padding-top:2px">
+		</div>
+        <div style="font-size:30px; color:white; padding"><b>SEBUAH WEBSITE</b></div>
         <div class="clearfix"></div>
     </div>
     <div class="container">
@@ -215,7 +213,7 @@
     </div>
     <footer style="background-color:#404040; padding:10px; color:white">
         <p style="font-family:'Consolas'; margin-left:10px; line-height:1.5;">
-        Terakhir diupdate: 4 Mar 2024<br>
+        Terakhir diupdate: 6 Mar 2024<br>
         Version: 1.7.4<br>
         Copyright © 2024 by Devan
         </p>
