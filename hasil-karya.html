@@ -9,13 +9,16 @@
 </head>
 <body>
     <div class="top-container heading">
-        <div class="dropdown" style="margin-right:20px; float:left;">
-            <button class="dropbtn" style="background-color:transparent; font-size:0;"><img src="images/menu-icon.jpg" width="30"></button>
-            <div class="dropdown-content" id="boxlink"></div>
-            <script src="script.js"></script>
+        <div class="sidebar" id="sidebar"></div>
+		<script src="script.js"></script>
+        <div class="backsidebar" id="backsidebar" onclick="closeNav()"></div>
+        <div class="column" style="padding-right:30px;">
+			<div class="openbtn" onclick="openNav()"><img src="images/menu-icon.jpg" width="30"></div>
         </div>
-        <img src="images/blank-profile.jpg" width="40" style="border-radius: 50%; vertical-align:middle; margin-right:20px; float:left;">
-        <div style="font-size:30px; color:white;"><b>SEBUAH WEBSITE</b></div>
+		<div class="column" style="padding-right:20px;">
+			<img src="images/blank-profile.jpg" width="40" style="border-radius:50%; padding-top:2px">
+		</div>
+        <div style="font-size:30px; color:white; padding"><b>SEBUAH WEBSITE</b></div>
         <div class="clearfix"></div>
     </div>
 	<div class="container">
