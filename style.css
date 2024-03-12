@@ -1,5 +1,9 @@
 /* Style di Website */
 
+/* Fonts */
+@import url("https://fonts.googleapis.com/css?family=Inter");
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
+
 body {
     /* font-family:"Open Sans Black",sans-serif; */
     /* font-family:"Segoe UI Medium",sans-serif; */
@@ -28,6 +32,7 @@ body {
     background-color: #105090;
     background-image: repeating-linear-gradient(90deg,#105090,#105090 30%,#40a0e0);
     padding: 10px;
+	z-index: 1;
 }
 /* .margin-left */
 .container {
