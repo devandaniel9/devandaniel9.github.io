@@ -43,6 +43,13 @@ body {
     background-color: #d0e0f8;
     padding: 0 20px;
 }
+/* Media queries - Responsive timeline on screens less than 600px wide */
+@media screen and (max-width: 1200px) {
+    .container {
+        width: 100%;
+    }
+}
+
 p {
     /* margin-block-start: 20px;
     margin-block-end: 20px; */
@@ -344,4 +351,49 @@ div.desc {
     display: none;
     overflow: hidden;
     background-color: #f1f1f1;
+}
+
+
+/* Pagination */
+.pagination {
+    display: inline-block;
+}
+
+.pagination a {
+    background-color: white;
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 2px solid gray;
+    transition: 0.3s;
+}
+
+.pagination a:not(:last-child) {
+    border-right: none; /* Prevent double borders */
+}
+
+.pagination a.active {
+    background-color: #80d0ff;
+    font-weight: bold;
+    /* color: white; */
+    /* border: 1px solid #4080c0; */
+}
+
+.pagination a.nonclick {
+    color: #c0c0c0;
+}
+
+.pagination a:hover:not(.active,.nonclick) {
+    background-color: #d0d0d0;
+}
+
+.pagination a:first-child {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+
+.pagination a:last-child {
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
 }
