@@ -25,11 +25,53 @@ function closeNav() {
 
 // document.getElementById("boxlink").innerHTML = `
 document.getElementById("sidebar").innerHTML = `
+<style>
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+</style>
+
 <div class="closebtn" onclick="closeNav()"><img src="images/close-icon.png" width="20"></div>
 <span style="font-size:26px;"><b>Main Menu</b></span><br>
 <span style="font-size:20px;"><b>Halaman</b></span>
 <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search..."><br>
 <hr style="height:2px; border-width:0; background-color:gray">
+
 <ul class="heading" id="myMenu">
     <li><a href="index.html">Home</a></li>
     <li><a href="blog.html">Blog</a></li>
@@ -44,7 +86,17 @@ document.getElementById("sidebar").innerHTML = `
     <li><a style="color:red">Guide</a></li>
     <li><a style="color:red">Explore</a></li>
 </ul>
-<a style="font-size:20px; color:red; width:100%; position:absolute; bottom:25px;">About Website</a>
+<!-- <a style="font-size:20px; color:red; width:100%; position:absolute; bottom:25px;">About Website</a> -->
+<button class="heading" id="myBtn" style="font-size:20px; color:red; width:100%; position:absolute; text-align:left; padding-left:20px; bottom:25px;">About Website</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Some text in the Modal..</p>
+    </div>
+</div>
 `;
 // <span style="font-size:20px; color:gray; position:absolute; bottom:16px">About Website</span>
 
@@ -62,4 +114,30 @@ function myFunction() {
             li[i].style.display = "none";
         }
     }
+}
+
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
 }
