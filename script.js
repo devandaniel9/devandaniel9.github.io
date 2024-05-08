@@ -28,41 +28,54 @@ document.getElementById("sidebar").innerHTML = `
 <style>
 /* The Modal (background) */
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.3); /* Black w/ opacity */
 }
 
 /* Modal Content */
 .modal-content {
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
+    background-color: #fefefe;
+    border-radius: 10px;
+    margin: auto;
+    padding-top: 15px;
+    border: 1px solid #888;
+    width: 80%;
 }
 
 /* The Close Button */
 .close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
+.close:hover, .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.closebtn2 {
+    background-color: #d0d0d0;
+    border-radius: 6px;
+    cursor: pointer;
+    float: right;
+    margin-right: 15px;
+    font-size: 0px;
+    transition: 0.3s;
+}
+.closebtn2 img {
+    padding: 8px;
 }
 </style>
 
@@ -93,8 +106,13 @@ document.getElementById("sidebar").innerHTML = `
 <div id="myModal" class="modal">
     <!-- Modal content -->
     <div class="modal-content">
-        <span class="close">&times;</span>
-        <p>Some text in the Modal..</p>
+        <!-- <span class="close">&times;</span> -->
+        <div class="closebtn2" onclick="closeModal()"><img src="images/close-icon.png" width="20"></div>
+        <span style="font-size:26px;"><b>About Website</b></span><br>
+        <p style="padding-left:20px">
+            ..........<br>..........<br>..........<br>..........<br>..........<br><br><br>
+            Terakhir diupdate: 8 Mei 2024
+        </p>
     </div>
 </div>
 `;
@@ -127,17 +145,21 @@ var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal 
 btn.onclick = function() {
-  modal.style.display = "block";
+    modal.style.display = "block";
 }
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
-  modal.style.display = "none";
+    modal.style.display = "none";
 }
 
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
+// window.onclick = function(event) {
+//     if (event.target == modal) {
+//         modal.style.display = "none";
+//     }
+// }
+
+function closeModal() {
     modal.style.display = "none";
-  }
 }
