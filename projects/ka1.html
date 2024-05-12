@@ -16,6 +16,8 @@
         background-color: #f0e8b0;
         /* font-family:"Helvetica",sans-serif; */
         font-family:"Source Sans Pro",sans-serif;
+        margin: 0 auto;
+        width: 90%;
     }
     canvas {
         /* border: 1px solid #d3d3d3; */
@@ -183,7 +185,9 @@
                 <option>Biru</option>
                 <option>Hitam</option>
                 <option>Coklat</option>
-            </select>
+                <option>Custom</option>
+            </select><br>
+            <div id="boxcolor2"></div>
         </div>
         <div class="column">
             <label><b>Kecepatan</b><br>Min: 5, Max: 100</label><br>
@@ -211,7 +215,7 @@
     <a class="button2" href="../projects.html">Kembali ke menu projects</a>
     <br><br>
     
-    <p>Terakhir diupdate: 26 Feb 2024</p>
+    <p>Terakhir diupdate: 12 Mei 2024</p>
 
     <script>
         var myGamePiece;
@@ -305,8 +309,18 @@
                 else if (bcindex == 1) {color = "#ff8000"}
                 else if (bcindex == 2) {color = "blue"}
                 else if (bcindex == 3) {color = "black"}
-                else {color = "brown"}
+                else if (bcindex == 4) {color = "brown"}
+
+                if (bcindex < 5) {
+                    document.getElementById("boxcolor2").innerHTML = ""
+                } else {
+                    document.getElementById("boxcolor2").innerHTML = `
+                    <input type="color" id="boxcolor3" name="Warna kustom:" value="#ff0000">
+                    `
+                    color = document.getElementById("boxcolor3").value;
+                }
             }
+
             this.update = function() {
                 ctx = myGameArea.context;
                 ctx.fillStyle = color;
@@ -316,13 +330,15 @@
                 ctx.arc(this.x+this.width/2, this.y+this.width/2, this.width/2, 0, 2*Math.PI);
                 ctx.fill();
                 ctx.closePath();
+                // ----------
+                this.speedXY = (this.speedX**2+this.gravitySpeed**2)**0.5;
                 // Properties
                 document.getElementById("ppts").innerHTML = `
                 <div class="column" style="padding-right:50px;font-size:18px">
                     Gravity: ${this.gravity} m/s2<br>Bounce: ${this.bounce}<br>Friction: ${this.friction}
                 </div>
                 <div class="column" style="padding-right:50px;font-size:18px">
-                    Speed Y: ${this.gravitySpeed.toFixed(2)} m/s
+                    Speed X: ${this.speedX.toFixed(2)} m/s<br>Speed Y: ${this.gravitySpeed.toFixed(2)} m/s<br>Speed XY: ${this.speedXY.toFixed(2)} m/s
                 </div>
                 <div class="clearfix"></div><br>`
             }
