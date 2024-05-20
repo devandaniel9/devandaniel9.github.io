@@ -13,9 +13,11 @@
 
     body {
         /* background-color: #a0e0d0; */
-        background-color: #f0e8b0;
+        background-color: #b8f0e0;
         /* font-family:"Helvetica",sans-serif; */
         font-family:"Source Sans Pro",sans-serif;
+        margin: 0 auto;
+        width: 90%;
     }
     canvas {
         /* border: 1px solid #d3d3d3; */
@@ -29,8 +31,106 @@
         /* font-family:"Raleway Medium",sans-serif; */
         font-family:"Inter",sans-serif;
     }
+    .column {
+        float: left;
+        padding-right: 10px;
+    }
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    button {
+        /* font-family:"Helvetica",sans-serif; */
+        /* src: url(https://dwl.freefontsfamily.com/download/Helvetica-Font); */
+        font-family:"Source Sans Pro",sans-serif;
+        font-size: 20px;
+    }
+    .button {
+        /* background-color: #4080c0; */
+        background-color: white;
+        border: none;
+        /* color: white; */
+        color: black;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 18px;
+        margin: 2px 2px;
+        border: 1px solid #404040;
+        border-radius: 6px;
+        transition: 0.3s;
+        cursor: pointer;
+    }
+    .button:hover {
+        background-color: #e0e0e0;
+    }
+    a {
+        font-size: 18px;
+    }
+    a.button2:link, a.button2:visited {
+        background-color: #f0f0f0;
+        color: black;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border: 1px solid #404040;
+        border-radius: 6px;
+        transition: 0.3s;
+    }
+    a.button2:hover, a.button2:active {
+        background-color: #d0d0d0;
+    }
+    /* input[type=text], select { */
+    input, select {
+        /* width: 100%; */
+        width: 200px;
+        padding: 5px 10px;
+        margin: 5px 0;
+        display: inline-block;
+        font-family:"Source Sans Pro",sans-serif;
+        font-size: 16px;
+        border: 1px solid #404040;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    /* Create a custom checkbox */
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #eee;
+    }
+    .clearfix:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+    /* Button color */
+    #mulai, #apply {
+        background-color: #80ff80;
+        color: black;
+        transition: 0.3s;
+    }
+    #mulai:hover, #apply:hover {
+        background-color: #70e070;
+    }
+    #hapus, #reset {
+        background-color: #ff8080;
+        color: black;
+        transition: 0.3s;
+    }
+    #hapus:hover, #reset:hover {
+        background-color: #ff6060;
+    }
 </style>
 <body>
+    <h1 class="heading">Kumpulan Permainan - 2</h1>
+
     <canvas id="myCanvas" width="500" height="300" onclick="startGame()"></canvas>
     <div style="text-align:center;width:480px;">
         <button onmousedown="moveup()" onmouseup="clearmove()" ontouchstart="moveup()">UP</button><br><br>
@@ -40,13 +140,19 @@
     </div>
     <p>The score will count one point for each frame you manage to "stay alive".</p>
 
+    <a class="button2" href="Kumpulan Permainan.html">Kembali ke menu kumpulan permainan</a><br>
+    <a class="button2" href="../projects.html">Kembali ke menu projects</a>
+    <br><br>
+    
+    <p>Terakhir diupdate: 12 Mei 2024</p>
+
     <script>
         var myGamePiece;
         var myObstacles = [];
         var myScore;
 
         function startGame() {
-            myGamePiece = new component(30, 30, "red", 10, 120);
+            myGamePiece = new component(30, 30, "red", 100, 120);
             myScore = new component("30px", "Consolas", "black", 280, 40, "text");
             myGameArea.start();
         }
@@ -56,13 +162,15 @@
         canvas.height = 300;
 
         var myGameArea = {
+            canvas : canvas,
             start : function() {
-                this.context = canvas.getContext("2d");
+                this.context = this.canvas.getContext("2d");
+                // document.body.insertBefore(this.canvas, document.body.childNodes[0]);
                 this.frameNo = 0;
-                this.interval = setInterval(updateGameArea, 50);
-            },
+                this.interval = setInterval(updateGameArea, 20);
+                },
             clear : function() {
-                this.context.clearRect(0, 0, canvas.width, canvas.height);
+                this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
             },
             stop : function() {
                 clearInterval(this.interval);
@@ -74,7 +182,7 @@
             this.width = width;
             this.height = height;
             this.speedX = 0;
-            this.speedY = 0;
+            this.speedY = 0;    
             this.x = x;
             this.y = y;    
             this.update = function() {
@@ -101,8 +209,7 @@
                 var otherright = otherobj.x + (otherobj.width);
                 var othertop = otherobj.y;
                 var otherbottom = otherobj.y + (otherobj.height);
-                // var crash = true;
-                var crash = false;
+                var crash = true;
                 if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
                     crash = false;
                 }
@@ -121,7 +228,7 @@
             myGameArea.clear();
             myGameArea.frameNo += 1;
             if (myGameArea.frameNo == 1 || everyinterval(150)) {
-                x = myGameArea.width;
+                x = myGameArea.canvas.width;
                 minHeight = 20;
                 maxHeight = 200;
                 height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
@@ -129,15 +236,15 @@
                 maxGap = 200;
                 gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
                 myObstacles.push(new component(10, height, "green", x, 0));
-                myObstacles.push(new component(10, x-height-gap, "green", x, height+gap));
-                myGameArea.frameNo += 1000;
+                myObstacles.push(new component(10, x - height - gap, "green", x, height + gap));
             }
             for (i = 0; i < myObstacles.length; i += 1) {
+                // myObstacles[i].speedX = -1;
                 myObstacles[i].speedX = -1;
                 myObstacles[i].newPos();
                 myObstacles[i].update();
             }
-            myScore.text = "SCORE: " + myGameArea.frameNo;
+            myScore.text="SCORE: " + myGameArea.frameNo;
             myScore.update();
             myGamePiece.newPos();    
             myGamePiece.update();
@@ -149,25 +256,58 @@
         }
 
         function moveup() {
-            myGamePiece.speedY = -1; 
+            if (myGamePiece.speedY > -1) {
+                // myGamePiece.speedY = -1;
+                myGamePiece.speedY -= 1;
+                myGamePiece.speedX = 0;
+            }
         }
 
         function movedown() {
-            myGamePiece.speedY = 1; 
+            if (myGamePiece.speedY < 1) {
+                // myGamePiece.speedY = 1;
+                myGamePiece.speedY += 1;
+                myGamePiece.speedX = 0;
+            }
         }
 
         function moveleft() {
-            myGamePiece.speedX = -1; 
+            if (myGamePiece.speedX > -1) {
+                // myGamePiece.speedX = -1;
+                myGamePiece.speedX -= 1;
+                myGamePiece.speedY = 0;
+            }
         }
 
         function moveright() {
-            myGamePiece.speedX = 1; 
+            if (myGamePiece.speedX < 1) {
+                // myGamePiece.speedX = 1;
+                myGamePiece.speedX += 1;
+                myGamePiece.speedY = 0;
+            }
         }
 
         function clearmove() {
             myGamePiece.speedX = 0; 
             myGamePiece.speedY = 0; 
         }
+
+        document.onkeypress = function(evt) {
+            evt = evt || window.event;
+            var charCode = evt.keyCode || evt.which;
+            var charStr = String.fromCharCode(charCode);
+
+            // alert(maze.player.hasWon);
+            if (charStr == 'd' || charStr == 'D') {
+                moveright();
+            } else if (charStr == 'a' || charStr == 'A') {
+                moveleft();
+            } else if (charStr == 'w' || charStr == 'W') {
+                moveup();
+            } else if (charStr == 's' || charStr == 'S') {
+                movedown();
+            }
+        };
     </script>
 </body>
 </html>
