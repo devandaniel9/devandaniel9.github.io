@@ -11,22 +11,37 @@
 <!-- <style></style> -->
 <body>
     <div class="top-container heading">
-        <div class="sidebar" id="sidebar"></div>
-		<script src="script.js"></script>
-        <div class="backsidebar" id="backsidebar" onclick="closeNav()"></div>
-        <div class="column" style="padding-right:30px;">
-			<div class="openbtn" onclick="openNav()"><img src="images/menu-icon.jpg" width="30"></div>
+        <div class="top-container2" id="top-container2" style="height:46px;"></div>
+        <script src="script.js"></script>
+        <div class="page-container">
+            <a class="page-selected" href="index.html">Home</a>
+            <a href="blog.html">Blog</a>
+            <a href="fakta.html">Fakta</a>
+            <a href="profil.html">Profil</a>
+            <a href="portofolio.html">Portofolio</a>
+            <a href="hasil-karya.html">Hasil Karya</a>
+            <a href="timeline.html">Timeline</a>
+            <a href="updates.html">Updates</a>
+            <a href="projects.html">Projects</a>
+            <div style="float:right;">
+                <input type="text" class="search" style="margin:5px;" onkeyup="myFunction()" placeholder="Search...">
+                <!-- <div class="openbtn" onclick="openSearch()"><img src="images/search-icon.png" width="10"></div> -->
+            </div>
+            <div class="clearfix"></div>
         </div>
-		<div class="column" style="padding-right:20px;">
-			<img src="images/blank-profile.jpg" width="40" style="border-radius:50%; padding-top:2px">
-		</div>
-        <div style="font-size:30px; color:white;"><b>SEBUAH WEBSITE</b></div>
-        <div class="clearfix"></div>
+    </div>
+    <div class="title-container">
+        <br><div class="heading2" id="home" style="font-size:50px; color:#004080;"><b>DEVAN</b></div><br>
     </div>
     <div class="container">
         <br>
         <!-- <font class="heading" id="home" size="7" color="#004080"><b>Website Devan</b></font> -->
-        <div class="heading" id="home" style="font-size:50px; color:#004080;"><b>Website Devan</b></div>
+        <!-- <div class="heading2" id="home" style="font-size:50px; color:#004080;"><b>DEVAN</b></div> -->
+
+        <p class="heading" style="font-size:25px; color:#000080;">
+            <b>Deskripsi</b>&nbsp;
+            <img style="vertical-align:middle;" src="images/description-icon.png" alt="Link icon" width="30">
+        </p>
         <p>
         Ini adalah program yang sudah Devan kerjakan, jumlahnya ada 8.<br>
         Semuanya berkaitan dengan Matematika dan program tersebut Devan kerjakan selama 3 tahun, selama Devan SMP.<br>
@@ -45,6 +60,7 @@
         <br><br>
         Font untuk heading sudah berubah dari <b>Raleway</b> ke <b>Inter</b>, dan menunya sudah diperbaiki dan diperlengkap, sehingga versinya berubah menjadi v1.7.4.
         </p>
+
         <p class="heading" style="font-size:25px; color:#000080;">
             <b>Link program:</b>&nbsp;
             <img style="vertical-align:middle;" src="images/link.png" alt="Link icon" width="30">
@@ -137,15 +153,15 @@
                 <td>Berisi hasil karya yang sudah pernah buat dari sekolah</td>
             </tr>
             <tr>
-                <td>Timeline - <span style="color:maroon">v1.7</span></td>
+                <td>Timeline</td>
                 <td>Berisi timeline dan juga sejarah, terdapat pengembangan website, program, dan karakter dari awal sampai akhir.</td>
             </tr>
             <tr>
-                <td>Updates - <span style="color:maroon">v1.7</span></td>
+                <td>Updates</td>
                 <td>Berisi update-update yang terbaru hingga terlama di website ini.</td>
             </tr>
             <tr>
-                <td>Projects - <span style="color:maroon">v1.7.2</span></td>
+                <td>Projects</td>
                 <td>Berisi proyek-proyek baik Python maupun HTML yang sudah pernah kita buat di website ini.</td>
             </tr>
         </table>
@@ -173,8 +189,8 @@
 
         <p style="text-align:center"><b>#--#--#--#--#--#--#--# &nbsp;&nbsp; <u>UNDER CONSTRUCTION</u> &nbsp;&nbsp; #--#--#--#--#--#--#--#</b></p>
         <br>
-        <hr style="height:2px; border-width:0; background-color:gray">
-        <p class="heading" style="font-size:30px; color:#206044;"><u><b>BEBERAPA LINK:</b></u></p>
+        <!-- <hr style="height:2px; border-width:0; background-color:gray"> -->
+        <!-- <p class="heading" style="font-size:30px; color:#206044;"><u><b>BEBERAPA LINK:</b></u></p> -->
         <!--
         <div class="btn-group">
         <a href="blog.html">Blog</a> |
@@ -186,7 +202,7 @@
         <a href="updates.html">Updates</a>
         </div>
         -->
-        <div class="box heading" id="demo">
+        <!-- <div class="box heading" id="demo">
             <p style="font-size:22px; margin-bottom:5px;"><b>Link halaman:</b></p>
             <div class="btn-group">
                 <a class="selected">Home</a>
@@ -201,7 +217,7 @@
             </div>
             <div class="clearfix"></div><br>
         </div>
-        <br>
+        <br> -->
         <!-- <p id="demo"></p> -->
         <!-- <a href="#home">Kembali ke awal</a> -->
         <a class="button heading" href="#home">Kembali ke awal</a>
@@ -210,8 +226,8 @@
     </div>
     <footer style="background-color:#404040; padding:10px; color:white">
         <p style="font-family:'Consolas'; margin-left:10px; line-height:1.5;">
-        Terakhir diupdate: 29 Mar 2024<br>
-        Version: 1.8<br>
+        Terakhir diupdate: 26 Mei 2024<br>
+        Version: 1.8.1<br>
         Copyright © 2024 by Devan
         </p>
     </footer>
