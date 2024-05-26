@@ -1,8 +1,10 @@
 /* Style di Website */
 
 /* Fonts */
-@import url("https://fonts.googleapis.com/css?family=Inter");
+/* @import url("https://fonts.googleapis.com/css?family=Inter"); */
+@import url("https://fonts.googleapis.com/css?family=Inter:500");
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
+@import url('https://fonts.googleapis.com/css?family=Rubik');
 
 body {
     /* font-family:"Open Sans Black",sans-serif; */
@@ -15,7 +17,7 @@ body {
     /* font-family:"Raleway Medium",sans-serif; */
     /* font-family:"Montserrat Medium",sans-serif; */
     /* font-family:"Source Sans Pro"; */
-    font-family:"Source Sans Pro",sans-serif;
+    font-family:"Rubik",sans-serif;
     /* background-color: #d0e0f8; */
     
     background-image: url('images/dark-cubes-texture.jpg');
@@ -25,14 +27,56 @@ body {
     /* margin: 30px; */
     margin: 0;
 }
+html {
+    scroll-behavior: smooth;
+}
+
 .top-container {
     /* position: -webkit-sticky; */
     position: sticky;
     top: 0;
+    z-index: 1;
+}
+.top-container2 {
     background-color: #105090;
     background-image: repeating-linear-gradient(90deg,#105090,#105090 30%,#40a0e0);
     padding: 10px;
-	z-index: 1;
+	/* z-index: 1; */
+}
+.page-container {
+    background-color: #384050;
+    /* padding: 10px; */
+	/* z-index: 1; */
+}
+.page-container a {
+    /* background-color: #f0f0f0; */
+    color: #d0d0d0;
+    font-size: 18px;
+    /* padding: 4px; */
+    padding: 10px 20px;
+    /* width: 120px; */
+    text-align: center;
+    cursor: pointer;
+    float: left;
+    text-decoration: none;
+    transition: 0.3s;
+}
+.page-container a:hover, a:active {
+    color: white;
+}
+.page-selected {
+    pointer-events: none;
+    font-weight: bold;
+    background-color: rgb(255,255,255,0.05);
+    border-bottom: 4px solid #30c050;
+    width: auto;
+}
+.title-container {
+    margin: 0 auto;
+    width: 80%;
+    background-color: white;
+    background-image: repeating-linear-gradient(180deg,white,white 0%,#d0e0f8);
+    padding: 0 20px;
 }
 /* .margin-left */
 .container {
@@ -59,6 +103,12 @@ p {
 .heading {
     /* font-family:"Raleway Medium",sans-serif; */
     font-family:"Inter",sans-serif;
+}
+.heading2 {
+    /* font-family:"Raleway Medium",sans-serif; */
+    font-family:"Inter",sans-serif;
+    letter-spacing: 10px;
+    /* font-weight: 700; */
 }
 .title {
 	font-family:"Bebas Neue",sans-serif;
@@ -280,6 +330,17 @@ div.desc {
 	margin-left: 16px;
 	width: 240px;
 }
+.search {
+	width: 100%;
+	font-family:"Inter",sans-serif;
+	font-size: 18px;
+	padding: 5px 10px;
+    background-color: #283040;
+    color: white;
+	border: 1px solid gray;
+	border-radius: 6px;
+	width: 200px;
+}
 
 /* Style the navigation menu inside the left column */
 #myMenu {
@@ -396,4 +457,40 @@ div.desc {
 .pagination a:last-child {
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
+}
+
+
+/* The Modal (background), and contents */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.3); /* Black w/ opacity */
+}
+.modal-content {
+    background-color: #fefefe;
+    border-radius: 10px;
+    margin: auto;
+    padding-top: 15px;
+    border: 1px solid #888;
+    width: 80%;
+}
+.closebtn2 {
+    background-color: #d0d0d0;
+    border-radius: 6px;
+    cursor: pointer;
+    float: right;
+    margin-right: 15px;
+    font-size: 0px;
+    transition: 0.3s;
+}
+.closebtn2 img {
+    padding: 8px;
 }
