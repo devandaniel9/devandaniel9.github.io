@@ -10,11 +10,13 @@
     /* Fonts */
     @import url("https://fonts.googleapis.com/css?family=Inter");
     @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
+    @import url("https://fonts.googleapis.com/css?family=Rubik");
 
     body {
         background-color: #101820;
         color: white;
-        font-family:"Source Sans Pro",sans-serif;
+        /* font-family:"Source Sans Pro",sans-serif; */
+        font-family:"Rubik",sans-serif;
         margin: 0 auto;
         width: 90%;
     }
@@ -24,6 +26,7 @@
     .heading {
         /* font-family:"Raleway Medium",sans-serif; */
         font-family:"Inter",sans-serif;
+        color: #d0ffa0;
     }
     .column {
         float: left;
@@ -37,7 +40,7 @@
     button {
         /* font-family:"Helvetica",sans-serif; */
         /* src: url(https://dwl.freefontsfamily.com/download/Helvetica-Font); */
-        font-family:"Source Sans Pro",sans-serif;
+        font-family:"Inter",sans-serif;
         font-size: 20px;
     }
     .button {
@@ -117,32 +120,54 @@
         cursor: pointer;
         transition: background-color 0.3s ease;
     }
-    button:hover {
+    /* button:hover {
         background-color: #ddd;
-    }
+    } */
     .clear {
-        background-color: #ff4136;
+        /* background-color: #ff4136; */
+        background-color: #ff4020;
         color: #fff;
+    }
+    .clear:hover {
+        background-color: #ff8060;
     }
     .number, .decimal {
         background-color: #606060;
         color: white;
     }
+    .number:hover, .decimal:hover {
+        background-color: #808080;
+    }
     .operator {
-        background-color: #0074d9;
-        color: #fff;
+        background-color: #0060c0;
+        /* color: #fff; */
+        color: white;
+    }
+    .operator:hover {
+        background-color: #0080d0;
     }
     .equals {
         background-color: #00c040;
         /* grid-row: span 3; */
         grid-row: span 2;
-        color: #fff;
+        color: white;
+    }
+    .equals:hover {
+        background-color: #00c040;
+        /* grid-row: span 3; */
+        grid-row: span 2;
+        color: white;
     }
 </style>
 <body>
     <h1 class="heading">Kalkulator Sederhana</h1>
+    <p>
+    <b>Kalkulator Sederhana</b> adalah alat yang sederhana yang terdiri dari penjumlahan, pengurangan, perkalian, dan pembagian. Untuk menghitungnya, dengan mengklik tombol "=".
+    <br><br>
+    </p>
+
     <div class="calculator">
-        <input type="text" id="result" readonly>
+        <input type="text" id="result" placeholder="0" readonly>
         <div class="buttons">
             <button class="clear">C</button>
             <button class="clear">CE</button>
@@ -172,6 +197,8 @@
     <br><br>
     <a class="button2" href="../projects.html">Kembali ke menu projects</a>
     <br><br>
+
+    <p>Terakhir diupdate: 29 Mei 2024</p>
 
     <script>
         const button = document.querySelectorAll("button");
