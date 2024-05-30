@@ -39,11 +39,18 @@
         <div class="box" style="max-width: 500px;">
             <p>
             <b>Link cerita:</b><br>
-            1. <a href="#1">Holiday to Bromo</a><br>
+            <!-- 1. <a href="#1">Holiday to Bromo</a><br>
             2. <a href="#2">Descriptive Text</a><br>
             3. <a href="#3">Memenangkan Lomba Besar</a><br>
             4. <a href="#4">Retreat Eagle School 2023</a><br>
-            5. <a href="#5">Holiday to Bali</a>
+            5. <a href="#5">Holiday to Bali</a> -->
+            <ol>
+                <li><a href="#1">Holiday to Bromo</a></li>
+                <li><a href="#2">Descriptive Text</a></li>
+                <li><a href="#3">Memenangkan Lomba Besar</a></li>
+                <li><a href="#4">Retreat Eagle School 2023</a></li>
+                <li><a href="#5">Holiday to Bali</a></li>
+            </ol>
             </p>
         </div>
         <br>
@@ -59,8 +66,14 @@
             </p>
             <div class="image">
                 <div class="gallery" style="width:300px;">
-                    <img src="images/IMG_6228.JPG">
-                    <div class="desc">Gambar 1: Pegunungan</div>
+                    <img id="myImg" src="images/IMG_6228.JPG">
+                    <div class="desc" id="image-desc">Gambar 1: Pegunungan</div>
+                    <!-- The Modal -->
+                    <div id="myModalImage" class="modal-image">
+                        <span class="close">&times;</span>
+                        <img class="modal-image-content" id="img01">
+                        <div id="caption"></div>
+                    </div>
                 </div>
                 <div class="gallery" style="width:300px;">
                     <img src="images/IMG_6168.JPG" width="300">
@@ -71,30 +84,32 @@
                     <summary>Klik disini</summary>
                 </details> -->
             </div>
-            <!-- <div class="text"> -->
-            <p>
-            First, we departed from <font color="#008000">Semarang</font> to <b>Batu Malang</b> by car. Arriving there, we immediately rested at the hotel for a while and went to eat at the <b>Batu Malang</b> square.
-            The next day we went to Jawa Timur Park 3, the place is nice and there are lots of interesting photo spots there.
-            Miniatures of Japanese cities, Dutch cities, India and many more. After that we returned to the hotel to rest for a while because at dawn we had to prepare for Bromo.
-            At 1 am we got up and got ready to go by jeep. We had to get up very early because we had to catch the sunrise.
-            The trip from the hotel to Bromo is quite far and takes as much as …. o'clock. We got there at exactly 4am and the weather was very, very cold.
-            Our first destination was the Peak of Mount Bromo. The view is amazing, I can see 3 Bromo mountains and the sunrise. After that, we went to the next destination, namely Whispering Sand.
-            There we took a lot of photos. And our last destination is Teletubbies Hill. When it was noon we went back to town and had lunch there.
-            <br><br>
-            Actually my family and I were very tired because of the trip but the beautiful scenery we saw was really worth it. It's an unforgettable experience.
-            <br><br>
-            After walking for a while and buying souvenirs in the city of Malang, we returned to Semarang.
-            <br><br>
-            <b>Catatan:</b><br>
-            <!-- <ul><li> -->
-            - Batu Malang: Kota di Jawa Timur<br>
-            - Kata Coach di Eagle School, nanti akan berencana untuk retreat ke <b>Batu Malang</b>, untuk karya wisata.<br>
-            - Coach Dedie dan Nana sudah pergi ke Gunung Bromo di bulang Agustus, langit dan pemandangannya bagus.<br>
-            <br>
-            <b>Link:</b><br>
-            * <a href="https://id.wikipedia.org/wiki/Jawa_Timur">Wikipedia - Jawa Timur</a><br>
-            <br>
-            </p>
+            <!-- <div class="text"> <p> -->
+            <span>
+                <!-- <font color="#008000">Semarang</font>, <b>Batu Malang</b>-->
+                <br>
+                First, we departed from <div class="tooltip">Semarang<span class="tooltiptext" id="desc01"></span></div> to <b>Batu Malang</b> by car. Arriving there, we immediately rested at the hotel for a while and went to eat at the <b>Batu Malang</b> square.
+                The next day we went to Jawa Timur Park 3, the place is nice and there are lots of interesting photo spots there.
+                Miniatures of Japanese cities, Dutch cities, India and many more. After that we returned to the hotel to rest for a while because at dawn we had to prepare for Bromo.
+                At 1 am we got up and got ready to go by jeep. We had to get up very early because we had to catch the sunrise.
+                The trip from the hotel to Bromo is quite far and takes as much as …. o'clock. We got there at exactly 4am and the weather was very, very cold.
+                Our first destination was the Peak of Mount Bromo. The view is amazing, I can see 3 Bromo mountains and the sunrise. After that, we went to the next destination, namely Whispering Sand.
+                There we took a lot of photos. And our last destination is Teletubbies Hill. When it was noon we went back to town and had lunch there.
+                <br><br>
+                Actually my family and I were very tired because of the trip but the beautiful scenery we saw was really worth it. It's an unforgettable experience.
+                <br><br>
+                After walking for a while and buying souvenirs in the city of Malang, we returned to Semarang.
+                <br><br>
+                <b>Catatan:</b><br>
+                <!-- <ul><li> -->
+                - Batu Malang: Kota di Jawa Timur<br>
+                - Kata Coach di Eagle School, nanti akan berencana untuk retreat ke <b>Batu Malang</b>, untuk karya wisata.<br>
+                - Coach Dedie dan Nana sudah pergi ke Gunung Bromo di bulang Agustus, langit dan pemandangannya bagus.<br>
+                <br>
+                <b>Link:</b><br>
+                * <a href="https://id.wikipedia.org/wiki/Jawa_Timur">Wikipedia - Jawa Timur</a><br>
+                <br><br>
+            </span>
         </div>
 
         <p class="heading" id="2" style="font-size: 25px"><b>2. About Me Devan - Descriptive Text</b></p>
@@ -270,6 +285,8 @@
         <a class="button heading" href="#home">Kembali ke awal</a>
         <br><br>
     </div>
+    <script src="script.js"></script>
+    <script src="blog-description.js"></script>
     <footer style="background-color:#404040; padding:10px; color:white;">
         <p style="font-family:'Consolas'; margin-left:10px; line-height:1.5;">
         Terakhir diupdate: 7 Mei 2024<br>
