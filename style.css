@@ -505,12 +505,18 @@ div.desc {
 
 
 /* The Modal (background) */
-#myImg {
+/* #myImg {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}  
+#myImg:hover {opacity: 0.7;} */
+.image {
     /* border-radius: 5px; */
     cursor: pointer;
     transition: 0.3s;
 }  
-#myImg:hover {opacity: 0.7;}
+.image:hover {opacity: 0.7;}
 .modal-image {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */

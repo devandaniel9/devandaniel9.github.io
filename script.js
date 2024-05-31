@@ -114,20 +114,33 @@ function closeModal() {
 var modal_image = document.getElementById("myModalImage");
 
 // Get the image and insert it inside the modal - use its "alt" text as a caption
-var img = document.getElementById("myImg");
-var modalImg = document.getElementById("img01");
-var captionText = document.getElementById("caption");
-img.onclick = function(){
-    modal_image.style.display = "block";
-    modalImg.src = this.src;
-    // captionText.innerHTML = this.alt;
-    captionText.innerHTML = document.getElementById("image-desc").innerHTML;
+var img = document.getElementById("img01");
+var modalImg = document.getElementById("img01m");
+var imgdesc = document.getElementById("img01d");
+var captionText = document.getElementById("img01c");
+
+function get_image_modal(modal_image, img, modalImg, imgdesc, captionText) {
+    img.onclick = function(){
+        modal_image.style.display = "block";
+        modalImg.src = this.src;
+        // captionText.innerHTML = this.alt;
+        captionText.innerHTML = imgdesc.innerHTML;
+    }
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() { 
+        modal_image.style.display = "none";
+    }
 }
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+get_image_modal(modal_image, img, modalImg, imgdesc, captionText);
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() { 
-    modal_image.style.display = "none";
-}
+var img = document.getElementById("img02");
+var modalImg = document.getElementById("img02m");
+var imgdesc = document.getElementById("img02d");
+var captionText = document.getElementById("img02c");
+
+get_image_modal(modal_image, img, modalImg, imgdesc, captionText);
