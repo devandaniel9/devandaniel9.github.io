@@ -20,13 +20,13 @@
         margin: 0 auto;
         width: 90%;
     }
-    p {
+    p, ul {
         font-size: 20px;
     }
     .heading {
         /* font-family:"Raleway Medium",sans-serif; */
         font-family:"Inter",sans-serif;
-        color: #d0ffa0;
+        /* color: #d0ffa0; */
     }
     .column {
         float: left;
@@ -100,7 +100,9 @@
         width: 100%;
         /* padding: 10px; */
         padding: 20px;
-        font-size: 24px;
+        font-family:"Century",sans-serif;
+        /* font-size: 24px; */
+        font-size: 30px;
         border: none;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3) inset;
         border-radius: 5px;
@@ -158,16 +160,39 @@
         grid-row: span 2;
         color: white;
     }
+    .clearfix:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+    /* input[type="text"] {
+        font-family:"Century",sans-serif;
+    } */
 </style>
 <body>
-    <h1 class="heading">Kalkulator Sederhana</h1>
+    <h1 class="heading" style="color: #d0ffa0;">Kalkulator Sederhana</h1>
     <p>
     <b>Kalkulator Sederhana</b> adalah alat yang sederhana yang terdiri dari penjumlahan, pengurangan, perkalian, dan pembagian. Untuk menghitungnya, dengan mengklik tombol "=".
     <br><br>
+    Fitur dalam kalkulator:<br>
+    <ul>
+        <li>
+            <span style="color: #ffe080;">Operasi Hitung</span><br>
+            "+": Penjumlahan<br>
+            "-": Pengurangan<br>
+            "*": Perkalian<br>
+            "/": Pembagian
+        </li><br>
+        <li>
+            C = Menghapus
+        </li>
+    </ul>
     </p>
 
     <div class="calculator">
-        <input type="text" id="result" placeholder="0" readonly>
+        <!-- <span class="heading">Kalkulator</span><br> -->
+        <input type="text" id="result" placeholder="0" class="font-size: 40px;" readonly>
+        <div class="clearfix"></div>
         <div class="buttons">
             <button class="clear">C</button>
             <button class="clear">CE</button>
@@ -198,7 +223,7 @@
     <a class="button2" href="../projects.html">Kembali ke menu projects</a>
     <br><br>
 
-    <p>Terakhir diupdate: 29 Mei 2024</p>
+    <p>Terakhir diupdate: 31 Mei 2024</p>
 
     <script>
         const button = document.querySelectorAll("button");
