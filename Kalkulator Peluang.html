@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Peluang</title>
+</head>
+<style>
+    /* Fonts */
+    @import url("https://fonts.googleapis.com/css?family=Inter");
+    @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
+    @import url("https://fonts.googleapis.com/css?family=Rubik");
+
+    body {
+        background-color: #101820;
+        color: white;
+        /* font-family:"Source Sans Pro",sans-serif; */
+        font-family:"Rubik",sans-serif;
+        margin: 0 auto;
+        width: 90%;
+    }
+    p, ul {
+        font-size: 20px;
+    }
+    .heading {
+        /* font-family:"Raleway Medium",sans-serif; */
+        font-family:"Inter",sans-serif;
+        /* color: #d0ffa0; */
+    }
+    .column {
+        float: left;
+        padding-right: 10px;
+    }
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    button {
+        /* font-family:"Helvetica",sans-serif; */
+        /* src: url(https://dwl.freefontsfamily.com/download/Helvetica-Font); */
+        font-family:"Inter",sans-serif;
+        font-size: 20px;
+    }
+    .button {
+        /* background-color: #4080c0; */
+        background-color: white;
+        border: none;
+        /* color: white; */
+        color: black;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 18px;
+        margin: 2px 2px;
+        border: 1px solid #404040;
+        border-radius: 6px;
+        transition: 0.3s;
+        cursor: pointer;
+    }
+    .button:hover {
+        background-color: #e0e0e0;
+    }
+    a.button2:link, a.button2:visited {
+        background-color: rgba(255,255,255,0.1);
+        font-family:"Inter",sans-serif;
+        font-size: 20px;
+        color: white;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border-radius: 6px;
+        transition: 0.3s;
+    }
+    a.button2:hover, a.button2:active {
+        background-color: rgba(255,255,255,0.2);
+    }
+
+    * {
+        box-sizing: border-box;
+        /* margin: 0; */
+    }
+    .calculator {
+        background-color: #404040;
+        padding: 20px;
+        max-width: 400px;
+        margin: 0 auto;
+        border: solid 1px gray;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+        margin-top: 40px;
+    }
+    #result {
+        /* background-color: yellowgreen; */
+        background-color: #202020;
+        color: white;
+        width: 100%;
+        /* padding: 10px; */
+        padding: 20px;
+        font-family:"Century",sans-serif;
+        /* font-size: 24px; */
+        font-size: 30px;
+        border: none;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3) inset;
+        border-radius: 5px;
+    }
+    .buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 10px;
+        margin-top: 20px;
+    }
+    button {
+        padding: 10px;
+        font-size: 24px;
+        border: none;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    /* button:hover {
+        background-color: #ddd;
+    } */
+    .clear {
+        /* background-color: #ff4136; */
+        background-color: #ff4020;
+        color: #fff;
+    }
+    .clear:hover {
+        background-color: #ff8060;
+    }
+    .number, .decimal {
+        background-color: #606060;
+        color: white;
+    }
+    .number:hover, .decimal:hover {
+        background-color: #808080;
+    }
+    .operator {
+        background-color: #0060c0;
+        /* color: #fff; */
+        color: white;
+    }
+    .operator:hover {
+        background-color: #0080d0;
+    }
+    .equals {
+        background-color: #00c040;
+        /* grid-row: span 3; */
+        grid-row: span 2;
+        color: white;
+    }
+    .equals:hover {
+        background-color: #00c040;
+        /* grid-row: span 3; */
+        grid-row: span 2;
+        color: white;
+    }
+    .clearfix:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+    /* input[type="text"] {
+        font-family:"Century",sans-serif;
+    } */
+</style>
+<body>
+    <h1 class="heading" style="color: #d0ffa0;">Kalkulator Sederhana</h1>
+    <p>
+    <b>Kalkulator Sederhana</b> adalah alat yang sederhana yang terdiri dari penjumlahan, pengurangan, perkalian, dan pembagian. Untuk menghitungnya, dengan mengklik tombol "=".
+    <br><br>
+    Fitur dalam kalkulator:<br>
+    <ul>
+        <li>
+            <span style="color: #ffe080;">Operasi Hitung</span><br>
+            "+": Penjumlahan<br>
+            "-": Pengurangan<br>
+            "*": Perkalian<br>
+            "/": Pembagian
+        </li><br>
+        <li>
+            C = Menghapus
+        </li>
+    </ul>
+    </p>
+
+    
+    <br><br>
+    <a class="button2" href="../projects.html">Kembali ke menu projects</a>
+    <br><br>
+
+    <p>Terakhir diupdate: 31 Mei 2024</p>
+
+    <script>
+        const button = document.querySelectorAll("button");
+        const result = document.getElementById("result");
+
+        for (let i=0; i<button.length; i++) {
+            button[i].addEventListener("click", () => {
+                const buttonValue = button[i].textContent;
+                if (buttonValue === "C") {
+                    clearResult();
+                } else if (buttonValue === "=") {
+                    calculateResult();
+                } else if (buttonValue === "DEL") {
+                    delete buttonValue[-1];
+                } else {
+                    appendValue(buttonValue);
+                }
+            });
+        }
+
+        function clearResult() {
+            result.value = "";
+        }
+
+        function calculateResult() {
+            result.value = eval(result.value);
+        }
+
+        function appendValue(buttonValue) {
+            result.value = result.value + buttonValue;
+        }
+    </script>
+</body>
+</html>
