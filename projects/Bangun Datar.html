@@ -7,9 +7,19 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
 </head>
 <style>
+    /* Fonts */
+    /* @import url("https://fonts.googleapis.com/css?family=Inter"); */
+    @import url("https://fonts.googleapis.com/css?family=Inter:500");
+    @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
+    @import url('https://fonts.googleapis.com/css?family=Rubik');
+
     body {
         background-color: lightblue;
-        font-family:"Source Sans Pro",sans-serif;
+        /* font-family:"Source Sans Pro",sans-serif; */
+        font-family:"Rubik",sans-serif;
+        font-size: 16px;
+        margin: 0 auto;
+        width: 90%;
     }
     .heading {
         font-family:"Inter",sans-serif;
@@ -24,13 +34,18 @@
         clear: both;
     }
     button {
-        font-family:"Source Sans Pro",sans-serif;
+        /* font-family:"Source Sans Pro",sans-serif; */
+        font-family:"Rubik",sans-serif;
         font-size: 20px;
     }
     .button {
-        background-color: #4080c0;
-        border: none;
-        color: white;
+        /* background-color: #4080c0; */
+        background-color: #80ff80;
+        /* border: none; */
+        border: 1px solid #808080;
+        /* color: white; */
+        color: black;
+        box-shadow: 2px 2px 2px;
         padding: 5px 10px;
         text-align: center;
         text-decoration: none;
@@ -63,11 +78,41 @@
         padding: 5px 10px;
         margin: 5px 0;
         display: inline-block;
-        font-family:"Source Sans Pro",sans-serif;
+        /* font-family:"Source Sans Pro",sans-serif; */
+        font-family:"Rubik",sans-serif;
         font-size: 16px;
         border: 1px solid #404040;
         border-radius: 4px;
         box-sizing: border-box;
+    }
+    .clearfix:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    /* Slider */
+    .slider {
+        -webkit-appearance: none;
+        width: 300px;
+        height: 15px;
+        border-radius: 5px;
+        background: white;
+        outline: none;
+        opacity: 0.7;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+    }
+    .slider:hover {
+        opacity: 1;
+    }
+    .slider::-webkit-slider-thumb {
+        appearance: none;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #2040ff;
+        cursor: pointer;
     }
 </style>
 <body>
@@ -82,22 +127,28 @@
     </p><br>
 
     <h2 class="heading">Jenis Bangun Datar</h2>
-
     <!-- <label for="bentuk">Pilih jenis bangun datar:</label> double()-->
     <label for="bentuk">Pilih jenis bangun datar:</label><br>
-    <select name="bentuk" id="bentuk" style="width:150px" onchange="change();output();">
+    <!-- <select name="bentuk" id="bentuk" style="width:200px" onchange="change();output();"> -->
+    <select name="bentuk" id="bentuk" style="width:200px" onchange="change();result_clear();">
         <option value="value1">Persegi</option>
         <option value="value2">Persegi Panjang</option>
         <option value="value3">Segitiga</option>
+        <option value="value4">Jajar Genjang</option>
+        <option value="value4">Trapesium</option>
+        <option value="value4">Belah Ketupat</option>
         <option value="value4">Lingkaran</option>
     </select>
     </label>
     <br><br>
 
-    <label>Jumlah digit desimal:</label>
-    <input type="range" id="digit" oninput="output()" min="2" max="5" value="2">
+    <h2 class="heading">Angka dan Satuan</h2>
+    <label><b>Jumlah digit desimal</b> (Digit precision)</label><br><br>
+    <!-- <input type="range" class="slider" id="digit" oninput="output()" min="2" max="10" value="2"> -->
+    <input type="range" class="slider" id="digit" oninput="precision()" min="2" max="10" value="2">
     <br>
-    <p id='digit2'>Digit precision: 2</p>
+    <!-- <p id='digit2'>Digit precision: 2</p> -->
+    <p id="digit2">Digit precision: 2</p>
     <br>
 
     <h2 class="heading">Input</h2>
@@ -106,20 +157,23 @@
         <p>Panjang</p>
         <input type="number" id="num1" oninput="output()" min="0" value="3">
     </div> -->
-    <div class="row" id="bangun"></div>
-    <p>Klik tombol ini!</p>
+    <div class="row" id="bangun"></div><br>
+    <!-- <p>Klik tombol ini!</p> -->
     <button class="button" onclick="output()">Selesaikan</button>
+    <button class="button" style="background-color: #ff8080;" onclick="change();result_clear();">Reset</button>
     <br><br>
 
     <h2 class="heading" id=1></h2>
-    <p id=2></p>
+    <!-- <p id=2></p>
     <p id=3></p>
-    <p id=4></p>
+    <p id=4></p> -->
+    <p id="hasil" style="font-size:18px; line-height:1.5;"></p>
+    <br>
 
     <a class="button2" href="../projects.html">Kembali ke menu projects</a>
 
     <br><br>
-    <p>Terakhir diupdate: 26 Jan 2024</p>
+    <p>Terakhir diupdate: 9 Agu 2024</p>
 
     <script>
         change();
@@ -128,15 +182,23 @@
             var e1 = e.options[e.selectedIndex];
             if (e1.index == 0) {
                 // <p>Panjang</p>
+                // <input type="number" id="num1" oninput="output()" min="0" value="3">
                 document.getElementById('bangun').innerHTML = `
-                <img src="images/Bangun Datar/Persegi.png" width="200"><br>
-                <p><b>Persegi</b> dalam bangun datar adalah kedua sisi yang sama, dengan panjang dan lebar yang sama. Persegi mempunyai diagonal yang miring.<br>Disini akan mencari Luas dan Keliling persegi.</p>
+                <div class="column" style="padding-right:20px;">
+                    <img src="images/Bangun Datar/Persegi.png" width="250"><br>
+                </div>
+                <div class="column" style="width:850px;">
+                    <p><b>Persegi</b> dalam bangun datar adalah kedua sisi yang sama, dengan panjang dan lebar yang sama. Persegi mempunyai diagonal yang miring.
+                    <br><br>
+                    Disini akan mencari Luas dan Keliling persegi.</p>
+                </div>
+                <div class="clearfix"></div><br>
                 <label>Panjang sisi</label><br>
-                <input type="number" id="num1" oninput="output()" min="0" value="3">
+                <input type="number" id="num1" placeholder="Masukkan sisi" min="0" value="3">
                 `;
             } else if (e1.index == 1) {
                 document.getElementById('bangun').innerHTML = `
-                <img src="images/Bangun Datar/Persegi Panjang.png" width="200"><br>
+                <img src="images/Bangun Datar/Persegi Panjang.png" width="250"><br>
                 <p><b>Persegi Panjang</b> adalah bangun yang terdiri dari dua sisi, yaitu panjang (p) dan lebar (l).</p>
                 <div class="column">
                     <label>Panjang</label><br>
@@ -149,8 +211,8 @@
                 `;
             } else if (e1.index == 2) {
                 document.getElementById('bangun').innerHTML = `
-                <img src="images/Bangun Datar/Segitiga.png" width="200"><br>
-                <p><b>Segitiga</b> adalah bangun yang terdiri dari 3 siri, yaitu alas dan 2 sisi miring. Terdapat alas (a) dan tinggi (t).<br>Ada 4 jenis segitiga, yaitu Segitiga Siku-Siku, Segitiga Sama Sisi, Segitiga Sama Kaki, dan Segitiga Sembarang</p>
+                <img src="images/Bangun Datar/Segitiga.png" width="250"><br>
+                <p><b>Segitiga</b> adalah bangun yang terdiri dari 3 sisi, yaitu alas dan 2 sisi miring. Terdapat alas (a) dan tinggi (t).<br>Ada 4 jenis segitiga, yaitu Segitiga Siku-Siku, Segitiga Sama Sisi, Segitiga Sama Kaki, dan Segitiga Sembarang</p>
                 <div class="column">
                     <label>Alas</label><br>
                     <input type="number" id="num1" oninput="output()" min="0" value="4">
@@ -160,14 +222,24 @@
                     <input type="number" id="num2" oninput="output()" min="0" value="3">
                 </div>
                 `;
-            } else {
+            } else if (e1.index == 6) {
                 document.getElementById('bangun').innerHTML = `
-                <img src="images/Bangun Datar/Lingkaran.png" width="200"><br>
+                <img src="images/Bangun Datar/Lingkaran.png" width="250"><br>
                 <p><b>Lingkaran</b> adalah bangun datar yang berbentuk bulat dan melengkung. Ada hubungannya dengan pi (π)<br>Bilangan pi (π) kira-kira 3.14 atau 22/7. Konstanta pi (π) = 3.14159...</p>
                 <label>Radius</label><br>
                 <input type="number" id="num1" oninput="output()" min="0" value="5">
                 `;
+            } else {
+                document.getElementById('bangun').innerHTML = "Coming Soon"
             }
+        }
+        function result_clear() {
+            document.getElementById(1).innerHTML = '';
+            document.getElementById("hasil").innerHTML = '';
+        }
+        function precision() {
+            var digit = parseInt(document.getElementById("digit").value);
+            document.getElementById("digit2").innerHTML = 'Digit precision: ' + digit;
         }
         function output() {
             var e = document.getElementById("bentuk");
@@ -175,40 +247,54 @@
             var digit = parseInt(document.getElementById("digit").value);
             document.getElementById("digit2").innerHTML = 'Digit precision: ' + digit;
             if (e1.index == 0) {
-                var x = parseInt(document.getElementById("num1").value);
+                document.getElementById(1).innerHTML = 'Hasil Penyelesaian';
+                // var x = parseInt(document.getElementById("num1").value);
+                var x = parseFloat(document.getElementById("num1").value);
                 var luas = x*x;
                 var keliling = 4*x;
                 // var c = new circle(x);
-                document.getElementById(1).innerHTML = 'Hasil Penyelesaian';
-                document.getElementById(2).innerHTML = 'Luas = ' + luas.toFixed(digit);
-                document.getElementById(3).innerHTML = 'Keliling = ' + keliling.toFixed(digit);
+                // document.getElementById(1).innerHTML = 'Hasil Penyelesaian';
+                // document.getElementById(2).innerHTML = 'Luas = ' + luas.toFixed(digit);
+                // document.getElementById(2).innerHTML = 'Luas = ' + parseFloat(luas.toFixed(digit));
+                // document.getElementById(3).innerHTML = 'Keliling = ' + parseFloat(keliling.toFixed(digit));
+                if (document.getElementById("num1").value == "") {
+                    document.getElementById("hasil").innerHTML = 'Masukkan panjang sisi';
+                } else {
+                    document.getElementById("hasil").innerHTML = `
+                    Luas = ${parseFloat(luas.toFixed(digit))}<br>
+                    Keliling = ${parseFloat(keliling.toFixed(digit))}
+                    `
+                };
             } else if (e1.index == 1) {
+                document.getElementById(1).innerHTML = 'Hasil Penyelesaian';
                 var x = parseInt(document.getElementById("num1").value);
                 var y = parseInt(document.getElementById("num2").value);
                 // const sb = document.querySelector('#color');
                 var luas = x*y;
                 var keliling = 2*(x+y);
                 // var c = new circle(x);
-                document.getElementById(1).innerHTML = 'Hasil Penyelesaian';
                 document.getElementById(2).innerHTML = 'Luas = ' + luas.toFixed(digit);
                 document.getElementById(3).innerHTML = 'Keliling = ' + keliling.toFixed(digit);
                 // document.getElementById(4).innerHTML = "Index: " + e1.index + " is " + e1.text;
             } else if (e1.index == 2) {
+                document.getElementById(1).innerHTML = 'Hasil Penyelesaian';
                 var x = parseInt(document.getElementById("num1").value);
                 var y = parseInt(document.getElementById("num2").value);
                 var luas = x*y/2;
                 // var c = new circle(x);
-                document.getElementById(1).innerHTML = 'Hasil Penyelesaian';
                 document.getElementById(2).innerHTML = 'Luas = ' + luas.toFixed(digit);
                 document.getElementById(3).innerHTML = '';
-            } else if (e1.index == 3) {
+            } else if (e1.index == 6) {
+                document.getElementById(1).innerHTML = 'Hasil Penyelesaian';
                 var r = parseInt(document.getElementById("num1").value);
                 var luas = Math.PI*r**2
                 var keliling = 2*Math.PI*r;
                 // var c = new circle(x);
-                document.getElementById(1).innerHTML = 'Hasil Penyelesaian';
                 document.getElementById(2).innerHTML = 'Luas = ' + luas.toFixed(digit);
                 document.getElementById(3).innerHTML = 'Keliling = ' + keliling.toFixed(digit);
+            } else {
+                document.getElementById(1).innerHTML = '';
+                document.getElementById("hasil").innerHTML = '';
             }
         }
 
