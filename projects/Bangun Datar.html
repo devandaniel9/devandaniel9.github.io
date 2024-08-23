@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
+    <link rel="stylesheet" href="checkbox.css">
 </head>
 <style>
     /* Fonts */
@@ -93,7 +94,8 @@
 
     /* Slider */
     .slider {
-        -webkit-appearance: none;
+        /* -webkit-appearance: none; */
+        appearance: none;
         width: 300px;
         height: 15px;
         border-radius: 5px;
@@ -146,17 +148,23 @@
     <label><b>Jumlah digit desimal</b> (Digit precision)</label><br><br>
     <!-- <input type="range" class="slider" id="digit" oninput="output()" min="2" max="10" value="2"> -->
     <input type="range" class="slider" id="digit" oninput="precision()" min="2" max="10" value="2">
-    <br>
-    <!-- <p id='digit2'>Digit precision: 2</p> -->
-    <p id="digit2">Digit precision: 2</p>
-    <br>
+    <br><br>
+    <!-- <p id="digit2">Digit precision: 2</p> -->
+    <span id="digit2">Digit precision: 2</span>
+    <br><br>
+    <!-- <input type="checkbox" id="digit" oninput="precision()" min="2" max="10" value="2"><label>Dengan satuan panjang</label> -->
+    <label class="cb-container">Dengan satuan panjang
+        <input type="checkbox">
+        <span class="checkmark"></span>
+    </label>
+    <div style="display:none;">Hahaha</div>
+    <label class="cb-container">Pertahankan pengaturan
+        <input type="checkbox" checked="checked">
+        <span class="checkmark"></span>
+    </label>
+    <br><br>
 
-    <h2 class="heading">Input</h2>
-    <!-- <span>Sebuah input</span> -->
-    <!-- <div class="row" id="bangun">
-        <p>Panjang</p>
-        <input type="number" id="num1" oninput="output()" min="0" value="3">
-    </div> -->
+    <h2 class="heading"></h2>
     <div class="row" id="bangun"></div><br>
     <!-- <p>Klik tombol ini!</p> -->
     <button class="button" onclick="output()">Selesaikan</button>
@@ -173,7 +181,7 @@
     <a class="button2" href="../projects.html">Kembali ke menu projects</a>
 
     <br><br>
-    <p>Terakhir diupdate: 9 Agu 2024</p>
+    <p>Terakhir diupdate: 23 Agu 2024</p>
 
     <script>
         change();
