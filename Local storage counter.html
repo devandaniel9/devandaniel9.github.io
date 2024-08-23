@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>The Window Object</h1>
+<h2>The localStorage Property</h2>
+
+<p id="count"></p>
+
+<button onclick="add()">Add</button>
+<button onclick="clear_all()">Clear</button>
+
+<script>
+count = localStorage.getItem('count');
+
+// First time the value does not exist...
+if (count == null) {
+    count = 0;  
+}
+
+count = parseInt(count); // because localstorage stores everything in strings
+
+function add() {
+    count += 1;
+    document.getElementById("count").innerHTML = "Click me: " + count;
+    localStorage.setItem("count", count);
+};
+
+function load() {
+    document.getElementById("count").innerHTML = "Click me: " + count;
+    localStorage.setItem("count", count);
+};
+
+load();
+
+function clear_all() {
+    // localStorage.clear();
+    count = 0;
+    load();
+}
+
+</script>
+
+</body>
+</html>
