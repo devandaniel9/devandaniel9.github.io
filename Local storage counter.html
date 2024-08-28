@@ -6,11 +6,27 @@
 <h2>The localStorage Property</h2>
 
 <p id="count"></p>
+<p id="time"></p>
 
 <button onclick="add()">Add</button>
 <button onclick="clear_all()">Clear</button>
 
 <script>
+d = new Date();
+time = d.getTime();
+time_old = localStorage.getItem('time');
+
+if (time_old == null) {
+    time_old = 0;
+}
+
+// console.log(time)
+// console.log(parseInt(time_old) + 5000)
+
+if (time > parseInt(time_old) + 10000) {
+    clear_all();
+}
+
 count = localStorage.getItem('count');
 
 // First time the value does not exist...
@@ -19,6 +35,15 @@ if (count == null) {
 }
 
 count = parseInt(count); // because localstorage stores everything in strings
+
+// setInterval(function() {element.innerHTML += "Hello"}, 1000);
+
+setInterval(function() {
+    d = new Date();
+    time = d.getTime();
+    // document.getElementById("time").innerHTML = time;
+    localStorage.setItem("time", time);
+}, 1000);
 
 function add() {
     count += 1;
