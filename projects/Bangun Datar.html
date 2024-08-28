@@ -116,33 +116,42 @@
         background: #2040ff;
         cursor: pointer;
     }
+    ol {
+        /* word-break: break-all; */
+        /* margin: 0; */
+        padding: 0;
+        padding-left: 10px;
+    }
+    li {
+        list-style-position: inside;
+        padding: 0;
+    }
+    li::before {
+        content: "";
+        width: 10px;
+        display: inline-block;
+    }
 </style>
 <body>
     <h1 class="heading">Bangun Datar</h1>
     <img src="images/2d-shapes.png" width="300">
     <p>
-    Ini akan mencari luas dan keliling pada bangun datar. Ada 3 bangun dalam bangun datar, yaitu:<br><br>
-    1. <b>Persegi</b> - Sisi yang sama<br>
+    Ini akan mencari luas dan keliling pada bangun datar. Ada 4 bangun dalam bangun datar, yaitu:
+    <!-- <br><br> -->
+    <!-- 1. <b>Persegi</b> - Sisi yang sama<br>
     2. <b>Persegi Panjang</b> - Terdapat panjang dan lebar<br>
     3. <b>Segitiga</b> - Ada 3 sisi<br>
-    4. <b>Lingkaran</b> - Bentuknya melengkung
+    4. <b>Lingkaran</b> - Bentuknya melengkung -->
+    <ol>
+        <li><b>Persegi</b> - Sisi yang sama</li>
+        <li><b>Persegi Panjang</b> - Terdapat panjang dan lebar</li>
+        <li><b>Segitiga</b> - Ada 3 sisi</li>
+        <li><b>Jajar Genjang</b></li>
+        <li><b>Trapesium</b></li>
+        <li><b>Belah Ketupat</b></li>
+        <li><b>Lingkaran</b> - Bentuknya melengkung</li>
+    </ol>
     </p><br>
-
-    <h2 class="heading">Jenis Bangun Datar</h2>
-    <!-- <label for="bentuk">Pilih jenis bangun datar:</label> double()-->
-    <label for="bentuk">Pilih jenis bangun datar:</label><br>
-    <!-- <select name="bentuk" id="bentuk" style="width:200px" onchange="change();output();"> -->
-    <select name="bentuk" id="bentuk" style="width:200px" onchange="change();result_clear();">
-        <option value="value1">Persegi</option>
-        <option value="value2">Persegi Panjang</option>
-        <option value="value3">Segitiga</option>
-        <option value="value4">Jajar Genjang</option>
-        <option value="value4">Trapesium</option>
-        <option value="value4">Belah Ketupat</option>
-        <option value="value4">Lingkaran</option>
-    </select>
-    </label>
-    <br><br>
 
     <h2 class="heading">Angka dan Satuan</h2>
     <label><b>Jumlah digit desimal</b> (Digit precision)</label><br><br>
@@ -158,9 +167,31 @@
         <span class="checkmark"></span>
     </label>
     <div style="display:none;">Hahaha</div>
-    <label class="cb-container">Pertahankan pengaturan
-        <input type="checkbox" checked="checked">
+    <label class="cb-container">Terapkan tema gelap (Belum tersedia)
+        <input type="checkbox">
         <span class="checkmark"></span>
+    </label>
+    <label class="cb-container">Pertahankan pengaturan<br>
+        <span style="font-size:14px">Akan direset secara otomatis setelah 7 hari tidak digunakan</span>
+        <!-- <input type="checkbox" id="settings" checked="checked"> -->
+        <input type="checkbox" id="settings" onclick="settings_check()">
+        <span class="checkmark"></span>
+    </label>
+    <br><br>
+
+    <h2 class="heading">Jenis Bangun Datar</h2>
+    <!-- <label for="bentuk">Pilih jenis bangun datar:</label> double()-->
+    <label for="bentuk">Pilih jenis bangun datar:</label><br>
+    <!-- <select name="bentuk" id="bentuk" style="width:200px" onchange="change();output();"> -->
+    <select name="bentuk" id="bentuk" style="width:200px" onchange="change();result_clear();">
+        <option value="value1">Persegi</option>
+        <option value="value2">Persegi Panjang</option>
+        <option value="value3">Segitiga</option>
+        <option value="value4">Jajar Genjang</option>
+        <option value="value4">Trapesium</option>
+        <option value="value4">Belah Ketupat</option>
+        <option value="value4">Lingkaran</option>
+    </select>
     </label>
     <br><br>
 
@@ -181,10 +212,22 @@
     <a class="button2" href="../projects.html">Kembali ke menu projects</a>
 
     <br><br>
-    <p>Terakhir diupdate: 23 Agu 2024</p>
+    <p>Terakhir diupdate: 28 Agu 2024</p>
 
     <script>
         change();
+        check_old = localStorage.getItem("settings-check");
+        if (check_old == null) {
+            check_old = false;
+        }
+        console.log(check_old);
+        document.getElementById("settings").checked = Boolean(check_old);
+        settings_check();
+        function settings_check() {
+            check = document.getElementById("settings").checked;
+            console.log(check);
+            localStorage.setItem("settings-check", check);
+        }
         function change() {
             var e = document.getElementById("bentuk");
             var e1 = e.options[e.selectedIndex];
