@@ -163,12 +163,12 @@
     <br><br>
     <!-- <input type="checkbox" id="digit" oninput="precision()" min="2" max="10" value="2"><label>Dengan satuan panjang</label> -->
     <label class="cb-container">Dengan satuan panjang
-        <input type="checkbox">
+        <input type="checkbox" id="satuan" onclick="settings_check()">
         <span class="checkmark"></span>
     </label>
     <div style="display:none;">Hahaha</div>
     <label class="cb-container">Terapkan tema gelap (Belum tersedia)
-        <input type="checkbox">
+        <input type="checkbox" id="tema" onclick="settings_check()">
         <span class="checkmark"></span>
     </label>
     <label class="cb-container">Pertahankan pengaturan<br>
@@ -212,22 +212,91 @@
     <a class="button2" href="../projects.html">Kembali ke menu projects</a>
 
     <br><br>
-    <p>Terakhir diupdate: 28 Agu 2024</p>
+    <p>Terakhir diupdate: 30 Agu 2024</p>
 
     <script>
-        change();
+        // Time
+        d = new Date();
+        time = d.getTime();
+        time_old = localStorage.getItem('time2');
+        console.log(time);
+        console.log(time_old);
+        if (time_old == null) {
+            time_old = 0;
+        }
         check_old = localStorage.getItem("settings-check");
-        if (check_old == null) {
+        check_old = check_old == "true"
+        console.log(time > parseInt(time_old) + 5000);
+        if (time > parseInt(time_old) + 5000) {
+            unit_check_old = false;
+            theme_check_old = false;
             check_old = false;
         }
-        console.log(check_old);
-        document.getElementById("settings").checked = Boolean(check_old);
-        settings_check();
-        function settings_check() {
-            check = document.getElementById("settings").checked;
-            console.log(check);
-            localStorage.setItem("settings-check", check);
+        if (!(check_old)) {
+            clear_all();
+            // settings_check();
         }
+
+        change();
+        console.log(check_old);
+        if (check_old) {
+            unit_check_old = localStorage.getItem("satuan-check");
+            theme_check_old = localStorage.getItem("tema-check");
+            unit_check_old = unit_check_old == "true"
+            theme_check_old = theme_check_old == "true"
+        } else {
+            console.log(0);
+            unit_check_old = false;
+            theme_check_old = false;
+            clear_all();
+        }
+        settings_check();
+        // check_old = localStorage.getItem("settings-check");
+        // if (check_old == null) {
+        //     check_old = false;
+        // }
+        // check_old = string
+        // unit_check_old = unit_check_old == "true"
+        // theme_check_old = theme_check_old == "true"
+        // check_old = check_old == "true"
+        // console.log(check_old);
+        // check_old = Boolean(check_old);
+        console.log(unit_check_old);
+        document.getElementById("satuan").checked = unit_check_old;
+        document.getElementById("tema").checked = theme_check_old;
+        document.getElementById("settings").checked = check_old;
+        settings_check();
+
+        setInterval(function() {
+            d = new Date();
+            time = d.getTime();
+            // document.getElementById("time").innerHTML = time;
+            // console.log(time);
+            localStorage.setItem("time2", time);
+        }, 1000);
+
+        function clear_all() {
+            localStorage.removeItem("satuan-check");
+            localStorage.removeItem("tema-check");
+            document.getElementById("satuan").checked = false;
+            document.getElementById("tema").checked = false;
+            document.getElementById("settings").checked = false;
+            // localStorage.clear();
+        }
+
+        function settings_check() {
+            unit_check = document.getElementById("satuan").checked;
+            theme_check = document.getElementById("tema").checked;
+            check = document.getElementById("settings").checked;
+            localStorage.setItem("settings-check", check);
+            //console.log(check);
+            //console.log(unit_check);
+            if (check) {
+                localStorage.setItem("satuan-check", unit_check);
+                localStorage.setItem("tema-check", theme_check);
+            }
+        }
+
         function change() {
             var e = document.getElementById("bentuk");
             var e1 = e.options[e.selectedIndex];
