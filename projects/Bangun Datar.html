@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Website Saya</title>
+    <title>Bangun Datar</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
@@ -14,6 +14,12 @@
     @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
     @import url('https://fonts.googleapis.com/css?family=Rubik');
 
+    html {
+        /* --darkmode: 0; */
+        --darkmode: 1;
+        container-name: root;
+        container-type: normal;
+    }
     body {
         background-color: lightblue;
         /* font-family:"Source Sans Pro",sans-serif; */
@@ -41,7 +47,7 @@
     }
     .button {
         /* background-color: #4080c0; */
-        background-color: #80ff80;
+        /* background-color: #80ff80; */
         /* border: none; */
         border: 1px solid #808080;
         /* color: white; */
@@ -55,6 +61,12 @@
         margin: 2px 2px;
         border-radius: 6px;
         cursor: pointer;
+    }
+    #solve {
+        background-color: #80ff80;
+    }
+    #reset {
+        background-color: #ff8080;
     }
     a {
         font-size: 18px;
@@ -110,6 +122,8 @@
     }
     .slider::-webkit-slider-thumb {
         appearance: none;
+        /* width: 25px;
+        height: 25px; */
         width: 25px;
         height: 25px;
         border-radius: 50%;
@@ -131,6 +145,63 @@
         width: 10px;
         display: inline-block;
     }
+
+    /* Dark Mode */
+    @container root style(--darkmode: 1) {
+        body {
+            background-color: #203040;
+            color: white;
+        }
+        .button {
+            color: white;
+        }
+        #solve {
+            background-color: #006000;
+        }
+        #reset {
+            background-color: #600000;
+        }
+        a.button2:link, a.button2:visited {
+            background-color: #202020;
+            color: white;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            border: 1px solid #c0c0c0;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+        a.button2:hover, a.button2:active {
+            background-color: #404040;
+        }
+        .checkmark {
+            background-color: #202020;
+            border: solid #c0c0c0;
+        }
+        .cb-container:hover input ~ .checkmark {
+            background-color: #404040;
+        }
+        .cb-container input:checked ~ .checkmark {
+            background-color: #1860c0;
+        }
+        .cb-container:hover input:checked ~ .checkmark {
+            background-color: #124890;
+        }
+        input[type=number], select {
+            background-color: #202020;
+            border: 1px solid #c0c0c0;
+            color: white;
+        }
+        .slider {
+            background-color: gray;
+        }
+        .slider::-webkit-slider-thumb {
+            border: 2px solid white;
+        }
+    }
+    /* html:has(#tema:not-checked) { --darkmode: 0; }
+    html:has(#tema:checked) { --darkmode: 1; } */
 </style>
 <body>
     <h1 class="heading">Bangun Datar</h1>
@@ -155,8 +226,8 @@
 
     <h2 class="heading">Angka dan Satuan</h2>
     <label><b>Jumlah digit desimal</b> (Digit precision)</label><br><br>
-    <!-- <input type="range" class="slider" id="digit" oninput="output()" min="2" max="10" value="2"> -->
-    <input type="range" class="slider" id="digit" oninput="precision()" min="2" max="10" value="2">
+    <!-- <input type="range" class="slider" id="digit" oninput="output(),precision()" min="2" max="10" value="2"> -->
+    <input type="range" class="slider" id="digit" oninput="settings_check()" min="2" max="10" value="2">
     <br><br>
     <!-- <p id="digit2">Digit precision: 2</p> -->
     <span id="digit2">Digit precision: 2</span>
@@ -166,18 +237,23 @@
         <input type="checkbox" id="satuan" onclick="settings_check()">
         <span class="checkmark"></span>
     </label>
-    <div style="display:none;">Hahaha</div>
     <label class="cb-container">Terapkan tema gelap (Belum tersedia)
         <input type="checkbox" id="tema" onclick="settings_check()">
         <span class="checkmark"></span>
     </label>
     <label class="cb-container">Pertahankan pengaturan<br>
-        <span style="font-size:14px">Akan direset secara otomatis setelah 7 hari tidak digunakan</span>
+        <span style="font-size:14px">Akan direset secara otomatis setelah 3 hari tidak digunakan</span>
         <!-- <input type="checkbox" id="settings" checked="checked"> -->
         <input type="checkbox" id="settings" onclick="settings_check()">
         <span class="checkmark"></span>
     </label>
     <br><br>
+
+    <div id="container" style="display:none;">
+        <h2 class="heading">Satuan Panjang</h2>
+        
+        <br><br>
+    </div>
 
     <h2 class="heading">Jenis Bangun Datar</h2>
     <!-- <label for="bentuk">Pilih jenis bangun datar:</label> double()-->
@@ -198,8 +274,8 @@
     <h2 class="heading"></h2>
     <div class="row" id="bangun"></div><br>
     <!-- <p>Klik tombol ini!</p> -->
-    <button class="button" onclick="output()">Selesaikan</button>
-    <button class="button" style="background-color: #ff8080;" onclick="change();result_clear();">Reset</button>
+    <button class="button" id="solve" onclick="output()">Selesaikan</button>
+    <button class="button" id="reset" onclick="change();result_clear();">Reset</button>
     <br><br>
 
     <h2 class="heading" id=1></h2>
@@ -212,88 +288,74 @@
     <a class="button2" href="../projects.html">Kembali ke menu projects</a>
 
     <br><br>
-    <p>Terakhir diupdate: 30 Agu 2024</p>
+    <p>Terakhir diupdate: 6 Sep 2024</p>
 
     <script>
         // Time
         d = new Date();
         time = d.getTime();
         time_old = localStorage.getItem('time2');
-        console.log(time);
-        console.log(time_old);
         if (time_old == null) {
             time_old = 0;
         }
         check_old = localStorage.getItem("settings-check");
         check_old = check_old == "true"
-        console.log(time > parseInt(time_old) + 5000);
-        if (time > parseInt(time_old) + 5000) {
-            unit_check_old = false;
-            theme_check_old = false;
+        // if (time > parseInt(time_old) + 5000) {
+            if (time > parseInt(time_old) + 3*86400*1000) {
             check_old = false;
-        }
-        if (!(check_old)) {
-            clear_all();
-            // settings_check();
         }
 
         change();
-        console.log(check_old);
         if (check_old) {
+            digit_old = parseInt(localStorage.getItem("digit"));
             unit_check_old = localStorage.getItem("satuan-check");
             theme_check_old = localStorage.getItem("tema-check");
             unit_check_old = unit_check_old == "true"
             theme_check_old = theme_check_old == "true"
         } else {
-            console.log(0);
+            digit_old = 2;
             unit_check_old = false;
             theme_check_old = false;
-            clear_all();
+            // clear_all();
         }
-        settings_check();
+        // settings_check();
         // check_old = localStorage.getItem("settings-check");
-        // if (check_old == null) {
-        //     check_old = false;
-        // }
-        // check_old = string
-        // unit_check_old = unit_check_old == "true"
-        // theme_check_old = theme_check_old == "true"
-        // check_old = check_old == "true"
-        // console.log(check_old);
-        // check_old = Boolean(check_old);
         console.log(unit_check_old);
+        document.getElementById("digit").value = digit_old;
         document.getElementById("satuan").checked = unit_check_old;
         document.getElementById("tema").checked = theme_check_old;
         document.getElementById("settings").checked = check_old;
         settings_check();
 
+        // interval = 1000;
+        interval = 200;
         setInterval(function() {
             d = new Date();
             time = d.getTime();
             // document.getElementById("time").innerHTML = time;
             // console.log(time);
             localStorage.setItem("time2", time);
-        }, 1000);
-
-        function clear_all() {
-            localStorage.removeItem("satuan-check");
-            localStorage.removeItem("tema-check");
-            document.getElementById("satuan").checked = false;
-            document.getElementById("tema").checked = false;
-            document.getElementById("settings").checked = false;
-            // localStorage.clear();
-        }
+        }, interval);
 
         function settings_check() {
+            digit = parseInt(document.getElementById("digit").value);
+            document.getElementById("digit2").innerHTML = 'Digit precision: ' + digit;
             unit_check = document.getElementById("satuan").checked;
             theme_check = document.getElementById("tema").checked;
             check = document.getElementById("settings").checked;
             localStorage.setItem("settings-check", check);
             //console.log(check);
             //console.log(unit_check);
+            console.log(digit)
             if (check) {
+                localStorage.setItem("digit", digit);
                 localStorage.setItem("satuan-check", unit_check);
                 localStorage.setItem("tema-check", theme_check);
+            }
+            if (unit_check) {
+                document.getElementById("container").style.display = "block";
+            } else {
+                document.getElementById("container").style.display = "none";
             }
         }
 
@@ -360,6 +422,7 @@
         function precision() {
             var digit = parseInt(document.getElementById("digit").value);
             document.getElementById("digit2").innerHTML = 'Digit precision: ' + digit;
+            settings_check();
         }
         function output() {
             var e = document.getElementById("bentuk");
