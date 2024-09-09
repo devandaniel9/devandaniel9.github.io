@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
     <link rel="stylesheet" href="checkbox.css">
+    <link rel="stylesheet" href="radio-buttons.css">
+    <link rel="stylesheet" href="sidebar.css">
 </head>
 <style>
     /* Fonts */
@@ -206,6 +208,45 @@
 <body>
     <h1 class="heading">Bangun Datar</h1>
     <img src="images/2d-shapes.png" width="300">
+    <script>
+        function openNav() {
+            document.getElementById("sidebar").style.width = "300px";
+            document.getElementById("backsidebar").style.display = "block";
+            document.getElementById("backsidebar").style.width = "100%";
+            document.getElementById("backsidebar").style.height = "100%";
+            // document.body.style.backgroundColor = "rgba(0,0,0,0.5)";
+        }
+        function closeNav() {
+            document.getElementById("sidebar").style.width = "0";
+            document.getElementById("backsidebar").style.display = "none";
+            document.getElementById("backsidebar").style.width = "0";
+            document.getElementById("backsidebar").style.height = "0";
+            // document.body.style.backgroundColor = "rgba(0,0,0,0)";
+        }
+
+        document.getElementById("sidebar").innerHTML = `
+        <div class="closebtn" onclick="closeNav()"><img src="images/close-icon.png" width="20"></div>
+        <span style="font-size:26px;"><b>Main Menu</b></span><br>
+        <span style="font-size:20px;"><b>Halaman</b></span>
+        <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search..."><br>
+        <hr style="height:2px; border-width:0; background-color:gray">
+
+        <ul class="heading" id="myMenu">
+            <li><a href="index.html"><img style="vertical-align:middle;" src="images/home-icon.png" width="20">&emsp;Home</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="fakta.html">Fakta</a></li>
+            <li><a href="profil.html"><img style="vertical-align:middle;" src="images/profile-icon.png" width="20">&emsp;Profil</a></li>
+            <li><a href="portofolio.html">Portofolio</a></li>
+            <li><a href="hasil-karya.html">Hasil Karya</a></li>
+            <li><a href="timeline.html"><img style="vertical-align:middle;" src="images/history-icon.png" width="20">&emsp;Timeline</a></li>
+            <li><a href="updates.html"><img style="vertical-align:middle;" src="images/update-icon.png" width="20">&emsp;Updates</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a style="color:red">Pertanyaan</a></li>
+            <li><a style="color:red">Guide</a></li>
+            <li><a style="color:red">Explore</a></li>
+        </ul>
+        `;
+    </script>
     <p>
     Ini akan mencari luas dan keliling pada bangun datar. Ada 4 bangun dalam bangun datar, yaitu:
     <!-- <br><br> -->
@@ -223,6 +264,12 @@
         <li><b>Lingkaran</b> - Bentuknya melengkung</li>
     </ol>
     </p><br>
+
+    <div class="sidebar" id="sidebar"></div>
+    <div class="backsidebar" id="backsidebar" onclick="closeNav()"></div>
+    <div class="column" style="padding-right:30px;">
+        <div class="openbtn" onclick="openNav()"><img src="images/menu-icon.jpg" width="30"></div>
+    </div>
 
     <h2 class="heading">Angka dan Satuan</h2>
     <label><b>Jumlah digit desimal</b> (Digit precision)</label><br><br>
