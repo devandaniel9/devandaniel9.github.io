@@ -28,7 +28,7 @@
         font-family:"Rubik",sans-serif;
         font-size: 16px;
         margin: 0 auto;
-        width: 90%;
+        width: 85%;
     }
     .heading {
         font-family:"Inter",sans-serif;
@@ -70,6 +70,27 @@
     #reset {
         background-color: #ff8080;
     }
+
+    /* Open and Close Button */
+    .openbtn {
+        /* background-color: #d0d0d0; */
+        /* background-color: lightblue;
+        font-size: 24px;
+        cursor: pointer; */
+        background-color: #103880;
+        border-radius: 6px;
+        cursor: pointer;
+        width: 46px;
+        font-size: 0px;
+        transition: 0.3s;
+    }
+    .openbtn:hover {
+        background-color: #0d2c68;
+    }
+    .openbtn img {
+        padding: 8px;
+    }
+
     a {
         font-size: 18px;
     }
@@ -113,7 +134,8 @@
         width: 300px;
         height: 15px;
         border-radius: 5px;
-        background: white;
+        /* background: white; */
+        background-image: repeating-linear-gradient(90deg,#ffc0c0,#ffffc0,#c0ffc0);
         outline: none;
         opacity: 0.7;
         -webkit-transition: .2s;
@@ -147,6 +169,9 @@
         width: 10px;
         display: inline-block;
     }
+    img {
+        border-radius: 10px;
+    }
 
     /* Dark Mode */
     @container root style(--darkmode: 1) {
@@ -156,6 +181,7 @@
         }
         .button {
             color: white;
+            box-shadow: 2px 2px 2px rgba(255,255,255,0.5);
         }
         #solve {
             background-color: #006000;
@@ -201,13 +227,62 @@
         .slider::-webkit-slider-thumb {
             border: 2px solid white;
         }
+        .sidebar {
+            background-color: #303030;
+            color: white;
+            box-shadow: 0px 8px 16px 0px rgba(255,255,255,0.2);
+        }
+        .sidebar a {
+            color: white;
+        }
+        .sidebar a:hover {
+            background-color: #606060;
+        }
+        .sidebar .closebtn {
+            background-color: #606060;
+        }
+        .sidebar .closebtn:hover {
+            background-color: #808080;
+        }
+        .sidebar .closebtn img {
+            padding: 8px;
+        }
+        #myMenu {
+            color: white;
+        }
+        img {
+            filter: invert(100%);
+        }
     }
     /* html:has(#tema:not-checked) { --darkmode: 0; }
     html:has(#tema:checked) { --darkmode: 1; } */
 </style>
 <body>
     <h1 class="heading">Bangun Datar</h1>
-    <img src="images/2d-shapes.png" width="300">
+    <img src="images/2d-shapes.png" style="background-color:white; padding:10px;" width="300">
+    <p>
+    Bangun Datar adalah bangun dua dimensi dalam geometri, yang memiliki satuan panjang, yaitu panjang dan lebar. Ini akan mencari luas dan keliling pada bangun datar. Ada 4 bangun dalam bangun datar, yaitu:
+    <!-- <br><br> -->
+    <!-- 1. <b>Persegi</b> - Sisi yang sama<br>
+    2. <b>Persegi Panjang</b> - Terdapat panjang dan lebar<br>
+    3. <b>Segitiga</b> - Ada 3 sisi<br>
+    4. <b>Lingkaran</b> - Bentuknya melengkung -->
+    <ol>
+        <li><b>Persegi</b> - Sisi yang sama</li>
+        <li><b>Persegi Panjang</b> - Terdapat panjang dan lebar</li>
+        <li><b>Segitiga</b> - Ada 3 sisi</li>
+        <li><b>Jajar Genjang</b></li>
+        <li><b>Trapesium</b></li>
+        <li><b>Belah Ketupat</b></li>
+        <li><b>Lingkaran</b> - Bentuknya melengkung</li>
+    </ol>
+    </p><br>
+
+    <div class="sidebar" id="sidebar"></div>
+    <div class="backsidebar" id="backsidebar" onclick="closeNav()"></div>
+    <div class="column" style="padding-right:30px;">
+        <div class="openbtn" onclick="openNav()"><img src="images/menu-icon.jpg" width="30"></div>
+    </div>
     <script>
         function openNav() {
             document.getElementById("sidebar").style.width = "300px";
@@ -231,45 +306,29 @@
         <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search..."><br>
         <hr style="height:2px; border-width:0; background-color:gray">
 
-        <ul class="heading" id="myMenu">
-            <li><a href="index.html"><img style="vertical-align:middle;" src="images/home-icon.png" width="20">&emsp;Home</a></li>
-            <li><a href="blog.html">Blog</a></li>
-            <li><a href="fakta.html">Fakta</a></li>
-            <li><a href="profil.html"><img style="vertical-align:middle;" src="images/profile-icon.png" width="20">&emsp;Profil</a></li>
-            <li><a href="portofolio.html">Portofolio</a></li>
-            <li><a href="hasil-karya.html">Hasil Karya</a></li>
-            <li><a href="timeline.html"><img style="vertical-align:middle;" src="images/history-icon.png" width="20">&emsp;Timeline</a></li>
-            <li><a href="updates.html"><img style="vertical-align:middle;" src="images/update-icon.png" width="20">&emsp;Updates</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a style="color:red">Pertanyaan</a></li>
-            <li><a style="color:red">Guide</a></li>
-            <li><a style="color:red">Explore</a></li>
+        <ul class="heading" id="myMenu" style="line-height:10px">
+            <li><a href="Bangun Datar.html">Bangun Datar</a></li>
+            <li><a href="Bangun Ruang.html">Bangun Ruang</a></li>
+            <li><a href="fakta.html">Link lainnya</a></li>
         </ul>
         `;
-    </script>
-    <p>
-    Ini akan mencari luas dan keliling pada bangun datar. Ada 4 bangun dalam bangun datar, yaitu:
-    <!-- <br><br> -->
-    <!-- 1. <b>Persegi</b> - Sisi yang sama<br>
-    2. <b>Persegi Panjang</b> - Terdapat panjang dan lebar<br>
-    3. <b>Segitiga</b> - Ada 3 sisi<br>
-    4. <b>Lingkaran</b> - Bentuknya melengkung -->
-    <ol>
-        <li><b>Persegi</b> - Sisi yang sama</li>
-        <li><b>Persegi Panjang</b> - Terdapat panjang dan lebar</li>
-        <li><b>Segitiga</b> - Ada 3 sisi</li>
-        <li><b>Jajar Genjang</b></li>
-        <li><b>Trapesium</b></li>
-        <li><b>Belah Ketupat</b></li>
-        <li><b>Lingkaran</b> - Bentuknya melengkung</li>
-    </ol>
-    </p><br>
 
-    <div class="sidebar" id="sidebar"></div>
-    <div class="backsidebar" id="backsidebar" onclick="closeNav()"></div>
-    <div class="column" style="padding-right:30px;">
-        <div class="openbtn" onclick="openNav()"><img src="images/menu-icon.jpg" width="30"></div>
-    </div>
+        function myFunction() {
+            var input, filter, ul, li, a, i;
+            input = document.getElementById("mySearch");
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("myMenu");
+            li = ul.getElementsByTagName("li");
+            for (i = 0; i < li.length; i++) {
+                a = li[i].getElementsByTagName("a")[0];
+                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
+    </script>
 
     <h2 class="heading">Angka dan Satuan</h2>
     <label><b>Jumlah digit desimal</b> (Digit precision)</label><br><br>
@@ -301,6 +360,9 @@
         
         <br><br>
     </div>
+
+    <hr style="height:2px; border-width:0; background-color:gray">
+
 
     <h2 class="heading">Jenis Bangun Datar</h2>
     <!-- <label for="bentuk">Pilih jenis bangun datar:</label> double()-->
@@ -335,7 +397,7 @@
     <a class="button2" href="../projects.html">Kembali ke menu projects</a>
 
     <br><br>
-    <p>Terakhir diupdate: 6 Sep 2024</p>
+    <p>Terakhir diupdate: 13 Sep 2024</p>
 
     <script>
         // Time
@@ -416,7 +478,7 @@
                 <div class="column" style="padding-right:20px;">
                     <img src="images/Bangun Datar/Persegi.png" width="250"><br>
                 </div>
-                <div class="column" style="width:850px;">
+                <div class="column" style="width:800px;">
                     <p><b>Persegi</b> dalam bangun datar adalah kedua sisi yang sama, dengan panjang dan lebar yang sama. Persegi mempunyai diagonal yang miring.
                     <br><br>
                     Disini akan mencari Luas dan Keliling persegi.</p>
@@ -426,24 +488,65 @@
                 <input type="number" id="num1" placeholder="Masukkan sisi" min="0" value="3">
                 `;
             } else if (e1.index == 1) {
+                // <input type="number" id="num1" oninput="output()" min="0" value="3">
                 document.getElementById('bangun').innerHTML = `
-                <img src="images/Bangun Datar/Persegi Panjang.png" width="250"><br>
-                <p><b>Persegi Panjang</b> adalah bangun yang terdiri dari dua sisi, yaitu panjang (p) dan lebar (l).</p>
+                <div class="column" style="padding-right:20px;">
+                    <img src="images/Bangun Datar/Persegi Panjang.png" width="300"><br>
+                </div>
+                <div class="column" style="padding-right:20px;">
+                    <p><b>Persegi Panjang</b> adalah bangun yang terdiri dari dua sisi, yaitu panjang (p) dan lebar (l).</p>
+                </div>
+                <div class="clearfix"></div><br>
                 <div class="column">
                     <label>Panjang</label><br>
-                    <input type="number" id="num1" oninput="output()" min="0" value="3">
+                    <input type="number" id="num1" placeholder="Masukkan panjang" min="0" value="3">
                 </div>
                 <div class="column">
                     <label>Lebar</label><br>
-                    <input type="number" id="num2" oninput="output()" min="0" value="2">
+                    <input type="number" id="num2" placeholder="Masukkan lebar" min="0" value="2">
                 </div>
                 `;
             } else if (e1.index == 2) {
                 document.getElementById('bangun').innerHTML = `
-                <img src="images/Bangun Datar/Segitiga.png" width="250"><br>
-                <p><b>Segitiga</b> adalah bangun yang terdiri dari 3 sisi, yaitu alas dan 2 sisi miring. Terdapat alas (a) dan tinggi (t).<br>Ada 4 jenis segitiga, yaitu Segitiga Siku-Siku, Segitiga Sama Sisi, Segitiga Sama Kaki, dan Segitiga Sembarang</p>
+                <div class="column" style="padding-right:20px;">
+                    <img src="images/Bangun Datar/Segitiga.png" width="300"><br>
+                </div>
+                <div class="column" style="width:800px;">
+                    <p><b>Segitiga</b> adalah bangun yang terdiri dari 3 sisi, yaitu alas dan 2 sisi miring. Terdapat alas (a) dan tinggi (t). Ada 4 jenis segitiga, yaitu Segitiga Siku-Siku, Segitiga Sama Sisi, Segitiga Sama Kaki, dan Segitiga Sembarang.</p>
+                </div>
+                <div class="clearfix"></div><br>
                 <div class="column">
                     <label>Alas</label><br>
+                    <input type="number" id="num1" oninput="output()" min="0" value="4">
+                </div>
+                <div class="column">
+                    <label>Tinggi</label><br>
+                    <input type="number" id="num2" oninput="output()" min="0" value="3">
+                </div>
+                `;
+            } else if (e1.index == 3) {
+                document.getElementById('bangun').innerHTML = `
+                <img src="images/Bangun Datar/Jajar Genjang.png" width="300"><br>
+                <p><b>Jajar Genjang</b> adalah ... (Coming Soon)</p>
+                <div class="column">
+                    <label>Alas</label><br>
+                    <input type="number" id="num1" oninput="output()" min="0" value="4">
+                </div>
+                <div class="column">
+                    <label>Tinggi</label><br>
+                    <input type="number" id="num2" oninput="output()" min="0" value="3">
+                </div>
+                `;
+            } else if (e1.index == 4) {
+                document.getElementById('bangun').innerHTML = `
+                <img src="images/Bangun Datar/Trapesium.png" width="300"><br>
+                <p><b>Trapesium</b> adalah ... (Coming Soon)</p>
+                <div class="column">
+                    <label>Panjang sisi A</label><br>
+                    <input type="number" id="num1" oninput="output()" min="0" value="4">
+                </div>
+                <div class="column">
+                    <label>Panjang sisi B</label><br>
                     <input type="number" id="num1" oninput="output()" min="0" value="4">
                 </div>
                 <div class="column">
@@ -495,6 +598,7 @@
                     Keliling = ${parseFloat(keliling.toFixed(digit))}
                     `
                 };
+
             } else if (e1.index == 1) {
                 document.getElementById(1).innerHTML = 'Hasil Penyelesaian';
                 var x = parseInt(document.getElementById("num1").value);
@@ -503,9 +607,30 @@
                 var luas = x*y;
                 var keliling = 2*(x+y);
                 // var c = new circle(x);
-                document.getElementById(2).innerHTML = 'Luas = ' + luas.toFixed(digit);
-                document.getElementById(3).innerHTML = 'Keliling = ' + keliling.toFixed(digit);
-                // document.getElementById(4).innerHTML = "Index: " + e1.index + " is " + e1.text;
+                // console.log(parseInt(document.getElementById("num1").value));
+                if (document.getElementById("num1").value == "") {
+                    document.getElementById("hasil").innerHTML = 'Masukkan satuan panjang';
+                    document.getElementById("hasil").style.color = 'yellow';
+                } else if (document.getElementById("num2").value == "") {
+                    document.getElementById("hasil").innerHTML = 'Masukkan satuan lebar';
+                    document.getElementById("hasil").style.color = 'yellow';
+                } else if (parseInt(document.getElementById("num1").value) <= 0) {
+                    document.getElementById("hasil").innerHTML = 'Satuan panjang harus lebih dari 0';
+                    document.getElementById("hasil").style.color = 'yellow';
+                } else if (parseInt(document.getElementById("num2").value) <= 0) {
+                    document.getElementById("hasil").innerHTML = 'Satuan lebar harus lebih dari 0';
+                    document.getElementById("hasil").style.color = 'yellow';
+                } else {
+                    document.getElementById("hasil").innerHTML = `
+                    Luas = ${parseFloat(luas.toFixed(digit))}<br>
+                    Keliling = ${parseFloat(keliling.toFixed(digit))}
+                    `
+                    document.getElementById("hasil").style.color = 'white';
+                    // document.getElementById(2).innerHTML = 'Luas = ' + luas.toFixed(digit);
+                    // document.getElementById(3).innerHTML = 'Keliling = ' + keliling.toFixed(digit);
+                    // document.getElementById(4).innerHTML = "Index: " + e1.index + " is " + e1.text;
+                }
+                
             } else if (e1.index == 2) {
                 document.getElementById(1).innerHTML = 'Hasil Penyelesaian';
                 var x = parseInt(document.getElementById("num1").value);
