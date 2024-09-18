@@ -138,7 +138,6 @@ function get_image_modal(modal_image, img, modalImg, imgdesc, captionText) {
 
 get_image_modal(modal_image, img, modalImg, imgdesc, captionText);
 
-var modal_image = document.getElementById("myModalImage2");
 var img = document.getElementById("img02");
 var modalImg = document.getElementById("img02m");
 var imgdesc = document.getElementById("img02d");
