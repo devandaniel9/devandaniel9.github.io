@@ -178,6 +178,8 @@
         body {
             background-color: #203040;
             color: white;
+            /* background-image: repeating-linear-gradient(180deg,#203040,#203040 80%,#304860); */
+            background-image: repeating-linear-gradient(0deg,#304860,#203040 200px,#203040);
         }
         .button {
             color: white;
@@ -216,7 +218,25 @@
         .cb-container:hover input:checked ~ .checkmark {
             background-color: #124890;
         }
+        .checkradio {
+            background-color: #202020;
+            border: solid #c0c0c0;
+        }
+        .rb-container:hover input ~ .checkradio {
+            background-color: #404040;
+        }
+        .rb-container input:checked ~ .checkradio {
+            background-color: #1860c0;
+        }
+        .rb-container:hover input:checked ~ .checkradio {
+            background-color: #124890;
+        }
         input[type=number], select {
+            background-color: #202020;
+            border: 1px solid #c0c0c0;
+            color: white;
+        }
+        #mySearch {
             background-color: #202020;
             border: 1px solid #c0c0c0;
             color: white;
@@ -253,6 +273,25 @@
         img {
             filter: invert(100%);
         }
+        a.external {
+            font-size: 16px;
+        }
+        a.external:link {
+            color: #8080ff;
+            /* background-color: transparent;
+            text-decoration: none; */
+        }
+        a.external:visited {
+            color: #c080ff;
+        }
+        /* .external a:hover {
+            color: red;
+            background-color: transparent;
+            text-decoration: underline;
+        } */
+        a.external:active {
+            color: #ff8080;
+        }
     }
     /* html:has(#tema:not-checked) { --darkmode: 0; }
     html:has(#tema:checked) { --darkmode: 1; } */
@@ -260,6 +299,14 @@
 <body>
     <h1 class="heading">Bangun Datar</h1>
     <img src="images/2d-shapes.png" style="background-color:white; padding:10px;" width="300">
+
+    <div class="sidebar" id="sidebar"></div>
+    <div class="backsidebar" id="backsidebar" onclick="closeNav()"></div>
+    <div class="column" style="padding-right:30px; position:fixed; left:10px; top:10px;">
+        <!-- border: 2px solid white; -->
+        <div class="openbtn" style="border:2px solid #c0c0c0;" onclick="openNav()"><img src="images/menu-icon.jpg" style="filter:invert(0%)" width="30"></div>
+    </div>
+
     <p>
     Bangun Datar adalah bangun dua dimensi dalam geometri, yang memiliki satuan panjang, yaitu panjang dan lebar. Ini akan mencari luas dan keliling pada bangun datar. Ada 4 bangun dalam bangun datar, yaitu:
     <!-- <br><br> -->
@@ -278,11 +325,6 @@
     </ol>
     </p><br>
 
-    <div class="sidebar" id="sidebar"></div>
-    <div class="backsidebar" id="backsidebar" onclick="closeNav()"></div>
-    <div class="column" style="padding-right:30px;">
-        <div class="openbtn" onclick="openNav()"><img src="images/menu-icon.jpg" width="30"></div>
-    </div>
     <script>
         function openNav() {
             document.getElementById("sidebar").style.width = "300px";
@@ -301,15 +343,21 @@
 
         document.getElementById("sidebar").innerHTML = `
         <div class="closebtn" onclick="closeNav()"><img src="images/close-icon.png" width="20"></div>
-        <span style="font-size:26px;"><b>Main Menu</b></span><br>
-        <span style="font-size:20px;"><b>Halaman</b></span>
-        <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search..."><br>
+        <span style="font-size:26px;"><b>Main Menu</b></span>
+        <!-- <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search..."><br><br> -->
         <hr style="height:2px; border-width:0; background-color:gray">
-
-        <ul class="heading" id="myMenu" style="line-height:10px">
+        <span style="font-size:22px;"><b>Program</b></span>
+        <ul class="heading" id="myMenu" style="line-height:5px;top:0;bottom:0">
             <li><a href="Bangun Datar.html">Bangun Datar</a></li>
             <li><a href="Bangun Ruang.html">Bangun Ruang</a></li>
-            <li><a href="fakta.html">Link lainnya</a></li>
+            <li><a href="Soal Matematika.html">Soal Matematika</a></li>
+            <li><a href="Peluang.html">Peluang</a></li>
+        </ul><br>
+        <hr style="height:2px; border-width:0; background-color:gray">
+        <span style="font-size:22px;"><b>Lainnya</b></span>
+        <ul class="heading" id="myMenu" style="line-height:5px">
+            <li><a href="../projects.html">Projects</a></li>
+            <li><a href="javascript:void(0)">Tentang program ini</a></li>
         </ul>
         `;
 
@@ -357,7 +405,24 @@
 
     <div id="container" style="display:none;">
         <h2 class="heading">Satuan Panjang</h2>
-        
+        <!-- <h3 class="heading">Pilih Satuan Panjang</h3> -->
+        <label for="bentuk" style="font-size:18px; line-height:30px;">Pilih Satuan Panjang</label><br>
+        <label value="satuan1" class="rb-container">Meter (m)
+            <input type="radio" checked="checked" name="radio">
+            <span class="checkradio"></span>
+        </label>
+        <label value="satuan2" class="rb-container">Centimeter (cm)
+            <input type="radio" name="radio">
+            <span class="checkradio"></span>
+        </label>
+        <label value="satuan3" class="rb-container">Milimeter (mm)
+            <input type="radio" name="radio">
+            <span class="checkradio"></span>
+        </label>
+        <label value="satuan4" class="rb-container">Inci
+            <input type="radio" name="radio">
+            <span class="checkradio"></span>
+        </label>
         <br><br>
     </div>
 
@@ -377,7 +442,7 @@
         <option value="value4">Belah Ketupat</option>
         <option value="value4">Lingkaran</option>
     </select>
-    </label>
+    <!-- </label> -->
     <br><br>
 
     <h2 class="heading"></h2>
@@ -397,7 +462,7 @@
     <a class="button2" href="../projects.html">Kembali ke menu projects</a>
 
     <br><br>
-    <p>Terakhir diupdate: 13 Sep 2024</p>
+    <p>Terakhir diupdate: 18 Sep 2024</p>
 
     <script>
         // Time
@@ -475,13 +540,19 @@
                 // <p>Panjang</p>
                 // <input type="number" id="num1" oninput="output()" min="0" value="3">
                 document.getElementById('bangun').innerHTML = `
+                <h2 class="heading">${e1.innerHTML}</h2>
                 <div class="column" style="padding-right:20px;">
                     <img src="images/Bangun Datar/Persegi.png" width="250"><br>
                 </div>
                 <div class="column" style="width:800px;">
-                    <p><b>Persegi</b> dalam bangun datar adalah kedua sisi yang sama, dengan panjang dan lebar yang sama. Persegi mempunyai diagonal yang miring.
+                    <p>
+                    <b>Persegi</b> dalam bangun datar adalah kedua sisi yang sama, dengan panjang dan lebar yang sama. Persegi mempunyai diagonal yang miring.
                     <br><br>
-                    Disini akan mencari Luas dan Keliling persegi.</p>
+                    Disini akan mencari Luas dan Keliling persegi.
+                    <br><br>
+                    Link:<br>
+                    - <a class="external" href="https://id.wikipedia.org/wiki/Persegi">Persegi - Wikipedia Bahasa Indonesia</a>
+                    </p>
                 </div>
                 <div class="clearfix"></div><br>
                 <label>Panjang sisi</label><br>
@@ -490,11 +561,17 @@
             } else if (e1.index == 1) {
                 // <input type="number" id="num1" oninput="output()" min="0" value="3">
                 document.getElementById('bangun').innerHTML = `
+                <h2 class="heading">${e1.innerHTML}</h2>
                 <div class="column" style="padding-right:20px;">
                     <img src="images/Bangun Datar/Persegi Panjang.png" width="300"><br>
                 </div>
                 <div class="column" style="padding-right:20px;">
-                    <p><b>Persegi Panjang</b> adalah bangun yang terdiri dari dua sisi, yaitu panjang (p) dan lebar (l).</p>
+                    <p>
+                    <b>Persegi Panjang</b> adalah bangun yang terdiri dari dua sisi, yaitu panjang (p) dan lebar (l).
+                    <br><br>
+                    Link:<br>
+                    - <a class="external" href="https://id.wikipedia.org/wiki/Persegi_panjang">Persegi Panjang - Wikipedia Bahasa Indonesia</a>
+                    </p>
                 </div>
                 <div class="clearfix"></div><br>
                 <div class="column">
@@ -508,6 +585,7 @@
                 `;
             } else if (e1.index == 2) {
                 document.getElementById('bangun').innerHTML = `
+                <h2 class="heading">${e1.innerHTML}</h2>
                 <div class="column" style="padding-right:20px;">
                     <img src="images/Bangun Datar/Segitiga.png" width="300"><br>
                 </div>
@@ -526,8 +604,14 @@
                 `;
             } else if (e1.index == 3) {
                 document.getElementById('bangun').innerHTML = `
-                <img src="images/Bangun Datar/Jajar Genjang.png" width="300"><br>
-                <p><b>Jajar Genjang</b> adalah ... (Coming Soon)</p>
+                <h2 class="heading">${e1.innerHTML}</h2>
+                <div class="column" style="padding-right:20px;">
+                    <img src="images/Bangun Datar/Jajar Genjang.png" width="300"><br>
+                </div>
+                <div class="column" style="width:800px;">
+                    <p><b>Jajar Genjang</b> adalah ... (Coming Soon)</p>
+                </div>
+                <div class="clearfix"></div><br>
                 <div class="column">
                     <label>Alas</label><br>
                     <input type="number" id="num1" oninput="output()" min="0" value="4">
@@ -539,6 +623,7 @@
                 `;
             } else if (e1.index == 4) {
                 document.getElementById('bangun').innerHTML = `
+                <h2 class="heading">${e1.innerHTML}</h2>
                 <img src="images/Bangun Datar/Trapesium.png" width="300"><br>
                 <p><b>Trapesium</b> adalah ... (Coming Soon)</p>
                 <div class="column">
@@ -556,6 +641,7 @@
                 `;
             } else if (e1.index == 6) {
                 document.getElementById('bangun').innerHTML = `
+                <h2 class="heading">${e1.innerHTML}</h2>
                 <img src="images/Bangun Datar/Lingkaran.png" width="250"><br>
                 <p><b>Lingkaran</b> adalah bangun datar yang berbentuk bulat dan melengkung. Ada hubungannya dengan pi (π)<br>Bilangan pi (π) kira-kira 3.14 atau 22/7. Konstanta pi (π) = 3.14159...</p>
                 <label>Radius</label><br>
