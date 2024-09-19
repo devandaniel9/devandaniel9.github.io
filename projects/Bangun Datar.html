@@ -539,14 +539,16 @@
             if (e1.index == 0) {
                 // <p>Panjang</p>
                 // <input type="number" id="num1" oninput="output()" min="0" value="3">
+                // <math>\times</math>
+                // <div class="column" style="width:75%;">
                 document.getElementById('bangun').innerHTML = `
                 <h2 class="heading">${e1.innerHTML}</h2>
                 <div class="column" style="padding-right:20px;">
                     <img src="images/Bangun Datar/Persegi.png" width="250"><br>
                 </div>
-                <div class="column" style="width:800px;">
+                <div class="column" style="width:50%;">
                     <p>
-                    <b>Persegi</b> dalam bangun datar adalah kedua sisi yang sama, dengan panjang dan lebar yang sama. Persegi mempunyai diagonal yang miring.
+                    <b>Persegi</b> dalam bangun datar adalah kedua sisi yang sama, dengan panjang dan lebar yang sama. Persegi mempunyai diagonal yang miring. Sifat persegi adalah semua sudutnya 90 derajat.
                     <br><br>
                     Disini akan mencari Luas dan Keliling persegi.
                     <br><br>
@@ -554,7 +556,15 @@
                     - <a class="external" href="https://id.wikipedia.org/wiki/Persegi">Persegi - Wikipedia Bahasa Indonesia</a>
                     </p>
                 </div>
+                <div class="column" style="width:20%;">
+                    <h3 class="heading">Rumus</h3>
+                    <p style="font-size:18px">
+                    L = s * s = s^2<br>
+                    K = 4 * s
+                    </p><br>
+                </div>
                 <div class="clearfix"></div><br>
+                <h2 class="heading">Input Angka</h2>
                 <label>Panjang sisi</label><br>
                 <input type="number" id="num1" placeholder="Masukkan sisi" min="0" value="3">
                 `;
@@ -565,7 +575,7 @@
                 <div class="column" style="padding-right:20px;">
                     <img src="images/Bangun Datar/Persegi Panjang.png" width="300"><br>
                 </div>
-                <div class="column" style="padding-right:20px;">
+                <div class="column" style="width:75%;">
                     <p>
                     <b>Persegi Panjang</b> adalah bangun yang terdiri dari dua sisi, yaitu panjang (p) dan lebar (l).
                     <br><br>
@@ -589,7 +599,7 @@
                 <div class="column" style="padding-right:20px;">
                     <img src="images/Bangun Datar/Segitiga.png" width="300"><br>
                 </div>
-                <div class="column" style="width:800px;">
+                <div class="column" style="width:75%;">
                     <p><b>Segitiga</b> adalah bangun yang terdiri dari 3 sisi, yaitu alas dan 2 sisi miring. Terdapat alas (a) dan tinggi (t). Ada 4 jenis segitiga, yaitu Segitiga Siku-Siku, Segitiga Sama Sisi, Segitiga Sama Kaki, dan Segitiga Sembarang.</p>
                 </div>
                 <div class="clearfix"></div><br>
@@ -608,7 +618,7 @@
                 <div class="column" style="padding-right:20px;">
                     <img src="images/Bangun Datar/Jajar Genjang.png" width="300"><br>
                 </div>
-                <div class="column" style="width:800px;">
+                <div class="column" style="width:75%;">
                     <p><b>Jajar Genjang</b> adalah ... (Coming Soon)</p>
                 </div>
                 <div class="clearfix"></div><br>
@@ -622,9 +632,10 @@
                 </div>
                 `;
             } else if (e1.index == 4) {
+                // <img src="images/Bangun Datar/Trapesium.png" width="300"><br>
                 document.getElementById('bangun').innerHTML = `
                 <h2 class="heading">${e1.innerHTML}</h2>
-                <img src="images/Bangun Datar/Trapesium.png" width="300"><br>
+                <img src="images/Bangun Datar/trapesium.png" width="300"><br>
                 <p><b>Trapesium</b> adalah ... (Coming Soon)</p>
                 <div class="column">
                     <label>Panjang sisi A</label><br>
