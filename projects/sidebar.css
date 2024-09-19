@@ -4,11 +4,11 @@
 @import url("https://fonts.googleapis.com/css?family=Inter");
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
 
-body {
+/* body {
     font-family:"Source Sans Pro",sans-serif;
     background-color: #d0e0f8;
-    white-space: nowrap;
-}
+    /* white-space: nowrap; */
+} */
 .heading {
     font-family:"Inter",sans-serif;
 }
@@ -26,6 +26,7 @@ body {
     transition: 0.5s;
     padding-top: 15px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    white-space: nowrap;
 }
 .backsidebar {
     background-color: rgb(0,0,0,0.3);
