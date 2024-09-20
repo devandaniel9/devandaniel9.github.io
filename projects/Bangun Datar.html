@@ -153,6 +153,7 @@
         border-radius: 50%;
         background: #2040ff;
         cursor: pointer;
+        z-index: 0;
     }
     ol {
         /* word-break: break-all; */
@@ -293,8 +294,6 @@
             color: #ff8080;
         }
     }
-    /* html:has(#tema:not-checked) { --darkmode: 0; }
-    html:has(#tema:checked) { --darkmode: 1; } */
 </style>
 <body>
     <h1 class="heading">Bangun Datar</h1>
@@ -391,7 +390,8 @@
         <input type="checkbox" id="satuan" onclick="settings_check()">
         <span class="checkmark"></span>
     </label>
-    <label class="cb-container">Terapkan tema gelap (Belum tersedia)
+    <!-- <label class="cb-container">Terapkan tema gelap (Belum tersedia) -->
+    <label class="cb-container">Terapkan tema gelap
         <input type="checkbox" id="tema" onclick="settings_check()">
         <span class="checkmark"></span>
     </label>
@@ -462,7 +462,7 @@
     <a class="button2" href="../projects.html">Kembali ke menu projects</a>
 
     <br><br>
-    <p>Terakhir diupdate: 18 Sep 2024</p>
+    <p>Terakhir diupdate: 20 Sep 2024</p>
 
     <script>
         // Time
@@ -530,6 +530,11 @@
                 document.getElementById("container").style.display = "block";
             } else {
                 document.getElementById("container").style.display = "none";
+            }
+            if (theme_check) {
+                document.documentElement.style.setProperty('--darkmode', 1);
+            } else {
+                document.documentElement.style.setProperty('--darkmode', 0);
             }
         }
 
