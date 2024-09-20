@@ -7,7 +7,7 @@
 /* body {
     font-family:"Source Sans Pro",sans-serif;
     background-color: #d0e0f8;
-    /* white-space: nowrap; */
+    white-space: nowrap;
 } */
 .heading {
     font-family:"Inter",sans-serif;
@@ -16,7 +16,8 @@
     height: 100%;
     width: 0;
     position: fixed;
-    z-index: 1;
+    /* z-index: 1; */
+    z-index: 2;
     top: 0;
     left: 0;
     /* background-color: lightblue; */
@@ -35,6 +36,7 @@
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 1;
 }
 .sidebar span {
     /* padding: 8px 8px 8px 20px; */
