@@ -1,15 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Website Saya</title>
+    <title>Bangun Ruang</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
+    <link rel="stylesheet" href="checkbox.css">
+    <link rel="stylesheet" href="radio-buttons.css">
+    <link rel="stylesheet" href="sidebar.css">
 </head>
 <style>
+    /* Fonts */
+    /* @import url("https://fonts.googleapis.com/css?family=Inter"); */
+    /* background-color: lightskyblue; */
+    @import url("https://fonts.googleapis.com/css?family=Inter:500");
+    @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
+    @import url('https://fonts.googleapis.com/css?family=Rubik');
+
+    html {
+        /* --darkmode: 0; */
+        --darkmode: 0;
+        container-name: root;
+        container-type: normal;
+    }
     body {
         background-color: lightskyblue;
-        font-family:"Source Sans Pro",sans-serif;
+        /* font-family:"Source Sans Pro",sans-serif; */
+        font-family:"Rubik",sans-serif;
+        font-size: 16px;
+        margin: 0 auto;
+        width: 85%;
     }
     .heading {
         font-family:"Inter",sans-serif;
@@ -24,13 +44,18 @@
         clear: both;
     }
     button {
-        font-family:"Source Sans Pro",sans-serif;
+        /* font-family:"Source Sans Pro",sans-serif; */
+        font-family:"Rubik",sans-serif;
         font-size: 20px;
     }
     .button {
-        background-color: #4080c0;
-        border: none;
-        color: white;
+        /* background-color: #4080c0; */
+        /* background-color: #80ff80; */
+        /* border: none; */
+        border: 1px solid #808080;
+        /* color: white; */
+        color: black;
+        box-shadow: 2px 2px 2px;
         padding: 5px 10px;
         text-align: center;
         text-decoration: none;
@@ -40,6 +65,33 @@
         border-radius: 6px;
         cursor: pointer;
     }
+    #solve {
+        background-color: #80ff80;
+    }
+    #reset {
+        background-color: #ff8080;
+    }
+
+    /* Open and Close Button */
+    .openbtn {
+        /* background-color: #d0d0d0; */
+        /* background-color: lightblue;
+        font-size: 24px;
+        cursor: pointer; */
+        background-color: #103880;
+        border-radius: 6px;
+        cursor: pointer;
+        width: 46px;
+        font-size: 0px;
+        transition: 0.3s;
+    }
+    .openbtn:hover {
+        background-color: #0d2c68;
+    }
+    .openbtn img {
+        padding: 8px;
+    }
+
     a {
         font-size: 18px;
     }
@@ -63,94 +115,512 @@
         padding: 5px 10px;
         margin: 5px 0;
         display: inline-block;
-        font-family:"Source Sans Pro",sans-serif;
+        /* font-family:"Source Sans Pro",sans-serif; */
+        font-family:"Rubik",sans-serif;
         font-size: 16px;
         border: 1px solid #404040;
         border-radius: 4px;
         box-sizing: border-box;
     }
+    .clearfix:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    /* Slider */
+    .slider {
+        /* -webkit-appearance: none; */
+        appearance: none;
+        width: 300px;
+        height: 15px;
+        border-radius: 5px;
+        /* background: white; */
+        background-image: repeating-linear-gradient(90deg,#ffc0c0,#ffffc0,#c0ffc0);
+        outline: none;
+        opacity: 0.7;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+    }
+    .slider:hover {
+        opacity: 1;
+    }
+    .slider::-webkit-slider-thumb {
+        appearance: none;
+        /* width: 25px;
+        height: 25px; */
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #2040ff;
+        cursor: pointer;
+        z-index: 0;
+    }
+    ol {
+        /* word-break: break-all; */
+        /* margin: 0; */
+        padding: 0;
+        padding-left: 10px;
+    }
+    li {
+        list-style-position: inside;
+        padding: 0;
+    }
+    li::before {
+        content: "";
+        width: 10px;
+        display: inline-block;
+    }
+    img {
+        border-radius: 10px;
+    }
+
+    /* Dark Mode */
+    @container root style(--darkmode: 1) {
+        body {
+            /* background-color: #203040; */
+            background-color: #203848;
+            color: white;
+            /* background-image: repeating-linear-gradient(180deg,#203040,#203040 80%,#304860); */
+            background-image: repeating-linear-gradient(0deg,#30546c,#203848 200px,#203848);
+        }
+        .button {
+            color: white;
+            box-shadow: 2px 2px 2px rgba(255,255,255,0.5);
+        }
+        #solve {
+            background-color: #006000;
+        }
+        #reset {
+            background-color: #600000;
+        }
+        a.button2:link, a.button2:visited {
+            background-color: #202020;
+            color: white;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            border: 1px solid #c0c0c0;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+        a.button2:hover, a.button2:active {
+            background-color: #404040;
+        }
+        .checkmark {
+            background-color: #202020;
+            border: solid #c0c0c0;
+        }
+        .cb-container:hover input ~ .checkmark {
+            background-color: #404040;
+        }
+        .cb-container input:checked ~ .checkmark {
+            background-color: #1860c0;
+        }
+        .cb-container:hover input:checked ~ .checkmark {
+            background-color: #124890;
+        }
+        .checkradio {
+            background-color: #202020;
+            border: solid #c0c0c0;
+        }
+        .rb-container:hover input ~ .checkradio {
+            background-color: #404040;
+        }
+        .rb-container input:checked ~ .checkradio {
+            background-color: #1860c0;
+        }
+        .rb-container:hover input:checked ~ .checkradio {
+            background-color: #124890;
+        }
+        input[type=number], select {
+            background-color: #202020;
+            border: 1px solid #c0c0c0;
+            color: white;
+        }
+        #mySearch {
+            background-color: #202020;
+            border: 1px solid #c0c0c0;
+            color: white;
+        }
+        .slider {
+            background-color: gray;
+        }
+        .slider::-webkit-slider-thumb {
+            border: 2px solid white;
+        }
+        .sidebar {
+            background-color: #303030;
+            color: white;
+            box-shadow: 0px 8px 16px 0px rgba(255,255,255,0.2);
+        }
+        .sidebar a {
+            color: white;
+        }
+        .sidebar a:hover {
+            background-color: #606060;
+        }
+        .sidebar .closebtn {
+            background-color: #606060;
+        }
+        .sidebar .closebtn:hover {
+            background-color: #808080;
+        }
+        .sidebar .closebtn img {
+            padding: 8px;
+        }
+        #myMenu {
+            color: white;
+        }
+        img {
+            filter: invert(100%);
+        }
+        a.external {
+            font-size: 16px;
+        }
+        a.external:link {
+            color: #8080ff;
+            /* background-color: transparent;
+            text-decoration: none; */
+        }
+        a.external:visited {
+            color: #c080ff;
+        }
+        /* .external a:hover {
+            color: red;
+            background-color: transparent;
+            text-decoration: underline;
+        } */
+        a.external:active {
+            color: #ff8080;
+        }
+    }
 </style>
 <body>
     <h1 class="heading">Bangun Ruang</h1>
-    <img src="images/2d-shapes.png" width="300">
+    <img src="images/2d-shapes.png" style="background-color:white; padding:10px;" width="300">
+
+    <div class="sidebar" id="sidebar"></div>
+    <div class="backsidebar" id="backsidebar" onclick="closeNav()"></div>
+    <div class="column" style="padding-right:30px; position:fixed; left:10px; top:10px;">
+        <!-- border: 2px solid white; -->
+        <div class="openbtn" style="border:2px solid #c0c0c0;" onclick="openNav()"><img src="images/menu-icon.jpg" style="filter:invert(0%)" width="30"></div>
+    </div>
+
     <p>
-    Ini akan mencari luas dan keliling pada bangun datar. Ada 3 bangun dalam bangun datar, yaitu:<br><br>
-    1. <b>Kubus</b> - Sisi yang sama<br>
-    2. <b>Balok</b> - Terdapat panjang dan lebar<br>
+    <b>Bangun Ruang</b> adalah bangun tiga dimensi dalam geometri, yang memiliki satuan panjang, lebar, dan tinggi. Bangun Ruang dijumpai pada benda maupun objek secara fisik dalam kehidupan sehari-hari. Ini akan mencari volume dan luas permukaan pada bangun ruang. Ada 8 bangun dalam bangun ruang, yaitu:
+    <!-- <br><br> -->
+    <!-- 1. <b>Persegi</b> - Sisi yang sama<br>
+    2. <b>Persegi Panjang</b> - Terdapat panjang dan lebar<br>
     3. <b>Segitiga</b> - Ada 3 sisi<br>
-    4. <b>Lingkaran</b> - Bentuknya melengkung
+    4. <b>Lingkaran</b> - Bentuknya melengkung -->
+    <ol>
+        <li>Kubus - <span style="color:yellow">Sisi yang sama</span></li>
+        <li>Balok - <span style="color:yellow">Terdapat panjang, lebar, dan tinggi</span></li>
+        <li>Prisma Segitiga</li>
+        <li>Tabung</li>
+        <li>Limas Segitiga</li> 
+        <li>Limas Segiempat</li> 
+        <li>Kerucut</li> 
+        <li>Bola - <span style="color:yellow">Bentuknya melengkung</span></li>
+    </ol>
+    Untuk versi lama, bisa menggunakan link dari Streamlit:<br>
+    <a class="external" href="https://devandaniel9-geometry-3.streamlit.app/">Program Geometri - Streamlit</a>
     </p><br>
 
-    <h2 class="heading">Jenis Bangun Ruang</h2>
+    <script>
+        function openNav() {
+            document.getElementById("sidebar").style.width = "300px";
+            document.getElementById("backsidebar").style.display = "block";
+            document.getElementById("backsidebar").style.width = "100%";
+            document.getElementById("backsidebar").style.height = "100%";
+            // document.body.style.backgroundColor = "rgba(0,0,0,0.5)";
+        }
+        function closeNav() {
+            document.getElementById("sidebar").style.width = "0";
+            document.getElementById("backsidebar").style.display = "none";
+            document.getElementById("backsidebar").style.width = "0";
+            document.getElementById("backsidebar").style.height = "0";
+            // document.body.style.backgroundColor = "rgba(0,0,0,0)";
+        }
 
-    <!-- <label for="bentuk">Pilih jenis bangun datar:</label> double()-->
-    <label for="bentuk">Pilih jenis bangun ruang:</label><br>
-    <select name="bentuk" id="bentuk" style="width:150px" onchange="change();output();">
-        <option value="value1">Kubus</option>
-        <option value="value2">Balok</option>
-        <option value="value3">Segitiga</option>
-        <option value="value4">Lingkaran</option>
-    </select>
+        document.getElementById("sidebar").innerHTML = `
+        <div class="closebtn" onclick="closeNav()"><img src="images/close-icon.png" width="20"></div>
+        <span style="font-size:26px;"><b>Main Menu</b></span>
+        <!-- <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search..."><br><br> -->
+        <hr style="height:2px; border-width:0; background-color:gray">
+        <span style="font-size:22px;"><b>Program</b></span>
+        <ul class="heading" id="myMenu" style="line-height:5px;top:0;bottom:0">
+            <li><a href="Bangun Datar.html">Bangun Datar</a></li>
+            <li><a href="Bangun Ruang.html">Bangun Ruang</a></li>
+            <li><a href="Soal Matematika.html">Soal Matematika</a></li>
+            <li><a href="Peluang.html" style="color:red">Peluang</a></li>
+            <li><a href="Sudut.html" style="color:red">Sudut</a></li>
+        </ul><br>
+        <hr style="height:2px; border-width:0; background-color:gray">
+        <span style="font-size:22px;"><b>Lainnya</b></span>
+        <ul class="heading" id="myMenu" style="line-height:5px">
+            <li><a href="../projects.html">Projects</a></li>
+            <li><a href="javascript:void(0)" style="color:red">Tentang program ini</a></li>
+        </ul>
+        `;
+
+        function myFunction() {
+            var input, filter, ul, li, a, i;
+            input = document.getElementById("mySearch");
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("myMenu");
+            li = ul.getElementsByTagName("li");
+            for (i = 0; i < li.length; i++) {
+                a = li[i].getElementsByTagName("a")[0];
+                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+
+    <h2 class="heading">Angka dan Satuan</h2>
+    <label><b>Jumlah digit desimal</b> (Digit precision)</label><br><br>
+    <!-- <input type="range" class="slider" id="digit" oninput="output(),precision()" min="2" max="10" value="2"> -->
+    <input type="range" class="slider" id="digit" oninput="settings_check()" min="2" max="10" value="2">
+    <br><br>
+    <!-- <p id="digit2">Digit precision: 2</p> -->
+    <span id="digit2">Digit precision: 2</span>
+    <br><br>
+    <!-- <input type="checkbox" id="digit" oninput="precision()" min="2" max="10" value="2"><label>Dengan satuan panjang</label> -->
+    <label class="cb-container" style="width:400px;">Dengan satuan panjang
+        <input type="checkbox" id="satuan" onclick="settings_check()">
+        <span class="checkmark"></span>
+    </label>
+    <!-- <label class="cb-container">Terapkan tema gelap (Belum tersedia) -->
+    <label class="cb-container" style="width:400px;">Terapkan tema gelap
+        <input type="checkbox" id="tema" onclick="settings_check()">
+        <span class="checkmark"></span>
+    </label>
+    <label class="cb-container" style="width:400px;">Pertahankan pengaturan<br>
+        <span style="font-size:14px">Akan direset secara otomatis setelah 3 hari tidak digunakan</span>
+        <!-- <input type="checkbox" id="settings" checked="checked"> -->
+        <input type="checkbox" id="settings" onclick="settings_check()">
+        <span class="checkmark"></span>
     </label>
     <br><br>
 
-    <label>Jumlah digit desimal:</label>
-    <input type="range" id="digit" oninput="output()" min="2" max="5" value="2">
-    <br>
-    <p id='digit2'>Digit precision: 2</p>
-    <br>
+    <div id="container" style="display:none;">
+        <h2 class="heading">Satuan Panjang</h2>
+        <img src="images/Measurement-Units-Length-icon.png" style="position:absolute; left:300px;" width="40">
+        <img src="images/satuan-panjang.png" style="position:absolute; left:400px;" width="200">
+        <!-- <h3 class="heading">Pilih Satuan Panjang</h3> -->
+        <label for="bentuk" style="font-size:18px; line-height:30px;">Pilih Satuan Panjang</label><br>
+        <label value="satuan1" class="rb-container" style="width:150px;">Meter (m)
+            <input type="radio" checked="checked" name="radio">
+            <span class="checkradio"></span>
+        </label>
+        <label value="satuan2" class="rb-container" style="width:150px;">Centimeter (cm)
+            <input type="radio" name="radio">
+            <span class="checkradio"></span>
+        </label>
+        <label value="satuan3" class="rb-container" style="width:150px;">Milimeter (mm)
+            <input type="radio" name="radio">
+            <span class="checkradio"></span>
+        </label>
+        <label value="satuan4" class="rb-container" style="width:150px;">Inci
+            <input type="radio" name="radio">
+            <span class="checkradio"></span>
+        </label>
+        <br><br>
+    </div>
 
-    <h2 class="heading">Input</h2>
-    <!-- <span>Sebuah input</span> -->
-    <!-- <div class="row" id="bangun">
-        <p>Panjang</p>
-        <input type="number" id="num1" oninput="output()" min="0" value="3">
-    </div> -->
-    <div class="row" id="bangun"></div>
-    <p>Klik tombol ini!</p>
-    <button class="button" onclick="output()">Selesaikan</button>
+    <hr style="height:2px; border-width:0; background-color:gray">
+
+
+    <h2 class="heading">Jenis Bangun Ruang</h2>
+    <!-- <label for="bentuk">Pilih jenis bangun datar:</label> double()-->
+    <label for="bentuk">Pilih jenis Bangun Ruang:</label><br>
+    <!-- <select name="bentuk" id="bentuk" style="width:200px" onchange="change();output();"> -->
+    <select name="bentuk" id="bentuk" style="width:200px" onchange="change();result_clear();">
+        <option value="value1">Kubus</option>
+        <option value="value2">Balok</option>
+        <option value="value3">Prisma Segitiga</option>
+        <option value="value4">Tabung</option>
+        <option value="value4">Limas Segitiga</option>
+        <option value="value4">Limas Segiempat</option>
+        <option value="value4">Kerucut</option>
+        <option value="value4">Bola</option>
+    </select>
+    <!-- </label> -->
     <br><br>
 
+    <h2 class="heading"></h2>
+    <div class="row" id="bangun"></div><br>
+    <!-- <p>Klik tombol ini!</p> -->
+    <button class="button" id="solve" onclick="output()">Selesaikan</button>
+    <button class="button" id="reset" onclick="change();result_clear();">Reset</button>
+    <br><br><br>
+
     <h2 class="heading" id=1></h2>
-    <p id=2></p>
+    <!-- <p id=2></p>
     <p id=3></p>
-    <p id=4></p>
+    <p id=4></p> -->
+    <p id="hasil" style="font-size:18px; line-height:1.5;"></p>
+    <br>
 
     <a class="button2" href="../projects.html">Kembali ke menu projects</a>
 
     <br><br>
-    <p>Terakhir diupdate: 7 Agu 2024</p>
+    <p>Terakhir diupdate: 20 Sep 2024</p>
 
     <script>
+        // Time
+        d = new Date();
+        time = d.getTime();
+        time_old = localStorage.getItem('time2');
+        if (time_old == null) {
+            time_old = 0;
+        }
+        check_old = localStorage.getItem("settings-check");
+        check_old = check_old == "true"
+        // if (time > parseInt(time_old) + 5000) {
+            if (time > parseInt(time_old) + 3*86400*1000) {
+            check_old = false;
+        }
+
         change();
+        if (check_old) {
+            digit_old = parseInt(localStorage.getItem("digit"));
+            unit_check_old = localStorage.getItem("satuan-check");
+            theme_check_old = localStorage.getItem("tema-check");
+            unit_check_old = unit_check_old == "true"
+            theme_check_old = theme_check_old == "true"
+        } else {
+            digit_old = 2;
+            unit_check_old = false;
+            theme_check_old = false;
+            // clear_all();
+        }
+        // settings_check();
+        // check_old = localStorage.getItem("settings-check");
+        console.log(unit_check_old);
+        document.getElementById("digit").value = digit_old;
+        document.getElementById("satuan").checked = unit_check_old;
+        document.getElementById("tema").checked = theme_check_old;
+        document.getElementById("settings").checked = check_old;
+        settings_check();
+
+        // interval = 1000;
+        interval = 200;
+        setInterval(function() {
+            d = new Date();
+            time = d.getTime();
+            // document.getElementById("time").innerHTML = time;
+            // console.log(time);
+            localStorage.setItem("time2", time);
+        }, interval);
+
+        function settings_check() {
+            digit = parseInt(document.getElementById("digit").value);
+            document.getElementById("digit2").innerHTML = 'Digit precision: ' + digit;
+            unit_check = document.getElementById("satuan").checked;
+            theme_check = document.getElementById("tema").checked;
+            check = document.getElementById("settings").checked;
+            localStorage.setItem("settings-check", check);
+            //console.log(check);
+            //console.log(unit_check);
+            console.log(digit)
+            if (check) {
+                localStorage.setItem("digit", digit);
+                localStorage.setItem("satuan-check", unit_check);
+                localStorage.setItem("tema-check", theme_check);
+            }
+            if (unit_check) {
+                document.getElementById("container").style.display = "block";
+            } else {
+                document.getElementById("container").style.display = "none";
+            }
+            if (theme_check) {
+                document.documentElement.style.setProperty('--darkmode', 1);
+            } else {
+                document.documentElement.style.setProperty('--darkmode', 0);
+            }
+        }
+
         function change() {
             var e = document.getElementById("bentuk");
             var e1 = e.options[e.selectedIndex];
             if (e1.index == 0) {
                 // <p>Panjang</p>
+                // <input type="number" id="num1" oninput="output()" min="0" value="3">
+                // <math>\times</math>
+                // <div class="column" style="width:75%;">
                 document.getElementById('bangun').innerHTML = `
-                <img src="images/Bangun Ruang/Persegi.png" width="200"><br>
-                <p><b>Persegi</b> dalam bangun datar adalah kedua sisi yang sama, dengan panjang dan lebar yang sama. Persegi mempunyai diagonal yang miring.<br>Disini akan mencari Luas dan Keliling persegi.</p>
+                <h2 class="heading">${e1.innerHTML}</h2>
+                <div class="column" style="padding-right:20px;">
+                    <img src="images/Bangun Datar/Persegi.png" width="250"><br>
+                </div>
+                <div class="column" style="width:50%;">
+                    <p>
+                    <b>Kubus</b> dalam bangun ruang adalah panjang ketiga sisi yang sama, dengan panjang, lebar, dan tinggi yang sama. Kubus mempunyai diagonal yang miring. Sifat persegi adalah semua sudutnya 90 derajat, dengan jumlah 6 sisi dan 12 rusuk.
+                    <br><br>
+                    Disini akan mencari Volume dan Luas permukaan.
+                    <br><br>
+                    Link:<br>
+                    - <a class="external" href="https://id.wikipedia.org/wiki/Kubus">Kubus - Wikipedia Bahasa Indonesia</a>
+                    </p>
+                </div>
+                <div class="column" style="width:20%;">
+                    <h3 class="heading">Rumus</h3>
+                    <p style="font-size:18px">
+                    L = s * s * s = s^3<br>
+                    K = 6 * s * s = 6*s^2
+                    </p><br>
+                </div>
+                <div class="clearfix"></div><br>
+                <h2 class="heading">Input Angka</h2>
                 <label>Panjang sisi</label><br>
-                <input type="number" id="num1" oninput="output()" min="0" value="3">
+                <input type="number" id="num1" placeholder="Masukkan sisi" min="0" value="3">
                 `;
             } else if (e1.index == 1) {
+                // <input type="number" id="num1" oninput="output()" min="0" value="3">
                 document.getElementById('bangun').innerHTML = `
-                <img src="images/Bangun Ruang/Persegi Panjang.png" width="200"><br>
-                <p><b>Persegi Panjang</b> adalah bangun yang terdiri dari dua sisi, yaitu panjang (p) dan lebar (l).</p>
+                <h2 class="heading">${e1.innerHTML}</h2>
+                <div class="column" style="padding-right:20px;">
+                    <img src="images/Bangun Datar/Persegi Panjang.png" width="300"><br>
+                </div>
+                <div class="column" style="width:70%;">
+                    <p>
+                    <b>Balok</b> adalah bangun ruang tiga dimensi yang dibentuk oleh tiga pasang persegi atau persegi panjang, dengan paling tidak satu pasang di antaranya berukuran berbeda. Balok memiliki 6 sisi, 12 rusuk dan 8 titik sudut. Balok yang dibentuk oleh enam persegi sama dan sebangun disebut sebagai kubus.
+                    <br><br>
+                    Link:<br>
+                    - <a class="external" href="https://id.wikipedia.org/wiki/Balok">Balok - Wikipedia Bahasa Indonesia</a>
+                    </p>
+                </div>
+                <div class="clearfix"></div><br>
                 <div class="column">
                     <label>Panjang</label><br>
-                    <input type="number" id="num1" oninput="output()" min="0" value="3">
+                    <input type="number" id="num1" placeholder="Masukkan panjang" min="0" value="4">
                 </div>
                 <div class="column">
                     <label>Lebar</label><br>
-                    <input type="number" id="num2" oninput="output()" min="0" value="2">
+                    <input type="number" id="num2" placeholder="Masukkan lebar" min="0" value="3">
+                </div>
+                <div class="column">
+                    <label>Tinggi</label><br>
+                    <input type="number" id="num3" placeholder="Masukkan tinggi" min="0" value="2">
                 </div>
                 `;
             } else if (e1.index == 2) {
                 document.getElementById('bangun').innerHTML = `
-                <img src="images/Bangun Datar/Segitiga.png" width="200"><br>
-                <p><b>Segitiga</b> adalah bangun yang terdiri dari 3 siri, yaitu alas dan 2 sisi miring. Terdapat alas (a) dan tinggi (t).<br>Ada 4 jenis segitiga, yaitu Segitiga Siku-Siku, Segitiga Sama Sisi, Segitiga Sama Kaki, dan Segitiga Sembarang</p>
+                <h2 class="heading">${e1.innerHTML}</h2>
+                <div class="column" style="padding-right:20px;">
+                    <img src="images/Bangun Datar/Segitiga.png" width="300"><br>
+                </div>
+                <div class="column" style="width:75%;">
+                    <p><b>Segitiga</b> adalah bangun yang terdiri dari 3 sisi, yaitu alas dan 2 sisi miring. Terdapat alas (a) dan tinggi (t). Ada 4 jenis segitiga, yaitu Segitiga Siku-Siku, Segitiga Sama Sisi, Segitiga Sama Kaki, dan Segitiga Sembarang.</p>
+                </div>
+                <div class="clearfix"></div><br>
                 <div class="column">
                     <label>Alas</label><br>
                     <input type="number" id="num1" oninput="output()" min="0" value="4">
@@ -160,14 +630,64 @@
                     <input type="number" id="num2" oninput="output()" min="0" value="3">
                 </div>
                 `;
-            } else {
+            } else if (e1.index == 3) {
                 document.getElementById('bangun').innerHTML = `
-                <img src="images/Bangun Datar/Lingkaran.png" width="200"><br>
+                <h2 class="heading">${e1.innerHTML}</h2>
+                <div class="column" style="padding-right:20px;">
+                    <img src="images/Bangun Datar/Jajar Genjang.png" width="300"><br>
+                </div>
+                <div class="column" style="width:75%;">
+                    <p><b>Jajar Genjang</b> adalah ... (Coming Soon)</p>
+                </div>
+                <div class="clearfix"></div><br>
+                <div class="column">
+                    <label>Alas</label><br>
+                    <input type="number" id="num1" oninput="output()" min="0" value="4">
+                </div>
+                <div class="column">
+                    <label>Tinggi</label><br>
+                    <input type="number" id="num2" oninput="output()" min="0" value="3">
+                </div>
+                `;
+            } else if (e1.index == 4) {
+                // <img src="images/Bangun Datar/Trapesium.png" width="300"><br>
+                document.getElementById('bangun').innerHTML = `
+                <h2 class="heading">${e1.innerHTML}</h2>
+                <img src="images/Bangun Datar/trapesium.png" width="300"><br>
+                <p><b>Trapesium</b> adalah ... (Coming Soon)</p>
+                <div class="column">
+                    <label>Panjang sisi A</label><br>
+                    <input type="number" id="num1" oninput="output()" min="0" value="4">
+                </div>
+                <div class="column">
+                    <label>Panjang sisi B</label><br>
+                    <input type="number" id="num1" oninput="output()" min="0" value="4">
+                </div>
+                <div class="column">
+                    <label>Tinggi</label><br>
+                    <input type="number" id="num2" oninput="output()" min="0" value="3">
+                </div>
+                `;
+            } else if (e1.index == 6) {
+                document.getElementById('bangun').innerHTML = `
+                <h2 class="heading">${e1.innerHTML}</h2>
+                <img src="images/Bangun Datar/Lingkaran.png" width="250"><br>
                 <p><b>Lingkaran</b> adalah bangun datar yang berbentuk bulat dan melengkung. Ada hubungannya dengan pi (π)<br>Bilangan pi (π) kira-kira 3.14 atau 22/7. Konstanta pi (π) = 3.14159...</p>
                 <label>Radius</label><br>
                 <input type="number" id="num1" oninput="output()" min="0" value="5">
                 `;
+            } else {
+                document.getElementById('bangun').innerHTML = "Coming Soon"
             }
+        }
+        function result_clear() {
+            document.getElementById(1).innerHTML = '';
+            document.getElementById("hasil").innerHTML = '';
+        }
+        function precision() {
+            var digit = parseInt(document.getElementById("digit").value);
+            document.getElementById("digit2").innerHTML = 'Digit precision: ' + digit;
+            settings_check();
         }
         function output() {
             var e = document.getElementById("bentuk");
@@ -175,41 +695,94 @@
             var digit = parseInt(document.getElementById("digit").value);
             document.getElementById("digit2").innerHTML = 'Digit precision: ' + digit;
             if (e1.index == 0) {
-                var x = parseInt(document.getElementById("num1").value);
-                var luas = x*x;
-                var keliling = 4*x;
-                // var c = new circle(x);
                 document.getElementById(1).innerHTML = 'Hasil Penyelesaian';
-                document.getElementById(2).innerHTML = 'Luas = ' + luas.toFixed(digit);
-                document.getElementById(3).innerHTML = 'Keliling = ' + keliling.toFixed(digit);
+                // var x = parseInt(document.getElementById("num1").value);
+                var x = parseFloat(document.getElementById("num1").value);
+                var volume = x*x*x;
+                var luas = 6*x*x;
+                // var c = new circle(x);
+                // document.getElementById(1).innerHTML = 'Hasil Penyelesaian';
+                // document.getElementById(2).innerHTML = 'Luas = ' + luas.toFixed(digit);
+                // document.getElementById(2).innerHTML = 'Luas = ' + parseFloat(luas.toFixed(digit));
+                // document.getElementById(3).innerHTML = 'Keliling = ' + parseFloat(keliling.toFixed(digit));
+                if (document.getElementById("num1").value == "") {
+                    document.getElementById("hasil").innerHTML = 'Masukkan panjang sisi';
+                    document.getElementById("hasil").style.color = 'yellow';
+                } else if (parseInt(document.getElementById("num1").value) <= 0) {
+                    document.getElementById("hasil").innerHTML = 'Satuan panjang harus lebih dari 0';
+                    document.getElementById("hasil").style.color = 'yellow';
+                } else {
+                    document.getElementById("hasil").innerHTML = `
+                    Volume = ${parseFloat(volume.toFixed(digit))}<br>
+                    Luas permukaan = ${parseFloat(luas.toFixed(digit))}
+                    `
+                };
+
             } else if (e1.index == 1) {
+                document.getElementById(1).innerHTML = 'Hasil Penyelesaian';
                 var x = parseInt(document.getElementById("num1").value);
                 var y = parseInt(document.getElementById("num2").value);
+                var z = parseInt(document.getElementById("num3").value);
                 // const sb = document.querySelector('#color');
-                var luas = x*y;
-                var keliling = 2*(x+y);
+                var luas = x*y*z;
+                var keliling = 2*(x*y+x*z+y*z);
                 // var c = new circle(x);
-                document.getElementById(1).innerHTML = 'Hasil Penyelesaian';
-                document.getElementById(2).innerHTML = 'Luas = ' + luas.toFixed(digit);
-                document.getElementById(3).innerHTML = 'Keliling = ' + keliling.toFixed(digit);
-                // document.getElementById(4).innerHTML = "Index: " + e1.index + " is " + e1.text;
+                // console.log(parseInt(document.getElementById("num1").value));
+                if (document.getElementById("num1").value == "") {
+                    document.getElementById("hasil").innerHTML = 'Masukkan satuan panjang';
+                    document.getElementById("hasil").style.color = 'yellow';
+                } else if (document.getElementById("num2").value == "") {
+                    document.getElementById("hasil").innerHTML = 'Masukkan satuan lebar';
+                    document.getElementById("hasil").style.color = 'yellow';
+                } else if (document.getElementById("num3").value == "") {
+                    document.getElementById("hasil").innerHTML = 'Masukkan satuan tinggi';
+                    document.getElementById("hasil").style.color = 'yellow';
+                } else if (parseInt(document.getElementById("num1").value) <= 0) {
+                    document.getElementById("hasil").innerHTML = 'Satuan panjang harus lebih dari 0';
+                    document.getElementById("hasil").style.color = 'yellow';
+                } else if (parseInt(document.getElementById("num2").value) <= 0) {
+                    document.getElementById("hasil").innerHTML = 'Satuan lebar harus lebih dari 0';
+                    document.getElementById("hasil").style.color = 'yellow';
+                } else if (parseInt(document.getElementById("num3").value) <= 0) {
+                    document.getElementById("hasil").innerHTML = 'Satuan tinggi harus lebih dari 0';
+                    document.getElementById("hasil").style.color = 'yellow';
+                } else {
+                    document.getElementById("hasil").innerHTML = `
+                    Luas = ${parseFloat(luas.toFixed(digit))}<br>
+                    Keliling = ${parseFloat(keliling.toFixed(digit))}
+                    `
+                    document.getElementById("hasil").style.color = 'white';
+                    // document.getElementById(2).innerHTML = 'Luas = ' + luas.toFixed(digit);
+                    // document.getElementById(3).innerHTML = 'Keliling = ' + keliling.toFixed(digit);
+                    // document.getElementById(4).innerHTML = "Index: " + e1.index + " is " + e1.text;
+                }
+                
             } else if (e1.index == 2) {
+                document.getElementById(1).innerHTML = 'Hasil Penyelesaian';
                 var x = parseInt(document.getElementById("num1").value);
                 var y = parseInt(document.getElementById("num2").value);
                 var luas = x*y/2;
                 // var c = new circle(x);
-                document.getElementById(1).innerHTML = 'Hasil Penyelesaian';
                 document.getElementById(2).innerHTML = 'Luas = ' + luas.toFixed(digit);
                 document.getElementById(3).innerHTML = '';
-            } else if (e1.index == 3) {
+            } else if (e1.index == 6) {
+                document.getElementById(1).innerHTML = 'Hasil Penyelesaian';
                 var r = parseInt(document.getElementById("num1").value);
                 var luas = Math.PI*r**2
                 var keliling = 2*Math.PI*r;
                 // var c = new circle(x);
-                document.getElementById(1).innerHTML = 'Hasil Penyelesaian';
                 document.getElementById(2).innerHTML = 'Luas = ' + luas.toFixed(digit);
                 document.getElementById(3).innerHTML = 'Keliling = ' + keliling.toFixed(digit);
+            } else {
+                document.getElementById(1).innerHTML = '';
+                document.getElementById("hasil").innerHTML = '';
             }
+            document.getElementById("hasil").innerHTML += `
+            <br><br><label class="cb-container" style="font-size:16px; width:500px;">Tampilkan Langkah Penyelesaian (Coming Soon)
+                <input type="checkbox">
+                <span class="checkmark"></span>
+            </label><br>
+            `
         }
 
         // function double() {
