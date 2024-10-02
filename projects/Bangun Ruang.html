@@ -416,19 +416,19 @@
         <!-- <h3 class="heading">Pilih Satuan Panjang</h3> -->
         <label for="bentuk" style="font-size:18px; line-height:30px;">Pilih Satuan Panjang</label><br>
         <label value="satuan1" class="rb-container" style="width:150px;">Meter (m)
-            <input type="radio" checked="checked" name="radio">
+            <input type="radio" id="satuan1" value="m" checked="checked" onclick="change()" name="radio">
             <span class="checkradio"></span>
         </label>
         <label value="satuan2" class="rb-container" style="width:150px;">Centimeter (cm)
-            <input type="radio" name="radio">
+            <input type="radio" id="satuan2" value="cm" onclick="change()" name="radio">
             <span class="checkradio"></span>
         </label>
         <label value="satuan3" class="rb-container" style="width:150px;">Milimeter (mm)
-            <input type="radio" name="radio">
+            <input type="radio" id="satuan3" value="mm" onclick="change()" name="radio">
             <span class="checkradio"></span>
         </label>
         <label value="satuan4" class="rb-container" style="width:150px;">Inci
-            <input type="radio" name="radio">
+            <input type="radio" id="satuan4" value="inci" onclick="change()" name="radio">
             <span class="checkradio"></span>
         </label>
         <br><br>
@@ -488,7 +488,7 @@
             check_old = false;
         }
 
-        change();
+        // change();
         if (check_old) {
             digit_old = parseInt(localStorage.getItem("digit"));
             unit_check_old = localStorage.getItem("satuan-check");
@@ -509,6 +509,7 @@
         document.getElementById("tema").checked = theme_check_old;
         document.getElementById("settings").checked = check_old;
         settings_check();
+        change();
 
         // interval = 1000;
         interval = 200;
@@ -550,6 +551,20 @@
         function change() {
             var e = document.getElementById("bentuk");
             var e1 = e.options[e.selectedIndex];
+            if (document.getElementById("satuan").checked) {
+                if (document.getElementById("satuan1").checked) {
+                    var satuan = "&nbsp;" + document.getElementById("satuan1").value + "&nbsp;";
+                } else if (document.getElementById("satuan2").checked) {
+                    var satuan = "&nbsp;" + document.getElementById("satuan2").value + "&nbsp;";
+                } else if (document.getElementById("satuan3").checked) {
+                    var satuan = "&nbsp;" + document.getElementById("satuan3").value + "&nbsp;";
+                } else {
+                    var satuan = "&nbsp;" + document.getElementById("satuan4").value + "&nbsp;";
+                }
+            } else {
+                var satuan = "";
+            }
+            console.log(satuan);
             if (e1.index == 0) {
                 // <p>Panjang</p>
                 // <input type="number" id="num1" oninput="output()" min="0" value="3">
@@ -581,6 +596,7 @@
                 <h2 class="heading">Input Angka</h2>
                 <label>Panjang sisi</label><br>
                 <input type="number" id="num1" placeholder="Masukkan sisi" min="0" value="3">
+                <label>${satuan}</label>
                 `;
             } else if (e1.index == 1) {
                 // <input type="number" id="num1" oninput="output()" min="0" value="3">
@@ -601,14 +617,17 @@
                 <div class="column">
                     <label>Panjang</label><br>
                     <input type="number" id="num1" placeholder="Masukkan panjang" min="0" value="4">
+                    <label>${satuan}</label>
                 </div>
                 <div class="column">
                     <label>Lebar</label><br>
                     <input type="number" id="num2" placeholder="Masukkan lebar" min="0" value="3">
+                    <label>${satuan}</label>
                 </div>
                 <div class="column">
                     <label>Tinggi</label><br>
                     <input type="number" id="num3" placeholder="Masukkan tinggi" min="0" value="2">
+                    <label>${satuan}</label>
                 </div>
                 `;
             } else if (e1.index == 2) {
@@ -624,10 +643,12 @@
                 <div class="column">
                     <label>Alas</label><br>
                     <input type="number" id="num1" oninput="output()" min="0" value="4">
+                    <label>${satuan}</label>
                 </div>
                 <div class="column">
                     <label>Tinggi</label><br>
                     <input type="number" id="num2" oninput="output()" min="0" value="3">
+                    <label>${satuan}</label>
                 </div>
                 `;
             } else if (e1.index == 3) {
@@ -643,10 +664,12 @@
                 <div class="column">
                     <label>Alas</label><br>
                     <input type="number" id="num1" oninput="output()" min="0" value="4">
+                    <label>${satuan}</label>
                 </div>
                 <div class="column">
                     <label>Tinggi</label><br>
                     <input type="number" id="num2" oninput="output()" min="0" value="3">
+                    <label>${satuan}</label>
                 </div>
                 `;
             } else if (e1.index == 4) {
@@ -658,14 +681,17 @@
                 <div class="column">
                     <label>Panjang sisi A</label><br>
                     <input type="number" id="num1" oninput="output()" min="0" value="4">
+                    <label>${satuan}</label>
                 </div>
                 <div class="column">
                     <label>Panjang sisi B</label><br>
                     <input type="number" id="num1" oninput="output()" min="0" value="4">
+                    <label>${satuan}</label>
                 </div>
                 <div class="column">
                     <label>Tinggi</label><br>
                     <input type="number" id="num2" oninput="output()" min="0" value="3">
+                    <label>${satuan}</label>
                 </div>
                 `;
             } else if (e1.index == 6) {
@@ -675,6 +701,7 @@
                 <p><b>Lingkaran</b> adalah bangun datar yang berbentuk bulat dan melengkung. Ada hubungannya dengan pi (π)<br>Bilangan pi (π) kira-kira 3.14 atau 22/7. Konstanta pi (π) = 3.14159...</p>
                 <label>Radius</label><br>
                 <input type="number" id="num1" oninput="output()" min="0" value="5">
+                <label>${satuan}</label>
                 `;
             } else {
                 document.getElementById('bangun').innerHTML = "Coming Soon"
@@ -694,6 +721,59 @@
             var e1 = e.options[e.selectedIndex];
             var digit = parseInt(document.getElementById("digit").value);
             document.getElementById("digit2").innerHTML = 'Digit precision: ' + digit;
+            
+            // var satuan, satuan2;
+
+            function satuan_pangkat(satuan, pangkat) {
+                if (satuan == "") {
+                    return "";
+                } else {
+                    if (pangkat == 1) {
+                        return satuan;
+                    } else {
+                        return `${satuan}^${pangkat}`;
+                    }
+                }
+            }
+
+            function satuan_teks(satuan) {
+                if (satuan == "") {
+                    return "";
+                } else {
+                    return "&nbsp;" + satuan + "&nbsp;";
+                }
+            }
+
+            // "&nbsp;" + 
+            if (document.getElementById("satuan").checked) {
+                if (document.getElementById("satuan1").checked) {
+                    satuan = document.getElementById("satuan1").value;
+                } else if (document.getElementById("satuan2").checked) {
+                    satuan = document.getElementById("satuan2").value;
+                } else if (document.getElementById("satuan3").checked) {
+                    satuan = document.getElementById("satuan3").value;
+                } else {
+                    satuan = document.getElementById("satuan4").value;
+                }
+            } else {
+                satuan = "";
+            }
+
+            if (document.getElementById("satuan").checked) {
+                if (document.getElementById("satuan1").checked) {
+                    satuan = document.getElementById("satuan1").value;
+                } else if (document.getElementById("satuan2").checked) {
+                    satuan = document.getElementById("satuan2").value;
+                } else if (document.getElementById("satuan3").checked) {
+                    satuan = document.getElementById("satuan3").value;
+                } else {
+                    satuan = document.getElementById("satuan4").value;
+                }
+            } else {
+                satuan = "";
+            }
+            
+            
             if (e1.index == 0) {
                 document.getElementById(1).innerHTML = 'Hasil Penyelesaian';
                 // var x = parseInt(document.getElementById("num1").value);
@@ -713,8 +793,8 @@
                     document.getElementById("hasil").style.color = 'yellow';
                 } else {
                     document.getElementById("hasil").innerHTML = `
-                    Volume = ${parseFloat(volume.toFixed(digit))}<br>
-                    Luas permukaan = ${parseFloat(luas.toFixed(digit))}
+                    Volume = ${parseFloat(volume.toFixed(digit))}${satuan_teks(satuan_pangkat(satuan,3))}<br>
+                    Luas permukaan = ${parseFloat(luas.toFixed(digit))}${satuan_teks(satuan_pangkat(satuan,2))}
                     `
                 };
 
@@ -724,8 +804,8 @@
                 var y = parseInt(document.getElementById("num2").value);
                 var z = parseInt(document.getElementById("num3").value);
                 // const sb = document.querySelector('#color');
-                var luas = x*y*z;
-                var keliling = 2*(x*y+x*z+y*z);
+                var volume = x*y*z;
+                var luas = 2*(x*y+x*z+y*z);
                 // var c = new circle(x);
                 // console.log(parseInt(document.getElementById("num1").value));
                 if (document.getElementById("num1").value == "") {
@@ -748,8 +828,8 @@
                     document.getElementById("hasil").style.color = 'yellow';
                 } else {
                     document.getElementById("hasil").innerHTML = `
-                    Luas = ${parseFloat(luas.toFixed(digit))}<br>
-                    Keliling = ${parseFloat(keliling.toFixed(digit))}
+                    Volume = ${parseFloat(volume.toFixed(digit))}${satuan_teks(satuan_pangkat(satuan,3))}<br>
+                    Luas Permukaan = ${parseFloat(luas.toFixed(digit))}${satuan_teks(satuan_pangkat(satuan,2))}
                     `
                     document.getElementById("hasil").style.color = 'white';
                     // document.getElementById(2).innerHTML = 'Luas = ' + luas.toFixed(digit);
