@@ -299,7 +299,8 @@
 </style>
 <body>
     <h1 class="heading">Bangun Ruang</h1>
-    <img src="images/2d-shapes.png" style="background-color:white; padding:10px;" width="300">
+    <!-- <img src="images/2d-shapes.png" style="background-color:white; padding:10px;" width="300"> -->
+    <img src="images/Bangun Ruang/3d-shapes.png" style="background-color:white; padding:10px; filter:invert(0%);" width="300">
 
     <div class="sidebar" id="sidebar"></div>
     <div class="backsidebar" id="backsidebar" onclick="closeNav()"></div>
@@ -384,7 +385,9 @@
     </script>
 
     <h2 class="heading">Angka dan Satuan</h2>
-    <label><b>Jumlah digit desimal</b> (Digit precision)</label><br><br>
+    <label><b>Jumlah digit desimal</b> (Digit precision)</label>
+    <img src="images/decimal_increase_icon_137693.png" style="position:absolute; left:500px;" width="80">
+    <br><br>
     <!-- <input type="range" class="slider" id="digit" oninput="output(),precision()" min="2" max="10" value="2"> -->
     <input type="range" class="slider" id="digit" oninput="settings_check()" min="2" max="10" value="2">
     <br><br>
@@ -411,8 +414,9 @@
 
     <div id="container" style="display:none;">
         <h2 class="heading">Satuan Panjang</h2>
-        <img src="images/Measurement-Units-Length-icon.png" style="position:absolute; left:300px;" width="40">
-        <img src="images/satuan-panjang.png" style="position:absolute; left:400px;" width="200">
+        <!-- <img src="images/Measurement-Units-Length-icon.png" style="position:absolute; left:300px;" width="40"> -->
+        <img src="images/Measurement-Units-Length-icon.png" style="position:absolute; left:350px;" width="40">
+        <img src="images/satuan-panjang.png" style="position:absolute; left:450px;" width="200">
         <!-- <h3 class="heading">Pilih Satuan Panjang</h3> -->
         <label for="bentuk" style="font-size:18px; line-height:30px;">Pilih Satuan Panjang</label><br>
         <label value="satuan1" class="rb-container" style="width:150px;">Meter (m)
@@ -471,7 +475,7 @@
     <a class="button2" href="../projects.html">Kembali ke menu projects</a>
 
     <br><br>
-    <p>Terakhir diupdate: 20 Sep 2024</p>
+    <p>Terakhir diupdate: 3 Okt 2024</p>
 
     <script>
         // Time
@@ -570,50 +574,72 @@
                 // <input type="number" id="num1" oninput="output()" min="0" value="3">
                 // <math>\times</math>
                 // <div class="column" style="width:75%;">
+                // <div class="column" style="width:50%;">
+                // <img src="images/Bangun Datar/Persegi.png" width="250"><br>
+                // <h3 class="heading">Rumus</h3>
+                // ²³
                 document.getElementById('bangun').innerHTML = `
                 <h2 class="heading">${e1.innerHTML}</h2>
                 <div class="column" style="padding-right:20px;">
-                    <img src="images/Bangun Datar/Persegi.png" width="250"><br>
+                    <img src="images/Bangun Ruang/Kubus.png" style="background-color:white; padding:20px;" width="300"><br>
                 </div>
-                <div class="column" style="width:50%;">
+                <div class="column" style="width:75%;">
                     <p>
                     <b>Kubus</b> dalam bangun ruang adalah panjang ketiga sisi yang sama, dengan panjang, lebar, dan tinggi yang sama. Kubus mempunyai diagonal yang miring. Sifat persegi adalah semua sudutnya 90 derajat, dengan jumlah 6 sisi dan 12 rusuk.
+                    <br><br>
+                    <u>Sifat-Sifat Kubus:</u><br>
+                    - Memiliki 6 sisi<br>
+                    - Semua sisinya sama<br>
+                    - Sisinya berbentuk persegi
+                    <br><br>
+                    Selain itu, contoh bangun ruang kubus di sekitar kita adalah es batu, dadu, kotak tisu, dan kotak hadiah.
                     <br><br>
                     Disini akan mencari Volume dan Luas permukaan.
                     <br><br>
                     Link:<br>
-                    - <a class="external" href="https://id.wikipedia.org/wiki/Kubus">Kubus - Wikipedia Bahasa Indonesia</a>
+                    - <a class="external" href="https://id.wikipedia.org/wiki/Kubus">Kubus - Wikipedia Bahasa Indonesia</a><br>
+                    - <a class="external" href="https://www.ruangguru.com/blog/pengertian-sifat-dan-rumus-kubus">Pengertian, Sifat, dan Rumus Kubus Disertai Contoh - Ruangguru</a>
                     </p>
                 </div>
-                <div class="column" style="width:20%;">
-                    <h3 class="heading">Rumus</h3>
-                    <p style="font-size:18px">
-                    L = s * s * s = s^3<br>
-                    K = 6 * s * s = 6*s^2
-                    </p><br>
-                </div>
                 <div class="clearfix"></div><br>
+                <h2 class="heading">Rumus</h2>
+                <p style="font-size:20px">
+                Volume = V = s * s * s = s³<br>
+                Luas permukaan = Lp = 6 * s * s = 6s²
+                </p><br>
                 <h2 class="heading">Input Angka</h2>
                 <label>Panjang sisi</label><br>
                 <input type="number" id="num1" placeholder="Masukkan sisi" min="0" value="3">
                 <label>${satuan}</label>
                 `;
+
             } else if (e1.index == 1) {
                 // <input type="number" id="num1" oninput="output()" min="0" value="3">
                 document.getElementById('bangun').innerHTML = `
                 <h2 class="heading">${e1.innerHTML}</h2>
                 <div class="column" style="padding-right:20px;">
-                    <img src="images/Bangun Datar/Persegi Panjang.png" width="300"><br>
+                    <img src="images/Bangun Ruang/Balok.png" width="400"><br>
                 </div>
                 <div class="column" style="width:70%;">
                     <p>
                     <b>Balok</b> adalah bangun ruang tiga dimensi yang dibentuk oleh tiga pasang persegi atau persegi panjang, dengan paling tidak satu pasang di antaranya berukuran berbeda. Balok memiliki 6 sisi, 12 rusuk dan 8 titik sudut. Balok yang dibentuk oleh enam persegi sama dan sebangun disebut sebagai kubus.
+                    <br><br>
+                    <u>Sifat-Sifat Kubus:</u><br>
+                    - Memiliki 6 sisi<br>
+                    - Semua sisinya sama<br>
+                    - Sisinya berbentuk persegi
                     <br><br>
                     Link:<br>
                     - <a class="external" href="https://id.wikipedia.org/wiki/Balok">Balok - Wikipedia Bahasa Indonesia</a>
                     </p>
                 </div>
                 <div class="clearfix"></div><br>
+                <h2 class="heading">Rumus</h2>
+                <p style="font-size:20px">
+                Volume = V = p * l * t<br>
+                Luas permukaan = Lp = 2 (p * l + p * t + l * t)
+                </p><br>
+                <h2 class="heading">Input Angka</h2>
                 <div class="column">
                     <label>Panjang</label><br>
                     <input type="number" id="num1" placeholder="Masukkan panjang" min="0" value="4">
@@ -634,12 +660,17 @@
                 document.getElementById('bangun').innerHTML = `
                 <h2 class="heading">${e1.innerHTML}</h2>
                 <div class="column" style="padding-right:20px;">
-                    <img src="images/Bangun Datar/Segitiga.png" width="300"><br>
+                    <img src="images/Bangun Datar/Prisma Segitiga.jpg" width="300"><br>
                 </div>
                 <div class="column" style="width:75%;">
-                    <p><b>Segitiga</b> adalah bangun yang terdiri dari 3 sisi, yaitu alas dan 2 sisi miring. Terdapat alas (a) dan tinggi (t). Ada 4 jenis segitiga, yaitu Segitiga Siku-Siku, Segitiga Sama Sisi, Segitiga Sama Kaki, dan Segitiga Sembarang.</p>
+                    <p>
+                    <b>Prisma</b> adalah alas atas dan bawah yang sama. Jenis prisma adalah Prisma Segitiga, Prisma Segiempat (Kubus), dan Tabung. Salah satu jenis prisma adalah Prisma Segitiga.
+                    <br><br>
+                    <b>Prisma Segitiga</b> adalah alas atas maupun bawah berbentuk segitiga yang saling berhadapan.
+                    </p>
                 </div>
                 <div class="clearfix"></div><br>
+                <h2 class="heading">Input Angka</h2>
                 <div class="column">
                     <label>Alas</label><br>
                     <input type="number" id="num1" oninput="output()" min="0" value="4">
@@ -655,12 +686,13 @@
                 document.getElementById('bangun').innerHTML = `
                 <h2 class="heading">${e1.innerHTML}</h2>
                 <div class="column" style="padding-right:20px;">
-                    <img src="images/Bangun Datar/Jajar Genjang.png" width="300"><br>
+                    <img src="images/Bangun Ruang/tabung.png" width="200"><br>
                 </div>
                 <div class="column" style="width:75%;">
-                    <p><b>Jajar Genjang</b> adalah ... (Coming Soon)</p>
+                    <p><b>Tabung</b> adalah ... (Coming Soon)</p>
                 </div>
                 <div class="clearfix"></div><br>
+                <h2 class="heading">Input Angka</h2>
                 <div class="column">
                     <label>Alas</label><br>
                     <input type="number" id="num1" oninput="output()" min="0" value="4">
@@ -676,8 +708,42 @@
                 // <img src="images/Bangun Datar/Trapesium.png" width="300"><br>
                 document.getElementById('bangun').innerHTML = `
                 <h2 class="heading">${e1.innerHTML}</h2>
-                <img src="images/Bangun Datar/trapesium.png" width="300"><br>
-                <p><b>Trapesium</b> adalah ... (Coming Soon)</p>
+                <div class="column" style="padding-right:20px;">
+                    <img src="images/Bangun Ruang/triangular-pyramid.png" width="300"><br>
+                </div>
+                <div class="column" style="width:75%;">
+                    <p><b>Limas Segitiga</b> adalah ... (Coming Soon)</p>
+                </div>
+                <div class="clearfix"></div><br>
+                <h2 class="heading">Input Angka</h2>
+                <div class="column">
+                    <label>Panjang sisi A</label><br>
+                    <input type="number" id="num1" oninput="output()" min="0" value="4">
+                    <label>${satuan}</label>
+                </div>
+                <div class="column">
+                    <label>Panjang sisi B</label><br>
+                    <input type="number" id="num1" oninput="output()" min="0" value="4">
+                    <label>${satuan}</label>
+                </div>
+                <div class="column">
+                    <label>Tinggi</label><br>
+                    <input type="number" id="num2" oninput="output()" min="0" value="3">
+                    <label>${satuan}</label>
+                </div>
+                `;
+            } else if (e1.index == 5) {
+                // <img src="images/Bangun Datar/Trapesium.png" width="300"><br>
+                document.getElementById('bangun').innerHTML = `
+                <h2 class="heading">${e1.innerHTML}</h2>
+                <div class="column" style="padding-right:20px;">
+                    <img src="images/Bangun Ruang/Limas Segiempat.png" width="300"><br>
+                </div>
+                <div class="column" style="width:75%;">
+                    <p><b>Limas Segiempat</b> adalah limas yang memiliki alas berbentuk segiempat, termasuk persegi.</p>
+                </div>
+                <div class="clearfix"></div><br>
+                <h2 class="heading">Input Angka</h2>
                 <div class="column">
                     <label>Panjang sisi A</label><br>
                     <input type="number" id="num1" oninput="output()" min="0" value="4">
@@ -695,10 +761,53 @@
                 </div>
                 `;
             } else if (e1.index == 6) {
+                // <img src="images/Bangun Datar/Trapesium.png" width="300"><br>
                 document.getElementById('bangun').innerHTML = `
                 <h2 class="heading">${e1.innerHTML}</h2>
-                <img src="images/Bangun Datar/Lingkaran.png" width="250"><br>
-                <p><b>Lingkaran</b> adalah bangun datar yang berbentuk bulat dan melengkung. Ada hubungannya dengan pi (π)<br>Bilangan pi (π) kira-kira 3.14 atau 22/7. Konstanta pi (π) = 3.14159...</p>
+                <div class="column" style="padding-right:20px;">
+                    <img src="images/Bangun Ruang/Kerucut.png" style="background-color:white; padding:20px;" width="150"><br>
+                </div>
+                <div class="column" style="width:75%;">
+                    <p>
+                    <b>Kerucut</b> adalah sebuah limas istimewa yang beralas lingkaran. Kerucut mempunyai 2 sisi, 1 rusuk, dan 1 titik sudut. Sisi tegak kerucut tidak berupa segitiga tapi berupa bidang miring yang disebut selimut kerucut.
+                    <br><br>
+                    Link:<br>
+                    - <a class="external" href="https://id.wikipedia.org/wiki/Kerucut">Kerucut - Wikipedia Bahasa Indonesia</a>
+                    </p>
+                </div>
+                <div class="clearfix"></div><br>
+                <div class="column">
+                    <label>Panjang sisi A</label><br>
+                    <input type="number" id="num1" oninput="output()" min="0" value="4">
+                    <label>${satuan}</label>
+                </div>
+                <div class="column">
+                    <label>Panjang sisi B</label><br>
+                    <input type="number" id="num1" oninput="output()" min="0" value="4">
+                    <label>${satuan}</label>
+                </div>
+                <div class="column">
+                    <label>Tinggi</label><br>
+                    <input type="number" id="num2" oninput="output()" min="0" value="3">
+                    <label>${satuan}</label>
+                </div>
+                `;
+            } else if (e1.index == 7) {
+                document.getElementById('bangun').innerHTML = `
+                <h2 class="heading">${e1.innerHTML}</h2>
+                <div class="column" style="padding-right:20px;">
+                    <img src="images/Bangun Ruang/bola.png" style="background-color:white; padding:20px;" width="250"><br>
+                </div>
+                <div class="column" style="width:75%;">
+                    <p>
+                    <b>Bola</b> adalah bangun ruang yang melengkung dan tidak punya sisi. Ada hubungannya dengan pi (π)<br>Bilangan pi (π) kira-kira 3.14 atau 22/7. Konstanta pi (π) = 3.14159...<br><br>
+                    <u>Sifat-Sifat Bola:</u><br>
+                    - Tidak punya sisi datar<br>
+                    - Tidak memiliki sisi<br>
+                    - Semuanya melengkung
+                    </p>
+                </div>
+                <div class="clearfix"></div><br>
                 <label>Radius</label><br>
                 <input type="number" id="num1" oninput="output()" min="0" value="5">
                 <label>${satuan}</label>
@@ -730,8 +839,11 @@
                 } else {
                     if (pangkat == 1) {
                         return satuan;
+                    } else if (pangkat == 2) {
+                        // return `${satuan}^${pangkat}`;
+                        return satuan + "²";
                     } else {
-                        return `${satuan}^${pangkat}`;
+                        return satuan + "³";
                     }
                 }
             }
