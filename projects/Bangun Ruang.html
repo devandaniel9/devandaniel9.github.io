@@ -624,10 +624,10 @@
                     <p>
                     <b>Balok</b> adalah bangun ruang tiga dimensi yang dibentuk oleh tiga pasang persegi atau persegi panjang, dengan paling tidak satu pasang di antaranya berukuran berbeda. Balok memiliki 6 sisi, 12 rusuk dan 8 titik sudut. Balok yang dibentuk oleh enam persegi sama dan sebangun disebut sebagai kubus.
                     <br><br>
-                    <u>Sifat-Sifat Kubus:</u><br>
+                    <u>Sifat-Sifat Balok:</u><br>
                     - Memiliki 6 sisi<br>
-                    - Semua sisinya sama<br>
-                    - Sisinya berbentuk persegi
+                    - Semua sisinya saling berhadapan<br>
+                    - Sisinya berbentuk persegi panjang
                     <br><br>
                     Link:<br>
                     - <a class="external" href="https://id.wikipedia.org/wiki/Balok">Balok - Wikipedia Bahasa Indonesia</a>
@@ -656,6 +656,7 @@
                     <label>${satuan}</label>
                 </div>
                 `;
+                
             } else if (e1.index == 2) {
                 document.getElementById('bangun').innerHTML = `
                 <h2 class="heading">${e1.innerHTML}</h2>
@@ -681,7 +682,13 @@
                     <input type="number" id="num2" oninput="output()" min="0" value="3">
                     <label>${satuan}</label>
                 </div>
+                <div class="column">
+                    <label>Tinggi Prisma</label><br>
+                    <input type="number" id="num3" oninput="output()" min="0" value="5">
+                    <label>${satuan}</label>
+                </div>
                 `;
+                
             } else if (e1.index == 3) {
                 document.getElementById('bangun').innerHTML = `
                 <h2 class="heading">${e1.innerHTML}</h2>
@@ -689,21 +696,22 @@
                     <img src="images/Bangun Ruang/tabung.png" width="200"><br>
                 </div>
                 <div class="column" style="width:75%;">
-                    <p><b>Tabung</b> adalah ... (Coming Soon)</p>
+                    <p><b>Tabung</b> adalah bangun ruang yang alasnya lingkaran dan saling berhadapan. Contoh di sekitar kita adalah botol minum.</p>
                 </div>
                 <div class="clearfix"></div><br>
                 <h2 class="heading">Input Angka</h2>
                 <div class="column">
-                    <label>Alas</label><br>
+                    <label>Jari-jari (Radius)</label><br>
                     <input type="number" id="num1" oninput="output()" min="0" value="4">
                     <label>${satuan}</label>
                 </div>
                 <div class="column">
-                    <label>Tinggi</label><br>
+                    <label>Tinggi Tabung</label><br>
                     <input type="number" id="num2" oninput="output()" min="0" value="3">
                     <label>${satuan}</label>
                 </div>
                 `;
+                
             } else if (e1.index == 4) {
                 // <img src="images/Bangun Datar/Trapesium.png" width="300"><br>
                 document.getElementById('bangun').innerHTML = `
@@ -717,21 +725,22 @@
                 <div class="clearfix"></div><br>
                 <h2 class="heading">Input Angka</h2>
                 <div class="column">
-                    <label>Panjang sisi A</label><br>
-                    <input type="number" id="num1" oninput="output()" min="0" value="4">
-                    <label>${satuan}</label>
-                </div>
-                <div class="column">
-                    <label>Panjang sisi B</label><br>
+                    <label>Alas</label><br>
                     <input type="number" id="num1" oninput="output()" min="0" value="4">
                     <label>${satuan}</label>
                 </div>
                 <div class="column">
                     <label>Tinggi</label><br>
-                    <input type="number" id="num2" oninput="output()" min="0" value="3">
+                    <input type="number" id="num2" oninput="output()" min="0" value="4">
+                    <label>${satuan}</label>
+                </div>
+                <div class="column">
+                    <label>Tinggi Limas</label><br>
+                    <input type="number" id="num3" oninput="output()" min="0" value="3">
                     <label>${satuan}</label>
                 </div>
                 `;
+                
             } else if (e1.index == 5) {
                 // <img src="images/Bangun Datar/Trapesium.png" width="300"><br>
                 document.getElementById('bangun').innerHTML = `
@@ -745,21 +754,22 @@
                 <div class="clearfix"></div><br>
                 <h2 class="heading">Input Angka</h2>
                 <div class="column">
-                    <label>Panjang sisi A</label><br>
+                    <label>Panjang</label><br>
                     <input type="number" id="num1" oninput="output()" min="0" value="4">
                     <label>${satuan}</label>
                 </div>
                 <div class="column">
-                    <label>Panjang sisi B</label><br>
+                    <label>Lebar</label><br>
                     <input type="number" id="num1" oninput="output()" min="0" value="4">
                     <label>${satuan}</label>
                 </div>
                 <div class="column">
-                    <label>Tinggi</label><br>
+                    <label>Tinggi Limas</label><br>
                     <input type="number" id="num2" oninput="output()" min="0" value="3">
                     <label>${satuan}</label>
                 </div>
                 `;
+                
             } else if (e1.index == 6) {
                 // <img src="images/Bangun Datar/Trapesium.png" width="300"><br>
                 document.getElementById('bangun').innerHTML = `
@@ -777,21 +787,17 @@
                 </div>
                 <div class="clearfix"></div><br>
                 <div class="column">
-                    <label>Panjang sisi A</label><br>
+                    <label>Jari-jari (Radius)</label><br>
                     <input type="number" id="num1" oninput="output()" min="0" value="4">
                     <label>${satuan}</label>
                 </div>
                 <div class="column">
-                    <label>Panjang sisi B</label><br>
+                    <label>Tinggi Kerucut</label><br>
                     <input type="number" id="num1" oninput="output()" min="0" value="4">
-                    <label>${satuan}</label>
-                </div>
-                <div class="column">
-                    <label>Tinggi</label><br>
-                    <input type="number" id="num2" oninput="output()" min="0" value="3">
                     <label>${satuan}</label>
                 </div>
                 `;
+                
             } else if (e1.index == 7) {
                 document.getElementById('bangun').innerHTML = `
                 <h2 class="heading">${e1.innerHTML}</h2>
@@ -808,7 +814,7 @@
                     </p>
                 </div>
                 <div class="clearfix"></div><br>
-                <label>Radius</label><br>
+                <label>Jari-jari (Radius)</label><br>
                 <input type="number" id="num1" oninput="output()" min="0" value="5">
                 <label>${satuan}</label>
                 `;
@@ -957,18 +963,34 @@
                 // var c = new circle(x);
                 document.getElementById(2).innerHTML = 'Luas = ' + luas.toFixed(digit);
                 document.getElementById(3).innerHTML = '';
-            } else if (e1.index == 6) {
+                
+            } else if (e1.index == 7) {
                 document.getElementById(1).innerHTML = 'Hasil Penyelesaian';
                 var r = parseInt(document.getElementById("num1").value);
-                var luas = Math.PI*r**2
-                var keliling = 2*Math.PI*r;
+                var volume = 4/3*Math.PI*r**3
+                var luas = 4*Math.PI*r**2;
                 // var c = new circle(x);
-                document.getElementById(2).innerHTML = 'Luas = ' + luas.toFixed(digit);
-                document.getElementById(3).innerHTML = 'Keliling = ' + keliling.toFixed(digit);
+                // document.getElementById(2).innerHTML = 'Volume = ' + luas.toFixed(digit);
+                // document.getElementById(3).innerHTML = 'Luas Permukaan = ' + keliling.toFixed(digit);
+                if (document.getElementById("num1").value == "") {
+                    document.getElementById("hasil").innerHTML = 'Masukkan satuan jari-jari';
+                    document.getElementById("hasil").style.color = 'yellow';
+                } else if (parseInt(document.getElementById("num1").value) <= 0) {
+                    document.getElementById("hasil").innerHTML = 'Jari-jari harus lebih dari 0';
+                    document.getElementById("hasil").style.color = 'yellow';
+                } else {
+                    document.getElementById("hasil").innerHTML = `
+                    Volume = ${parseFloat(volume.toFixed(digit))}${satuan_teks(satuan_pangkat(satuan,3))}<br>
+                    Luas Permukaan = ${parseFloat(luas.toFixed(digit))}${satuan_teks(satuan_pangkat(satuan,2))}
+                    `
+                    document.getElementById("hasil").style.color = 'white';
+                }
+                
             } else {
                 document.getElementById(1).innerHTML = '';
                 document.getElementById("hasil").innerHTML = '';
             }
+            
             document.getElementById("hasil").innerHTML += `
             <br><br><label class="cb-container" style="font-size:16px; width:500px;">Tampilkan Langkah Penyelesaian (Coming Soon)
                 <input type="checkbox">
