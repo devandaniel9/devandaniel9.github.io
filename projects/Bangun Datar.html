@@ -405,22 +405,24 @@
 
     <div id="container" style="display:none;">
         <h2 class="heading">Satuan Panjang</h2>
+        <img src="images/Measurement-Units-Length-icon.png" style="position:absolute; left:350px;" width="40">
+        <img src="images/satuan-panjang.png" style="position:absolute; left:450px;" width="200">
         <!-- <h3 class="heading">Pilih Satuan Panjang</h3> -->
         <label for="bentuk" style="font-size:18px; line-height:30px;">Pilih Satuan Panjang</label><br>
-        <label value="satuan1" class="rb-container">Meter (m)
-            <input type="radio" checked="checked" name="radio">
+        <label value="satuan1" class="rb-container" style="width:150px;">Meter (m)
+            <input type="radio" id="satuan1" value="m" checked="checked" onclick="change()" name="radio">
             <span class="checkradio"></span>
         </label>
-        <label value="satuan2" class="rb-container">Centimeter (cm)
-            <input type="radio" name="radio">
+        <label value="satuan2" class="rb-container" style="width:150px;">Centimeter (cm)
+            <input type="radio" id="satuan2" value="cm" onclick="change()" name="radio">
             <span class="checkradio"></span>
         </label>
-        <label value="satuan3" class="rb-container">Milimeter (mm)
-            <input type="radio" name="radio">
+        <label value="satuan3" class="rb-container" style="width:150px;">Milimeter (mm)
+            <input type="radio" id="satuan3" value="mm" onclick="change()" name="radio">
             <span class="checkradio"></span>
         </label>
-        <label value="satuan4" class="rb-container">Inci
-            <input type="radio" name="radio">
+        <label value="satuan4" class="rb-container" style="width:150px;">Inci
+            <input type="radio" id="satuan4" value="inci" onclick="change()" name="radio">
             <span class="checkradio"></span>
         </label>
         <br><br>
@@ -462,7 +464,7 @@
     <a class="button2" href="../projects.html">Kembali ke menu projects</a>
 
     <br><br>
-    <p>Terakhir diupdate: 20 Sep 2024</p>
+    <p>Terakhir diupdate: 9 Okt 2024</p>
 
     <script>
         // Time
@@ -541,17 +543,34 @@
         function change() {
             var e = document.getElementById("bentuk");
             var e1 = e.options[e.selectedIndex];
+            if (document.getElementById("satuan").checked) {
+                if (document.getElementById("satuan1").checked) {
+                    var satuan = "&nbsp;" + document.getElementById("satuan1").value + "&nbsp;";
+                } else if (document.getElementById("satuan2").checked) {
+                    var satuan = "&nbsp;" + document.getElementById("satuan2").value + "&nbsp;";
+                } else if (document.getElementById("satuan3").checked) {
+                    var satuan = "&nbsp;" + document.getElementById("satuan3").value + "&nbsp;";
+                } else {
+                    var satuan = "&nbsp;" + document.getElementById("satuan4").value + "&nbsp;";
+                }
+            } else {
+                var satuan = "";
+            }
+            console.log(satuan);
+
             if (e1.index == 0) {
                 // <p>Panjang</p>
                 // <input type="number" id="num1" oninput="output()" min="0" value="3">
                 // <math>\times</math>
                 // <div class="column" style="width:75%;">
+                // <h3 class="heading">Rumus</h3>
+                // <p style="font-size:18px">
                 document.getElementById('bangun').innerHTML = `
                 <h2 class="heading">${e1.innerHTML}</h2>
                 <div class="column" style="padding-right:20px;">
                     <img src="images/Bangun Datar/Persegi.png" width="250"><br>
                 </div>
-                <div class="column" style="width:50%;">
+                <div class="column" style="width:75%;">
                     <p>
                     <b>Persegi</b> dalam bangun datar adalah kedua sisi yang sama, dengan panjang dan lebar yang sama. Persegi mempunyai diagonal yang miring. Sifat persegi adalah semua sudutnya 90 derajat.
                     <br><br>
@@ -561,17 +580,16 @@
                     - <a class="external" href="https://id.wikipedia.org/wiki/Persegi">Persegi - Wikipedia Bahasa Indonesia</a>
                     </p>
                 </div>
-                <div class="column" style="width:20%;">
-                    <h3 class="heading">Rumus</h3>
-                    <p style="font-size:18px">
-                    L = s * s = s^2<br>
-                    K = 4 * s
-                    </p><br>
-                </div>
                 <div class="clearfix"></div><br>
+                <h2 class="heading">Rumus</h2>
+                <p style="font-size:20px">
+                Luas = L = s * s = s²<br>
+                Keliling = K = 4 * s = 4s
+                </p><br>
                 <h2 class="heading">Input Angka</h2>
                 <label>Panjang sisi</label><br>
                 <input type="number" id="num1" placeholder="Masukkan sisi" min="0" value="3">
+                <label>${satuan}</label>
                 `;
             } else if (e1.index == 1) {
                 // <input type="number" id="num1" oninput="output()" min="0" value="3">
@@ -681,6 +699,44 @@
             var e1 = e.options[e.selectedIndex];
             var digit = parseInt(document.getElementById("digit").value);
             document.getElementById("digit2").innerHTML = 'Digit precision: ' + digit;
+
+            function satuan_pangkat(satuan, pangkat) {
+                if (satuan == "") {
+                    return "";
+                } else {
+                    if (pangkat == 1) {
+                        return satuan;
+                    } else if (pangkat == 2) {
+                        // return `${satuan}^${pangkat}`;
+                        return satuan + "²";
+                    } else {
+                        return satuan + "³";
+                    }
+                }
+            }
+
+            function satuan_teks(satuan) {
+                if (satuan == "") {
+                    return "";
+                } else {
+                    return "&nbsp;" + satuan + "&nbsp;";
+                }
+            }
+
+            if (document.getElementById("satuan").checked) {
+                if (document.getElementById("satuan1").checked) {
+                    satuan = document.getElementById("satuan1").value;
+                } else if (document.getElementById("satuan2").checked) {
+                    satuan = document.getElementById("satuan2").value;
+                } else if (document.getElementById("satuan3").checked) {
+                    satuan = document.getElementById("satuan3").value;
+                } else {
+                    satuan = document.getElementById("satuan4").value;
+                }
+            } else {
+                satuan = "";
+            }
+
             if (e1.index == 0) {
                 document.getElementById(1).innerHTML = 'Hasil Penyelesaian';
                 // var x = parseInt(document.getElementById("num1").value);
@@ -692,12 +748,13 @@
                 // document.getElementById(2).innerHTML = 'Luas = ' + luas.toFixed(digit);
                 // document.getElementById(2).innerHTML = 'Luas = ' + parseFloat(luas.toFixed(digit));
                 // document.getElementById(3).innerHTML = 'Keliling = ' + parseFloat(keliling.toFixed(digit));
+                // Keliling = ${parseFloat(keliling.toFixed(digit))}${satuan_teks(satuan_pangkat(satuan,1))}
                 if (document.getElementById("num1").value == "") {
                     document.getElementById("hasil").innerHTML = 'Masukkan panjang sisi';
                 } else {
                     document.getElementById("hasil").innerHTML = `
-                    Luas = ${parseFloat(luas.toFixed(digit))}<br>
-                    Keliling = ${parseFloat(keliling.toFixed(digit))}
+                    Luas = ${parseFloat(luas.toFixed(digit))}${satuan_teks(satuan_pangkat(satuan,2))}<br>
+                    Keliling = ${parseFloat(keliling.toFixed(digit))}${satuan_teks(satuan)}
                     `
                 };
 
@@ -724,8 +781,8 @@
                     document.getElementById("hasil").style.color = 'yellow';
                 } else {
                     document.getElementById("hasil").innerHTML = `
-                    Luas = ${parseFloat(luas.toFixed(digit))}<br>
-                    Keliling = ${parseFloat(keliling.toFixed(digit))}
+                    Luas = ${parseFloat(luas.toFixed(digit))}${satuan_teks(satuan_pangkat(satuan,2))}<br>
+                    Keliling = ${parseFloat(keliling.toFixed(digit))}${satuan_teks(satuan)}
                     `
                     document.getElementById("hasil").style.color = 'white';
                     // document.getElementById(2).innerHTML = 'Luas = ' + luas.toFixed(digit);
