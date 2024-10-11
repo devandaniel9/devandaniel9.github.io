@@ -386,16 +386,16 @@
     <span id="digit2">Digit precision: 2</span>
     <br><br>
     <!-- <input type="checkbox" id="digit" oninput="precision()" min="2" max="10" value="2"><label>Dengan satuan panjang</label> -->
-    <label class="cb-container">Dengan satuan panjang
-        <input type="checkbox" id="satuan" onclick="settings_check()">
+    <label class="cb-container" style="width:400px;">Dengan satuan panjang
+        <input type="checkbox" id="satuan" onclick="settings_check();change()">
         <span class="checkmark"></span>
     </label>
     <!-- <label class="cb-container">Terapkan tema gelap (Belum tersedia) -->
-    <label class="cb-container">Terapkan tema gelap
+    <label class="cb-container" style="width:400px;">Terapkan tema gelap
         <input type="checkbox" id="tema" onclick="settings_check()">
         <span class="checkmark"></span>
     </label>
-    <label class="cb-container">Pertahankan pengaturan<br>
+    <label class="cb-container" style="width:400px;">Pertahankan pengaturan<br>
         <span style="font-size:14px">Akan direset secara otomatis setelah 3 hari tidak digunakan</span>
         <!-- <input type="checkbox" id="settings" checked="checked"> -->
         <input type="checkbox" id="settings" onclick="settings_check()">
@@ -464,7 +464,7 @@
     <a class="button2" href="../projects.html">Kembali ke menu projects</a>
 
     <br><br>
-    <p>Terakhir diupdate: 9 Okt 2024</p>
+    <p>Terakhir diupdate: 11 Okt 2024</p>
 
     <script>
         // Time
@@ -481,7 +481,7 @@
             check_old = false;
         }
 
-        change();
+        // change();
         if (check_old) {
             digit_old = parseInt(localStorage.getItem("digit"));
             unit_check_old = localStorage.getItem("satuan-check");
@@ -502,6 +502,7 @@
         document.getElementById("tema").checked = theme_check_old;
         document.getElementById("settings").checked = check_old;
         settings_check();
+        change();
 
         // interval = 1000;
         interval = 200;
@@ -565,6 +566,7 @@
                 // <div class="column" style="width:75%;">
                 // <h3 class="heading">Rumus</h3>
                 // <p style="font-size:18px">
+                // <input type="number" id="num1" oninput="output()" min="0" value="4">
                 document.getElementById('bangun').innerHTML = `
                 <h2 class="heading">${e1.innerHTML}</h2>
                 <div class="column" style="padding-right:20px;">
@@ -598,7 +600,7 @@
                 <div class="column" style="padding-right:20px;">
                     <img src="images/Bangun Datar/Persegi Panjang.png" width="300"><br>
                 </div>
-                <div class="column" style="width:75%;">
+                <div class="column" style="width:70%;">
                     <p>
                     <b>Persegi Panjang</b> adalah bangun yang terdiri dari dua sisi, yaitu panjang (p) dan lebar (l).
                     <br><br>
@@ -610,10 +612,12 @@
                 <div class="column">
                     <label>Panjang</label><br>
                     <input type="number" id="num1" placeholder="Masukkan panjang" min="0" value="3">
+                    <label>${satuan}</label>
                 </div>
                 <div class="column">
                     <label>Lebar</label><br>
                     <input type="number" id="num2" placeholder="Masukkan lebar" min="0" value="2">
+                    <label>${satuan}</label>
                 </div>
                 `;
             } else if (e1.index == 2) {
@@ -622,17 +626,19 @@
                 <div class="column" style="padding-right:20px;">
                     <img src="images/Bangun Datar/Segitiga.png" width="300"><br>
                 </div>
-                <div class="column" style="width:75%;">
+                <div class="column" style="width:70%;">
                     <p><b>Segitiga</b> adalah bangun yang terdiri dari 3 sisi, yaitu alas dan 2 sisi miring. Terdapat alas (a) dan tinggi (t). Ada 4 jenis segitiga, yaitu Segitiga Siku-Siku, Segitiga Sama Sisi, Segitiga Sama Kaki, dan Segitiga Sembarang.</p>
                 </div>
                 <div class="clearfix"></div><br>
                 <div class="column">
                     <label>Alas</label><br>
-                    <input type="number" id="num1" oninput="output()" min="0" value="4">
+                    <input type="number" id="num1" placeholder="Masukkan alas" min="0" value="4">
+                    <label>${satuan}</label>
                 </div>
                 <div class="column">
                     <label>Tinggi</label><br>
-                    <input type="number" id="num2" oninput="output()" min="0" value="3">
+                    <input type="number" id="num2" placeholder="Masukkan tinggi" min="0" value="3">
+                    <label>${satuan}</label>
                 </div>
                 `;
             } else if (e1.index == 3) {
@@ -641,36 +647,56 @@
                 <div class="column" style="padding-right:20px;">
                     <img src="images/Bangun Datar/Jajar Genjang.png" width="300"><br>
                 </div>
-                <div class="column" style="width:75%;">
-                    <p><b>Jajar Genjang</b> adalah ... (Coming Soon)</p>
+                <div class="column" style="width:70%;">
+                    <p>
+                    <b>Jajar Genjang</b> adalah bangun datar dua dimensi yang dibentuk oleh dua pasang rusuk yang masing-masing sama panjang dan sejajar dengan pasangannya, dan memiliki dua pasang sudut yang masing-masing sama besar dengan sudut di hadapannya. Jajar genjang dengan empat rusuk yang sama panjang disebut belah ketupat.
+                    <br><br>
+                    Link:<br>
+                    - <a class="external" href="https://id.wikipedia.org/wiki/Jajar_genjang">Jajar Genjang - Wikipedia Bahasa Indonesia</a>
+                    </p>
                 </div>
                 <div class="clearfix"></div><br>
                 <div class="column">
                     <label>Alas</label><br>
-                    <input type="number" id="num1" oninput="output()" min="0" value="4">
+                    <input type="number" id="num1" placeholder="Masukkan alas" min="0" value="4">
+                    <label>${satuan}</label>
                 </div>
                 <div class="column">
                     <label>Tinggi</label><br>
-                    <input type="number" id="num2" oninput="output()" min="0" value="3">
+                    <input type="number" id="num2" placeholder="Masukkan tinggi" min="0" value="3">
+                    <label>${satuan}</label>
                 </div>
                 `;
             } else if (e1.index == 4) {
                 // <img src="images/Bangun Datar/Trapesium.png" width="300"><br>
                 document.getElementById('bangun').innerHTML = `
                 <h2 class="heading">${e1.innerHTML}</h2>
-                <img src="images/Bangun Datar/trapesium.png" width="300"><br>
-                <p><b>Trapesium</b> adalah ... (Coming Soon)</p>
+                <div class="column" style="padding-right:20px;">
+                    <img src="images/Bangun Datar/trapesium.png" width="300"><br>
+                </div>
+                <div class="column" style="width:70%;">
+                    <p>
+                    <b>Trapesium</b> adalah bangun datar dua dimensi yang dibentuk oleh empat buah rusuk yang dua di antaranya saling sejajar namun tidak sama panjang. Ada 3 jenis trapesium, yaitu trapesium sembarang, sama kaki, dan siku-siku.
+                    <br><br>
+                    Link:<br>
+                    - <a class="external" href="https://id.wikipedia.org/wiki/Trapesium_(geometri)">Trapesium - Wikipedia Bahasa Indonesia</a>
+                    </p>
+                </div>
+                <div class="clearfix"></div><br>
                 <div class="column">
                     <label>Panjang sisi A</label><br>
-                    <input type="number" id="num1" oninput="output()" min="0" value="4">
+                    <input type="number" id="num1" placeholder="Masukkan sisi A" min="0" value="4">
+                    <label>${satuan}</label>
                 </div>
                 <div class="column">
                     <label>Panjang sisi B</label><br>
-                    <input type="number" id="num1" oninput="output()" min="0" value="4">
+                    <input type="number" id="num2" placeholder="Masukkan sisi B" min="0" value="4">
+                    <label>${satuan}</label>
                 </div>
                 <div class="column">
                     <label>Tinggi</label><br>
-                    <input type="number" id="num2" oninput="output()" min="0" value="3">
+                    <input type="number" id="num3" placeholder="Masukkan tinggi" min="0" value="3">
+                    <label>${satuan}</label>
                 </div>
                 `;
             } else if (e1.index == 6) {
@@ -795,9 +821,81 @@
                 var x = parseInt(document.getElementById("num1").value);
                 var y = parseInt(document.getElementById("num2").value);
                 var luas = x*y/2;
-                // var c = new circle(x);
-                document.getElementById(2).innerHTML = 'Luas = ' + luas.toFixed(digit);
-                document.getElementById(3).innerHTML = '';
+                // var keliling = x*y/2;
+                if (document.getElementById("num1").value == "") {
+                    document.getElementById("hasil").innerHTML = 'Masukkan satuan alas';
+                    document.getElementById("hasil").style.color = 'yellow';
+                } else if (document.getElementById("num2").value == "") {
+                    document.getElementById("hasil").innerHTML = 'Masukkan satuan tinggi';
+                    document.getElementById("hasil").style.color = 'yellow';
+                } else if (parseInt(document.getElementById("num1").value) <= 0) {
+                    document.getElementById("hasil").innerHTML = 'Satuan alas harus lebih dari 0';
+                    document.getElementById("hasil").style.color = 'yellow';
+                } else if (parseInt(document.getElementById("num2").value) <= 0) {
+                    document.getElementById("hasil").innerHTML = 'Satuan tinggi harus lebih dari 0';
+                    document.getElementById("hasil").style.color = 'yellow';
+                } else {
+                    document.getElementById("hasil").innerHTML = `
+                    Luas = ${parseFloat(luas.toFixed(digit))}${satuan_teks(satuan_pangkat(satuan,2))}
+                    `
+                    document.getElementById("hasil").style.color = 'white';
+                }
+
+            } else if (e1.index == 3) {
+                document.getElementById(1).innerHTML = 'Hasil Penyelesaian';
+                var x = parseInt(document.getElementById("num1").value);
+                var y = parseInt(document.getElementById("num2").value);
+                var luas = x*y;
+                if (document.getElementById("num1").value == "") {
+                    document.getElementById("hasil").innerHTML = 'Masukkan satuan alas';
+                    document.getElementById("hasil").style.color = 'yellow';
+                } else if (document.getElementById("num2").value == "") {
+                    document.getElementById("hasil").innerHTML = 'Masukkan satuan tinggi';
+                    document.getElementById("hasil").style.color = 'yellow';
+                } else if (parseInt(document.getElementById("num1").value) <= 0) {
+                    document.getElementById("hasil").innerHTML = 'Satuan alas harus lebih dari 0';
+                    document.getElementById("hasil").style.color = 'yellow';
+                } else if (parseInt(document.getElementById("num2").value) <= 0) {
+                    document.getElementById("hasil").innerHTML = 'Satuan tinggi harus lebih dari 0';
+                    document.getElementById("hasil").style.color = 'yellow';
+                } else {
+                    document.getElementById("hasil").innerHTML = `
+                    Luas = ${parseFloat(luas.toFixed(digit))}${satuan_teks(satuan_pangkat(satuan,2))}
+                    `
+                    document.getElementById("hasil").style.color = 'white';
+                }
+
+            } else if (e1.index == 4) {
+                document.getElementById(1).innerHTML = 'Hasil Penyelesaian';
+                var sisi_a = parseInt(document.getElementById("num1").value);
+                var sisi_b = parseInt(document.getElementById("num2").value);
+                var tinggi = parseInt(document.getElementById("num3").value);
+                var luas = tinggi*(sisi_a+sisi_b)/2;
+                if (document.getElementById("num1").value == "") {
+                    document.getElementById("hasil").innerHTML = 'Masukkan satuan sisi A';
+                    document.getElementById("hasil").style.color = 'yellow';
+                } else if (document.getElementById("num2").value == "") {
+                    document.getElementById("hasil").innerHTML = 'Masukkan satuan sisi B';
+                    document.getElementById("hasil").style.color = 'yellow';
+                } else if (document.getElementById("num3").value == "") {
+                    document.getElementById("hasil").innerHTML = 'Masukkan satuan tinggi';
+                    document.getElementById("hasil").style.color = 'yellow';
+                } else if (parseInt(document.getElementById("num1").value) <= 0) {
+                    document.getElementById("hasil").innerHTML = 'Satuan sisi A harus lebih dari 0';
+                    document.getElementById("hasil").style.color = 'yellow';
+                } else if (parseInt(document.getElementById("num2").value) <= 0) {
+                    document.getElementById("hasil").innerHTML = 'Satuan sisi B harus lebih dari 0';
+                    document.getElementById("hasil").style.color = 'yellow';
+                } else if (parseInt(document.getElementById("num3").value) <= 0) {
+                    document.getElementById("hasil").innerHTML = 'Satuan tinggi harus lebih dari 0';
+                    document.getElementById("hasil").style.color = 'yellow';
+                } else {
+                    document.getElementById("hasil").innerHTML = `
+                    Luas = ${parseFloat(luas.toFixed(digit))}${satuan_teks(satuan_pangkat(satuan,2))}
+                    `
+                    document.getElementById("hasil").style.color = 'white';
+                }
+                
             } else if (e1.index == 6) {
                 document.getElementById(1).innerHTML = 'Hasil Penyelesaian';
                 var r = parseInt(document.getElementById("num1").value);
