@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sebuah Permainan - Website Devan</title>
+    <!-- <link rel="stylesheet" href="fonts/"> -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
+</head>
+<style>
+    body {
+        background-color: #a0c0e0;
+        /* font-family:"Helvetica",sans-serif; */
+        font-family:"Source Sans Pro",sans-serif;
+    }
+    .heading {
+        font-family:"Inter",sans-serif;
+    }
+    .column {
+        float: left;
+        padding-right: 10px;
+    }
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    button {
+        /* font-family:"Helvetica",sans-serif; */
+        /* src: url(https://dwl.freefontsfamily.com/download/Helvetica-Font); */
+        font-family:"Source Sans Pro",sans-serif;
+        font-size: 20px;
+    }
+    .button {
+        background-color: #4080c0;
+        border: none;
+        color: white;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 18px;
+        margin: 2px 2px;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+    a {
+        font-size: 18px;
+    }
+    a.button2:link, a.button2:visited {
+        background-color: #f0f0f0;
+        color: black;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border: 1px solid #404040;
+        border-radius: 6px;
+        transition: 0.3s;
+    }
+    a.button2:hover, a.button2:active {
+        background-color: #d0d0d0;
+    }
+    input[type=number], select {
+        /* width: 100%; */
+        width: 200px;
+        padding: 5px 10px;
+        margin: 5px 0;
+        display: inline-block;
+        font-family:"Source Sans Pro",sans-serif;
+        font-size: 16px;
+        border: 1px solid #404040;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    /* Create a custom checkbox */
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #eee;
+    }
+    .box {
+        background-color: #b0c8e8;
+        width: 200px;
+        padding: 10px;
+    }
+</style>
+<body>
+    <h1 class="heading">Soal Pertanyaan Matematika</h1>
+    <p>
+    <b>Soal Pertanyaan</b> ini akan menjawab beberapa soal matematika, termasuk <b>Penjumlahan.</b><br>
+    Program ini bisa membuat soal baru dengan angka yang berbeda dengan tombolnya, lalu klik selesaikan.
+    <br><br>
+    Ada yang baru di program ini, yaitu:<br>
+    - <b>Penjumlahan dan Pengurangan</b><br>
+    - <b>Soal Cerita</b>
+    <br><br>
+    </p>
+
+    <h2 class="heading">Mode pertanyaan</h2>
+    <!-- <label for="bentuk">Pilih jenis pertanyaan matematika:</label><br>
+    <select name="bentuk" id="bentuk" style="width:150px"> -->
+    <label>Pilih jenis pertanyaan matematika:</label><br>
+    <select id="bentuk" style="width:250px">
+        <option>Penjumlahan</option>
+        <option>Pengurangan</option>
+        <option>Perkalian</option>
+        <option>Pembagian</option>
+        <option>Penjumlahan dan Pengurangan</option>
+        <option>Campuran</option>
+    </select>
+    <br><br>
+
+    <label>Pilih tingkat kesulitan:</label><br>
+    <select id="level" style="width:150px">
+        <option>Mudah</option>
+        <option>Sedang</option>
+        <option>Sulit</option>
+    </select>
+    <br><br>
+
+    <label>Pilih tipe pertanyaan:</label><br>
+    <select id="tipe" style="width:150px" onchange="pilihan()">
+        <option>Isian</option>
+        <option>Pilihan ganda</option>
+    </select>
+    <br><br>
+
+    <label>Dengan soal cerita:</label>
+    <!-- <input type="checkbox" id="check" onclick="change()"> -->
+    <input type="checkbox" id="check" onclick="tampilkan()">
+    <br><br>
+
+    <div class="box" id="cerita" style="background-color:#a0b0c0; width:200px; display:none">
+        <span style="font-size:20px"><b>Soal cerita</b></span><br><br>
+        <label>Pilih tipe pertanyaan:</label><br>
+        <select id="cerita2" style="width:150px" onchange="tampilkan()">
+            <option>Buah</option>
+            <option>Uang</option>
+        </select>
+    </div>
+
+    <h2 class="heading">Pertanyaan</h2>
+    <!-- <p id="soal">Hasil dari 2 + 3 adalah ...</p> -->
+    <!-- <p>Pilih pertanyaan</p> -->
+    <p id="soal" style="width:500px; word-wrap:break-word;">Belum ada soal</p>
+    <p id="soal2"></p>
+    <button class="button" onclick="buat();pilihan()">Buat soal baru</button>
+    <br><br>
+    <!-- <p>Input angka</p> -->
+    <!-- <input type="number" id="angka" min="0"> -->
+    <div id="tipe2"></div>
+    <br><br>
+    <button class="button" onclick="selesaikan()">Selesaikan</button>
+
+    <h2 class="heading">Jawaban</h2>
+    <p id="jawaban">Belum ada jawaban</p>
+
+    <br><br>
+    <a class="button2" href="../projects.html">Kembali ke menu projects</a>
+
+    <br><br>
+    <p>Terakhir diupdate: 2 Feb 2024</p>
+
+    <script>
+        pilihan()
+        function tampilkan() {
+            var cerita_check = document.getElementById("check");
+            var cerita = document.getElementById("cerita");
+            if (cerita_check.checked == false) {
+                cerita.style.display = "none";
+            } else {
+                cerita.style.display = "block";
+            }
+        }
+        
+        function buat() {
+            var e = document.getElementById("bentuk");
+            var e1 = e.options[e.selectedIndex];
+            var level = document.getElementById("level");
+            var level2 = level.options[level.selectedIndex];
+            var tipe = document.getElementById("tipe");
+            var tipe2 = tipe.options[tipe.selectedIndex];
+            // var tanda = '';
+            document.getElementById('jawaban').innerHTML = 'Belum ada jawaban';
+            // document.getElementById('angka').innerHTML = '';
+            if (e1.index == 0) {
+                if (level2.index == 0) {
+                    a = Math.floor(1 + 10 * Math.random());
+                    b = Math.floor(1 + 10 * Math.random());
+                } else if (level2.index == 1) {
+                    a = Math.floor(10 + 90 * Math.random());
+                    b = Math.floor(10 + 90 * Math.random());
+                } else {
+                    a = Math.floor(100 + 900 * Math.random());
+                    b = Math.floor(100 + 900 * Math.random());
+                }
+                tanda = ' + ';
+                hasil = a+b;
+            } else if (e1.index == 1) {
+                if (level2.index == 0) {
+                    kecil = Math.floor(1 + 10 * Math.random());
+                    a = Math.floor(1 + 10 * Math.random()) + kecil - 1;
+                    b = kecil;
+                } else if (level2.index == 1) {
+                    kecil = Math.floor(10 + 40 * Math.random());
+                    a = Math.floor(10 + 40 * Math.random()) + kecil;
+                    b = kecil;
+                } else {
+                    kecil = Math.floor(100 + 400 * Math.random());
+                    a = Math.floor(100 + 400 * Math.random()) + kecil;
+                    b = kecil;
+                }
+                tanda = ' - ';
+                hasil = a-b;
+            } else if (e1.index == 2) {
+                if (level2.index == 0) {
+                    a = Math.floor(1 + 10 * Math.random());
+                    b = Math.floor(1 + 10 * Math.random());
+                } else if (level2.index == 1) {
+                    if (Math.random() < 0.5) {
+                        a = Math.floor(10 + 20 * Math.random());
+                        b = Math.floor(3 + 17 * Math.random());
+                    } else {
+                        a = Math.floor(3 + 17 * Math.random());
+                        b = Math.floor(10 + 20 * Math.random());
+                    }
+                } else {
+                    if (Math.random() < 0.5) {
+                        a = Math.floor(50 + 250 * Math.random());
+                        b = Math.floor(10 + 40 * Math.random());
+                    } else {
+                        a = Math.floor(10 + 40 * Math.random());
+                        b = Math.floor(50 + 250 * Math.random());
+                    }
+                }
+                tanda = ' x '
+                hasil = a*b;
+            } else if (e1.index == 3) {
+                kecil = Math.floor(1 + 10 * Math.random());
+                a = Math.floor(1 + 10 * Math.random()) * kecil;
+                b = kecil;
+                tanda = ' : '
+                hasil = Math.floor(a/b);
+            } else if (e1.index == 4) {
+                if (Math.random() < 0.5) {
+                    if (Math.random() < 0.5) {
+                        a = Math.floor(5 + 16 * Math.random());
+                        b = Math.floor(1 + 20 * Math.random());
+                    } else {
+                        a = Math.floor(1 + 20 * Math.random());
+                        b = Math.floor(5 + 16 * Math.random());
+                    }
+                    if (a+b < 20) {
+                        c = Math.floor(1 + (a+b) * Math.random());
+                    } else {
+                        c = Math.floor(1 + 20 * Math.random());
+                    }
+                    tanda = ' + ';
+                    tanda2 = ' - ';
+                    hasil = a+b-c;
+                } else {
+                    a = Math.floor(5 + 16 * Math.random());
+                    b = Math.floor(1 + a * Math.random());
+                    c = Math.floor(1 + 20 * Math.random());
+                    tanda = ' - ';
+                    tanda2 = ' + ';
+                    hasil = a-b+c;
+                }
+            }
+            
+            var cerita_check = document.getElementById("check");
+            var cerita = document.getElementById("cerita");
+            if (cerita_check.checked == false) {
+                if (e1.index < 4) {
+                    // document.getElementById('soal').innerHTML = 'Hasil dari ' + a + tanda + b + ' adalah ...';
+                    document.getElementById('soal').innerHTML = `Hasil dari ${a} ${tanda} ${b} adalah ...`;
+                } else {
+                    document.getElementById('soal').innerHTML = `Hasil dari ${a} ${tanda} ${b} ${tanda2} ${c} adalah ...`;
+                }
+            } else {
+                var cerita2 = document.getElementById("cerita2");
+                cerita2 = cerita2.options[cerita2.selectedIndex];
+                if (e1.index == 0) {
+                    if (cerita2.index == 0) {
+                        document.getElementById('soal').innerHTML = `Di dalam sebuah toko buah, ibu membeli ${a} buah. Kemudian adik memberikan buahnya kepada ibu sebanyak ${b} buah. Berapa jumlah buah ibu sekarang?`;
+                    } else {
+                        document.getElementById('soal').innerHTML = `Di dalam sebuah pusat perbelanjaan, ibu membeli sesuatu seharga ${a} ribu. Kemudian adik membeli lagi seharga ${b} ribu, lalu dikumpulkan ke keranjang ibu. Berapa jumlah uang ibu sekarang? (dalam ribuan)`;
+                    }
+                } else if (e1.index == 1) {
+                    document.getElementById('soal').innerHTML = `Di dalam sebuah toko buah, ibu sudah membeli apel sebanyak ${a} buah. Lalu adik memakan buah apelnya sebanyak ${b} apel. Berapa sisa buah apel sekarang?`;
+                }
+            }
+        }
+
+        function pilihan() {
+            var tipe = document.getElementById("tipe");
+            var tipe2 = tipe.options[tipe.selectedIndex];
+            if (tipe2.index == 0) {
+                document.getElementById('tipe2').innerHTML = `
+                <label>Input jawaban</label><br>
+                <input type="number" id="angka" min="0">
+                `;
+            } else {
+                var e = document.getElementById("bentuk");
+                var e1 = e.options[e.selectedIndex];
+                pilihan_index = Math.floor(5 * Math.random());
+                c = Math.floor(5*Math.random());
+                pilihan_list = [12,13,14,15,16];
+                if (e1.index == 0) {
+                    // hasil = a+b;
+                    pilihan_list = [
+                        a+b+1+Math.floor(b/2*Math.random()),
+                        a+b-1-Math.floor(b/2*Math.random()),
+                        a+b+1+Math.floor(b/2*Math.random()),
+                        a+b-1-Math.floor(b/2*Math.random()),
+                        a+b+1+Math.floor(b/2*Math.random())
+                    ];
+                } else if (e1.index == 1) {
+                    pilihan_list = [12,13,14,15,16];
+                } else if (e1.index == 2) {
+                    pilihan_list = [12,13,14,15,16];
+                } else if (e1.index == 3) {
+                    pilihan_list = [12,13,14,15,16];
+                }
+                pilihan_list[pilihan_index] = hasil;
+                document.getElementById('tipe2').innerHTML = `
+                <span>Pilihan jawaban</span><br><br>
+                <div class="column">
+                    <input type="radio" id="pilihan1" name="pilihan" value="0">
+                    <label for="pilihan1">A. ${pilihan_list[0]}</label>
+                </div>
+                <div class="column">
+                    <input type="radio" id="pilihan2" name="pilihan" value="1">
+                    <label for="pilihan2">B. ${pilihan_list[1]}</label>
+                </div>
+                <div class="column">
+                    <input type="radio" id="pilihan3" name="pilihan" value="2">
+                    <label for="pilihan3">C. ${pilihan_list[2]}</label>
+                </div>
+                <div class="column">
+                    <input type="radio" id="pilihan4" name="pilihan" value="3">
+                    <label for="pilihan4">D. ${pilihan_list[3]}</label>
+                    </div>
+                <div class="column">
+                    <input type="radio" id="pilihan5" name="pilihan" value="4">
+                    <label for="pilihan5">E. ${pilihan_list[4]}</label>
+                </div>
+                <div class="clearfix"></div><br>
+                `;
+            }
+        }
+
+        function selesaikan() {
+            var tipe = document.getElementById("tipe");
+            var tipe2 = tipe.options[tipe.selectedIndex];
+            if (tipe2.index == 0) {
+                var angka_awal = document.getElementById('angka').value;
+            } else {
+                var angka_awal = document.getElementsByName('pilihan1').value;
+            }
+            if (angka_awal != '') {
+                var e = document.getElementById("bentuk");
+                var e1 = e.options[e.selectedIndex];
+                // var tanda = '';
+                angka = parseInt(angka_awal);
+                // if (e1.index == 0) {
+                //     tanda = ' + ';
+                if (e1.index <= 3) {
+                    soal = a + tanda + b;
+                } else {
+                    soal = a + tanda + b + tanda2 + c;
+                }
+                if (angka == hasil) {
+                    document.getElementById('jawaban').innerHTML = `Jawabannya benar<br><br> ${soal} = ${hasil}`;
+                } else {
+                    document.getElementById('jawaban').innerHTML = `Jawabannya salah<br>Jawaban yang diinput: ${angka}<br><br>${soal} = ${hasil}`;
+                }
+            } else {
+                document.getElementById('jawaban').innerHTML = 'Input angka harus diisi';
+            }
+        }
+    </script>
+</body>
