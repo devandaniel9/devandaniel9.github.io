@@ -1,17 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Sebuah Permainan - Website Devan</title>
-    <!-- <link rel="stylesheet" href="fonts/"> -->
+    <!-- <title>Sebuah Permainan - Website Devan</title> -->
+    <title>Soal Matematika</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
+    <link rel="stylesheet" href="checkbox.css">
+    <link rel="stylesheet" href="radio-buttons.css">
+    <link rel="stylesheet" href="sidebar.css">
 </head>
 <style>
+    /* Fonts */
+    /* @import url("https://fonts.googleapis.com/css?family=Inter"); */
+    @import url("https://fonts.googleapis.com/css?family=Inter:500");
+    @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
+    @import url('https://fonts.googleapis.com/css?family=Rubik');
+
     body {
-        background-color: #a0c0e0;
+        /* background-color: #a0c0e0; */
+        background-color: #a0e0d0;
         /* font-family:"Helvetica",sans-serif; */
-        font-family:"Source Sans Pro",sans-serif;
+        /* font-family:"Source Sans Pro",sans-serif; */
+        font-family:"Rubik",sans-serif;
+        font-size: 16px;
+        margin: 0 auto;
+        width: 85%;
     }
     .heading {
         font-family:"Inter",sans-serif;
@@ -26,15 +40,13 @@
         clear: both;
     }
     button {
-        /* font-family:"Helvetica",sans-serif; */
-        /* src: url(https://dwl.freefontsfamily.com/download/Helvetica-Font); */
-        font-family:"Source Sans Pro",sans-serif;
+        font-family:"Rubik",sans-serif;
         font-size: 20px;
     }
     .button {
-        background-color: #4080c0;
-        border: none;
-        color: white;
+        border: 1px solid #808080;
+        color: black;
+        box-shadow: 2px 2px 2px;
         padding: 5px 10px;
         text-align: center;
         text-decoration: none;
@@ -44,6 +56,33 @@
         border-radius: 6px;
         cursor: pointer;
     }
+    #solve {
+        background-color: #80ff80;
+    }
+    #reset {
+        background-color: #ff8080;
+    }
+
+    /* Open and Close Button */
+    .openbtn {
+        /* background-color: #d0d0d0; */
+        /* background-color: lightblue;
+        font-size: 24px;
+        cursor: pointer; */
+        background-color: #103880;
+        border-radius: 6px;
+        cursor: pointer;
+        width: 46px;
+        font-size: 0px;
+        transition: 0.3s;
+    }
+    .openbtn:hover {
+        background-color: #0d2c68;
+    }
+    .openbtn img {
+        padding: 8px;
+    }
+
     a {
         font-size: 18px;
     }
@@ -67,21 +106,74 @@
         padding: 5px 10px;
         margin: 5px 0;
         display: inline-block;
-        font-family:"Source Sans Pro",sans-serif;
+        font-family:"Rubik",sans-serif;
         font-size: 16px;
         border: 1px solid #404040;
         border-radius: 4px;
         box-sizing: border-box;
     }
+    .clearfix:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    /* Slider */
+    .slider {
+        /* -webkit-appearance: none; */
+        appearance: none;
+        width: 300px;
+        height: 15px;
+        border-radius: 5px;
+        /* background: white; */
+        background-image: repeating-linear-gradient(90deg,#ffc0c0,#ffffc0,#c0ffc0);
+        outline: none;
+        opacity: 0.7;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+    }
+    .slider:hover {
+        opacity: 1;
+    }
+    .slider::-webkit-slider-thumb {
+        appearance: none;
+        /* width: 25px;
+        height: 25px; */
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #2040ff;
+        cursor: pointer;
+        z-index: 0;
+    }
+    ol {
+        /* word-break: break-all; */
+        /* margin: 0; */
+        padding: 0;
+        padding-left: 10px;
+    }
+    li {
+        list-style-position: inside;
+        padding: 0;
+    }
+    li::before {
+        content: "";
+        width: 10px;
+        display: inline-block;
+    }
+    img {
+        border-radius: 10px;
+    }
+
     /* Create a custom checkbox */
-    .checkmark {
+    /* .checkmark {
         position: absolute;
         top: 0;
         left: 0;
         height: 25px;
         width: 25px;
         background-color: #eee;
-    }
+    } */
     .box {
         background-color: #b0c8e8;
         width: 200px;
@@ -90,6 +182,67 @@
 </style>
 <body>
     <h1 class="heading">Soal Pertanyaan Matematika</h1>
+
+    <div class="sidebar" id="sidebar"></div>
+    <div class="backsidebar" id="backsidebar" onclick="closeNav()"></div>
+    <div class="column" style="padding-right:30px; position:fixed; left:10px; top:10px;">
+        <!-- border: 2px solid white; -->
+        <div class="openbtn" style="border:2px solid #c0c0c0;" onclick="openNav()"><img src="images/menu-icon.jpg" style="filter:invert(0%)" width="30"></div>
+    </div>
+
+    <script>
+        function openNav() {
+            document.getElementById("sidebar").style.width = "300px";
+            document.getElementById("backsidebar").style.display = "block";
+            document.getElementById("backsidebar").style.width = "100%";
+            document.getElementById("backsidebar").style.height = "100%";
+            // document.body.style.backgroundColor = "rgba(0,0,0,0.5)";
+        }
+        function closeNav() {
+            document.getElementById("sidebar").style.width = "0";
+            document.getElementById("backsidebar").style.display = "none";
+            document.getElementById("backsidebar").style.width = "0";
+            document.getElementById("backsidebar").style.height = "0";
+            // document.body.style.backgroundColor = "rgba(0,0,0,0)";
+        }
+
+        document.getElementById("sidebar").innerHTML = `
+        <div class="closebtn" onclick="closeNav()"><img src="images/close-icon.png" width="20"></div>
+        <span style="font-size:26px;"><b>Main Menu</b></span>
+        <!-- <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search..."><br><br> -->
+        <hr style="height:2px; border-width:0; background-color:gray">
+        <span style="font-size:22px;"><b>Program</b></span>
+        <ul class="heading" id="myMenu" style="line-height:5px;top:0;bottom:0">
+            <li><a href="Bangun Datar.html">Bangun Datar</a></li>
+            <li><a href="Bangun Ruang.html">Bangun Ruang</a></li>
+            <li><a href="Soal Matematika.html">Soal Matematika</a></li>
+            <li><a href="Peluang.html">Peluang</a></li>
+        </ul><br>
+        <hr style="height:2px; border-width:0; background-color:gray">
+        <span style="font-size:22px;"><b>Lainnya</b></span>
+        <ul class="heading" id="myMenu" style="line-height:5px">
+            <li><a href="../projects.html">Projects</a></li>
+            <li><a href="javascript:void(0)">Tentang program ini</a></li>
+        </ul>
+        `;
+
+        function myFunction() {
+            var input, filter, ul, li, a, i;
+            input = document.getElementById("mySearch");
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("myMenu");
+            li = ul.getElementsByTagName("li");
+            for (i = 0; i < li.length; i++) {
+                a = li[i].getElementsByTagName("a")[0];
+                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+
     <p>
     <b>Soal Pertanyaan</b> ini akan menjawab beberapa soal matematika, termasuk <b>Penjumlahan.</b><br>
     Program ini bisa membuat soal baru dengan angka yang berbeda dengan tombolnya, lalu klik selesaikan.
@@ -163,7 +316,8 @@
     <a class="button2" href="../projects.html">Kembali ke menu projects</a>
 
     <br><br>
-    <p>Terakhir diupdate: 2 Feb 2024</p>
+    <!-- <p>Terakhir diupdate: 2 Feb 2024</p> -->
+    <p>Terakhir diupdate: 14 Okt 2024</p>
 
     <script>
         pilihan()
