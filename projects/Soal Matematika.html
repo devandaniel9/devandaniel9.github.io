@@ -17,6 +17,11 @@
     @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
     @import url('https://fonts.googleapis.com/css?family=Rubik');
 
+    html {
+        --darkmode: 0;
+        container-name: root;
+        container-type: normal;
+    }
     body {
         /* background-color: #a0c0e0; */
         background-color: #a0e0d0;
@@ -179,6 +184,130 @@
         width: 200px;
         padding: 10px;
     }
+
+    /* Dark Mode */
+    @container root style(--darkmode: 1) {
+        body {
+            /* background-color: #203040; */
+            /* background-color: #a0e0d0; */
+            background-color: #183028;
+            color: white;
+            /* background-image: repeating-linear-gradient(180deg,#203040,#203040 80%,#304860); */
+            background-image: repeating-linear-gradient(0deg,#244842,#183028 200px,#183028);
+        }
+        .button {
+            background-color: #404040;
+            color: white;
+            box-shadow: 2px 2px 2px rgba(255,255,255,0.5);
+        }
+        #solve {
+            background-color: #006000;
+        }
+        #reset {
+            background-color: #600000;
+        }
+        a.button2:link, a.button2:visited {
+            background-color: #202020;
+            color: white;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            border: 1px solid #c0c0c0;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+        a.button2:hover, a.button2:active {
+            background-color: #404040;
+        }
+        .checkmark {
+            background-color: #202020;
+            border: solid #c0c0c0;
+        }
+        .cb-container:hover input ~ .checkmark {
+            background-color: #404040;
+        }
+        .cb-container input:checked ~ .checkmark {
+            background-color: #1860c0;
+        }
+        .cb-container:hover input:checked ~ .checkmark {
+            background-color: #124890;
+        }
+        .checkradio {
+            background-color: #202020;
+            border: solid #c0c0c0;
+        }
+        .rb-container:hover input ~ .checkradio {
+            background-color: #404040;
+        }
+        .rb-container input:checked ~ .checkradio {
+            background-color: #1860c0;
+        }
+        .rb-container:hover input:checked ~ .checkradio {
+            background-color: #124890;
+        }
+        input[type=number], select {
+            background-color: #202020;
+            border: 1px solid #c0c0c0;
+            color: white;
+        }
+        #mySearch {
+            background-color: #202020;
+            border: 1px solid #c0c0c0;
+            color: white;
+        }
+        .slider {
+            background-color: gray;
+        }
+        .slider::-webkit-slider-thumb {
+            border: 2px solid white;
+        }
+        .sidebar {
+            background-color: #303030;
+            color: white;
+            box-shadow: 0px 8px 16px 0px rgba(255,255,255,0.2);
+        }
+        .sidebar a {
+            color: white;
+        }
+        .sidebar a:hover {
+            background-color: #606060;
+        }
+        .sidebar .closebtn {
+            background-color: #606060;
+        }
+        .sidebar .closebtn:hover {
+            background-color: #808080;
+        }
+        .sidebar .closebtn img {
+            padding: 8px;
+        }
+        #myMenu {
+            color: white;
+        }
+        img {
+            filter: invert(100%);
+        }
+        a.external {
+            font-size: 16px;
+        }
+        a.external:link {
+            color: #8080ff;
+            /* background-color: transparent;
+            text-decoration: none; */
+        }
+        a.external:visited {
+            color: #c080ff;
+        }
+        /* .external a:hover {
+            color: red;
+            background-color: transparent;
+            text-decoration: underline;
+        } */
+        a.external:active {
+            color: #ff8080;
+        }
+    }
 </style>
 <body>
     <h1 class="heading">Soal Pertanyaan Matematika</h1>
@@ -272,6 +401,7 @@
         <option>Mudah</option>
         <option>Sedang</option>
         <option>Sulit</option>
+        <option>Kustom</option>
     </select>
     <br><br>
 
@@ -281,10 +411,43 @@
         <option>Pilihan ganda</option>
     </select>
     <br><br>
+    <!-- <label id="digit2">Jumlah pilihan pada pilihan ganda: 5</label><br><br> -->
+    <!-- <input type="range" class="slider" id="digit" oninput="output(),precision()" min="2" max="10" value="2"> -->
+    <!-- <input type="range" class="slider" id="digit" oninput="settings_check()" min="2" max="10" value="2">
+    <br><br>
+    <span id="digit2">Jumlah pilihan pada pilihan ganda: 5</span>
+    <br><br><br> -->
 
-    <label>Dengan soal cerita:</label>
+    <img src="images/timer-icon.png" style="position:absolute; left:400px;" width="60">
+    <label>Pilih waktu timer setiap soal:</label><br>
+    <select id="tipe" style="width:150px" onchange="pilihan()">
+        <option>Tidak ada</option>
+        <option>5 detik</option>
+        <option>10 detik</option>
+        <option>15 detik</option>
+        <option>30 detik</option>
+        <option>1 menit</option>
+        <option>Kustom</option>
+    </select>
+    <br><br>
+
+    <!-- <label>Dengan soal cerita:</label> -->
     <!-- <input type="checkbox" id="check" onclick="change()"> -->
-    <input type="checkbox" id="check" onclick="tampilkan()">
+    <!-- <input type="checkbox" id="check" onclick="tampilkan()"> -->
+    <label class="cb-container" style="width:400px;">Dengan soal cerita
+        <input type="checkbox" id="check" onclick="tampilkan()">
+        <span class="checkmark"></span>
+    </label>
+    <label class="cb-container" style="width:400px;">Terapkan tema gelap
+        <input type="checkbox" id="tema" onclick="settings_check()">
+        <span class="checkmark"></span>
+    </label>
+    <label class="cb-container" style="width:400px;">Pertahankan pengaturan<br>
+        <span style="font-size:14px">Akan direset secara otomatis setelah 3 hari tidak digunakan</span>
+        <!-- <input type="checkbox" id="settings" checked="checked"> -->
+        <input type="checkbox" id="settings" onclick="settings_check()">
+        <span class="checkmark"></span>
+    </label>
     <br><br>
 
     <div class="box" id="cerita" style="background-color:#a0b0c0; width:200px; display:none">
@@ -300,14 +463,15 @@
     <!-- <p id="soal">Hasil dari 2 + 3 adalah ...</p> -->
     <!-- <p>Pilih pertanyaan</p> -->
     <p id="soal" style="width:500px; word-wrap:break-word;">Belum ada soal</p>
-    <p id="soal2"></p>
     <button class="button" onclick="buat();pilihan()">Buat soal baru</button>
-    <br><br>
+    <p id="soal2"></p>
+    <!-- <br><br> -->
     <!-- <p>Input angka</p> -->
     <!-- <input type="number" id="angka" min="0"> -->
-    <div id="tipe2"></div>
+    <div id="tipe2"></div><br>
+    <!-- <br><br> -->
+    <button class="button" id="solve" onclick="selesaikan()">Selesaikan</button>
     <br><br>
-    <button class="button" onclick="selesaikan()">Selesaikan</button>
 
     <h2 class="heading">Jawaban</h2>
     <p id="jawaban">Belum ada jawaban</p>
@@ -317,10 +481,55 @@
 
     <br><br>
     <!-- <p>Terakhir diupdate: 2 Feb 2024</p> -->
-    <p>Terakhir diupdate: 14 Okt 2024</p>
+    <p>Terakhir diupdate: 16 Okt 2024</p>
 
     <script>
-        pilihan()
+        // Time
+        d = new Date();
+        time = d.getTime();
+        time_old = localStorage.getItem('time2');
+        if (time_old == null) {
+            time_old = 0;
+        }
+        check_old = localStorage.getItem("settings-check");
+        check_old = check_old == "true"
+        // if (time > parseInt(time_old) + 5000) {
+            if (time > parseInt(time_old) + 3*86400*1000) {
+            check_old = false;
+        }
+
+        // change();
+        if (check_old) {
+            theme_check_old = localStorage.getItem("tema-check");
+            theme_check_old = theme_check_old == "true"
+        } else {
+            theme_check_old = false;
+            // clear_all();
+        }
+
+        document.getElementById("tema").checked = theme_check_old;
+        document.getElementById("settings").checked = check_old;
+        settings_check();
+        pilihan();
+
+        function settings_check() {
+            theme_check = document.getElementById("tema").checked;
+            check = document.getElementById("settings").checked;
+            localStorage.setItem("settings-check", check);
+            // console.log(theme_check);
+            console.log(check);
+            //console.log(unit_check);
+            //console.log(digit)
+            if (check) {
+                localStorage.setItem("tema-check", theme_check);
+            }
+            if (theme_check) {
+                document.documentElement.style.setProperty('--darkmode', 1);
+            } else {
+                document.documentElement.style.setProperty('--darkmode', 0);
+            }
+        }
+
         function tampilkan() {
             var cerita_check = document.getElementById("check");
             var cerita = document.getElementById("cerita");
@@ -458,6 +667,14 @@
                 <label>Input jawaban</label><br>
                 <input type="number" id="angka" min="0">
                 `;
+                var input = document.getElementById("angka");
+                input.addEventListener("keypress", function(event) {
+                    if (event.key === "Enter") {
+                        event.preventDefault();
+                        document.getElementById("solve").click();
+                    }
+                });
+
             } else {
                 var e = document.getElementById("bentuk");
                 var e1 = e.options[e.selectedIndex];
@@ -481,28 +698,29 @@
                     pilihan_list = [12,13,14,15,16];
                 }
                 pilihan_list[pilihan_index] = hasil;
+                // <div class="column">
                 document.getElementById('tipe2').innerHTML = `
                 <span>Pilihan jawaban</span><br><br>
-                <div class="column">
-                    <input type="radio" id="pilihan1" name="pilihan" value="0">
-                    <label for="pilihan1">A. ${pilihan_list[0]}</label>
-                </div>
-                <div class="column">
-                    <input type="radio" id="pilihan2" name="pilihan" value="1">
-                    <label for="pilihan2">B. ${pilihan_list[1]}</label>
-                </div>
-                <div class="column">
-                    <input type="radio" id="pilihan3" name="pilihan" value="2">
-                    <label for="pilihan3">C. ${pilihan_list[2]}</label>
-                </div>
-                <div class="column">
-                    <input type="radio" id="pilihan4" name="pilihan" value="3">
-                    <label for="pilihan4">D. ${pilihan_list[3]}</label>
-                    </div>
-                <div class="column">
-                    <input type="radio" id="pilihan5" name="pilihan" value="4">
-                    <label for="pilihan5">E. ${pilihan_list[4]}</label>
-                </div>
+                <label class="rb-container" style="width:150px;">A. ${pilihan_list[0]}
+                    <input type="radio" id="pilihan1" value="${pilihan_list[0]}" name="pilihan" value="0">
+                    <span class="checkradio"></span>
+                </label>
+                <label class="rb-container" style="width:150px;">B. ${pilihan_list[1]}
+                    <input type="radio" id="pilihan2" value="${pilihan_list[1]}" name="pilihan" value="1">
+                    <span class="checkradio"></span>
+                </label>
+                <label class="rb-container" style="width:150px;">C. ${pilihan_list[2]}
+                    <input type="radio" id="pilihan3" value="${pilihan_list[2]}" name="pilihan" value="2">
+                    <span class="checkradio"></span>
+                </label>
+                <label class="rb-container" style="width:150px;">D. ${pilihan_list[3]}
+                    <input type="radio" id="pilihan4" value="${pilihan_list[3]}" name="pilihan" value="3">
+                    <span class="checkradio"></span>
+                </label>
+                <label class="rb-container" style="width:150px;">E. ${pilihan_list[4]}
+                    <input type="radio" id="pilihan5" value="${pilihan_list[4]}" name="pilihan" value="4">
+                    <span class="checkradio"></span>
+                </label>
                 <div class="clearfix"></div><br>
                 `;
             }
@@ -514,7 +732,18 @@
             if (tipe2.index == 0) {
                 var angka_awal = document.getElementById('angka').value;
             } else {
-                var angka_awal = document.getElementsByName('pilihan1').value;
+                // var angka_awal = document.getElementsByName('pilihan1').value;
+                if (document.getElementById("pilihan1").checked) {
+                    var angka_awal = document.getElementById('pilihan1').value;
+                } else if (document.getElementById("pilihan2").checked) {
+                    var angka_awal = document.getElementById('pilihan2').value;
+                } else if (document.getElementById("pilihan3").checked) {
+                    var angka_awal = document.getElementById('pilihan3').value;
+                } else if (document.getElementById("pilihan4").checked) {
+                    var angka_awal = document.getElementById('pilihan4').value;
+                } else {
+                    var angka_awal = document.getElementById('pilihan5').value;
+                }
             }
             if (angka_awal != '') {
                 var e = document.getElementById("bentuk");
