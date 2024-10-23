@@ -405,11 +405,22 @@
     </select>
     <br><br>
 
-    <label>Pilih tipe pertanyaan:</label><br>
-    <select id="tipe" style="width:150px" onchange="pilihan()">
-        <option>Isian</option>
-        <option>Pilihan ganda</option>
-    </select>
+    <div class="column" style="padding-right:50px;">
+        <label>Pilih tipe pertanyaan:</label><br>
+        <select id="tipe" style="width:150px" onchange="pilihan()">
+            <option>Isian</option>
+            <option>Pilihan ganda</option>
+        </select>
+    </div>
+    <div class="column" id="pilihan" style="display:block">
+        <label>Jumlah pilihan:</label><br>
+        <select id="jumlah-pilihan" style="width:150px" onchange="pilihan()">
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+    </div>
+    <div class="clearfix"></div>
     <br><br>
     <!-- <label id="digit2">Jumlah pilihan pada pilihan ganda: 5</label><br><br> -->
     <!-- <input type="range" class="slider" id="digit" oninput="output(),precision()" min="2" max="10" value="2"> -->
@@ -420,7 +431,7 @@
 
     <img src="images/timer-icon.png" style="position:absolute; left:400px;" width="60">
     <label>Pilih waktu timer setiap soal:</label><br>
-    <select id="tipe" style="width:150px" onchange="pilihan()">
+    <select id="waktu" style="width:150px" onchange="pilihan()">
         <option>Tidak ada</option>
         <option>5 detik</option>
         <option>10 detik</option>
@@ -481,7 +492,7 @@
 
     <br><br>
     <!-- <p>Terakhir diupdate: 2 Feb 2024</p> -->
-    <p>Terakhir diupdate: 16 Okt 2024</p>
+    <p>Terakhir diupdate: 23 Okt 2024</p>
 
     <script>
         // Time
@@ -663,6 +674,7 @@
             var tipe = document.getElementById("tipe");
             var tipe2 = tipe.options[tipe.selectedIndex];
             if (tipe2.index == 0) {
+                document.getElementById("pilihan").style.display = "none";
                 document.getElementById('tipe2').innerHTML = `
                 <label>Input jawaban</label><br>
                 <input type="number" id="angka" min="0">
@@ -676,6 +688,7 @@
                 });
 
             } else {
+                document.getElementById("pilihan").style.display = "block";
                 var e = document.getElementById("bentuk");
                 var e1 = e.options[e.selectedIndex];
                 pilihan_index = Math.floor(5 * Math.random());
