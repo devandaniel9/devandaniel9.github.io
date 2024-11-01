@@ -311,6 +311,7 @@
 </style>
 <body>
     <h1 class="heading">Soal Pertanyaan Matematika</h1>
+    <img src="images/soal-matematika.jpg" style="background-color:white; filter:invert(0%);" width="200">
 
     <div class="sidebar" id="sidebar"></div>
     <div class="backsidebar" id="backsidebar" onclick="closeNav()"></div>
@@ -414,7 +415,7 @@
     </div>
     <div class="column" id="pilihan" style="display:block">
         <label>Jumlah pilihan:</label><br>
-        <select id="jumlah-pilihan" style="width:150px" onchange="pilihan()">
+        <select name="jumlah-pilihan" id="jumlah-pilihan" style="width:150px" onchange="pilihan()">
             <option>3</option>
             <option>4</option>
             <option>5</option>
@@ -447,6 +448,10 @@
     <!-- <input type="checkbox" id="check" onclick="tampilkan()"> -->
     <label class="cb-container" style="width:400px;">Dengan soal cerita
         <input type="checkbox" id="check" onclick="tampilkan()">
+        <span class="checkmark"></span>
+    </label>
+    <label class="cb-container" style="width:400px;">Percobaan satu kali dalam setiap soal
+        <input type="checkbox" id="check2" onclick="tampilkan()">
         <span class="checkmark"></span>
     </label>
     <label class="cb-container" style="width:400px;">Terapkan tema gelap
@@ -492,7 +497,7 @@
 
     <br><br>
     <!-- <p>Terakhir diupdate: 2 Feb 2024</p> -->
-    <p>Terakhir diupdate: 23 Okt 2024</p>
+    <p>Terakhir diupdate: 1 Nov 2024</p>
 
     <script>
         // Time
@@ -560,6 +565,7 @@
             var tipe2 = tipe.options[tipe.selectedIndex];
             // var tanda = '';
             document.getElementById('jawaban').innerHTML = 'Belum ada jawaban';
+            document.getElementById('tipe2').style.display = 'block';
             // document.getElementById('angka').innerHTML = '';
             if (e1.index == 0) {
                 if (level2.index == 0) {
@@ -614,8 +620,26 @@
                 tanda = ' x '
                 hasil = a*b;
             } else if (e1.index == 3) {
-                kecil = Math.floor(1 + 10 * Math.random());
-                a = Math.floor(1 + 10 * Math.random()) * kecil;
+                if (level2.index == 0) {
+                    kecil = Math.floor(1 + 10 * Math.random());
+                    a = Math.floor(1 + 10 * Math.random()) * kecil;
+                } else if (level2.index == 1) {
+                    if (Math.random() < 0.5) {
+                        kecil = Math.floor(10 + 20 * Math.random());
+                        a = Math.floor(3 + 17 * Math.random()) * kecil;
+                    } else {
+                        kecil = Math.floor(3 + 17 * Math.random());
+                        a = Math.floor(10 + 20 * Math.random()) * kecil;
+                    }
+                } else {
+                    if (Math.random() < 0.5) {
+                        kecil = Math.floor(10 + 20 * Math.random());
+                        a = Math.floor(3 + 17 * Math.random()) * kecil;
+                    } else {
+                        kecil = Math.floor(50 + 250 * Math.random());
+                        a = Math.floor(10 + 40 * Math.random()) * kecil;
+                    }
+                }
                 b = kecil;
                 tanda = ' : '
                 hasil = Math.floor(a/b);
@@ -673,6 +697,18 @@
         function pilihan() {
             var tipe = document.getElementById("tipe");
             var tipe2 = tipe.options[tipe.selectedIndex];
+            
+            var j_pilihan = document.getElementById("jumlah-pilihan");
+            var j_pilihan2 = parseInt(j_pilihan.options[j_pilihan.selectedIndex].innerHTML);
+            // console.log(j_pilihan2)
+
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i >= 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+            }
+            
             if (tipe2.index == 0) {
                 document.getElementById("pilihan").style.display = "none";
                 document.getElementById('tipe2').innerHTML = `
@@ -691,8 +727,8 @@
                 document.getElementById("pilihan").style.display = "block";
                 var e = document.getElementById("bentuk");
                 var e1 = e.options[e.selectedIndex];
-                pilihan_index = Math.floor(5 * Math.random());
-                c = Math.floor(5*Math.random());
+                pilihan_index = Math.floor(j_pilihan2 * Math.random());
+                // c = Math.floor(5*Math.random());
                 pilihan_list = [12,13,14,15,16];
                 if (e1.index == 0) {
                     // hasil = a+b;
@@ -704,12 +740,33 @@
                         a+b+1+Math.floor(b/2*Math.random())
                     ];
                 } else if (e1.index == 1) {
-                    pilihan_list = [12,13,14,15,16];
+                    pilihan_list = [
+                        a-b+1+Math.floor(b/2*Math.random()),
+                        a-b-1-Math.floor(b/2*Math.random()),
+                        a-b+1+Math.floor(b/2*Math.random()),
+                        a-b-1-Math.floor(b/2*Math.random()),
+                        a-b+1+Math.floor(b/2*Math.random())
+                    ];
                 } else if (e1.index == 2) {
-                    pilihan_list = [12,13,14,15,16];
+                    pilihan_list = [
+                        Math.floor(a/2+a*Math.random())*Math.floor(b/2+b*Math.random()),
+                        Math.floor(a/2+a*Math.random())*Math.floor(b/2+b*Math.random()),
+                        Math.floor(a/2+a*Math.random())*Math.floor(b/2+b*Math.random()),
+                        Math.floor(a/2+a*Math.random())*Math.floor(b/2+b*Math.random()),
+                        Math.floor(a/2+a*Math.random())*Math.floor(b/2+b*Math.random()),
+                    ];
                 } else if (e1.index == 3) {
-                    pilihan_list = [12,13,14,15,16];
+                    // pilihan_list = [12,13,14,15,16];
+                    pilihan_list = [
+                        Math.floor(1+2*a/b*Math.random()),
+                        Math.floor(1+2*a/b*Math.random()),
+                        Math.floor(1+2*a/b*Math.random()),
+                        Math.floor(1+2*a/b*Math.random()),
+                        Math.floor(1+2*a/b*Math.random()),
+                    ];
                 }
+                pilihan_list = pilihan_list.sort( () => .5 - Math.random() );
+                pilihan_list = pilihan_list.slice(0,j_pilihan2);
                 pilihan_list[pilihan_index] = hasil;
                 // <div class="column">
                 document.getElementById('tipe2').innerHTML = `
@@ -726,22 +783,35 @@
                     <input type="radio" id="pilihan3" value="${pilihan_list[2]}" name="pilihan" value="2">
                     <span class="checkradio"></span>
                 </label>
-                <label class="rb-container" style="width:150px;">D. ${pilihan_list[3]}
-                    <input type="radio" id="pilihan4" value="${pilihan_list[3]}" name="pilihan" value="3">
-                    <span class="checkradio"></span>
-                </label>
-                <label class="rb-container" style="width:150px;">E. ${pilihan_list[4]}
-                    <input type="radio" id="pilihan5" value="${pilihan_list[4]}" name="pilihan" value="4">
-                    <span class="checkradio"></span>
-                </label>
-                <div class="clearfix"></div><br>
                 `;
+                if (j_pilihan2 >= 4) {
+                    document.getElementById('tipe2').innerHTML += `
+                    <label class="rb-container" style="width:150px;">D. ${pilihan_list[3]}
+                        <input type="radio" id="pilihan4" value="${pilihan_list[3]}" name="pilihan" value="3">
+                        <span class="checkradio"></span>
+                    </label>
+                    `;
+                }
+                if (j_pilihan2 == 5) {
+                    document.getElementById('tipe2').innerHTML += `
+                    <label class="rb-container" style="width:150px;">E. ${pilihan_list[4]}
+                        <input type="radio" id="pilihan5" value="${pilihan_list[4]}" name="pilihan" value="4">
+                        <span class="checkradio"></span>
+                    </label>
+                    <div class="clearfix"></div><br>
+                    `;
+                }
             }
         }
 
         function selesaikan() {
             var tipe = document.getElementById("tipe");
             var tipe2 = tipe.options[tipe.selectedIndex];
+
+            if (document.getElementById('check2').checked) {
+                document.getElementById('tipe2').style.display = 'none';
+            }
+
             if (tipe2.index == 0) {
                 var angka_awal = document.getElementById('angka').value;
             } else {
