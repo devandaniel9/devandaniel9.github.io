@@ -497,7 +497,7 @@
 
     <br><br>
     <!-- <p>Terakhir diupdate: 2 Feb 2024</p> -->
-    <p>Terakhir diupdate: 1 Nov 2024</p>
+    <p>Terakhir diupdate: 4 Nov 2024</p>
 
     <script>
         // Time
@@ -508,9 +508,9 @@
             time_old = 0;
         }
         check_old = localStorage.getItem("settings-check");
-        check_old = check_old == "true"
+        check_old = check_old == "true";
         // if (time > parseInt(time_old) + 5000) {
-            if (time > parseInt(time_old) + 3*86400*1000) {
+        if (time > parseInt(time_old) + 3*86400*1000) {
             check_old = false;
         }
 
@@ -527,6 +527,16 @@
         document.getElementById("settings").checked = check_old;
         settings_check();
         pilihan();
+
+        // interval = 1000;
+        interval = 200;
+        setInterval(function() {
+            d = new Date();
+            time = d.getTime();
+            // document.getElementById("time").innerHTML = time;
+            // console.log(time);
+            localStorage.setItem("time2", time);
+        }, interval);
 
         function settings_check() {
             theme_check = document.getElementById("tema").checked;
@@ -730,6 +740,7 @@
                 pilihan_index = Math.floor(j_pilihan2 * Math.random());
                 // c = Math.floor(5*Math.random());
                 pilihan_list = [12,13,14,15,16];
+                pilihan_list = [];
                 if (e1.index == 0) {
                     // hasil = a+b;
                     pilihan_list = [
@@ -748,13 +759,22 @@
                         a-b+1+Math.floor(b/2*Math.random())
                     ];
                 } else if (e1.index == 2) {
-                    pilihan_list = [
-                        Math.floor(a/2+a*Math.random())*Math.floor(b/2+b*Math.random()),
-                        Math.floor(a/2+a*Math.random())*Math.floor(b/2+b*Math.random()),
-                        Math.floor(a/2+a*Math.random())*Math.floor(b/2+b*Math.random()),
-                        Math.floor(a/2+a*Math.random())*Math.floor(b/2+b*Math.random()),
-                        Math.floor(a/2+a*Math.random())*Math.floor(b/2+b*Math.random()),
-                    ];
+                    // pilihan_list = [
+                    //     Math.floor(a/2+a*Math.random())*Math.floor(b/2+b*Math.random()),
+                    //     Math.floor(a/2+a*Math.random())*Math.floor(b/2+b*Math.random()),
+                    //     Math.floor(a/2+a*Math.random())*Math.floor(b/2+b*Math.random()),
+                    //     Math.floor(a/2+a*Math.random())*Math.floor(b/2+b*Math.random()),
+                    //     Math.floor(a/2+a*Math.random())*Math.floor(b/2+b*Math.random()),
+                    // ];
+                    // for (let i = 0; i < cars.length; i++) {
+                    for (let i = 0; i < 5; i++) {
+                        value = Math.floor(a/2+Math.max(a,3)*Math.random())*Math.floor(b/2+Math.max(b,3)*Math.random())
+                        while (pilihan_list.indexOf(value) > -1 | value == hasil) {
+                            value = Math.floor(a/2+Math.max(a,3)*Math.random())*Math.floor(b/2+Math.max(b,3)*Math.random())
+                        }
+                        pilihan_list.push(value);
+                    }
+                    console.log(pilihan_list);
                 } else if (e1.index == 3) {
                     // pilihan_list = [12,13,14,15,16];
                     pilihan_list = [
