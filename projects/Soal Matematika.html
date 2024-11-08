@@ -387,13 +387,16 @@
     <!-- <label for="bentuk">Pilih jenis pertanyaan matematika:</label><br>
     <select name="bentuk" id="bentuk" style="width:150px"> -->
     <label>Pilih jenis pertanyaan matematika:</label><br>
-    <select id="bentuk" style="width:250px">
+    <select id="bentuk" style="width:300px">
         <option>Penjumlahan</option>
         <option>Pengurangan</option>
         <option>Perkalian</option>
         <option>Pembagian</option>
         <option>Penjumlahan dan Pengurangan</option>
         <option>Campuran</option>
+        <option style="color:gray">FPB</option>
+        <option style="color:gray">KPK</option>
+        <option style="color:gray">Perpangkatan</option>
     </select>
     <br><br>
 
@@ -423,24 +426,26 @@
     </div>
     <div class="clearfix"></div>
     <br><br>
-    <!-- <label id="digit2">Jumlah pilihan pada pilihan ganda: 5</label><br><br> -->
-    <!-- <input type="range" class="slider" id="digit" oninput="output(),precision()" min="2" max="10" value="2"> -->
-    <!-- <input type="range" class="slider" id="digit" oninput="settings_check()" min="2" max="10" value="2">
-    <br><br>
-    <span id="digit2">Jumlah pilihan pada pilihan ganda: 5</span>
-    <br><br><br> -->
 
-    <img src="images/timer-icon.png" style="position:absolute; left:400px;" width="60">
-    <label>Pilih waktu timer setiap soal:</label><br>
-    <select id="waktu" style="width:150px" onchange="pilihan();clearInterval(myInterval);">
-        <option value="0">Tidak ada</option>
-        <option value="5">5 detik</option>
-        <option value="10">10 detik</option>
-        <option value="15">15 detik</option>
-        <option value="30">30 detik</option>
-        <option value="60">1 menit</option>
-        <option value="10">Kustom</option>
-    </select>
+    <img src="images/timer-icon.png" id="timer-icon" style="position:absolute; left:400px;" width="60">
+    <div class="column" style="padding-right:50px;">
+        <label>Pilih waktu timer setiap soal:</label><br>
+        <select id="waktu" style="width:150px" onchange="pilihan();clearInterval(myInterval);">
+            <option value="0">Tidak ada</option>
+            <option value="5">5 detik</option>
+            <option value="10">10 detik</option>
+            <option value="15">15 detik</option>
+            <option value="30">30 detik</option>
+            <option value="60">1 menit</option>
+            <option value="1">Kustom</option>
+        </select>
+    </div>
+    <div class="column" id="waktu-timer" style="display:none">
+        <label>Waktu timer:</label><br>
+        <input type="number" id="waktu2" style="width:150px;" min="1" value="10">
+        <label>&nbsp;detik</label>
+    </div>
+    <div class="clearfix"></div>
     <br><br>
 
     <!-- <label>Dengan soal cerita:</label> -->
@@ -500,7 +505,7 @@
 
     <br><br>
     <!-- <p>Terakhir diupdate: 2 Feb 2024</p> -->
-    <p>Terakhir diupdate: 6 Nov 2024</p>
+    <p>Terakhir diupdate: 8 Nov 2024</p>
 
     <script>
         // Time
@@ -724,20 +729,68 @@
 
             if (waktu_timer == 0) {
                 document.getElementById('timer').style.display = 'none';
+                waktu_check = true;
             } else {
                 document.getElementById('timer').style.display = 'block';
+                waktu_check = false;
+            }
+
+            if (waktu_timer == 1) {
+                document.getElementById('waktu-timer').style.display = 'block';
+                document.getElementById('timer-icon').style.left = '600px';
+                waktu_timer = document.getElementById('waktu2').value;
+            } else {
+                document.getElementById('waktu-timer').style.display = 'none';
+                document.getElementById('timer-icon').style.left = '400px';
             }
 
             // myInterval = "";
             // var myInterval;
             // clearInterval(myInterval);
+            // document.getElementById('timer').innerHTML = `${waktu_timer} detik`;
+            waktu_teks = `Sisa waktu:<br><span style="font-size:24px; line-height:40px;">`;
+
+            if (waktu_timer < 60) {
+                waktu_teks += `${waktu_timer} detik`;
+            } else if (waktu_timer % 60 < 1) {
+                waktu_teks += `${Math.floor(waktu_timer/60)} menit`;
+            } else {
+                waktu_teks += `${Math.floor(waktu_timer/60)} menit ${waktu_timer % 60} detik`;
+            }
+
+            waktu_teks += "</span>";
+            document.getElementById('timer').innerHTML = waktu_teks;
+
             myInterval = setInterval(function() {
                 d3 = new Date();
                 time3 = d3.getTime();
-                var waktu_timer = parseInt(document.getElementById("waktu").value);
-                // console.log(time2,time3,waktu_timer);
-                waktu2 = parseInt(Math.max(0,(time2-time3)/1000+waktu_timer+1))
-                document.getElementById('timer').innerHTML = `${waktu2} detik`;
+                waktu_timer = parseInt(document.getElementById("waktu").value);
+                // console.log(waktu_timer);
+                if (waktu_timer == 1) {
+                    waktu_timer = parseInt(document.getElementById('waktu2').value);
+                    if (isNaN(waktu_timer)) {
+                        waktu_timer = 0;
+                    }
+                    // console.log(waktu_timer);
+                }
+                // console.log(waktu_timer);
+                console.log(time2,time3,waktu_timer);
+                waktu2 = parseInt(Math.min(waktu_timer,Math.max(0,(time2-time3)/1000+waktu_timer+1)));
+                // waktu_teks = `Waktu: ${waktu2} detik`;
+
+                waktu_teks = `Sisa waktu:<br><span style="font-size:24px; line-height:40px;">`;
+
+                if (waktu2 < 60) {
+                    waktu_teks += `${waktu2} detik`;
+                } else if (waktu2 % 60 < 1) {
+                    waktu_teks += `${Math.floor(waktu2/60)} menit`;
+                } else {
+                    waktu_teks += `${Math.floor(waktu2/60)} menit ${waktu2 % 60} detik`;
+                }
+
+                waktu_teks += "</span>";
+                document.getElementById('timer').innerHTML = waktu_teks;
+
                 if (waktu_timer > 0 & waktu2 == 0) {
                     document.getElementById('tipe2').style.display = 'none';
                 }
@@ -774,21 +827,25 @@
                 pilihan_list = [];
                 if (e1.index == 0) {
                     // hasil = a+b;
-                    pilihan_list = [
-                        a+b+1+Math.floor(b/2*Math.random()),
-                        a+b-1-Math.floor(b/2*Math.random()),
-                        a+b+1+Math.floor(b/2*Math.random()),
-                        a+b-1-Math.floor(b/2*Math.random()),
-                        a+b+1+Math.floor(b/2*Math.random())
-                    ];
+                    // pilihan_list = [
+                    //     a+b+1+Math.floor(b/2*Math.random()),
+                    for (let i = 0; i < 5; i++) {
+                        value = a+b+Math.floor(-(a+b)/2+Math.max(a+b,6)*Math.random());
+                        while (pilihan_list.indexOf(value) > -1 | value == hasil) {
+                            value = a+b+Math.floor(-(a+b)/2+Math.max(a+b,6)*Math.random());
+                        }
+                        pilihan_list.push(value);
+                    }
+                    
                 } else if (e1.index == 1) {
-                    pilihan_list = [
-                        a-b+1+Math.floor(b/2*Math.random()),
-                        a-b-1-Math.floor(b/2*Math.random()),
-                        a-b+1+Math.floor(b/2*Math.random()),
-                        a-b-1-Math.floor(b/2*Math.random()),
-                        a-b+1+Math.floor(b/2*Math.random())
-                    ];
+                    for (let i = 0; i < 5; i++) {
+                        value = a-b+Math.floor(-(a-b)/2+Math.max(a-b,6)*Math.random());
+                        while (pilihan_list.indexOf(value) > -1 | value == hasil) {
+                            value = a-b+Math.floor(-(a-b)/2+Math.max(a-b,6)*Math.random());
+                        }
+                        pilihan_list.push(value);
+                    }
+                    
                 } else if (e1.index == 2) {
                     // pilihan_list = [
                     //     Math.floor(a/2+a*Math.random())*Math.floor(b/2+b*Math.random()),
@@ -799,22 +856,25 @@
                     // ];
                     // for (let i = 0; i < cars.length; i++) {
                     for (let i = 0; i < 5; i++) {
-                        value = Math.floor(a/2+Math.max(a,3)*Math.random())*Math.floor(b/2+Math.max(b,3)*Math.random())
+                        value = Math.floor(a/2+Math.max(a,3)*Math.random())*Math.floor(b/2+Math.max(b,3)*Math.random());
                         while (pilihan_list.indexOf(value) > -1 | value == hasil) {
-                            value = Math.floor(a/2+Math.max(a,3)*Math.random())*Math.floor(b/2+Math.max(b,3)*Math.random())
+                            value = Math.floor(a/2+Math.max(a,3)*Math.random())*Math.floor(b/2+Math.max(b,3)*Math.random());
                         }
                         pilihan_list.push(value);
                     }
                     console.log(pilihan_list);
+
                 } else if (e1.index == 3) {
                     // pilihan_list = [12,13,14,15,16];
-                    pilihan_list = [
-                        Math.floor(1+2*a/b*Math.random()),
-                        Math.floor(1+2*a/b*Math.random()),
-                        Math.floor(1+2*a/b*Math.random()),
-                        Math.floor(1+2*a/b*Math.random()),
-                        Math.floor(1+2*a/b*Math.random()),
-                    ];
+                    // pilihan_list = [
+                    //     Math.floor(1+2*a/b*Math.random()),
+                    for (let i = 0; i < 5; i++) {
+                        value = Math.floor(1+Math.max(2*a/b,6)*Math.random());
+                        while (pilihan_list.indexOf(value) > -1 | value == hasil) {
+                            value = Math.floor(1+Math.max(2*a/b,6)*Math.random());
+                        }
+                        pilihan_list.push(value);
+                    }
                 }
                 pilihan_list = pilihan_list.sort( () => .5 - Math.random() );
                 pilihan_list = pilihan_list.slice(0,j_pilihan2);
