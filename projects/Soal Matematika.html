@@ -411,14 +411,15 @@
 
     <div class="column" style="padding-right:50px;">
         <label>Pilih tipe pertanyaan:</label><br>
-        <select id="tipe" style="width:150px" onchange="pilihan()">
+        <!-- <select id="tipe" style="width:150px" onchange="pilihan()"> -->
+        <select id="tipe" style="width:150px" onchange="pilihan();clearInterval(myInterval);">
             <option>Isian</option>
             <option>Pilihan ganda</option>
         </select>
     </div>
     <div class="column" id="pilihan" style="display:block">
         <label>Jumlah pilihan:</label><br>
-        <select name="jumlah-pilihan" id="jumlah-pilihan" style="width:150px" onchange="pilihan()">
+        <select name="jumlah-pilihan" id="jumlah-pilihan" style="width:150px" onchange="pilihan();clearInterval(myInterval);">
             <option>3</option>
             <option>4</option>
             <option>5</option>
@@ -505,7 +506,7 @@
 
     <br><br>
     <!-- <p>Terakhir diupdate: 2 Feb 2024</p> -->
-    <p>Terakhir diupdate: 8 Nov 2024</p>
+    <p>Terakhir diupdate: 11 Nov 2024</p>
 
     <script>
         // Time
@@ -694,8 +695,13 @@
                 if (e1.index < 4) {
                     // document.getElementById('soal').innerHTML = 'Hasil dari ' + a + tanda + b + ' adalah ...';
                     document.getElementById('soal').innerHTML = `Hasil dari ${a} ${tanda} ${b} adalah ...`;
-                } else {
+                    document.getElementById('tipe2').style.display = 'block';
+                } else if (e1.index == 4) {
                     document.getElementById('soal').innerHTML = `Hasil dari ${a} ${tanda} ${b} ${tanda2} ${c} adalah ...`;
+                    document.getElementById('tipe2').style.display = 'block';
+                } else {
+                    document.getElementById('soal').innerHTML = "Jenis pertanyaan ini belum tersedia";
+                    document.getElementById('tipe2').style.display = 'none';
                 }
             } else {
                 var cerita2 = document.getElementById("cerita2");
@@ -717,7 +723,7 @@
             var tipe2 = tipe.options[tipe.selectedIndex];
             
             var j_pilihan = document.getElementById("jumlah-pilihan");
-            var j_pilihan2 = parseInt(j_pilihan.options[j_pilihan.selectedIndex].innerHTML);
+            j_pilihan2 = parseInt(j_pilihan.options[j_pilihan.selectedIndex].innerHTML);
             // console.log(j_pilihan2)
 
             var waktu_timer = parseInt(document.getElementById("waktu").value);
@@ -774,7 +780,7 @@
                     // console.log(waktu_timer);
                 }
                 // console.log(waktu_timer);
-                console.log(time2,time3,waktu_timer);
+                // console.log(time2,time3,waktu_timer);
                 waktu2 = parseInt(Math.min(waktu_timer,Math.max(0,(time2-time3)/1000+waktu_timer+1)));
                 // waktu_teks = `Waktu: ${waktu2} detik`;
 
@@ -933,10 +939,16 @@
                     var angka_awal = document.getElementById('pilihan2').value;
                 } else if (document.getElementById("pilihan3").checked) {
                     var angka_awal = document.getElementById('pilihan3').value;
-                } else if (document.getElementById("pilihan4").checked) {
-                    var angka_awal = document.getElementById('pilihan4').value;
+                } else if (j_pilihan2 >= 4) {
+                    if (document.getElementById("pilihan4").checked) {
+                        var angka_awal = document.getElementById('pilihan4').value;
+                    }
+                } else if (j_pilihan2 == 5) {
+                    if (document.getElementById("pilihan5").checked) {
+                        var angka_awal = document.getElementById('pilihan5').value;
+                    }
                 } else {
-                    var angka_awal = document.getElementById('pilihan5').value;
+                    var angka_awal = '';
                 }
             }
             if (angka_awal != '') {
