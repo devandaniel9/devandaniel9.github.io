@@ -318,7 +318,7 @@
     <div class="column" style="padding-right:30px; position:fixed; left:10px; top:10px;">
         <!-- border: 2px solid white; -->
         <div class="openbtn" style="border:2px solid #c0c0c0;" onclick="openNav()"><img src="images/menu-icon.jpg" style="filter:invert(0%)" width="30"></div>
-    </div>
+    </div><br>
 
     <script>
         function openNav() {
@@ -373,19 +373,28 @@
         }
     </script>
 
+    <!-- <span> -->
     <p>
-    <b>Soal Pertanyaan</b> ini akan menjawab beberapa soal matematika, termasuk <b>Penjumlahan.</b><br>
+    <b>Soal Pertanyaan</b> dalam Matematika berisi beberapa jenis pertanyaan, yaitu penjumlahan, pengurangan, perkalian, pembagian, dan sebagainya. Lalu ada tingkat kesulitan yang berbeda-beda, dan terdiri dari isian dan pilihan ganda. Selain itu, ada timer untuk setiap soal pada pengaturan.
+    <br><br>
+    Program ini akan menjawab beberapa soal matematika dan jenis-jenisnya.<br>
     Program ini bisa membuat soal baru dengan angka yang berbeda dengan tombolnya, lalu klik selesaikan.
     <br><br>
     Ada yang baru di program ini, yaitu:<br>
-    - <b>Penjumlahan dan Pengurangan</b><br>
-    - <b>Soal Cerita</b>
+    <ul style="padding:0">
+        <li>Pengaturan</li>
+        <li>Pilihan Ganda</li>
+        <li>Timer</li>
+        <li>Operasi Hitung Campuran</li>
+    </ul>
     <br><br>
     </p>
+    <!-- - <b>Penjumlahan dan Pengurangan</b><br></p>-->
 
     <h2 class="heading">Mode pertanyaan</h2>
     <!-- <label for="bentuk">Pilih jenis pertanyaan matematika:</label><br>
     <select name="bentuk" id="bentuk" style="width:150px"> -->
+    <!-- <option>Campuran</option> -->
     <label>Pilih jenis pertanyaan matematika:</label><br>
     <select id="bentuk" style="width:300px">
         <option>Penjumlahan</option>
@@ -393,7 +402,7 @@
         <option>Perkalian</option>
         <option>Pembagian</option>
         <option>Penjumlahan dan Pengurangan</option>
-        <option>Campuran</option>
+        <option>Operasi Hitung Campuran</option>
         <option style="color:gray">FPB</option>
         <option style="color:gray">KPK</option>
         <option style="color:gray">Perpangkatan</option>
@@ -453,11 +462,11 @@
     <!-- <input type="checkbox" id="check" onclick="change()"> -->
     <!-- <input type="checkbox" id="check" onclick="tampilkan()"> -->
     <label class="cb-container" style="width:400px;">Dengan soal cerita
-        <input type="checkbox" id="check" onclick="tampilkan()">
+        <input type="checkbox" id="check" onclick="settings_check();tampilkan();">
         <span class="checkmark"></span>
     </label>
     <label class="cb-container" style="width:400px;">Percobaan satu kali dalam setiap soal
-        <input type="checkbox" id="check2" onclick="tampilkan()">
+        <input type="checkbox" id="check2" onclick="settings_check();tampilkan();">
         <span class="checkmark"></span>
     </label>
     <label class="cb-container" style="width:400px;">Terapkan tema gelap
@@ -506,7 +515,7 @@
 
     <br><br>
     <!-- <p>Terakhir diupdate: 2 Feb 2024</p> -->
-    <p>Terakhir diupdate: 11 Nov 2024</p>
+    <p>Terakhir diupdate: 13 Nov 2024</p>
 
     <script>
         // Time
@@ -525,13 +534,21 @@
 
         // change();
         if (check_old) {
+            soal_cerita_check_old = localStorage.getItem("soal-cerita-check");
+            soal_cerita_check_old = soal_cerita_check_old == "true"
+            percobaan_check_old = localStorage.getItem("percobaan-check");
+            percobaan_check_old = percobaan_check_old == "true"
             theme_check_old = localStorage.getItem("tema-check");
             theme_check_old = theme_check_old == "true"
         } else {
+            soal_cerita_check_old = false;
+            percobaan_check_old = false;
             theme_check_old = false;
             // clear_all();
         }
 
+        document.getElementById("check").checked = soal_cerita_check_old;
+        document.getElementById("check2").checked = percobaan_check_old;
         document.getElementById("tema").checked = theme_check_old;
         document.getElementById("settings").checked = check_old;
         settings_check();
@@ -548,6 +565,8 @@
         }, interval);
 
         function settings_check() {
+            soal_cerita_check = document.getElementById("check").checked;
+            percobaan_check = document.getElementById("check2").checked;
             theme_check = document.getElementById("tema").checked;
             check = document.getElementById("settings").checked;
             localStorage.setItem("settings-check", check);
@@ -556,6 +575,8 @@
             //console.log(unit_check);
             //console.log(digit)
             if (check) {
+                localStorage.setItem("soal-cerita-check", soal_cerita_check);
+                localStorage.setItem("percobaan-check", percobaan_check);
                 localStorage.setItem("tema-check", theme_check);
             }
             if (theme_check) {
