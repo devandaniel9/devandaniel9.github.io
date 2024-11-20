@@ -154,16 +154,21 @@
     ol {
         /* word-break: break-all; */
         /* margin: 0; */
-        padding: 0;
-        padding-left: 10px;
+        /* padding: 0; */
+        padding-left: 0px;
+    }
+    ul {
+        padding-left: 0px;
     }
     li {
         list-style-position: inside;
         padding: 0;
+        padding-left: 20px;
+        
     }
     li::before {
         content: "";
-        width: 10px;
+        /* width: 10px; */
         display: inline-block;
     }
     img {
@@ -381,16 +386,19 @@
     Program ini bisa membuat soal baru dengan angka yang berbeda dengan tombolnya, lalu klik selesaikan.
     <br><br>
     Link:<br>
-    <ul style="padding:0"></ul>
+    <!-- <ul style="padding:0"> -->
+    <!-- <ul style="padding-left:20px;"> -->
+    <ul>
         <li><a class="external" href="https://www.ruangguru.com/blog/matematika-kelas-7-mengenal-operasi-hitung-pada-pecahan">Mengenal Operasi Hitung pada Pecahan - Ruangguru</a></li>
     </ul>
     <br><br>
     Ada yang baru di program ini, yaitu:<br>
-    <ul style="padding:0">
+    <ul>
         <li>Pengaturan</li>
         <li>Pilihan Ganda</li>
         <li>Timer</li>
         <li>Operasi Hitung Campuran</li>
+        <li>Bentuk Bersusun</li>
     </ul>
     <br><br>
     </p>
@@ -426,11 +434,32 @@
     </select>
     <br><br>
 
-    <label>Pilih bentuk soal:</label><br>
-    <select id="bentuk-soal" style="width:200px">
-        <option>Tulisan datar</option>
-        <option>Bentuk bersusun</option>
-    </select>
+    <div class="column" style="padding-right:50px;">
+        <label>Pilih bentuk soal:</label><br>
+        <select id="bentuk-soal" style="width:200px">
+            <!-- <option>Tulisan datar</option> -->
+            <option>Tulisan Datar</option>
+            <option>Bentuk Bersusun</option>
+        </select>
+    </div>
+    <div class="column" id="contoh-bentuk-soal" style="display:block">
+        <span>
+        Contoh:<br><br>
+        Hasil dari 123 + 45 adalah ...<br><br>
+        <div class="column" style="font-size:20px; width:15px">&nbsp;</div>
+        <div class="column" style="font-size:20px; width:15px">1</div>
+        <div class="column" style="font-size:20px; width:15px">2</div>
+        <div class="column" style="font-size:20px; width:15px">3</div>
+        <div class="clearfix"></div>
+        <div class="column" style="font-size:20px; width:15px">+</div>
+        <div class="column" style="font-size:20px; width:15px">&nbsp;</div>
+        <div class="column" style="font-size:20px; width:15px">4</div>
+        <div class="column" style="font-size:20px; width:15px">5</div>
+        <div class="clearfix"></div>
+        <hr style="float:left; width:90px; height:2px; border-width:0; background-color:white">
+        </span>
+    </div>
+    <div class="clearfix"></div>
     <br><br>
 
     <label>Pilih tingkat kesulitan:</label><br>
@@ -539,7 +568,7 @@
 
     <br><br>
     <!-- <p>Terakhir diupdate: 2 Feb 2024</p> -->
-    <p>Terakhir diupdate: 15 Nov 2024</p>
+    <p>Terakhir diupdate: 20 Nov 2024</p>
 
     <script>
         // Time
@@ -621,6 +650,8 @@
         }
         
         function buat() {
+            var bs = document.getElementById("bentuk-soal");
+            var bs2 = bs.options[bs.selectedIndex];
             var e = document.getElementById("bentuk");
             var e1 = e.options[e.selectedIndex];
             var level = document.getElementById("level");
@@ -733,13 +764,63 @@
                     hasil = a-b+c;
                 }
             }
+
+            function bersusun(a,b,tanda) {
+                text = `
+                <div class="column" style="font-size:20px; width:15px">&nbsp;</div>
+                <div class="column" style="font-size:20px; width:15px">1</div>
+                <div class="column" style="font-size:20px; width:15px">2</div>
+                <div class="column" style="font-size:20px; width:15px">3</div>
+                <div class="clearfix"></div>
+                <div class="column" style="font-size:20px; width:15px">+</div>
+                <div class="column" style="font-size:20px; width:15px">&nbsp;</div>
+                <div class="column" style="font-size:20px; width:15px">4</div>
+                <div class="column" style="font-size:20px; width:15px">5</div>
+                <div class="clearfix"></div>
+                <hr style="float:left; width:90px; height:2px; border-width:0; background-color:white">
+                `
+                max_number = Math.max(a,b);
+                length = parseInt(1+Math.log10(max_number));
+                length_a = parseInt(1+Math.log10(a));
+                length_b = parseInt(1+Math.log10(b));
+                text = ``;
+                text += `<div class="column" style="font-size:20px; width:15px">&nbsp;</div>`;
+                for (let i = 0; i < length; i++) {
+                    if (i < length-length_a) {
+                        text += `<div class="column" style="font-size:20px; width:15px">&nbsp;</div>`;
+                    } else {
+                        text += `<div class="column" style="font-size:20px; width:15px">${parseInt(a/(10**(length-i-1))%10)}</div>`;
+                    }
+                }
+                text += `<div class="clearfix"></div>`
+                text += `<div class="column" style="font-size:20px; width:15px">${tanda}</div>`
+                for (let i = 0; i < length; i++) {
+                    if (i < length-length_b) {
+                        text += `<div class="column" style="font-size:20px; width:15px">&nbsp;</div>`;
+                    } else {
+                        text += `<div class="column" style="font-size:20px; width:15px">${parseInt(b/(10**(length-i-1))%10)}</div>`;
+                    }
+                }
+                text += `<div class="clearfix"></div>`
+                text += `<hr style="float:left; width:${23*(length+1)}px; height:2px; border-width:0; background-color:white">`
+                return text;
+            }
             
             var cerita_check = document.getElementById("check");
             var cerita = document.getElementById("cerita");
             if (cerita_check.checked == false) {
                 if (e1.index < 4) {
                     // document.getElementById('soal').innerHTML = 'Hasil dari ' + a + tanda + b + ' adalah ...';
-                    document.getElementById('soal').innerHTML = `Hasil dari ${a} ${tanda} ${b} adalah ...`;
+                    if (bs2.index == 0) {
+                        document.getElementById('soal').innerHTML = `Hasil dari ${a} ${tanda} ${b} adalah ...`;
+                    } else {
+                        if (e1.index < 3) {
+                            // document.getElementById('soal').innerHTML = bersusun(a,b,tanda.replace(' ',''));
+                            document.getElementById('soal').innerHTML = bersusun(a,b,tanda);
+                        } else {
+                            document.getElementById('soal').innerHTML = '';
+                        }
+                    }
                     document.getElementById('tipe2').style.display = 'block';
                 } else if (e1.index == 4) {
                     document.getElementById('soal').innerHTML = `Hasil dari ${a} ${tanda} ${b} ${tanda2} ${c} adalah ...`;
