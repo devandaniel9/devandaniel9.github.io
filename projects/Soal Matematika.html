@@ -433,8 +433,8 @@
         <option style="color:gray">Trigonometri</option>
     </select>
     <br><br>
-
-    <div class="column" style="padding-right:50px;">
+	
+	<div class="column" style="padding-right:50px;">
         <label>Pilih bentuk soal:</label><br>
         <select id="bentuk-soal" style="width:200px">
             <!-- <option>Tulisan datar</option> -->
@@ -515,11 +515,11 @@
     <!-- <input type="checkbox" id="check" onclick="change()"> -->
     <!-- <input type="checkbox" id="check" onclick="tampilkan()"> -->
     <label class="cb-container" style="width:400px;">Dengan soal cerita
-        <input type="checkbox" id="check" onclick="settings_check();tampilkan();">
+        <input type="checkbox" id="check" onclick="tampilkan()">
         <span class="checkmark"></span>
     </label>
     <label class="cb-container" style="width:400px;">Percobaan satu kali dalam setiap soal
-        <input type="checkbox" id="check2" onclick="settings_check();tampilkan();">
+        <input type="checkbox" id="check2" onclick="tampilkan()">
         <span class="checkmark"></span>
     </label>
     <label class="cb-container" style="width:400px;">Terapkan tema gelap
@@ -568,7 +568,7 @@
 
     <br><br>
     <!-- <p>Terakhir diupdate: 2 Feb 2024</p> -->
-    <p>Terakhir diupdate: 20 Nov 2024</p>
+    <p>Terakhir diupdate: 21 Nov 2024</p>
 
     <script>
         // Time
@@ -618,7 +618,7 @@
         }, interval);
 
         function settings_check() {
-            soal_cerita_check = document.getElementById("check").checked;
+			soal_cerita_check = document.getElementById("check").checked;
             percobaan_check = document.getElementById("check2").checked;
             theme_check = document.getElementById("tema").checked;
             check = document.getElementById("settings").checked;
@@ -650,7 +650,7 @@
         }
         
         function buat() {
-            var bs = document.getElementById("bentuk-soal");
+			var bs = document.getElementById("bentuk-soal");
             var bs2 = bs.options[bs.selectedIndex];
             var e = document.getElementById("bentuk");
             var e1 = e.options[e.selectedIndex];
@@ -763,9 +763,70 @@
                     tanda2 = ' + ';
                     hasil = a-b+c;
                 }
+            } else if (e1.index == 5) {
+                if (Math.random() < 0.25) {
+                    a = Math.floor(2 + 9 * Math.random());
+                    b = Math.floor(2 + 9 * Math.random());
+                    if (Math.random() < 0.5) {
+                        c = Math.floor(1 + 10 * Math.random());
+						hasil = a*b+c;
+						soal = `${a} x ${b} + ${c}`
+                    } else {
+                        c = Math.floor(1 + 10 * Math.random());
+						hasil = a*b-c;
+						soal = `${a} x ${b} - ${c}`
+                    }
+                } else if (Math.random() < 0.5) {
+					kecil = Math.floor(1 + 10 * Math.random());
+                    a = Math.floor(1 + 10 * Math.random()) * kecil;
+                    b = kecil;
+                    if (Math.random() < 0.5) {
+                        c = Math.floor(1 + 10 * Math.random());
+						hasil = Math.floor(a/b+1e-10)+c;
+						soal = `${a} : ${b} + ${c}`
+                    } else {
+                        c = Math.floor(1 + 10 * Math.random());
+						hasil = Math.floor(a/b+1e-10)-c;
+						soal = `${a} : ${b} - ${c}`
+                    }
+                } else if (Math.random() < 0.75) {
+                    a = Math.floor(2 + 9 * Math.random());
+                    b = Math.floor(1 + 10 * Math.random());
+                    if (Math.random() < 0.5) {
+                        c = Math.floor(1 + 10 * Math.random());
+						hasil = a*(b+c);
+						if (Math.random() < 0.5) {
+							soal = `${a} x (${b} + ${c})`;
+						} else {
+							soal = `(${b} + ${c}) x ${a}`;
+						}
+                    } else {
+                        c = Math.floor(1 + 10 * Math.random());
+						hasil = a*(b-c);
+						if (Math.random() < 0.5) {
+							soal = `${a} x (${b} - ${c})`;
+						} else {
+							soal = `(${b} - ${c}) x ${a}`;
+						}
+                    }
+                } else {
+					kecil = Math.floor(1 + 10 * Math.random());
+					a = Math.floor(1 + 10 * Math.random())
+                    a2 = Math.floor(1 + 10 * Math.random()) * kecil;
+                    c = kecil;
+                    if (Math.random() < 0.5) {
+						b = a2 - a
+						hasil = (a+b)/c;
+						soal = `(${a} + ${b}) / ${c}`
+                    } else {
+						b = a2 + a
+						hasil = (a-b)/c;
+						soal = `(${a} - ${b}) / ${c}`
+                    }
+                }
             }
-
-            function bersusun(a,b,tanda) {
+			
+			function bersusun(a,b,tanda) {
                 text = `
                 <div class="column" style="font-size:20px; width:15px">&nbsp;</div>
                 <div class="column" style="font-size:20px; width:15px">1</div>
@@ -825,6 +886,9 @@
                 } else if (e1.index == 4) {
                     document.getElementById('soal').innerHTML = `Hasil dari ${a} ${tanda} ${b} ${tanda2} ${c} adalah ...`;
                     document.getElementById('tipe2').style.display = 'block';
+				} else if (e1.index == 5) {
+				document.getElementById('soal').innerHTML = `Hasil dari ${soal} adalah ...`;
+                    document.getElementById('tipe2').style.display = 'block';
                 } else {
                     document.getElementById('soal').innerHTML = "Jenis pertanyaan ini belum tersedia";
                     document.getElementById('tipe2').style.display = 'none';
@@ -869,7 +933,7 @@
 
             if (waktu_timer == 1) {
                 document.getElementById('waktu-timer').style.display = 'block';
-                document.getElementById('timer-icon').style.left = '600px';
+                document.getElementById('timer-icon').style.left = '650px';
                 waktu_timer = document.getElementById('waktu2').value;
             } else {
                 document.getElementById('waktu-timer').style.display = 'none';
@@ -890,7 +954,9 @@
                 waktu_teks += `${Math.floor(waktu_timer/60)} menit ${waktu_timer % 60} detik`;
             }
 
-            waktu_teks += "</span>";
+            waktu_teks += "</span><br>";
+			waktu_teks += `<div style="background-color:gray; position:absolute; width:300px; height:5px;"></div><div style="background-color:#80ff80; position:absolute; width:300px; height:5px;"></div>`;
+			
             document.getElementById('timer').innerHTML = waktu_teks;
 
             myInterval = setInterval(function() {
@@ -921,6 +987,8 @@
                 }
 
                 waktu_teks += "</span>";
+				waktu_teks += `<div style="background-color:gray; position:absolute; width:300px; height:5px;"></div><div style="background-color:#80ff80; position:absolute; width:${300*waktu2/waktu_timer}px; height:5px;"></div>`;
+				
                 document.getElementById('timer').innerHTML = waktu_teks;
 
                 if (waktu_timer > 0 & waktu2 == 0) {
@@ -1007,7 +1075,17 @@
                         }
                         pilihan_list.push(value);
                     }
-                }
+				
+				} else if (e1.index == 4 | e1.index == 5) {
+                    for (let i = 0; i < 5; i++) {
+                        value = hasil+Math.floor(-hasil/2+Math.max(hasil,6)*Math.random());
+                        while (pilihan_list.indexOf(value) > -1 | value == hasil) {
+                            value = hasil+Math.floor(-hasil/2+Math.max(hasil,6)*Math.random());
+                        }
+                        pilihan_list.push(value);
+                    }
+				}
+				
                 pilihan_list = pilihan_list.sort( () => .5 - Math.random() );
                 pilihan_list = pilihan_list.slice(0,j_pilihan2);
                 pilihan_list[pilihan_index] = hasil;
@@ -1086,7 +1164,7 @@
                 //     tanda = ' + ';
                 if (e1.index <= 3) {
                     soal = a + tanda + b;
-                } else {
+                } else if (e1.index == 4) {
                     soal = a + tanda + b + tanda2 + c;
                 }
                 if (angka == hasil) {
