@@ -388,6 +388,7 @@
     Link:<br>
     <!-- <ul style="padding:0"> -->
     <!-- <ul style="padding-left:20px;"> -->
+    <!-- Soal matematika menggunakan font MathJax -->
     <ul>
         <li><a class="external" href="https://www.ruangguru.com/blog/matematika-kelas-7-mengenal-operasi-hitung-pada-pecahan">Mengenal Operasi Hitung pada Pecahan - Ruangguru</a></li>
     </ul>
@@ -404,12 +405,15 @@
     </p>
     <!-- - <b>Penjumlahan dan Pengurangan</b><br></p>-->
 
+    <hr style="height:2px; border-width:0; background-color:gray">
+
+
     <h2 class="heading">Mode pertanyaan</h2>
     <!-- <label for="bentuk">Pilih jenis pertanyaan matematika:</label><br>
     <select name="bentuk" id="bentuk" style="width:150px"> -->
     <!-- <option>Campuran</option> -->
     <label>Pilih jenis pertanyaan matematika:</label><br>
-    <select id="bentuk" style="width:300px">
+    <select id="bentuk" style="width:300px" onchange="pilihan();clearInterval(myInterval);">
         <option>Penjumlahan</option>
         <option>Pengurangan</option>
         <option>Perkalian</option>
@@ -434,33 +438,24 @@
     </select>
     <br><br>
 	
-	<div class="column" style="padding-right:50px;">
-        <label>Pilih bentuk soal:</label><br>
-        <select id="bentuk-soal" style="width:200px">
-            <!-- <option>Tulisan datar</option> -->
-            <option>Tulisan Datar</option>
-            <option>Bentuk Bersusun</option>
-        </select>
-    </div>
-    <div class="column" id="contoh-bentuk-soal" style="display:block">
-        <span>
-        Contoh:<br><br>
-        Hasil dari 123 + 45 adalah ...<br><br>
-        <div class="column" style="font-size:20px; width:15px">&nbsp;</div>
-        <div class="column" style="font-size:20px; width:15px">1</div>
-        <div class="column" style="font-size:20px; width:15px">2</div>
-        <div class="column" style="font-size:20px; width:15px">3</div>
+    <div id="bentuk-soal" style="display:block">
+        <div class="column" style="padding-right:50px;">
+            <label>Pilih bentuk soal:</label><br>
+            <select id="pilihan-bentuk-soal" style="width:200px" onchange="pilihan();clearInterval(myInterval);">
+                <!-- <option>Tulisan datar</option> -->
+                <option>Tulisan Datar</option>
+                <option>Bentuk Bersusun</option>
+            </select>
+        </div>
+        <div class="column" id="contoh-bentuk-soal">
+            <span>
+            Contoh:<br><br>
+            Hasil dari 123 + 45 adalah ...
+            </span>
+        </div>
         <div class="clearfix"></div>
-        <div class="column" style="font-size:20px; width:15px">+</div>
-        <div class="column" style="font-size:20px; width:15px">&nbsp;</div>
-        <div class="column" style="font-size:20px; width:15px">4</div>
-        <div class="column" style="font-size:20px; width:15px">5</div>
-        <div class="clearfix"></div>
-        <hr style="float:left; width:90px; height:2px; border-width:0; background-color:white">
-        </span>
+        <br><br>
     </div>
-    <div class="clearfix"></div>
-    <br><br>
 
     <label>Pilih tingkat kesulitan:</label><br>
     <select id="level" style="width:150px">
@@ -515,11 +510,11 @@
     <!-- <input type="checkbox" id="check" onclick="change()"> -->
     <!-- <input type="checkbox" id="check" onclick="tampilkan()"> -->
     <label class="cb-container" style="width:400px;">Dengan soal cerita
-        <input type="checkbox" id="check" onclick="tampilkan()">
+        <input type="checkbox" id="check" onclick="settings_check();tampilkan()">
         <span class="checkmark"></span>
     </label>
     <label class="cb-container" style="width:400px;">Percobaan satu kali dalam setiap soal
-        <input type="checkbox" id="check2" onclick="tampilkan()">
+        <input type="checkbox" id="check2" onclick="settings_check();tampilkan()">
         <span class="checkmark"></span>
     </label>
     <label class="cb-container" style="width:400px;">Terapkan tema gelap
@@ -543,6 +538,9 @@
         </select>
     </div>
 
+    <hr style="height:2px; border-width:0; background-color:gray">
+
+
     <h2 class="heading">Pertanyaan</h2>
     <!-- <p id="soal">Hasil dari 2 + 3 adalah ...</p> -->
     <!-- <p>Pilih pertanyaan</p> -->
@@ -551,12 +549,7 @@
     <div id="timer" style="position:absolute; left:500px;"></div><br><br>
     <!-- <div class="column" style="padding-right:50px;"></div> -->
     <button class="button" onclick="buat();pilihan();clearInterval(myInterval);">Buat soal baru</button><br><br>
-    <!-- <p id="soal2"></p> -->
-    <!-- <br><br> -->
-    <!-- <p>Input angka</p> -->
-    <!-- <input type="number" id="angka" min="0"> -->
     <div id="tipe2"></div><br>
-    <!-- <br><br> -->
     <button class="button" id="solve" onclick="selesaikan()">Selesaikan</button>
     <br><br>
 
@@ -568,7 +561,7 @@
 
     <br><br>
     <!-- <p>Terakhir diupdate: 2 Feb 2024</p> -->
-    <p>Terakhir diupdate: 21 Nov 2024</p>
+    <p>Terakhir diupdate: 22 Nov 2024</p>
 
     <script>
         // Time
@@ -650,7 +643,7 @@
         }
         
         function buat() {
-			var bs = document.getElementById("bentuk-soal");
+			var bs = document.getElementById("pilihan-bentuk-soal");
             var bs2 = bs.options[bs.selectedIndex];
             var e = document.getElementById("bentuk");
             var e1 = e.options[e.selectedIndex];
@@ -909,6 +902,44 @@
         }
 
         function pilihan() {
+            var e = document.getElementById("bentuk");
+            var e1 = e.options[e.selectedIndex];
+
+            if (e1.index <= 3) {
+                document.getElementById("bentuk-soal").style.display = 'block';
+            } else {
+                document.getElementById("bentuk-soal").style.display = 'none';
+            }
+
+            var bs = document.getElementById("pilihan-bentuk-soal");
+            var bs2 = bs.options[bs.selectedIndex];
+
+            if (bs2.index == 0) {
+                document.getElementById("contoh-bentuk-soal").innerHTML = `
+                <span>
+                Contoh:<br><br>
+                Hasil dari 123 + 45 adalah ...
+                </span>
+                `;
+            } else {
+                document.getElementById("contoh-bentuk-soal").innerHTML = `
+                <span>
+                Contoh:<br><br>
+                <div class="column" style="font-size:20px; width:15px">&nbsp;</div>
+                <div class="column" style="font-size:20px; width:15px">1</div>
+                <div class="column" style="font-size:20px; width:15px">2</div>
+                <div class="column" style="font-size:20px; width:15px">3</div>
+                <div class="clearfix"></div>
+                <div class="column" style="font-size:20px; width:15px">+</div>
+                <div class="column" style="font-size:20px; width:15px">&nbsp;</div>
+                <div class="column" style="font-size:20px; width:15px">4</div>
+                <div class="column" style="font-size:20px; width:15px">5</div>
+                <div class="clearfix"></div>
+                <hr style="float:left; width:90px; height:2px; border-width:0; background-color:white">
+                </span>
+                `;
+            }
+            
             var tipe = document.getElementById("tipe");
             var tipe2 = tipe.options[tipe.selectedIndex];
             
@@ -1019,8 +1050,8 @@
 
             } else {
                 document.getElementById("pilihan").style.display = "block";
-                var e = document.getElementById("bentuk");
-                var e1 = e.options[e.selectedIndex];
+                // var e = document.getElementById("bentuk");
+                // var e1 = e.options[e.selectedIndex];
                 pilihan_index = Math.floor(j_pilihan2 * Math.random());
                 // c = Math.floor(5*Math.random());
                 pilihan_list = [12,13,14,15,16];
