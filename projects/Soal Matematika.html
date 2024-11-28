@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="checkbox.css">
     <link rel="stylesheet" href="radio-buttons.css">
     <link rel="stylesheet" href="sidebar.css">
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>
+	<script src="speech.js"></script>
 </head>
 <style>
     /* Fonts */
@@ -384,6 +386,17 @@
     <br><br>
     Program ini akan menjawab beberapa soal matematika dan jenis-jenisnya.<br>
     Program ini bisa membuat soal baru dengan angka yang berbeda dengan tombolnya, lalu klik selesaikan.
+	
+
+\newcommand\Mydiv[2]{%
+$\strut#1$\kern.25em\smash{\raise.3ex\hbox{$\big)$}}$\mkern-8mu
+        \overline{\enspace\strut#2}$}
+
+\begin{document}
+
+\Mydiv{56}{3678}\quad\Mydiv{3}{37678}
+
+
     <br><br>
     Link:<br>
     <!-- <ul style="padding:0"> -->
@@ -517,6 +530,10 @@
         <input type="checkbox" id="check2" onclick="settings_check();tampilkan()">
         <span class="checkmark"></span>
     </label>
+	<label class="cb-container" style="width:400px;">Dengan ucapan suara
+        <input type="checkbox" id="suara" onclick="settings_check()">
+        <span class="checkmark"></span>
+    </label>
     <label class="cb-container" style="width:400px;">Terapkan tema gelap
         <input type="checkbox" id="tema" onclick="settings_check()">
         <span class="checkmark"></span>
@@ -584,6 +601,8 @@
             soal_cerita_check_old = soal_cerita_check_old == "true"
             percobaan_check_old = localStorage.getItem("percobaan-check");
             percobaan_check_old = percobaan_check_old == "true"
+			suara_check_old = localStorage.getItem("suara-check");
+            suara_check_old = suara_check_old == "true"
             theme_check_old = localStorage.getItem("tema-check");
             theme_check_old = theme_check_old == "true"
         } else {
@@ -595,6 +614,7 @@
 
         document.getElementById("check").checked = soal_cerita_check_old;
         document.getElementById("check2").checked = percobaan_check_old;
+		document.getElementById("suara").checked = suara_check_old;
         document.getElementById("tema").checked = theme_check_old;
         document.getElementById("settings").checked = check_old;
         settings_check();
@@ -613,6 +633,7 @@
         function settings_check() {
 			soal_cerita_check = document.getElementById("check").checked;
             percobaan_check = document.getElementById("check2").checked;
+			suara_check = document.getElementById("suara").checked;
             theme_check = document.getElementById("tema").checked;
             check = document.getElementById("settings").checked;
             localStorage.setItem("settings-check", check);
@@ -623,6 +644,7 @@
             if (check) {
                 localStorage.setItem("soal-cerita-check", soal_cerita_check);
                 localStorage.setItem("percobaan-check", percobaan_check);
+				localStorage.setItem("suara-check", suara_check);
                 localStorage.setItem("tema-check", theme_check);
             }
             if (theme_check) {
@@ -862,43 +884,53 @@
             
             var cerita_check = document.getElementById("check");
             var cerita = document.getElementById("cerita");
-            if (cerita_check.checked == false) {
-                if (e1.index < 4) {
-                    // document.getElementById('soal').innerHTML = 'Hasil dari ' + a + tanda + b + ' adalah ...';
-                    if (bs2.index == 0) {
-                        document.getElementById('soal').innerHTML = `Hasil dari ${a} ${tanda} ${b} adalah ...`;
-                    } else {
-                        if (e1.index < 3) {
-                            // document.getElementById('soal').innerHTML = bersusun(a,b,tanda.replace(' ',''));
-                            document.getElementById('soal').innerHTML = bersusun(a,b,tanda);
-                        } else {
-                            document.getElementById('soal').innerHTML = '';
-                        }
-                    }
-                    document.getElementById('tipe2').style.display = 'block';
-                } else if (e1.index == 4) {
-                    document.getElementById('soal').innerHTML = `Hasil dari ${a} ${tanda} ${b} ${tanda2} ${c} adalah ...`;
-                    document.getElementById('tipe2').style.display = 'block';
-				} else if (e1.index == 5) {
-				document.getElementById('soal').innerHTML = `Hasil dari ${soal} adalah ...`;
-                    document.getElementById('tipe2').style.display = 'block';
-                } else {
-                    document.getElementById('soal').innerHTML = "Jenis pertanyaan ini belum tersedia";
-                    document.getElementById('tipe2').style.display = 'none';
-                }
-            } else {
-                var cerita2 = document.getElementById("cerita2");
-                cerita2 = cerita2.options[cerita2.selectedIndex];
-                if (e1.index == 0) {
-                    if (cerita2.index == 0) {
-                        document.getElementById('soal').innerHTML = `Di dalam sebuah toko buah, ibu membeli ${a} buah. Kemudian adik memberikan buahnya kepada ibu sebanyak ${b} buah. Berapa jumlah buah ibu sekarang?`;
-                    } else {
-                        document.getElementById('soal').innerHTML = `Di dalam sebuah pusat perbelanjaan, ibu membeli sesuatu seharga ${a} ribu. Kemudian adik membeli lagi seharga ${b} ribu, lalu dikumpulkan ke keranjang ibu. Berapa jumlah uang ibu sekarang? (dalam ribuan)`;
-                    }
-                } else if (e1.index == 1) {
-                    document.getElementById('soal').innerHTML = `Di dalam sebuah toko buah, ibu sudah membeli apel sebanyak ${a} buah. Lalu adik memakan buah apelnya sebanyak ${b} apel. Berapa sisa buah apel sekarang?`;
-                }
-            }
+			var soal_teks;
+			if (e1.index <= 5) {
+				if (cerita_check.checked == false) {
+					if (e1.index < 4) {
+						// document.getElementById('soal').innerHTML = 'Hasil dari ' + a + tanda + b + ' adalah ...';
+						if (bs2.index == 0) {
+							// document.getElementById('soal').innerHTML = `Hasil dari ${a} ${tanda} ${b} adalah ...`;
+							soal_teks = `Hasil dari ${a} ${tanda} ${b} adalah ...`;
+							// speak(`Hasil dari ${a} ${tanda} ${b} adalah ...`);
+						} else {
+							if (e1.index < 3) {
+								// document.getElementById('soal').innerHTML = bersusun(a,b,tanda.replace(' ',''));
+								soal_teks = bersusun(a,b,tanda);
+							} else {
+								soal_teks = '';
+							}
+						}
+						document.getElementById('tipe2').style.display = 'block';
+					} else if (e1.index == 4) {
+						soal_teks = `Hasil dari ${a} ${tanda} ${b} ${tanda2} ${c} adalah ...`;
+						document.getElementById('tipe2').style.display = 'block';
+					} else {
+						soal_teks = `Hasil dari ${soal} adalah ...`;
+						document.getElementById('tipe2').style.display = 'block';
+					}
+				} else {
+					var cerita2 = document.getElementById("cerita2");
+					cerita2 = cerita2.options[cerita2.selectedIndex];
+					if (e1.index == 0) {
+						if (cerita2.index == 0) {
+							soal_teks = `Di dalam sebuah toko buah, ibu membeli ${a} buah. Kemudian adik memberikan buahnya kepada ibu sebanyak ${b} buah. Berapa jumlah buah ibu sekarang?`;
+						} else {
+							soal_teks = `Di dalam sebuah pusat perbelanjaan, ibu membeli sesuatu seharga ${a} ribu. Kemudian adik membeli lagi seharga ${b} ribu, lalu dikumpulkan ke keranjang ibu. Berapa jumlah uang ibu sekarang? (dalam ribuan)`;
+						}
+					} else if (e1.index == 1) {
+						soal_teks = `Di dalam sebuah toko buah, ibu sudah membeli apel sebanyak ${a} buah. Lalu adik memakan buah apelnya sebanyak ${b} apel. Berapa sisa buah apel sekarang?`;
+					}
+				}
+				document.getElementById('soal').innerHTML = soal_teks;
+				if (document.getElementById('suara').checked) {
+				    speak(soal_teks);
+				}
+				document.getElementById('tipe2').style.display = 'block';
+			} else {
+				document.getElementById('soal').innerHTML = "Jenis pertanyaan ini belum tersedia";
+				document.getElementById('tipe2').style.display = 'none';
+			}
         }
 
         function pilihan() {
@@ -919,6 +951,11 @@
                 <span>
                 Contoh:<br><br>
                 Hasil dari 123 + 45 adalah ...
+				\documentclass{article}
+				\usepackage{longdivision}
+				\begin{document}
+					\intlongdivision{12345}{13}
+				\end{document}
                 </span>
                 `;
             } else {
@@ -1026,6 +1063,14 @@
                     document.getElementById('tipe2').style.display = 'none';
                 }
             }, interval);
+			
+			if (waktu_timer > 0 & waktu2 == 0) {
+				document.getElementById('tipe2').style.display = 'none';
+				clearInterval(myInterval);
+				// if (document.getElementById('suara').checked) {
+					// speak("Waktunya habis");
+				// }
+			}
 
             function shuffleArray(array) {
                 for (let i = array.length - 1; i >= 0; i--) {
@@ -1198,11 +1243,18 @@
                 } else if (e1.index == 4) {
                     soal = a + tanda + b + tanda2 + c;
                 }
+				var jawaban_teks, jawaban_teks2;
                 if (angka == hasil) {
-                    document.getElementById('jawaban').innerHTML = `Jawabannya benar<br><br> ${soal} = ${hasil}`;
+                    jawaban_teks = `Jawabannya benar<br><br> ${soal} = ${hasil}`;
+					jawaban_teks2 = 'Jawabannya benar';
                 } else {
-                    document.getElementById('jawaban').innerHTML = `Jawabannya salah<br>Jawaban yang diinput: ${angka}<br><br>${soal} = ${hasil}`;
+                    jawaban_teks = `Jawabannya salah<br>Jawaban yang diinput: ${angka}<br><br>${soal} = ${hasil}`;
+					jawaban_teks2 = 'Jawabannya salah';
                 }
+				document.getElementById('jawaban').innerHTML = jawaban_teks;
+				if (document.getElementById('suara').checked) {
+				    speak(jawaban_teks2);
+				}
             } else {
                 document.getElementById('jawaban').innerHTML = 'Input angka harus diisi';
             }
