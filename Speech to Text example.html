@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>	
+	<h1>Text To Speech</h1>
+	<!-- <button onclick="speak()">Speak</button> -->
+	<!-- <button class="audio-btn" data-content="Hola como estas?" data-lang="es-ES">Speak</button> -->
+	<!-- <button class="audio-btn" data-content="Salut, comment ca va?" data-lang="fr-FR"></button> -->
+	<button class="audio-btn" data-content="Kamu lagi ngapain?" data-lang="id">Speak</button>
+	<script>
+	const btns = document.querySelectorAll('button')
+
+	btns.forEach((el) => {
+	el.addEventListener('click', e => {
+	const msg = new SpeechSynthesisUtterance();
+	// const txt = e.target.getAttribute('data-content');
+	const txt = 'Hasil dari 2 ditambah 3 adalah';
+	const lang = e.target.getAttribute('data-lang');     
+	const langCode = lang.split('-')[0]
+
+	let s = setSpeech();
+	s.then((voices) => {
+	  //const voices = window.speechSynthesis.getVoices();   
+	  console.log(voices.findIndex(a => a.lang == langCode));
+	  
+	  msg.voice = voices[voices.findIndex(a => a.lang == langCode)];
+	  msg.text = txt;
+	  msg.lang = lang;
+	  msg.volume = 1;
+	  msg.voiceURI = "native";
+	  window.speechSynthesis.speak(msg);            
+	}); 
+	  
+
+	  })
+	})
+
+
+
+	function setSpeech() {
+	  return new Promise(
+	function (resolve, reject) {
+	  let synth = window.speechSynthesis;
+	  let id;
+
+	  id = setInterval(() => {
+		if (synth.getVoices().length !== 0) {
+		  resolve(synth.getVoices());
+		  clearInterval(id);
+		}
+	  }, 10);
+	}
+	  )
+	}
+	</script>
+</body>
+</html>

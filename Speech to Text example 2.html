@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>	
+	<h1>Text To Speech</h1>
+	<!-- <button onclick="speak()">Speak</button> -->
+	<p>Program ini bisa mengubah dari Teks ke Ucapan (Text to Speech).</p>
+	<button class="audio-btn" onclick="speak2()">Speak</button>
+	<script>
+	// const btn = document.getElementById('speak')
+
+	function speak(txt) {
+		const msg = new SpeechSynthesisUtterance();
+		// const txt = e.target.getAttribute('data-content');
+		// var txt = 'Ini adalah';
+		const lang = 'id';     
+		const langCode = lang.split('-')[0];
+		
+		function setSpeech() {
+			return new Promise(
+			function (resolve, reject) {
+				let synth = window.speechSynthesis;
+				let id;
+
+				id = setInterval(() => {
+				if (synth.getVoices().length !== 0) {
+					resolve(synth.getVoices());
+					clearInterval(id);
+				}}, 10);
+			})
+		}
+
+		let s = setSpeech();
+		s.then((voices) => {
+			// const voices = window.speechSynthesis.getVoices();   
+			console.log(voices.findIndex(a => a.lang == langCode));
+		  
+			msg.voice = voices[voices.findIndex(a => a.lang == langCode)];
+			msg.text = txt;
+			msg.lang = lang;
+			msg.volume = 1;
+			msg.voiceURI = "native";
+			window.speechSynthesis.speak(msg);            
+		});
+	}
+	
+	function speak2(txt) {
+		speak('Selamat datang');
+		speak('Selamat datang lagi');
+	}
+	</script>
+</body>
+</html>
