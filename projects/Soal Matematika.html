@@ -34,6 +34,9 @@
         margin: 0 auto;
         width: 85%;
     }
+    .color2 {
+        color: #002080;
+    }
     .heading {
         font-family:"Inter",sans-serif;
     }
@@ -193,6 +196,7 @@
     }
 
     /* Dark Mode */
+    /* @media screen and (max-width: 600px) { */
     @container root style(--darkmode: 1) {
         body {
             /* background-color: #203040; */
@@ -201,6 +205,9 @@
             color: white;
             /* background-image: repeating-linear-gradient(180deg,#203040,#203040 80%,#304860); */
             background-image: repeating-linear-gradient(0deg,#244842,#183028 200px,#183028);
+        }
+        .color2 {
+            color: #a0e0ff;
         }
         .button {
             background-color: #404040;
@@ -421,82 +428,106 @@ $\strut#1$\kern.25em\smash{\raise.3ex\hbox{$\big)$}}$\mkern-8mu
     <hr style="height:2px; border-width:0; background-color:gray">
 
 
-    <h2 class="heading">Mode pertanyaan</h2>
+    <h2 class="heading">Pengaturan</h2>
     <!-- <label for="bentuk">Pilih jenis pertanyaan matematika:</label><br>
     <select name="bentuk" id="bentuk" style="width:150px"> -->
     <!-- <option>Campuran</option> -->
-    <label>Pilih jenis pertanyaan matematika:</label><br>
-    <select id="bentuk" style="width:300px" onchange="pilihan();clearInterval(myInterval);">
-        <option>Penjumlahan</option>
-        <option>Pengurangan</option>
-        <option>Perkalian</option>
-        <option>Pembagian</option>
-        <option>Penjumlahan dan Pengurangan</option>
-        <option>Operasi Hitung Campuran</option>
-        <option style="color:gray">Sisa Pembagian</option>
-        <option style="color:gray">FPB</option>
-        <option style="color:gray">KPK</option>
-        <option style="color:gray">Pecahan</option>
-        <option style="color:gray">Bilangan Desimal dan Persen</option>
-        <option style="color:gray">Operasi Pecahan</option>
-        <option style="color:gray">Perpangkatan</option>
-        <option style="color:gray">Akar Kuadrat</option>
-        <option style="color:gray">Akar Kubik</option>
-        <option style="color:gray">Bangun Datar</option>
-        <option style="color:gray">Bangun Ruang</option>
-        <option style="color:gray">Persamaan Linear</option>
-        <option style="color:gray">Persamaan Dua Variabel</option>
-        <option style="color:gray">Persamaan Kuadrat</option>
-        <option style="color:gray">Trigonometri</option>
-    </select>
-    <br><br>
-	
-    <div id="bentuk-soal" style="display:block">
-        <div class="column" style="padding-right:50px;">
-            <label>Pilih bentuk soal:</label><br>
-            <select id="pilihan-bentuk-soal" style="width:200px" onchange="pilihan();clearInterval(myInterval);">
-                <!-- <option>Tulisan datar</option> -->
-                <option>Tulisan Datar</option>
-                <option>Bentuk Bersusun</option>
-            </select>
+    
+    <h3 class="heading">●&nbsp;&nbsp;&nbsp;<span class="color2">Mode pertanyaan</span></h2>
+    <div class="column" style="width:500px; padding-left:25px; padding-right:50px;">
+        <label>Pilih jenis pertanyaan matematika:</label><br>
+        <select id="bentuk" style="width:300px" onchange="pilihan(true);clearInterval(myInterval);">
+            <option>Penjumlahan</option>
+            <option>Pengurangan</option>
+            <option>Perkalian</option>
+            <option>Pembagian</option>
+            <option>Penjumlahan dan Pengurangan</option>
+            <option>Operasi Hitung Campuran</option>
+            <option style="color:gray">Sisa Pembagian</option>
+            <option style="color:gray">FPB</option>
+            <option style="color:gray">KPK</option>
+            <option style="color:gray">Pecahan</option>
+            <option style="color:gray">Bilangan Desimal dan Persen</option>
+            <option style="color:gray">Operasi Pecahan</option>
+            <option style="color:gray">Perpangkatan</option>
+            <option style="color:gray">Akar Kuadrat</option>
+            <option style="color:gray">Akar Kubik</option>
+            <option style="color:gray">Bangun Datar</option>
+            <option style="color:gray">Bangun Ruang</option>
+            <option style="color:gray">Persamaan Linear</option>
+            <option style="color:gray">Persamaan Dua Variabel</option>
+            <option style="color:gray">Persamaan Kuadrat</option>
+            <option style="color:gray">Trigonometri</option>
+        </select>
+        <br><br>
+        
+        <div id="bentuk-soal" style="display:block">
+            <div class="column" style="padding-right:50px;">
+                <label>Pilih bentuk soal:</label><br>
+                <select id="pilihan-bentuk-soal" style="width:200px" onchange="pilihan();clearInterval(myInterval);">
+                    <!-- <option>Tulisan datar</option> -->
+                    <option>Tulisan Datar</option>
+                    <option>Bentuk Bersusun</option>
+                </select>
+            </div>
+            <div class="column" id="contoh-bentuk-soal">
+                <span>
+                Contoh:<br><br>
+                Hasil dari 123 + 45 adalah ...
+                </span>
+            </div>
+            <div class="clearfix"></div>
+            <br><br>
         </div>
-        <div class="column" id="contoh-bentuk-soal">
-            <span>
-            Contoh:<br><br>
-            Hasil dari 123 + 45 adalah ...
-            </span>
-        </div>
-        <div class="clearfix"></div>
+
+        <label>Pilih tingkat kesulitan:</label><br>
+        <select id="level" style="width:150px">
+            <option>Mudah</option>
+            <option>Sedang</option>
+            <option>Sulit</option>
+            <option>Kustom</option>
+        </select>
         <br><br>
     </div>
-
-    <label>Pilih tingkat kesulitan:</label><br>
-    <select id="level" style="width:150px">
-        <option>Mudah</option>
-        <option>Sedang</option>
-        <option>Sulit</option>
-        <option>Kustom</option>
-    </select>
-    <br><br>
-
     <div class="column" style="padding-right:50px;">
-        <label>Pilih tipe pertanyaan:</label><br>
-        <!-- <select id="tipe" style="width:150px" onchange="pilihan()"> -->
-        <select id="tipe" style="width:150px" onchange="pilihan();clearInterval(myInterval);">
-            <option>Isian</option>
-            <option>Pilihan ganda</option>
-        </select>
-    </div>
-    <div class="column" id="pilihan" style="display:block">
-        <label>Jumlah pilihan:</label><br>
-        <select name="jumlah-pilihan" id="jumlah-pilihan" style="width:150px" onchange="pilihan();clearInterval(myInterval);">
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-        </select>
+        <div class="column" style="padding-right:70px;">
+            <label>Pilih tipe pertanyaan:</label><br>
+            <!-- <select id="tipe" style="width:150px" onchange="pilihan()"> -->
+            <select id="tipe" style="width:150px" onchange="pilihan();clearInterval(myInterval);">
+                <option>Isian</option>
+                <option>Pilihan ganda</option>
+            </select>
+        </div>
+        <div class="column" id="pilihan" style="display:block">
+            <label>Jumlah pilihan:</label><br>
+            <select name="jumlah-pilihan" id="jumlah-pilihan" style="width:150px" onchange="pilihan();clearInterval(myInterval);">
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+        </div>
+        <div class="clearfix"></div>
+
+        <label class="cb-container" style="width:400px;">Percobaan satu kali dalam setiap soal
+            <input type="checkbox" id="check2" onclick="settings_check();tampilkan()">
+            <span class="checkmark"></span>
+        </label>
+        <label class="cb-container" style="width:400px;">Dengan soal cerita
+            <input type="checkbox" id="check" onclick="settings_check();tampilkan()">
+            <span class="checkmark"></span>
+        </label><br>
+
+        <div class="box" id="cerita" style="background-color:#a0b0c0; width:200px; display:none">
+            <span style="font-size:20px"><b>Soal cerita</b></span><br><br>
+            <label>Pilih tipe pertanyaan:</label><br>
+            <select id="cerita2" style="width:150px" onchange="tampilkan()">
+                <option>Buah</option>
+                <option>Uang</option>
+            </select>
+        </div>
     </div>
     <div class="clearfix"></div>
-    <br><br>
+    <br>
 
     <img src="images/timer-icon.png" id="timer-icon" style="position:absolute; left:400px;" width="60">
     <div class="column" style="padding-right:50px;">
@@ -522,14 +553,6 @@ $\strut#1$\kern.25em\smash{\raise.3ex\hbox{$\big)$}}$\mkern-8mu
     <!-- <label>Dengan soal cerita:</label> -->
     <!-- <input type="checkbox" id="check" onclick="change()"> -->
     <!-- <input type="checkbox" id="check" onclick="tampilkan()"> -->
-    <label class="cb-container" style="width:400px;">Dengan soal cerita
-        <input type="checkbox" id="check" onclick="settings_check();tampilkan()">
-        <span class="checkmark"></span>
-    </label>
-    <label class="cb-container" style="width:400px;">Percobaan satu kali dalam setiap soal
-        <input type="checkbox" id="check2" onclick="settings_check();tampilkan()">
-        <span class="checkmark"></span>
-    </label>
 	<label class="cb-container" style="width:400px;">Dengan ucapan suara
         <input type="checkbox" id="suara" onclick="settings_check()">
         <span class="checkmark"></span>
@@ -545,15 +568,6 @@ $\strut#1$\kern.25em\smash{\raise.3ex\hbox{$\big)$}}$\mkern-8mu
         <span class="checkmark"></span>
     </label>
     <br><br>
-
-    <div class="box" id="cerita" style="background-color:#a0b0c0; width:200px; display:none">
-        <span style="font-size:20px"><b>Soal cerita</b></span><br><br>
-        <label>Pilih tipe pertanyaan:</label><br>
-        <select id="cerita2" style="width:150px" onchange="tampilkan()">
-            <option>Buah</option>
-            <option>Uang</option>
-        </select>
-    </div>
 
     <hr style="height:2px; border-width:0; background-color:gray">
 
@@ -578,7 +592,7 @@ $\strut#1$\kern.25em\smash{\raise.3ex\hbox{$\big)$}}$\mkern-8mu
 
     <br><br>
     <!-- <p>Terakhir diupdate: 2 Feb 2024</p> -->
-    <p>Terakhir diupdate: 22 Nov 2024</p>
+    <p>Terakhir diupdate: 29 Nov 2024</p>
 
     <script>
         // Time
@@ -885,7 +899,7 @@ $\strut#1$\kern.25em\smash{\raise.3ex\hbox{$\big)$}}$\mkern-8mu
             var cerita_check = document.getElementById("check");
             var cerita = document.getElementById("cerita");
 			var soal_teks;
-			if (e1.index <= 5) {
+			if (e1.index <= 9) {
 				if (cerita_check.checked == false) {
 					if (e1.index < 4) {
 						// document.getElementById('soal').innerHTML = 'Hasil dari ' + a + tanda + b + ' adalah ...';
@@ -905,10 +919,26 @@ $\strut#1$\kern.25em\smash{\raise.3ex\hbox{$\big)$}}$\mkern-8mu
 					} else if (e1.index == 4) {
 						soal_teks = `Hasil dari ${a} ${tanda} ${b} ${tanda2} ${c} adalah ...`;
 						document.getElementById('tipe2').style.display = 'block';
-					} else {
+					} else if (e1.index == 5) {
 						soal_teks = `Hasil dari ${soal} adalah ...`;
 						document.getElementById('tipe2').style.display = 'block';
-					}
+					} else if (e1.index == 6) {
+                        soal_teks = `Sisa pembagian dari 13 oleh 4 adalah ...`;
+                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+						document.getElementById('tipe2').style.display = 'block';
+                    } else if (e1.index == 7) {
+                        soal_teks = `FPB dari 8 dan 12 adalah ...`;
+                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+						document.getElementById('tipe2').style.display = 'block';
+                    } else if (e1.index == 8) {
+                        soal_teks = `KPK dari 6 dan 14 adalah ...`;
+                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+						document.getElementById('tipe2').style.display = 'block';
+                    } else if (e1.index == 9) {
+                        soal_teks = `Hasil dari 1/4 + 2/3 adalah ...`;
+                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+						document.getElementById('tipe2').style.display = 'block';
+                    }
 				} else {
 					var cerita2 = document.getElementById("cerita2");
 					cerita2 = cerita2.options[cerita2.selectedIndex];
@@ -928,53 +958,88 @@ $\strut#1$\kern.25em\smash{\raise.3ex\hbox{$\big)$}}$\mkern-8mu
 				}
 				document.getElementById('tipe2').style.display = 'block';
 			} else {
-				document.getElementById('soal').innerHTML = "Jenis pertanyaan ini belum tersedia";
+				// document.getElementById('soal').innerHTML = "Jenis pertanyaan ini belum tersedia";
+                document.getElementById('soal').innerHTML = `<span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
 				document.getElementById('tipe2').style.display = 'none';
 			}
         }
 
-        function pilihan() {
+        function pilihan(change=false) {
             var e = document.getElementById("bentuk");
             var e1 = e.options[e.selectedIndex];
-
-            if (e1.index <= 3) {
-                document.getElementById("bentuk-soal").style.display = 'block';
-            } else {
-                document.getElementById("bentuk-soal").style.display = 'none';
-            }
 
             var bs = document.getElementById("pilihan-bentuk-soal");
             var bs2 = bs.options[bs.selectedIndex];
 
-            if (bs2.index == 0) {
-		// \documentclass{article}
-		// \usepackage{longdivision}
-		// \begin{document}
-		// \intlongdivision{12345}{13}
-		// \end{document}
-                document.getElementById("contoh-bentuk-soal").innerHTML = `
-                <span>
-                Contoh:<br><br>
-                Hasil dari 123 + 45 adalah ...
-                </span>
-                `;
+            if (e1.index <= 3) {
+                document.getElementById("bentuk-soal").style.display = 'block';
+
+                if (change) {
+                    document.getElementById("pilihan-bentuk-soal").innerHTML = `
+                        <option>Tulisan Datar</option>
+                        <option>Bentuk Bersusun</option>
+                    `;
+                }
+
+                // var bs = document.getElementById("pilihan-bentuk-soal");
+                // var bs2 = bs.options[bs.selectedIndex];
+
+                if (bs2.index == 0) {
+                    // \documentclass{article}
+                    // \usepackage{longdivision}
+                    // \begin{document}
+                    // \intlongdivision{12345}{13}
+                    // \end{document}
+                    document.getElementById("contoh-bentuk-soal").innerHTML = `
+                    <span>
+                    Contoh:<br><br>
+                    Hasil dari 123 + 45 adalah ...
+                    </span>
+                    `;
+                } else {
+                    document.getElementById("contoh-bentuk-soal").innerHTML = `
+                    <span>
+                    Contoh:<br><br>
+                    <div class="column" style="font-size:20px; width:15px">&nbsp;</div>
+                    <div class="column" style="font-size:20px; width:15px">1</div>
+                    <div class="column" style="font-size:20px; width:15px">2</div>
+                    <div class="column" style="font-size:20px; width:15px">3</div>
+                    <div class="clearfix"></div>
+                    <div class="column" style="font-size:20px; width:15px">+</div>
+                    <div class="column" style="font-size:20px; width:15px">&nbsp;</div>
+                    <div class="column" style="font-size:20px; width:15px">4</div>
+                    <div class="column" style="font-size:20px; width:15px">5</div>
+                    <div class="clearfix"></div>
+                    <hr style="float:left; width:90px; height:2px; border-width:0; background-color:white">
+                    </span>
+                    `;
+                }
+
+            } else if (e1.index >= 4 & e1.index <= 8) {
+                document.getElementById("bentuk-soal").style.display = 'none';
+
             } else {
-                document.getElementById("contoh-bentuk-soal").innerHTML = `
-                <span>
-                Contoh:<br><br>
-                <div class="column" style="font-size:20px; width:15px">&nbsp;</div>
-                <div class="column" style="font-size:20px; width:15px">1</div>
-                <div class="column" style="font-size:20px; width:15px">2</div>
-                <div class="column" style="font-size:20px; width:15px">3</div>
-                <div class="clearfix"></div>
-                <div class="column" style="font-size:20px; width:15px">+</div>
-                <div class="column" style="font-size:20px; width:15px">&nbsp;</div>
-                <div class="column" style="font-size:20px; width:15px">4</div>
-                <div class="column" style="font-size:20px; width:15px">5</div>
-                <div class="clearfix"></div>
-                <hr style="float:left; width:90px; height:2px; border-width:0; background-color:white">
-                </span>
-                `;
+                document.getElementById("bentuk-soal").style.display = 'block';
+
+                if (change) {
+                    document.getElementById("pilihan-bentuk-soal").innerHTML = `
+                        <option>Bentuk Pembagian</option>
+                        <option>Bentuk Pecahan</option>
+                    `;
+                }
+
+                if (bs2.index == 0) {
+                    text = `
+                    Contoh:<br><br>
+                    /[x = {-b /pm /sqrt{b^2-4ac} /over 2a}./]
+                    `.replaceAll("/","&#x005c");
+                    
+                    // document.getElementById("contoh-bentuk-soal").innerHTML = `<span>${text}</span>`;
+                    $("#contoh-bentuk-soal").append(`<span>${text}</span>`);
+                    MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+                } else {
+                    
+                }
             }
             
             var tipe = document.getElementById("tipe");
