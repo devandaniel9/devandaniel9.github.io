@@ -393,17 +393,9 @@
     <br><br>
     Program ini akan menjawab beberapa soal matematika dan jenis-jenisnya.<br>
     Program ini bisa membuat soal baru dengan angka yang berbeda dengan tombolnya, lalu klik selesaikan.
-	
-
-\newcommand\Mydiv[2]{%
-$\strut#1$\kern.25em\smash{\raise.3ex\hbox{$\big)$}}$\mkern-8mu
-        \overline{\enspace\strut#2}$}
-
-\begin{document}
-
-\Mydiv{56}{3678}\quad\Mydiv{3}{37678}
-
-
+    <br><br>
+    When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\) and they are
+    \[x = {-b \pm \sqrt{b^2-4ac} \over 2a}.\]
     <br><br>
     Link:<br>
     <!-- <ul style="padding:0"> -->
@@ -935,9 +927,14 @@ $\strut#1$\kern.25em\smash{\raise.3ex\hbox{$\big)$}}$\mkern-8mu
                         soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
 						document.getElementById('tipe2').style.display = 'block';
                     } else if (e1.index == 9) {
-                        soal_teks = `Hasil dari 1/4 + 2/3 adalah ...`;
+                        // soal_teks = `Hasil dari 1/4 + 2/3 adalah ...`;
+                        soal_teks = `Hasil dari <span style="font-size:20px">/({1 /over 4} + {2 /over 3}/)`.replaceAll("/","&#x005c");
+                        soal_teks += `</span> adalah ...`
+                        // soal_teks = `When /(a /ne 0/), there are three solutions to /(ax^2 + bx + c = 0/) and they are
+                        // /[x = {-b /pm /sqrt{b^2-4ac} /over 2a}./]`.replaceAll("/","&#x005c");
                         soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
 						document.getElementById('tipe2').style.display = 'block';
+                        // MathJax.typeset();
                     }
 				} else {
 					var cerita2 = document.getElementById("cerita2");
@@ -953,6 +950,7 @@ $\strut#1$\kern.25em\smash{\raise.3ex\hbox{$\big)$}}$\mkern-8mu
 					}
 				}
 				document.getElementById('soal').innerHTML = soal_teks;
+                MathJax.typeset();
 				if (document.getElementById('suara').checked) {
 				    speak(soal_teks);
 				}
