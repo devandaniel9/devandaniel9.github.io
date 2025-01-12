@@ -393,9 +393,9 @@
     <br><br>
     Program ini akan menjawab beberapa soal matematika dan jenis-jenisnya.<br>
     Program ini bisa membuat soal baru dengan angka yang berbeda dengan tombolnya, lalu klik selesaikan.
-    <br><br>
-    When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\) and they are
-    \[x = {-b \pm \sqrt{b^2-4ac} \over 2a}.\]
+	<br><br>
+	When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\) and they are
+	\[x = {-b \pm \sqrt{b^2-4ac} \over 2a}.\]
     <br><br>
     Link:<br>
     <!-- <ul style="padding:0"> -->
@@ -429,27 +429,31 @@
     <div class="column" style="width:500px; padding-left:25px; padding-right:50px;">
         <label>Pilih jenis pertanyaan matematika:</label><br>
         <select id="bentuk" style="width:300px" onchange="pilihan(true);clearInterval(myInterval);">
+			<!-- <option style="color:gray">Sisa Pembagian</option> -->
             <option>Penjumlahan</option>
             <option>Pengurangan</option>
             <option>Perkalian</option>
             <option>Pembagian</option>
             <option>Penjumlahan dan Pengurangan</option>
             <option>Operasi Hitung Campuran</option>
-            <option style="color:gray">Sisa Pembagian</option>
+            <option>Sisa Pembagian</option>
             <option style="color:gray">FPB</option>
             <option style="color:gray">KPK</option>
             <option style="color:gray">Pecahan</option>
             <option style="color:gray">Bilangan Desimal dan Persen</option>
-            <option style="color:gray">Operasi Pecahan</option>
             <option style="color:gray">Perpangkatan</option>
             <option style="color:gray">Akar Kuadrat</option>
             <option style="color:gray">Akar Kubik</option>
+			<option style="color:gray">Konversi Satuan</option>
             <option style="color:gray">Bangun Datar</option>
             <option style="color:gray">Bangun Ruang</option>
             <option style="color:gray">Persamaan Linear</option>
             <option style="color:gray">Persamaan Dua Variabel</option>
+			<option style="color:gray">Pemfaktoran</option>
             <option style="color:gray">Persamaan Kuadrat</option>
             <option style="color:gray">Trigonometri</option>
+			<option style="color:gray">Peluang</option>
+			<option style="color:gray">Berhitung</option>
         </select>
         <br><br>
         
@@ -614,6 +618,7 @@
         } else {
             soal_cerita_check_old = false;
             percobaan_check_old = false;
+			suara_check_old = false;
             theme_check_old = false;
             // clear_all();
         }
@@ -624,7 +629,7 @@
         document.getElementById("tema").checked = theme_check_old;
         document.getElementById("settings").checked = check_old;
         settings_check();
-        pilihan();
+        // pilihan();
 
         // interval = 1000;
         interval = 200;
@@ -845,7 +850,32 @@
 						soal = `(${a} - ${b}) / ${c}`
                     }
                 }
-            }
+            } else if (e1.index == 6) {
+				if (level2.index == 0) {
+                    kecil = Math.floor(1 + 10 * Math.random());
+                    a = Math.floor(1 + 10 * Math.random()) * kecil;
+                } else if (level2.index == 1) {
+                    if (Math.random() < 0.5) {
+                        kecil = Math.floor(10 + 20 * Math.random());
+                        a = Math.floor(3 + 17 * Math.random()) * kecil;
+                    } else {
+                        kecil = Math.floor(3 + 17 * Math.random());
+                        a = Math.floor(10 + 20 * Math.random()) * kecil;
+                    }
+                } else {
+                    if (Math.random() < 0.5) {
+                        kecil = Math.floor(10 + 20 * Math.random());
+                        a = Math.floor(3 + 17 * Math.random()) * kecil;
+                    } else {
+                        kecil = Math.floor(50 + 250 * Math.random());
+                        a = Math.floor(10 + 40 * Math.random()) * kecil;
+                    }
+                }
+                b = kecil;
+				a += Math.floor(1 + (b-1) * Math.random());
+                tanda = ' : '
+                hasil = a % b;
+			}
 			
 			function bersusun(a,b,tanda) {
                 text = `
@@ -887,11 +917,36 @@
                 text += `<hr style="float:left; width:${23*(length+1)}px; height:2px; border-width:0; background-color:white">`
                 return text;
             }
+			
+			function bersusun2(a,b) {
+                max_number = Math.max(a,b);
+                length = parseInt(1+Math.log10(max_number));
+                length_a = parseInt(1+Math.log10(a));
+                length_b = parseInt(1+Math.log10(b));
+                text = ``;
+				text += `<hr style="float:left; margin-left:${23*(length_b+1)-18}px; width:${23*(length_a+1)}px; height:2px; border-width:0; background-color:white">`
+				text += `<div class="clearfix"></div>`
+                // text += `<div class="column" style="font-size:20px; width:15px">&nbsp;</div>`;
+                for (let i = 0; i < length; i++) {
+                    if (i >= length-length_b) {
+                        text += `<div class="column" style="font-size:20px; width:15px">${parseInt(b/(10**(length-i-1))%10)}</div>`;
+                    }
+                }
+                // text += `<div class="clearfix"></div>`
+                text += `<div class="column" style="font-size:20px; float:center; width:15px">|</div>`
+                for (let i = 0; i < length; i++) {
+                    if (i >= length-length_a) {
+                        text += `<div class="column" style="font-size:20px; width:15px">${parseInt(a/(10**(length-i-1))%10)}</div>`;
+                    }
+                }
+                // text += `<div class="clearfix"></div>`
+                return text;
+            }
             
             var cerita_check = document.getElementById("check");
             var cerita = document.getElementById("cerita");
 			var soal_teks;
-			if (e1.index <= 9) {
+			if (e1.index <= 15) {
 				if (cerita_check.checked == false) {
 					if (e1.index < 4) {
 						// document.getElementById('soal').innerHTML = 'Hasil dari ' + a + tanda + b + ' adalah ...';
@@ -904,7 +959,8 @@
 								// document.getElementById('soal').innerHTML = bersusun(a,b,tanda.replace(' ',''));
 								soal_teks = bersusun(a,b,tanda);
 							} else {
-								soal_teks = '';
+								// soal_teks = '';
+								soal_teks = bersusun2(a,b);
 							}
 						}
 						document.getElementById('tipe2').style.display = 'block';
@@ -915,8 +971,9 @@
 						soal_teks = `Hasil dari ${soal} adalah ...`;
 						document.getElementById('tipe2').style.display = 'block';
 					} else if (e1.index == 6) {
-                        soal_teks = `Sisa pembagian dari 13 oleh 4 adalah ...`;
-                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                        // soal_teks = `Sisa pembagian dari 13 oleh 4 adalah ...`;
+						soal_teks = `Sisa pembagian dari ${a} oleh ${b} adalah ...`;
+                        // soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
 						document.getElementById('tipe2').style.display = 'block';
                     } else if (e1.index == 7) {
                         soal_teks = `FPB dari 8 dan 12 adalah ...`;
@@ -927,15 +984,41 @@
                         soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
 						document.getElementById('tipe2').style.display = 'block';
                     } else if (e1.index == 9) {
-                        // soal_teks = `Hasil dari 1/4 + 2/3 adalah ...`;
-                        soal_teks = `Hasil dari <span style="font-size:20px">/({1 /over 4} + {2 /over 3}/)`.replaceAll("/","&#x005c");
-                        soal_teks += `</span> adalah ...`
+						if (bs2.index == 0) {
+							soal_teks = `Hasil dari 1/4 + 2/3 adalah ...`;
+						} else {
+							soal_teks = `Hasil dari <span style="font-size:20px">/({1 /over 4} + {2 /over 3}/)`.replaceAll("/","&#x005c");
+							soal_teks += `</span> adalah ...`
+						}
                         // soal_teks = `When /(a /ne 0/), there are three solutions to /(ax^2 + bx + c = 0/) and they are
                         // /[x = {-b /pm /sqrt{b^2-4ac} /over 2a}./]`.replaceAll("/","&#x005c");
                         soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
 						document.getElementById('tipe2').style.display = 'block';
-                        // MathJax.typeset();
-                    }
+                    } else if (e1.index == 10) {
+						soal_teks = `Hasil dari &nbsp;<span style="font-size:20px">/(30 /% + {1 /over 4}/)`.replaceAll("/","&#x005c");
+						soal_teks += `</span>&nbsp; adalah ...`
+                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+						document.getElementById('tipe2').style.display = 'block';
+					} else if (e1.index == 11) {
+						soal_teks = `Hasil dari &nbsp;<span style="font-size:20px">/(5^2/)`.replaceAll("/","&#x005c");
+						soal_teks += `</span>&nbsp; adalah ...`
+                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+					} else if (e1.index == 12) {
+						soal_teks = `Hasil dari &nbsp;<span style="font-size:20px">/(/sqrt{16}/)`.replaceAll("/","&#x005c");
+						soal_teks += `</span>&nbsp; adalah ...`
+                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+					} else if (e1.index == 13) {
+						soal_teks = `Hasil dari &nbsp;<span style="font-size:20px">/(/sqrt[3]{27}/)`.replaceAll("/","&#x005c");
+						soal_teks += `</span>&nbsp; adalah ...`
+                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+					} else if (e1.index == 14) {
+						soal_teks = `Waktu 3 menit berapa detik?`.replaceAll("/","&#x005c");
+						soal_teks += `</span>&nbsp; adalah ...`
+                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+					} else if (e1.index == 15) {
+						soal_teks = `Diketahui panjang sisi persegi adalah 4 cm. Luas perseginya adalah ...`;
+                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+					}
 				} else {
 					var cerita2 = document.getElementById("cerita2");
 					cerita2 = cerita2.options[cerita2.selectedIndex];
@@ -950,7 +1033,7 @@
 					}
 				}
 				document.getElementById('soal').innerHTML = soal_teks;
-                MathJax.typeset();
+				MathJax.typeset();
 				if (document.getElementById('suara').checked) {
 				    speak(soal_teks);
 				}
@@ -1155,6 +1238,8 @@
                         document.getElementById("solve").click();
                     }
                 });
+				// hasil = 0;
+				hasil2 = hasil;
 
             } else {
                 document.getElementById("pilihan").style.display = "block";
@@ -1228,6 +1313,13 @@
                 pilihan_list = pilihan_list.sort( () => .5 - Math.random() );
                 pilihan_list = pilihan_list.slice(0,j_pilihan2);
                 pilihan_list[pilihan_index] = hasil;
+				
+				if (pilihan_index == 0) {hasil2 = hasil + ' (A)';}
+				else if (pilihan_index == 1) {hasil2 = hasil + ' (B)';}
+				else if (pilihan_index == 2) {hasil2 = hasil + ' (C)';}
+				else if (pilihan_index == 3) {hasil2 = hasil + ' (D)';}
+				else {hasil2 = hasil + ' (E)';}
+				
                 // <div class="column">
                 document.getElementById('tipe2').innerHTML = `
                 <span>Pilihan jawaban</span><br><br>
@@ -1305,13 +1397,18 @@
                     soal = a + tanda + b;
                 } else if (e1.index == 4) {
                     soal = a + tanda + b + tanda2 + c;
-                }
+                } else if (e1.index == 6) {
+					soal = 'Hasil';
+				} else {
+					soal = '';
+				}
 				var jawaban_teks, jawaban_teks2;
                 if (angka == hasil) {
-                    jawaban_teks = `Jawabannya benar<br><br> ${soal} = ${hasil}`;
+                    // jawaban_teks = `Jawabannya benar<br><br> ${soal} = ${hasil}`;
+					jawaban_teks = `Jawabannya benar<br><br> ${soal} = ${hasil2}`;
 					jawaban_teks2 = 'Jawabannya benar';
                 } else {
-                    jawaban_teks = `Jawabannya salah<br>Jawaban yang diinput: ${angka}<br><br>${soal} = ${hasil}`;
+                    jawaban_teks = `Jawabannya salah<br>Jawaban yang diinput: ${angka}<br><br>${soal} = ${hasil2}`;
 					jawaban_teks2 = 'Jawabannya salah';
                 }
 				document.getElementById('jawaban').innerHTML = jawaban_teks;
