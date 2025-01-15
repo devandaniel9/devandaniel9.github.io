@@ -393,9 +393,9 @@
     <br><br>
     Program ini akan menjawab beberapa soal matematika dan jenis-jenisnya.<br>
     Program ini bisa membuat soal baru dengan angka yang berbeda dengan tombolnya, lalu klik selesaikan.
-	<br><br>
+	<!-- <br><br>
 	When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\) and they are
-	\[x = {-b \pm \sqrt{b^2-4ac} \over 2a}.\]
+	\[x = {-b \pm \sqrt{b^2-4ac} \over 2a}.\] -->
     <br><br>
     Link:<br>
     <!-- <ul style="padding:0"> -->
@@ -407,6 +407,7 @@
     <br><br>
     Ada yang baru di program ini, yaitu:<br>
     <ul>
+        <li>KPK dan FPB</li>
         <li>Pengaturan</li>
         <li>Pilihan Ganda</li>
         <li>Timer</li>
@@ -437,8 +438,10 @@
             <option>Penjumlahan dan Pengurangan</option>
             <option>Operasi Hitung Campuran</option>
             <option>Sisa Pembagian</option>
-            <option style="color:gray">FPB</option>
-            <option style="color:gray">KPK</option>
+            <option>KPK</option>
+            <option>FPB</option>
+            <!-- <option style="color:gray">KPK</option> -->
+            <!-- <option style="color:gray">FPB</option> -->
             <option style="color:gray">Pecahan</option>
             <option style="color:gray">Bilangan Desimal dan Persen</option>
             <option style="color:gray">Perpangkatan</option>
@@ -588,7 +591,8 @@
 
     <br><br>
     <!-- <p>Terakhir diupdate: 2 Feb 2024</p> -->
-    <p>Terakhir diupdate: 29 Nov 2024</p>
+    <!-- <p>Terakhir diupdate: 29 Nov 2024</p> -->
+    <p>Terakhir diupdate: 15 Jan 2025</p>
 
     <script>
         // Time
@@ -688,6 +692,22 @@
             document.getElementById('jawaban').innerHTML = 'Belum ada jawaban';
             document.getElementById('tipe2').style.display = 'block';
             // document.getElementById('angka').innerHTML = '';
+
+            function gcd(a, b) { 
+                for (let temp = b; b !== 0;) { 
+                    b = a % b; 
+                    a = temp; 
+                    temp = b; 
+                } 
+                return a; 
+            } 
+  
+            // function lcmFunction(a, b) { 
+            function lcm(a, b) { 
+                const gcdValue = gcd(a, b); 
+                return (a * b) / gcdValue; 
+            } 
+
             if (e1.index == 0) {
                 if (level2.index == 0) {
                     a = Math.floor(1 + 10 * Math.random());
@@ -875,7 +895,17 @@
 				a += Math.floor(1 + (b-1) * Math.random());
                 tanda = ' : '
                 hasil = a % b;
-			}
+			} else if (e1.index == 7) {
+                a = Math.floor(2 + 19 * Math.random());
+                b = Math.floor(2 + 19 * Math.random());
+                // hasil = 0;
+                hasil = lcm(a,b);
+            } else if (e1.index == 8) {
+                a = Math.floor(2 + 19 * Math.random());
+                b = Math.floor(2 + 19 * Math.random());
+                // hasil = 0;
+                hasil = gcd(a,b);
+            }
 			
 			function bersusun(a,b,tanda) {
                 text = `
@@ -946,7 +976,7 @@
             var cerita_check = document.getElementById("check");
             var cerita = document.getElementById("cerita");
 			var soal_teks;
-			if (e1.index <= 15) {
+			if (e1.index <= 18) {
 				if (cerita_check.checked == false) {
 					if (e1.index < 4) {
 						// document.getElementById('soal').innerHTML = 'Hasil dari ' + a + tanda + b + ' adalah ...';
@@ -976,12 +1006,12 @@
                         // soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
 						document.getElementById('tipe2').style.display = 'block';
                     } else if (e1.index == 7) {
-                        soal_teks = `FPB dari 8 dan 12 adalah ...`;
-                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                        // soal_teks = `KPK dari 6 dan 14 adalah ...`;
+                        soal_teks = `KPK dari ${a} dan ${b} adalah ...`;
 						document.getElementById('tipe2').style.display = 'block';
                     } else if (e1.index == 8) {
-                        soal_teks = `KPK dari 6 dan 14 adalah ...`;
-                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                        // soal_teks = `FPB dari 8 dan 12 adalah ...`;
+                        soal_teks = `FPB dari ${a} dan ${b} adalah ...`;
 						document.getElementById('tipe2').style.display = 'block';
                     } else if (e1.index == 9) {
 						if (bs2.index == 0) {
@@ -1005,20 +1035,30 @@
                         soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
 					} else if (e1.index == 12) {
 						soal_teks = `Hasil dari &nbsp;<span style="font-size:20px">/(/sqrt{16}/)`.replaceAll("/","&#x005c");
-						soal_teks += `</span>&nbsp; adalah ...`
+						soal_teks += `</span>&nbsp; adalah ...`;
                         soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
 					} else if (e1.index == 13) {
 						soal_teks = `Hasil dari &nbsp;<span style="font-size:20px">/(/sqrt[3]{27}/)`.replaceAll("/","&#x005c");
-						soal_teks += `</span>&nbsp; adalah ...`
+						soal_teks += `</span>&nbsp; adalah ...`;
                         soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
 					} else if (e1.index == 14) {
-						soal_teks = `Waktu 3 menit berapa detik?`.replaceAll("/","&#x005c");
-						soal_teks += `</span>&nbsp; adalah ...`
+						soal_teks = `Waktu 3 menit berapa detik?`;
                         soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
 					} else if (e1.index == 15) {
 						soal_teks = `Diketahui panjang sisi persegi adalah 4 cm. Luas perseginya adalah ...`;
                         soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-					}
+                    } else if (e1.index == 16) {
+                        soal_teks = `Diketahui panjang sisi kubus adalah 3 cm. Luas perseginya adalah ...`;
+                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+					} else if (e1.index == 17) {
+                        soal_teks = `Solusi x dari &nbsp;<span style="font-size:20px">/(2x + 3 = 5/)`.replaceAll("/","&#x005c");
+                        soal_teks += `</span>&nbsp; adalah ...`
+                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                    } else if (e1.index == 18) {
+                        soal_teks = `Solusi x dari &nbsp;<span style="font-size:20px">/(x^2 - 3x + 2 = 0/)`.replaceAll("/","&#x005c");
+                        soal_teks += `</span>&nbsp; adalah ...`
+                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                    }
 				} else {
 					var cerita2 = document.getElementById("cerita2");
 					cerita2 = cerita2.options[cerita2.selectedIndex];
