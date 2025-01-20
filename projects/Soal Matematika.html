@@ -110,7 +110,7 @@
     a.button2:hover, a.button2:active {
         background-color: #d0d0d0;
     }
-    input[type=number], select {
+    input[type=number], input[type=text], select {
         /* width: 100%; */
         width: 200px;
         padding: 5px 10px;
@@ -260,7 +260,7 @@
         .rb-container:hover input:checked ~ .checkradio {
             background-color: #124890;
         }
-        input[type=number], select {
+        input[type=number], input[type=text], select {
             background-color: #202020;
             border: 1px solid #c0c0c0;
             color: white;
@@ -592,7 +592,7 @@
     <br><br>
     <!-- <p>Terakhir diupdate: 2 Feb 2024</p> -->
     <!-- <p>Terakhir diupdate: 29 Nov 2024</p> -->
-    <p>Terakhir diupdate: 15 Jan 2025</p>
+    <p>Terakhir diupdate: 20 Jan 2025</p>
 
     <script>
         // Time
@@ -905,6 +905,19 @@
                 b = Math.floor(2 + 19 * Math.random());
                 // hasil = 0;
                 hasil = gcd(a,b);
+            } else if (e1.index == 9) {
+                // a/b + a2/b2
+                a = Math.floor(1 + 9 * Math.random());
+                b = Math.floor(a+1 + (11-a-1) * Math.random());
+                a2 = Math.floor(1 + 9 * Math.random());
+                b2 = Math.floor(a2+1 + (11-a2-1) * Math.random());
+                dibagi = gcd(a*b2+b*a2,b*b2);
+                if ((b*b2)/dibagi == 1) {
+                    hasil = (a*b2+b*a2)/dibagi;
+                } else {
+                    hasil = `${(a*b2+b*a2)/dibagi}/${(b*b2)/dibagi}`;
+                }
+                console.log(hasil);
             }
 			
 			function bersusun(a,b,tanda) {
@@ -1015,14 +1028,14 @@
 						document.getElementById('tipe2').style.display = 'block';
                     } else if (e1.index == 9) {
 						if (bs2.index == 0) {
-							soal_teks = `Hasil dari 1/4 + 2/3 adalah ...`;
-						} else {
-							soal_teks = `Hasil dari <span style="font-size:20px">/({1 /over 4} + {2 /over 3}/)`.replaceAll("/","&#x005c");
+                            // soal_teks = `Hasil dari <span style="font-size:20px">/({1 /over 4} + {2 /over 3}/)`.replaceAll("/","&#x005c");
+                            soal_teks = `Hasil dari <span style="font-size:20px">/({${a} /over ${b}} + {${a2} /over ${b2}}/)`.replaceAll("/","&#x005c");
 							soal_teks += `</span> adalah ...`
+						} else {
+                            soal_teks = `Hasil dari ${a}/${b} + ${a2}/${b2} adalah ...`;
 						}
                         // soal_teks = `When /(a /ne 0/), there are three solutions to /(ax^2 + bx + c = 0/) and they are
                         // /[x = {-b /pm /sqrt{b^2-4ac} /over 2a}./]`.replaceAll("/","&#x005c");
-                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
 						document.getElementById('tipe2').style.display = 'block';
                     } else if (e1.index == 10) {
 						soal_teks = `Hasil dari &nbsp;<span style="font-size:20px">/(30 /% + {1 /over 4}/)`.replaceAll("/","&#x005c");
@@ -1143,9 +1156,13 @@
                 document.getElementById("bentuk-soal").style.display = 'block';
 
                 if (change) {
+                    // document.getElementById("pilihan-bentuk-soal").innerHTML = `
+                    //     <option>Bentuk Pembagian</option>
+                    //     <option>Bentuk Pecahan</option>
+                    // `;
                     document.getElementById("pilihan-bentuk-soal").innerHTML = `
-                        <option>Bentuk Pembagian</option>
                         <option>Bentuk Pecahan</option>
+                        <option>Bentuk Pembagian</option>
                     `;
                 }
 
@@ -1156,8 +1173,8 @@
                     `.replaceAll("/","&#x005c");
                     
                     // document.getElementById("contoh-bentuk-soal").innerHTML = `<span>${text}</span>`;
-                    $("#contoh-bentuk-soal").append(`<span>${text}</span>`);
-                    MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+                    // $("#contoh-bentuk-soal").append(`<span>${text}</span>`);
+                    // MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
                 } else {
                     
                 }
@@ -1267,9 +1284,10 @@
             
             if (tipe2.index == 0) {
                 document.getElementById("pilihan").style.display = "none";
+                // <input type="number" id="angka" min="0">
                 document.getElementById('tipe2').innerHTML = `
                 <label>Input jawaban</label><br>
-                <input type="number" id="angka" min="0">
+                <input type="text" id="angka" min="0">
                 `;
                 var input = document.getElementById("angka");
                 input.addEventListener("keypress", function(event) {
@@ -1280,6 +1298,7 @@
                 });
 				// hasil = 0;
 				hasil2 = hasil;
+                console.log(hasil2);
 
             } else {
                 document.getElementById("pilihan").style.display = "block";
@@ -1430,7 +1449,11 @@
                 var e = document.getElementById("bentuk");
                 var e1 = e.options[e.selectedIndex];
                 // var tanda = '';
-                angka = parseInt(angka_awal);
+                if (e1.index <= 8) {
+                    angka = parseInt(angka_awal);
+                } else {
+                    angka = angka_awal;
+                }
                 // if (e1.index == 0) {
                 //     tanda = ' + ';
                 if (e1.index <= 3) {
