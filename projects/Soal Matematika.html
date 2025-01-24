@@ -168,8 +168,7 @@
     li {
         list-style-position: inside;
         padding: 0;
-        padding-left: 20px;
-        
+        /* padding-left: 20px; */
     }
     li::before {
         content: "";
@@ -205,6 +204,9 @@
             color: white;
             /* background-image: repeating-linear-gradient(180deg,#203040,#203040 80%,#304860); */
             background-image: repeating-linear-gradient(0deg,#244842,#183028 200px,#183028);
+            /* background-image: url("images/5570834.jpg"); */
+            background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url("images/5570834.jpg");background-repeat: no-repeat;
+            background-position: center;
         }
         .color2 {
             color: #a0e0ff;
@@ -361,6 +363,7 @@
             <li><a href="Bangun Ruang.html">Bangun Ruang</a></li>
             <li><a href="Soal Matematika.html">Soal Matematika</a></li>
             <li><a href="Peluang.html">Peluang</a></li>
+            <li><a href="Kalkulator Sederhana.html">Kalkulator Sederhana</a></li>
         </ul><br>
         <hr style="height:2px; border-width:0; background-color:gray">
         <span style="font-size:22px;"><b>Lainnya</b></span>
@@ -401,12 +404,12 @@
     <!-- <ul style="padding:0"> -->
     <!-- <ul style="padding-left:20px;"> -->
     <!-- Soal matematika menggunakan font MathJax -->
-    <ul>
+    <ul style="padding-left:20px;">
         <li><a class="external" href="https://www.ruangguru.com/blog/matematika-kelas-7-mengenal-operasi-hitung-pada-pecahan">Mengenal Operasi Hitung pada Pecahan - Ruangguru</a></li>
     </ul>
     <br><br>
     Ada yang baru di program ini, yaitu:<br>
-    <ul>
+    <ul style="padding-left:20px;">
         <li>KPK dan FPB</li>
         <li>Pengaturan</li>
         <li>Pilihan Ganda</li>
@@ -442,9 +445,9 @@
             <option>FPB</option>
             <!-- <option style="color:gray">KPK</option> -->
             <!-- <option style="color:gray">FPB</option> -->
-            <option style="color:gray">Pecahan</option>
+            <option>Pecahan</option>
             <option style="color:gray">Bilangan Desimal dan Persen</option>
-            <option style="color:gray">Perpangkatan</option>
+            <option>Perpangkatan</option>
             <option style="color:gray">Akar Kuadrat</option>
             <option style="color:gray">Akar Kubik</option>
 			<option style="color:gray">Konversi Satuan</option>
@@ -497,7 +500,8 @@
                 <option>Pilihan ganda</option>
             </select>
         </div>
-        <div class="column" id="pilihan" style="display:block">
+        <!-- <div class="column" id="pilihan" style="display:block"> -->
+        <div class="column" id="pilihan" style="display:none">
             <label>Jumlah pilihan:</label><br>
             <select name="jumlah-pilihan" id="jumlah-pilihan" style="width:150px" onchange="pilihan();clearInterval(myInterval);">
                 <option>3</option>
@@ -556,6 +560,10 @@
         <input type="checkbox" id="suara" onclick="settings_check()">
         <span class="checkmark"></span>
     </label>
+    <label class="cb-container" style="width:400px; color:gray;">Tampilkan langkah penyelesaian (Coming Soon)
+        <input type="checkbox" id="suara" onclick="settings_check()">
+        <span class="checkmark"></span>
+    </label>
     <label class="cb-container" style="width:400px;">Terapkan tema gelap
         <input type="checkbox" id="tema" onclick="settings_check()">
         <span class="checkmark"></span>
@@ -592,7 +600,7 @@
     <br><br>
     <!-- <p>Terakhir diupdate: 2 Feb 2024</p> -->
     <!-- <p>Terakhir diupdate: 29 Nov 2024</p> -->
-    <p>Terakhir diupdate: 22 Jan 2025</p>
+    <p>Terakhir diupdate: 24 Jan 2025</p>
 
     <script>
         // Time
@@ -680,6 +688,11 @@
         }
         
         a = 0;
+        b = 0;
+        a2 = 0;
+        b2 = 0;
+        a_2 = 0;
+        b_2 = 0;
         function buat() {
 			var bs = document.getElementById("pilihan-bentuk-soal");
             var bs2 = bs.options[bs.selectedIndex];
@@ -910,13 +923,13 @@
                 // a/b + a2/b2
                 a = Math.floor(1 + 9 * Math.random());
                 b = Math.floor(a+1 + (11-a-1) * Math.random());
-                a2 = Math.floor(1 + 9 * Math.random());
-                b2 = Math.floor(a2+1 + (11-a2-1) * Math.random());
-                dibagi = gcd(a*b2+b*a2,b*b2);
-                if ((b*b2)/dibagi == 1) {
-                    hasil = (a*b2+b*a2)/dibagi;
+                a_2 = Math.floor(1 + 9 * Math.random());
+                b_2 = Math.floor(a_2+1 + (11-a_2-1) * Math.random());
+                dibagi = gcd(a*b_2+b*a_2,b*b_2);
+                if ((b*b_2)/dibagi == 1) {
+                    hasil = (a*b_2+b*a_2)/dibagi;
                 } else {
-                    hasil = `${(a*b2+b*a2)/dibagi}/${(b*b2)/dibagi}`;
+                    hasil = `${(a*b_2+b*a_2)/dibagi}/${(b*b_2)/dibagi}`;
                 }
                 console.log(hasil);
             } else if (e1.index == 10) {
@@ -1066,10 +1079,13 @@
                     } else if (e1.index == 9) {
 						if (bs2.index == 0) {
                             // soal_teks = `Hasil dari <span style="font-size:20px">/({1 /over 4} + {2 /over 3}/)`.replaceAll("/","&#x005c");
-                            soal_teks = `Hasil dari <span style="font-size:20px">/({${a} /over ${b}} + {${a2} /over ${b2}}/)`.replaceAll("/","&#x005c");
+                            soal_teks = `Hasil dari <span style="font-size:20px">/({${a} /over ${b}} + {${a_2} /over ${b_2}}/)`.replaceAll("/","&#x005c");
 							soal_teks += `</span> adalah ...`
+                            if (tipe2.index == 0) {
+                                soal_teks += `<br><br>- Tulis jawaban dengan bentuk tulisan "a" atau "a/b"<br>- Bentuk pecahan paling sederhana`
+                            }
 						} else {
-                            soal_teks = `Hasil dari ${a}/${b} + ${a2}/${b2} adalah ...`;
+                            soal_teks = `Hasil dari ${a}/${b} + ${a_2}/${b_2} adalah ...`;
 						}
                         // soal_teks = `When /(a /ne 0/), there are three solutions to /(ax^2 + bx + c = 0/) and they are
                         // /[x = {-b /pm /sqrt{b^2-4ac} /over 2a}./]`.replaceAll("/","&#x005c");
@@ -1135,6 +1151,8 @@
 				document.getElementById('tipe2').style.display = 'none';
 			}
         }
+
+        hasil = 0;
 
         function pilihan(change=false) {
             var e = document.getElementById("bentuk");
@@ -1209,14 +1227,20 @@
                     Contoh:<br><br>
                     /[x = {-b /pm /sqrt{b^2-4ac} /over 2a}./]
                     `.replaceAll("/","&#x005c");
+
+                    soal_teks = `Contoh:<br><br>Hasil dari <span style="font-size:20px">/({1 /over 4} + {2 /over 3}/)`.replaceAll("/","&#x005c");
+                    soal_teks += `</span> adalah ...`;
+                    document.getElementById("contoh-bentuk-soal").innerHTML = soal_teks;
                     
                     // document.getElementById("contoh-bentuk-soal").innerHTML = `<span>${text}</span>`;
                     // $("#contoh-bentuk-soal").append(`<span>${text}</span>`);
                     // MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
                 } else {
-                    
+                    document.getElementById("contoh-bentuk-soal").innerHTML = `Contoh:<br><br>Hasil dari 1/4 + 2/3 adalah ...`;;
                 }
             }
+
+            MathJax.typeset();
             
             var tipe = document.getElementById("tipe");
             var tipe2 = tipe.options[tipe.selectedIndex];
@@ -1500,7 +1524,10 @@
                     soal = a + tanda + b + tanda2 + c;
                 } else if (e1.index == 6) {
 					soal = 'Hasil';
-				} else {
+				} else if (e1.index == 9) {
+                    // soal = `${a}/${b} + ${a2}/${b2}`;
+                    soal = `${a}/${b} + ${a_2}/${b_2}`;
+                } else {
 					soal = '';
 				}
 				var jawaban_teks, jawaban_teks2;
