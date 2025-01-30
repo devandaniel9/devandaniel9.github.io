@@ -5,4 +5,4 @@ document.getElementById("desc01").innerHTML = `
 `;
 document.getElementById("desc01").style.width = "300px";
 document.getElementById("desc01").style.marginLeft = "-150px";
-document.getElementById("desc02").innerHTML = "Blablabla adalah blablabla";
+// document.getElementById("desc02").innerHTML = "Blablabla adalah blablabla";
