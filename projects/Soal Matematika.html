@@ -34,6 +34,9 @@
         margin: 0 auto;
         width: 85%;
     }
+	#top-color {
+		background-color:rgba(32,48,64,0);
+	}
     .color2 {
         color: #002080;
     }
@@ -205,9 +208,14 @@
             /* background-image: repeating-linear-gradient(180deg,#203040,#203040 80%,#304860); */
             background-image: repeating-linear-gradient(0deg,#244842,#183028 200px,#183028);
             /* background-image: url("images/5570834.jpg"); */
-            background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url("images/5570834.jpg");background-repeat: no-repeat;
+            /* background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url("images/5570834.jpg");background-repeat: no-repeat; */
+			background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0)),url("images/5570834.jpg");background-repeat: no-repeat;
             background-position: center;
+			background-size: auto 100%;
         }
+		#top-color {
+		    background-color:rgba(32,48,64,0.75);
+		}
         .color2 {
             color: #a0e0ff;
         }
@@ -326,7 +334,8 @@
     }
 </style>
 <body>
-    <h1 class="heading">Soal Pertanyaan Matematika</h1>
+    <div id="top-color" style="position:absolute; width:100%; height:80px; left:0; top:0; z-index:-1;"></div>
+    <h1 class="heading">Soal Pertanyaan Matematika</h1><br>
     <img src="images/soal-matematika.jpg" style="background-color:white; filter:invert(0%);" width="200">
 
     <div class="sidebar" id="sidebar"></div>
@@ -406,6 +415,7 @@
     <!-- Soal matematika menggunakan font MathJax -->
     <ul style="padding-left:20px;">
         <li><a class="external" href="https://www.ruangguru.com/blog/matematika-kelas-7-mengenal-operasi-hitung-pada-pecahan">Mengenal Operasi Hitung pada Pecahan - Ruangguru</a></li>
+		<li><a class="external" href="https://www.ruangguru.com/blog/matematika-kelas-7-mengingat-kembali-apa-itu-kpk-dan-fpb">KPK dan FPB - Ruangguru</a></li>
     </ul>
     <br><br>
     Ada yang baru di program ini, yaitu:<br>
@@ -424,6 +434,7 @@
     <hr style="height:2px; border-width:0; background-color:gray">
 
 
+    <img src="images/settings-icon.png" style="position:absolute; left:300px; padding-top:5px;" width="40">
     <h2 class="heading">Pengaturan</h2>
     <!-- <label for="bentuk">Pilih jenis pertanyaan matematika:</label><br>
     <select name="bentuk" id="bentuk" style="width:150px"> -->
@@ -448,8 +459,8 @@
             <option>Pecahan</option>
             <option style="color:gray">Bilangan Desimal dan Persen</option>
             <option>Perpangkatan</option>
-            <option style="color:gray">Akar Kuadrat</option>
-            <option style="color:gray">Akar Kubik</option>
+            <option>Akar Kuadrat</option>
+            <option>Akar Kubik</option>
 			<option style="color:gray">Konversi Satuan</option>
             <option style="color:gray">Bangun Datar</option>
             <option style="color:gray">Bangun Ruang</option>
@@ -600,7 +611,7 @@
     <br><br>
     <!-- <p>Terakhir diupdate: 2 Feb 2024</p> -->
     <!-- <p>Terakhir diupdate: 29 Nov 2024</p> -->
-    <p>Terakhir diupdate: 24 Jan 2025</p>
+    <p>Terakhir diupdate: 30 Jan 2025</p>
 
     <script>
         // Time
@@ -734,6 +745,7 @@
                     b = Math.floor(100 + 900 * Math.random());
                 }
                 tanda = ' + ';
+				tanda_suara = 'ditambah';
                 hasil = a+b;
             } else if (e1.index == 1) {
                 if (level2.index == 0) {
@@ -750,6 +762,7 @@
                     b = kecil;
                 }
                 tanda = ' - ';
+				tanda_suara = 'dikurangi';
                 hasil = a-b;
             } else if (e1.index == 2) {
                 if (level2.index == 0) {
@@ -773,6 +786,7 @@
                     }
                 }
                 tanda = ' x '
+				tanda_suara = 'dikali';
                 hasil = a*b;
             } else if (e1.index == 3) {
                 if (level2.index == 0) {
@@ -797,6 +811,7 @@
                 }
                 b = kecil;
                 tanda = ' : '
+				tanda_suara = 'dibagi';
                 hasil = Math.floor(a/b);
             } else if (e1.index == 4) {
                 if (Math.random() < 0.5) {
@@ -813,14 +828,18 @@
                         c = Math.floor(1 + 20 * Math.random());
                     }
                     tanda = ' + ';
+					tanda_suara = 'ditambah';
                     tanda2 = ' - ';
+					tanda2_suara = 'dikurangi';
                     hasil = a+b-c;
                 } else {
                     a = Math.floor(5 + 16 * Math.random());
                     b = Math.floor(1 + a * Math.random());
                     c = Math.floor(1 + 20 * Math.random());
                     tanda = ' - ';
+					tanda_suara = 'dikurangi';
                     tanda2 = ' + ';
+					tanda2_suara = 'ditambah';
                     hasil = a-b+c;
                 }
             } else if (e1.index == 5) {
@@ -830,11 +849,13 @@
                     if (Math.random() < 0.5) {
                         c = Math.floor(1 + 10 * Math.random());
 						hasil = a*b+c;
-						soal = `${a} x ${b} + ${c}`
+						soal = `${a} x ${b} + ${c}`;
+						soal_suara = `${a} dikali ${b} ditambah ${c}`;
                     } else {
                         c = Math.floor(1 + 10 * Math.random());
 						hasil = a*b-c;
-						soal = `${a} x ${b} - ${c}`
+						soal = `${a} x ${b} - ${c}`;
+						soal_suara = `${a} dikali ${b} dikurangi ${c}`;
                     }
                 } else if (Math.random() < 0.5) {
 					kecil = Math.floor(1 + 10 * Math.random());
@@ -844,10 +865,12 @@
                         c = Math.floor(1 + 10 * Math.random());
 						hasil = Math.floor(a/b+1e-10)+c;
 						soal = `${a} : ${b} + ${c}`
+						soal_suara = `${a} dibagi ${b} ditambah ${c}`;
                     } else {
                         c = Math.floor(1 + 10 * Math.random());
 						hasil = Math.floor(a/b+1e-10)-c;
 						soal = `${a} : ${b} - ${c}`
+						soal_suara = `${a} dibagi ${b} dikurangi ${c}`;
                     }
                 } else if (Math.random() < 0.75) {
                     a = Math.floor(2 + 9 * Math.random());
@@ -857,37 +880,43 @@
 						hasil = a*(b+c);
 						if (Math.random() < 0.5) {
 							soal = `${a} x (${b} + ${c})`;
+							soal_suara = `${a} dikali kurung buka ${b} ditambah ${c} kurung tutup`;
 						} else {
 							soal = `(${b} + ${c}) x ${a}`;
+							soal_suara = `kurung buka ${b} ditambah ${c} kurung tutup dikali ${a}`;
 						}
                     } else {
                         c = Math.floor(1 + 10 * Math.random());
 						hasil = a*(b-c);
 						if (Math.random() < 0.5) {
 							soal = `${a} x (${b} - ${c})`;
+							soal_suara = `${a} dikali kurung buka ${b} dikurangi ${c} kurung tutup`;
 						} else {
 							soal = `(${b} - ${c}) x ${a}`;
+							soal_suara = `kurung buka ${b} dikurangi ${c} kurung tutup dikali ${a}`;
 						}
                     }
                 } else {
 					kecil = Math.floor(1 + 10 * Math.random());
-					a = Math.floor(1 + 10 * Math.random())
+					a = Math.floor(1 + 10 * Math.random());
                     a2 = Math.floor(1 + 10 * Math.random()) * kecil;
                     c = kecil;
                     if (Math.random() < 0.5) {
 						b = a2 - a
 						hasil = (a+b)/c;
-						soal = `(${a} + ${b}) / ${c}`
+						soal = `(${a} + ${b}) / ${c}`;
+						soal_suara = `kurung buka ${a} ditambah ${b} kurung tutup dibagi ${c}`;
                     } else {
 						b = a2 + a
 						hasil = (a-b)/c;
-						soal = `(${a} - ${b}) / ${c}`
+						soal = `(${a} - ${b}) / ${c}`;
+						soal_suara = `kurung buka ${a} dikurangi ${b} kurung tutup dibagi ${c}`;
                     }
                 }
             } else if (e1.index == 6) {
 				if (level2.index == 0) {
-                    kecil = Math.floor(1 + 10 * Math.random());
-                    a = Math.floor(1 + 10 * Math.random()) * kecil;
+                    kecil = Math.floor(2 + 9 * Math.random());
+                    a = Math.floor(2 + 9 * Math.random()) * kecil;
                 } else if (level2.index == 1) {
                     if (Math.random() < 0.5) {
                         kecil = Math.floor(10 + 20 * Math.random());
@@ -968,7 +997,35 @@
                     }
                 }
                 a = a2;
-            }
+            } else if (e1.index == 12) {
+			    var a2;
+                while (a2 === undefined | a == a2) {
+                    if (level2.index == 0) {
+                        a2 = Math.floor(1 + 20 * Math.random());
+                    } else if (level2.index == 1) {
+                        a2 = Math.floor(21 + 80 * Math.random());
+                    } else {
+                        a2 = Math.floor(101 + 900 * Math.random());
+                    }
+					a3 = a2*a2;
+                    hasil = a2;
+                }
+                a = a2;
+			} else if (e1.index == 13) {
+			    var a2;
+                while (a2 === undefined | a == a2) {
+                    if (level2.index == 0) {
+                        a2 = Math.floor(1 + 10 * Math.random());
+                    } else if (level2.index == 1) {
+                        a2 = Math.floor(11 + 40 * Math.random());
+                    } else {
+                        a2 = Math.floor(51 + 150 * Math.random());
+                    }
+					a3 = a2*a2*a2;
+                    hasil = a2;
+                }
+                a = a2;
+			}
 			
 			function bersusun(a,b,tanda) {
                 text = `
@@ -1036,7 +1093,8 @@
                 return text;
             }
             
-            var cerita_check = document.getElementById("check");
+            // var cerita_check = document.getElementById("check");
+			cerita_check = document.getElementById("check");
             var cerita = document.getElementById("cerita");
 			var soal_teks;
 			if (e1.index <= 18) {
@@ -1056,25 +1114,31 @@
 								soal_teks = bersusun2(a,b);
 							}
 						}
+						soal_suara = `Hasil dari ${a} ${tanda_suara} ${b} adalah ...`;
 						document.getElementById('tipe2').style.display = 'block';
 					} else if (e1.index == 4) {
 						soal_teks = `Hasil dari ${a} ${tanda} ${b} ${tanda2} ${c} adalah ...`;
+						soal_suara = `Hasil dari ${a} ${tanda_suara} ${b} ${tanda2_suara} ${c} adalah ...`;
 						document.getElementById('tipe2').style.display = 'block';
 					} else if (e1.index == 5) {
 						soal_teks = `Hasil dari ${soal} adalah ...`;
+						soal_suara = `Hasil dari ${soal_suara} adalah ...`;
 						document.getElementById('tipe2').style.display = 'block';
 					} else if (e1.index == 6) {
                         // soal_teks = `Sisa pembagian dari 13 oleh 4 adalah ...`;
 						soal_teks = `Sisa pembagian dari ${a} oleh ${b} adalah ...`;
+						soal_suara = soal_teks;
                         // soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
 						document.getElementById('tipe2').style.display = 'block';
                     } else if (e1.index == 7) {
                         // soal_teks = `KPK dari 6 dan 14 adalah ...`;
                         soal_teks = `KPK dari ${a} dan ${b} adalah ...`;
+						soal_suara = soal_teks;
 						document.getElementById('tipe2').style.display = 'block';
                     } else if (e1.index == 8) {
                         // soal_teks = `FPB dari 8 dan 12 adalah ...`;
                         soal_teks = `FPB dari ${a} dan ${b} adalah ...`;
+						soal_suara = soal_teks;
 						document.getElementById('tipe2').style.display = 'block';
                     } else if (e1.index == 9) {
 						if (bs2.index == 0) {
@@ -1087,6 +1151,7 @@
 						} else {
                             soal_teks = `Hasil dari ${a}/${b} + ${a_2}/${b_2} adalah ...`;
 						}
+						soal_suara = `Hasil dari ${a} per ${b} ditambah ${a_2} per ${b_2} adalah ...`;
                         // soal_teks = `When /(a /ne 0/), there are three solutions to /(ax^2 + bx + c = 0/) and they are
                         // /[x = {-b /pm /sqrt{b^2-4ac} /over 2a}./]`.replaceAll("/","&#x005c");
 						document.getElementById('tipe2').style.display = 'block';
@@ -1099,17 +1164,25 @@
 						// soal_teks = `Hasil dari &nbsp;<span style="font-size:20px">/(5^2/)`.replaceAll("/","&#x005c");
                         soal_teks = `Hasil dari &nbsp;<span style="font-size:20px">/(${a}^${pangkat}/)`.replaceAll("/","&#x005c");
 						soal_teks += `</span>&nbsp; adalah ...`
+						if (pangkat == 2) {
+							soal_suara = `Hasil dari ${a} kuadrat adalah ...`;
+						} else {
+							soal_suara = `Hasil dari ${a} pangkat ${pangkat} adalah ...`;
+						}
                         // soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
 					} else if (e1.index == 12) {
-						soal_teks = `Hasil dari &nbsp;<span style="font-size:20px">/(/sqrt{16}/)`.replaceAll("/","&#x005c");
+						// soal_teks = `Bentuk sederhana dari &nbsp;<span style="font-size:20px">/(/sqrt{16}/)`.replaceAll("/","&#x005c");
+						soal_teks = `Bentuk sederhana dari &nbsp;<span style="font-size:20px">/(/sqrt{${a3}}/)`.replaceAll("/","&#x005c");
 						soal_teks += `</span>&nbsp; adalah ...`;
-                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+						soal_suara = `Bentuk sederhana dari akar kuadrat dari ${a3} adalah ...`;
 					} else if (e1.index == 13) {
-						soal_teks = `Hasil dari &nbsp;<span style="font-size:20px">/(/sqrt[3]{27}/)`.replaceAll("/","&#x005c");
+						// soal_teks = `Bentuk sederhana dari &nbsp;<span style="font-size:20px">/(/sqrt[3]{27}/)`.replaceAll("/","&#x005c");
+						soal_teks = `Bentuk sederhana dari &nbsp;<span style="font-size:20px">/(/sqrt[3]{${a3}}/)`.replaceAll("/","&#x005c");
 						soal_teks += `</span>&nbsp; adalah ...`;
-                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+						soal_suara = `Bentuk sederhana dari akar pangkat 3 dari ${a3} adalah ...`;
 					} else if (e1.index == 14) {
 						soal_teks = `Waktu 3 menit berapa detik?`;
+						soal_suara = soal_teks;
                         soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
 					} else if (e1.index == 15) {
 						soal_teks = `Diketahui panjang sisi persegi adalah 4 cm. Luas perseginya adalah ...`;
@@ -1131,18 +1204,39 @@
 					cerita2 = cerita2.options[cerita2.selectedIndex];
 					if (e1.index == 0) {
 						if (cerita2.index == 0) {
-							soal_teks = `Di dalam sebuah toko buah, ibu membeli ${a} buah. Kemudian adik memberikan buahnya kepada ibu sebanyak ${b} buah. Berapa jumlah buah ibu sekarang?`;
-						} else {
+							if (Math.random < 1/3) {nama_orang = 'ibu'}
+							else if (Math.random < 2/3) {nama_orang = 'ayah'}
+							else {nama_orang = 'abang'}
+						    if (Math.random < 0.2) {nama_buah = 'buah'}
+							else if (Math.random < 0.4) {nama_buah = 'apel'}
+							else if (Math.random < 0.6) {nama_buah = 'pisang'}
+							else if (Math.random < 0.8) {nama_buah = 'jeruk'}
+							else {nama_buah = 'mangga'}
+							// soal_teks = `Di dalam sebuah toko buah, ibu membeli ${a} buah. Kemudian adik memberikan buahnya kepada ibu sebanyak ${b} buah. Berapa jumlah buah ibu sekarang?`;
+							soal_teks = `Di dalam sebuah toko buah, ${nama_orang} membeli ${a} ${nama_buah}. Kemudian adik memberikan buahnya kepada ${nama_orang} sebanyak ${b} ${nama_buah}. Berapa jumlah ${nama_buah} ${nama_orang} sekarang?`;
+						} else if (cerita2.index == 0){
 							soal_teks = `Di dalam sebuah pusat perbelanjaan, ibu membeli sesuatu seharga ${a} ribu. Kemudian adik membeli lagi seharga ${b} ribu, lalu dikumpulkan ke keranjang ibu. Berapa jumlah uang ibu sekarang? (dalam ribuan)`;
+						} else {
+						    soal_teks = `Ibu ingin menimbang buah apel dengan berat ${a} kg, lalu seseorang menaruh buah pisang di atas timbangan dengan berat ${b} kg. Berat timbangannya adalah ...`;
 						}
 					} else if (e1.index == 1) {
 						soal_teks = `Di dalam sebuah toko buah, ibu sudah membeli apel sebanyak ${a} buah. Lalu adik memakan buah apelnya sebanyak ${b} apel. Berapa sisa buah apel sekarang?`;
+					} else if (e1.index == 2) {
+					    soal_teks = `Pada hari Minggu, ada acara yang cukup besar dan meriah, sehingga perlu disiapkan ${a} bungkus supaya acaranya lebih lengkap. Setiap bungkus akan diberikan ke semua orang, yang masing-masing berisi ${b} kue. Berapa banyak kue yang akan diberikan ke semua orang di acara tersebut?`;
+					} else if (e1.index == 3) {
+					    soal_teks = `Di suatu kelas di sekolah, terdapat beberapa kegiatan yang harus dibuat kelompok. Sebanyak ${a} siswa yang akan dibuat kelompok, yang masing-masing sebanyak ${b} orang. Berapa banyak kelompok yang terbentuk?`;
+					} else if (e1.index == 7) {
+					    soal_teks = `Andi mengunjungi perpustakaan setiap ${a} hari sekali, sedangkan Budi setiap ${b} hari sekali. Berapa hari sekali sehingga Andi dan Budi mengunjungi perpustakaan secara bersamaan?`;
+					} else if (e1.index == 8) {
+					    soal_teks = `Ibu memiliki ${a} buah apel dan ${b} buah jeruk. Buah-buahan tersebut akan dibagi secara rata kepada teman-teman di sekolah. Berapakah banyak anak yang mendapatkan buah-buahan tersebut secara rata?`;
 					}
+					soal_suara = soal_teks;
 				}
 				document.getElementById('soal').innerHTML = soal_teks;
 				MathJax.typeset();
 				if (document.getElementById('suara').checked) {
-				    speak(soal_teks);
+				    // speak(soal_teks);
+					speak(soal_suara);
 				}
 				document.getElementById('tipe2').style.display = 'block';
 			} else {
@@ -1429,6 +1523,15 @@
                         }
                         pilihan_list.push(value);
                     }
+				
+				} else if (e1.index == 6) {
+                    for (let i = 0; i < 5; i++) {
+                        value = Math.floor(Math.max(b,6)*Math.random());
+                        while (pilihan_list.indexOf(value) > -1 | value == hasil) {
+                            value = Math.floor(Math.max(b,6)*Math.random());
+                        }
+                        pilihan_list.push(value);
+                    }
 				}
 				
                 pilihan_list = pilihan_list.sort( () => .5 - Math.random() );
@@ -1531,6 +1634,9 @@
 					soal = '';
 				}
 				var jawaban_teks, jawaban_teks2;
+				if (cerita_check.checked == true) {
+				    soal = '';
+				}
                 if (angka == hasil) {
                     // jawaban_teks = `Jawabannya benar<br><br> ${soal} = ${hasil}`;
 					jawaban_teks = `Jawabannya benar<br><br> ${soal} = ${hasil2}`;
