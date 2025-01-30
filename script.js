@@ -110,15 +110,6 @@ function closeModal() {
 }
 
 
-// Get the modal image
-var modal_image = document.getElementById("myModalImage");
-
-// Get the image and insert it inside the modal - use its "alt" text as a caption
-var img = document.getElementById("img01");
-var modalImg = document.getElementById("img01m");
-var imgdesc = document.getElementById("img01d");
-var captionText = document.getElementById("img01c");
-
 function get_image_modal(modal_image, img, modalImg, imgdesc, captionText) {
     img.onclick = function(){
         modal_image.style.display = "block";
@@ -128,7 +119,8 @@ function get_image_modal(modal_image, img, modalImg, imgdesc, captionText) {
     }
 
     // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
+    // var span = document.getElementsByClassName("close")[0];
+	var span = document.getElementById("close01").innerHTML;
 
     // When the user clicks on <span> (x), close the modal
     span.onclick = function() { 
@@ -136,11 +128,65 @@ function get_image_modal(modal_image, img, modalImg, imgdesc, captionText) {
     }
 }
 
-get_image_modal(modal_image, img, modalImg, imgdesc, captionText);
+// Get the modal image
+var modal_image_content = document.getElementById("myModalImage");
+var modal_image = document.getElementById("imgmodal");
+var modal_image_desc = document.getElementById("imgdesc");
 
-var img = document.getElementById("img02");
-var modalImg = document.getElementById("img02m");
-var imgdesc = document.getElementById("img02d");
-var captionText = document.getElementById("img02c");
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+// var img = document.getElementById("img01");
+// console.log(img);
+// var modalImg = document.getElementById("img01m");
+// console.log(modalImg);
+// var imgdesc = document.getElementById("img01d").innerHTML;
+// console.log(imgdesc);
+// var captionText = document.getElementById("img01c").innerHTML;
+// console.log(captionText);
 
-get_image_modal(modal_image, img, modalImg, imgdesc, captionText);
+// get_image_modal(modal_image, img, modalImg, imgdesc, captionText);
+
+// var modal_image = document.getElementById("myModalImage2");
+// var img = document.getElementById("img02");
+// var modalImg = document.getElementById("img02m");
+// var imgdesc = document.getElementById("img02d");
+// var captionText = document.getElementById("img02c");
+
+// get_image_modal(modal_image, img, modalImg, imgdesc, captionText);
+
+// modal_image.style.display = "block";
+
+document.getElementById("img001").onclick = function() {
+    modal_image_content.style.display = "block";
+	modal_image.src = document.getElementById("img001").src;
+	modal_image.style.width = "auto";
+	modal_image.style.height = "500px";
+	modal_image_desc.innerHTML = document.getElementById("img001d").innerHTML;
+}
+
+document.getElementById("img002").onclick = function() {
+    modal_image_content.style.display = "block";
+	modal_image.src = document.getElementById("img002").src;
+	modal_image.style.width = "auto";
+	modal_image.style.height = "500px";
+	modal_image_desc.innerHTML = document.getElementById("img002d").innerHTML;
+}
+
+document.getElementById("img003").onclick = function() {
+    modal_image_content.style.display = "block";
+	modal_image.src = document.getElementById("img003").src;
+	modal_image.style.width = "auto";
+	modal_image.style.height = "500px";
+	modal_image_desc.innerHTML = document.getElementById("img003d").innerHTML;
+}
+
+document.getElementById("img004").onclick = function() {
+    modal_image_content.style.display = "block";
+	modal_image.src = document.getElementById("img004").src;
+	modal_image.style.width = "auto";
+	modal_image.style.height = "500px";
+	modal_image_desc.innerHTML = document.getElementById("img004d").innerHTML;
+}
+
+document.getElementById("imgclose").onclick = function() { 
+    modal_image_content.style.display = "none";
+}
