@@ -420,6 +420,7 @@
     <br><br>
     Ada yang baru di program ini, yaitu:<br>
     <ul style="padding-left:20px;">
+        <li>Jenis Pertanyaan</li>
         <li>KPK dan FPB</li>
         <li>Pengaturan</li>
         <li>Pilihan Ganda</li>
@@ -451,13 +452,13 @@
             <option>Pembagian</option>
             <option>Penjumlahan dan Pengurangan</option>
             <option>Operasi Hitung Campuran</option>
-            <option>Sisa Pembagian</option>
+            <option>Faktor Bilangan</option>
             <option>KPK</option>
             <option>FPB</option>
             <!-- <option style="color:gray">KPK</option> -->
             <!-- <option style="color:gray">FPB</option> -->
             <option>Pecahan</option>
-            <option style="color:gray">Bilangan Desimal dan Persen</option>
+            <option>Bilangan Desimal dan Persen</option>
             <option>Perpangkatan</option>
             <option>Akar Kuadrat</option>
             <option>Akar Kubik</option>
@@ -471,8 +472,12 @@
             <option style="color:gray">Trigonometri</option>
 			<option style="color:gray">Peluang</option>
 			<option style="color:gray">Berhitung</option>
-        </select>
-        <br><br>
+        </select><br><br>
+
+        <div id="bentuk-sub" style="display:none">
+            <label>Pilih jenis pertanyaan 2:</label><br>
+            <select id="pilihan-bentuk-sub" style="width:300px" onchange="pilihan();clearInterval(myInterval);"></select><br><br>
+        </div>
         
         <div id="bentuk-soal" style="display:block">
             <div class="column" style="padding-right:50px;">
@@ -492,17 +497,16 @@
             <div class="clearfix"></div>
             <br><br>
         </div>
+    </div>
 
+    <div class="column" style="padding-right:50px;">
         <label>Pilih tingkat kesulitan:</label><br>
         <select id="level" style="width:150px">
             <option>Mudah</option>
             <option>Sedang</option>
             <option>Sulit</option>
             <option>Kustom</option>
-        </select>
-        <br><br>
-    </div>
-    <div class="column" style="padding-right:50px;">
+        </select><br><br>
         <div class="column" style="padding-right:70px;">
             <label>Pilih tipe pertanyaan:</label><br>
             <!-- <select id="tipe" style="width:150px" onchange="pilihan()"> -->
@@ -597,7 +601,7 @@
     <span id="soal" style="width:500px; word-wrap:break-word;">Belum ada soal</span>
     <div id="timer" style="position:absolute; left:500px;"></div><br><br>
     <!-- <div class="column" style="padding-right:50px;"></div> -->
-    <button class="button" onclick="buat();pilihan();clearInterval(myInterval);">Buat soal baru</button><br><br>
+    <button class="button" onclick="pilihan();buat();pilihan();clearInterval(myInterval);">Buat soal baru</button><br><br>
     <div id="tipe2"></div><br>
     <button class="button" id="solve" onclick="selesaikan()">Selesaikan</button>
     <br><br>
@@ -611,7 +615,7 @@
     <br><br>
     <!-- <p>Terakhir diupdate: 2 Feb 2024</p> -->
     <!-- <p>Terakhir diupdate: 29 Nov 2024</p> -->
-    <p>Terakhir diupdate: 30 Jan 2025</p>
+    <p>Terakhir diupdate: 5 Feb 2025</p>
 
     <script>
         // Time
@@ -734,6 +738,7 @@
             } 
 
             if (e1.index == 0) {
+                document.getElementById("bentuk-sub").style.display = 'none';
                 if (level2.index == 0) {
                     a = Math.floor(1 + 10 * Math.random());
                     b = Math.floor(1 + 10 * Math.random());
@@ -748,6 +753,7 @@
 				tanda_suara = 'ditambah';
                 hasil = a+b;
             } else if (e1.index == 1) {
+                document.getElementById("bentuk-sub").style.display = 'none';
                 if (level2.index == 0) {
                     kecil = Math.floor(1 + 10 * Math.random());
                     a = Math.floor(1 + 10 * Math.random()) + kecil - 1;
@@ -765,6 +771,7 @@
 				tanda_suara = 'dikurangi';
                 hasil = a-b;
             } else if (e1.index == 2) {
+                document.getElementById("bentuk-sub").style.display = 'none';
                 if (level2.index == 0) {
                     a = Math.floor(1 + 10 * Math.random());
                     b = Math.floor(1 + 10 * Math.random());
@@ -789,6 +796,7 @@
 				tanda_suara = 'dikali';
                 hasil = a*b;
             } else if (e1.index == 3) {
+                document.getElementById("bentuk-sub").style.display = 'none';
                 if (level2.index == 0) {
                     kecil = Math.floor(1 + 10 * Math.random());
                     a = Math.floor(1 + 10 * Math.random()) * kecil;
@@ -814,6 +822,7 @@
 				tanda_suara = 'dibagi';
                 hasil = Math.floor(a/b);
             } else if (e1.index == 4) {
+                document.getElementById("bentuk-sub").style.display = 'none';
                 if (Math.random() < 0.5) {
                     if (Math.random() < 0.5) {
                         a = Math.floor(5 + 16 * Math.random());
@@ -843,6 +852,7 @@
                     hasil = a-b+c;
                 }
             } else if (e1.index == 5) {
+                document.getElementById("bentuk-sub").style.display = 'none';
                 if (Math.random() < 0.25) {
                     a = Math.floor(2 + 9 * Math.random());
                     b = Math.floor(2 + 9 * Math.random());
@@ -914,30 +924,40 @@
                     }
                 }
             } else if (e1.index == 6) {
-				if (level2.index == 0) {
-                    kecil = Math.floor(2 + 9 * Math.random());
-                    a = Math.floor(2 + 9 * Math.random()) * kecil;
-                } else if (level2.index == 1) {
-                    if (Math.random() < 0.5) {
-                        kecil = Math.floor(10 + 20 * Math.random());
-                        a = Math.floor(3 + 17 * Math.random()) * kecil;
+                // document.getElementById("bentuk-sub").style.display = 'block';
+                // document.getElementById("pilihan-bentuk-sub").innerHTML = `
+                //     <option>Sisa Pembagian</option>
+                //     <option>Faktor Bilangan</option>
+                // `;
+                // var e_bentuk = document.getElementById("pilihan-bentuk-sub");
+                // var e1_bentuk = e_bentuk.options[e_bentuk.selectedIndex];
+                console.log(e1_bentuk.index);
+                if (e1_bentuk.index == 0) {
+                    if (level2.index == 0) {
+                        kecil = Math.floor(2 + 9 * Math.random());
+                        a = Math.floor(2 + 9 * Math.random()) * kecil;
+                    } else if (level2.index == 1) {
+                        if (Math.random() < 0.5) {
+                            kecil = Math.floor(10 + 20 * Math.random());
+                            a = Math.floor(3 + 17 * Math.random()) * kecil;
+                        } else {
+                            kecil = Math.floor(3 + 17 * Math.random());
+                            a = Math.floor(10 + 20 * Math.random()) * kecil;
+                        }
                     } else {
-                        kecil = Math.floor(3 + 17 * Math.random());
-                        a = Math.floor(10 + 20 * Math.random()) * kecil;
+                        if (Math.random() < 0.5) {
+                            kecil = Math.floor(10 + 20 * Math.random());
+                            a = Math.floor(3 + 17 * Math.random()) * kecil;
+                        } else {
+                            kecil = Math.floor(50 + 250 * Math.random());
+                            a = Math.floor(10 + 40 * Math.random()) * kecil;
+                        }
                     }
-                } else {
-                    if (Math.random() < 0.5) {
-                        kecil = Math.floor(10 + 20 * Math.random());
-                        a = Math.floor(3 + 17 * Math.random()) * kecil;
-                    } else {
-                        kecil = Math.floor(50 + 250 * Math.random());
-                        a = Math.floor(10 + 40 * Math.random()) * kecil;
-                    }
+                    b = kecil;
+                    a += Math.floor(1 + (b-1) * Math.random());
+                    tanda = ' : '
+                    hasil = a % b;
                 }
-                b = kecil;
-				a += Math.floor(1 + (b-1) * Math.random());
-                tanda = ' : '
-                hasil = a % b;
 			} else if (e1.index == 7) {
                 a = Math.floor(2 + 19 * Math.random());
                 b = Math.floor(2 + 19 * Math.random());
@@ -962,6 +982,25 @@
                 }
                 console.log(hasil);
             } else if (e1.index == 10) {
+                if (Math.random() < 0.125) {b = 2;}
+                else if (Math.random() < 0.25) {b = 4;}
+                else if (Math.random() < 0.375) {b = 5;}
+                else if (Math.random() < 0.5) {b = 10;}
+                else if (Math.random() < 0.625) {b = 20;}
+                else if (Math.random() < 0.75) {b = 25;}
+                else if (Math.random() < 0.875) {b = 50;}
+                else {b = 100;}
+                a = Math.floor(1+b*Math.random());
+                c = Math.floor(1+100*Math.random());
+                hasil = Math.round(100*(a/b+c/100));
+                if (Math.random() < 0.5) {
+                    // /(30 /% + {1 /over 4}/)
+                    soal = `/({${a} /over ${b}} + ${c} /%/)`;
+                    soal_suara = `${a} per ${b} ditambah ${c} persen`;
+                } else {
+                    soal = `/(${c} /% + {${a} /over ${b}}/)`;
+                    soal_suara = `${c} persen ditambah ${a} per ${b}`;
+                }
             } else if (e1.index == 11) {
                 // var a;
                 var a2;
@@ -1156,9 +1195,11 @@
                         // /[x = {-b /pm /sqrt{b^2-4ac} /over 2a}./]`.replaceAll("/","&#x005c");
 						document.getElementById('tipe2').style.display = 'block';
                     } else if (e1.index == 10) {
-						soal_teks = `Hasil dari &nbsp;<span style="font-size:20px">/(30 /% + {1 /over 4}/)`.replaceAll("/","&#x005c");
+						// soal_teks = `Hasil dari &nbsp;<span style="font-size:20px">/(30 /% + {1 /over 4}/)`.replaceAll("/","&#x005c");
+                        soal_teks = `Hasil dari &nbsp;<span style="font-size:20px">${soal}`.replaceAll("/","&#x005c");
 						soal_teks += `</span>&nbsp; adalah ...`
-                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                        soal_teks += `<br><br>- Hasil jawaban di input jawaban dikali 100 dari hasil awalnya`
+						soal_suara = `Hasil dari ${soal_suara} adalah ...`;
 						document.getElementById('tipe2').style.display = 'block';
 					} else if (e1.index == 11) {
 						// soal_teks = `Hasil dari &nbsp;<span style="font-size:20px">/(5^2/)`.replaceAll("/","&#x005c");
@@ -1251,6 +1292,114 @@
         function pilihan(change=false) {
             var e = document.getElementById("bentuk");
             var e1 = e.options[e.selectedIndex];
+            
+            e_bentuk = document.getElementById("pilihan-bentuk-sub");
+            e1_bentuk = e_bentuk.options[e_bentuk.selectedIndex];
+
+            if (e1.index <= 5) {
+                document.getElementById("bentuk-sub").style.display = 'none';
+            } else if (e1.index == 6) {
+                document.getElementById("bentuk-sub").style.display = 'block';
+                if (change) {
+                    document.getElementById("pilihan-bentuk-sub").innerHTML = `
+                        <option>Sisa Pembagian</option>
+                        <option style="color:gray">Bilangan genap dan ganjil</option>
+                        <option style="color:gray">Bilangan prima</option>
+                        <option style="color:gray">Faktorisasi prima</option>
+                    `;
+                }
+            } else if (e1.index == 7) {
+                document.getElementById("bentuk-sub").style.display = 'block';
+                if (change) {
+                    document.getElementById("pilihan-bentuk-sub").innerHTML = `
+                        <option>KPK dengan 2 angka</option>
+                        <option style="color:gray">KPK dengan 3 angka</option>
+                    `;
+                }
+            } else if (e1.index == 8) {
+                document.getElementById("bentuk-sub").style.display = 'block';
+                if (change) {
+                    document.getElementById("pilihan-bentuk-sub").innerHTML = `
+                        <option>FPB dengan 2 angka</option>
+                        <option style="color:gray">FPB dengan 3 angka</option>
+                    `;
+                }
+            } else if (e1.index == 9) {
+                document.getElementById("bentuk-sub").style.display = 'block';
+                if (change) {
+                    document.getElementById("pilihan-bentuk-sub").innerHTML = `
+                        <option>Penjumlahan Pecahan</option>
+                        <option style="color:gray">Pengurangan Pecahan</option>
+                        <option style="color:gray">Perkalian dan Pembagian Pecahan</option>
+                        <option style="color:gray">Pecahan Campuran</option>
+                    `;
+                }
+            } else if (e1.index == 14) {
+                document.getElementById("bentuk-sub").style.display = 'block';
+                if (change) {
+                    document.getElementById("pilihan-bentuk-sub").innerHTML = `
+                        <option style="color:gray">Jarak</option>
+                        <option style="color:gray">Waktu</option>
+                        <option style="color:gray">Kecepatan</option>
+                        <option style="color:gray">Berat</option>
+                        <option style="color:gray">Suhu</option>
+                        <option style="color:gray">Energi</option>
+                    `;
+                }
+            } else if (e1.index == 15) {
+                document.getElementById("bentuk-sub").style.display = 'block';
+                if (change) {
+                    document.getElementById("pilihan-bentuk-sub").innerHTML = `
+                        <option style="color:gray">Persegi / Persegi Panjang</option>
+                        <option style="color:gray">Segitiga</option>
+                        <option style="color:gray">Segiempat</option>
+                        <option style="color:gray">Lingkaran</option>
+                        <option style="color:gray">Campuran</option>
+                        <option style="color:gray">Gabungan</option>
+                    `;
+                }
+            } else if (e1.index == 16) {
+                document.getElementById("bentuk-sub").style.display = 'block';
+                if (change) {
+                    document.getElementById("pilihan-bentuk-sub").innerHTML = `
+                        <option style="color:gray">Kubus / Balok</option>
+                        <option style="color:gray">Prisma</option>
+                        <option style="color:gray">Limas</option>
+                        <option style="color:gray">Bola</option>
+                        <option style="color:gray">Campuran</option>
+                        <option style="color:gray">Gabungan</option>
+                    `;
+                }
+            } else if (e1.index == 19) {
+                document.getElementById("bentuk-sub").style.display = 'block';
+                if (change) {
+                    document.getElementById("pilihan-bentuk-sub").innerHTML = `
+                        <option style="color:gray">Pemfaktoran Linear</option>
+                        <option style="color:gray">Pemfaktoran Kuadrat</option>
+                        <option style="color:gray">Pemfaktoran Derajat Tinggi</option>
+                        <option style="color:gray">Pemfaktoran Campuran</option>
+                    `;
+                }
+            } else if (e1.index == 20) {
+                document.getElementById("bentuk-sub").style.display = 'block';
+                if (change) {
+                    document.getElementById("pilihan-bentuk-sub").innerHTML = `
+                        <option style="color:gray">Solusi</option>
+                        <option style="color:gray">Diskriminan</option>
+                        <option style="color:gray">Banyaknya Solusi</option>
+                    `;
+                }
+            } else if (e1.index == 21) {
+                document.getElementById("bentuk-sub").style.display = 'block';
+                if (change) {
+                    document.getElementById("pilihan-bentuk-sub").innerHTML = `
+                        <option style="color:gray">Satu fungsi</option>
+                        <option style="color:gray">Campuran</option>
+                    `;
+                }
+            } else {
+                document.getElementById("bentuk-sub").style.display = 'none';
+            }
 
             var bs = document.getElementById("pilihan-bentuk-soal");
             var bs2 = bs.options[bs.selectedIndex];
@@ -1333,6 +1482,8 @@
                     document.getElementById("contoh-bentuk-soal").innerHTML = `Contoh:<br><br>Hasil dari 1/4 + 2/3 adalah ...`;;
                 }
             }
+
+            
 
             MathJax.typeset();
             
@@ -1454,7 +1605,7 @@
                 });
 				// hasil = 0;
 				hasil2 = hasil;
-                console.log(hasil2);
+                // console.log(hasil2);
 
             } else {
                 document.getElementById("pilihan").style.display = "block";
