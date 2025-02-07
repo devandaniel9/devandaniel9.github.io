@@ -615,3 +615,57 @@ div.desc {
     text-decoration: none;
     cursor: pointer;
 }
+
+
+/* Dark Mode */
+/* @media screen and (max-width: 600px) { */
+@container root style(--darkmode: 1) {
+    body {
+        background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('images/dark-cubes-texture.jpg');
+    }
+    .container {
+        /* background-color: #d0e0f8; */
+        background-color: #202438;
+        color: white;
+    }
+    .box {
+        /* background-color: #c4d0f4; */
+        background-color: #082034;
+    }
+    /* a.external {
+        font-size: 16px;
+    } */
+    a.link:link {
+        color: #8080ff;
+        /* background-color: transparent;
+        text-decoration: none; */
+    }
+    a.link:visited {
+        color: #c080ff;
+    }
+    /* .external a:hover {
+        color: red;
+        background-color: transparent;
+        text-decoration: underline;
+    } */
+    a.link:active {
+        color: #ff8080;
+    }
+    a.button:link, a.button:visited {
+        background-color: #202020;
+        color: white;
+        border: 1px solid #c0c0c0;
+    }
+    a.button:hover, a.button:active {
+        background-color: #404040;
+    }
+    /* Group Button */
+    .btn-group a {
+        background-color: #202020; /* Green background */
+        border: 1px solid white;
+        color: white; /* White text */
+    }
+    .btn-group a:hover {
+        background-color: #404040;
+    }
+}
