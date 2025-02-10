@@ -668,4 +668,15 @@ div.desc {
     .btn-group a:hover {
         background-color: #404040;
     }
+    .pagination a {
+        background-color: black;
+        color: white;
+    }
+    .pagination a.active {
+        /* background-color: #80d0ff; */
+        background-color: #103060;
+    }
+    .pagination a:hover:not(.active,.nonclick) {
+        background-color: #404040;
+    }
 }
