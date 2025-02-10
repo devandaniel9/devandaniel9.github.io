@@ -15,12 +15,25 @@ function openNav() {
     document.getElementById("backsidebar").style.height = "100%";
     // document.body.style.backgroundColor = "rgba(0,0,0,0.5)";
 }
+
 function closeNav() {
     document.getElementById("sidebar").style.width = "0";
     document.getElementById("backsidebar").style.display = "none";
     document.getElementById("backsidebar").style.width = "0";
     document.getElementById("backsidebar").style.height = "0";
     // document.body.style.backgroundColor = "rgba(0,0,0,0)";
+}
+
+theme_check = false;
+
+function change_theme() {
+    if (theme_check) {
+        theme_check = false;
+        document.documentElement.style.setProperty('--darkmode', 0);
+    } else {
+        theme_check = true;
+        document.documentElement.style.setProperty('--darkmode', 1);
+    }
 }
 
 // document.getElementById("boxlink").innerHTML = `
@@ -34,7 +47,12 @@ document.getElementById("top-container2").innerHTML = `
     <!-- <img src="images/blank-profile.jpg" width="40" style="border-radius:50%; padding-top:2px"> -->
     <img src="images/profile.jpg" style="height:46px; border-radius:50%;">
 </div>
-<div style="font-size:30px; color:white; padding-top:4px;"><b>MY WEBSITE</b></div>
+<div class="column" style="padding-right:20px;">
+    <div style="font-size:30px; color:white; padding-top:4px;"><b>MY WEBSITE</b></div>
+</div>
+<div class="column" style="float:right;">
+    <div class="openbtn" onclick="change_theme()"><img width="30" height="30"></div>
+</div>
 <div class="clearfix"></div>
 `
 
