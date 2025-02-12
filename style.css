@@ -258,6 +258,7 @@ div.desc {
     transition: 0.5s;
     padding-top: 15px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    white-space: nowrap;
 }
 .backsidebar {
     background-color: rgb(0,0,0,0.3);
