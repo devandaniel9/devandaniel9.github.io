@@ -40,8 +40,12 @@ function change_theme() {
 document.getElementById("top-container2").innerHTML = `
 <div class="sidebar" id="sidebar"></div>
 <div class="backsidebar" id="backsidebar" onclick="closeNav()"></div>
-<div class="column" style="padding-right:30px;">
+<div class="column" style="padding-right:10px;">
     <div class="openbtn" onclick="openNav()"><img src="images/menu-icon.jpg" width="30"></div>
+</div>
+<!-- <div class="column" style="padding-right:30px;"> -->
+<div class="column" style="padding-right:20px;">
+    <div class="openbtn" onclick="change_theme()"><img src="images/dark-mode.png" style="filter:invert(100%)" width="30" height="30"></div>
 </div>
 <div class="column" style="padding-right:20px;">
     <!-- <img src="images/blank-profile.jpg" width="40" style="border-radius:50%; padding-top:2px"> -->
@@ -49,9 +53,6 @@ document.getElementById("top-container2").innerHTML = `
 </div>
 <div class="column" style="padding-right:20px;">
     <div style="font-size:30px; color:white; padding-top:4px;"><b>MY WEBSITE</b></div>
-</div>
-<div class="column" style="float:right;">
-    <div class="openbtn" onclick="change_theme()"><img width="30" height="30"></div>
 </div>
 <div class="clearfix"></div>
 `
