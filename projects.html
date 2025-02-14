@@ -16,6 +16,20 @@
         container-name: root;
         container-type: normal;
     }
+    #home {
+        color: #146480;
+    }
+    #heading2 {
+        color: #206044;
+    }
+    @container root style(--darkmode: 1) {
+        #home {
+            color: #60c0ff;
+        }
+        #heading2 {
+            color: #80ffb0;
+        }
+    }
 </style>
 <body>
     <div class="top-container heading">
@@ -42,14 +56,16 @@
     </div>
     <div class="container">
         <br>
-        <div class="heading" id="home" style="font-size:50px; color:#146480;"><b>Projects</b></div>
+        <!-- <div class="heading" id="home" style="font-size:50px; color:#146480;"><b>Projects</b></div> -->
+        <div class="heading" id="home" style="font-size:50px;"><b>Projects</b></div>
         <p>
         Halaman Projects ini berisi kumpulan Project yang sudah dibuat sebelumnya, seperti program Streamlit, halaman website kecil, menghitung BMI, penghitung waktu, permainan, dan kumpulan animasi.
 		<br><br>
 		Ada juga beberapa program yang masih belum dimasukkan, jadi akan diperbanyak lagi isi websitenya.<br>
 		Di halaman ini terdapat 10 project nya, yang sudah ditampilkan di bawah ini:
         </p>
-        <p class="heading" style="font-size:30px; color:#206044;"><u><b>DAFTAR ISI</b></u></p>
+        <!-- <p class="heading" style="font-size:30px; color:#206044;"><u><b>DAFTAR ISI</b></u></p> -->
+        <p class="heading" id="heading2" style="font-size:30px;"><u><b>DAFTAR ISI</b></u></p>
         <div class="box" style="max-width: 500px;">
             <p><b>Link program dalam projects:</b></p>
             <ol>
@@ -69,7 +85,7 @@
 		
 		<hr style="height:2px; border-width:0; background-color:gray">
 		
-        <p class="heading" style="font-size:30px; color:#206044;"><u><b>ISI HALAMAN</b></u></p>
+        <p class="heading" id="heading2" style="font-size:30px;"><u><b>ISI HALAMAN</b></u></p>
         <p class="heading" id="1" style="font-size: 25px"><b>1. Program Streamlit</b></p>
         <div class="container2">
             <!-- <div class="image"> -->
@@ -155,7 +171,7 @@
 		
 		<hr style="height:2px; border-width:0; background-color:gray">
 
-        <p class="heading" style="font-size:30px; color:#206044;"><u><b>BEBERAPA LINK:</b></u></p>
+        <p class="heading" id="heading2" style="font-size:30px;"><u><b>BEBERAPA LINK:</b></u></p>
         <div class="box heading">
             <p style="font-size:22px; margin-bottom:5px;"><b>Link halaman:</b></p>
             <div class="btn-group">
@@ -179,9 +195,10 @@
     <footer style="background-color:#404040; padding:10px; color:white;">
         <p style="font-family:'Consolas'; margin-left:10px; line-height:1.5;">
         <!-- Terakhir diupdate: 13 Nov 2024<br> -->
-        Terakhir diupdate: 10 Feb 2025<br>
+        Terakhir diupdate: 14 Feb 2025<br>
         Copyright © 2025 by Devan
         </p>
     </footer>
+    <script src="script.js"></script>
 </body>
 </html>
