@@ -7,6 +7,28 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
 </head>
+<style>
+    html {
+        /* --darkmode: 0; */
+        --darkmode: 0;
+        container-name: root;
+        container-type: normal;
+    }
+    .color001 {
+        color: #146480;
+    }
+    .color002 {
+        color: #206044;
+    }
+    @container root style(--darkmode: 1) {
+        .color001 {
+            color: #60c0ff;
+        }
+        .color002 {
+            color: #80ffb0;
+        }
+    }
+</style>
 <body>
     <div class="top-container heading">
         <div class="top-container2" id="top-container2" style="height:46px;"></div>
@@ -26,28 +48,30 @@
     </div>
     <div class="container">
         <br>
-        <div class="heading" id="home" style="font-size:50px; color:#146480;"><b>Timeline dan Sejarah</b></div>
+        <!-- <div class="heading" id="home" style="font-size:50px; color:#146480;"><b>Timeline dan Sejarah</b></div> -->
+        <div class="heading color001" id="home" style="font-size:50px;"><b>Timeline dan Sejarah</b></div>
         <p>
         Timeline dan Sejarah berisi kejadian timeline yang sudah terjadi, baik dalam hal sekolah maupun perjalanan.<br>
         Ada berbagai timeline dari SD sampai sekarang, ada di halaman ini.
 		<br><br>
 		Selain itu, ada juga timeline khusus matematika. Ini linknya:<br>
-		<a href="timeline-math.html">Timeline Matematika</a>
+		<a class="link" href="timeline-math.html">Timeline Matematika</a>
 		</p><br>
 		
-        <p class="heading" style="font-size:30px; color:#206044;"><u><b>DAFTAR ISI</b></u></p>
+        <!-- <p class="heading color001" style="font-size:30px; color:#206044;"><u><b>DAFTAR ISI</b></u></p> -->
+        <p class="heading color002" style="font-size:30px;"><u><b>DAFTAR ISI</b></u></p>
         <div class="box" style="max-width: 500px;">
             <p>
-            1. <a href="#1">Sebelum Tahun 2020</a><br>
-            2. <a href="#2">Tahun 2020</a><br>
-            3. <a href="#3">Tahun 2021</a><br>
-            4. <a href="#4">Tahun 2022</a><br>
-            5. <a href="#5">Tahun 2023</a><br>
-			6. <a href="#6">Tahun 2024</a>
+            1. <a class="link" href="#1">Sebelum Tahun 2020</a><br>
+            2. <a class="link" href="#2">Tahun 2020</a><br>
+            3. <a class="link" href="#3">Tahun 2021</a><br>
+            4. <a class="link" href="#4">Tahun 2022</a><br>
+            5. <a class="link" href="#5">Tahun 2023</a><br>
+			6. <a class="link" href="#6">Tahun 2024</a>
             </p>
         </div>
         <br>
-        <p class="heading" style="font-size:30px; color:#206044;"><u><b>ISI HALAMAN</b></u></p>
+        <p class="heading color002" style="font-size:30px;"><u><b>ISI HALAMAN</b></u></p>
         <p class="heading" id="1" style="font-size: 25px"><b>1. Sebelum 2020</b></p>
         <p class="heading" id="2" style="font-size: 25px"><b>2. Tahun 2020</b></p>
         <div class="container2">
@@ -127,8 +151,9 @@
     </div>
     <footer style="background-color:#404040; padding:10px; color:white;">
         <p style="font-family:'Consolas'; margin-left:10px; line-height:1.5;">
-        Terakhir diupdate: 26 Mei 2024<br>
-        Copyright © 2024 by Devan
+        <!-- Terakhir diupdate: 26 Mei 2024<br> -->
+        Terakhir diupdate: 19 Feb 2025<br>
+        Copyright © 2025 by Devan
         </p>
     </footer>
 </body>
