@@ -7,6 +7,46 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
 </head>
+<style>
+    html {
+        /* --darkmode: 0; */
+        --darkmode: 0;
+        container-name: root;
+        container-type: normal;
+    }
+    .color001 {
+        color: #146480;
+    }
+    .color002 {
+        color: #206044;
+    }
+    .color003 {
+        color: #000080;
+    }
+    .color004 {
+        color: darkcyan;
+    }
+    .color005 {
+        color: darkgreen;
+    }
+    @container root style(--darkmode: 1) {
+        .color001 {
+            color: #60c0ff;
+        }
+        .color002 {
+            color: #80ffb0;
+        }
+        .color003 {
+            color: #a0a0ff;
+        }
+        .color004 {
+            color: #80ffff;
+        }
+        .color005 {
+            color: #80ff80;
+        }
+    }
+</style>
 <body>
     <div class="top-container heading">
         <div class="top-container2" id="top-container2" style="height:46px;"></div>
@@ -29,15 +69,16 @@
     <div class="container">
         <br>
         <!-- <font face="Open Sans Black" size="6" color="#002080"><b>BLOG DAN CERITA</b></font> -->
-        <div class="heading" id="home" style="font-size:50px; color:#146480;"><b>Blog dan Cerita</b></div>
-        <p style="font-size: 22px">
+        <div class="heading color001" id="home" style="font-size:50px;"><b>Blog dan Cerita</b></div>
+        <!-- <p style="font-size: 22px"> -->
+        <p style="font-size:22px">
             <b class="heading">Halaman 1 dari 3</b>
             <br><br>
             Cerita dan pengalaman saya yang pernah dirasakan.<br>
             Dari masa lalu hingga kini, semua cerita sudah menjadi hal yang berharga.<br>
             Inilah beberapa cerita yang ada di blog ini.
         </p>
-        <p class="heading" style="font-size:30px; color:#206044;"><u><b>DAFTAR ISI</b></u></p>
+        <p class="heading color002" style="font-size:30px;"><u><b>DAFTAR ISI</b></u></p>
         <div class="box" style="max-width: 500px;">
             <p>
             <b>Link cerita:</b><br>
@@ -62,7 +103,7 @@
         </div>
         <br>
         
-        <p class="heading" style="font-size:30px; color:#206044;"><u><b>BEBERAPA CERITA</b></u></p>
+        <p class="heading color002" style="font-size:30px;"><u><b>BEBERAPA CERITA</b></u></p>
         <p class="heading" id="1" style="font-size: 25px"><b>1. Holiday to Bromo</b></p>
         <div class="container2">
             <p>
@@ -204,24 +245,25 @@
         <div class="container2">
             <p>
             <!-- <span style="font-size:22px; color:#000080;"><b>Kamis, 8 Sep 2023</b></span> -->
-            <b style="font-size:23px; color:#000080;">Kamis, 8 Sep 2023</b>
+            <b class="color003" style="font-size:23px;">Kamis, 8 Sep 2023</b>
             <br><br>
             <!-- <b style="color:#200040">Berangkat ke Lembah Kemenangan</b><br> -->
             <b>Berangkat ke Lembah Kemenangan</b><br>
-            Lokasi: <span style="color:darkcyan">Lembah Kemenangan, Ungaran, Kab. Semarang</span><br><br>
+            Lokasi: <span class="color004">Lembah Kemenangan, Ungaran, Kab. Semarang</span><br><br>
             Hari ini siswa SMA dan gurunya pergi dari sekolah naik bus, dengan membawa 2 tas yang berat, seperti tas buku dan Sekolah, lalu masukkan ke dalam bawah bus. Nanti akan ke Lembah Kemenang an melewati, Jalan Tol di Ungaran, makan siang. Ada 3 sesi hari ini.
             <br><br>
             <!-- &#8226;&#9;&#9; -->
-            <b>SESI 1 ~ <span style="color:darkgreen">12:30-15:30</span></b><br>
+            <!-- <b>SESI 1 ~ <span style="color:darkgreen">12:30-15:30</span></b><br> -->
+            <b>SESI 1 ~ <span class="color005">12:30-15:30</span></b><br>
             Pada sesi pertama pengenalan retreat yaitu kelompok yel-yel dan kamar, dikumpulkan hp, dan juga ibadah bersama pendeta Michael. Setelah itu, nyari kamar tapi malah ke atas jadi bingung, akhirnya ada temannya yang bantuin ke kamar, dio dalamnya ada Gilbert, dan mandi dengan membawa peralatan mandi dan bawa baju ganti, juga belum terlalu terbiasa jadi agak bingung.
             <br><br>
-            <b>SESI 2 ~ <span style="color:darkgreen">16:30-18:30</span></b><br>
+            <b>SESI 2 ~ <span class="color005">16:30-18:30</span></b><br>
             Pada sesi kedua, kembali ke aula dikumpulkan hp lagi ke kotaknya, ada ibadah bersama pendeta Hengky, khotbah-nya marah-marah dan berdoanya kaut untuk menjauh dari dosa, setelah itu makan malam ada ayamnya, suasananya rame, dan melihat coach Ditus yang sedang berbicara sama Ps. Hengky.
             <br><br>
-            <b>SESI 3 ~ <span style="color:darkgreen">19:15-22:00</span></b><br>
+            <b>SESI 3 ~ <span class="color005">19:15-22:00</span></b><br>
             Pada sesi ketiga, ada ibadah bersama Sr. Ditus, tentang kekudusan, juga ada sesi tanya jawab (Q&A). Dan kegiatan terakhir hari ini adalah latihan yel-yel dengan tema Be Excellent jam 10 malam, karena banyak siswa yang melanggar tata tertib, maka C. Gaby dan C. Agus S marah dan menegurnya, seperti membersihkan meja makan. Di malam hari akhirnya melihat penampilan kelompok yel-yel dekat api unggun karena abis latihan. Baru tidur di kamar Graha Gita sekiar tengah malam atau jam 12 malam, sempat main hp dan menunjukkan ke Gilbert.
             <br><br>
-            <span style="font-size:23px; color:#000080;"><b>Jumat, 9 Sep 2023</b></span>
+            <span class="color003" style="font-size:23px;"><b>Jumat, 9 Sep 2023</b></span>
             <br><br>
             <b>Kegiatan Outbound</b><br>
             Di pagi hari yaitu jam setengah 6 pagi (05:30), kita akan pergi ke ruang aula untuk beribadah, dan lalu sarapan. Habis itu, ada beberapa kegiatan outbound yang menarik, sama Daniel T pada kelompok yel-yel yang sama. Yang pertama bermain bola dan pipa, agar pipa ga bocor, maka dipegang. Selanjutnya, memasukkan bola ke dalam lubangnya, dengan pegangan orang-orang dari kelompok, dan ada permainan melompat di lingkaran.
@@ -254,20 +296,20 @@
             </div>
             <!-- <p> -->
             <br>
-            <span style="font-size:23px; color:#000080;"><b>Hari pertama</b></span>
+            <span class="color003" style="font-size:23px;"><b>Hari pertama</b></span>
             <br><br>
             <!-- <span style="color:red">* Untuk sementara ini, foto ini diblur terlebih dahulu.</span><br><br> -->
             Pada hari Sabtu, keluarga saya berangkat dulu dari Semarang ke Jogja naik mobil. Lalu ke bandara Adi Sucipto dengan kondisi yang rame-rame karena libur Lebaran, lalu naik pesawat selama 2 jam dari Jogja ke Bali. Akhirnya kita sampai ke Bali dengan kondisi yang selamat meskipun kondisinya ramai. Setelah itu, baru makan outdoor di dekat pantai, sebelum kita pesan hotel dan sempat foto-foto pemandangan di Bali (Gambar 5, 6).
             <!-- Lalu memesan hotel dekat pantai Kuta, dan makan malamnya dekat hotel. Lalu besoknya ke Pantai Kuta, dan kita naik kapal kecil ...<br> -->
             <!-- [Under Construction] -->
             <br><br><br>
-            <span style="font-size:23px; color:#000080;"><b>Hari kedua</b></span>
+            <span class="color003" style="font-size:23px;"><b>Hari kedua</b></span>
             <br><br>
             Hari kedua di Bali, yaitu hari Minggu. Cucu-cucu dari keluarga saya berenang di sebuah hotel dan aku sempat sarapan. Setelah itu. Di sore hari, kita ke pantai Pandawa untuk melihat sunset yang indah.
             <br><br><br>
-            <span style="font-size:23px; color:#000080;"><b>Hari ketiga</b></span>
+            <span class="color003" style="font-size:23px;"><b>Hari ketiga</b></span>
             <br><br><br>
-            <span style="font-size:23px; color:#000080;"><b>Hari keempat</b></span>
+            <span class="color003" style="font-size:23px;"><b>Hari keempat</b></span>
             <br><br><br>
             <b>Catatan:</b><br>
             <!-- <ul><li> -->
@@ -347,7 +389,7 @@
     <footer style="background-color:#404040; padding:10px; color:white;">
         <p style="font-family:'Consolas'; margin-left:10px; line-height:1.5;">
         <!-- Terakhir diupdate: 7 Mei 2024<br> -->
-		Terakhir diupdate: 10 Feb 2025<br>
+		Terakhir diupdate: 19 Feb 2025<br>
         Copyright © 2025 by Devan
         </p>
     </footer>
