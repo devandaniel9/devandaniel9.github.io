@@ -429,7 +429,7 @@
     <div class="column" style="width:500px; padding-left:25px; padding-right:50px;">
         <label>Pilih jenis pertanyaan matematika:</label><br>
         <select id="bentuk" style="width:300px" onchange="pilihan(true);clearInterval(myInterval);">
-			<!-- <option style="color:gray">Sisa Pembagian</option> -->
+            <!-- <option style="color:gray">Sisa Pembagian</option> -->
             <option>Penjumlahan</option>
             <option>Pengurangan</option>
             <option>Perkalian</option>
@@ -599,7 +599,8 @@
     <br><br>
     <!-- <p>Terakhir diupdate: 2 Feb 2024</p> -->
     <!-- <p>Terakhir diupdate: 29 Nov 2024</p> -->
-    <p>Terakhir diupdate: 5 Feb 2025</p>
+    <!-- <p>Terakhir diupdate: 5 Feb 2025</p> -->
+    <p>Terakhir diupdate: 5 Maret 2025</p>
 
     <script>
         // Time
@@ -706,18 +707,18 @@
             document.getElementById('tipe2').style.display = 'block';
             // document.getElementById('angka').innerHTML = '';
 
-            function gcd(a, b) { 
-                for (let temp = b; b !== 0;) { 
-                    b = a % b; 
-                    a = temp; 
-                    temp = b; 
-                } 
-                return a; 
-            } 
+            function gcd(a, b) {
+                for (let temp = b; b !== 0;) {
+                    b = a % b;
+                    a = temp;
+                    temp = b;
+                }
+                return a;
+            }
   
             // function lcmFunction(a, b) { 
             function lcm(a, b) { 
-                const gcdValue = gcd(a, b); 
+                const gcdValue = gcd(a, b);
                 return (a * b) / gcdValue; 
             } 
 
@@ -915,7 +916,7 @@
                 // `;
                 // var e_bentuk = document.getElementById("pilihan-bentuk-sub");
                 // var e1_bentuk = e_bentuk.options[e_bentuk.selectedIndex];
-                console.log(e1_bentuk.index);
+                // console.log(e1_bentuk.index);
                 if (e1_bentuk.index == 0) {
                     if (level2.index == 0) {
                         kecil = Math.floor(2 + 9 * Math.random());
@@ -939,19 +940,50 @@
                     }
                     b = kecil;
                     a += Math.floor(1 + (b-1) * Math.random());
-                    tanda = ' : '
+                    tanda = ' : ';
                     hasil = a % b;
+                } else {
+                    a = Math.floor(1 + 20 * Math.random());
                 }
 			} else if (e1.index == 7) {
-                a = Math.floor(2 + 19 * Math.random());
-                b = Math.floor(2 + 19 * Math.random());
-                // hasil = 0;
-                hasil = lcm(a,b);
+                if (e1_bentuk.index == 0) {
+                    var a,b;
+                    a = Math.floor(2 + 19 * Math.random());
+                    while (b === undefined | a == b) {
+                        b = Math.floor(2 + 19 * Math.random());
+                    }
+                    // hasil = 0;
+                    hasil = lcm(a,b);
+                } else {
+                    var a,b,c;
+                    a = Math.floor(2 + 19 * Math.random());
+                    while (b === undefined | a == b) {
+                        b = Math.floor(2 + 19 * Math.random());
+                    }
+                    while (c === undefined | a == c | b == c) {
+                        c = Math.floor(2 + 19 * Math.random());
+                    }
+                    hasil = lcm(lcm(a,b),c);
+                }
             } else if (e1.index == 8) {
-                a = Math.floor(2 + 19 * Math.random());
-                b = Math.floor(2 + 19 * Math.random());
-                // hasil = 0;
-                hasil = gcd(a,b);
+                if (e1_bentuk.index == 0) {
+                    var a,b;
+                    a = Math.floor(2 + 19 * Math.random());
+                    while (b === undefined | a == b) {
+                        b = Math.floor(2 + 19 * Math.random());
+                    }
+                    hasil = gcd(a,b);
+                } else {
+                    var a,b,c;
+                    a = Math.floor(2 + 19 * Math.random());
+                    while (b === undefined | a == b) {
+                        b = Math.floor(2 + 19 * Math.random());
+                    }
+                    while (c === undefined | a == c | b == c) {
+                        c = Math.floor(2 + 19 * Math.random());
+                    }
+                    hasil = gcd(gcd(a,b),c);
+                }
             } else if (e1.index == 9) {
                 // a/b + a2/b2
                 a = Math.floor(1 + 9 * Math.random());
@@ -1119,10 +1151,10 @@
             // var cerita_check = document.getElementById("check");
 			cerita_check = document.getElementById("check");
             var cerita = document.getElementById("cerita");
-			var soal_teks;
-			if (e1.index <= 18) {
-				if (cerita_check.checked == false) {
-					if (e1.index < 4) {
+            var soal_teks;
+            if (e1.index <= 18) {
+                if (cerita_check.checked == false) {
+                    if (e1.index < 4) {
 						// document.getElementById('soal').innerHTML = 'Hasil dari ' + a + tanda + b + ' adalah ...';
 						if (bs2.index == 0) {
 							// document.getElementById('soal').innerHTML = `Hasil dari ${a} ${tanda} ${b} adalah ...`;
@@ -1140,41 +1172,70 @@
 						soal_suara = `Hasil dari ${a} ${tanda_suara} ${b} adalah ...`;
 						document.getElementById('tipe2').style.display = 'block';
 					} else if (e1.index == 4) {
-						soal_teks = `Hasil dari ${a} ${tanda} ${b} ${tanda2} ${c} adalah ...`;
-						soal_suara = `Hasil dari ${a} ${tanda_suara} ${b} ${tanda2_suara} ${c} adalah ...`;
-						document.getElementById('tipe2').style.display = 'block';
-					} else if (e1.index == 5) {
-						soal_teks = `Hasil dari ${soal} adalah ...`;
-						soal_suara = `Hasil dari ${soal_suara} adalah ...`;
-						document.getElementById('tipe2').style.display = 'block';
-					} else if (e1.index == 6) {
+                        soal_teks = `Hasil dari ${a} ${tanda} ${b} ${tanda2} ${c} adalah ...`;
+                        soal_suara = `Hasil dari ${a} ${tanda_suara} ${b} ${tanda2_suara} ${c} adalah ...`;
+                        document.getElementById('tipe2').style.display = 'block';
+                    } else if (e1.index == 5) {
+                        soal_teks = `Hasil dari ${soal} adalah ...`;
+                        soal_suara = `Hasil dari ${soal_suara} adalah ...`;
+                        document.getElementById('tipe2').style.display = 'block';
+                    } else if (e1.index == 6) {
                         // soal_teks = `Sisa pembagian dari 13 oleh 4 adalah ...`;
-						soal_teks = `Sisa pembagian dari ${a} oleh ${b} adalah ...`;
+                        if (e1_bentuk.index == 0) {
+						    soal_teks = `Sisa pembagian dari ${a} oleh ${b} adalah ...`;
+                        } else if (e1_bentuk.index == 1)  {
+                            soal_teks = `Angka ${a} merupakan bilangan genap atau ganjil?`;
+                        } else if (e1_bentuk.index == 2)  {
+                            soal_teks = `Apakah ${a} merupakan bilangan prima?`;
+                        } else {
+                            soal_teks = `Faktorisasi prima dari ${a} adalah ...`;
+                        }
 						soal_suara = soal_teks;
                         // soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
 						document.getElementById('tipe2').style.display = 'block';
                     } else if (e1.index == 7) {
                         // soal_teks = `KPK dari 6 dan 14 adalah ...`;
-                        soal_teks = `KPK dari ${a} dan ${b} adalah ...`;
+                        if (e1_bentuk.index == 0) {
+                            soal_teks = `KPK dari ${a} dan ${b} adalah ...`;
+                        } else {
+                            soal_teks = `KPK dari ${a}, ${b}, dan ${c} adalah ...`;
+                        }
 						soal_suara = soal_teks;
 						document.getElementById('tipe2').style.display = 'block';
                     } else if (e1.index == 8) {
                         // soal_teks = `FPB dari 8 dan 12 adalah ...`;
-                        soal_teks = `FPB dari ${a} dan ${b} adalah ...`;
+                        if (e1_bentuk.index == 0) {
+                            soal_teks = `FPB dari ${a} dan ${b} adalah ...`;
+                        } else {
+                            soal_teks = `FPB dari ${a}, ${b}, dan ${c} adalah ...`;
+                        }
 						soal_suara = soal_teks;
 						document.getElementById('tipe2').style.display = 'block';
                     } else if (e1.index == 9) {
-						if (bs2.index == 0) {
-                            // soal_teks = `Hasil dari <span style="font-size:20px">/({1 /over 4} + {2 /over 3}/)`.replaceAll("/","&#x005c");
-                            soal_teks = `Hasil dari <span style="font-size:20px">/({${a} /over ${b}} + {${a_2} /over ${b_2}}/)`.replaceAll("/","&#x005c");
-							soal_teks += `</span> adalah ...`
-                            if (tipe2.index == 0) {
-                                soal_teks += `<br><br>- Tulis jawaban dengan bentuk tulisan "a" atau "a/b"<br>- Bentuk pecahan paling sederhana`
+                        if (e1_bentuk.index == 0) {
+                            if (bs2.index == 0) {
+                                // soal_teks = `Hasil dari <span style="font-size:20px">/({1 /over 4} + {2 /over 3}/)`.replaceAll("/","&#x005c");
+                                soal_teks = `Hasil dari <span style="font-size:20px">/({${a} /over ${b}} + {${a_2} /over ${b_2}}/)`.replaceAll("/","&#x005c");
+                                soal_teks += `</span> adalah ...`
+                                if (tipe2.index == 0) {
+                                    soal_teks += `<br><br>- Tulis jawaban dengan bentuk tulisan "a" atau "a/b"<br>- Bentuk pecahan paling sederhana`
+                                }
+                            } else {
+                                soal_teks = `Hasil dari ${a}/${b} + ${a_2}/${b_2} adalah ...`;
                             }
-						} else {
-                            soal_teks = `Hasil dari ${a}/${b} + ${a_2}/${b_2} adalah ...`;
-						}
-						soal_suara = `Hasil dari ${a} per ${b} ditambah ${a_2} per ${b_2} adalah ...`;
+                            soal_suara = `Hasil dari ${a} per ${b} ditambah ${a_2} per ${b_2} adalah ...`;
+                        } else {
+                            if (bs2.index == 0) {
+                                soal_teks = `Hasil dari <span style="font-size:20px">/({${a} /over ${b}} - {${a_2} /over ${b_2}}/)`.replaceAll("/","&#x005c");
+                                soal_teks += `</span> adalah ...`
+                                if (tipe2.index == 0) {
+                                    soal_teks += `<br><br>- Tulis jawaban dengan bentuk tulisan "a" atau "a/b"<br>- Bentuk pecahan paling sederhana`
+                                }
+                            } else {
+                                soal_teks = `Hasil dari ${a}/${b} - ${a_2}/${b_2} adalah ...`;
+                            }
+                            soal_suara = `Hasil dari ${a} per ${b} dikurangi ${a_2} per ${b_2} adalah ...`;
+                        }
                         // soal_teks = `When /(a /ne 0/), there are three solutions to /(ax^2 + bx + c = 0/) and they are
                         // /[x = {-b /pm /sqrt{b^2-4ac} /over 2a}./]`.replaceAll("/","&#x005c");
 						document.getElementById('tipe2').style.display = 'block';
@@ -1297,7 +1358,7 @@
                 if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
                         <option>KPK dengan 2 angka</option>
-                        <option style="color:gray">KPK dengan 3 angka</option>
+                        <option>KPK dengan 3 angka</option>
                     `;
                 }
             } else if (e1.index == 8) {
@@ -1305,7 +1366,7 @@
                 if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
                         <option>FPB dengan 2 angka</option>
-                        <option style="color:gray">FPB dengan 3 angka</option>
+                        <option>FPB dengan 3 angka</option>
                     `;
                 }
             } else if (e1.index == 9) {
@@ -1334,7 +1395,8 @@
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
-                        <option style="color:gray">Persegi / Persegi Panjang</option>
+                        <option style="color:gray">Persegi</option>
+                        <option style="color:gray">Persegi Panjang</option>
                         <option style="color:gray">Segitiga</option>
                         <option style="color:gray">Segiempat</option>
                         <option style="color:gray">Lingkaran</option>
@@ -1346,7 +1408,8 @@
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
-                        <option style="color:gray">Kubus / Balok</option>
+                        <option style="color:gray">Kubus</option>
+                        <option style="color:gray">Balok</option>
                         <option style="color:gray">Prisma</option>
                         <option style="color:gray">Limas</option>
                         <option style="color:gray">Bola</option>
