@@ -82,7 +82,8 @@
         /* background-color: lightblue;
         font-size: 24px;
         cursor: pointer; */
-        background-color: #103880;
+        background-color: white;
+        border: 2px solid gray;
         border-radius: 6px;
         cursor: pointer;
         width: 46px;
@@ -90,15 +91,16 @@
         transition: 0.3s;
     }
     .openbtn:hover {
-        background-color: #0d2c68;
+        background-color: #e0e0e0;
     }
     .openbtn img {
+        filter: invert(100%);
         padding: 8px;
     }
 
-    a {
+    /* a {
         font-size: 18px;
-    }
+    } */
     a.button2:link, a.button2:visited {
         background-color: #f0f0f0;
         color: black;
@@ -230,6 +232,16 @@
         #reset {
             background-color: #600000;
         }
+        .openbtn {
+            background-color: #103880;
+            border: 2px solid #c0c0c0;
+        }
+        .openbtn:hover {
+            background-color: #0d2c68;
+        }
+        .openbtn img {
+            filter: invert(0%);
+        }
         a.button2:link, a.button2:visited {
             background-color: #202020;
             color: white;
@@ -342,7 +354,8 @@
     <div class="backsidebar" id="backsidebar" onclick="closeNav()"></div>
     <div class="column" style="padding-right:30px; position:fixed; left:10px; top:10px;">
         <!-- border: 2px solid white; -->
-        <div class="openbtn" style="border:2px solid #c0c0c0;" onclick="openNav()"><img src="images/menu-icon.jpg" style="filter:invert(0%)" width="30"></div>
+        <!-- <div class="openbtn" style="border:2px solid #c0c0c0;" onclick="openNav()"><img src="images/menu-icon.jpg" style="filter:invert(0%)" width="30"></div> -->
+        <div class="openbtn" onclick="openNav()"><img src="images/menu-icon.jpg" width="30"></div>
     </div><br>
 
     <script>
