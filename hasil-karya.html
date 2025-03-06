@@ -7,6 +7,28 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
 </head>
+<style>
+    html {
+        /* --darkmode: 0; */
+        --darkmode: 0;
+        container-name: root;
+        container-type: normal;
+    }
+    .color001 {
+        color: #146480;
+    }
+    .color002 {
+        color: #206044;
+    }
+    @container root style(--darkmode: 1) {
+        .color001 {
+            color: #60c0ff;
+        }
+        .color002 {
+            color: #80ffb0;
+        }
+    }
+</style>
 <body>
     <div class="top-container heading">
         <div class="top-container2" id="top-container2" style="height:46px;"></div>
@@ -21,58 +43,61 @@
             <a href="timeline.html">Timeline</a>
             <a href="updates.html">Updates</a>
             <a href="projects.html">Projects</a>
+            <div style="float:right;" id="search"></div>
+            <script src="search.js"></script>
             <div class="clearfix"></div>
         </div>
     </div>
 	<div class="container">
         <br>
-        <div class="heading" id="home" style="font-size:50px; color:#146480;"><b>Hasil Karya</b></div>
+        <div class="heading color001" id="home" style="font-size:50px;"><b>Hasil Karya</b></div>
         <p>
         Hasil Karya berisi karya yang sudah dibuat selama ini, seperti koding dan menggambar.
-        </p>
-        <p class="heading" style="font-size:30px; color:#206044;"><u><b>DAFTAR ISI</b></u></p>
+        </p><br>
+        <p class="heading color002" style="font-size:30px;"><u><b>DAFTAR ISI</b></u></p>
         <div class="box" style="max-width: 500px;">
-            <p>
-            1. <a href="#1">Canva</a><br>
-            2. <a href="#2">Google Form</a><br>
-            3. <a href="#3">Kumpulan Website</a><br>
-            4. <a href="#4">Hasil Karya Kelas 7</a><br>
-            5. <a href="#5">Hasil Karya Kelas 8</a><br>
-            6. <a href="#6">Hasil Karya Kelas 9</a><br>
-            7. <a href="#7">Hasil Karya Kelas 10</a><br>
-            </p>
+            <p><b>Link Hasil Karya:</b></p>
+            <ol>
+                <li><a class="link" href="#1">Canva</a></li>
+                <li><a class="link" href="#2">Google Form</a></li>
+                <li><a class="link" href="#3">Kumpulan Website</a></li>
+                <li><a class="link" href="#4">Hasil Karya Kelas 7</a></li>
+                <li><a class="link" href="#5">Hasil Karya Kelas 8</a></li>
+                <li><a class="link" href="#6">Hasil Karya Kelas 9</a></li>
+                <li><a class="link" href="#7">Hasil Karya Kelas 10</a></li>
+            </ol>
         </div>
         <br>
-        <p class="heading" style="font-size:30px; color:#206044;"><u><b>ISI HALAMAN</b></u></p>
+        <p class="heading color002" style="font-size:30px;"><u><b>ISI HALAMAN</b></u></p>
 		<p class="heading" id="1" style="font-size: 25px"><b>1. Canva</b></p>
         <div class="container2">
 			<img src="images/canva-icon.png" width="100">
             <div class="clearfix"></div>
             <p>Inilah beberapa project canva yang sudah dibuat di Canva<br>Berikut ini ada beberapa presentasi yang sudah pernah buat:</p>
             <ul>
-                <div class="column" style="padding-right: 100px;">
+                <div class="column" style="padding-right:100px;">
                     <li>
                         <!-- <a href="https://www.canva.com/design/DAF0n98aNrE/2Ywu2IQ0lNZ5a3dW5GGuvQ/edit">Entrepreneur Term 2</a><br> -->
-                        <a href="https://www.canva.com/design/DAF0n98aNrE/2Ywu2IQ0lNZ5a3dW5GGuvQ/view">Entrepreneur Term 2</a><br>
+                        <a class="link" href="https://www.canva.com/design/DAF0n98aNrE/2Ywu2IQ0lNZ5a3dW5GGuvQ/view">Entrepreneur Term 2</a><br>
                         Tugas Sekolah Kelas 10<br>
                         Dibuat: November 2023
                     </li><br>
                     <li>
-                        <a href="https://www.canva.com/design/DAFwXlWF5Ko/qLFstaN2wWiQQCl179B3KQ/view">Laporan Hidroponik Tanaman Kangkung</a><br>
+                        <a class="link" href="https://www.canva.com/design/DAFwXlWF5Ko/qLFstaN2wWiQQCl179B3KQ/view">Laporan Hidroponik Tanaman Kangkung</a><br>
                         Dibuat: Oktober 2023
                     </li><br>
                     <li>
-                        <a href="https://www.canva.com/design/DAFwFtdQ0Ko/CZakrbjnuprD6d988TQL8Q/view">Entrepreneur Term 1</a><br>
+                        <a class="link" href="https://www.canva.com/design/DAFwFtdQ0Ko/CZakrbjnuprD6d988TQL8Q/view">Entrepreneur Term 1</a><br>
                         Dibuat: September 2023
                     </li><br>
                 </div>
                 <div class="column">
                     <li>
-                        <a href="https://www.canva.com/design/DAFTTOc-ulA/u2hnjpYUx-o8QH9b0yHNlw/view">Observasi Bandeng Juwana Elrina</a><br>
+                        <a class="link" href="https://www.canva.com/design/DAFTTOc-ulA/u2hnjpYUx-o8QH9b0yHNlw/view">Observasi Bandeng Juwana Elrina</a><br>
                         Dibuat: November 2022
                     </li><br>
                     <li>
-                        <a href="https://www.canva.com/design/DAFIDBYDpJw/u54kaC39SdO2cQgt5LWrnQ/view">Produk Chokies</a><br>
+                        <a class="link" href="https://www.canva.com/design/DAFIDBYDpJw/u54kaC39SdO2cQgt5LWrnQ/view">Produk Chokies</a><br>
                         Dibuat: Agustus 2022
                     </li><br>
                 </div>
@@ -86,7 +111,7 @@
 			<div class="clearfix"></div>
             <p>Google Form adalah website untuk mengisi form yang terdiri dari kuis, pilihan ganda, dan paragraf.<br>Berikut ini ada beberapa google form yang sudah pernah buat:</p>
             <ul>
-                <li><a href="https://docs.google.com/forms/d/1TYLPl871KmzQhd0X6kO_xlqiosELJifWl6R7xTDWvaE/">Kuis dan Pertanyaan Astronomi</a> - Belum sepenuhnya selesai</li>
+                <li><a class="link" href="https://docs.google.com/forms/d/1TYLPl871KmzQhd0X6kO_xlqiosELJifWl6R7xTDWvaE/">Kuis dan Pertanyaan Astronomi</a> - Belum sepenuhnya selesai</li>
                 <li>Refleksi Liburan</li>
             </ul>
         </div><br>
@@ -97,12 +122,12 @@
             <div class="clearfix"></div>
 			<p>Inilah beberapa website yang sudah pernah dibuat sebelumnya:</p>
             <ul>
-                <li><a href="Kumpulan Website/Tugas Eagle School/Latihan1.html">Latihan 1</a> - Website Pertama - Dibuat: Januari 2021</li>
-                <li><a href="Kumpulan Website/Tugas Eagle School/Tugas 1.html">Perumpamaan Domba Yang Hilang</a> - Dibuat: Januari 2021</li>
-                <li><a href="Kumpulan Website/Tugas Eagle School/tugas2/index.html">Profil Siswa</a> - Dibuat: Februari 2021</li>
-				<li><a href="Kumpulan Website/Tugas Eagle School/Latihan2.html">Latihan 2</a> - Dibuat: Februari 2021</li>
-				<li><a href="Kumpulan Website/Tugas Eagle School/tugas table.html">Tugas Tabel</a> - Dibuat: Februari 2021</li>
-				<li><a href="Kumpulan Website/Tugas Eagle School/Tugas membuat form.html">Tugas Membuat Form</a> - Dibuat: Maret 2021</li>
+                <li><a class="link" href="Kumpulan Website/Tugas Eagle School/Latihan1.html">Latihan 1</a> - Website Pertama - Dibuat: Januari 2021</li>
+                <li><a class="link" href="Kumpulan Website/Tugas Eagle School/Tugas 1.html">Perumpamaan Domba Yang Hilang</a> - Dibuat: Januari 2021</li>
+                <li><a class="link" href="Kumpulan Website/Tugas Eagle School/tugas2/index.html">Profil Siswa</a> - Dibuat: Februari 2021</li>
+				<li><a class="link" href="Kumpulan Website/Tugas Eagle School/Latihan2.html">Latihan 2</a> - Dibuat: Februari 2021</li>
+				<li><a class="link" href="Kumpulan Website/Tugas Eagle School/tugas table.html">Tugas Tabel</a> - Dibuat: Februari 2021</li>
+				<li><a class="link" href="Kumpulan Website/Tugas Eagle School/Tugas membuat form.html">Tugas Membuat Form</a> - Dibuat: Maret 2021</li>
             </ul>
 		</div><br>
 		
@@ -193,9 +218,11 @@
         <a class="button heading" href="#home">Kembali ke awal</a>
         <br><br>
     </div>
+    <script src="script.js"></script>
     <footer style="background-color:#404040; padding:10px; color:white;">
         <p style="font-family:'Consolas'; margin-left:10px; line-height:1.5;">
-        Terakhir diupdate: 16 Feb 2024<br>
+        <!-- Terakhir diupdate: 16 Feb 2024<br> -->
+        Terakhir diupdate: 6 Maret 2025<br>
         Copyright © 2024 by Devan
         </p>
     </footer>
