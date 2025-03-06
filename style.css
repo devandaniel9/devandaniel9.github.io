@@ -666,6 +666,14 @@ div.desc {
     a.button:hover, a.button:active {
         background-color: #404040;
     }
+    /* Table */
+    table, th, td {
+        background-color: #20242c;
+        border: 1px solid white;
+        border-collapse: collapse;
+        padding: 10px;
+        font-size: 20px;
+    }
     /* Group Button */
     .btn-group a {
         background-color: #202020; /* Green background */
