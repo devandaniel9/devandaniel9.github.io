@@ -417,6 +417,7 @@
     <br><br>
     Ada yang baru di program ini, yaitu:<br>
     <ul style="padding-left:20px;">
+        <li>Penjelasan pada masing-masing jenis pertanyaan</li>
         <li>Jenis Pertanyaan</li>
         <li>KPK dan FPB</li>
         <li>Pengaturan</li>
@@ -470,6 +471,10 @@
 			<option style="color:gray">Peluang</option>
 			<option style="color:gray">Berhitung</option>
         </select><br><br>
+
+        <div id="bentuk-penjelasan">
+            Penjumlahan ("+") merupakan penambahan sekelompok bilangan atau lebih menjadi suatu bilangan yang disebut jumlah. Misalnya, terdapat tiga apel di sisi kiri dan dua apel di sisi kanan, menghasilkan jumlah lima apel. Dalam simbol matematika, ini dilambangkan "3 + 2 = 5", disebut "3 ditambah 2 sama dengan 5".
+        </div><br><br>
 
         <div id="bentuk-sub" style="display:none">
             <label>Pilih jenis pertanyaan 2:</label><br>
@@ -613,7 +618,8 @@
     <!-- <p>Terakhir diupdate: 2 Feb 2024</p> -->
     <!-- <p>Terakhir diupdate: 29 Nov 2024</p> -->
     <!-- <p>Terakhir diupdate: 5 Feb 2025</p> -->
-    <p>Terakhir diupdate: 5 Maret 2025</p>
+    <!-- <p>Terakhir diupdate: 5 Maret 2025</p> -->
+    <p>Terakhir diupdate: 25 April 2025</p>
 
     <script>
         // Time
@@ -654,7 +660,7 @@
         document.getElementById("tema").checked = theme_check_old;
         document.getElementById("settings").checked = check_old;
         settings_check();
-        // pilihan();
+        // pilihan(); // On off
 
         // interval = 1000;
         interval = 200;
@@ -1460,6 +1466,93 @@
             } else {
                 document.getElementById("bentuk-sub").style.display = 'none';
             }
+
+            if (e1.index == 0) document.getElementById("bentuk-penjelasan").innerHTML = `Penjumlahan ("+") merupakan penambahan sekelompok bilangan atau lebih menjadi suatu bilangan yang disebut jumlah. Misalnya, terdapat tiga apel di sisi kiri dan dua apel di sisi kanan, menghasilkan jumlah lima apel. Dalam simbol matematika, ini dilambangkan "3 + 2 = 5", disebut "3 ditambah 2 sama dengan 5".<br><br>Sumber: Wikipedia`;
+            else if (e1.index == 1) document.getElementById("bentuk-penjelasan").innerHTML = `Pengurangan adalah operasi aritmetika yang mewakili operasi menghapus objek dari koleksi. Pengurangan ditandai dengan tanda minus, "-". Misalnya, 5 - 2 buah persik—artinya 5 buah persik dengan 2 buah yang diambil, menghasilkan total 3 buah persik. Oleh karena itu, selisih dari 5 dan 2 adalah 3; yaitu, 5 - 2 = 3.`;
+            else if (e1.index == 2) document.getElementById("bentuk-penjelasan").innerHTML = `Perkalian ('×', '⋅', '*', 'x') adalah salah satu dari empat dasar operasi matematika dari aritmetika, dengan yang lainnya adalah penambahan, pengurangan dan pembagian.<br><br>Perkalian bilangan bulat dapat dianggap sebagai penjumlahan berulang; yaitu, perkalian dua bilangan sama dengan menjumlahkan sebanyak mungkin salinan salah satunya, perkalian, sebagai kuantitas yang lain, "pengganda". Kedua angka tersebut dapat disebut sebagai faktor.<br><br>Misalnya, 4 dikalikan 3, ditulis sebagai 4 x 3 dan diucapkan sebagai "3 dikali 4", dapat dihitung dengan menambahkan 3 salinan dari 4 secara bersamaan:<br><br>3 x 4 = 4 + 4 + 4 = 12<br><br>Maka, 3 (pengganda) dan 4 (pengganda) adalah faktor, dan 12 adalah produk.`;
+            else if (e1.index == 3) document.getElementById("bentuk-penjelasan").innerHTML = `Pembagian ('/', ':') adalah salah satu dari empat operasi dasar aritmetika, cara bilangan digabungkan untuk membuat bilangan baru. Operasi lainnya adalah penambahan, pengurangan, dan perkalian.`;
+            else if (e1.index == 7) document.getElementById("bentuk-penjelasan").innerHTML = `Dalam aritmetika dan teori bilangan, kelipatan persekutuan terkecil dari dua bilangan adalah bilangan bulat positif terkecil yang dapat dibagi habis oleh kedua bilangan tersebut.[1][2] Kelipatan persekutuan terkecil biasanya disingkat sebagai 
+KPK
+{\displaystyle \operatorname {KPK} }[3] atau dituliskan 
+lcm
+{\displaystyle \operatorname {lcm} }, abreviasi dari bahasa Inggris: least common multiple[4] atau bahasa Inggris: lowest common multiple. Notasi kelipatan persekutuan dari bilangan 
+a
+{\displaystyle a} dan 
+b
+{\displaystyle b} dituliskan sebagai 
+KPK
+⁡
+(
+a
+,
+b
+)
+{\displaystyle \operatorname {KPK} (a,b)} atau 
+lcm
+⁡
+(
+a
+,
+b
+)
+{\displaystyle \operatorname {lcm} (a,b)}. Terkadang, ada juga beberapa buku yang menotasikannya sebagai 
+[
+a
+,
+b
+]
+{\displaystyle [a,b]}.[5][6]
+
+Sebagai contoh, diberikan bilangan bulat 
+12
+{\displaystyle 12} dan 
+20
+{\displaystyle 20}. Karena kelipatan dari masing-masing kedua bilangan adalah 
+12
+,
+24
+,
+36
+,
+48
+,
+60
+,
+…
+{\displaystyle 12,24,36,48,{\color {red}{60}},\dots } dan 
+20
+,
+40
+,
+60
+,
+80
+,
+…
+{\displaystyle 20,40,{\color {red}{60}},80,\dots }, maka 
+KPK
+⁡
+(
+12
+,
+20
+)
+=
+60
+{\displaystyle \operatorname {KPK} (12,20)=60}. Kelipatan persekutuan lainnya adalah
+
+120
+,
+180
+,
+240
+,
+300
+,
+…
+{\displaystyle 120,180,240,300,\dots }.
+Suatu kelipatan persekutuan terkecil dari bilangan yang lebih dari dua dapat dilakukan dengan cara yang serupa.`;
+            else document.getElementById("bentuk-penjelasan").innerHTML = '';
 
             var bs = document.getElementById("pilihan-bentuk-soal");
             var bs2 = bs.options[bs.selectedIndex];
