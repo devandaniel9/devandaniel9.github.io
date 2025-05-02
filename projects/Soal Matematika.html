@@ -472,7 +472,7 @@
 			<option style="color:gray">Berhitung</option>
         </select><br><br>
 
-        <div id="bentuk-penjelasan">
+        <div id="bentuk-penjelasan" style="line-height:1.5em">
             Penjumlahan ("+") merupakan penambahan sekelompok bilangan atau lebih menjadi suatu bilangan yang disebut jumlah. Misalnya, terdapat tiga apel di sisi kiri dan dua apel di sisi kanan, menghasilkan jumlah lima apel. Dalam simbol matematika, ini dilambangkan "3 + 2 = 5", disebut "3 ditambah 2 sama dengan 5".
         </div><br><br>
 
@@ -619,7 +619,7 @@
     <!-- <p>Terakhir diupdate: 29 Nov 2024</p> -->
     <!-- <p>Terakhir diupdate: 5 Feb 2025</p> -->
     <!-- <p>Terakhir diupdate: 5 Maret 2025</p> -->
-    <p>Terakhir diupdate: 25 April 2025</p>
+    <p>Terakhir diupdate: 2 Mei 2025</p>
 
     <script>
         // Time
@@ -741,6 +741,7 @@
                 return (a * b) / gcdValue; 
             } 
 
+            soal = '';
             if (e1.index == 0) {
                 document.getElementById("bentuk-sub").style.display = 'none';
                 if (level2.index == 0) {
@@ -756,6 +757,8 @@
                 tanda = ' + ';
 				tanda_suara = 'ditambah';
                 hasil = a+b;
+                soal = a + tanda + b;
+
             } else if (e1.index == 1) {
                 document.getElementById("bentuk-sub").style.display = 'none';
                 if (level2.index == 0) {
@@ -774,6 +777,8 @@
                 tanda = ' - ';
 				tanda_suara = 'dikurangi';
                 hasil = a-b;
+                soal = a + tanda + b;
+
             } else if (e1.index == 2) {
                 document.getElementById("bentuk-sub").style.display = 'none';
                 if (level2.index == 0) {
@@ -799,6 +804,8 @@
                 tanda = ' x '
 				tanda_suara = 'dikali';
                 hasil = a*b;
+                soal = a + tanda + b;
+
             } else if (e1.index == 3) {
                 document.getElementById("bentuk-sub").style.display = 'none';
                 if (level2.index == 0) {
@@ -825,6 +832,8 @@
                 tanda = ' : '
 				tanda_suara = 'dibagi';
                 hasil = Math.floor(a/b);
+                soal = a + tanda + b;
+
             } else if (e1.index == 4) {
                 document.getElementById("bentuk-sub").style.display = 'none';
                 if (Math.random() < 0.5) {
@@ -855,6 +864,8 @@
 					tanda2_suara = 'ditambah';
                     hasil = a-b+c;
                 }
+                soal = a + tanda + b + tanda2 + c;
+
             } else if (e1.index == 5) {
                 document.getElementById("bentuk-sub").style.display = 'none';
                 if (Math.random() < 0.25) {
@@ -910,6 +921,7 @@
 							soal_suara = `kurung buka ${b} dikurangi ${c} kurung tutup dikali ${a}`;
 						}
                     }
+
                 } else {
 					kecil = Math.floor(1 + 10 * Math.random());
 					a = Math.floor(1 + 10 * Math.random());
@@ -927,6 +939,7 @@
 						soal_suara = `kurung buka ${a} dikurangi ${b} kurung tutup dibagi ${c}`;
                     }
                 }
+
             } else if (e1.index == 6) {
                 // document.getElementById("bentuk-sub").style.display = 'block';
                 // document.getElementById("pilihan-bentuk-sub").innerHTML = `
@@ -964,6 +977,8 @@
                 } else {
                     a = Math.floor(1 + 20 * Math.random());
                 }
+                soal = 'Hasil';
+
 			} else if (e1.index == 7) {
                 if (e1_bentuk.index == 0) {
                     var a,b;
@@ -984,6 +999,7 @@
                     }
                     hasil = lcm(lcm(a,b),c);
                 }
+
             } else if (e1.index == 8) {
                 if (e1_bentuk.index == 0) {
                     var a,b;
@@ -1003,6 +1019,7 @@
                     }
                     hasil = gcd(gcd(a,b),c);
                 }
+
             } else if (e1.index == 9) {
                 // a/b + a2/b2
                 a = Math.floor(1 + 9 * Math.random());
@@ -1016,15 +1033,18 @@
                     hasil = `${(a*b_2+b*a_2)/dibagi}/${(b*b_2)/dibagi}`;
                 }
                 console.log(hasil);
+                soal = `${a}/${b} + ${a_2}/${b_2}`;
+
             } else if (e1.index == 10) {
-                if (Math.random() < 0.125) {b = 2;}
-                else if (Math.random() < 0.25) {b = 4;}
-                else if (Math.random() < 0.375) {b = 5;}
-                else if (Math.random() < 0.5) {b = 10;}
-                else if (Math.random() < 0.625) {b = 20;}
-                else if (Math.random() < 0.75) {b = 25;}
-                else if (Math.random() < 0.875) {b = 50;}
-                else {b = 100;}
+                // if (Math.random() < 0.125) {b = 2;}
+                if (Math.random() < 0.125) b = 2;
+                else if (Math.random() < 0.25) b = 4;
+                else if (Math.random() < 0.375) b = 5;
+                else if (Math.random() < 0.5) b = 10;
+                else if (Math.random() < 0.625) b = 20;
+                else if (Math.random() < 0.75) b = 25;
+                else if (Math.random() < 0.875) b = 50;
+                else b = 100;
                 a = Math.floor(1+b*Math.random());
                 c = Math.floor(1+100*Math.random());
                 hasil = Math.round(100*(a/b+c/100));
@@ -1036,6 +1056,7 @@
                     soal = `/(${c} /% + {${a} /over ${b}}/)`;
                     soal_suara = `${c} persen ditambah ${a} per ${b}`;
                 }
+
             } else if (e1.index == 11) {
                 // var a;
                 var a2;
@@ -1071,6 +1092,7 @@
                     }
                 }
                 a = a2;
+
             } else if (e1.index == 12) {
 			    var a2;
                 while (a2 === undefined | a == a2) {
@@ -1085,6 +1107,7 @@
                     hasil = a2;
                 }
                 a = a2;
+
 			} else if (e1.index == 13) {
 			    var a2;
                 while (a2 === undefined | a == a2) {
@@ -1466,93 +1489,20 @@
             } else {
                 document.getElementById("bentuk-sub").style.display = 'none';
             }
-
+            
             if (e1.index == 0) document.getElementById("bentuk-penjelasan").innerHTML = `Penjumlahan ("+") merupakan penambahan sekelompok bilangan atau lebih menjadi suatu bilangan yang disebut jumlah. Misalnya, terdapat tiga apel di sisi kiri dan dua apel di sisi kanan, menghasilkan jumlah lima apel. Dalam simbol matematika, ini dilambangkan "3 + 2 = 5", disebut "3 ditambah 2 sama dengan 5".<br><br>Sumber: Wikipedia`;
             else if (e1.index == 1) document.getElementById("bentuk-penjelasan").innerHTML = `Pengurangan adalah operasi aritmetika yang mewakili operasi menghapus objek dari koleksi. Pengurangan ditandai dengan tanda minus, "-". Misalnya, 5 - 2 buah persik—artinya 5 buah persik dengan 2 buah yang diambil, menghasilkan total 3 buah persik. Oleh karena itu, selisih dari 5 dan 2 adalah 3; yaitu, 5 - 2 = 3.`;
             else if (e1.index == 2) document.getElementById("bentuk-penjelasan").innerHTML = `Perkalian ('×', '⋅', '*', 'x') adalah salah satu dari empat dasar operasi matematika dari aritmetika, dengan yang lainnya adalah penambahan, pengurangan dan pembagian.<br><br>Perkalian bilangan bulat dapat dianggap sebagai penjumlahan berulang; yaitu, perkalian dua bilangan sama dengan menjumlahkan sebanyak mungkin salinan salah satunya, perkalian, sebagai kuantitas yang lain, "pengganda". Kedua angka tersebut dapat disebut sebagai faktor.<br><br>Misalnya, 4 dikalikan 3, ditulis sebagai 4 x 3 dan diucapkan sebagai "3 dikali 4", dapat dihitung dengan menambahkan 3 salinan dari 4 secara bersamaan:<br><br>3 x 4 = 4 + 4 + 4 = 12<br><br>Maka, 3 (pengganda) dan 4 (pengganda) adalah faktor, dan 12 adalah produk.`;
             else if (e1.index == 3) document.getElementById("bentuk-penjelasan").innerHTML = `Pembagian ('/', ':') adalah salah satu dari empat operasi dasar aritmetika, cara bilangan digabungkan untuk membuat bilangan baru. Operasi lainnya adalah penambahan, pengurangan, dan perkalian.`;
-            else if (e1.index == 7) document.getElementById("bentuk-penjelasan").innerHTML = `Dalam aritmetika dan teori bilangan, kelipatan persekutuan terkecil dari dua bilangan adalah bilangan bulat positif terkecil yang dapat dibagi habis oleh kedua bilangan tersebut.[1][2] Kelipatan persekutuan terkecil biasanya disingkat sebagai 
-KPK
-{\displaystyle \operatorname {KPK} }[3] atau dituliskan 
-lcm
-{\displaystyle \operatorname {lcm} }, abreviasi dari bahasa Inggris: least common multiple[4] atau bahasa Inggris: lowest common multiple. Notasi kelipatan persekutuan dari bilangan 
-a
-{\displaystyle a} dan 
-b
-{\displaystyle b} dituliskan sebagai 
-KPK
-⁡
-(
-a
-,
-b
-)
-{\displaystyle \operatorname {KPK} (a,b)} atau 
-lcm
-⁡
-(
-a
-,
-b
-)
-{\displaystyle \operatorname {lcm} (a,b)}. Terkadang, ada juga beberapa buku yang menotasikannya sebagai 
-[
-a
-,
-b
-]
-{\displaystyle [a,b]}.[5][6]
-
-Sebagai contoh, diberikan bilangan bulat 
-12
-{\displaystyle 12} dan 
-20
-{\displaystyle 20}. Karena kelipatan dari masing-masing kedua bilangan adalah 
-12
-,
-24
-,
-36
-,
-48
-,
-60
-,
-…
-{\displaystyle 12,24,36,48,{\color {red}{60}},\dots } dan 
-20
-,
-40
-,
-60
-,
-80
-,
-…
-{\displaystyle 20,40,{\color {red}{60}},80,\dots }, maka 
-KPK
-⁡
-(
-12
-,
-20
-)
-=
-60
-{\displaystyle \operatorname {KPK} (12,20)=60}. Kelipatan persekutuan lainnya adalah
-
-120
-,
-180
-,
-240
-,
-300
-,
-…
-{\displaystyle 120,180,240,300,\dots }.
-Suatu kelipatan persekutuan terkecil dari bilangan yang lebih dari dua dapat dilakukan dengan cara yang serupa.`;
+            else if (e1.index == 6) document.getElementById("bentuk-penjelasan").innerHTML = `Faktorisasi prima adalah pecahan bilangan komposit yang terdiri dari bilangan-bilangan pembagi yang lebih kecil, dan hasil perkalian dari bilangan-bilangan tersebut sama dengan bilangan komposit yang disebutkan. Contohnya, faktorisasi prima bilangan 84 adalah 2x2x3x7, di mana bilangan 2, 3 dan 7 adalah bilangan prima dan bilangan pembagi 84.`.replaceAll("/","&#x005c");
+            else if (e1.index == 7) document.getElementById("bentuk-penjelasan").innerHTML = `Dalam aritmetika dan teori bilangan, kelipatan persekutuan terkecil dari dua bilangan adalah bilangan bulat positif terkecil yang dapat dibagi habis oleh kedua bilangan tersebut. Kelipatan persekutuan terkecil biasanya disingkat sebagai KPK atau dituliskan LCM, dalam bahasa Inggris. Notasi kelipatan persekutuan dari bilangan a dan b dituliskan sebagai /(/mathrm{KPK(a,b)}/). Sebagai contoh, diberikan bilangan bulat 12 dan 20. Karena kelipatan dari masing-masing kedua bilangan adalah 12, 24, 36, 48, 60, … dan 20, 40, 60, 80, …, maka /(/mathrm{KPK(12,20)} = 60/). Kelipatan persekutuan lainnya adalah 120, 180, 240, 300, …. Suatu kelipatan persekutuan terkecil dari bilangan yang lebih dari dua dapat dilakukan dengan cara yang serupa.`.replaceAll("/","&#x005c");
+            else if (e1.index == 8) document.getElementById("bentuk-penjelasan").innerHTML = `Dalam matematika, faktor persekutuan terbesar (FPB) dari dua bilangan bulat adalah bilangan bulat terbesar yang sama-sama membagi habis kedua bilangan bulat tersebut. Sebagai contoh, faktor persekutuan terbesar 24 dan 60 adalah 12.
+            <br><br>
+            Dua bilangan atau lebih disebut saling prima jika FPB bilangan-bilangan tersebut sama dengan 1. Sebagai contoh, karena FPB bilangan 9 dan 28 sama dengan 1, maka bilangan 9 dan 28 adalah saling prima (walaupun masing-masingnya bukan bilangan prima)
+            <br><br>
+            Faktor persekutuan terbesar (FPB) dan sekawannya, kelipatan persekutuan terkecil (KPK), menjadi pembahasan yang penting dalam aritmatika dan teori bilangan.`.replaceAll("/","&#x005c");
             else document.getElementById("bentuk-penjelasan").innerHTML = '';
+            document.getElementById("bentuk-penjelasan").style.lineHeight = '1.5em';
 
             var bs = document.getElementById("pilihan-bentuk-soal");
             var bs2 = bs.options[bs.selectedIndex];
@@ -1925,18 +1875,6 @@ Suatu kelipatan persekutuan terkecil dari bilangan yang lebih dari dua dapat dil
                 }
                 // if (e1.index == 0) {
                 //     tanda = ' + ';
-                if (e1.index <= 3) {
-                    soal = a + tanda + b;
-                } else if (e1.index == 4) {
-                    soal = a + tanda + b + tanda2 + c;
-                } else if (e1.index == 6) {
-					soal = 'Hasil';
-				} else if (e1.index == 9) {
-                    // soal = `${a}/${b} + ${a2}/${b2}`;
-                    soal = `${a}/${b} + ${a_2}/${b_2}`;
-                } else {
-					soal = '';
-				}
 				var jawaban_teks, jawaban_teks2;
 				if (cerita_check.checked == true) {
 				    soal = '';
