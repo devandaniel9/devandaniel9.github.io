@@ -473,6 +473,8 @@
         </select><br><br>
 
         <div id="bentuk-penjelasan" style="line-height:1.5em">
+            <img src="images/Addition01.svg.png" style="filter:invert(0%); padding-right:50px;" width="50">
+            <img src="images/plus.png" width="80"><br><br>
             Penjumlahan ("+") merupakan penambahan sekelompok bilangan atau lebih menjadi suatu bilangan yang disebut jumlah. Misalnya, terdapat tiga apel di sisi kiri dan dua apel di sisi kanan, menghasilkan jumlah lima apel. Dalam simbol matematika, ini dilambangkan "3 + 2 = 5", disebut "3 ditambah 2 sama dengan 5".
         </div><br><br>
 
@@ -619,7 +621,7 @@
     <!-- <p>Terakhir diupdate: 29 Nov 2024</p> -->
     <!-- <p>Terakhir diupdate: 5 Feb 2025</p> -->
     <!-- <p>Terakhir diupdate: 5 Maret 2025</p> -->
-    <p>Terakhir diupdate: 2 Mei 2025</p>
+    <p>Terakhir diupdate: 5 Mei 2025</p>
 
     <script>
         // Time
@@ -836,7 +838,17 @@
 
             } else if (e1.index == 4) {
                 document.getElementById("bentuk-sub").style.display = 'none';
-                if (Math.random() < 0.5) {
+                // 3 angka
+                if (Math.random() < 0.25) {
+                    a = Math.floor(1 + 20 * Math.random());
+                    b = Math.floor(1 + 20 * Math.random());
+                    c = Math.floor(1 + 20 * Math.random());
+                    tanda = ' + ';
+                    tanda_suara = 'ditambah';
+                    tanda2 = ' + ';
+                    tanda2_suara = 'ditambah';
+                    hasil = a+b+c;
+                } else if (Math.random() < 0.5) {
                     if (Math.random() < 0.5) {
                         a = Math.floor(5 + 16 * Math.random());
                         b = Math.floor(1 + 20 * Math.random());
@@ -854,7 +866,7 @@
                     tanda2 = ' - ';
 					tanda2_suara = 'dikurangi';
                     hasil = a+b-c;
-                } else {
+                } else if (Math.random() < 0.75) {
                     a = Math.floor(5 + 16 * Math.random());
                     b = Math.floor(1 + a * Math.random());
                     c = Math.floor(1 + 20 * Math.random());
@@ -863,6 +875,15 @@
                     tanda2 = ' + ';
 					tanda2_suara = 'ditambah';
                     hasil = a-b+c;
+                } else {
+                    b = Math.floor(1 + 20 * Math.random());
+                    c = Math.floor(1 + 20 * Math.random());
+                    a = Math.floor(b + c + 20 * Math.random());
+                    tanda = ' - ';
+                    tanda_suara = 'dikurangi';
+                    tanda2 = ' - ';
+                    tanda2_suara = 'dikurangi';
+                    hasil = a-b-c;
                 }
                 soal = a + tanda + b + tanda2 + c;
 
@@ -1490,7 +1511,7 @@
                 document.getElementById("bentuk-sub").style.display = 'none';
             }
             
-            if (e1.index == 0) document.getElementById("bentuk-penjelasan").innerHTML = `Penjumlahan ("+") merupakan penambahan sekelompok bilangan atau lebih menjadi suatu bilangan yang disebut jumlah. Misalnya, terdapat tiga apel di sisi kiri dan dua apel di sisi kanan, menghasilkan jumlah lima apel. Dalam simbol matematika, ini dilambangkan "3 + 2 = 5", disebut "3 ditambah 2 sama dengan 5".<br><br>Sumber: Wikipedia`;
+            if (e1.index == 0) document.getElementById("bentuk-penjelasan").innerHTML = `<img src="images/Addition01.svg.png" style="filter:invert(0%); padding-right:50px;" width="50"><img src="images/plus.png" width="80"><br><br>Penjumlahan ("+") merupakan penambahan sekelompok bilangan atau lebih menjadi suatu bilangan yang disebut jumlah. Misalnya, terdapat tiga apel di sisi kiri dan dua apel di sisi kanan, menghasilkan jumlah lima apel. Dalam simbol matematika, ini dilambangkan "3 + 2 = 5", disebut "3 ditambah 2 sama dengan 5".<br><br>Sumber: Wikipedia`;
             else if (e1.index == 1) document.getElementById("bentuk-penjelasan").innerHTML = `Pengurangan adalah operasi aritmetika yang mewakili operasi menghapus objek dari koleksi. Pengurangan ditandai dengan tanda minus, "-". Misalnya, 5 - 2 buah persik—artinya 5 buah persik dengan 2 buah yang diambil, menghasilkan total 3 buah persik. Oleh karena itu, selisih dari 5 dan 2 adalah 3; yaitu, 5 - 2 = 3.`;
             else if (e1.index == 2) document.getElementById("bentuk-penjelasan").innerHTML = `Perkalian ('×', '⋅', '*', 'x') adalah salah satu dari empat dasar operasi matematika dari aritmetika, dengan yang lainnya adalah penambahan, pengurangan dan pembagian.<br><br>Perkalian bilangan bulat dapat dianggap sebagai penjumlahan berulang; yaitu, perkalian dua bilangan sama dengan menjumlahkan sebanyak mungkin salinan salah satunya, perkalian, sebagai kuantitas yang lain, "pengganda". Kedua angka tersebut dapat disebut sebagai faktor.<br><br>Misalnya, 4 dikalikan 3, ditulis sebagai 4 x 3 dan diucapkan sebagai "3 dikali 4", dapat dihitung dengan menambahkan 3 salinan dari 4 secara bersamaan:<br><br>3 x 4 = 4 + 4 + 4 = 12<br><br>Maka, 3 (pengganda) dan 4 (pengganda) adalah faktor, dan 12 adalah produk.`;
             else if (e1.index == 3) document.getElementById("bentuk-penjelasan").innerHTML = `Pembagian ('/', ':') adalah salah satu dari empat operasi dasar aritmetika, cara bilangan digabungkan untuk membuat bilangan baru. Operasi lainnya adalah penambahan, pengurangan, dan perkalian.`;
@@ -1668,8 +1689,8 @@
                 }
 
                 waktu_teks += "</span>";
-				waktu_teks += `<div style="background-color:gray; position:absolute; width:300px; height:5px;"></div><div style="background-color:#80ff80; position:absolute; width:${300*waktu2/waktu_timer}px; height:5px;"></div>`;
-				
+                waktu_teks += `<div style="background-color:gray; position:absolute; width:300px; height:5px;"></div><div style="background-color:#80ff80; position:absolute; width:${300*waktu2/waktu_timer}px; height:5px;"></div>`;
+
                 document.getElementById('timer').innerHTML = waktu_teks;
 
                 if (waktu_timer > 0 & waktu2 == 0) {
@@ -1706,8 +1727,8 @@
                         document.getElementById("solve").click();
                     }
                 });
-				// hasil = 0;
-				hasil2 = hasil;
+                // hasil = 0;
+                hasil2 = hasil;
                 // console.log(hasil2);
 
             } else {
