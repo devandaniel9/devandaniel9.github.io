@@ -474,13 +474,14 @@
 
         <div id="bentuk-penjelasan" style="line-height:1.5em">
             <img src="images/Addition01.svg.png" style="filter:invert(0%); padding-right:50px;" width="50">
-            <img src="images/plus.png" width="80"><br><br>
+            <img src="images/plus-icon-plus-svg-png-icon-download-1.png" width="60"><br><br>
             Penjumlahan ("+") merupakan penambahan sekelompok bilangan atau lebih menjadi suatu bilangan yang disebut jumlah. Misalnya, terdapat tiga apel di sisi kiri dan dua apel di sisi kanan, menghasilkan jumlah lima apel. Dalam simbol matematika, ini dilambangkan "3 + 2 = 5", disebut "3 ditambah 2 sama dengan 5".
         </div><br><br>
 
         <div id="bentuk-sub" style="display:none">
             <label>Pilih jenis pertanyaan 2:</label><br>
             <select id="pilihan-bentuk-sub" style="width:300px" onchange="pilihan();clearInterval(myInterval);"></select><br><br>
+			<div id="bentuk-penjelasan2" style="line-height:1.5em"></div><br><br>
         </div>
         
         <div id="bentuk-soal" style="display:block">
@@ -995,11 +996,36 @@
                     a += Math.floor(1 + (b-1) * Math.random());
                     tanda = ' : ';
                     hasil = a % b;
-                } else {
-                    a = Math.floor(1 + 20 * Math.random());
-                    if (a % 2 == 0) hasil = 'Genap';
-                    else hasil = 'Ganjil';
-                }
+                } else if (e1_bentuk.index == 1) {
+				    var a2;
+					while (a2 === undefined | a == a2) {
+                        a2 = Math.floor(1 + 20 * Math.random());
+					    if (a2 % 2 == 0) hasil = 'Genap';
+                        else hasil = 'Ganjil';
+					}
+					a = a2;
+                } else if (e1_bentuk.index == 2) {
+				    var a2;
+				    function isPrime(n) {
+						if (n <= 1) return false;
+						for (let i = 2; i < n; i++) if (n % i == 0) return false;
+						return true;
+					}
+					var check = false
+					while (a2 === undefined | a == a2 | check) {
+					    if (level2.index == 0) {
+						    a2 = Math.floor(1 + 100 * Math.random());
+							check = false;
+					    } else if (level2.index == 1) {
+						    a2 = Math.floor(21 + 980 * Math.random());
+							if (a2 % 2 == 0 | a2 % 3 == 0 | a2 % 5 == 0) check = true;
+							else check = false;
+						}
+					    if (isPrime(a2)) hasil = 'Ya';
+				        else hasil = 'Tidak';
+					}
+					a = a2;
+			    }
                 soal = 'Hasil';
 
 			} else if (e1.index == 7) {
@@ -1269,6 +1295,9 @@
                             }
                         } else if (e1_bentuk.index == 2)  {
                             soal_teks = `Apakah ${a} merupakan bilangan prima?`;
+							if (tipe2.index == 0) {
+                                soal_teks += `<br><br>- Tulis jawaban dengan kata "Ya" atau "Tidak"`;
+                            }
                         } else {
                             soal_teks = `Faktorisasi prima dari ${a} adalah ...`;
                         }
@@ -1530,21 +1559,35 @@
                 document.getElementById("bentuk-sub").style.display = 'none';
             }
             
-            if (e1.index == 0) document.getElementById("bentuk-penjelasan").innerHTML = `<img src="images/Addition01.svg.png" style="filter:invert(0%); padding-right:50px;" width="50"><img src="images/plus.png" width="80"><br><br>Penjumlahan ("+") merupakan penambahan sekelompok bilangan atau lebih menjadi suatu bilangan yang disebut jumlah. Misalnya, terdapat tiga apel di sisi kiri dan dua apel di sisi kanan, menghasilkan jumlah lima apel. Dalam simbol matematika, ini dilambangkan "3 + 2 = 5", disebut "3 ditambah 2 sama dengan 5".<br><br>Sumber: Wikipedia`;
-            else if (e1.index == 1) document.getElementById("bentuk-penjelasan").innerHTML = `Pengurangan adalah operasi aritmetika yang mewakili operasi menghapus objek dari koleksi. Pengurangan ditandai dengan tanda minus, "-". Misalnya, 5 - 2 buah persik—artinya 5 buah persik dengan 2 buah yang diambil, menghasilkan total 3 buah persik. Oleh karena itu, selisih dari 5 dan 2 adalah 3; yaitu, 5 - 2 = 3.`;
-            else if (e1.index == 2) document.getElementById("bentuk-penjelasan").innerHTML = `Perkalian ('×', '⋅', '*', 'x') adalah salah satu dari empat dasar operasi matematika dari aritmetika, dengan yang lainnya adalah penambahan, pengurangan dan pembagian.<br><br>Perkalian bilangan bulat dapat dianggap sebagai penjumlahan berulang; yaitu, perkalian dua bilangan sama dengan menjumlahkan sebanyak mungkin salinan salah satunya, perkalian, sebagai kuantitas yang lain, "pengganda". Kedua angka tersebut dapat disebut sebagai faktor.<br><br>Misalnya, 4 dikalikan 3, ditulis sebagai 4 x 3 dan diucapkan sebagai "3 dikali 4", dapat dihitung dengan menambahkan 3 salinan dari 4 secara bersamaan:<br><br>3 x 4 = 4 + 4 + 4 = 12<br><br>Maka, 3 (pengganda) dan 4 (pengganda) adalah faktor, dan 12 adalah produk.`;
-            else if (e1.index == 3) document.getElementById("bentuk-penjelasan").innerHTML = `Pembagian ('/', ':') adalah salah satu dari empat operasi dasar aritmetika, cara bilangan digabungkan untuk membuat bilangan baru. Operasi lainnya adalah penambahan, pengurangan, dan perkalian.`;
-            else if (e1.index == 6) document.getElementById("bentuk-penjelasan").innerHTML = `Faktorisasi prima adalah pecahan bilangan komposit yang terdiri dari bilangan-bilangan pembagi yang lebih kecil, dan hasil perkalian dari bilangan-bilangan tersebut sama dengan bilangan komposit yang disebutkan. Contohnya, faktorisasi prima bilangan 84 adalah 2x2x3x7, di mana bilangan 2, 3 dan 7 adalah bilangan prima dan bilangan pembagi 84.`.replaceAll("/","&#x005c");
-            else if (e1.index == 7) document.getElementById("bentuk-penjelasan").innerHTML = `Dalam aritmetika dan teori bilangan, kelipatan persekutuan terkecil dari dua bilangan adalah bilangan bulat positif terkecil yang dapat dibagi habis oleh kedua bilangan tersebut. Kelipatan persekutuan terkecil biasanya disingkat sebagai KPK atau dituliskan LCM, dalam bahasa Inggris.
-            <br><br>
-            Notasi kelipatan persekutuan dari bilangan a dan b dituliskan sebagai /(/mathrm{KPK(a,b)}/). Sebagai contoh, diberikan bilangan bulat 12 dan 20. Karena kelipatan dari masing-masing kedua bilangan adalah 12, 24, 36, 48, 60, … dan 20, 40, 60, 80, …, maka /(/mathrm{KPK(12,20)} = 60/). Kelipatan persekutuan lainnya adalah 120, 180, 240, 300, …. Suatu kelipatan persekutuan terkecil dari bilangan yang lebih dari dua dapat dilakukan dengan cara yang serupa.`.replaceAll("/","&#x005c");
-            else if (e1.index == 8) document.getElementById("bentuk-penjelasan").innerHTML = `Dalam matematika, faktor persekutuan terbesar (FPB) dari dua bilangan bulat adalah bilangan bulat terbesar yang sama-sama membagi habis kedua bilangan bulat tersebut. Sebagai contoh, faktor persekutuan terbesar 24 dan 60 adalah 12.
-            <br><br>
-            Dua bilangan atau lebih disebut saling prima jika FPB bilangan-bilangan tersebut sama dengan 1. Sebagai contoh, karena FPB bilangan 9 dan 28 sama dengan 1, maka bilangan 9 dan 28 adalah saling prima (walaupun masing-masingnya bukan bilangan prima)
-            <br><br>
-            Faktor persekutuan terbesar (FPB) dan sekawannya, kelipatan persekutuan terkecil (KPK), menjadi pembahasan yang penting dalam aritmatika dan teori bilangan.`.replaceAll("/","&#x005c");
-            else if (e1.index == 9) document.getElementById("bentuk-penjelasan").innerHTML = `Pecahan atau fraksi adalah istilah yang merujuk pada suatu bagian atau sejumlah bagian yang setara dari sesuatu yang "penuh". Dalam matematika, pecahan umumnya ditunjukkan dengan notasi /(a /over b/), di mana b ≠ 0. Dalam hal ini a merupakan pembilang, dan b merupakan penyebut. Dalam bilangan pecahan adalah bagaimana suatu nilai dapat disederhanakan. Penyederhanaan pembilang dan penyebut akan memudahkan dalam operasi aritmatika sehingga tidak menghasilkan angka yang terlalu besar tetapi tetap mempunyai nilai yang sama.`.replaceAll("/","&#x005c");
-            else document.getElementById("bentuk-penjelasan").innerHTML = '';
+            if (e1.index == 0) {
+			    document.getElementById("bentuk-penjelasan").innerHTML = `<img src="images/Addition01.svg.png" style="filter:invert(0%); padding-right:50px;" width="40"><img src="images/plus-icon-plus-svg-png-icon-download-1.png" width="60"><br><br>Penjumlahan ("+") merupakan penambahan sekelompok bilangan atau lebih menjadi suatu bilangan yang disebut jumlah. Misalnya, terdapat tiga apel di sisi kiri dan dua apel di sisi kanan, menghasilkan jumlah lima apel. Dalam simbol matematika, ini dilambangkan "3 + 2 = 5", disebut "3 ditambah 2 sama dengan 5".<br><br>Sumber: Wikipedia`;
+			} else if (e1.index == 1) {
+			    document.getElementById("bentuk-penjelasan").innerHTML = `Pengurangan adalah operasi aritmetika yang mewakili operasi menghapus objek dari koleksi. Pengurangan ditandai dengan tanda minus, "-". Misalnya, 5 - 2 buah persik—artinya 5 buah persik dengan 2 buah yang diambil, menghasilkan total 3 buah persik. Oleh karena itu, selisih dari 5 dan 2 adalah 3; yaitu, 5 - 2 = 3.`;
+			} else if (e1.index == 2) {
+			    document.getElementById("bentuk-penjelasan").innerHTML = `Perkalian ('×', '⋅', '*', 'x') adalah salah satu dari empat dasar operasi matematika dari aritmetika, dengan yang lainnya adalah penambahan, pengurangan dan pembagian.<br><br>Perkalian bilangan bulat dapat dianggap sebagai penjumlahan berulang; yaitu, perkalian dua bilangan sama dengan menjumlahkan sebanyak mungkin salinan salah satunya, perkalian, sebagai kuantitas yang lain, "pengganda". Kedua angka tersebut dapat disebut sebagai faktor.<br><br>Misalnya, 4 dikalikan 3, ditulis sebagai 4 x 3 dan diucapkan sebagai "3 dikali 4", dapat dihitung dengan menambahkan 3 salinan dari 4 secara bersamaan:<br><br>3 x 4 = 4 + 4 + 4 = 12<br><br>Maka, 3 (pengganda) dan 4 (pengganda) adalah faktor, dan 12 adalah produk.`;
+			} else if (e1.index == 3) {
+			    document.getElementById("bentuk-penjelasan").innerHTML = `Pembagian ('/', ':') adalah salah satu dari empat operasi dasar aritmetika, cara bilangan digabungkan untuk membuat bilangan baru. Operasi lainnya adalah penambahan, pengurangan, dan perkalian.`;
+			} else if (e1.index == 6) {
+			    document.getElementById("bentuk-penjelasan").innerHTML = `Faktorisasi prima adalah pecahan bilangan komposit yang terdiri dari bilangan-bilangan pembagi yang lebih kecil, dan hasil perkalian dari bilangan-bilangan tersebut sama dengan bilangan komposit yang disebutkan. Contohnya, faktorisasi prima bilangan 84 adalah 2x2x3x7, di mana bilangan 2, 3 dan 7 adalah bilangan prima dan bilangan pembagi 84.`.replaceAll("/","&#x005c");
+				if (e1_bentuk.index == 2) {
+				    document.getElementById("bentuk-penjelasan2").innerHTML = `Bilangan prima adalah bilangan asli lebih dari 1 yang bukan merupakan hasil kali dari dua bilangan asli yang lebih kecil. Dengan kata lagi, bilangan prima adalah bilangan yang hanya punya atau punya tepat dua (2) faktor, yaitu 1 dan bilangan itu sendiri. Bilangan asli yang lebih dari 1 dan bukan bilangan prima disebut bilangan komposit.`;
+				}
+			} else if (e1.index == 7) {
+			    document.getElementById("bentuk-penjelasan").innerHTML = `Dalam aritmetika dan teori bilangan, kelipatan persekutuan terkecil dari dua bilangan adalah bilangan bulat positif terkecil yang dapat dibagi habis oleh kedua bilangan tersebut. Kelipatan persekutuan terkecil biasanya disingkat sebagai KPK atau dituliskan LCM, dalam bahasa Inggris.
+                <br><br>
+                Notasi kelipatan persekutuan dari bilangan a dan b dituliskan sebagai /(/mathrm{KPK(a,b)}/). Sebagai contoh, diberikan bilangan bulat 12 dan 20. Karena kelipatan dari masing-masing kedua bilangan adalah 12, 24, 36, 48, 60, … dan 20, 40, 60, 80, …, maka /(/mathrm{KPK(12,20)} = 60/). Kelipatan persekutuan lainnya adalah 120, 180, 240, 300, …. Suatu kelipatan persekutuan terkecil dari bilangan yang lebih dari dua dapat dilakukan dengan cara yang serupa.`.replaceAll("/","&#x005c");
+			} else if (e1.index == 8) {
+			    document.getElementById("bentuk-penjelasan").innerHTML = `Dalam matematika, faktor persekutuan terbesar (FPB) dari dua bilangan bulat adalah bilangan bulat terbesar yang sama-sama membagi habis kedua bilangan bulat tersebut. Sebagai contoh, faktor persekutuan terbesar 24 dan 60 adalah 12.
+                <br><br>
+                Dua bilangan atau lebih disebut saling prima jika FPB bilangan-bilangan tersebut sama dengan 1. Sebagai contoh, karena FPB bilangan 9 dan 28 sama dengan 1, maka bilangan 9 dan 28 adalah saling prima (walaupun masing-masingnya bukan bilangan prima)
+                <br><br>
+                Faktor persekutuan terbesar (FPB) dan sekawannya, kelipatan persekutuan terkecil (KPK), menjadi pembahasan yang penting dalam aritmatika dan teori bilangan.`.replaceAll("/","&#x005c");
+			} else if (e1.index == 9) {
+			    document.getElementById("bentuk-penjelasan").innerHTML = `Pecahan atau fraksi adalah istilah yang merujuk pada suatu bagian atau sejumlah bagian yang setara dari sesuatu yang "penuh". Dalam matematika, pecahan umumnya ditunjukkan dengan notasi /(a /over b/), di mana b ≠ 0. Dalam hal ini a merupakan pembilang, dan b merupakan penyebut. Dalam bilangan pecahan adalah bagaimana suatu nilai dapat disederhanakan. Penyederhanaan pembilang dan penyebut akan memudahkan dalam operasi aritmatika sehingga tidak menghasilkan angka yang terlalu besar tetapi tetap mempunyai nilai yang sama.`.replaceAll("/","&#x005c");
+			} else {
+			    document.getElementById("bentuk-penjelasan").innerHTML = '';
+			}
+			
             document.getElementById("bentuk-penjelasan").style.lineHeight = '1.5em';
 
             var bs = document.getElementById("pilihan-bentuk-soal");
@@ -1630,6 +1673,7 @@
             }
 
             
+			
 
             MathJax.typeset();
             
@@ -1921,10 +1965,12 @@
                 var e = document.getElementById("bentuk");
                 var e1 = e.options[e.selectedIndex];
                 // var tanda = '';
-                if (e1.index <= 5 || e1.index == 7 || e1.index == 8) {
+                if (e1.index <= 5 || (e1.index == 6 & e1_bentuk.index == 0) || e1.index == 7 || e1.index == 8) {
                     angka = parseInt(angka_awal);
+					hasil = hasil;
                 } else {
-                    angka = angka_awal;
+                    angka = angka_awal.toLowerCase();
+					hasil = hasil.toLowerCase();
                 }
                 // if (e1.index == 0) {
                 //     tanda = ' + ';
@@ -1932,12 +1978,14 @@
 				if (cerita_check.checked == true) {
 				    soal = '';
 				}
-                if (angka == hasil) {
-                    // jawaban_teks = `Jawabannya benar<br><br> ${soal} = ${hasil}`;
-					jawaban_teks = `Jawabannya benar<br><br> ${soal} = ${hasil2}`;
+                // if (angka == hasil) {
+				if (angka == hasil) {
+                    // jawaban_teks = `Jawabannya benar<br><br> ${soal} = ${hasil2}`;
+					jawaban_teks = `Jawabannya benar<br><br> ${soal} = ${angka_awal}`;
 					jawaban_teks2 = 'Jawabannya benar';
                 } else {
-                    jawaban_teks = `Jawabannya salah<br>Jawaban yang diinput: ${angka}<br><br>${soal} = ${hasil2}`;
+                    // jawaban_teks = `Jawabannya salah<br>Jawaban yang diinput: ${angka}<br><br>${soal} = ${hasil2}`;
+					jawaban_teks = `Jawabannya salah<br>Jawaban yang diinput: ${angka_awal}<br><br>${soal} = ${hasil2}`;
 					jawaban_teks2 = 'Jawabannya salah';
                 }
 				document.getElementById('jawaban').innerHTML = jawaban_teks;
