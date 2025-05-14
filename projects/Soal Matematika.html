@@ -622,7 +622,7 @@
     <!-- <p>Terakhir diupdate: 29 Nov 2024</p> -->
     <!-- <p>Terakhir diupdate: 5 Feb 2025</p> -->
     <!-- <p>Terakhir diupdate: 5 Maret 2025</p> -->
-    <p>Terakhir diupdate: 7 Mei 2025</p>
+    <p>Terakhir diupdate: 14 Mei 2025</p>
 
     <script>
         // Time
@@ -708,10 +708,26 @@
                 cerita.style.display = "block";
             }
         }
+
+        function gcd(a, b) {
+            for (let temp = b; b !== 0;) {
+                b = a % b;
+                a = temp;
+                temp = b;
+            }
+            return a;
+        }
+
+        // function lcmFunction(a, b) { 
+        function lcm(a, b) { 
+            const gcdValue = gcd(a, b);
+            return (a * b) / gcdValue; 
+        }
         
         a = 0;
         b = 0;
         a2 = 0;
+        a3 = 0;
         b2 = 0;
         a_2 = 0;
         b_2 = 0;
@@ -729,20 +745,7 @@
             document.getElementById('tipe2').style.display = 'block';
             // document.getElementById('angka').innerHTML = '';
 
-            function gcd(a, b) {
-                for (let temp = b; b !== 0;) {
-                    b = a % b;
-                    a = temp;
-                    temp = b;
-                }
-                return a;
-            }
-  
-            // function lcmFunction(a, b) { 
-            function lcm(a, b) { 
-                const gcdValue = gcd(a, b);
-                return (a * b) / gcdValue; 
-            } 
+            // function gcd(a, b) {
 
             soal = '';
             if (e1.index == 0) {
@@ -895,14 +898,14 @@
                     b = Math.floor(2 + 9 * Math.random());
                     if (Math.random() < 0.5) {
                         c = Math.floor(1 + 10 * Math.random());
-						hasil = a*b+c;
-						soal = `${a} x ${b} + ${c}`;
-						soal_suara = `${a} dikali ${b} ditambah ${c}`;
+                        hasil = a*b+c;
+                        soal = `${a} x ${b} + ${c}`;
+                        soal_suara = `${a} dikali ${b} ditambah ${c}`;
                     } else {
                         c = Math.floor(1 + 10 * Math.random());
-						hasil = a*b-c;
-						soal = `${a} x ${b} - ${c}`;
-						soal_suara = `${a} dikali ${b} dikurangi ${c}`;
+                        hasil = a*b-c;
+                        soal = `${a} x ${b} - ${c}`;
+                        soal_suara = `${a} dikali ${b} dikurangi ${c}`;
                     }
                 } else if (Math.random() < 0.5) {
 					kecil = Math.floor(1 + 10 * Math.random());
@@ -910,14 +913,14 @@
                     b = kecil;
                     if (Math.random() < 0.5) {
                         c = Math.floor(1 + 10 * Math.random());
-						hasil = Math.floor(a/b+1e-10)+c;
-						soal = `${a} : ${b} + ${c}`
-						soal_suara = `${a} dibagi ${b} ditambah ${c}`;
+                        hasil = Math.floor(a/b+1e-10)+c;
+                        soal = `${a} : ${b} + ${c}`
+                        soal_suara = `${a} dibagi ${b} ditambah ${c}`;
                     } else {
                         c = Math.floor(1 + 10 * Math.random());
-						hasil = Math.floor(a/b+1e-10)-c;
-						soal = `${a} : ${b} - ${c}`
-						soal_suara = `${a} dibagi ${b} dikurangi ${c}`;
+                        hasil = Math.floor(a/b+1e-10)-c;
+                        soal = `${a} : ${b} - ${c}`
+                        soal_suara = `${a} dibagi ${b} dikurangi ${c}`;
                     }
                 } else if (Math.random() < 0.75) {
                     a = Math.floor(2 + 9 * Math.random());
@@ -971,6 +974,37 @@
                 // var e_bentuk = document.getElementById("pilihan-bentuk-sub");
                 // var e1_bentuk = e_bentuk.options[e_bentuk.selectedIndex];
                 // console.log(e1_bentuk.index);
+                function isPrime(n) {
+                    if (n <= 1) return false;
+                    for (let i = 2; i < n; i++) if (n % i == 0) return false;
+                    return true;
+                }
+                function factor(n) {
+                    let index = 0;
+                    let str = '';
+                    let pf = 2;
+                    let pp = 1;
+                    let prev_n = n;
+                    for (let i = 2; i*i <= n | isPrime(n); i++) {
+                        if (isPrime(i) & n % i == 0) {
+                            pf = i;
+                            pp = 1;
+                            n /= i;
+                            while (n > 0 & n % i == 0) {
+                                pp++;
+                                n /= i;
+                            }
+                            if (index >= 1) str += ' x ';
+                            if (pp == 1) str += `${pf}`;
+                            else str += `${pf}^${pp}`;
+                            index++;
+                        }
+                    }
+                    return str;
+                }
+                // for (let i = 0; i <= 30; i++) {
+                //     console.log(i,factor_text(i));
+                // }
                 if (e1_bentuk.index == 0) {
                     if (level2.index == 0) {
                         kecil = Math.floor(2 + 9 * Math.random());
@@ -1004,33 +1038,46 @@
                         else hasil = 'Ganjil';
 					}
 					a = a2;
-                } else if (e1_bentuk.index == 2) {
+                } else if (e1_bentuk.index == 3) {
 				    var a2;
-				    function isPrime(n) {
-						if (n <= 1) return false;
-						for (let i = 2; i < n; i++) if (n % i == 0) return false;
-						return true;
-					}
-					var check = false
+					var check = false;
+                    // console.log(a,a2);
 					while (a2 === undefined | a == a2 | check) {
 					    if (level2.index == 0) {
 						    a2 = Math.floor(1 + 100 * Math.random());
 							check = false;
-					    } else if (level2.index == 1) {
-						    a2 = Math.floor(21 + 980 * Math.random());
-							if (a2 % 2 == 0 | a2 % 3 == 0 | a2 % 5 == 0) check = true;
-							else check = false;
-						}
+                        } else if (level2.index == 1) {
+                            a2 = Math.floor(21 + 980 * Math.random());
+                            if (a2 % 2 == 0 | a2 % 3 == 0 | a2 % 5 == 0) check = true;
+                            else check = false;
+                        } else {
+                            a2 = Math.floor(201 + 9800 * Math.random());
+                            if (a2 % 2 == 0 | a2 % 3 == 0 | a2 % 5 == 0 | a2 % 7 == 0 | a2 % 11 == 0 | a2 % 13 == 0) check = true;
+                            else check = false;
+                        }
 					    if (isPrime(a2)) hasil = 'Ya';
-				        else hasil = 'Tidak';
+				        // else hasil = 'Tidak';
+                        else hasil = 'Bukan';
 					}
 					a = a2;
-			    }
+			    } else if (e1_bentuk.index == 4) {
+                    var a2;
+                    var check = false;
+                    // console.log(a,a2);
+                    while (a2 === undefined | a == a2) {
+                        if (level2.index == 0) a2 = Math.floor(2 + 99 * Math.random());
+                        else if (level2.index == 1) a2 = Math.floor(21 + 980 * Math.random());
+                        else a2 = Math.floor(201 + 9800 * Math.random());
+                        hasil = factor(a2);
+                    }
+                    a = a2;
+                }
                 soal = 'Hasil';
 
 			} else if (e1.index == 7) {
                 if (e1_bentuk.index == 0) {
-                    var a,b;
+                    // var a,b;
+                    var b;
                     a = Math.floor(2 + 19 * Math.random());
                     while (b === undefined | a == b) {
                         b = Math.floor(2 + 19 * Math.random());
@@ -1038,7 +1085,8 @@
                     // hasil = 0;
                     hasil = lcm(a,b);
                 } else {
-                    var a,b,c;
+                    // var a,b,c;
+                    var b,c;
                     a = Math.floor(2 + 19 * Math.random());
                     while (b === undefined | a == b) {
                         b = Math.floor(2 + 19 * Math.random());
@@ -1051,14 +1099,16 @@
 
             } else if (e1.index == 8) {
                 if (e1_bentuk.index == 0) {
-                    var a,b;
+                    // var a,b;
+                    var b;
                     a = Math.floor(2 + 19 * Math.random());
                     while (b === undefined | a == b) {
                         b = Math.floor(2 + 19 * Math.random());
                     }
                     hasil = gcd(a,b);
                 } else {
-                    var a,b,c;
+                    // var a,b,c;
+                    var b,c;
                     a = Math.floor(2 + 19 * Math.random());
                     while (b === undefined | a == b) {
                         b = Math.floor(2 + 19 * Math.random());
@@ -1076,11 +1126,16 @@
                     b = Math.floor(a+1 + (11-a-1) * Math.random());
                     a_2 = Math.floor(1 + 9 * Math.random());
                     b_2 = Math.floor(a_2+1 + (11-a_2-1) * Math.random());
-                    dibagi = gcd(a*b_2+b*a_2,b*b_2);
-                    if ((b*b_2)/dibagi == 1) {
-                        hasil = (a*b_2+b*a_2)/dibagi;
+                    a_3 = a*b_2+b*a_2;
+                    b_3 = b*b_2;
+                    // dibagi = gcd(a*b_2+b*a_2,b*b_2);
+                    dibagi = gcd(a_3,b_3);
+                    // if ((b*b_2)/dibagi == 1) {
+                    if (b_3/dibagi == 1) {
+                        hasil = a_3/dibagi;
                     } else {
-                        hasil = `${(a*b_2+b*a_2)/dibagi}/${(b*b_2)/dibagi}`;
+                        // hasil = `${(a*b_2+b*a_2)/dibagi}/${(b*b_2)/dibagi}`;
+                        hasil = `${a_3/dibagi}/${b_3/dibagi}`;
                     }
                     // console.log(hasil);
                     soal = `${a}/${b} + ${a_2}/${b_2}`;
@@ -1288,18 +1343,37 @@
                         // soal_teks = `Sisa pembagian dari 13 oleh 4 adalah ...`;
                         if (e1_bentuk.index == 0) {
 						    soal_teks = `Sisa pembagian dari ${a} oleh ${b} adalah ...`;
-                        } else if (e1_bentuk.index == 1)  {
+                        } else if (e1_bentuk.index == 1) {
                             soal_teks = `Angka ${a} merupakan bilangan genap atau ganjil?`;
                             if (tipe2.index == 0) {
                                 soal_teks += `<br><br>- Tulis jawaban dengan kata "Genap" atau "Ganjil"`;
                             }
-                        } else if (e1_bentuk.index == 2)  {
+                        } else if (e1_bentuk.index == 2) {
+                            if (level2.index == 0) {
+                                if (Math.random < 0.25) {
+                                    soal_teks = `Bilangan asli terkecil sehingga bersisa ${rem1} jika dibagi ${mod1} dan bersisa ${rem2} jika dibagi ${mod2} adalah ...`;
+                                } else if (Math.random < 0.5) {
+                                    soal_teks = `Berapa bilangan asli terkecil sehingga bersisa ${rem1} jika dibagi ${mod1} dan bersisa ${rem2} jika dibagi ${mod2}?`;
+                                } else if (Math.random < 0.75) {
+                                    soal_teks = `Bilangan asli terkecil sehingga jika dibagi ${mod1} dan ${mod2} masing-masing akan bersisa ${rem1} dan ${rem2} adalah ...`;
+                                } else {
+                                    soal_teks = `Berapa bilangan asli terkecil sehingga jika dibagi ${mod1} dan ${mod2} masing-masing akan bersisa ${rem1} dan ${rem2}?`;
+                                }
+                            } else if (level2.index == 1) {
+                                soal_teks = `Bilangan asli terkecil sehingga bersisa ${rem1} jika dibagi ${mod1}, bersisa ${rem2} jika dibagi ${mod2}, dan bersisa ${rem3} jika dibagi ${mod3} adalah ...`;
+                            } else {
+                                soal_teks = `Bilangan asli terkecil sehingga bersisa ${rem1} jika dibagi ${mod1}, bersisa ${rem2} jika dibagi ${mod2}, dan bersisa ${rem3} jika dibagi ${mod3} adalah ...`;
+                            }
+                        } else if (e1_bentuk.index == 3) {
                             soal_teks = `Apakah ${a} merupakan bilangan prima?`;
 							if (tipe2.index == 0) {
-                                soal_teks += `<br><br>- Tulis jawaban dengan kata "Ya" atau "Tidak"`;
+                                soal_teks += `<br><br>- Tulis jawaban dengan kata "Ya" atau "Bukan"`;
                             }
                         } else {
                             soal_teks = `Faktorisasi prima dari ${a} adalah ...`;
+                            if (tipe2.index == 0) {
+                                soal_teks += `<br><br>- Tulis jawaban dalam bentuk "p1^a1 x p2^a2 x p3^a3 x ..."<br>- Contohnya seperti "2^2 x 3"`;
+                            }
                         }
 						soal_suara = soal_teks;
                         // soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
@@ -1452,17 +1526,40 @@
             e_bentuk = document.getElementById("pilihan-bentuk-sub");
             e1_bentuk = e_bentuk.options[e_bentuk.selectedIndex];
 
-            if (e1.index <= 5) {
+            document.getElementById("bentuk-penjelasan").innerHTML = '';
+            // if (e1.index <= 5) {
+            if (e1.index == 0) {
+                document.getElementById("bentuk-sub").style.display = 'none';
+                document.getElementById("bentuk-penjelasan").innerHTML = `<img src="images/Addition01.svg.png" style="filter:invert(0%); padding-right:50px;" width="40"><img src="images/plus-icon-plus-svg-png-icon-download-1.png" width="60"><br><br>Penjumlahan ("+") merupakan penambahan sekelompok bilangan atau lebih menjadi suatu bilangan yang disebut jumlah. Misalnya, terdapat tiga apel di sisi kiri dan dua apel di sisi kanan, menghasilkan jumlah lima apel. Dalam simbol matematika, ini dilambangkan "3 + 2 = 5", disebut "3 ditambah 2 sama dengan 5".<br><br>Sumber: Wikipedia`;
+            } else if (e1.index == 1) {
+                document.getElementById("bentuk-sub").style.display = 'none';
+			    document.getElementById("bentuk-penjelasan").innerHTML = `Pengurangan adalah operasi aritmetika yang mewakili operasi menghapus objek dari koleksi. Pengurangan ditandai dengan tanda minus, "-". Misalnya, 5 - 2 buah persik—artinya 5 buah persik dengan 2 buah yang diambil, menghasilkan total 3 buah persik. Oleh karena itu, selisih dari 5 dan 2 adalah 3; yaitu, 5 - 2 = 3.`;
+			} else if (e1.index == 2) {
+                document.getElementById("bentuk-sub").style.display = 'none';
+			    document.getElementById("bentuk-penjelasan").innerHTML = `Perkalian ('×', '⋅', '*', 'x') adalah salah satu dari empat dasar operasi matematika dari aritmetika, dengan yang lainnya adalah penambahan, pengurangan dan pembagian.<br><br>Perkalian bilangan bulat dapat dianggap sebagai penjumlahan berulang; yaitu, perkalian dua bilangan sama dengan menjumlahkan sebanyak mungkin salinan salah satunya, perkalian, sebagai kuantitas yang lain, "pengganda". Kedua angka tersebut dapat disebut sebagai faktor.<br><br>Misalnya, 4 dikalikan 3, ditulis sebagai 4 x 3 dan diucapkan sebagai "3 dikali 4", dapat dihitung dengan menambahkan 3 salinan dari 4 secara bersamaan:<br><br>3 x 4 = 4 + 4 + 4 = 12<br><br>Maka, 3 (pengganda) dan 4 (pengganda) adalah faktor, dan 12 adalah produk.`;
+			} else if (e1.index == 3) {
+                document.getElementById("bentuk-sub").style.display = 'none';
+			    document.getElementById("bentuk-penjelasan").innerHTML = `Pembagian ('/', ':') adalah salah satu dari empat operasi dasar aritmetika, cara bilangan digabungkan untuk membuat bilangan baru. Operasi lainnya adalah penambahan, pengurangan, dan perkalian.`;
+            } else if (e1.index == 4) {
+                document.getElementById("bentuk-sub").style.display = 'none';
+            } else if (e1.index == 5) {
                 document.getElementById("bentuk-sub").style.display = 'none';
             } else if (e1.index == 6) {
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
                         <option>Sisa Pembagian</option>
-                        <option style="color:gray">Bilangan genap dan ganjil</option>
-                        <option style="color:gray">Bilangan prima</option>
-                        <option style="color:gray">Faktorisasi prima</option>
+                        <option>Bilangan genap dan ganjil</option>
+                        <option style="color:gray">Mencari bilangan terkecil dari sisa</option>
+                        <option>Bilangan prima</option>
+                        <option>Faktorisasi prima</option>
                     `;
+                }
+                document.getElementById("bentuk-penjelasan").innerHTML = `Faktorisasi prima adalah pecahan bilangan komposit yang terdiri dari bilangan-bilangan pembagi yang lebih kecil, dan hasil perkalian dari bilangan-bilangan tersebut sama dengan bilangan komposit yang disebutkan. Contohnya, faktorisasi prima bilangan 84 adalah 2x2x3x7, di mana bilangan 2, 3 dan 7 adalah bilangan prima dan bilangan pembagi 84.`.replaceAll("/","&#x005c");
+				if (e1_bentuk.index == 3) {
+				    document.getElementById("bentuk-penjelasan2").innerHTML = `Bilangan prima adalah bilangan asli lebih dari 1 yang bukan merupakan hasil kali dari dua bilangan asli yang lebih kecil. Dengan kata lagi, bilangan prima adalah bilangan yang hanya punya atau punya tepat dua (2) faktor, yaitu 1 dan bilangan itu sendiri. Bilangan asli yang lebih dari 1 dan bukan bilangan prima disebut bilangan komposit.`;
+				} else {
+                    document.getElementById("bentuk-penjelasan2").innerHTML = '';
                 }
             } else if (e1.index == 7) {
                 document.getElementById("bentuk-sub").style.display = 'block';
@@ -1472,6 +1569,9 @@
                         <option>KPK dengan 3 angka</option>
                     `;
                 }
+                document.getElementById("bentuk-penjelasan").innerHTML = `Dalam aritmetika dan teori bilangan, kelipatan persekutuan terkecil dari dua bilangan adalah bilangan bulat positif terkecil yang dapat dibagi habis oleh kedua bilangan tersebut. Kelipatan persekutuan terkecil biasanya disingkat sebagai KPK atau dituliskan LCM, dalam bahasa Inggris.
+                <br><br>
+                Notasi kelipatan persekutuan dari bilangan a dan b dituliskan sebagai /(/mathrm{KPK(a,b)}/). Sebagai contoh, diberikan bilangan bulat 12 dan 20. Karena kelipatan dari masing-masing kedua bilangan adalah 12, 24, 36, 48, 60, … dan 20, 40, 60, 80, …, maka /(/mathrm{KPK(12,20)} = 60/). Kelipatan persekutuan lainnya adalah 120, 180, 240, 300, …. Suatu kelipatan persekutuan terkecil dari bilangan yang lebih dari dua dapat dilakukan dengan cara yang serupa.`.replaceAll("/","&#x005c");
             } else if (e1.index == 8) {
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
@@ -1480,6 +1580,11 @@
                         <option>FPB dengan 3 angka</option>
                     `;
                 }
+                document.getElementById("bentuk-penjelasan").innerHTML = `Dalam matematika, faktor persekutuan terbesar (FPB) dari dua bilangan bulat adalah bilangan bulat terbesar yang sama-sama membagi habis kedua bilangan bulat tersebut. Sebagai contoh, faktor persekutuan terbesar 24 dan 60 adalah 12.
+                <br><br>
+                Dua bilangan atau lebih disebut saling prima jika FPB bilangan-bilangan tersebut sama dengan 1. Sebagai contoh, karena FPB bilangan 9 dan 28 sama dengan 1, maka bilangan 9 dan 28 adalah saling prima (walaupun masing-masingnya bukan bilangan prima)
+                <br><br>
+                Faktor persekutuan terbesar (FPB) dan sekawannya, kelipatan persekutuan terkecil (KPK), menjadi pembahasan yang penting dalam aritmatika dan teori bilangan.`.replaceAll("/","&#x005c");
             } else if (e1.index == 9) {
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
@@ -1490,6 +1595,16 @@
                         <option style="color:gray">Pecahan Campuran</option>
                     `;
                 }
+                document.getElementById("bentuk-penjelasan").innerHTML = `Pecahan atau fraksi adalah istilah yang merujuk pada suatu bagian atau sejumlah bagian yang setara dari sesuatu yang "penuh". Dalam matematika, pecahan umumnya ditunjukkan dengan notasi /(a /over b/), di mana b ≠ 0. Dalam hal ini a merupakan pembilang, dan b merupakan penyebut. Dalam bilangan pecahan adalah bagaimana suatu nilai dapat disederhanakan. Penyederhanaan pembilang dan penyebut akan memudahkan dalam operasi aritmatika sehingga tidak menghasilkan angka yang terlalu besar tetapi tetap mempunyai nilai yang sama.`.replaceAll("/","&#x005c");
+            } else if (e1.index == 11) {
+                document.getElementById("bentuk-penjelasan").innerHTML = `Dalam jenis perpangkatan ini terdiri dari 3, yaitu:
+                <br><br>
+                - Pangkat 2 (kuadrat): /({a}^2/)<br>
+                - Pangkat 3 (kubik): /({a}^3/)<br>
+                - Pangkat 4: /({a}^4/)
+                `.replaceAll("/","&#x005c");
+            } else if (e1.index == 12) {
+                document.getElementById("bentuk-penjelasan").innerHTML = `Di dalam matematika, akar kuadrat atau akar persegi dari bilangan x sama dengan bilangan r sedemikian sehingga /(r^2 = x/), atau, di dalam perkataan lain, bilangan r yang bila dikuadratkan (hasil kali dengan bilangan itu sendiri) sama dengan x. Setiap bilangan real tak-negatif, katakanlah x memiliki akar kuadrat tak-negatif yang tunggal, disebut akar kuadrat utama, yang dilambangkan oleh akar ke-n sebagai /(/sqrt {x}/).`.replaceAll("/","&#x005c");
             } else if (e1.index == 14) {
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
@@ -1558,35 +1673,6 @@
             } else {
                 document.getElementById("bentuk-sub").style.display = 'none';
             }
-            
-            if (e1.index == 0) {
-			    document.getElementById("bentuk-penjelasan").innerHTML = `<img src="images/Addition01.svg.png" style="filter:invert(0%); padding-right:50px;" width="40"><img src="images/plus-icon-plus-svg-png-icon-download-1.png" width="60"><br><br>Penjumlahan ("+") merupakan penambahan sekelompok bilangan atau lebih menjadi suatu bilangan yang disebut jumlah. Misalnya, terdapat tiga apel di sisi kiri dan dua apel di sisi kanan, menghasilkan jumlah lima apel. Dalam simbol matematika, ini dilambangkan "3 + 2 = 5", disebut "3 ditambah 2 sama dengan 5".<br><br>Sumber: Wikipedia`;
-			} else if (e1.index == 1) {
-			    document.getElementById("bentuk-penjelasan").innerHTML = `Pengurangan adalah operasi aritmetika yang mewakili operasi menghapus objek dari koleksi. Pengurangan ditandai dengan tanda minus, "-". Misalnya, 5 - 2 buah persik—artinya 5 buah persik dengan 2 buah yang diambil, menghasilkan total 3 buah persik. Oleh karena itu, selisih dari 5 dan 2 adalah 3; yaitu, 5 - 2 = 3.`;
-			} else if (e1.index == 2) {
-			    document.getElementById("bentuk-penjelasan").innerHTML = `Perkalian ('×', '⋅', '*', 'x') adalah salah satu dari empat dasar operasi matematika dari aritmetika, dengan yang lainnya adalah penambahan, pengurangan dan pembagian.<br><br>Perkalian bilangan bulat dapat dianggap sebagai penjumlahan berulang; yaitu, perkalian dua bilangan sama dengan menjumlahkan sebanyak mungkin salinan salah satunya, perkalian, sebagai kuantitas yang lain, "pengganda". Kedua angka tersebut dapat disebut sebagai faktor.<br><br>Misalnya, 4 dikalikan 3, ditulis sebagai 4 x 3 dan diucapkan sebagai "3 dikali 4", dapat dihitung dengan menambahkan 3 salinan dari 4 secara bersamaan:<br><br>3 x 4 = 4 + 4 + 4 = 12<br><br>Maka, 3 (pengganda) dan 4 (pengganda) adalah faktor, dan 12 adalah produk.`;
-			} else if (e1.index == 3) {
-			    document.getElementById("bentuk-penjelasan").innerHTML = `Pembagian ('/', ':') adalah salah satu dari empat operasi dasar aritmetika, cara bilangan digabungkan untuk membuat bilangan baru. Operasi lainnya adalah penambahan, pengurangan, dan perkalian.`;
-			} else if (e1.index == 6) {
-			    document.getElementById("bentuk-penjelasan").innerHTML = `Faktorisasi prima adalah pecahan bilangan komposit yang terdiri dari bilangan-bilangan pembagi yang lebih kecil, dan hasil perkalian dari bilangan-bilangan tersebut sama dengan bilangan komposit yang disebutkan. Contohnya, faktorisasi prima bilangan 84 adalah 2x2x3x7, di mana bilangan 2, 3 dan 7 adalah bilangan prima dan bilangan pembagi 84.`.replaceAll("/","&#x005c");
-				if (e1_bentuk.index == 2) {
-				    document.getElementById("bentuk-penjelasan2").innerHTML = `Bilangan prima adalah bilangan asli lebih dari 1 yang bukan merupakan hasil kali dari dua bilangan asli yang lebih kecil. Dengan kata lagi, bilangan prima adalah bilangan yang hanya punya atau punya tepat dua (2) faktor, yaitu 1 dan bilangan itu sendiri. Bilangan asli yang lebih dari 1 dan bukan bilangan prima disebut bilangan komposit.`;
-				}
-			} else if (e1.index == 7) {
-			    document.getElementById("bentuk-penjelasan").innerHTML = `Dalam aritmetika dan teori bilangan, kelipatan persekutuan terkecil dari dua bilangan adalah bilangan bulat positif terkecil yang dapat dibagi habis oleh kedua bilangan tersebut. Kelipatan persekutuan terkecil biasanya disingkat sebagai KPK atau dituliskan LCM, dalam bahasa Inggris.
-                <br><br>
-                Notasi kelipatan persekutuan dari bilangan a dan b dituliskan sebagai /(/mathrm{KPK(a,b)}/). Sebagai contoh, diberikan bilangan bulat 12 dan 20. Karena kelipatan dari masing-masing kedua bilangan adalah 12, 24, 36, 48, 60, … dan 20, 40, 60, 80, …, maka /(/mathrm{KPK(12,20)} = 60/). Kelipatan persekutuan lainnya adalah 120, 180, 240, 300, …. Suatu kelipatan persekutuan terkecil dari bilangan yang lebih dari dua dapat dilakukan dengan cara yang serupa.`.replaceAll("/","&#x005c");
-			} else if (e1.index == 8) {
-			    document.getElementById("bentuk-penjelasan").innerHTML = `Dalam matematika, faktor persekutuan terbesar (FPB) dari dua bilangan bulat adalah bilangan bulat terbesar yang sama-sama membagi habis kedua bilangan bulat tersebut. Sebagai contoh, faktor persekutuan terbesar 24 dan 60 adalah 12.
-                <br><br>
-                Dua bilangan atau lebih disebut saling prima jika FPB bilangan-bilangan tersebut sama dengan 1. Sebagai contoh, karena FPB bilangan 9 dan 28 sama dengan 1, maka bilangan 9 dan 28 adalah saling prima (walaupun masing-masingnya bukan bilangan prima)
-                <br><br>
-                Faktor persekutuan terbesar (FPB) dan sekawannya, kelipatan persekutuan terkecil (KPK), menjadi pembahasan yang penting dalam aritmatika dan teori bilangan.`.replaceAll("/","&#x005c");
-			} else if (e1.index == 9) {
-			    document.getElementById("bentuk-penjelasan").innerHTML = `Pecahan atau fraksi adalah istilah yang merujuk pada suatu bagian atau sejumlah bagian yang setara dari sesuatu yang "penuh". Dalam matematika, pecahan umumnya ditunjukkan dengan notasi /(a /over b/), di mana b ≠ 0. Dalam hal ini a merupakan pembilang, dan b merupakan penyebut. Dalam bilangan pecahan adalah bagaimana suatu nilai dapat disederhanakan. Penyederhanaan pembilang dan penyebut akan memudahkan dalam operasi aritmatika sehingga tidak menghasilkan angka yang terlalu besar tetapi tetap mempunyai nilai yang sama.`.replaceAll("/","&#x005c");
-			} else {
-			    document.getElementById("bentuk-penjelasan").innerHTML = '';
-			}
 			
             document.getElementById("bentuk-penjelasan").style.lineHeight = '1.5em';
 
@@ -1880,7 +1966,25 @@
                         pilihan_list.push("Ganjil");
                         random_check = false;
                     }
-				}
+
+				} else if (e1.index == 9) {
+                    for (let i = 0; i < 5; i++) {
+                        a_3newp = a*b_2-b*a_2;
+                        a_3new = Math.floor(a_3newp/2+Math.max(a_3newp,6)*Math.random());
+                        b_3new = b*b_2;
+                        dibagi = gcd(a_3new,b_3new);
+                        if (b_3new/dibagi == 1) value = `${a_3new/dibagi}`;
+                        else value = `${a_3new/dibagi}/${b_3new/dibagi}`;
+                        while (pilihan_list.indexOf(value) > -1 || value == hasil) {
+                            a_3new = Math.floor(a_3newp/2+Math.max(a_3newp,6)*Math.random());
+                            dibagi = gcd(a_3new,b_3new);
+                            if (b_3new/dibagi == 1) value = `${a_3new/dibagi}`;
+                            else value = `${a_3new/dibagi}/${b_3new/dibagi}`;
+                            // console.log(value);
+                        }
+                        pilihan_list.push(value);
+                    }
+                }
 
                 // pilihan_list = pilihan_list.sort( () => .5 - Math.random() );
                 if (random_check) {
@@ -1965,12 +2069,17 @@
                 var e = document.getElementById("bentuk");
                 var e1 = e.options[e.selectedIndex];
                 // var tanda = '';
-                if (e1.index <= 5 || (e1.index == 6 & e1_bentuk.index == 0) || e1.index == 7 || e1.index == 8) {
+                // e1.index == 6 & e1_bentuk.index == 0
+                if (e1.index <= 5 || (e1.index == 6 && e1_bentuk.index == 0) || e1.index == 7 || e1.index == 8 || e1.index == 10 || e1.index == 11 || e1.index == 12 || e1.index == 13) {
                     angka = parseInt(angka_awal);
-					hasil = hasil;
+					// hasil = hasil;
+                } else if (e1.index == 6 && e1_bentuk.index == 4) {
+                    angka = angka_awal.toLowerCase().replaceAll('*','x').replaceAll('.','x').replaceAll(' ','');
+                    hasil = hasil.replaceAll(' ','');
+                    // console.log(angka, hasil);
                 } else {
                     angka = angka_awal.toLowerCase();
-					hasil = hasil.toLowerCase();
+                    hasil = hasil.toLowerCase();
                 }
                 // if (e1.index == 0) {
                 //     tanda = ' + ';
