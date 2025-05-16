@@ -540,7 +540,13 @@
             <span class="checkmark"></span>
         </label><br>
 
-        <div class="box" id="cerita" style="background-color:#a0b0c0; width:200px; display:none">
+        Tombol Keyboard:<br>
+        - Enter = Selesaikan<br>
+        - N = Buat soal baru
+        <br><br>
+
+        <!-- <div class="box" id="cerita" style="background-color:#a0b0c0; width:200px; display:none"> -->
+        <div class="box" id="cerita" style="background-color:#204060; width:200px; display:none">
             <span style="font-size:20px"><b>Soal cerita</b></span><br><br>
             <label>Pilih tipe pertanyaan:</label><br>
             <select id="cerita2" style="width:150px" onchange="tampilkan()">
@@ -606,7 +612,7 @@
     <span id="soal" style="width:500px; word-wrap:break-word;">Belum ada soal</span>
     <div id="timer" style="position:absolute; left:500px;"></div><br><br>
     <!-- <div class="column" style="padding-right:50px;"></div> -->
-    <button class="button" onclick="pilihan();buat();pilihan();clearInterval(myInterval);">Buat soal baru</button><br><br>
+    <button class="button" id="buat-soal" onclick="pilihan();buat();pilihan();clearInterval(myInterval);">Buat soal baru</button><br><br>
     <div id="tipe2"></div><br>
     <button class="button" id="solve" onclick="selesaikan()">Selesaikan</button>
     <br><br>
@@ -622,7 +628,7 @@
     <!-- <p>Terakhir diupdate: 29 Nov 2024</p> -->
     <!-- <p>Terakhir diupdate: 5 Feb 2025</p> -->
     <!-- <p>Terakhir diupdate: 5 Maret 2025</p> -->
-    <p>Terakhir diupdate: 14 Mei 2025</p>
+    <p>Terakhir diupdate: 16 Mei 2025</p>
 
     <script>
         // Time
@@ -664,6 +670,7 @@
         document.getElementById("settings").checked = check_old;
         settings_check();
         // pilihan(); // On off
+        pilihan(true);
 
         // interval = 1000;
         interval = 200;
@@ -1475,21 +1482,28 @@
 					cerita2 = cerita2.options[cerita2.selectedIndex];
 					if (e1.index == 0) {
 						if (cerita2.index == 0) {
-							if (Math.random < 1/3) {nama_orang = 'ibu'}
-							else if (Math.random < 2/3) {nama_orang = 'ayah'}
-							else {nama_orang = 'abang'}
-						    if (Math.random < 0.2) {nama_buah = 'buah'}
-							else if (Math.random < 0.4) {nama_buah = 'apel'}
-							else if (Math.random < 0.6) {nama_buah = 'pisang'}
-							else if (Math.random < 0.8) {nama_buah = 'jeruk'}
-							else {nama_buah = 'mangga'}
+                            nama_tempat_list = ['toko buah','pasar','supermarket'];
+                            nama_tempat = nama_tempat_list[parseInt(nama_tempat_list.length*Math.random())];
+                            nama_orang_list = ['ibu','ayah','kakak','abang','tante','Andi','Ayu','Brian','Budi','Dani','Daniel','David','Jeremy','Matthew','Michael','Putra','Putri','Siti','Tika','Yuni']
+                            // if (Math.random() < 0.2) nama_orang = 'ibu';
+                            nama_orang = nama_orang_list[parseInt(nama_orang_list.length*Math.random())];
+                            nama_orang2 = nama_orang;
+                            while (nama_orang2 == nama_orang) {
+                                nama_orang2 = nama_orang_list[parseInt(nama_orang_list.length*Math.random())];
+                            }
+                            console.log(nama_orang_list);
+                            nama_buah_list = ['buah','apel','pisang','jeruk','mangga','alpukat','pepaya','rambutan','nanas','jambu','stroberi','semangka','salak'];
+						    nama_buah = nama_buah_list[parseInt(nama_buah_list.length*Math.random())]
 							// soal_teks = `Di dalam sebuah toko buah, ibu membeli ${a} buah. Kemudian adik memberikan buahnya kepada ibu sebanyak ${b} buah. Berapa jumlah buah ibu sekarang?`;
-							soal_teks = `Di dalam sebuah toko buah, ${nama_orang} membeli ${a} ${nama_buah}. Kemudian adik memberikan buahnya kepada ${nama_orang} sebanyak ${b} ${nama_buah}. Berapa jumlah ${nama_buah} ${nama_orang} sekarang?`;
-						} else if (cerita2.index == 0){
+							soal_teks = `Di dalam suatu ${nama_tempat}, ${nama_orang} membeli ${a} ${nama_buah}. Kemudian ${nama_orang2} memberikan buahnya kepada ${nama_orang} sebanyak ${b} ${nama_buah}. Berapa jumlah ${nama_buah} ${nama_orang} sekarang?`;
+						} else if (cerita2.index == 1) {
 							soal_teks = `Di dalam sebuah pusat perbelanjaan, ibu membeli sesuatu seharga ${a} ribu. Kemudian adik membeli lagi seharga ${b} ribu, lalu dikumpulkan ke keranjang ibu. Berapa jumlah uang ibu sekarang? (dalam ribuan)`;
-						} else {
+						} else if (cerita2.index == 2) {
 						    soal_teks = `Ibu ingin menimbang buah apel dengan berat ${a} kg, lalu seseorang menaruh buah pisang di atas timbangan dengan berat ${b} kg. Berat timbangannya adalah ...`;
-						}
+						} else {
+                            soal_teks = `Di dalam sebuah botol air telah terisi ${50*a} ml, lalu ibu menuangkan air ke dalam botol tersebut sebanyak ${50*b} ml. Volume botol air sekarang dalam ml (mililiter) adalah ...`;
+                            hasil = 50*hasil;
+                        }
 					} else if (e1.index == 1) {
 						soal_teks = `Di dalam sebuah toko buah, ibu sudah membeli apel sebanyak ${a} buah. Lalu adik memakan buah apelnya sebanyak ${b} apel. Berapa sisa buah apel sekarang?`;
 					} else if (e1.index == 2) {
@@ -1497,7 +1511,20 @@
 					} else if (e1.index == 3) {
 					    soal_teks = `Di suatu kelas di sekolah, terdapat beberapa kegiatan yang harus dibuat kelompok. Sebanyak ${a} siswa yang akan dibuat kelompok, yang masing-masing sebanyak ${b} orang. Berapa banyak kelompok yang terbentuk?`;
 					} else if (e1.index == 7) {
-					    soal_teks = `Andi mengunjungi perpustakaan setiap ${a} hari sekali, sedangkan Budi setiap ${b} hari sekali. Berapa hari sekali sehingga Andi dan Budi mengunjungi perpustakaan secara bersamaan?`;
+                        if (cerita2.index == 0) {
+                            nama_tempat_list = ['perpustakaan','rumah teman','les piano'];
+                            nama_tempat = nama_tempat_list[parseInt(nama_tempat_list.length*Math.random())];
+                            nama_orang_list = ['ibu','ayah','kakak','abang','tante','Andi','Ayu','Brian','Budi','Dani','Daniel','David','Jeremy','Matthew','Michael','Putra','Putri','Siti','Tika','Yuni']
+                            nama_orang = nama_orang_list[parseInt(nama_orang_list.length*Math.random())];
+                            nama_orang2 = nama_orang;
+                            while (nama_orang2 == nama_orang) {
+                                nama_orang2 = nama_orang_list[parseInt(nama_orang_list.length*Math.random())];
+                            }
+                            // soal_teks = `Andi mengunjungi perpustakaan setiap ${a} hari sekali, sedangkan Budi setiap ${b} hari sekali. Berapa hari sekali sehingga Andi dan Budi mengunjungi perpustakaan secara bersamaan?`;
+                            soal_teks = `${nama_orang} mengunjungi ${nama_tempat} setiap ${a} hari sekali, sedangkan ${nama_orang2} setiap ${b} hari sekali. Berapa hari sekali sehingga ${nama_orang} dan ${nama_orang2} mengunjungi ${nama_tempat} secara bersamaan?`;
+                        } else {
+                            soal_teks = `Pada lalu lintas, terdapat dua lampu merah, dimana yang bagian barat, lampu hijau hidup setiap ${a} menit sekali, sedangkan yang bagian timur setiap ${b} menit sekali. Berapa menit sekali kedua lampu tersebut hijau secara bersamaan?`;
+                        }
 					} else if (e1.index == 8) {
 					    soal_teks = `Ibu memiliki ${a} buah apel dan ${b} buah jeruk. Buah-buahan tersebut akan dibagi secara rata kepada teman-teman di sekolah. Berapakah banyak anak yang mendapatkan buah-buahan tersebut secara rata?`;
 					}
@@ -1525,6 +1552,10 @@
             
             e_bentuk = document.getElementById("pilihan-bentuk-sub");
             e1_bentuk = e_bentuk.options[e_bentuk.selectedIndex];
+            
+            tampilkan();
+
+            if (change) hasil = 0;
 
             document.getElementById("bentuk-penjelasan").innerHTML = '';
             // if (e1.index <= 5) {
@@ -1679,6 +1710,8 @@
             var bs = document.getElementById("pilihan-bentuk-soal");
             var bs2 = bs.options[bs.selectedIndex];
 
+            document.getElementById("cerita2").innerHTML = '<option>Option 1</option>';
+
             if (e1.index <= 3) {
                 document.getElementById("bentuk-soal").style.display = 'block';
 
@@ -1687,6 +1720,29 @@
                         <option>Tulisan Datar</option>
                         <option>Bentuk Bersusun</option>
                     `;
+                    if (e1.index == 0) {
+                        document.getElementById("cerita2").innerHTML = `
+                            <option>Buah</option>
+                            <option>Uang</option>
+                            <option>Option 3</option>
+                            <option>Option 4</option>
+                        `;
+                    } else if (e1.index == 1) {
+                        document.getElementById("cerita2").innerHTML = `
+                            <option>Buah</option>
+                            <option>Uang</option>
+                        `;
+                    } else if (e1.index == 2) {
+                        document.getElementById("cerita2").innerHTML = `
+                            <option>Option 1</option>
+                            <option>Option 2</option>
+                        `;
+                    } else if (e1.index == 3) {
+                        document.getElementById("cerita2").innerHTML = `
+                            <option>Option 1</option>
+                            <option>Option 2</option>
+                        `;
+                    }
                 }
 
                 // var bs = document.getElementById("pilihan-bentuk-soal");
@@ -1725,6 +1781,19 @@
 
             } else if (e1.index >= 4 & e1.index <= 8) {
                 document.getElementById("bentuk-soal").style.display = 'none';
+                if (change) {
+                    if (e1.index == 7) {
+                        document.getElementById("cerita2").innerHTML = `
+                            <option>Option 1</option>
+                            <option>Option 2</option>
+                        `;
+                    } else if (e1.index == 8) {
+                        document.getElementById("cerita2").innerHTML = `
+                            <option>Option 1</option>
+                            <option>Option 2</option>
+                        `;
+                    }
+                }
 
             } else {
                 document.getElementById("bentuk-soal").style.display = 'block';
@@ -1880,6 +1949,7 @@
                     }
                 });
                 // hasil = 0;
+                // console.log(11111);
                 hasil2 = hasil;
                 // console.log(hasil2);
 
@@ -2033,6 +2103,13 @@
                     `;
                 }
             }
+            var input = document.getElementById("angka");
+            input.addEventListener("keypress", function(event) {
+                if (event.key === "N" || event.key === "n") {
+                    event.preventDefault();
+                    document.getElementById("buat-soal").click();
+                }
+            });
         }
 
         function selesaikan() {
