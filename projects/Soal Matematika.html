@@ -467,6 +467,7 @@
             <option style="color:gray">Persamaan Dua Variabel</option>
 			<option style="color:gray">Pemfaktoran</option>
             <option style="color:gray">Persamaan Kuadrat</option>
+            <option style="color:gray">Subsitusi Fungsi</option>
             <option style="color:gray">Trigonometri</option>
 			<option style="color:gray">Peluang</option>
 			<option style="color:gray">Berhitung</option>
@@ -1319,7 +1320,7 @@
 			cerita_check = document.getElementById("check");
             var cerita = document.getElementById("cerita");
             var soal_teks;
-            if (e1.index <= 18) {
+            if (e1.index <= 21) {
                 if (cerita_check.checked == false) {
                     if (e1.index < 4) {
 						// document.getElementById('soal').innerHTML = 'Hasil dari ' + a + tanda + b + ' adalah ...';
@@ -1473,8 +1474,24 @@
                         soal_teks += `</span>&nbsp; adalah ...`
                         soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
                     } else if (e1.index == 18) {
+                        soal_teks = `Solusi x dari &nbsp;<span style="font-size:20px">/{cases}(abc // abc/{cases})`.replaceAll("/","&#x005c");
+                        soal_teks += `</span>&nbsp; adalah ...`
+                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                    } else if (e1.index == 19) {
                         soal_teks = `Solusi x dari &nbsp;<span style="font-size:20px">/(x^2 - 3x + 2 = 0/)`.replaceAll("/","&#x005c");
                         soal_teks += `</span>&nbsp; adalah ...`
+                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                    } else if (e1.index == 20) {
+                        soal_teks = `Solusi x dari &nbsp;<span style="font-size:20px">/(x^2 - 3x + 2 = 0/)`.replaceAll("/","&#x005c");
+                        soal_teks += `</span>&nbsp; adalah ...`
+                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                    } else if (e1.index == 21) {
+                        // soal_teks = `Diketahui fungsi linear /(f(x) = 2x+3/). Nilai dari /(f(5)/) adalah ...`.replaceAll("/","&#x005c");
+                        soal_teks = `Diketahui fungsi linear &nbsp;<span style="font-size:18px">/(f(x) = 2x+3/)</span>. Nilai dari &nbsp;<span style="font-size:18px">/(f(5)/)</span> adalah ...`.replaceAll("/","&#x005c").replaceAll("<&#x005cspan>","</span>");
+                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                    } else if (e1.index == 22) {
+                        // soal_teks = `Diketahui fungsi linear /(f(x) = 2x+3/). Nilai dari /(f(5)/) adalah ...`.replaceAll("/","&#x005c");
+                        soal_teks = `Hasil dari &nbsp;<span style="font-size:18px">/(sin(60/deg)/)</span> adalah ...`.replaceAll("/","&#x005c").replaceAll("<&#x005cspan>","</span>");
                         soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
                     }
 				} else {
