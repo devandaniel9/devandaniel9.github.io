@@ -466,11 +466,13 @@
             <option style="color:gray">Persamaan Linear</option>
             <option style="color:gray">Persamaan Dua Variabel</option>
 			<option style="color:gray">Pemfaktoran</option>
-            <option style="color:gray">Persamaan Kuadrat</option>
+            <option style="color:gray">Fungsi dan Persamaan Kuadrat</option>
             <option style="color:gray">Subsitusi Fungsi</option>
             <option style="color:gray">Trigonometri</option>
-			<option style="color:gray">Peluang</option>
 			<option style="color:gray">Berhitung</option>
+            <option style="color:gray">Permutasi dan Kombinasi</option>
+            <option style="color:gray">Peluang</option>
+            <option style="color:gray">Berpikir Logika</option>
         </select><br><br>
 
         <div id="bentuk-penjelasan" style="line-height:1.5em">
@@ -629,7 +631,7 @@
     <!-- <p>Terakhir diupdate: 29 Nov 2024</p> -->
     <!-- <p>Terakhir diupdate: 5 Feb 2025</p> -->
     <!-- <p>Terakhir diupdate: 5 Maret 2025</p> -->
-    <p>Terakhir diupdate: 16 Mei 2025</p>
+    <p>Terakhir diupdate: 27 Mei 2025</p>
 
     <script>
         // Time
@@ -1039,13 +1041,33 @@
                     tanda = ' : ';
                     hasil = a % b;
                 } else if (e1_bentuk.index == 1) {
-				    var a2;
-					while (a2 === undefined | a == a2) {
+                    var a2;
+                    while (a2 === undefined | a == a2) {
                         a2 = Math.floor(1 + 20 * Math.random());
-					    if (a2 % 2 == 0) hasil = 'Genap';
+                        if (a2 % 2 == 0) hasil = 'Genap';
                         else hasil = 'Ganjil';
-					}
-					a = a2;
+                    }
+                    a = a2;
+                } else if (e1_bentuk.index == 2) {
+                    var a2;
+                    while (a2 === undefined | a == a2) {
+                        a2 = Math.floor(1 + 20 * Math.random());
+                        if (a2 % 2 == 0) hasil = 'Genap';
+                        else hasil = 'Ganjil';
+                    }
+                    mod1 = 2
+                    mod2 = 2
+                    while (gcd(mod1, mod2) > 1) {
+                        mod1 = Math.floor(2 + 9 * Math.random());
+                        mod2 = Math.floor(2 + 9 * Math.random());
+                    }
+                    rem1 = Math.floor(mod1 * Math.random());
+                    rem2 = Math.floor(mod2 * Math.random());
+                    // k*mod1+rem1
+                    hasil = rem1;
+                    while (hasil == 0 || hasil % mod2 != rem2) {
+                        hasil += mod1;
+                    }
                 } else if (e1_bentuk.index == 3) {
 				    var a2;
 					var check = false;
@@ -1186,7 +1208,7 @@
             } else if (e1.index == 11) {
                 // var a;
                 var a2;
-                while (a2 === undefined | a == a2) {
+                while (a2 === undefined || a == a2) {
                     if (level2.index == 0) {
                         a2 = Math.floor(1 + 10 * Math.random());
                         hasil = a2*a2;
@@ -1248,6 +1270,9 @@
                     hasil = a2;
                 }
                 a = a2;
+
+			} else if (e1.index == 17) {
+			    // ax+b=c
 			}
 			
 			function bersusun(a,b,tanda) {
@@ -1316,11 +1341,15 @@
                 return text;
             }
             
+            function convert_to_math(text) {
+                return text.replaceAll("/(","<span style='font-size:18px'>&#x005c(").replaceAll("/)","&#x005c)</span>")
+            }
+            
             // var cerita_check = document.getElementById("check");
 			cerita_check = document.getElementById("check");
             var cerita = document.getElementById("cerita");
             var soal_teks;
-            if (e1.index <= 21) {
+            if (e1.index <= 24) {
                 if (cerita_check.checked == false) {
                     if (e1.index < 4) {
 						// document.getElementById('soal').innerHTML = 'Hasil dari ' + a + tanda + b + ' adalah ...';
@@ -1358,11 +1387,20 @@
                             }
                         } else if (e1_bentuk.index == 2) {
                             if (level2.index == 0) {
-                                if (Math.random < 0.25) {
-                                    soal_teks = `Bilangan asli terkecil sehingga bersisa ${rem1} jika dibagi ${mod1} dan bersisa ${rem2} jika dibagi ${mod2} adalah ...`;
-                                } else if (Math.random < 0.5) {
-                                    soal_teks = `Berapa bilangan asli terkecil sehingga bersisa ${rem1} jika dibagi ${mod1} dan bersisa ${rem2} jika dibagi ${mod2}?`;
-                                } else if (Math.random < 0.75) {
+                                if (Math.random() < 0.25) {
+                                    if (rem1 == 0) rem1a = `habis`;
+                                    else rem1a = `bersisa ${rem1} jika`;
+                                    if (rem1 == 0) rem1a = `habis`;
+                                    else rem1a = `bersisa ${rem1} jika`;
+                                    // soal_teks = `Bilangan asli terkecil sehingga bersisa ${rem1} jika dibagi ${mod1} dan bersisa ${rem2} jika dibagi ${mod2} adalah ...`;
+                                    soal_teks = `Bilangan asli terkecil ${rem1a} dibagi ${mod1} dan ${rem2a} dibagi ${mod2} adalah ...`;
+                                } else if (Math.random() < 0.5) {
+                                    if (rem1 == 0) rem1a = `habis`;
+                                    else rem1a = `bersisa ${rem1} jika`;
+                                    if (rem2 == 0) rem2a = `habis`;
+                                    else rem2a = `bersisa ${rem2} jika`;
+                                    soal_teks = `Berapa bilangan asli terkecil sehingga ${rem1a} dibagi ${mod1} dan ${rem2a} dibagi ${mod2}?`;
+                                } else if (Math.random() < 0.75) {
                                     soal_teks = `Bilangan asli terkecil sehingga jika dibagi ${mod1} dan ${mod2} masing-masing akan bersisa ${rem1} dan ${rem2} adalah ...`;
                                 } else {
                                     soal_teks = `Berapa bilangan asli terkecil sehingga jika dibagi ${mod1} dan ${mod2} masing-masing akan bersisa ${rem1} dan ${rem2}?`;
@@ -1460,22 +1498,46 @@
 						soal_teks += `</span>&nbsp; adalah ...`;
 						soal_suara = `Bentuk sederhana dari akar pangkat 3 dari ${a3} adalah ...`;
 					} else if (e1.index == 14) {
-						soal_teks = `Waktu 3 menit berapa detik?`;
+                        if (e1_bentuk.index == 0) {
+                            soal_teks = `Jarak dari kota A ke C melalui kota B adalah 280 km, sedangkan jarak dari kota A ke B adalah 110 km. Jarak dari kota B ke C adalah ...`;
+                        } else if (e1_bentuk.index == 1) {
+                            soal_teks = `Waktu 3 menit berapa detik?`;
+                        } else {
+                            soal_teks = `Sebuah mobil menempuh jarak 120 km dalam waktu 3 jam. Kecepatan mobil tersebut dalam km/jam adalah ...`;
+                        }
 						soal_suara = soal_teks;
                         soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
 					} else if (e1.index == 15) {
-						soal_teks = `Diketahui panjang sisi persegi adalah 4 cm. Luas perseginya adalah ...`;
-                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                        if (e1_bentuk.index == 0) {
+						    soal_teks = `Diketahui panjang sisi persegi adalah 4 cm. Luas perseginya adalah ...`;
+                            soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                        } else if (e1_bentuk.index == 1) {
+                            soal_teks = `Diberikan suatu persegi panjang dengan panjang 6 cm dan lebar 4 cm. Luas persegi panjang dalam cm kuadrat adalah ...`;
+                            soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                        } else if (e1_bentuk.index == 2) {
+                            soal_teks = `Diberikan suatu segitiga dengan alas 20 cm dan tinggi 12 cm. Luas segitiga dalam cm kuadrat adalah ...`;
+                            soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                        } else if (e1_bentuk.index == 3) {
+                            soal_teks = `Diberikan trapesium siku-siku /(ABCD/), dimana siku-sikunya di /(D/). Jika diketahui panjang /(AB = 13/), /(DC = 11/), dan /(AD = 7/), maka luas trapesium adalah ...`;
+                            soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                        } else if (e1_bentuk.index == 4) {
+                            soal_teks = `Diberikan sesuatu segitiga dengan alas 20 cm dan tinggi 12 cm. Luas segitiga dalam cm kuadrat adalah ...`;
+                            soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                        } else {
+                            // soal_teks = convert_to_math(soal_teks);
+                        }
+                        soal_teks = convert_to_math(soal_teks);
                     } else if (e1.index == 16) {
                         soal_teks = `Diketahui panjang sisi kubus adalah 3 cm. Luas perseginya adalah ...`;
                         soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
 					} else if (e1.index == 17) {
-                        soal_teks = `Solusi x dari &nbsp;<span style="font-size:20px">/(2x + 3 = 5/)`.replaceAll("/","&#x005c");
-                        soal_teks += `</span>&nbsp; adalah ...`
+                        // soal_teks = `Solusi x dari &nbsp;<span style="font-size:20px">/(2x + 3 = 5/)`.replaceAll("/","&#x005c");
+                        // soal_teks += `</span>&nbsp; adalah ...`
+                        soal_teks = `Solusi x dari &nbsp;/(${soal_teks}/)`
                         soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                        soal_teks = convert_to_math(soal_teks);
                     } else if (e1.index == 18) {
-                        soal_teks = `Solusi x dari &nbsp;<span style="font-size:20px">/{cases}(abc // abc/{cases})`.replaceAll("/","&#x005c");
-                        soal_teks += `</span>&nbsp; adalah ...`
+                        soal_teks = `Diketahui sistem persamaan linear dua variabel yang terdapat dibawah ini:<br><div style="padding-top:10px"></div><span style="font-size:18px">&nbsp;&nbsp;/(x+y=2/)<br>&nbsp;&nbsp;/(2x+3y=5/)</span><br><br>Solusi dari x dan y berturut-turut adalah ...`.replaceAll("/","&#x005c").replaceAll("<&#x005c","</");
                         soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
                     } else if (e1.index == 19) {
                         soal_teks = `Solusi x dari &nbsp;<span style="font-size:20px">/(x^2 - 3x + 2 = 0/)`.replaceAll("/","&#x005c");
@@ -1491,7 +1553,11 @@
                         soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
                     } else if (e1.index == 22) {
                         // soal_teks = `Diketahui fungsi linear /(f(x) = 2x+3/). Nilai dari /(f(5)/) adalah ...`.replaceAll("/","&#x005c");
-                        soal_teks = `Hasil dari &nbsp;<span style="font-size:18px">/(sin(60/deg)/)</span> adalah ...`.replaceAll("/","&#x005c").replaceAll("<&#x005cspan>","</span>");
+                        soal_teks = `Hasil dari &nbsp;<span style="font-size:18px">/(/mathrm{sin(60°)}/)</span> adalah ...`.replaceAll("/","&#x005c").replaceAll("<&#x005cspan>","</span>");
+                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                    } else if (e1.index == 23) {
+                        // soal_teks = `Diketahui fungsi linear /(f(x) = 2x+3/). Nilai dari /(f(5)/) adalah ...`.replaceAll("/","&#x005c");
+                        soal_teks = `Peluang dari 2 dadu yang dilempar secara bersamaan, sehinga jumlahnya 9 adalah ...`.replaceAll("/","&#x005c").replaceAll("<&#x005cspan>","</span>");
                         soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
                     }
 				} else {
@@ -1598,7 +1664,7 @@
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
                         <option>Sisa Pembagian</option>
                         <option>Bilangan genap dan ganjil</option>
-                        <option style="color:gray">Mencari bilangan terkecil dari sisa</option>
+                        <option>Mencari bilangan terkecil dari sisa</option>
                         <option>Bilangan prima</option>
                         <option>Faktorisasi prima</option>
                     `;
@@ -2164,7 +2230,7 @@
                 var e1 = e.options[e.selectedIndex];
                 // var tanda = '';
                 // e1.index == 6 & e1_bentuk.index == 0
-                if (e1.index <= 5 || (e1.index == 6 && e1_bentuk.index == 0) || e1.index == 7 || e1.index == 8 || e1.index == 10 || e1.index == 11 || e1.index == 12 || e1.index == 13) {
+                if (e1.index <= 5 || (e1.index == 6 && (e1_bentuk.index == 0 || e1_bentuk.index == 2)) || e1.index == 7 || e1.index == 8 || e1.index == 10 || e1.index == 11 || e1.index == 12 || e1.index == 13) {
                     angka = parseInt(angka_awal);
 					// hasil = hasil;
                 } else if (e1.index == 6 && e1_bentuk.index == 4) {
