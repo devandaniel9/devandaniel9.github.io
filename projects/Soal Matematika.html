@@ -465,9 +465,12 @@
             <option style="color:gray">Bangun Ruang</option>
             <option style="color:gray">Persamaan Linear</option>
             <option style="color:gray">Persamaan Dua Variabel</option>
-			<option style="color:gray">Pemfaktoran</option>
+			<option style="color:gray">Manipulasi Aljabar</option>
+            <option style="color:gray">Pertidaksamaan</option>
             <option style="color:gray">Fungsi dan Persamaan Kuadrat</option>
+            <option style="color:gray">Persamaan Lingkaran</option>
             <option style="color:gray">Subsitusi Fungsi</option>
+            <option style="color:gray">Barisan dan Deret dari Pola Bilangan</option>
             <option style="color:gray">Trigonometri</option>
 			<option style="color:gray">Berhitung</option>
             <option style="color:gray">Permutasi dan Kombinasi</option>
@@ -631,7 +634,8 @@
     <!-- <p>Terakhir diupdate: 29 Nov 2024</p> -->
     <!-- <p>Terakhir diupdate: 5 Feb 2025</p> -->
     <!-- <p>Terakhir diupdate: 5 Maret 2025</p> -->
-    <p>Terakhir diupdate: 27 Mei 2025</p>
+    <!-- <p>Terakhir diupdate: 27 Mei 2025</p> -->
+     <p>Terakhir diupdate: 21 Juli 2025</p>
 
     <script>
         // Time
@@ -1108,11 +1112,29 @@
                 if (e1_bentuk.index == 0) {
                     // var a,b;
                     var b;
-                    a = Math.floor(2 + 19 * Math.random());
-                    while (b === undefined | a == b) {
-                        b = Math.floor(2 + 19 * Math.random());
+                    if (level2.index == 0) {
+                        // a = Math.floor(2 + 19 * Math.random());
+                        a = Math.floor(1 + 10 * Math.random());
+                        while (b === undefined || a == b || gcd(a,b) > 1) {
+                            b = Math.floor(1 + 10 * Math.random());
+                        }
+                        // hasil = gcd(a,b);
+                        c = Math.floor(1 + 10 * Math.random()**2);
+                    } else if (level2.index == 1) {
+                        c = Math.floor(1 + 30 * Math.random()**2);
+                        a = Math.floor(11 + (100/c) * Math.random());
+                        while (b === undefined || a == b || gcd(a,b) > 1) {
+                            b = Math.floor(11 + (100/c) * Math.random());
+                        }
+                    } else {
+                        c = Math.floor(1 + 100 * Math.random()**2);
+                        a = Math.floor(31 + (1000/c) * Math.random());
+                        while (b === undefined || a == b || gcd(a,b) > 1) {
+                            b = Math.floor(31 + (1000/c) * Math.random());
+                        }
                     }
-                    // hasil = 0;
+                    a *= c;
+                    b *= c;
                     hasil = lcm(a,b);
                 } else {
                     // var a,b,c;
@@ -1131,11 +1153,30 @@
                 if (e1_bentuk.index == 0) {
                     // var a,b;
                     var b;
-                    a = Math.floor(2 + 19 * Math.random());
-                    while (b === undefined | a == b) {
-                        b = Math.floor(2 + 19 * Math.random());
+                    if (level2.index == 0) {
+                        // a = Math.floor(2 + 19 * Math.random());
+                        a = Math.floor(1 + 10 * Math.random());
+                        while (b === undefined || a == b || gcd(a,b) > 1) {
+                            b = Math.floor(1 + 10 * Math.random());
+                        }
+                        // hasil = gcd(a,b);
+                        c = Math.floor(1 + 10 * Math.random()**2);
+                    } else if (level2.index == 1) {
+                        c = Math.floor(1 + 30 * Math.random()**2);
+                        a = Math.floor(11 + (100/c) * Math.random());
+                        while (b === undefined || a == b || gcd(a,b) > 1) {
+                            b = Math.floor(11 + (100/c) * Math.random());
+                        }
+                    } else {
+                        c = Math.floor(1 + 100 * Math.random()**2);
+                        a = Math.floor(31 + (1000/c) * Math.random());
+                        while (b === undefined || a == b || gcd(a,b) > 1) {
+                            b = Math.floor(31 + (1000/c) * Math.random());
+                        }
                     }
-                    hasil = gcd(a,b);
+                    hasil = c;
+                    a *= c;
+                    b *= c;
                 } else {
                     // var a,b,c;
                     var b,c;
@@ -1427,18 +1468,34 @@
                     } else if (e1.index == 7) {
                         // soal_teks = `KPK dari 6 dan 14 adalah ...`;
                         if (e1_bentuk.index == 0) {
-                            soal_teks = `KPK dari ${a} dan ${b} adalah ...`;
+                            if (bs2.index == 0) {
+                                soal_teks = `KPK dari ${a} dan ${b} adalah ...`;
+                            } else {
+                                soal_teks = `KPK(${a}, ${b}) = ...`;
+                            }
                         } else {
-                            soal_teks = `KPK dari ${a}, ${b}, dan ${c} adalah ...`;
+                            if (bs2.index == 0) {
+                                soal_teks = `KPK dari ${a}, ${b}, dan ${c} adalah ...`;
+                            } else {
+                                soal_teks = `KPK(${a}, ${b}, ${c}) = ...`;
+                            }
                         }
 						soal_suara = soal_teks;
 						document.getElementById('tipe2').style.display = 'block';
                     } else if (e1.index == 8) {
                         // soal_teks = `FPB dari 8 dan 12 adalah ...`;
                         if (e1_bentuk.index == 0) {
-                            soal_teks = `FPB dari ${a} dan ${b} adalah ...`;
+                            if (bs2.index == 0) {
+                                soal_teks = `FPB dari ${a} dan ${b} adalah ...`;
+                            } else {
+                                soal_teks = `FPB(${a}, ${b}) = ...`;
+                            }
                         } else {
-                            soal_teks = `FPB dari ${a}, ${b}, dan ${c} adalah ...`;
+                            if (bs2.index == 0) {
+                                soal_teks = `FPB dari ${a}, ${b}, dan ${c} adalah ...`;
+                            } else {
+                                soal_teks = `FPB(${a}, ${b}, ${c}) = ...`;
+                            }
                         }
 						soal_suara = soal_teks;
 						document.getElementById('tipe2').style.display = 'block';
@@ -1671,7 +1728,7 @@
                 }
                 document.getElementById("bentuk-penjelasan").innerHTML = `Faktorisasi prima adalah pecahan bilangan komposit yang terdiri dari bilangan-bilangan pembagi yang lebih kecil, dan hasil perkalian dari bilangan-bilangan tersebut sama dengan bilangan komposit yang disebutkan. Contohnya, faktorisasi prima bilangan 84 adalah 2x2x3x7, di mana bilangan 2, 3 dan 7 adalah bilangan prima dan bilangan pembagi 84.`.replaceAll("/","&#x005c");
 				if (e1_bentuk.index == 3) {
-				    document.getElementById("bentuk-penjelasan2").innerHTML = `Bilangan prima adalah bilangan asli lebih dari 1 yang bukan merupakan hasil kali dari dua bilangan asli yang lebih kecil. Dengan kata lagi, bilangan prima adalah bilangan yang hanya punya atau punya tepat dua (2) faktor, yaitu 1 dan bilangan itu sendiri. Bilangan asli yang lebih dari 1 dan bukan bilangan prima disebut bilangan komposit.`;
+				    document.getElementById("bentuk-penjelasan2").innerHTML = `Bilangan prima adalah bilangan asli lebih dari 1 yang bukan merupakan hasil kali dari dua bilangan asli yang lebih kecil. Dengan kata lain, bilangan prima adalah bilangan yang hanya punya atau punya tepat dua (2) faktor, yaitu 1 dan bilangan itu sendiri. Bilangan asli yang lebih dari 1 dan bukan bilangan prima disebut bilangan komposit.`;
 				} else {
                     document.getElementById("bentuk-penjelasan2").innerHTML = '';
                 }
@@ -1863,14 +1920,23 @@
                 }
 
             } else if (e1.index >= 4 & e1.index <= 8) {
-                document.getElementById("bentuk-soal").style.display = 'none';
+                // document.getElementById("bentuk-soal").style.display = 'none';
+                document.getElementById("bentuk-soal").style.display = 'block';
                 if (change) {
                     if (e1.index == 7) {
+                        document.getElementById("pilihan-bentuk-soal").innerHTML = `
+                            <option>Tanpa kurung</option>
+                            <option>Dengan kurung</option>
+                        `;
                         document.getElementById("cerita2").innerHTML = `
                             <option>Option 1</option>
                             <option>Option 2</option>
                         `;
                     } else if (e1.index == 8) {
+                        document.getElementById("pilihan-bentuk-soal").innerHTML = `
+                            <option>Tanpa kurung</option>
+                            <option>Dengan kurung</option>
+                        `;
                         document.getElementById("cerita2").innerHTML = `
                             <option>Option 1</option>
                             <option>Option 2</option>
@@ -2232,7 +2298,7 @@
                 // e1.index == 6 & e1_bentuk.index == 0
                 if (e1.index <= 5 || (e1.index == 6 && (e1_bentuk.index == 0 || e1_bentuk.index == 2)) || e1.index == 7 || e1.index == 8 || e1.index == 10 || e1.index == 11 || e1.index == 12 || e1.index == 13) {
                     angka = parseInt(angka_awal);
-					// hasil = hasil;
+                    // hasil = hasil;
                 } else if (e1.index == 6 && e1_bentuk.index == 4) {
                     angka = angka_awal.toLowerCase().replaceAll('*','x').replaceAll('.','x').replaceAll(' ','');
                     hasil = hasil.replaceAll(' ','');
@@ -2243,24 +2309,24 @@
                 }
                 // if (e1.index == 0) {
                 //     tanda = ' + ';
-				var jawaban_teks, jawaban_teks2;
-				if (cerita_check.checked == true) {
-				    soal = '';
-				}
+                var jawaban_teks, jawaban_teks2;
+                if (cerita_check.checked == true) {
+                    soal = '';
+                }
                 // if (angka == hasil) {
-				if (angka == hasil) {
+                if (angka == hasil) {
                     // jawaban_teks = `Jawabannya benar<br><br> ${soal} = ${hasil2}`;
-					jawaban_teks = `Jawabannya benar<br><br> ${soal} = ${angka_awal}`;
-					jawaban_teks2 = 'Jawabannya benar';
+                    jawaban_teks = `Jawabannya benar<br><br> ${soal} = ${angka_awal}`;
+                    jawaban_teks2 = 'Jawabannya benar';
                 } else {
                     // jawaban_teks = `Jawabannya salah<br>Jawaban yang diinput: ${angka}<br><br>${soal} = ${hasil2}`;
-					jawaban_teks = `Jawabannya salah<br>Jawaban yang diinput: ${angka_awal}<br><br>${soal} = ${hasil2}`;
-					jawaban_teks2 = 'Jawabannya salah';
+                    jawaban_teks = `Jawabannya salah<br>Jawaban yang diinput: ${angka_awal}<br><br>${soal} = ${hasil2}`;
+                    jawaban_teks2 = 'Jawabannya salah';
                 }
-				document.getElementById('jawaban').innerHTML = jawaban_teks;
-				if (document.getElementById('suara').checked) {
-				    speak(jawaban_teks2);
-				}
+                document.getElementById('jawaban').innerHTML = jawaban_teks;
+                if (document.getElementById('suara').checked) {
+                    speak(jawaban_teks2);
+                }
             } else {
                 document.getElementById('jawaban').innerHTML = 'Input angka harus diisi';
             }
