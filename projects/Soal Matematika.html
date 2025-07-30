@@ -462,15 +462,19 @@
             <option>Bilangan Kubik dan Pangkat lebih tinggi</option>
             <option>Akar Kuadrat</option>
             <option>Akar Kubik dan Pangkat lebih tinggi</option>
-			<option style="color:gray">Konversi Satuan</option>
+            <option style="color:gray">Konversi Satuan</option>
             <option style="color:gray">Bangun Datar</option>
             <option style="color:gray">Bangun Ruang</option>
-            <option style="color:gray">Persamaan Linear</option>
+            <option>Persamaan Linear</option>
             <option style="color:gray">Persamaan Dua Variabel</option>
 			<option style="color:gray">Manipulasi Aljabar</option>
             <option style="color:gray">Pertidaksamaan</option>
             <option style="color:gray">Fungsi dan Persamaan Kuadrat</option>
+            <option>Fungsi Eksponensial</option>
+            <option>Fungsi Logaritma</option>
             <option style="color:gray">Persamaan Lingkaran</option>
+            <option>Fungsi dan Persamaan Mutlak</option>
+            <option>Fungsi dan Persamaan Floor</option>
             <option style="color:gray">Subsitusi Fungsi</option>
             <option style="color:gray">Barisan dan Deret dari Pola Bilangan</option>
             <option style="color:gray">Trigonometri</option>
@@ -478,6 +482,7 @@
             <option style="color:gray">Permutasi dan Kombinasi</option>
             <option style="color:gray">Peluang</option>
             <option style="color:gray">Berpikir Logika</option>
+            <option style="color:gray">Statistika</option>
         </select><br><br>
 
         <div id="bentuk-penjelasan" style="line-height:1.5em">
@@ -637,7 +642,7 @@
     <!-- <p>Terakhir diupdate: 5 Feb 2025</p> -->
     <!-- <p>Terakhir diupdate: 5 Maret 2025</p> -->
     <!-- <p>Terakhir diupdate: 27 Mei 2025</p> -->
-    <p>Terakhir diupdate: 25 Juli 2025</p>
+    <p>Terakhir diupdate: 30 Juli 2025</p>
 
     <script>
         // Time
@@ -742,6 +747,10 @@
         function lcm(a, b) { 
             const gcdValue = gcd(a, b);
             return (a * b) / gcdValue; 
+        }
+        function convert_to_math(text) {
+            try {MathJax.typeset();} catch(err) {}
+            return text.replaceAll("/(","<span style='font-size:18px'>&#x005c(").replaceAll("/)","&#x005c)</span>")
         }
         
         a = 0;
@@ -1363,7 +1372,22 @@
                 var a2;
                 while (a2 === undefined || a == a2) {
                     if (level2.index == 0) {
-                        a2 = Math.floor(1 + 20 * Math.random());
+                        if (e1_bentuk.index == 0) {
+                            a2 = Math.floor(1 + 20 * Math.random());
+                        } else if (e1_bentuk.index == 1) {
+                            a2 = 10 * Math.floor(1 + 20 * Math.random()) + 5;
+                        } else if (e1_bentuk.index == 2) {
+                            a2 = Math.floor(1 + 20 * Math.random());
+                            if (a2 % 10 == 0) continue;
+                            pangkat = Math.floor(1 + 3 * Math.random())
+                            a2 *= 10**pangkat;
+                        } else if (e1_bentuk.index == 3) {
+                            pangkat = Math.floor(2 + 3 * Math.random())
+                            a2 = 10**pangkat-Math.floor(1+10*Math.random());
+                        } else {
+                            pangkat = Math.floor(2 + 3 * Math.random())
+                            a2 = 10**pangkat+Math.floor(1+10*Math.random());
+                        }
                         hasil = a2*a2;
                         pangkat = 2;
                     } else if (level2.index == 1) {
@@ -1444,8 +1468,34 @@
                 }
                 a = a2;
 
-			} else if (e1.index == 17) {
+			} else if (e1.index == 18) {
 			    // ax+b=c
+                var a2;
+                while (a2 === undefined || a == a2 || a2 == 0) {
+                    a2 = Math.floor(-10 + 21 * Math.random());
+                }
+                a = a2;
+                b = Math.floor(-10 + 21 * Math.random());
+                c = Math.floor(-10 + 21 * Math.random());
+                if (a >= 2 || a <= -2 || a == 0) a3 = a;
+                else if (a == 1) a3 = '';
+                else a3 = '-';
+                if (b >= 1) b3 = `+${b}`;
+                else if (b == 0) b3 = '';
+                else b3 = `-${-b}`;
+                persamaan = `${a3}x${b3}=${c}`
+                soal_teks = `Solusi x dari &nbsp;/(${persamaan}/)`
+                xa = c-b;
+                xb = a;
+                if (xb < 0) {xa = -xa; xb = -xb}
+                dibagi = gcd(Math.abs(xa),Math.abs(xb));
+                xa /= dibagi;
+                xb /= dibagi;
+                if (xb == 1) {
+                    hasil = `${xa}`;
+                } else {
+                    hasil = `${xa}/${xb}`;
+                }
 			}
 			
 			function bersusun(a,b,tanda) {
@@ -1739,7 +1789,7 @@
 					} else if (e1.index == 18) {
                         // soal_teks = `Solusi x dari &nbsp;<span style="font-size:20px">/(2x + 3 = 5/)`.replaceAll("/","&#x005c");
                         // soal_teks += `</span>&nbsp; adalah ...`
-                        soal_teks = `Solusi x dari &nbsp;/(${soal_teks}/)`
+                        // soal_teks = `Solusi x dari &nbsp;/(${soal_teks}/)`
                         soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
                         soal_teks = convert_to_math(soal_teks);
                     } else if (e1.index == 19) {
@@ -1927,7 +1977,9 @@
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
+                        <option>Semua</option>
                         <option>Digit terakhir 5</option>
+                        <option>Digit terakhir 0</option>
                         <option>Kurang dari 10 pangkat</option>
                         <option>Lebih dari 10 pangkat</option>
                     `;
@@ -1939,6 +1991,14 @@
                 - Pangkat 3 (kubik): /({a}^3/)<br>
                 - Pangkat 4: /({a}^4/)
                 `.replaceAll("/","&#x005c");
+                if (change) {
+                    document.getElementById("pilihan-bentuk-sub").innerHTML = `
+                        <option>Pangkat campuran</option>
+                        <option>Pangkat 3 (Kubik)</option>
+                        <option>Pangkat 4</option>
+                        <option>Pangkat 5</option>
+                    `;
+                }
             } else if (e1.index == 13) {
                 document.getElementById("bentuk-penjelasan").innerHTML = `Di dalam matematika, akar kuadrat atau akar persegi dari bilangan x sama dengan bilangan r sedemikian sehingga /(r^2 = x/), atau, di dalam perkataan lain, bilangan r yang bila dikuadratkan (hasil kali dengan bilangan itu sendiri) sama dengan x. Setiap bilangan real tak-negatif, katakanlah x memiliki akar kuadrat tak-negatif yang tunggal, disebut akar kuadrat utama, yang dilambangkan oleh akar ke-n sebagai /(/sqrt {x}/).`.replaceAll("/","&#x005c");
             } else if (e1.index == 15) {
@@ -2385,6 +2445,11 @@
                         }
                         pilihan_list.push(value);
                     }
+                
+                } else if (e1.index == 18) {
+                    pilihan_list.push(convert_to_math("/(x=1/)"));
+                    pilihan_list.push(convert_to_math("/(x=2/)"));
+                    random_check = false;
                 }
 
                 // pilihan_list = pilihan_list.sort( () => .5 - Math.random() );
@@ -2433,6 +2498,7 @@
                     <div class="clearfix"></div><br>
                     `;
                 }
+                try {MathJax.typeset();} catch(err) {}
             }
         }
 
