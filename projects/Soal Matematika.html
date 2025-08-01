@@ -467,8 +467,9 @@
             <option style="color:gray">Bangun Ruang</option>
             <option>Persamaan Linear</option>
             <option style="color:gray">Persamaan Dua Variabel</option>
-			<option style="color:gray">Manipulasi Aljabar</option>
+            <option style="color:gray">Manipulasi Aljabar</option>
             <option style="color:gray">Pertidaksamaan</option>
+            <option >Himpunan</option>
             <option style="color:gray">Fungsi dan Persamaan Kuadrat</option>
             <option>Fungsi Eksponensial</option>
             <option>Fungsi Logaritma</option>
@@ -642,7 +643,8 @@
     <!-- <p>Terakhir diupdate: 5 Feb 2025</p> -->
     <!-- <p>Terakhir diupdate: 5 Maret 2025</p> -->
     <!-- <p>Terakhir diupdate: 27 Mei 2025</p> -->
-    <p>Terakhir diupdate: 30 Juli 2025</p>
+    <!-- <p>Terakhir diupdate: 30 Juli 2025</p> -->
+     <p>Terakhir diupdate: 1 Agustus 2025</p>
 
     <script>
         // Time
@@ -749,8 +751,9 @@
             return (a * b) / gcdValue; 
         }
         function convert_to_math(text) {
+            // return text.replaceAll("/(","&nbsp;<span style='font-size:18px'>&#x005c(").replaceAll("/)","&#x005c)</span>")
             try {MathJax.typeset();} catch(err) {}
-            return text.replaceAll("/(","<span style='font-size:18px'>&#x005c(").replaceAll("/)","&#x005c)</span>")
+            return text.replaceAll("/(","<span style='font-size:18px'>&#x005c(").replaceAll("/)","/)</span>").replaceAll("/","&#x005c").replaceAll("<&#x005cspan>","</span>")
         }
         
         a = 0;
@@ -1564,15 +1567,12 @@
                 return text;
             }
             
-            function convert_to_math(text) {
-                return text.replaceAll("/(","<span style='font-size:18px'>&#x005c(").replaceAll("/)","&#x005c)</span>")
-            }
-            
             // var cerita_check = document.getElementById("check");
 			cerita_check = document.getElementById("check");
             var cerita = document.getElementById("cerita");
             var soal_teks;
-            if (e1.index <= 25) {
+            // if (e1.index <= 25) {
+            if (e1.index <= 30) {
                 if (cerita_check.checked == false) {
                     if (e1.index < 4) {
 						// document.getElementById('soal').innerHTML = 'Hasil dari ' + a + tanda + b + ' adalah ...';
@@ -1804,14 +1804,43 @@
                         soal_teks += `</span>&nbsp; adalah ...`
                         soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
                     } else if (e1.index == 22) {
-                        // soal_teks = `Diketahui fungsi linear /(f(x) = 2x+3/). Nilai dari /(f(5)/) adalah ...`.replaceAll("/","&#x005c");
-                        soal_teks = `Diketahui fungsi linear &nbsp;<span style="font-size:18px">/(f(x) = 2x+3/)</span>. Nilai dari &nbsp;<span style="font-size:18px">/(f(5)/)</span> adalah ...`.replaceAll("/","&#x005c").replaceAll("<&#x005cspan>","</span>");
-                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-                    } else if (e1.index == 23) {
+                        // /cup
+                        soal_teks = `Diketahui himpunan /(A = /{1,2,3,4,5/}/) dan himpunan /(B = /{2,3,6,7/}/). Maka A /cap B adalah ...`
+                        soal_teks = convert_to_math(soal_teks);
+                    } else if (e1.index == 24) {
+                        soal_teks = `Hasil dari /(2^6/) adalah ...`
+                        soal_teks = convert_to_math(soal_teks);
+                    } else if (e1.index == 27) {
+                        if (e1_bentuk.index == 0) {
+                            soal_teks = `Hasil dari /(|2-3|/) adalah ...`
+                        } else if (e1_bentuk.index == 1) {
+                            soal_teks = `Solusi x dari /(|2x+1|=3/) adalah ...`
+                        } else {
+                            // soal_teks = `Solusi x dari /(|3x-1|+|x+2|=5-2/lfloor x /rfloor/) adalah ...`
+                            soal_teks = `Solusi x dari /(|3x-1|+|x+2|=8-3x/) adalah ...`
+                        }
+                        soal_teks = convert_to_math(soal_teks);
+                    } else if (e1.index == 29) {
+                        if (e1_bentuk.index == 0) {
+                            // soal_teks = `Diketahui fungsi linear /(f(x) = 2x+3/). Nilai dari /(f(5)/) adalah ...`.replaceAll("/","&#x005c");
+                            soal_teks = `Diketahui fungsi linear &nbsp;/(f(x) = 2x+3/). Nilai dari &nbsp;/(f(5)/) adalah ...`;
+                            soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                        } else if (e1_bentuk.index == 1) {
+                            soal_teks = `Diketahui fungsi linear &nbsp;/(f(x) = 2x+3/). Nilai dari &nbsp;/(f^{-1}(5)/) adalah ...`;
+                            soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                        } else if (e1_bentuk.index == 2) {
+                            soal_teks = `Didefinisikan /(a*b = ab+a-b/). Nilai dari /(2*(3*4)/) adalah ...`;
+                            soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                        } else {
+                            soal_teks = `Diketahui suatu fungsi linear /(f(x)/) dan /(g(x)/), sehingga /(f(x+g(y))=2x-3y+1/). Jika diketahui /(g^{-1}(2)=4/), maka nilai dari /(f^{-1}(1+g(5))/) adalah ...`;
+                            soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                        }
+                        soal_teks = convert_to_math(soal_teks);
+                    } else if (e1.index == 30) {
                         // soal_teks = `Diketahui fungsi linear /(f(x) = 2x+3/). Nilai dari /(f(5)/) adalah ...`.replaceAll("/","&#x005c");
                         soal_teks = `Hasil dari &nbsp;<span style="font-size:18px">/(/mathrm{sin(60°)}/)</span> adalah ...`.replaceAll("/","&#x005c").replaceAll("<&#x005cspan>","</span>");
                         soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-                    } else if (e1.index == 24) {
+                    } else if (e1.index == 31) {
                         // soal_teks = `Diketahui fungsi linear /(f(x) = 2x+3/). Nilai dari /(f(5)/) adalah ...`.replaceAll("/","&#x005c");
                         soal_teks = `Peluang dari 2 dadu yang dilempar secara bersamaan, sehinga jumlahnya 9 adalah ...`.replaceAll("/","&#x005c").replaceAll("<&#x005cspan>","</span>");
                         soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
@@ -1851,7 +1880,7 @@
 					    soal_teks = `Di suatu kelas di sekolah, terdapat beberapa kegiatan yang harus dibuat kelompok. Sebanyak ${a} siswa yang akan dibuat kelompok, yang masing-masing sebanyak ${b} orang. Berapa banyak kelompok yang terbentuk?`;
 					} else if (e1.index == 7) {
                         if (cerita2.index == 0) {
-                            nama_tempat_list = ['perpustakaan','rumah teman','les piano'];
+                            nama_tempat_list = ['mengunjungi perpustakaan','mengunjungi rumah teman','les piano','les berenang','olahraga'];
                             nama_tempat = nama_tempat_list[parseInt(nama_tempat_list.length*Math.random())];
                             nama_orang_list = ['ibu','ayah','kakak','abang','tante','Andi','Ayu','Brian','Budi','Dani','Daniel','David','Jeremy','Matthew','Michael','Putra','Putri','Siti','Tika','Yuni']
                             nama_orang = nama_orang_list[parseInt(nama_orang_list.length*Math.random())];
@@ -1860,7 +1889,7 @@
                                 nama_orang2 = nama_orang_list[parseInt(nama_orang_list.length*Math.random())];
                             }
                             // soal_teks = `Andi mengunjungi perpustakaan setiap ${a} hari sekali, sedangkan Budi setiap ${b} hari sekali. Berapa hari sekali sehingga Andi dan Budi mengunjungi perpustakaan secara bersamaan?`;
-                            soal_teks = `${nama_orang} mengunjungi ${nama_tempat} setiap ${a} hari sekali, sedangkan ${nama_orang2} setiap ${b} hari sekali. Berapa hari sekali sehingga ${nama_orang} dan ${nama_orang2} mengunjungi ${nama_tempat} secara bersamaan?`;
+                            soal_teks = `${nama_orang} ${nama_tempat} setiap ${a} hari sekali, sedangkan ${nama_orang2} setiap ${b} hari sekali. Berapa hari sekali sehingga ${nama_orang} dan ${nama_orang2} mengunjungi ${nama_tempat} secara bersamaan?`;
                         } else {
                             soal_teks = `Pada lalu lintas, terdapat dua lampu merah, dimana yang bagian barat, lampu hijau hidup setiap ${a} menit sekali, sedangkan yang bagian timur setiap ${b} menit sekali. Berapa menit sekali kedua lampu tersebut hijau secara bersamaan?`;
                         }
@@ -2053,16 +2082,47 @@
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
+                        <option style="color:gray">Pemfaktoran Linear</option>
+                        <option style="color:gray">Pemfaktoran Kuadrat</option>
+                        <option style="color:gray">Pemfaktoran Derajat Tinggi</option>
+                        <option style="color:gray">Pemfaktoran Campuran</option>
+                    `;
+                }
+            } else if (e1.index == 22) {
+                document.getElementById("bentuk-sub").style.display = 'block';
+                if (change) {
+                    document.getElementById("pilihan-bentuk-sub").innerHTML = `
+                        <option style="color:gray">Dua himpunan</option>
+                        <option style="color:gray">Tiga himpunan</option>
+                        <option style="color:gray">Himpunan bagian</option>
+                        <option style="color:gray">Himpunan bersyarat</option>
+                    `;
+                }
+            } else if (e1.index == 23) {
+                document.getElementById("bentuk-sub").style.display = 'block';
+                if (change) {
+                    document.getElementById("pilihan-bentuk-sub").innerHTML = `
                         <option style="color:gray">Solusi</option>
                         <option style="color:gray">Diskriminan</option>
                         <option style="color:gray">Banyaknya Solusi</option>
                     `;
                 }
-            } else if (e1.index == 21) {
+            } else if (e1.index == 27) {
+                document.getElementById("bentuk-sub").style.display = 'block';
+                if (change) {
+                    document.getElementById("pilihan-bentuk-sub").innerHTML = `
+                        <option style="color:gray">Nilai Mutlak</option>
+                        <option style="color:gray">Persamaan Mutlak</option>
+                        <option style="color:gray">Persamaan Mutlak Kompleks</option>
+                    `;
+                }
+            } else if (e1.index == 29) {
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
                         <option style="color:gray">Satu fungsi</option>
+                        <option style="color:gray">Invers fungsi</option>
+                        <option style="color:gray">Operator fungsi</option>
                         <option style="color:gray">Campuran</option>
                     `;
                 }
@@ -2426,6 +2486,7 @@
                         pilihan_list.push("Genap");
                         pilihan_list.push("Ganjil");
                         random_check = false;
+                        j_pilihan2 = 2;
                     }
 
 				} else if (e1.index == 9) {
@@ -2450,6 +2511,19 @@
                     pilihan_list.push(convert_to_math("/(x=1/)"));
                     pilihan_list.push(convert_to_math("/(x=2/)"));
                     random_check = false;
+                
+                } else if (e1.index == 21) {
+                    pilihan_list.push(convert_to_math("/(x<2/)"));
+                    pilihan_list.push(convert_to_math("/(x>3/)"));
+                    pilihan_list.push(convert_to_math("/(x<-4/)"));
+                    random_check = false;
+
+                } else if (e1.index == 22) {
+                    pilihan_list.push(convert_to_math("/(/{1,2,3/}/)"));
+                    pilihan_list.push(convert_to_math("/(/{2,3/}/)"));
+                    pilihan_list.push(convert_to_math("/(/{1,4/}/)"));
+                    random_check = false;
+
                 }
 
                 // pilihan_list = pilihan_list.sort( () => .5 - Math.random() );
@@ -2466,24 +2540,29 @@
 				else {hasil2 = hasil + ' (E)';}
 				
                 // <div class="column">
+                // <label class="rb-container" style="width:150px;">
                 document.getElementById('tipe2').innerHTML = `
                 <span>Pilihan jawaban</span><br><br>
-                <label class="rb-container" style="width:150px;">A. ${pilihan_list[0]}
+                <label class="rb-container">A. ${pilihan_list[0]}
                     <input type="radio" id="pilihan1" value="${pilihan_list[0]}" name="pilihan" value="0">
                     <span class="checkradio"></span>
                 </label>
-                <label class="rb-container" style="width:150px;">B. ${pilihan_list[1]}
+                <label class="rb-container">B. ${pilihan_list[1]}
                     <input type="radio" id="pilihan2" value="${pilihan_list[1]}" name="pilihan" value="1">
                     <span class="checkradio"></span>
                 </label>
-                <label class="rb-container" style="width:150px;">C. ${pilihan_list[2]}
-                    <input type="radio" id="pilihan3" value="${pilihan_list[2]}" name="pilihan" value="2">
-                    <span class="checkradio"></span>
-                </label>
                 `;
+                if (j_pilihan2 >= 3) {
+                    document.getElementById('tipe2').innerHTML += `
+                    <label class="rb-container">C. ${pilihan_list[2]}
+                        <input type="radio" id="pilihan3" value="${pilihan_list[2]}" name="pilihan" value="2">
+                        <span class="checkradio"></span>
+                    </label>
+                    `;
+                }
                 if (j_pilihan2 >= 4) {
                     document.getElementById('tipe2').innerHTML += `
-                    <label class="rb-container" style="width:150px;">D. ${pilihan_list[3]}
+                    <label class="rb-container">D. ${pilihan_list[3]}
                         <input type="radio" id="pilihan4" value="${pilihan_list[3]}" name="pilihan" value="3">
                         <span class="checkradio"></span>
                     </label>
@@ -2491,7 +2570,7 @@
                 }
                 if (j_pilihan2 == 5) {
                     document.getElementById('tipe2').innerHTML += `
-                    <label class="rb-container" style="width:150px;">E. ${pilihan_list[4]}
+                    <label class="rb-container">E. ${pilihan_list[4]}
                         <input type="radio" id="pilihan5" value="${pilihan_list[4]}" name="pilihan" value="4">
                         <span class="checkradio"></span>
                     </label>
