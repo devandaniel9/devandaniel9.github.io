@@ -644,7 +644,8 @@
     <!-- <p>Terakhir diupdate: 5 Maret 2025</p> -->
     <!-- <p>Terakhir diupdate: 27 Mei 2025</p> -->
     <!-- <p>Terakhir diupdate: 30 Juli 2025</p> -->
-     <p>Terakhir diupdate: 1 Agustus 2025</p>
+    <!-- <p>Terakhir diupdate: 1 Agustus 2025</p> -->
+    <p>Terakhir diupdate: 6 Agustus 2025</p>
 
     <script>
         // Time
@@ -752,6 +753,7 @@
         }
         function convert_to_math(text) {
             // return text.replaceAll("/(","&nbsp;<span style='font-size:18px'>&#x005c(").replaceAll("/)","&#x005c)</span>")
+            // replaceAll(";","&#x005c").
             try {MathJax.typeset();} catch(err) {}
             return text.replaceAll("/(","<span style='font-size:18px'>&#x005c(").replaceAll("/)","/)</span>").replaceAll("/","&#x005c").replaceAll("<&#x005cspan>","</span>")
         }
@@ -780,6 +782,7 @@
             // function gcd(a, b) {
 
             soal = '';
+            soal_check = true;
             if (e1.index == 0) {
                 document.getElementById("bentuk-sub").style.display = 'none';
                 if (level2.index == 0) {
@@ -1334,7 +1337,7 @@
                     }
                     // console.log(hasil);
                     soal = `${a}/${b} + ${a_2}/${b_2}`;
-                } else {
+                } else if (e1_bentuk.index == 2) {
                     a = Math.floor(1 + 9 * Math.random());
                     b = Math.floor(a+1 + (11-a-1) * Math.random());
                     a_2 = Math.floor(1 + 9 * Math.random());
@@ -1346,7 +1349,44 @@
                         hasil = `${(a*b_2-b*a_2)/dibagi}/${(b*b_2)/dibagi}`;
                     }
                     soal = `${a}/${b} - ${a_2}/${b_2}`;
+                } else if (e1_bentuk.index == 3) {
+                    // a/b + a2/b2
+                    a = Math.floor(1 + 9 * Math.random());
+                    b = Math.floor(a+1 + (11-a-1) * Math.random());
+                    a_2 = Math.floor(1 + 9 * Math.random());
+                    b_2 = Math.floor(a_2+1 + (11-a_2-1) * Math.random());
+                    xa = a*a_2;
+                    xb = b*b_2;
+                    if (xb < 0) {xa = -xa; xb = -xb}
+                    dibagi = gcd(Math.abs(xa),Math.abs(xb));
+                    xa /= dibagi;
+                    xb /= dibagi;
+                    if (xb == 1) {
+                        hasil = `${xa}`;
+                    } else {
+                        hasil = `${xa}/${xb}`;
+                    }
+                    // console.log(hasil);
+                    soal = `${a}/${b} &#x5C;times ${a_2}/${b_2}`;
+                } else {
+                    b = Math.floor(1 + 10 * Math.random());
+                    a = Math.floor(1 + b * Math.random());
+                    b_2 = Math.floor(1 + 10 * Math.random());
+                    a_2 = Math.floor(1 + b_2 * Math.random());
+                    xa = a*b_2;
+                    xb = b*a_2;
+                    if (xb < 0) {xa = -xa; xb = -xb}
+                    dibagi = gcd(Math.abs(xa),Math.abs(xb));
+                    xa /= dibagi;
+                    xb /= dibagi;
+                    if (xb == 1) {
+                        hasil = `${xa}`;
+                    } else {
+                        hasil = `${xa}/${xb}`;
+                    }
+                    soal = `${a}/${b} &#x5C;times ${a_2}/${b_2}`;
                 }
+                soal_check = false;
 
             } else if (e1.index == 10) {
                 // if (Math.random() < 0.125) {b = 2;}
@@ -1369,6 +1409,7 @@
                     soal = `/(${c} /% + {${a} /over ${b}}/)`;
                     soal_suara = `${c} persen ditambah ${a} per ${b}`;
                 }
+                soal_check = false;
 
             } else if (e1.index == 11) {
                 // var a;
@@ -1382,14 +1423,16 @@
                         } else if (e1_bentuk.index == 2) {
                             a2 = Math.floor(1 + 20 * Math.random());
                             if (a2 % 10 == 0) continue;
-                            pangkat = Math.floor(1 + 3 * Math.random())
+                            pangkat = Math.floor(1 + 3 * Math.random());
                             a2 *= 10**pangkat;
                         } else if (e1_bentuk.index == 3) {
-                            pangkat = Math.floor(2 + 3 * Math.random())
-                            a2 = 10**pangkat-Math.floor(1+10*Math.random());
+                            pangkat = Math.floor(2 + 3 * Math.random());
+                            kali = Math.floor(1 + 9 * Math.random());
+                            a2 = kali*10**pangkat-Math.floor(1+10*Math.random());
                         } else {
                             pangkat = Math.floor(2 + 3 * Math.random())
-                            a2 = 10**pangkat+Math.floor(1+10*Math.random());
+                            kali = Math.floor(1 + 9 * Math.random());
+                            a2 = kali*10**pangkat+Math.floor(1+10*Math.random());
                         }
                         hasil = a2*a2;
                         pangkat = 2;
@@ -1499,6 +1542,7 @@
                 } else {
                     hasil = `${xa}/${xb}`;
                 }
+                soal_check = false;
 			}
 			
 			function bersusun(a,b,tanda) {
@@ -1707,7 +1751,7 @@
                                 soal_teks = `Hasil dari ${a}/${b} + ${a_2}/${b_2} adalah ...`;
                             }
                             soal_suara = `Hasil dari ${a} per ${b} ditambah ${a_2} per ${b_2} adalah ...`;
-                        } else {
+                        } else if (e1_bentuk.index == 2) {
                             if (bs2.index == 0) {
                                 soal_teks = `Hasil dari <span style="font-size:20px">/({${a} /over ${b}} - {${a_2} /over ${b_2}}/)`.replaceAll("/","&#x005c");
                                 soal_teks += `</span> adalah ...`
@@ -1718,6 +1762,31 @@
                                 soal_teks = `Hasil dari ${a}/${b} - ${a_2}/${b_2} adalah ...`;
                             }
                             soal_suara = `Hasil dari ${a} per ${b} dikurangi ${a_2} per ${b_2} adalah ...`;
+                        } else if (e1_bentuk.index == 3) {
+                            if (bs2.index == 0) {
+                                // soal_teks = `Hasil dari /({${a} /over ${b}} ;times {${a_2} /over ${b_2}}/)`; ×
+                                soal_teks = `Hasil dari /({${a} /over ${b}} /times {${a_2} /over ${b_2}}/)`;
+                                soal_teks += `</span> adalah ...`
+                                if (tipe2.index == 0) {
+                                    soal_teks += `<br><br>- Tulis jawaban dengan bentuk tulisan "a" atau "a/b"<br>- Bentuk pecahan paling sederhana`
+                                }
+                                soal_teks = convert_to_math(soal_teks);
+                            } else {
+                                soal_teks = `Hasil dari ${a}/${b} x ${a_2}/${b_2} adalah ...`;
+                            }
+                            soal_suara = `Hasil dari ${a} per ${b} dikali ${a_2} per ${b_2} adalah ...`;
+                        } else if (e1_bentuk.index == 4) {
+                            if (bs2.index == 0) {
+                                soal_teks = `Hasil dari /({${a} /over ${b}} ÷ {${a_2} /over ${b_2}}/)`;
+                                soal_teks += `</span> adalah ...`
+                                if (tipe2.index == 0) {
+                                    soal_teks += `<br><br>- Tulis jawaban dengan bentuk tulisan "a" atau "a/b"<br>- Bentuk pecahan paling sederhana`
+                                }
+                                soal_teks = convert_to_math(soal_teks);
+                            } else {
+                                soal_teks = `Hasil dari ${a}/${b} : ${a_2}/${b_2} adalah ...`;
+                            }
+                            soal_suara = `Hasil dari ${a} per ${b} dibagi ${a_2} per ${b_2} adalah ...`;
                         }
                         // soal_teks = `When /(a /ne 0/), there are three solutions to /(ax^2 + bx + c = 0/) and they are
                         // /[x = {-b /pm /sqrt{b^2-4ac} /over 2a}./]`.replaceAll("/","&#x005c");
@@ -1804,8 +1873,8 @@
                         soal_teks += `</span>&nbsp; adalah ...`
                         soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
                     } else if (e1.index == 22) {
-                        // /cup
-                        soal_teks = `Diketahui himpunan /(A = /{1,2,3,4,5/}/) dan himpunan /(B = /{2,3,6,7/}/). Maka A /cap B adalah ...`
+                        // /cup (∪) /cap (∩)
+                        soal_teks = `Diketahui himpunan /(A = /{1,2,3,4,5/}/) dan himpunan /(B = /{2,3,6,7/}/). Maka /(A ∩ B/) adalah ...`
                         soal_teks = convert_to_math(soal_teks);
                     } else if (e1.index == 24) {
                         soal_teks = `Hasil dari /(2^6/) adalah ...`
@@ -1993,12 +2062,14 @@
             } else if (e1.index == 9) {
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
+                    // <option style="color:gray">Pecahan Campuran</option>
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
                         <option>Penyerderhanakan Pecahan</option>
                         <option>Penjumlahan Pecahan</option>
                         <option>Pengurangan Pecahan</option>
-                        <option style="color:gray">Perkalian dan Pembagian Pecahan</option>
-                        <option style="color:gray">Pecahan Campuran</option>
+                        <option>Perkalian Pecahan</option>
+                        <option>Pembagian Pecahan</option>
+                        <option style="color:gray">Operasi Pecahan</option>
                     `;
                 }
                 document.getElementById("bentuk-penjelasan").innerHTML = `Pecahan atau fraksi adalah istilah yang merujuk pada suatu bagian atau sejumlah bagian yang setara dari sesuatu yang "penuh". Dalam matematika, pecahan umumnya ditunjukkan dengan notasi /(a /over b/), di mana b ≠ 0. Dalam hal ini a merupakan pembilang, dan b merupakan penyebut. Dalam bilangan pecahan adalah bagaimana suatu nilai dapat disederhanakan. Penyederhanaan pembilang dan penyebut akan memudahkan dalam operasi aritmatika sehingga tidak menghasilkan angka yang terlalu besar tetapi tetap mempunyai nilai yang sama.`.replaceAll("/","&#x005c");
@@ -2009,8 +2080,8 @@
                         <option>Semua</option>
                         <option>Digit terakhir 5</option>
                         <option>Digit terakhir 0</option>
-                        <option>Kurang dari 10 pangkat</option>
-                        <option>Lebih dari 10 pangkat</option>
+                        <option>Kurang dari kelipatan 10 pangkat</option>
+                        <option>Lebih dari kelipatan 10 pangkat</option>
                     `;
                 }
             } else if (e1.index == 12) {
@@ -2631,16 +2702,26 @@
                 //     tanda = ' + ';
                 var jawaban_teks, jawaban_teks2;
                 if (cerita_check.checked == true) {
-                    soal = '';
+                    // soal = '';
+                    soal_check = false;
                 }
+                // if (soal2 = '') soal2 = soal;
                 // if (angka == hasil) {
                 if (angka == hasil) {
                     // jawaban_teks = `Jawabannya benar<br><br> ${soal} = ${hasil2}`;
-                    jawaban_teks = `Jawabannya benar<br><br> ${soal} = ${angka_awal}`;
+                    if (soal_check) {
+                        jawaban_teks = `Jawabannya benar<br><br>${soal} = ${angka_awal}`;
+                    } else {
+                        jawaban_teks = `Jawabannya benar<br><br>Hasil = ${angka_awal}`;
+                    }
                     jawaban_teks2 = 'Jawabannya benar';
                 } else {
                     // jawaban_teks = `Jawabannya salah<br>Jawaban yang diinput: ${angka}<br><br>${soal} = ${hasil2}`;
-                    jawaban_teks = `Jawabannya salah<br>Jawaban yang diinput: ${angka_awal}<br><br>${soal} = ${hasil2}`;
+                    if (soal_check) {
+                        jawaban_teks = `Jawabannya salah<br>Jawaban yang diinput = ${angka_awal}<br><br>${soal} = ${hasil2}`;
+                    } else {
+                        jawaban_teks = `Jawabannya salah<br>Jawaban yang diinput = ${angka_awal}<br><br>Jawaban yang benar = ${hasil2}`;
+                    }
                     jawaban_teks2 = 'Jawabannya salah';
                 }
                 document.getElementById('jawaban').innerHTML = jawaban_teks;
