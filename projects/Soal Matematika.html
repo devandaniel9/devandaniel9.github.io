@@ -471,8 +471,8 @@
             <option style="color:gray">Pertidaksamaan</option>
             <option >Himpunan</option>
             <option style="color:gray">Fungsi dan Persamaan Kuadrat</option>
-            <option>Fungsi Eksponensial</option>
-            <option>Fungsi Logaritma</option>
+            <option>Fungsi dan Persamaan Eksponensial</option>
+            <option>Fungsi dan Persamaan Logaritma</option>
             <option style="color:gray">Persamaan Lingkaran</option>
             <option>Fungsi dan Persamaan Mutlak</option>
             <option>Fungsi dan Persamaan Floor</option>
@@ -645,7 +645,7 @@
     <!-- <p>Terakhir diupdate: 27 Mei 2025</p> -->
     <!-- <p>Terakhir diupdate: 30 Juli 2025</p> -->
     <!-- <p>Terakhir diupdate: 1 Agustus 2025</p> -->
-    <p>Terakhir diupdate: 8 Agustus 2025</p>
+    <p>Terakhir diupdate: 22 Agustus 2025</p>
 
     <script>
         // Time
@@ -1543,6 +1543,24 @@
                     hasil = `${xa}/${xb}`;
                 }
                 soal_check = false;
+            } else if (e1.index == 19) {
+			    // ax+by=c, dx+ex=f
+                var a2;
+                while (a2 === undefined || a == a2 || a2 == 0) {
+                    a2 = Math.floor(-5 + 11 * Math.random());
+                }
+                a2 = a;
+                b = Math.floor(-5 + 11 * Math.random());
+                c = Math.floor(-5 + 11 * Math.random());
+                d = Math.floor(-5 + 11 * Math.random());
+                e = Math.floor(-5 + 11 * Math.random());
+                while (b*d-a*e == 0) {
+                    e = Math.floor(-5 + 11 * Math.random());
+                }
+                f = Math.floor(-5 + 11 * Math.random());
+                soal_teks = `Diketahui sistem persamaan linear dua variabel yang terdapat dibawah ini:
+                <span style='font-size:18px'>\\begin{cases} ${a}x+${b}y=${c} \\\\ ${d}x+${e}y=${f} \\end{cases}</span>
+                Maka solusi dari x adalah ...`;
 			} else if (e1.index == 22) {
                 // A ∩ B
                 // function getIntersection(a, n, b, m) {
@@ -1967,8 +1985,13 @@
                         soal_teks = convert_to_math(soal_teks);
                         // soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
                     } else if (e1.index == 19) {
-                        soal_teks = `Diketahui sistem persamaan linear dua variabel yang terdapat dibawah ini:<br><div style="padding-top:10px"></div><span style="font-size:18px">&nbsp;&nbsp;/(x+y=2/)<br>&nbsp;&nbsp;/(2x+3y=5/)</span><br><br>Solusi dari x dan y berturut-turut adalah ...`.replaceAll("/","&#x005c").replaceAll("<&#x005c","</");
-                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                        // &#x2F
+                        // soal_teks = `Diketahui sistem persamaan linear dua variabel yang terdapat dibawah ini:<br><div style="padding-top:10px"><|||div>\\begin{array} x+2y=2 \\\\ 2x+3y=5 \\end{array}`;
+                        // Solusi dari x dan y berturut-turut adalah ...`;
+                        // soal_teks = `Diketahui sistem persamaan linear dua variabel yang terdapat dibawah ini:
+                        // <span style='font-size:18px'>\\begin{cases} x+2y=2 \\\\ 2x+3y=5 \\end{cases}</span>
+                        // Maka solusi dari x adalah ...`;
+                        // soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
                     } else if (e1.index == 20) {
                         if (e1_bentuk.index == 0) {
                             soal_teks = `Jika /({5 /over /sqrt{12}}/) dapat dinyatakan ke dalam bentuk /({a/sqrt{b}} /over c/), dimana /(FPB(a,c) = 1/), dan b adalah bebas kuadrat, maka nilai dari a+b+c adalah ...`;
@@ -2300,6 +2323,14 @@
                         <option style="color:gray">Banyaknya Solusi</option>
                     `;
                 }
+            } else if (e1.index == 24) {
+                document.getElementById("bentuk-sub").style.display = 'block';
+                if (change) {
+                    document.getElementById("pilihan-bentuk-sub").innerHTML = `
+                        <option style="color:gray">Fungsi eksponensial</option>
+                        <option style="color:gray">Persamaan eksponensial</option>
+                    `;
+                }
             } else if (e1.index == 27) {
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
@@ -2587,10 +2618,10 @@
                     }
                 // var input = document.getElementById("angka");
                 // input.addEventListener("keypress", function(event) {
-                    if (event.key === "N" || event.key === "n") {
-                        event.preventDefault();
-                        document.getElementById("buat-soal").click();
-                    }
+                    // if (event.key === "N" || event.key === "n") {
+                    //     event.preventDefault();
+                    //     document.getElementById("buat-soal").click();
+                    // }
                 });
                 // hasil = 0;
                 // console.log(11111);
@@ -2651,16 +2682,17 @@
                     //     Math.floor(1+2*a/b*Math.random()),
                     for (let i = 0; i < 5; i++) {
                         value = Math.floor(1+Math.max(2*a/b,6)*Math.random());
-                        while (pilihan_list.indexOf(value) > -1 | value == hasil) {
+                        // while (pilihan_list.indexOf(value) > -1 | value == hasil) {
+                        while (pilihan_list.indexOf(value) > -1 || value == hasil) {
                             value = Math.floor(1+Math.max(2*a/b,6)*Math.random());
                         }
                         pilihan_list.push(value);
                     }
 				
-				} else if (e1.index == 4 | e1.index == 5) {
+				} else if (e1.index == 4 || e1.index == 5) {
                     for (let i = 0; i < 5; i++) {
                         value = hasil+Math.floor(-hasil/2+Math.max(hasil,6)*Math.random());
-                        while (pilihan_list.indexOf(value) > -1 | value == hasil) {
+                        while (pilihan_list.indexOf(value) > -1 || value == hasil) {
                             value = hasil+Math.floor(-hasil/2+Math.max(hasil,6)*Math.random());
                         }
                         pilihan_list.push(value);
