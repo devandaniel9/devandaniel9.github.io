@@ -645,7 +645,7 @@
     <!-- <p>Terakhir diupdate: 27 Mei 2025</p> -->
     <!-- <p>Terakhir diupdate: 30 Juli 2025</p> -->
     <!-- <p>Terakhir diupdate: 1 Agustus 2025</p> -->
-    <p>Terakhir diupdate: 22 Agustus 2025</p>
+    <p>Terakhir diupdate: 27 Agustus 2025</p>
 
     <script>
         // Time
@@ -1545,21 +1545,47 @@
                 soal_check = false;
             } else if (e1.index == 19) {
 			    // ax+by=c, dx+ex=f
-                var a2;
-                while (a2 === undefined || a == a2 || a2 == 0) {
-                    a2 = Math.floor(-5 + 11 * Math.random());
+                // var a2;
+                var a_old;
+                while (a_old === undefined || a == a_old) {
+                    a_old = Math.floor(-5 + 11 * Math.random());
                 }
-                a2 = a;
+                a = a_old;
+                if (a >= 2 || a <= -2) a2 = `${a}x`;
+                else if (a == 1) a2 = 'x';
+                else if (a == -1) a2 = '-x';
+                else a2 = '';
                 b = Math.floor(-5 + 11 * Math.random());
+                while (a == 0 && b == 0) {
+                    b = Math.floor(-5 + 11 * Math.random());
+                }
+                if (b >= 2 || b <= -2) b2 = `${b}y`;
+                else if (b == 1) b2 = 'y';
+                else if (b == -1) b2 = '-y';
+                else b2 = '';
+                if (a != 0 && b >= 1) b2 = '+' + b2;
                 c = Math.floor(-5 + 11 * Math.random());
-                d = Math.floor(-5 + 11 * Math.random());
-                e = Math.floor(-5 + 11 * Math.random());
-                while (b*d-a*e == 0) {
+                var check = true;
+                while (check || b*d-a*e == 0) {
+                    d = Math.floor(-5 + 11 * Math.random());
+                    if (d >= 2 || d <= -2) d2 = `${d}x`;
+                    else if (d == 1) d2 = 'x';
+                    else if (d == -1) d2 = '-x';
+                    else d2 = '';
                     e = Math.floor(-5 + 11 * Math.random());
+                    if (e >= 2 || e <= -2) e2 = `${e}y`;
+                    else if (e == 1) e2 = 'y';
+                    else if (e == -1) e2 = '-y';
+                    else e2 = '';
+                    if (d != 0 && e >= 1) e2 = '+' + e2;
+                    check = false;
                 }
                 f = Math.floor(-5 + 11 * Math.random());
-                soal_teks = `Diketahui sistem persamaan linear dua variabel yang terdapat dibawah ini:
+                /* soal_teks = `Diketahui sistem persamaan linear dua variabel yang terdapat dibawah ini:
                 <span style='font-size:18px'>\\begin{cases} ${a}x+${b}y=${c} \\\\ ${d}x+${e}y=${f} \\end{cases}</span>
+                Maka solusi dari x adalah ...`; */
+                soal_teks = `Diketahui sistem persamaan linear dua variabel yang terdapat dibawah ini:
+                <span style='font-size:18px'>\\begin{cases} ${a2}${b2}=${c} \\\\ ${d2}${e2}=${f} \\end{cases}</span>
                 Maka solusi dari x adalah ...`;
 			} else if (e1.index == 22) {
                 // A ∩ B
@@ -1665,6 +1691,16 @@
                     } else if (mathrandom < 0.75) {
                     } else {
                     }
+                }
+            } else if (e1.index == 23) {
+                if (e1_bentuk.index == 0) {
+                    // soal_teks = `Solusi x dari <span style='font-size:18px'>\\begin{array} x^2 \\end{array}</span>
+                    // Maka solusi dari x adalah ...`;
+                    soal_teks = `Solusi x dari persamaan &nbsp;<span style="font-size:18px">/(x^2 - 3x + 2 = 0/)`.replaceAll("/","&#x005c");
+                } else if (e1_bentuk.index == 1) {
+                    soal_teks = `Diskriminan dari persamaan &nbsp;<span style="font-size:18px">/(x^2 - 3x + 2 = 0/)`.replaceAll("/","&#x005c");
+                } else {
+                    soal_teks = `Misalkan akar-akar dari persamaan &nbsp;<span style="font-size:18px">/(x^2 - 4x + 1 = 0/) adalah /(a/) dan /(b/). Nilai dari /(a^2+b^2/) adalah ...`.replaceAll("/","&#x005c");
                 }
             }
 			
@@ -2005,8 +2041,9 @@
                             soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
                         }
                     } else if (e1.index == 21) {
-                        soal_teks = `Solusi x dari &nbsp;<span style="font-size:20px">/(x^2 - 3x + 2 = 0/)`.replaceAll("/","&#x005c");
-                        soal_teks += `</span>&nbsp; adalah ...`
+                        // soal_teks = `Solusi x dari &nbsp;<span style="font-size:20px">/(x^2 - 3x + 2 = 0/)`.replaceAll("/","&#x005c");
+                        soal_teks = `Banyak solusi x bilangan asli sehingga /(3x+7<25/) adalah ...`
+                        soal_teks = convert_to_math(soal_teks);
                         soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
                     } else if (e1.index == 22) {
                         if (e1_bentuk.index == 0) {
@@ -2021,8 +2058,13 @@
                             
                         }
                     } else if (e1.index == 24) {
-                        soal_teks = `Hasil dari /(2^6/) adalah ...`
-                        soal_teks = convert_to_math(soal_teks);
+                        if (e1_bentuk.index == 0) {
+                            soal_teks = `Hasil dari /(2^6/) adalah ...`
+                            soal_teks = convert_to_math(soal_teks);
+                        } else {
+                            soal_teks = `Solusi x dari persamaan /(4^x+2^x=72/) adalah ...`
+                            soal_teks = convert_to_math(soal_teks);
+                        }
                     } else if (e1.index == 27) {
                         if (e1_bentuk.index == 0) {
                             soal_teks = `Hasil dari /(|2-3|/) adalah ...`
