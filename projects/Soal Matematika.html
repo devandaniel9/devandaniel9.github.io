@@ -466,7 +466,7 @@
             <option style="color:gray">Bangun Datar</option>
             <option style="color:gray">Bangun Ruang</option>
             <option>Persamaan Linear</option>
-            <option style="color:gray">Persamaan Dua Variabel</option>
+            <option>Persamaan Dua Variabel</option>
             <option style="color:gray">Manipulasi Aljabar</option>
             <option style="color:gray">Pertidaksamaan</option>
             <option >Himpunan</option>
@@ -477,9 +477,10 @@
             <option>Fungsi dan Persamaan Mutlak</option>
             <option>Fungsi dan Persamaan Floor</option>
             <option style="color:gray">Subsitusi Fungsi</option>
+            <option style="color:gray">Matriks dan Determinan</option>
             <option style="color:gray">Barisan dan Deret dari Pola Bilangan</option>
             <option style="color:gray">Trigonometri</option>
-			<option style="color:gray">Berhitung</option>
+            <option style="color:gray">Berhitung</option>
             <option style="color:gray">Permutasi dan Kombinasi</option>
             <option style="color:gray">Peluang</option>
             <option style="color:gray">Berpikir Logika</option>
@@ -645,7 +646,7 @@
     <!-- <p>Terakhir diupdate: 27 Mei 2025</p> -->
     <!-- <p>Terakhir diupdate: 30 Juli 2025</p> -->
     <!-- <p>Terakhir diupdate: 1 Agustus 2025</p> -->
-    <p>Terakhir diupdate: 27 Agustus 2025</p>
+    <p>Terakhir diupdate: 29 Agustus 2025</p>
 
     <script>
         // Time
@@ -1587,6 +1588,61 @@
                 soal_teks = `Diketahui sistem persamaan linear dua variabel yang terdapat dibawah ini:
                 <span style='font-size:18px'>\\begin{cases} ${a2}${b2}=${c} \\\\ ${d2}${e2}=${f} \\end{cases}</span>
                 Maka solusi dari x adalah ...`;
+                check = true;
+                xa = b*f-c*e;
+                xb = b*d-a*e;
+                if (xb < 0) {xa = -xa; xb = -xb}
+                dibagi = gcd(Math.abs(xa),Math.abs(xb));
+                xa /= dibagi;
+                xb /= dibagi;
+                ya = c*d-a*f;
+                yb = b*d-a*e;
+                if (yb < 0) {ya = -ya; yb = -yb}
+                dibagi = gcd(Math.abs(xa),Math.abs(xb));
+                ya /= dibagi;
+                yb /= dibagi;
+                if (check) {
+                    if (xb == 1) {
+                        hasil = `${xa}`;
+                    } else {
+                        hasil = `${xa}/${xb}`;
+                    }
+                } else {
+                    if (yb == 1) {
+                        hasil = `${ya}`;
+                    } else {
+                        hasil = `${ya}/${yb}`;
+                    }
+                }
+                soal_check = false;
+            } else if (e1.index == 20) {
+                if (e1_bentuk.index == 0) {
+                    // soal_teks = `Jika /({5 /over /sqrt{12}}/) dapat dinyatakan ke dalam bentuk /({a/sqrt{b}} /over c/), dimana /(FPB(a,c) = 1/), dan b adalah bebas kuadrat, maka nilai dari a+b+c adalah ...`;
+                    // a/sqrt(b)
+                    prime_list = [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97];
+                    var a_old;
+                    while (a_old === undefined || a == a_old) {
+                        a_old = Math.floor(1 + 10 * Math.random());
+                    }
+                    a = a_old;
+                    // b = Math.floor(2 + 49 * Math.random());
+                    b = Math.floor(2 + 49 * Math.random()**2);
+                    // ca*sqrt(cb)/cc
+                    ca = a;
+                    cb = b;
+                    cc = b;
+                    for (let i = 0; i < 25; i++) {
+                        if (cb % prime_list[i]**2 == 0) {
+                            cb /= prime_list[i]**2
+                            ca *= prime_list[i]
+                        }
+                    }
+                    dibagi = gcd(Math.abs(ca),Math.abs(cc));
+                    ca /= dibagi;
+                    cc /= dibagi;
+                    soal_teks = `Jika \\({${a} \\over \\sqrt{${b}}}\\) dapat dinyatakan ke dalam bentuk \\({a\\sqrt{b}} \\over c\\), dimana \\(FPB(a,c) = 1\\), dan b adalah bebas kuadrat selain 1, maka nilai dari a+b+c adalah ...`;
+                    hasil = ca+cb+cc;
+                }
 			} else if (e1.index == 22) {
                 // A ∩ B
                 // function getIntersection(a, n, b, m) {
@@ -1701,6 +1757,55 @@
                     soal_teks = `Diskriminan dari persamaan &nbsp;<span style="font-size:18px">/(x^2 - 3x + 2 = 0/)`.replaceAll("/","&#x005c");
                 } else {
                     soal_teks = `Misalkan akar-akar dari persamaan &nbsp;<span style="font-size:18px">/(x^2 - 4x + 1 = 0/) adalah /(a/) dan /(b/). Nilai dari /(a^2+b^2/) adalah ...`.replaceAll("/","&#x005c");
+                }
+            } else if (e1.index == 29) {
+                if (e1_bentuk.index == 0) {
+                    mathrandom = Math.random()
+                    if (mathrandom < 0.5) {
+                        var a_old;
+                        while (a_old === undefined || a == a_old || a_old == 0) {
+                            // a_old = Math.floor(-10 + 21 * Math.random());
+                            a_old = Math.floor(11*Math.random()**2*(-1)**Math.floor(2*Math.random()));
+                        }
+                        a = a_old;
+                        if (a >= 2 || a <= -2 || a == 0) a2 = a;
+                        else if (a == 1) a2 = '';
+                        else a2 = '-';
+                        b = Math.floor(11*Math.random()**2*(-1)**Math.floor(2*Math.random()));
+                        if (b >= 1) b2 = `+${b}`;
+                        else if (b == 0) b2 = '';
+                        else b2 = `-${-b}`;
+                        c = Math.floor(11*Math.random()**2*(-1)**Math.floor(2*Math.random()));
+                        soal_teks = `Diketahui fungsi linear &nbsp;\\(f(x) = ${a2}x${b2}\\). Nilai dari &nbsp;\\(f(${c})\\) adalah ...`;
+                        hasil = a*c+b;
+                    } else {
+                        var a_old;
+                        while (a_old === undefined || a == a_old || a_old == 0) {
+                            // a_old = Math.floor(-10 + 21 * Math.random());
+                            a_old = Math.floor(6*Math.random()**2*(-1)**Math.floor(2*Math.random()));
+                        }
+                        a = a_old;
+                        if (a >= 2 || a <= -2) a2 = `${a}x^2`;
+                        else if (a == 1) a2 = 'x^2';
+                        else if (a == -1) a2 = '-x^2';
+                        else a2 = '';
+                        b = Math.floor(11*Math.random()**2*(-1)**Math.floor(2*Math.random()));
+                        if (b >= 2 || b <= -2) b2 = `${b}x`;
+                        else if (b == 1) b2 = 'x';
+                        else if (b == -1) b2 = '-x';
+                        else b2 = '';
+                        // if (a != 0 && b >= 1) b2 = '+' + b2;
+                        if (b >= 1) b2 = '+' + b2;
+                        c = Math.floor(11*Math.random()**2*(-1)**Math.floor(2*Math.random()));
+                        if (c >= 2 || c <= -2) c2 = `${c}`;
+                        else if (c == 1) c2 = '1';
+                        else if (c == -1) c2 = '-1';
+                        else c2 = '';
+                        if (c >= 1) c2 = '+' + c2;
+                        d = Math.floor(11*Math.random()**2*(-1)**Math.floor(2*Math.random()));
+                        soal_teks = `Diketahui fungsi kuadrat &nbsp;\\(f(x) = ${a2}${b2}${c2}\\). Nilai dari &nbsp;\\(f(${d})\\) adalah ...`;
+                        hasil = a*d**2+b*d+c;
+                    }
                 }
             }
 			
@@ -2030,8 +2135,8 @@
                         // soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
                     } else if (e1.index == 20) {
                         if (e1_bentuk.index == 0) {
-                            soal_teks = `Jika /({5 /over /sqrt{12}}/) dapat dinyatakan ke dalam bentuk /({a/sqrt{b}} /over c/), dimana /(FPB(a,c) = 1/), dan b adalah bebas kuadrat, maka nilai dari a+b+c adalah ...`;
-                            soal_teks = convert_to_math(soal_teks);
+                            // soal_teks = `Jika /({5 /over /sqrt{12}}/) dapat dinyatakan ke dalam bentuk /({a/sqrt{b}} /over c/), dimana /(FPB(a,c) = 1/), dan b adalah bebas kuadrat, maka nilai dari a+b+c adalah ...`;
+                            // soal_teks = convert_to_math(soal_teks);
                             soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
                         } else if (e1_bentuk.index == 1) {
                             soal_teks = convert_to_math(soal_teks);
@@ -2078,7 +2183,6 @@
                     } else if (e1.index == 29) {
                         if (e1_bentuk.index == 0) {
                             // soal_teks = `Diketahui fungsi linear /(f(x) = 2x+3/). Nilai dari /(f(5)/) adalah ...`.replaceAll("/","&#x005c");
-                            soal_teks = `Diketahui fungsi linear &nbsp;/(f(x) = 2x+3/). Nilai dari &nbsp;/(f(5)/) adalah ...`;
                             soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
                         } else if (e1_bentuk.index == 1) {
                             soal_teks = `Diketahui fungsi linear &nbsp;/(f(x) = 2x+3/). Nilai dari &nbsp;/(f^{-1}(5)/) adalah ...`;
@@ -2090,12 +2194,12 @@
                             soal_teks = `Diketahui suatu fungsi linear /(f(x)/) dan /(g(x)/), sehingga /(f(x+g(y))=2x-3y+1/). Jika diketahui /(g^{-1}(2)=4/), maka nilai dari /(f^{-1}(1+g(5))/) adalah ...`;
                             soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
                         }
-                        soal_teks = convert_to_math(soal_teks);
-                    } else if (e1.index == 30) {
+                        // soal_teks = convert_to_math(soal_teks);
+                    } else if (e1.index == 32) {
                         // soal_teks = `Diketahui fungsi linear /(f(x) = 2x+3/). Nilai dari /(f(5)/) adalah ...`.replaceAll("/","&#x005c");
                         soal_teks = `Hasil dari &nbsp;<span style="font-size:18px">/(/mathrm{sin(60°)}/)</span> adalah ...`.replaceAll("/","&#x005c").replaceAll("<&#x005cspan>","</span>");
                         soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-                    } else if (e1.index == 31) {
+                    } else if (e1.index == 33) {
                         // soal_teks = `Diketahui fungsi linear /(f(x) = 2x+3/). Nilai dari /(f(5)/) adalah ...`.replaceAll("/","&#x005c");
                         soal_teks = `Peluang dari 2 dadu yang dilempar secara bersamaan, sehinga jumlahnya 9 adalah ...`.replaceAll("/","&#x005c").replaceAll("<&#x005cspan>","</span>");
                         soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
@@ -2390,6 +2494,17 @@
                         <option style="color:gray">Invers fungsi</option>
                         <option style="color:gray">Operator fungsi</option>
                         <option style="color:gray">Campuran</option>
+                    `;
+                }
+            } else if (e1.index == 29) {
+                document.getElementById("bentuk-sub").style.display = 'block';
+                if (change) {
+                    document.getElementById("pilihan-bentuk-sub").innerHTML = `
+                        <option style="color:gray">Penjumlahan dan Pengurangan Matriks</option>
+                        <option style="color:gray">Perkalian Matriks</option>
+                        <option style="color:gray">Invers Matriks</option>
+                        <option style="color:gray">Campuran</option>
+                        <option style="color:gray">Determinan</option>
                     `;
                 }
             } else {
@@ -2883,7 +2998,7 @@
                 var e1 = e.options[e.selectedIndex];
                 // var tanda = '';
                 // e1.index == 6 & e1_bentuk.index == 0
-                if (e1.index <= 5 || (e1.index == 6 && (e1_bentuk.index == 0 || e1_bentuk.index == 2)) || e1.index == 7 || e1.index == 8 || e1.index == 10 || e1.index == 11 || e1.index == 12 || e1.index == 13) {
+                if (e1.index <= 5 || (e1.index == 6 && (e1_bentuk.index == 0 || e1_bentuk.index == 2)) || e1.index == 7 || e1.index == 8 || e1.index == 10 || e1.index == 11 || e1.index == 12 || e1.index == 13 || e1.index == 20 || e1.index == 29) {
                     angka = parseInt(angka_awal);
                     jawaban_check = angka == hasil;
                     // hasil = hasil;
