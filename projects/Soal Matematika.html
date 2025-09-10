@@ -647,7 +647,7 @@
     <!-- <p>Terakhir diupdate: 30 Juli 2025</p> -->
     <!-- <p>Terakhir diupdate: 1 Agustus 2025</p> -->
     <!-- <p>Terakhir diupdate: 29 Agustus 2025</p> -->
-    <p>Terakhir diupdate: 3 September 2025</p>
+    <p>Terakhir diupdate: 10 September 2025</p>
 
     <script>
         // Time
@@ -1516,6 +1516,52 @@
                 }
                 a = a2;
 
+            } else if (e1.index == 15) {
+                if (e1_bentuk.index == 0) {
+                    // soal_teks = `Jarak dari kota A ke C melalui kota B adalah 280 km, sedangkan jarak dari kota A ke B adalah 110 km. Jarak dari kota B ke C adalah ...`;
+                    satuan_list = ['mm','dm','cm','m','dam','hm','km'];
+                    angka_satuan_list = [1,10,100,1000,10000,100000,1000000];
+                    // soal_teks = `1 m = _____ cm`;
+                    soal_teks = `1 m = ..... cm`;
+                } else if (e1_bentuk.index == 1) {
+                    soal_teks = `1 menit = ..... detik`;
+                } else if (e1_bentuk.index == 2) {
+                    soal_teks = `10 m/detik = ..... km/jam`;
+                } else if (e1_bentuk.index == 3) {
+                    soal_teks = `1 kg = ..... g`;
+                } else if (e1_bentuk.index == 4) {
+                    soal_teks = `25 C = ..... F`;
+                } else {
+                    soal_teks = ``;
+                }
+
+            } else if (e1.index == 16) {
+                if (e1_bentuk.index == 0) {
+                    // soal_teks = `Diketahui panjang sisi persegi adalah 4 cm. Luas perseginya adalah ...`;
+                    // soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                    // var s_old;
+                    // s = 0;
+                    var a_old;
+                    while (a_old === undefined || a == a_old) {
+                        a_old = Math.floor(1 + 10 * Math.random());
+                    }
+                    a = a_old;
+                    mathrandom = Math.random();
+                    if (mathrandom < 0.25) {
+                        soal_teks = `Diketahui panjang sisi persegi adalah ${a} satuan. Luas perseginya adalah ...`; 
+                        hasil = a**2;
+                    } else if (mathrandom < 0.5) {
+                        soal_teks = `Diketahui panjang sisi persegi adalah ${a} satuan. Keliling perseginya adalah ...`;
+                        hasil = 4*a;
+                    } else if (mathrandom < 0.75) {
+                        soal_teks = `Diketahui luas persegi adalah ${a**2} satuan kuadrat. Panjang sisi perseginya adalah ...`;
+                        hasil = a;
+                    } else {
+                        soal_teks = `Diketahui keliling persegi adalah ${4*a} satuan. Panjang sisi perseginya adalah ...`;
+                        hasil = a;
+                    }
+                }
+
 			} else if (e1.index == 18) {
 			    // ax+b=c
                 var a2;
@@ -1618,6 +1664,33 @@
                 soal_check = false;
             } else if (e1.index == 20) {
                 if (e1_bentuk.index == 0) {
+                    var a_old;
+                    while (a_old === undefined || a == a_old) {
+                        a_old = Math.floor(10 + 91 * Math.random()**2);
+                    }
+                    a = a_old;
+                    b = Math.floor(1 + 10 * Math.random()**2);
+                    soal_teks = `Hasil dari \\(${a}^2-${a-b}^2\\) adalah ...`;
+                    hasil = a**2-(a-b)**2;
+                } else if (e1_bentuk.index == 1) {
+                    var a_old;
+                    while (a_old === undefined || a == a_old) {
+                        a_old = Math.floor(10 + 91 * Math.random()**2);
+                    }
+                    a = a_old;
+                    b = Math.floor(1 + a * Math.random()**2);
+                    soal_teks = `Hasil dari \\(${a}^2-${b}^2\\) adalah ...`;
+                    hasil = a**2-b**2;
+                } else if (e1_bentuk.index == 2) {
+                    var a_old;
+                    while (a_old === undefined || a == a_old) {
+                        a_old = Math.floor(5 + 25 * Math.random()**2);
+                    }
+                    a = a_old;
+                    b = Math.floor(1 + 5 * Math.random()**2);
+                    soal_teks = `Hasil dari \\(${a}^3-${a-b}^3\\) adalah ...`;
+                    hasil = a**3-(a-b)**3;
+                } else if (e1_bentuk.index == 3) {
                     // soal_teks = `Jika /({5 /over /sqrt{12}}/) dapat dinyatakan ke dalam bentuk /({a/sqrt{b}} /over c/), dimana /(FPB(a,c) = 1/), dan b adalah bebas kuadrat, maka nilai dari a+b+c adalah ...`;
                     // a/sqrt(b)
                     prime_list = [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97];
@@ -2104,18 +2177,16 @@
 						soal_suara = `Bentuk sederhana dari akar pangkat 3 dari ${a3} adalah ...`;
 					} else if (e1.index == 15) {
                         if (e1_bentuk.index == 0) {
-                            soal_teks = `Jarak dari kota A ke C melalui kota B adalah 280 km, sedangkan jarak dari kota A ke B adalah 110 km. Jarak dari kota B ke C adalah ...`;
+                            // soal_teks = `Jarak dari kota A ke C melalui kota B adalah 280 km, sedangkan jarak dari kota A ke B adalah 110 km. Jarak dari kota B ke C adalah ...`;
                         } else if (e1_bentuk.index == 1) {
-                            soal_teks = `Waktu 3 menit berapa detik?`;
+                            // soal_teks = `Waktu 3 menit berapa detik?`;
                         } else {
-                            soal_teks = `Sebuah mobil menempuh jarak 120 km dalam waktu 3 jam. Kecepatan mobil tersebut dalam km/jam adalah ...`;
+                            // soal_teks = `Sebuah mobil menempuh jarak 120 km dalam waktu 3 jam. Kecepatan mobil tersebut dalam km/jam adalah ...`;
                         }
 						soal_suara = soal_teks;
                         soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
 					} else if (e1.index == 16) {
                         if (e1_bentuk.index == 0) {
-						    soal_teks = `Diketahui panjang sisi persegi adalah 4 cm. Luas perseginya adalah ...`;
-                            soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
                         } else if (e1_bentuk.index == 1) {
                             soal_teks = `Diberikan suatu persegi panjang dengan panjang 6 cm dan lebar 4 cm. Luas persegi panjang dalam cm kuadrat adalah ...`;
                             soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
@@ -2151,10 +2222,15 @@
                         // soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
                     } else if (e1.index == 20) {
                         if (e1_bentuk.index == 0) {
+                            soal_teks = convert_to_math(soal_teks);
+                        } else if (e1_bentuk.index == 1) {
+                            soal_teks = convert_to_math(soal_teks);
+                        } else if (e1_bentuk.index == 2) {
+                        } else if (e1_bentuk.index == 3) {
                             // soal_teks = `Jika /({5 /over /sqrt{12}}/) dapat dinyatakan ke dalam bentuk /({a/sqrt{b}} /over c/), dimana /(FPB(a,c) = 1/), dan b adalah bebas kuadrat, maka nilai dari a+b+c adalah ...`;
                             // soal_teks = convert_to_math(soal_teks);
-                            soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-                        } else if (e1_bentuk.index == 1) {
+                            // soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                        } else if (e1_bentuk.index == 4) {
                             soal_teks = convert_to_math(soal_teks);
                             soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
                         } else {
@@ -2459,6 +2535,9 @@
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
+                        <option style="color:gray">Selisih Bilangan Kuadrat</option>
+                        <option style="color:gray">Selisih Bilangan Kuadrat Besar</option>
+                        <option style="color:gray">Selisih Bilangan Kubik</option>
                         <option style="color:gray">Rasionalkan Akar Kuadrat</option>
                         <option style="color:gray">Campuran Variabel</option>
                         <option style="color:gray">Campuran Variabel 2</option>
@@ -3014,7 +3093,7 @@
                 var e1 = e.options[e.selectedIndex];
                 // var tanda = '';
                 // e1.index == 6 & e1_bentuk.index == 0
-                if (e1.index <= 5 || (e1.index == 6 && (e1_bentuk.index == 0 || e1_bentuk.index == 2)) || e1.index == 7 || e1.index == 8 || e1.index == 10 || e1.index == 11 || e1.index == 12 || e1.index == 13 || e1.index == 20 || e1.index == 29) {
+                if (e1.index <= 5 || (e1.index == 6 && (e1_bentuk.index == 0 || e1_bentuk.index == 2)) || e1.index == 7 || e1.index == 8 || e1.index == 10 || e1.index == 11 || e1.index == 12 || e1.index == 13 || e1.index == 16 || e1.index == 20 || e1.index == 29) {
                     angka = parseInt(angka_awal);
                     jawaban_check = angka == hasil;
                     // hasil = hasil;
