@@ -447,7 +447,7 @@
             <!-- <option style="color:gray">KPK</option> -->
             <!-- <option style="color:gray">FPB</option> -->
             <!-- <option>Perpangkatan</option> -->
-            <option id=0 style="color:gray">Mengenal Bilangan</option>
+            <option id=0>Mengenal Bilangan</option>
             <option id=1>Penjumlahan</option>
             <option id=2>Pengurangan</option>
             <option id=3>Perkalian</option>
@@ -664,7 +664,7 @@
     <!-- <p>Terakhir diupdate: 30 Juli 2025</p> -->
     <!-- <p>Terakhir diupdate: 1 Agustus 2025</p> -->
     <!-- <p>Terakhir diupdate: 29 Agustus 2025</p> -->
-    <p>Terakhir diupdate: 12 September 2025</p>
+    <p>Terakhir diupdate: 19 September 2025</p>
 
     <script>
         // Time
@@ -884,7 +884,7 @@
                 }
                 tanda = ' + ';
 				tanda_suara = 'ditambah';
-                hasil = a+b;
+                hasil = a + b;
                 soal = a + tanda + b;
                 if (bs2.index == 0) soal_teks = `Hasil dari ${soal} adalah ...`;
                 else soal_teks = bersusun(a,b,tanda);
@@ -1103,6 +1103,9 @@
                     }
                     soal_suara_awal = '';
                 }
+                soal_teks = `Hasil dari ${soal} adalah ...`;
+                soal_suara = `Hasil dari ${soal_suara_awal} adalah ...`;
+                document.getElementById('tipe2').style.display = 'block';
 
             } else if (e1.index == 6) {
                 document.getElementById("bentuk-sub").style.display = 'none';
@@ -1177,6 +1180,9 @@
 						soal_suara = `kurung buka ${a} dikurangi ${b} kurung tutup dibagi ${c}`;
                     }
                 }
+                soal_teks = `Hasil dari ${soal} adalah ...`;
+                soal_suara = `Hasil dari ${soal_suara} adalah ...`;
+                document.getElementById('tipe2').style.display = 'block';
 
             } else if (e1.index == 11) {
                 // document.getElementById("bentuk-sub").style.display = 'block';
@@ -1189,7 +1195,9 @@
                 // console.log(e1_bentuk.index);
                 function isPrime(n) {
                     if (n <= 1) return false;
-                    for (let i = 2; i < n; i++) if (n % i == 0) return false;
+                    // for (let i = 2; i < n; i++) if (n % i == 0) return false;
+                    // i**2 = i*i
+                    for (let i = 2; i**2 <= n; i++) if (n % i == 0) return false;
                     return true;
                 }
                 function factor(n) {
@@ -1198,7 +1206,7 @@
                     let pf = 2;
                     let pp = 1;
                     let prev_n = n;
-                    for (let i = 2; i*i <= n | isPrime(n); i++) {
+                    for (let i = 2; i*i <= n || isPrime(n); i++) {
                         if (isPrime(i) & n % i == 0) {
                             pf = i;
                             pp = 1;
@@ -1243,6 +1251,7 @@
                     a += Math.floor(1 + (b-1) * Math.random());
                     tanda = ' : ';
                     hasil = a % b;
+                    soal_teks = `Sisa pembagian dari ${a} oleh ${b} adalah ...`;
                 } else if (e1_bentuk.index == 1) {
                     var a2;
                     while (a2 === undefined | a == a2) {
@@ -1251,6 +1260,10 @@
                         else hasil = 'Ganjil';
                     }
                     a = a2;
+                    soal_teks = `Angka ${a} merupakan bilangan genap atau ganjil?`;
+                    if (tipe2.index == 0) {
+                        soal_teks += `<br><br>- Tulis jawaban dengan kata "Genap" atau "Ganjil"`;
+                    }
                 } else if (e1_bentuk.index == 2) {
                     var a2;
                     while (a2 === undefined | a == a2) {
@@ -1271,28 +1284,58 @@
                     while (hasil == 0 || hasil % mod2 != rem2) {
                         hasil += mod1;
                     }
+                    if (level2.index == 0) {
+                        if (Math.random() < 0.25) {
+                            if (rem1 == 0) rem1a = `habis`;
+                            else rem1a = `bersisa ${rem1} jika`;
+                            if (rem1 == 0) rem1a = `habis`;
+                            else rem1a = `bersisa ${rem1} jika`;
+                            // soal_teks = `Bilangan asli terkecil sehingga bersisa ${rem1} jika dibagi ${mod1} dan bersisa ${rem2} jika dibagi ${mod2} adalah ...`;
+                            soal_teks = `Bilangan asli terkecil sehingga ${rem1a} dibagi ${mod1} dan ${rem2a} dibagi ${mod2} adalah ...`;
+                        } else if (Math.random() < 0.5) {
+                            if (rem1 == 0) rem1a = `habis`;
+                            else rem1a = `bersisa ${rem1} jika`;
+                            if (rem2 == 0) rem2a = `habis`;
+                            else rem2a = `bersisa ${rem2} jika`;
+                            soal_teks = `Berapa bilangan asli terkecil sehingga ${rem1a} dibagi ${mod1} dan ${rem2a} dibagi ${mod2}?`;
+                        } else if (Math.random() < 0.75) {
+                            soal_teks = `Bilangan asli terkecil sehingga jika dibagi ${mod1} dan ${mod2} masing-masing akan bersisa ${rem1} dan ${rem2} adalah ...`;
+                        } else {
+                            soal_teks = `Berapa bilangan asli terkecil sehingga jika dibagi ${mod1} dan ${mod2} masing-masing akan bersisa ${rem1} dan ${rem2}?`;
+                        }
+                    } else if (level2.index == 1) {
+                        soal_teks = `Bilangan asli terkecil sehingga bersisa ${rem1} jika dibagi ${mod1}, bersisa ${rem2} jika dibagi ${mod2}, dan bersisa ${rem3} jika dibagi ${mod3} adalah ...`;
+                    } else {
+                        soal_teks = `Bilangan asli terkecil sehingga bersisa ${rem1} jika dibagi ${mod1}, bersisa ${rem2} jika dibagi ${mod2}, dan bersisa ${rem3} jika dibagi ${mod3} adalah ...`;
+                    }
                 } else if (e1_bentuk.index == 3) {
-				    var a2;
+				    // var a2;
 					var check = false;
                     // console.log(a,a2);
-					while (a2 === undefined | a == a2 | check) {
+					// while (a2 === undefined || a == a2 || check) {
+                    while (typeof a2 === 'undefined' || a == a2 || check) {
 					    if (level2.index == 0) {
 						    a2 = Math.floor(1 + 100 * Math.random());
 							check = false;
                         } else if (level2.index == 1) {
                             a2 = Math.floor(21 + 980 * Math.random());
-                            if (a2 % 2 == 0 | a2 % 3 == 0 | a2 % 5 == 0) check = true;
+                            if (a2 % 2 == 0 || a2 % 3 == 0 || a2 % 5 == 0) check = true;
                             else check = false;
                         } else {
                             a2 = Math.floor(201 + 9800 * Math.random());
-                            if (a2 % 2 == 0 | a2 % 3 == 0 | a2 % 5 == 0 | a2 % 7 == 0 | a2 % 11 == 0 | a2 % 13 == 0) check = true;
+                            if (a2 % 2 == 0 || a2 % 3 == 0 || a2 % 5 == 0 || a2 % 7 == 0 || a2 % 11 == 0 || a2 % 13 == 0) check = true;
                             else check = false;
                         }
 					    if (isPrime(a2)) hasil = 'Ya';
-				        // else hasil = 'Tidak';
-                        else hasil = 'Bukan';
+				        else hasil = 'Tidak';
+                        // else hasil = 'Bukan';
 					}
 					a = a2;
+                    soal_teks = `Apakah ${a} merupakan bilangan prima?`;
+                    if (tipe2.index == 0) {
+                        // soal_teks += `<br><br>- Tulis jawaban dengan kata "Ya" atau "Bukan"`;
+                        soal_teks += `<br><br>- Tulis jawaban dengan kata "Ya" atau "Tidak"`;
+                    }
 			    } else if (e1_bentuk.index == 4) {
                     var a2;
                     var check = false;
@@ -1304,8 +1347,14 @@
                         hasil = factor(a2);
                     }
                     a = a2;
+                    soal_teks = `Faktorisasi prima dari ${a} adalah ...`;
+                    if (tipe2.index == 0) {
+                        soal_teks += `<br><br>- Tulis jawaban dalam bentuk "p1^a1 x p2^a2 x p3^a3 x ..."<br>- Contohnya seperti "2^2 x 3"`;
+                    }
                 }
-                soal = 'Hasil';
+                // soal = 'Hasil';
+                soal_suara = soal_teks;
+                document.getElementById('tipe2').style.display = 'block';
 
 			} else if (e1.index == 12) {
                 if (e1_bentuk.index == 0) {
@@ -1335,6 +1384,11 @@
                     a *= c;
                     b *= c;
                     hasil = lcm(a,b);
+                    if (bs2.index == 0) {
+                        soal_teks = `KPK dari ${a} dan ${b} adalah ...`;
+                    } else {
+                        soal_teks = `KPK(${a}, ${b}) = ...`;
+                    }
                 } else {
                     // var a,b,c;
                     var b,c;
@@ -1346,7 +1400,14 @@
                         c = Math.floor(2 + 19 * Math.random());
                     }
                     hasil = lcm(lcm(a,b),c);
+                    if (bs2.index == 0) {
+                        soal_teks = `KPK dari ${a}, ${b}, dan ${c} adalah ...`;
+                    } else {
+                        soal_teks = `KPK(${a}, ${b}, ${c}) = ...`;
+                    }
                 }
+                soal_suara = soal_teks;
+				document.getElementById('tipe2').style.display = 'block';
 
             } else if (e1.index == 13) {
                 if (e1_bentuk.index == 0) {
@@ -1376,6 +1437,11 @@
                     hasil = c;
                     a *= c;
                     b *= c;
+                    if (bs2.index == 0) {
+                        soal_teks = `FPB dari ${a} dan ${b} adalah ...`;
+                    } else {
+                        soal_teks = `FPB(${a}, ${b}) = ...`;
+                    }
                 } else {
                     // var a,b,c;
                     var b,c;
@@ -1387,7 +1453,15 @@
                         c = Math.floor(2 + 19 * Math.random());
                     }
                     hasil = gcd(gcd(a,b),c);
+                    if (bs2.index == 0) {
+                        soal_teks = `FPB dari ${a}, ${b}, dan ${c} adalah ...`;
+                    } else {
+                        soal_teks = `FPB(${a}, ${b}, ${c}) = ...`;
+                    }
                 }
+                // soal_teks = `FPB dari 8 dan 12 adalah ...`;
+                soal_suara = soal_teks;
+				document.getElementById('tipe2').style.display = 'block';
 
             } else if (e1.index == 14) {
                 if (e1_bentuk.index == 0) {
@@ -1440,6 +1514,16 @@
                     }
                     // console.log(hasil);
                     soal = `${a}/${b} + ${a_2}/${b_2}`;
+                    if (bs2.index == 0) {
+                        soal_teks = `Bentuk sederhana dari pecahan <span style="font-size:20px">/(${a} /over ${b}/)`.replaceAll("/","&#x005c");
+                        soal_teks += `</span> adalah ...`
+                        if (tipe2.index == 0) {
+                            soal_teks += `<br><br>- Tulis jawaban dengan bentuk tulisan "a" atau "a/b"<br>- Bentuk pecahan paling sederhana`
+                        }
+                    } else {
+                        soal_teks = `Hasil dari ${a}/${b} + ${a_2}/${b_2} adalah ...`;
+                    }
+                    soal_suara = `Hasil dari ${a} per ${b} ditambah ${a_2} per ${b_2} adalah ...`;
                 } else if (e1_bentuk.index == 2) {
                     a = Math.floor(1 + 9 * Math.random());
                     b = Math.floor(a+1 + (11-a-1) * Math.random());
@@ -1452,6 +1536,16 @@
                         hasil = `${(a*b_2-b*a_2)/dibagi}/${(b*b_2)/dibagi}`;
                     }
                     soal = `${a}/${b} - ${a_2}/${b_2}`;
+                    if (bs2.index == 0) {
+                        soal_teks = `Hasil dari <span style="font-size:20px">/({${a} /over ${b}} - {${a_2} /over ${b_2}}/)`.replaceAll("/","&#x005c");
+                        soal_teks += `</span> adalah ...`
+                        if (tipe2.index == 0) {
+                            soal_teks += `<br><br>- Tulis jawaban dengan bentuk tulisan "a" atau "a/b"<br>- Bentuk pecahan paling sederhana`
+                        }
+                    } else {
+                        soal_teks = `Hasil dari ${a}/${b} - ${a_2}/${b_2} adalah ...`;
+                    }
+                    soal_suara = `Hasil dari ${a} per ${b} dikurangi ${a_2} per ${b_2} adalah ...`;
                 } else if (e1_bentuk.index == 3) {
                     // a/b + a2/b2
                     a = Math.floor(1 + 9 * Math.random());
@@ -1471,6 +1565,18 @@
                     }
                     // console.log(hasil);
                     soal = `${a}/${b} &#x5C;times ${a_2}/${b_2}`;
+                    if (bs2.index == 0) {
+                        // soal_teks = `Hasil dari /({${a} /over ${b}} ;times {${a_2} /over ${b_2}}/)`; ×
+                        soal_teks = `Hasil dari /({${a} /over ${b}} /times {${a_2} /over ${b_2}}/)`;
+                        soal_teks += `</span> adalah ...`
+                        if (tipe2.index == 0) {
+                            soal_teks += `<br><br>- Tulis jawaban dengan bentuk tulisan "a" atau "a/b"<br>- Bentuk pecahan paling sederhana`
+                        }
+                        soal_teks = convert_to_math(soal_teks);
+                    } else {
+                        soal_teks = `Hasil dari ${a}/${b} x ${a_2}/${b_2} adalah ...`;
+                    }
+                    soal_suara = `Hasil dari ${a} per ${b} dikali ${a_2} per ${b_2} adalah ...`;
                 } else {
                     b = Math.floor(1 + 10 * Math.random());
                     a = Math.floor(1 + b * Math.random());
@@ -1488,8 +1594,22 @@
                         hasil = `${xa}/${xb}`;
                     }
                     soal = `${a}/${b} &#x5C;times ${a_2}/${b_2}`;
+                    if (bs2.index == 0) {
+                        soal_teks = `Hasil dari /({${a} /over ${b}} ÷ {${a_2} /over ${b_2}}/)`;
+                        soal_teks += `</span> adalah ...`
+                        if (tipe2.index == 0) {
+                            soal_teks += `<br><br>- Tulis jawaban dengan bentuk tulisan "a" atau "a/b"<br>- Bentuk pecahan paling sederhana`
+                        }
+                        soal_teks = convert_to_math(soal_teks);
+                    } else {
+                        soal_teks = `Hasil dari ${a}/${b} : ${a_2}/${b_2} adalah ...`;
+                    }
+                    soal_suara = `Hasil dari ${a} per ${b} dibagi ${a_2} per ${b_2} adalah ...`;
                 }
                 soal_check = false;
+                // soal_teks = `When /(a /ne 0/), there are three solutions to /(ax^2 + bx + c = 0/) and they are
+                // /[x = {-b /pm /sqrt{b^2-4ac} /over 2a}./]`.replaceAll("/","&#x005c");
+                document.getElementById('tipe2').style.display = 'block';
 
             } else if (e1.index == 15) {
                 // if (Math.random() < 0.125) {b = 2;}
@@ -1513,6 +1633,160 @@
                     soal_suara = `${c} persen ditambah ${a} per ${b}`;
                 }
                 soal_check = false;
+                // soal_teks = `Hasil dari &nbsp;<span style="font-size:20px">/(30 /% + {1 /over 4}/)`.replaceAll("/","&#x005c");
+                soal_teks = `Hasil dari &nbsp;<span style="font-size:20px">${soal}`.replaceAll("/","&#x005c");
+                soal_teks += `</span>&nbsp; adalah ...`
+                soal_teks += `<br><br>- Hasil jawaban di input jawaban dikali 100 dari hasil awalnya`
+                soal_suara = `Hasil dari ${soal_suara} adalah ...`;
+                document.getElementById('tipe2').style.display = 'block';
+
+            /* 
+            } else if (e1.index == 11) {
+                        soal_teks = `Hasil dari &nbsp;<span style="font-size:20px">/(${a}^2/)`.replaceAll("/","&#x005c");
+                        soal_teks += `</span>&nbsp; adalah ...`
+                        soal_suara = `Hasil dari ${a} kuadrat adalah ...`;
+                    } else if (e1.index == 12) {
+                        // soal_teks = `Hasil dari &nbsp;<span style="font-size:20px">/(5^2/)`.replaceAll("/","&#x005c");
+                        soal_teks = `Hasil dari &nbsp;<span style="font-size:20px">/(${a}^${pangkat}/)`.replaceAll("/","&#x005c");
+                        soal_teks += `</span>&nbsp; adalah ...`
+                        if (pangkat == 2) {
+                            soal_suara = `Hasil dari ${a} kubik adalah ...`;
+                        } else {
+                            soal_suara = `Hasil dari ${a} pangkat ${pangkat} adalah ...`;
+                        }
+                        // soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+					} else if (e1.index == 13) {
+						// soal_teks = `Bentuk sederhana dari &nbsp;<span style="font-size:20px">/(/sqrt{16}/)`.replaceAll("/","&#x005c");
+						soal_teks = `Bentuk sederhana dari &nbsp;<span style="font-size:20px">/(/sqrt{${a3}}/)`.replaceAll("/","&#x005c");
+						soal_teks += `</span>&nbsp; adalah ...`;
+						soal_suara = `Bentuk sederhana dari akar kuadrat dari ${a3} adalah ...`;
+					} else if (e1.index == 14) {
+						// soal_teks = `Bentuk sederhana dari &nbsp;<span style="font-size:20px">/(/sqrt[3]{27}/)`.replaceAll("/","&#x005c");
+						soal_teks = `Bentuk sederhana dari &nbsp;<span style="font-size:20px">/(/sqrt[3]{${a3}}/)`.replaceAll("/","&#x005c");
+						soal_teks += `</span>&nbsp; adalah ...`;
+						soal_suara = `Bentuk sederhana dari akar pangkat 3 dari ${a3} adalah ...`;
+					} else if (e1.index == 15) {
+                        if (e1_bentuk.index == 0) {
+                            // soal_teks = `Jarak dari kota A ke C melalui kota B adalah 280 km, sedangkan jarak dari kota A ke B adalah 110 km. Jarak dari kota B ke C adalah ...`;
+                        } else if (e1_bentuk.index == 1) {
+                            // soal_teks = `Waktu 3 menit berapa detik?`;
+                        } else {
+                            // soal_teks = `Sebuah mobil menempuh jarak 120 km dalam waktu 3 jam. Kecepatan mobil tersebut dalam km/jam adalah ...`;
+                        }
+						soal_suara = soal_teks;
+                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+					} else if (e1.index == 16) {
+                        if (e1_bentuk.index == 0) {
+                        } else if (e1_bentuk.index == 1) {
+                            soal_teks = `Diberikan suatu persegi panjang dengan panjang 6 cm dan lebar 4 cm. Luas persegi panjang dalam cm kuadrat adalah ...`;
+                            soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                        } else if (e1_bentuk.index == 2) {
+                            soal_teks = `Diberikan suatu segitiga dengan alas 20 cm dan tinggi 12 cm. Luas segitiga dalam cm kuadrat adalah ...`;
+                            soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                        } else if (e1_bentuk.index == 3) {
+                            soal_teks = `Diberikan trapesium siku-siku /(ABCD/), dimana siku-sikunya di /(D/). Jika diketahui panjang /(AB = 13/), /(DC = 11/), dan /(AD = 7/), maka luas trapesium adalah ...`;
+                            soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                        } else if (e1_bentuk.index == 4) {
+                            soal_teks = `Diberikan sesuatu segitiga dengan alas 20 cm dan tinggi 12 cm. Luas segitiga dalam cm kuadrat adalah ...`;
+                            soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                        } else {
+                            // soal_teks = convert_to_math(soal_teks);
+                        }
+                        soal_teks = convert_to_math(soal_teks);
+                    } else if (e1.index == 17) {
+                        soal_teks = `Diketahui panjang sisi kubus adalah 3 cm. Luas perseginya adalah ...`;
+                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+					} else if (e1.index == 18) {
+                        // soal_teks = `Solusi x dari &nbsp;<span style="font-size:20px">/(2x + 3 = 5/)`.replaceAll("/","&#x005c");
+                        // soal_teks += `</span>&nbsp; adalah ...`
+                        // soal_teks = `Solusi x dari &nbsp;/(${soal_teks}/)`
+                        soal_teks = convert_to_math(soal_teks);
+                        // soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                    } else if (e1.index == 19) {
+                        // &#x2F
+                        // soal_teks = `Diketahui sistem persamaan linear dua variabel yang terdapat dibawah ini:<br><div style="padding-top:10px"><|||div>\\begin{array} x+2y=2 \\\\ 2x+3y=5 \\end{array}`;
+                        // Solusi dari x dan y berturut-turut adalah ...`;
+                        // soal_teks = `Diketahui sistem persamaan linear dua variabel yang terdapat dibawah ini:
+                        // <span style='font-size:18px'>\\begin{cases} x+2y=2 \\\\ 2x+3y=5 \\end{cases}</span>
+                        // Maka solusi dari x adalah ...`;
+                        // soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                    } else if (e1.index == 20) {
+                        if (e1_bentuk.index == 0) {
+                            soal_teks = convert_to_math(soal_teks);
+                        } else if (e1_bentuk.index == 1) {
+                            soal_teks = convert_to_math(soal_teks);
+                        } else if (e1_bentuk.index == 2) {
+                        } else if (e1_bentuk.index == 3) {
+                            // soal_teks = `Jika /({5 /over /sqrt{12}}/) dapat dinyatakan ke dalam bentuk /({a/sqrt{b}} /over c/), dimana /(FPB(a,c) = 1/), dan b adalah bebas kuadrat, maka nilai dari a+b+c adalah ...`;
+                            // soal_teks = convert_to_math(soal_teks);
+                            // soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                        } else if (e1_bentuk.index == 4) {
+                            soal_teks = convert_to_math(soal_teks);
+                            soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                        } else {
+                            soal_teks = convert_to_math(soal_teks);
+                            soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                        }
+                    } else if (e1.index == 21) {
+                        // soal_teks = `Solusi x dari &nbsp;<span style="font-size:20px">/(x^2 - 3x + 2 = 0/)`.replaceAll("/","&#x005c");
+                        soal_teks = `Banyak solusi x bilangan asli sehingga /(3x+7<25/) adalah ...`
+                        soal_teks = convert_to_math(soal_teks);
+                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                    } else if (e1.index == 22) {
+                        if (e1_bentuk.index == 0) {
+                            // /cup (∪) /cap (∩)
+                            // soal_teks = `Diketahui himpunan /(A = /{1,2,3,4,5/}/) dan himpunan /(B = /{2,3,6,7/}/). Maka /(A ∩ B/) adalah ...`
+                            soal_teks = convert_to_math(soal_teks);
+                        } else if (e1_bentuk.index == 1) {
+                            soal_teks = convert_to_math(soal_teks);
+                        } else if (e1_bentuk.index == 2) {
+                            soal_teks = convert_to_math(soal_teks);
+                        } else {
+                            
+                        }
+                    } else if (e1.index == 24) {
+                        if (e1_bentuk.index == 0) {
+                            soal_teks = `Hasil dari /(2^6/) adalah ...`
+                            soal_teks = convert_to_math(soal_teks);
+                        } else {
+                            soal_teks = `Solusi x dari persamaan /(4^x+2^x=72/) adalah ...`
+                            soal_teks = convert_to_math(soal_teks);
+                        }
+                    } else if (e1.index == 27) {
+                        if (e1_bentuk.index == 0) {
+                            soal_teks = `Hasil dari /(|2-3|/) adalah ...`
+                        } else if (e1_bentuk.index == 1) {
+                            soal_teks = `Solusi x dari /(|2x+1|=3/) adalah ...`
+                        } else {
+                            // soal_teks = `Solusi x dari /(|3x-1|+|x+2|=5-2/lfloor x /rfloor/) adalah ...`
+                            soal_teks = `Solusi x dari /(|3x-1|+|x+2|=8-3x/) adalah ...`
+                        }
+                        soal_teks = convert_to_math(soal_teks);
+                    } else if (e1.index == 29) {
+                        if (e1_bentuk.index == 0) {
+                            // soal_teks = `Diketahui fungsi linear /(f(x) = 2x+3/). Nilai dari /(f(5)/) adalah ...`.replaceAll("/","&#x005c");
+                            soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                        } else if (e1_bentuk.index == 1) {
+                            soal_teks = `Diketahui fungsi linear &nbsp;/(f(x) = 2x+3/). Nilai dari &nbsp;/(f^{-1}(5)/) adalah ...`;
+                            soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                        } else if (e1_bentuk.index == 2) {
+                            soal_teks = `Didefinisikan /(a*b = ab+a-b/). Nilai dari /(2*(3*4)/) adalah ...`;
+                            soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                        } else {
+                            soal_teks = `Diketahui suatu fungsi linear /(f(x)/) dan /(g(x)/), sehingga /(f(x+g(y))=2x-3y+1/). Jika diketahui /(g^{-1}(2)=4/), maka nilai dari /(f^{-1}(1+g(5))/) adalah ...`;
+                            soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                        }
+                        // soal_teks = convert_to_math(soal_teks);
+                    } else if (e1.index == 32) {
+                        // soal_teks = `Diketahui fungsi linear /(f(x) = 2x+3/). Nilai dari /(f(5)/) adalah ...`.replaceAll("/","&#x005c");
+                        soal_teks = `Hasil dari &nbsp;<span style="font-size:18px">/(/mathrm{sin(60°)}/)</span> adalah ...`.replaceAll("/","&#x005c").replaceAll("<&#x005cspan>","</span>");
+                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                    } else if (e1.index == 33) {
+                        // soal_teks = `Diketahui fungsi linear /(f(x) = 2x+3/). Nilai dari /(f(5)/) adalah ...`.replaceAll("/","&#x005c");
+                        soal_teks = `Peluang dari 2 dadu yang dilempar secara bersamaan, sehinga jumlahnya 9 adalah ...`.replaceAll("/","&#x005c").replaceAll("<&#x005cspan>","</span>");
+                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                    }
+            */
 
             } else if (e1.index == 17) {
                 // var a;
@@ -2006,315 +2280,7 @@
             // if (e1.index <= 25) {
             if (e1.index <= 30) {
                 if (cerita_check.checked == false) {
-                    if (e1.index < 4) {
-					} else if (e1.index == 4) {
-                        // soal_teks = `Hasil dari ${a} ${tanda} ${b} ${tanda2} ${c} adalah ...`;
-                        // soal_suara = `Hasil dari ${a} ${tanda_suara} ${b} ${tanda2_suara} ${c} adalah ...`;
-                        soal_teks = `Hasil dari ${soal} adalah ...`;
-                        soal_suara = `Hasil dari ${soal_suara_awal} adalah ...`;
-                        document.getElementById('tipe2').style.display = 'block';
-                    } else if (e1.index == 5) {
-                        soal_teks = `Hasil dari ${soal} adalah ...`;
-                        soal_suara = `Hasil dari ${soal_suara} adalah ...`;
-                        document.getElementById('tipe2').style.display = 'block';
-                    } else if (e1.index == 6) {
-                        // soal_teks = `Sisa pembagian dari 13 oleh 4 adalah ...`;
-                        if (e1_bentuk.index == 0) {
-						    soal_teks = `Sisa pembagian dari ${a} oleh ${b} adalah ...`;
-                        } else if (e1_bentuk.index == 1) {
-                            soal_teks = `Angka ${a} merupakan bilangan genap atau ganjil?`;
-                            if (tipe2.index == 0) {
-                                soal_teks += `<br><br>- Tulis jawaban dengan kata "Genap" atau "Ganjil"`;
-                            }
-                        } else if (e1_bentuk.index == 2) {
-                            if (level2.index == 0) {
-                                if (Math.random() < 0.25) {
-                                    if (rem1 == 0) rem1a = `habis`;
-                                    else rem1a = `bersisa ${rem1} jika`;
-                                    if (rem1 == 0) rem1a = `habis`;
-                                    else rem1a = `bersisa ${rem1} jika`;
-                                    // soal_teks = `Bilangan asli terkecil sehingga bersisa ${rem1} jika dibagi ${mod1} dan bersisa ${rem2} jika dibagi ${mod2} adalah ...`;
-                                    soal_teks = `Bilangan asli terkecil sehingga ${rem1a} dibagi ${mod1} dan ${rem2a} dibagi ${mod2} adalah ...`;
-                                } else if (Math.random() < 0.5) {
-                                    if (rem1 == 0) rem1a = `habis`;
-                                    else rem1a = `bersisa ${rem1} jika`;
-                                    if (rem2 == 0) rem2a = `habis`;
-                                    else rem2a = `bersisa ${rem2} jika`;
-                                    soal_teks = `Berapa bilangan asli terkecil sehingga ${rem1a} dibagi ${mod1} dan ${rem2a} dibagi ${mod2}?`;
-                                } else if (Math.random() < 0.75) {
-                                    soal_teks = `Bilangan asli terkecil sehingga jika dibagi ${mod1} dan ${mod2} masing-masing akan bersisa ${rem1} dan ${rem2} adalah ...`;
-                                } else {
-                                    soal_teks = `Berapa bilangan asli terkecil sehingga jika dibagi ${mod1} dan ${mod2} masing-masing akan bersisa ${rem1} dan ${rem2}?`;
-                                }
-                            } else if (level2.index == 1) {
-                                soal_teks = `Bilangan asli terkecil sehingga bersisa ${rem1} jika dibagi ${mod1}, bersisa ${rem2} jika dibagi ${mod2}, dan bersisa ${rem3} jika dibagi ${mod3} adalah ...`;
-                            } else {
-                                soal_teks = `Bilangan asli terkecil sehingga bersisa ${rem1} jika dibagi ${mod1}, bersisa ${rem2} jika dibagi ${mod2}, dan bersisa ${rem3} jika dibagi ${mod3} adalah ...`;
-                            }
-                        } else if (e1_bentuk.index == 3) {
-                            soal_teks = `Apakah ${a} merupakan bilangan prima?`;
-							if (tipe2.index == 0) {
-                                soal_teks += `<br><br>- Tulis jawaban dengan kata "Ya" atau "Bukan"`;
-                            }
-                        } else {
-                            soal_teks = `Faktorisasi prima dari ${a} adalah ...`;
-                            if (tipe2.index == 0) {
-                                soal_teks += `<br><br>- Tulis jawaban dalam bentuk "p1^a1 x p2^a2 x p3^a3 x ..."<br>- Contohnya seperti "2^2 x 3"`;
-                            }
-                        }
-						soal_suara = soal_teks;
-                        // soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-						document.getElementById('tipe2').style.display = 'block';
-                    } else if (e1.index == 7) {
-                        // soal_teks = `KPK dari 6 dan 14 adalah ...`;
-                        if (e1_bentuk.index == 0) {
-                            if (bs2.index == 0) {
-                                soal_teks = `KPK dari ${a} dan ${b} adalah ...`;
-                            } else {
-                                soal_teks = `KPK(${a}, ${b}) = ...`;
-                            }
-                        } else {
-                            if (bs2.index == 0) {
-                                soal_teks = `KPK dari ${a}, ${b}, dan ${c} adalah ...`;
-                            } else {
-                                soal_teks = `KPK(${a}, ${b}, ${c}) = ...`;
-                            }
-                        }
-						soal_suara = soal_teks;
-						document.getElementById('tipe2').style.display = 'block';
-                    } else if (e1.index == 8) {
-                        // soal_teks = `FPB dari 8 dan 12 adalah ...`;
-                        if (e1_bentuk.index == 0) {
-                            if (bs2.index == 0) {
-                                soal_teks = `FPB dari ${a} dan ${b} adalah ...`;
-                            } else {
-                                soal_teks = `FPB(${a}, ${b}) = ...`;
-                            }
-                        } else {
-                            if (bs2.index == 0) {
-                                soal_teks = `FPB dari ${a}, ${b}, dan ${c} adalah ...`;
-                            } else {
-                                soal_teks = `FPB(${a}, ${b}, ${c}) = ...`;
-                            }
-                        }
-						soal_suara = soal_teks;
-						document.getElementById('tipe2').style.display = 'block';
-                    } else if (e1.index == 9) {
-                        if (e1_bentuk.index == 0) {
-                            if (bs2.index == 0) {
-                                soal_teks = `Bentuk sederhana dari pecahan <span style="font-size:20px">/(${a} /over ${b}/)`.replaceAll("/","&#x005c");
-                                soal_teks += `</span> adalah ...`
-                                if (tipe2.index == 0) {
-                                    soal_teks += `<br><br>- Tulis jawaban dengan bentuk tulisan "a" atau "a/b"<br>- Bentuk pecahan paling sederhana`
-                                }
-                            } else {
-                                soal_teks = `Hasil dari ${a}/${b} + ${a_2}/${b_2} adalah ...`;
-                            }
-                            soal_suara = `Hasil dari ${a} per ${b} ditambah ${a_2} per ${b_2} adalah ...`;
-                        } else if (e1_bentuk.index == 1) {
-                            if (bs2.index == 0) {
-                                // soal_teks = `Hasil dari <span style="font-size:20px">/({1 /over 4} + {2 /over 3}/)`.replaceAll("/","&#x005c");
-                                soal_teks = `Hasil dari <span style="font-size:20px">/({${a} /over ${b}} + {${a_2} /over ${b_2}}/)`.replaceAll("/","&#x005c");
-                                soal_teks += `</span> adalah ...`
-                                if (tipe2.index == 0) {
-                                    soal_teks += `<br><br>- Tulis jawaban dengan bentuk tulisan "a" atau "a/b"<br>- Bentuk pecahan paling sederhana`
-                                }
-                            } else {
-                                soal_teks = `Hasil dari ${a}/${b} + ${a_2}/${b_2} adalah ...`;
-                            }
-                            soal_suara = `Hasil dari ${a} per ${b} ditambah ${a_2} per ${b_2} adalah ...`;
-                        } else if (e1_bentuk.index == 2) {
-                            if (bs2.index == 0) {
-                                soal_teks = `Hasil dari <span style="font-size:20px">/({${a} /over ${b}} - {${a_2} /over ${b_2}}/)`.replaceAll("/","&#x005c");
-                                soal_teks += `</span> adalah ...`
-                                if (tipe2.index == 0) {
-                                    soal_teks += `<br><br>- Tulis jawaban dengan bentuk tulisan "a" atau "a/b"<br>- Bentuk pecahan paling sederhana`
-                                }
-                            } else {
-                                soal_teks = `Hasil dari ${a}/${b} - ${a_2}/${b_2} adalah ...`;
-                            }
-                            soal_suara = `Hasil dari ${a} per ${b} dikurangi ${a_2} per ${b_2} adalah ...`;
-                        } else if (e1_bentuk.index == 3) {
-                            if (bs2.index == 0) {
-                                // soal_teks = `Hasil dari /({${a} /over ${b}} ;times {${a_2} /over ${b_2}}/)`; ×
-                                soal_teks = `Hasil dari /({${a} /over ${b}} /times {${a_2} /over ${b_2}}/)`;
-                                soal_teks += `</span> adalah ...`
-                                if (tipe2.index == 0) {
-                                    soal_teks += `<br><br>- Tulis jawaban dengan bentuk tulisan "a" atau "a/b"<br>- Bentuk pecahan paling sederhana`
-                                }
-                                soal_teks = convert_to_math(soal_teks);
-                            } else {
-                                soal_teks = `Hasil dari ${a}/${b} x ${a_2}/${b_2} adalah ...`;
-                            }
-                            soal_suara = `Hasil dari ${a} per ${b} dikali ${a_2} per ${b_2} adalah ...`;
-                        } else if (e1_bentuk.index == 4) {
-                            if (bs2.index == 0) {
-                                soal_teks = `Hasil dari /({${a} /over ${b}} ÷ {${a_2} /over ${b_2}}/)`;
-                                soal_teks += `</span> adalah ...`
-                                if (tipe2.index == 0) {
-                                    soal_teks += `<br><br>- Tulis jawaban dengan bentuk tulisan "a" atau "a/b"<br>- Bentuk pecahan paling sederhana`
-                                }
-                                soal_teks = convert_to_math(soal_teks);
-                            } else {
-                                soal_teks = `Hasil dari ${a}/${b} : ${a_2}/${b_2} adalah ...`;
-                            }
-                            soal_suara = `Hasil dari ${a} per ${b} dibagi ${a_2} per ${b_2} adalah ...`;
-                        }
-                        // soal_teks = `When /(a /ne 0/), there are three solutions to /(ax^2 + bx + c = 0/) and they are
-                        // /[x = {-b /pm /sqrt{b^2-4ac} /over 2a}./]`.replaceAll("/","&#x005c");
-						document.getElementById('tipe2').style.display = 'block';
-                    } else if (e1.index == 10) {
-						// soal_teks = `Hasil dari &nbsp;<span style="font-size:20px">/(30 /% + {1 /over 4}/)`.replaceAll("/","&#x005c");
-                        soal_teks = `Hasil dari &nbsp;<span style="font-size:20px">${soal}`.replaceAll("/","&#x005c");
-						soal_teks += `</span>&nbsp; adalah ...`
-                        soal_teks += `<br><br>- Hasil jawaban di input jawaban dikali 100 dari hasil awalnya`
-						soal_suara = `Hasil dari ${soal_suara} adalah ...`;
-						document.getElementById('tipe2').style.display = 'block';
-                    } else if (e1.index == 11) {
-                        soal_teks = `Hasil dari &nbsp;<span style="font-size:20px">/(${a}^2/)`.replaceAll("/","&#x005c");
-                        soal_teks += `</span>&nbsp; adalah ...`
-                        soal_suara = `Hasil dari ${a} kuadrat adalah ...`;
-                    } else if (e1.index == 12) {
-                        // soal_teks = `Hasil dari &nbsp;<span style="font-size:20px">/(5^2/)`.replaceAll("/","&#x005c");
-                        soal_teks = `Hasil dari &nbsp;<span style="font-size:20px">/(${a}^${pangkat}/)`.replaceAll("/","&#x005c");
-                        soal_teks += `</span>&nbsp; adalah ...`
-                        if (pangkat == 2) {
-                            soal_suara = `Hasil dari ${a} kubik adalah ...`;
-                        } else {
-                            soal_suara = `Hasil dari ${a} pangkat ${pangkat} adalah ...`;
-                        }
-                        // soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-					} else if (e1.index == 13) {
-						// soal_teks = `Bentuk sederhana dari &nbsp;<span style="font-size:20px">/(/sqrt{16}/)`.replaceAll("/","&#x005c");
-						soal_teks = `Bentuk sederhana dari &nbsp;<span style="font-size:20px">/(/sqrt{${a3}}/)`.replaceAll("/","&#x005c");
-						soal_teks += `</span>&nbsp; adalah ...`;
-						soal_suara = `Bentuk sederhana dari akar kuadrat dari ${a3} adalah ...`;
-					} else if (e1.index == 14) {
-						// soal_teks = `Bentuk sederhana dari &nbsp;<span style="font-size:20px">/(/sqrt[3]{27}/)`.replaceAll("/","&#x005c");
-						soal_teks = `Bentuk sederhana dari &nbsp;<span style="font-size:20px">/(/sqrt[3]{${a3}}/)`.replaceAll("/","&#x005c");
-						soal_teks += `</span>&nbsp; adalah ...`;
-						soal_suara = `Bentuk sederhana dari akar pangkat 3 dari ${a3} adalah ...`;
-					} else if (e1.index == 15) {
-                        if (e1_bentuk.index == 0) {
-                            // soal_teks = `Jarak dari kota A ke C melalui kota B adalah 280 km, sedangkan jarak dari kota A ke B adalah 110 km. Jarak dari kota B ke C adalah ...`;
-                        } else if (e1_bentuk.index == 1) {
-                            // soal_teks = `Waktu 3 menit berapa detik?`;
-                        } else {
-                            // soal_teks = `Sebuah mobil menempuh jarak 120 km dalam waktu 3 jam. Kecepatan mobil tersebut dalam km/jam adalah ...`;
-                        }
-						soal_suara = soal_teks;
-                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-					} else if (e1.index == 16) {
-                        if (e1_bentuk.index == 0) {
-                        } else if (e1_bentuk.index == 1) {
-                            soal_teks = `Diberikan suatu persegi panjang dengan panjang 6 cm dan lebar 4 cm. Luas persegi panjang dalam cm kuadrat adalah ...`;
-                            soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-                        } else if (e1_bentuk.index == 2) {
-                            soal_teks = `Diberikan suatu segitiga dengan alas 20 cm dan tinggi 12 cm. Luas segitiga dalam cm kuadrat adalah ...`;
-                            soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-                        } else if (e1_bentuk.index == 3) {
-                            soal_teks = `Diberikan trapesium siku-siku /(ABCD/), dimana siku-sikunya di /(D/). Jika diketahui panjang /(AB = 13/), /(DC = 11/), dan /(AD = 7/), maka luas trapesium adalah ...`;
-                            soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-                        } else if (e1_bentuk.index == 4) {
-                            soal_teks = `Diberikan sesuatu segitiga dengan alas 20 cm dan tinggi 12 cm. Luas segitiga dalam cm kuadrat adalah ...`;
-                            soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-                        } else {
-                            // soal_teks = convert_to_math(soal_teks);
-                        }
-                        soal_teks = convert_to_math(soal_teks);
-                    } else if (e1.index == 17) {
-                        soal_teks = `Diketahui panjang sisi kubus adalah 3 cm. Luas perseginya adalah ...`;
-                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-					} else if (e1.index == 18) {
-                        // soal_teks = `Solusi x dari &nbsp;<span style="font-size:20px">/(2x + 3 = 5/)`.replaceAll("/","&#x005c");
-                        // soal_teks += `</span>&nbsp; adalah ...`
-                        // soal_teks = `Solusi x dari &nbsp;/(${soal_teks}/)`
-                        soal_teks = convert_to_math(soal_teks);
-                        // soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-                    } else if (e1.index == 19) {
-                        // &#x2F
-                        // soal_teks = `Diketahui sistem persamaan linear dua variabel yang terdapat dibawah ini:<br><div style="padding-top:10px"><|||div>\\begin{array} x+2y=2 \\\\ 2x+3y=5 \\end{array}`;
-                        // Solusi dari x dan y berturut-turut adalah ...`;
-                        // soal_teks = `Diketahui sistem persamaan linear dua variabel yang terdapat dibawah ini:
-                        // <span style='font-size:18px'>\\begin{cases} x+2y=2 \\\\ 2x+3y=5 \\end{cases}</span>
-                        // Maka solusi dari x adalah ...`;
-                        // soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-                    } else if (e1.index == 20) {
-                        if (e1_bentuk.index == 0) {
-                            soal_teks = convert_to_math(soal_teks);
-                        } else if (e1_bentuk.index == 1) {
-                            soal_teks = convert_to_math(soal_teks);
-                        } else if (e1_bentuk.index == 2) {
-                        } else if (e1_bentuk.index == 3) {
-                            // soal_teks = `Jika /({5 /over /sqrt{12}}/) dapat dinyatakan ke dalam bentuk /({a/sqrt{b}} /over c/), dimana /(FPB(a,c) = 1/), dan b adalah bebas kuadrat, maka nilai dari a+b+c adalah ...`;
-                            // soal_teks = convert_to_math(soal_teks);
-                            // soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-                        } else if (e1_bentuk.index == 4) {
-                            soal_teks = convert_to_math(soal_teks);
-                            soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-                        } else {
-                            soal_teks = convert_to_math(soal_teks);
-                            soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-                        }
-                    } else if (e1.index == 21) {
-                        // soal_teks = `Solusi x dari &nbsp;<span style="font-size:20px">/(x^2 - 3x + 2 = 0/)`.replaceAll("/","&#x005c");
-                        soal_teks = `Banyak solusi x bilangan asli sehingga /(3x+7<25/) adalah ...`
-                        soal_teks = convert_to_math(soal_teks);
-                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-                    } else if (e1.index == 22) {
-                        if (e1_bentuk.index == 0) {
-                            // /cup (∪) /cap (∩)
-                            // soal_teks = `Diketahui himpunan /(A = /{1,2,3,4,5/}/) dan himpunan /(B = /{2,3,6,7/}/). Maka /(A ∩ B/) adalah ...`
-                            soal_teks = convert_to_math(soal_teks);
-                        } else if (e1_bentuk.index == 1) {
-                            soal_teks = convert_to_math(soal_teks);
-                        } else if (e1_bentuk.index == 2) {
-                            soal_teks = convert_to_math(soal_teks);
-                        } else {
-                            
-                        }
-                    } else if (e1.index == 24) {
-                        if (e1_bentuk.index == 0) {
-                            soal_teks = `Hasil dari /(2^6/) adalah ...`
-                            soal_teks = convert_to_math(soal_teks);
-                        } else {
-                            soal_teks = `Solusi x dari persamaan /(4^x+2^x=72/) adalah ...`
-                            soal_teks = convert_to_math(soal_teks);
-                        }
-                    } else if (e1.index == 27) {
-                        if (e1_bentuk.index == 0) {
-                            soal_teks = `Hasil dari /(|2-3|/) adalah ...`
-                        } else if (e1_bentuk.index == 1) {
-                            soal_teks = `Solusi x dari /(|2x+1|=3/) adalah ...`
-                        } else {
-                            // soal_teks = `Solusi x dari /(|3x-1|+|x+2|=5-2/lfloor x /rfloor/) adalah ...`
-                            soal_teks = `Solusi x dari /(|3x-1|+|x+2|=8-3x/) adalah ...`
-                        }
-                        soal_teks = convert_to_math(soal_teks);
-                    } else if (e1.index == 29) {
-                        if (e1_bentuk.index == 0) {
-                            // soal_teks = `Diketahui fungsi linear /(f(x) = 2x+3/). Nilai dari /(f(5)/) adalah ...`.replaceAll("/","&#x005c");
-                            soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-                        } else if (e1_bentuk.index == 1) {
-                            soal_teks = `Diketahui fungsi linear &nbsp;/(f(x) = 2x+3/). Nilai dari &nbsp;/(f^{-1}(5)/) adalah ...`;
-                            soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-                        } else if (e1_bentuk.index == 2) {
-                            soal_teks = `Didefinisikan /(a*b = ab+a-b/). Nilai dari /(2*(3*4)/) adalah ...`;
-                            soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-                        } else {
-                            soal_teks = `Diketahui suatu fungsi linear /(f(x)/) dan /(g(x)/), sehingga /(f(x+g(y))=2x-3y+1/). Jika diketahui /(g^{-1}(2)=4/), maka nilai dari /(f^{-1}(1+g(5))/) adalah ...`;
-                            soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-                        }
-                        // soal_teks = convert_to_math(soal_teks);
-                    } else if (e1.index == 32) {
-                        // soal_teks = `Diketahui fungsi linear /(f(x) = 2x+3/). Nilai dari /(f(5)/) adalah ...`.replaceAll("/","&#x005c");
-                        soal_teks = `Hasil dari &nbsp;<span style="font-size:18px">/(/mathrm{sin(60°)}/)</span> adalah ...`.replaceAll("/","&#x005c").replaceAll("<&#x005cspan>","</span>");
-                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-                    } else if (e1.index == 33) {
-                        // soal_teks = `Diketahui fungsi linear /(f(x) = 2x+3/). Nilai dari /(f(5)/) adalah ...`.replaceAll("/","&#x005c");
-                        soal_teks = `Peluang dari 2 dadu yang dilempar secara bersamaan, sehinga jumlahnya 9 adalah ...`.replaceAll("/","&#x005c").replaceAll("<&#x005cspan>","</span>");
-                        soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-                    }
+                    
 				} else {
 					var cerita2 = document.getElementById("cerita2");
 					cerita2 = cerita2.options[cerita2.selectedIndex];
@@ -2439,9 +2405,9 @@
                         <option>Dengan bilangan negatif</option>
                     `;
                 }
-            } else if (e1.index == 5) {
-                document.getElementById("bentuk-sub").style.display = 'none';
             } else if (e1.index == 6) {
+                document.getElementById("bentuk-sub").style.display = 'none';
+            } else if (e1.index == 11) {
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
@@ -2458,7 +2424,7 @@
 				} else {
                     document.getElementById("bentuk-penjelasan2").innerHTML = '';
                 }
-            } else if (e1.index == 7) {
+            } else if (e1.index == 12) {
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
@@ -2469,7 +2435,7 @@
                 document.getElementById("bentuk-penjelasan").innerHTML = `Dalam aritmetika dan teori bilangan, kelipatan persekutuan terkecil dari dua bilangan adalah bilangan bulat positif terkecil yang dapat dibagi habis oleh kedua bilangan tersebut. Kelipatan persekutuan terkecil biasanya disingkat sebagai KPK atau dituliskan LCM, dalam bahasa Inggris.
                 <br><br>
                 Notasi kelipatan persekutuan dari bilangan a dan b dituliskan sebagai /(/mathrm{KPK(a,b)}/). Sebagai contoh, diberikan bilangan bulat 12 dan 20. Karena kelipatan dari masing-masing kedua bilangan adalah 12, 24, 36, 48, 60, … dan 20, 40, 60, 80, …, maka /(/mathrm{KPK(12,20)} = 60/). Kelipatan persekutuan lainnya adalah 120, 180, 240, 300, …. Suatu kelipatan persekutuan terkecil dari bilangan yang lebih dari dua dapat dilakukan dengan cara yang serupa.`.replaceAll("/","&#x005c");
-            } else if (e1.index == 8) {
+            } else if (e1.index == 13) {
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
@@ -2482,7 +2448,7 @@
                 Dua bilangan atau lebih disebut saling prima jika FPB bilangan-bilangan tersebut sama dengan 1. Sebagai contoh, karena FPB bilangan 9 dan 28 sama dengan 1, maka bilangan 9 dan 28 adalah saling prima (walaupun masing-masingnya bukan bilangan prima)
                 <br><br>
                 Faktor persekutuan terbesar (FPB) dan sekawannya, kelipatan persekutuan terkecil (KPK), menjadi pembahasan yang penting dalam aritmatika dan teori bilangan.`.replaceAll("/","&#x005c");
-            } else if (e1.index == 9) {
+            } else if (e1.index == 14) {
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
                     // <option style="color:gray">Pecahan Campuran</option>
@@ -2496,7 +2462,7 @@
                     `;
                 }
                 document.getElementById("bentuk-penjelasan").innerHTML = `Pecahan atau fraksi adalah istilah yang merujuk pada suatu bagian atau sejumlah bagian yang setara dari sesuatu yang "penuh". Dalam matematika, pecahan umumnya ditunjukkan dengan notasi /(a /over b/), di mana b ≠ 0. Dalam hal ini a merupakan pembilang, dan b merupakan penyebut. Dalam bilangan pecahan adalah bagaimana suatu nilai dapat disederhanakan. Penyederhanaan pembilang dan penyebut akan memudahkan dalam operasi aritmatika sehingga tidak menghasilkan angka yang terlalu besar tetapi tetap mempunyai nilai yang sama.`.replaceAll("/","&#x005c");
-            } else if (e1.index == 11) {
+            } else if (e1.index == 17) {
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
@@ -2507,7 +2473,7 @@
                         <option>Lebih dari kelipatan 10 pangkat</option>
                     `;
                 }
-            } else if (e1.index == 12) {
+            } else if (e1.index == 18) {
                 document.getElementById("bentuk-penjelasan").innerHTML = `Dalam jenis perpangkatan ini terdiri dari 3, yaitu:
                 <br><br>
                 - Pangkat 2 (kuadrat): /({a}^2/)<br>
@@ -2522,9 +2488,9 @@
                         <option>Pangkat 5</option>
                     `;
                 }
-            } else if (e1.index == 13) {
+            } else if (e1.index == 19) {
                 document.getElementById("bentuk-penjelasan").innerHTML = `Di dalam matematika, akar kuadrat atau akar persegi dari bilangan x sama dengan bilangan r sedemikian sehingga /(r^2 = x/), atau, di dalam perkataan lain, bilangan r yang bila dikuadratkan (hasil kali dengan bilangan itu sendiri) sama dengan x. Setiap bilangan real tak-negatif, katakanlah x memiliki akar kuadrat tak-negatif yang tunggal, disebut akar kuadrat utama, yang dilambangkan oleh akar ke-n sebagai /(/sqrt {x}/).`.replaceAll("/","&#x005c");
-            } else if (e1.index == 15) {
+            } else if (e1.index == 21) {
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
@@ -2536,7 +2502,7 @@
                         <option style="color:gray">Energi</option>
                     `;
                 }
-            } else if (e1.index == 15) {
+            } else if (e1.index == 22) {
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
@@ -2549,7 +2515,7 @@
                         <option style="color:gray">Gabungan</option>
                     `;
                 }
-            } else if (e1.index == 16) {
+            } else if (e1.index == 23) {
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
@@ -2562,7 +2528,7 @@
                         <option style="color:gray">Gabungan</option>
                     `;
                 }
-            } else if (e1.index == 19) {
+            } else if (e1.index == 24) {
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
@@ -2572,7 +2538,7 @@
                         <option style="color:gray">Pemfaktoran Campuran</option>
                     `;
                 }
-            } else if (e1.index == 20) {
+            } else if (e1.index == 26) {
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
@@ -2584,7 +2550,7 @@
                         <option style="color:gray">Campuran Variabel 2</option>
                     `;
                 }
-            } else if (e1.index == 22) {
+            } else if (e1.index == 27) {
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
@@ -2596,7 +2562,7 @@
                         <option style="color:gray">Himpunan bersyarat</option>
                     `;
                 }
-            } else if (e1.index == 23) {
+            } else if (e1.index == 28) {
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
@@ -2605,7 +2571,7 @@
                         <option style="color:gray">Banyaknya Solusi</option>
                     `;
                 }
-            } else if (e1.index == 24) {
+            } else if (e1.index == 29) {
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
@@ -2613,7 +2579,7 @@
                         <option style="color:gray">Persamaan eksponensial</option>
                     `;
                 }
-            } else if (e1.index == 27) {
+            } else if (e1.index == 32) {
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
@@ -2622,7 +2588,7 @@
                         <option style="color:gray">Persamaan Mutlak Kompleks</option>
                     `;
                 }
-            } else if (e1.index == 29) {
+            } else if (e1.index == 37) {
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
@@ -2632,7 +2598,7 @@
                         <option style="color:gray">Campuran</option>
                     `;
                 }
-            } else if (e1.index == 29) {
+            } else if (e1.index == 38) {
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
