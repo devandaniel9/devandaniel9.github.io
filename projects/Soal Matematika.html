@@ -665,7 +665,8 @@
     <!-- <p>Terakhir diupdate: 1 Agustus 2025</p> -->
     <!-- <p>Terakhir diupdate: 29 Agustus 2025</p> -->
     <!-- <p>Terakhir diupdate: 19 September 2025</p> -->
-    <p>Terakhir diupdate: 1 Oktober 2025</p>
+    <!-- <p>Terakhir diupdate: 1 Oktober 2025</p> -->
+    <p>Terakhir diupdate: 8 Oktober 2025</p>
 
     <script>
         // Time
@@ -869,8 +870,38 @@
 
             soal = '';
             soal_check = true;
+            document.getElementById('tipe2').style.display = 'block';
+            
             if (e1.index == 0) {
-                
+                if (e1_bentuk.index == 0) {
+                    // <canvas id="myCanvas" width="500" height="300" style="border:1px solid #000000;">
+                    soal_teks = `
+                    <canvas id="myCanvas" width="400" height="200" style="background-color:#202020; border:1px solid gray;">
+                    Sorry, your browser does not support canvas.
+                    </canvas><br><br>
+                    `;
+                    soal_teks += 'Banyaknya titik di gambar ini adalah ...';
+                    document.getElementById('soal').innerHTML = soal_teks;
+                    const canvas = document.getElementById("myCanvas");
+                    const ctx = canvas.getContext("2d");
+                    ctx.beginPath();
+                    for (let a = 1; a <= 20; a++) {
+                        // ctx.arx(50*(1+(a-1)%8), 50*(1+parseInt((a-1)/8)), 5, 0, 2 * Math.Pi);
+                        // ctx.fillStyle = "yellow";
+                        ctx.fillStyle = "white";
+                        ctx.fillRect(37+40*(0+(a-1)%8), 37+40*(0+parseInt((a-1)/8)), 6, 6);
+                        ctx.fill();
+                    }
+                    ctx.clear();
+                    // ctx.fill();
+                } else if (e1_bentuk.index == 1) {
+                    soal = 'Banyaknya titik di gambar ini adalah ...';
+                } else if (e1_bentuk.index == 2) {
+                    soal = 'Banyaknya titik di gambar ini adalah ...';
+                } else {
+                    soal = 'Banyaknya titik di gambar ini adalah ...';
+                }
+
             } else if (e1.index == 1) {
                 document.getElementById("bentuk-sub").style.display = 'none';
                 if (level2.index == 0) {
@@ -1190,7 +1221,7 @@
                     soal_teks = `Bilangan Romawi dari 124 adalah ...`;
                     soal_suara = soal_teks;
                     document.getElementById('tipe2').style.display = 'block';
-                } else if (e1_bentuk.index == 0) {
+                } else if (e1_bentuk.index == 1) {
                     soal_teks = `Bilangan asli dari CXXIV adalah ...`;
                     soal_suara = soal_teks;
                 } else {
@@ -1663,130 +1694,6 @@
                 soal_suara = `Hasil dari ${soal_suara} adalah ...`;
                 document.getElementById('tipe2').style.display = 'block';
 
-            /* 
-            } else if (e1.index == 15) {
-                if (e1_bentuk.index == 0) {
-                    // soal_teks = `Jarak dari kota A ke C melalui kota B adalah 280 km, sedangkan jarak dari kota A ke B adalah 110 km. Jarak dari kota B ke C adalah ...`;
-                } else if (e1_bentuk.index == 1) {
-                    // soal_teks = `Waktu 3 menit berapa detik?`;
-                } else {
-                    // soal_teks = `Sebuah mobil menempuh jarak 120 km dalam waktu 3 jam. Kecepatan mobil tersebut dalam km/jam adalah ...`;
-                }
-                soal_suara = soal_teks;
-                soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-            } else if (e1.index == 16) {
-                if (e1_bentuk.index == 0) {
-                } else if (e1_bentuk.index == 1) {
-                    soal_teks = `Diberikan suatu persegi panjang dengan panjang 6 cm dan lebar 4 cm. Luas persegi panjang dalam cm kuadrat adalah ...`;
-                    soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-                } else if (e1_bentuk.index == 2) {
-                    soal_teks = `Diberikan suatu segitiga dengan alas 20 cm dan tinggi 12 cm. Luas segitiga dalam cm kuadrat adalah ...`;
-                    soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-                } else if (e1_bentuk.index == 3) {
-                    soal_teks = `Diberikan trapesium siku-siku /(ABCD/), dimana siku-sikunya di /(D/). Jika diketahui panjang /(AB = 13/), /(DC = 11/), dan /(AD = 7/), maka luas trapesium adalah ...`;
-                    soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-                } else if (e1_bentuk.index == 4) {
-                    soal_teks = `Diberikan sesuatu segitiga dengan alas 20 cm dan tinggi 12 cm. Luas segitiga dalam cm kuadrat adalah ...`;
-                    soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-                } else {
-                    // soal_teks = convert_to_math(soal_teks);
-                }
-                soal_teks = convert_to_math(soal_teks);
-            } else if (e1.index == 17) {
-                soal_teks = `Diketahui panjang sisi kubus adalah 3 cm. Luas perseginya adalah ...`;
-                soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-            } else if (e1.index == 18) {
-                // soal_teks = `Solusi x dari &nbsp;<span style="font-size:20px">/(2x + 3 = 5/)`.replaceAll("/","&#x005c");
-                // soal_teks += `</span>&nbsp; adalah ...`
-                // soal_teks = `Solusi x dari &nbsp;/(${soal_teks}/)`
-                soal_teks = convert_to_math(soal_teks);
-                // soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-            } else if (e1.index == 19) {
-                // &#x2F
-                // soal_teks = `Diketahui sistem persamaan linear dua variabel yang terdapat dibawah ini:<br><div style="padding-top:10px"><|||div>\\begin{array} x+2y=2 \\\\ 2x+3y=5 \\end{array}`;
-                // Solusi dari x dan y berturut-turut adalah ...`;
-                // soal_teks = `Diketahui sistem persamaan linear dua variabel yang terdapat dibawah ini:
-                // <span style='font-size:18px'>\\begin{cases} x+2y=2 \\\\ 2x+3y=5 \\end{cases}</span>
-                // Maka solusi dari x adalah ...`;
-                // soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-            } else if (e1.index == 20) {
-                if (e1_bentuk.index == 0) {
-                    soal_teks = convert_to_math(soal_teks);
-                } else if (e1_bentuk.index == 1) {
-                    soal_teks = convert_to_math(soal_teks);
-                } else if (e1_bentuk.index == 2) {
-                } else if (e1_bentuk.index == 3) {
-                    // soal_teks = `Jika /({5 /over /sqrt{12}}/) dapat dinyatakan ke dalam bentuk /({a/sqrt{b}} /over c/), dimana /(FPB(a,c) = 1/), dan b adalah bebas kuadrat, maka nilai dari a+b+c adalah ...`;
-                    // soal_teks = convert_to_math(soal_teks);
-                    // soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-                } else if (e1_bentuk.index == 4) {
-                    soal_teks = convert_to_math(soal_teks);
-                    soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-                } else {
-                    soal_teks = convert_to_math(soal_teks);
-                    soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-                }
-            } else if (e1.index == 21) {
-                // soal_teks = `Solusi x dari &nbsp;<span style="font-size:20px">/(x^2 - 3x + 2 = 0/)`.replaceAll("/","&#x005c");
-                soal_teks = `Banyak solusi x bilangan asli sehingga /(3x+7<25/) adalah ...`
-                soal_teks = convert_to_math(soal_teks);
-                soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-            } else if (e1.index == 22) {
-                if (e1_bentuk.index == 0) {
-                    // /cup (∪) /cap (∩)
-                    // soal_teks = `Diketahui himpunan /(A = /{1,2,3,4,5/}/) dan himpunan /(B = /{2,3,6,7/}/). Maka /(A ∩ B/) adalah ...`
-                    soal_teks = convert_to_math(soal_teks);
-                } else if (e1_bentuk.index == 1) {
-                    soal_teks = convert_to_math(soal_teks);
-                } else if (e1_bentuk.index == 2) {
-                    soal_teks = convert_to_math(soal_teks);
-                } else {
-                    
-                }
-            } else if (e1.index == 24) {
-                if (e1_bentuk.index == 0) {
-                    soal_teks = `Hasil dari /(2^6/) adalah ...`
-                    soal_teks = convert_to_math(soal_teks);
-                } else {
-                    soal_teks = `Solusi x dari persamaan /(4^x+2^x=72/) adalah ...`
-                    soal_teks = convert_to_math(soal_teks);
-                }
-            } else if (e1.index == 27) {
-                if (e1_bentuk.index == 0) {
-                    soal_teks = `Hasil dari /(|2-3|/) adalah ...`
-                } else if (e1_bentuk.index == 1) {
-                    soal_teks = `Solusi x dari /(|2x+1|=3/) adalah ...`
-                } else {
-                    // soal_teks = `Solusi x dari /(|3x-1|+|x+2|=5-2/lfloor x /rfloor/) adalah ...`
-                    soal_teks = `Solusi x dari /(|3x-1|+|x+2|=8-3x/) adalah ...`
-                }
-                soal_teks = convert_to_math(soal_teks);
-            } else if (e1.index == 29) {
-                if (e1_bentuk.index == 0) {
-                    // soal_teks = `Diketahui fungsi linear /(f(x) = 2x+3/). Nilai dari /(f(5)/) adalah ...`.replaceAll("/","&#x005c");
-                    soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-                } else if (e1_bentuk.index == 1) {
-                    soal_teks = `Diketahui fungsi linear &nbsp;/(f(x) = 2x+3/). Nilai dari &nbsp;/(f^{-1}(5)/) adalah ...`;
-                    soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-                } else if (e1_bentuk.index == 2) {
-                    soal_teks = `Didefinisikan /(a*b = ab+a-b/). Nilai dari /(2*(3*4)/) adalah ...`;
-                    soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-                } else {
-                    soal_teks = `Diketahui suatu fungsi linear /(f(x)/) dan /(g(x)/), sehingga /(f(x+g(y))=2x-3y+1/). Jika diketahui /(g^{-1}(2)=4/), maka nilai dari /(f^{-1}(1+g(5))/) adalah ...`;
-                    soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-                }
-                // soal_teks = convert_to_math(soal_teks);
-            } else if (e1.index == 32) {
-                // soal_teks = `Diketahui fungsi linear /(f(x) = 2x+3/). Nilai dari /(f(5)/) adalah ...`.replaceAll("/","&#x005c");
-                soal_teks = `Hasil dari &nbsp;<span style="font-size:18px">/(/mathrm{sin(60°)}/)</span> adalah ...`.replaceAll("/","&#x005c").replaceAll("<&#x005cspan>","</span>");
-                soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-            } else if (e1.index == 33) {
-                // soal_teks = `Diketahui fungsi linear /(f(x) = 2x+3/). Nilai dari /(f(5)/) adalah ...`.replaceAll("/","&#x005c");
-                soal_teks = `Peluang dari 2 dadu yang dilempar secara bersamaan, sehinga jumlahnya 9 adalah ...`.replaceAll("/","&#x005c").replaceAll("<&#x005cspan>","</span>");
-                soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-            }
-            */
-
             } else if (e1.index == 17) {
                 // var a;
                 var a2;
@@ -1918,8 +1825,10 @@
                     // soal_teks = `1 m = _____ cm`;
                     soal_teks = `1 m = ..... cm`;
                 } else if (e1_bentuk.index == 1) {
+                    // soal_teks = `Waktu 3 menit berapa detik?`;
                     soal_teks = `1 menit = ..... detik`;
                 } else if (e1_bentuk.index == 2) {
+                    // soal_teks = `Sebuah mobil menempuh jarak 120 km dalam waktu 3 jam. Kecepatan mobil tersebut dalam km/jam adalah ...`;
                     soal_teks = `10 m/detik = ..... km/jam`;
                 } else if (e1_bentuk.index == 3) {
                     soal_teks = `1 kg = ..... g`;
@@ -1928,6 +1837,8 @@
                 } else {
                     soal_teks = ``;
                 }
+                soal_suara = soal_teks;
+                soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
 
             } else if (e1.index == 22) {
                 if (e1_bentuk.index == 0) {
@@ -1954,9 +1865,29 @@
                         soal_teks = `Diketahui keliling persegi adalah ${4*a} satuan. Panjang sisi perseginya adalah ...`;
                         hasil = a;
                     }
+                } else if (e1_bentuk.index == 1) {
+                    soal_teks = `Diberikan suatu persegi panjang dengan panjang 6 cm dan lebar 4 cm. Luas persegi panjang dalam cm kuadrat adalah ...`;
+                    soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                } else if (e1_bentuk.index == 2) {
+                    soal_teks = `Diberikan suatu segitiga dengan alas 20 cm dan tinggi 12 cm. Luas segitiga dalam cm kuadrat adalah ...`;
+                    soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                } else if (e1_bentuk.index == 3) {
+                    soal_teks = `Diberikan trapesium siku-siku /(ABCD/), dimana siku-sikunya di /(D/). Jika diketahui panjang /(AB = 13/), /(DC = 11/), dan /(AD = 7/), maka luas trapesium adalah ...`;
+                    soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                } else if (e1_bentuk.index == 4) {
+                    soal_teks = `Diberikan sesuatu segitiga dengan alas 20 cm dan tinggi 12 cm. Luas segitiga dalam cm kuadrat adalah ...`;
+                    soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                } else {
+                    // soal_teks = convert_to_math(soal_teks);
                 }
+                soal_teks = convert_to_math(soal_teks);
 
 			} else if (e1.index == 23) {
+                if (e1_bentuk.index == 0) {
+                    soal_teks = `Diketahui panjang sisi kubus adalah 3 cm. Luas perseginya adalah ...`;
+                    soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                }
+            } else if (e1.index == 24) {
 			    // ax+b=c
                 var a2;
                 while (a2 === undefined || a == a2 || a2 == 0) {
@@ -1985,7 +1916,12 @@
                     hasil = `${xa}/${xb}`;
                 }
                 soal_check = false;
-            } else if (e1.index == 24) {
+                // soal_teks = `Solusi x dari &nbsp;<span style="font-size:20px">/(2x + 3 = 5/)`.replaceAll("/","&#x005c");
+                // soal_teks += `</span>&nbsp; adalah ...`
+                // soal_teks = `Solusi x dari &nbsp;/(${soal_teks}/)`
+                soal_teks = convert_to_math(soal_teks);
+                // soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+            } else if (e1.index == 25) {
 			    // ax+by=c, dx+ex=f
                 // var a2;
                 var a_old;
@@ -2056,7 +1992,14 @@
                     }
                 }
                 soal_check = false;
-            } else if (e1.index == 25) {
+                // &#x2F
+                // soal_teks = `Diketahui sistem persamaan linear dua variabel yang terdapat dibawah ini:<br><div style="padding-top:10px"><|||div>\\begin{array} x+2y=2 \\\\ 2x+3y=5 \\end{array}`;
+                // Solusi dari x dan y berturut-turut adalah ...`;
+                // soal_teks = `Diketahui sistem persamaan linear dua variabel yang terdapat dibawah ini:
+                // <span style='font-size:18px'>\\begin{cases} x+2y=2 \\\\ 2x+3y=5 \\end{cases}</span>
+                // Maka solusi dari x adalah ...`;
+                // soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+            } else if (e1.index == 26) {
                 if (e1_bentuk.index == 0) {
                     var a_old;
                     while (a_old === undefined || a == a_old) {
@@ -2066,6 +2009,7 @@
                     b = Math.floor(1 + 10 * Math.random()**2);
                     soal_teks = `Hasil dari \\(${a}^2-${a-b}^2\\) adalah ...`;
                     hasil = a**2-(a-b)**2;
+                    soal_teks = convert_to_math(soal_teks);
                 } else if (e1_bentuk.index == 1) {
                     var a_old;
                     while (a_old === undefined || a == a_old) {
@@ -2075,6 +2019,7 @@
                     b = Math.floor(1 + a * Math.random()**2);
                     soal_teks = `Hasil dari \\(${a}^2-${b}^2\\) adalah ...`;
                     hasil = a**2-b**2;
+                    soal_teks = convert_to_math(soal_teks);
                 } else if (e1_bentuk.index == 2) {
                     var a_old;
                     while (a_old === undefined || a == a_old) {
@@ -2084,6 +2029,7 @@
                     b = Math.floor(1 + 5 * Math.random()**2);
                     soal_teks = `Hasil dari \\(${a}^3-${a-b}^3\\) adalah ...`;
                     hasil = a**3-(a-b)**3;
+                    soal_teks = convert_to_math(soal_teks);
                 } else if (e1_bentuk.index == 3) {
                     // soal_teks = `Jika /({5 /over /sqrt{12}}/) dapat dinyatakan ke dalam bentuk /({a/sqrt{b}} /over c/), dimana /(FPB(a,c) = 1/), dan b adalah bebas kuadrat, maka nilai dari a+b+c adalah ...`;
                     // a/sqrt(b)
@@ -2110,8 +2056,17 @@
                     cc /= dibagi;
                     soal_teks = `Jika \\({${a} \\over \\sqrt{${b}}}\\) dapat dinyatakan ke dalam bentuk \\({a\\sqrt{b}} \\over c\\), dimana \\(FPB(a,c) = 1\\), dan b adalah bebas kuadrat selain 1, maka nilai dari a+b+c adalah ...`;
                     hasil = ca+cb+cc;
+                    // soal_teks = `Jika /({5 /over /sqrt{12}}/) dapat dinyatakan ke dalam bentuk /({a/sqrt{b}} /over c/), dimana /(FPB(a,c) = 1/), dan b adalah bebas kuadrat, maka nilai dari a+b+c adalah ...`;
+                    // soal_teks = convert_to_math(soal_teks);
+                    // soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                } else if (e1_bentuk.index == 4) {
+                    soal_teks = convert_to_math(soal_teks);
+                    soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                } else {
+                    soal_teks = convert_to_math(soal_teks);
+                    soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
                 }
-			} else if (e1.index == 26) {
+			} else if (e1.index == 27) {
                 // A ∩ B
                 // function getIntersection(a, n, b, m) {
                 function intersection(a, b) {
@@ -2202,7 +2157,11 @@
                     }
                     soal_teks = `Diketahui himpunan \\(A = \\{x&nbsp\\ |\\ 1 \\leq x \\leq 30, x \\in bilangan\\ prima \\}\\) dan himpunan \\(B = \\{3,4,5,6\\}\\). Jika himpunan diurutkan dari terkecil hingga terbesar, maka \\(A ∩ B\\) adalah ...`;
                     hasil = '{' + hasil.toString() + '}';
+                    // /cup (∪) /cap (∩)
+                    // soal_teks = `Diketahui himpunan /(A = /{1,2,3,4,5/}/) dan himpunan /(B = /{2,3,6,7/}/). Maka /(A ∩ B/) adalah ...`
+                    soal_teks = convert_to_math(soal_teks);
                 } else if (e1_bentuk.index == 1) {
+                    soal_teks = convert_to_math(soal_teks);
                 } else if (e1_bentuk.index == 2) {
                     // nama_tempat_list = ['toko buah','pasar','supermarket'];
                     mathrandom = Math.random()
@@ -2230,6 +2189,7 @@
                     } else if (mathrandom < 0.75) {
                     } else {
                     }
+                    soal_teks = convert_to_math(soal_teks);
                 }
             } else if (e1.index == 28) {
                 if (e1_bentuk.index == 0) {
@@ -2241,6 +2201,29 @@
                 } else {
                     soal_teks = `Misalkan akar-akar dari persamaan &nbsp;<span style="font-size:18px">/(x^2 - 4x + 1 = 0/) adalah /(a/) dan /(b/). Nilai dari /(a^2+b^2/) adalah ...`.replaceAll("/","&#x005c");
                 }
+            } else if (e1.index == 29) {
+                if (e1_bentuk.index == 0) {
+                    soal_teks = `Hasil dari /(2^6/) adalah ...`
+                    soal_teks = convert_to_math(soal_teks);
+                } else {
+                    soal_teks = `Solusi x dari persamaan /(4^x+2^x=72/) adalah ...`
+                    soal_teks = convert_to_math(soal_teks);
+                }
+            } else if (e1.index == 32) {
+                if (e1_bentuk.index == 0) {
+                    soal_teks = `Hasil dari /(|2-3|/) adalah ...`
+                } else if (e1_bentuk.index == 1) {
+                    soal_teks = `Solusi x dari /(|2x+1|=3/) adalah ...`
+                } else {
+                    // soal_teks = `Solusi x dari /(|3x-1|+|x+2|=5-2/lfloor x /rfloor/) adalah ...`
+                    soal_teks = `Solusi x dari /(|3x-1|+|x+2|=8-3x/) adalah ...`
+                }
+                soal_teks = convert_to_math(soal_teks);
+            } else if (e1.index == 34) {
+                // soal_teks = `Solusi x dari &nbsp;<span style="font-size:20px">/(x^2 - 3x + 2 = 0/)`.replaceAll("/","&#x005c");
+                soal_teks = `Banyak solusi x bilangan asli sehingga /(3x+7<25/) adalah ...`
+                soal_teks = convert_to_math(soal_teks);
+                soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
             } else if (e1.index == 37) {
                 if (e1_bentuk.index == 0) {
                     mathrandom = Math.random()
@@ -2289,9 +2272,33 @@
                         soal_teks = `Diketahui fungsi kuadrat &nbsp;\\(f(x) = ${a2}${b2}${c2}\\). Nilai dari &nbsp;\\(f(${d})\\) adalah ...`;
                         hasil = a*d**2+b*d+c;
                     }
+                    // soal_teks = `Diketahui fungsi linear /(f(x) = 2x+3/). Nilai dari /(f(5)/) adalah ...`.replaceAll("/","&#x005c");
+                    soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                } else if (e1_bentuk.index == 1) {
+                    soal_teks = `Diketahui fungsi linear &nbsp;/(f(x) = 2x+3/). Nilai dari &nbsp;/(f^{-1}(5)/) adalah ...`;
+                    soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                } else if (e1_bentuk.index == 2) {
+                    soal_teks = `Didefinisikan /(a*b = ab+a-b/). Nilai dari /(2*(3*4)/) adalah ...`;
+                    soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                } else {
+                    soal_teks = `Diketahui suatu fungsi linear /(f(x)/) dan /(g(x)/), sehingga /(f(x+g(y))=2x-3y+1/). Jika diketahui /(g^{-1}(2)=4/), maka nilai dari /(f^{-1}(1+g(5))/) adalah ...`;
+                    soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
                 }
+                // soal_teks = convert_to_math(soal_teks);
+            } else if (e1.index == 40) {
+                // soal_teks = `Diketahui fungsi linear /(f(x) = 2x+3/). Nilai dari /(f(5)/) adalah ...`.replaceAll("/","&#x005c");
+                soal_teks = `Hasil dari &nbsp;<span style="font-size:18px">/(/mathrm{sin(60°)}/)</span> adalah ...`.replaceAll("/","&#x005c").replaceAll("<&#x005cspan>","</span>");
+                soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+            } else if (e1.index == 45) {
+                // soal_teks = `Diketahui fungsi linear /(f(x) = 2x+3/). Nilai dari /(f(5)/) adalah ...`.replaceAll("/","&#x005c");
+                soal_teks = `Peluang dari 2 dadu yang dilempar secara bersamaan, sehinga jumlahnya 9 adalah ...`.replaceAll("/","&#x005c").replaceAll("<&#x005cspan>","</span>");
+                soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
             } else {
                 soal_teks = '<span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>';
+                document.getElementById('tipe2').style.display = 'none';
+                soal_suara = '';
+                // document.getElementById('soal').innerHTML = `<span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+				// document.getElementById('tipe2').style.display = 'none';
             }
             
             // var cerita_check = document.getElementById("check");
@@ -2299,74 +2306,68 @@
             var cerita = document.getElementById("cerita");
             var soal_teks;
             // if (e1.index <= 25) {
-            if (e1.index <= 30) {
-                if (cerita_check.checked == false) {
-                    
-				} else {
-					var cerita2 = document.getElementById("cerita2");
-					cerita2 = cerita2.options[cerita2.selectedIndex];
-					if (e1.index == 1) {
-						if (cerita2.index == 0) {
-                            nama_tempat_list = ['toko buah','pasar','supermarket'];
-                            nama_tempat = nama_tempat_list[parseInt(nama_tempat_list.length*Math.random())];
-                            nama_orang_list = ['ibu','ayah','kakak','abang','tante','Andi','Ayu','Brian','Budi','Dani','Daniel','David','Jeremy','Matthew','Michael','Putra','Putri','Siti','Tika','Yuni']
-                            // if (Math.random() < 0.2) nama_orang = 'ibu';
-                            nama_orang = nama_orang_list[parseInt(nama_orang_list.length*Math.random())];
-                            nama_orang2 = nama_orang;
-                            while (nama_orang2 == nama_orang) {
-                                nama_orang2 = nama_orang_list[parseInt(nama_orang_list.length*Math.random())];
-                            }
-                            console.log(nama_orang_list);
-                            nama_buah_list = ['buah','apel','pisang','jeruk','mangga','alpukat','pepaya','rambutan','nanas','jambu','stroberi','semangka','salak'];
-						    nama_buah = nama_buah_list[parseInt(nama_buah_list.length*Math.random())]
-							// soal_teks = `Di dalam sebuah toko buah, ibu membeli ${a} buah. Kemudian adik memberikan buahnya kepada ibu sebanyak ${b} buah. Berapa jumlah buah ibu sekarang?`;
-							soal_teks = `Di dalam suatu ${nama_tempat}, ${nama_orang} membeli ${a} ${nama_buah}. Kemudian ${nama_orang2} memberikan buahnya kepada ${nama_orang} sebanyak ${b} ${nama_buah}. Berapa jumlah ${nama_buah} ${nama_orang} sekarang?`;
-						} else if (cerita2.index == 1) {
-							soal_teks = `Di dalam sebuah pusat perbelanjaan, ibu membeli sesuatu seharga ${a} ribu. Kemudian adik membeli lagi seharga ${b} ribu, lalu dikumpulkan ke keranjang ibu. Berapa jumlah uang ibu sekarang? (dalam ribuan)`;
-						} else if (cerita2.index == 2) {
-						    soal_teks = `Ibu ingin menimbang buah apel dengan berat ${a} kg, lalu seseorang menaruh buah pisang di atas timbangan dengan berat ${b} kg. Berat timbangannya adalah ...`;
-						} else {
-                            soal_teks = `Di dalam sebuah botol air telah terisi ${50*a} ml, lalu ibu menuangkan air ke dalam botol tersebut sebanyak ${50*b} ml. Volume botol air sekarang dalam ml (mililiter) adalah ...`;
-                            hasil = 50*hasil;
+            // if (e1.index <= 30) {
+            // if (cerita_check.checked == false) {
+            // } else {
+            if (cerita_check.checked) {
+                var cerita2 = document.getElementById("cerita2");
+                cerita2 = cerita2.options[cerita2.selectedIndex];
+                if (e1.index == 1) {
+                    if (cerita2.index == 0) {
+                        nama_tempat_list = ['toko buah','pasar','supermarket'];
+                        nama_tempat = nama_tempat_list[parseInt(nama_tempat_list.length*Math.random())];
+                        nama_orang_list = ['ibu','ayah','kakak','abang','tante','Andi','Ayu','Brian','Budi','Dani','Daniel','David','Jeremy','Matthew','Michael','Putra','Putri','Siti','Tika','Yuni']
+                        // if (Math.random() < 0.2) nama_orang = 'ibu';
+                        nama_orang = nama_orang_list[parseInt(nama_orang_list.length*Math.random())];
+                        nama_orang2 = nama_orang;
+                        while (nama_orang2 == nama_orang) {
+                            nama_orang2 = nama_orang_list[parseInt(nama_orang_list.length*Math.random())];
                         }
-					} else if (e1.index == 2) {
-						soal_teks = `Di dalam sebuah toko buah, ibu sudah membeli apel sebanyak ${a} buah. Lalu adik memakan buah apelnya sebanyak ${b} apel. Berapa sisa buah apel sekarang?`;
-					} else if (e1.index == 3) {
-					    soal_teks = `Pada hari Minggu, ada acara yang cukup besar dan meriah, sehingga perlu disiapkan ${a} bungkus supaya acaranya lebih lengkap. Setiap bungkus akan diberikan ke semua orang, yang masing-masing berisi ${b} kue. Berapa banyak kue yang akan diberikan ke semua orang di acara tersebut?`;
-					} else if (e1.index == 4) {
-					    soal_teks = `Di suatu kelas di sekolah, terdapat beberapa kegiatan yang harus dibuat kelompok. Sebanyak ${a} siswa yang akan dibuat kelompok, yang masing-masing sebanyak ${b} orang. Berapa banyak kelompok yang terbentuk?`;
-					} else if (e1.index == 8) {
-                        if (cerita2.index == 0) {
-                            nama_tempat_list = ['mengunjungi perpustakaan','mengunjungi rumah teman','les piano','les berenang','olahraga'];
-                            nama_tempat = nama_tempat_list[parseInt(nama_tempat_list.length*Math.random())];
-                            nama_orang_list = ['ibu','ayah','kakak','abang','tante','Andi','Ayu','Brian','Budi','Dani','Daniel','David','Jeremy','Matthew','Michael','Putra','Putri','Siti','Tika','Yuni']
-                            nama_orang = nama_orang_list[parseInt(nama_orang_list.length*Math.random())];
-                            nama_orang2 = nama_orang;
-                            while (nama_orang2 == nama_orang) {
-                                nama_orang2 = nama_orang_list[parseInt(nama_orang_list.length*Math.random())];
-                            }
-                            // soal_teks = `Andi mengunjungi perpustakaan setiap ${a} hari sekali, sedangkan Budi setiap ${b} hari sekali. Berapa hari sekali sehingga Andi dan Budi mengunjungi perpustakaan secara bersamaan?`;
-                            soal_teks = `${nama_orang} ${nama_tempat} setiap ${a} hari sekali, sedangkan ${nama_orang2} setiap ${b} hari sekali. Berapa hari sekali sehingga ${nama_orang} dan ${nama_orang2} mengunjungi ${nama_tempat} secara bersamaan?`;
-                        } else {
-                            soal_teks = `Pada lalu lintas, terdapat dua lampu merah, dimana yang bagian barat, lampu hijau hidup setiap ${a} menit sekali, sedangkan yang bagian timur setiap ${b} menit sekali. Berapa menit sekali kedua lampu tersebut hijau secara bersamaan?`;
+                        console.log(nama_orang_list);
+                        nama_buah_list = ['buah','apel','pisang','jeruk','mangga','alpukat','pepaya','rambutan','nanas','jambu','stroberi','semangka','salak'];
+                        nama_buah = nama_buah_list[parseInt(nama_buah_list.length*Math.random())]
+                        // soal_teks = `Di dalam sebuah toko buah, ibu membeli ${a} buah. Kemudian adik memberikan buahnya kepada ibu sebanyak ${b} buah. Berapa jumlah buah ibu sekarang?`;
+                        soal_teks = `Di dalam suatu ${nama_tempat}, ${nama_orang} membeli ${a} ${nama_buah}. Kemudian ${nama_orang2} memberikan buahnya kepada ${nama_orang} sebanyak ${b} ${nama_buah}. Berapa jumlah ${nama_buah} ${nama_orang} sekarang?`;
+                    } else if (cerita2.index == 1) {
+                        soal_teks = `Di dalam sebuah pusat perbelanjaan, ibu membeli sesuatu seharga ${a} ribu. Kemudian adik membeli lagi seharga ${b} ribu, lalu dikumpulkan ke keranjang ibu. Berapa jumlah uang ibu sekarang? (dalam ribuan)`;
+                    } else if (cerita2.index == 2) {
+                        soal_teks = `Ibu ingin menimbang buah apel dengan berat ${a} kg, lalu seseorang menaruh buah pisang di atas timbangan dengan berat ${b} kg. Berat timbangannya adalah ...`;
+                    } else {
+                        soal_teks = `Di dalam sebuah botol air telah terisi ${50*a} ml, lalu ibu menuangkan air ke dalam botol tersebut sebanyak ${50*b} ml. Volume botol air sekarang dalam ml (mililiter) adalah ...`;
+                        hasil = 50*hasil;
+                    }
+                } else if (e1.index == 2) {
+                    soal_teks = `Di dalam sebuah toko buah, ibu sudah membeli apel sebanyak ${a} buah. Lalu adik memakan buah apelnya sebanyak ${b} apel. Berapa sisa buah apel sekarang?`;
+                } else if (e1.index == 3) {
+                    soal_teks = `Pada hari Minggu, ada acara yang cukup besar dan meriah, sehingga perlu disiapkan ${a} bungkus supaya acaranya lebih lengkap. Setiap bungkus akan diberikan ke semua orang, yang masing-masing berisi ${b} kue. Berapa banyak kue yang akan diberikan ke semua orang di acara tersebut?`;
+                } else if (e1.index == 4) {
+                    soal_teks = `Di suatu kelas di sekolah, terdapat beberapa kegiatan yang harus dibuat kelompok. Sebanyak ${a} siswa yang akan dibuat kelompok, yang masing-masing sebanyak ${b} orang. Berapa banyak kelompok yang terbentuk?`;
+                } else if (e1.index == 8) {
+                    if (cerita2.index == 0) {
+                        nama_tempat_list = ['mengunjungi perpustakaan','mengunjungi rumah teman','les piano','les berenang','olahraga'];
+                        nama_tempat = nama_tempat_list[parseInt(nama_tempat_list.length*Math.random())];
+                        nama_orang_list = ['ibu','ayah','kakak','abang','tante','Andi','Ayu','Brian','Budi','Dani','Daniel','David','Jeremy','Matthew','Michael','Putra','Putri','Siti','Tika','Yuni']
+                        nama_orang = nama_orang_list[parseInt(nama_orang_list.length*Math.random())];
+                        nama_orang2 = nama_orang;
+                        while (nama_orang2 == nama_orang) {
+                            nama_orang2 = nama_orang_list[parseInt(nama_orang_list.length*Math.random())];
                         }
-					} else if (e1.index == 9) {
-					    soal_teks = `Ibu memiliki ${a} buah apel dan ${b} buah jeruk. Buah-buahan tersebut akan dibagi secara rata kepada teman-teman di sekolah. Berapakah banyak anak yang mendapatkan buah-buahan tersebut secara rata?`;
-					}
-					soal_suara = soal_teks;
-				}
-				document.getElementById('soal').innerHTML = soal_teks;
-				// MathJax.typeset();
-				if (document.getElementById('suara').checked) {
-				    // speak(soal_teks);
-					speak(soal_suara);
-				}
-				document.getElementById('tipe2').style.display = 'block';
-			} else {
-				// document.getElementById('soal').innerHTML = "Jenis pertanyaan ini belum tersedia";
-                document.getElementById('soal').innerHTML = `<span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-				document.getElementById('tipe2').style.display = 'none';
-			}
+                        // soal_teks = `Andi mengunjungi perpustakaan setiap ${a} hari sekali, sedangkan Budi setiap ${b} hari sekali. Berapa hari sekali sehingga Andi dan Budi mengunjungi perpustakaan secara bersamaan?`;
+                        soal_teks = `${nama_orang} ${nama_tempat} setiap ${a} hari sekali, sedangkan ${nama_orang2} setiap ${b} hari sekali. Berapa hari sekali sehingga ${nama_orang} dan ${nama_orang2} mengunjungi ${nama_tempat} secara bersamaan?`;
+                    } else {
+                        soal_teks = `Pada lalu lintas, terdapat dua lampu merah, dimana yang bagian barat, lampu hijau hidup setiap ${a} menit sekali, sedangkan yang bagian timur setiap ${b} menit sekali. Berapa menit sekali kedua lampu tersebut hijau secara bersamaan?`;
+                    }
+                } else if (e1.index == 9) {
+                    soal_teks = `Ibu memiliki ${a} buah apel dan ${b} buah jeruk. Buah-buahan tersebut akan dibagi secara rata kepada teman-teman di sekolah. Berapakah banyak anak yang mendapatkan buah-buahan tersebut secara rata?`;
+                }
+                soal_suara = soal_teks;
+            }
+            document.getElementById('soal').innerHTML = soal_teks;
+            // MathJax.typeset();
+            if (document.getElementById('suara').checked) {
+                // speak(soal_teks);
+                speak(soal_suara);
+            }
         }
 
         hasil = 0;
