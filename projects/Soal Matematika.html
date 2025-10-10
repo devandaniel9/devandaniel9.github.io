@@ -666,7 +666,8 @@
     <!-- <p>Terakhir diupdate: 29 Agustus 2025</p> -->
     <!-- <p>Terakhir diupdate: 19 September 2025</p> -->
     <!-- <p>Terakhir diupdate: 1 Oktober 2025</p> -->
-    <p>Terakhir diupdate: 8 Oktober 2025</p>
+    <!-- <p>Terakhir diupdate: 8 Oktober 2025</p> -->
+    <p>Terakhir diupdate: 10 Oktober 2025</p>
 
     <script>
         // Time
@@ -779,7 +780,9 @@
             return text.replaceAll("/(","<span style='font-size:18px'>&#x005c(").replaceAll("/)","/)</span>").replaceAll("/","&#x005c").replaceAll("<&#x005cspan>","</span>")
         }
         
-        a = 0;
+        // a = 0;
+        // a = -1;
+        a = '';
         b = 0;
         a2 = 0;
         a3 = 0;
@@ -876,7 +879,7 @@
                 if (e1_bentuk.index == 0) {
                     // <canvas id="myCanvas" width="500" height="300" style="border:1px solid #000000;">
                     soal_teks = `
-                    <canvas id="myCanvas" width="400" height="200" style="background-color:#202020; border:1px solid gray;">
+                    <canvas id="myCanvas" width="400" height="300" style="background-color:#202020; border:1px solid gray;">
                     Sorry, your browser does not support canvas.
                     </canvas><br><br>
                     `;
@@ -885,21 +888,90 @@
                     const canvas = document.getElementById("myCanvas");
                     const ctx = canvas.getContext("2d");
                     ctx.beginPath();
-                    for (let a = 1; a <= 20; a++) {
+                    // hasil = 20;
+                    if (level2.index == 0) {
+                        // hasil = Math.floor(1 + 20 * Math.random());
+                        // while (typeof a2 === 'undefined' || a == a2 || check) {
+                        while (typeof a2 === 'undefined' || a == a2) {
+                            a2 = Math.floor(21 * Math.random());
+                            console.log(a2);
+                        }
+                        // ctx.clear();
+                        // ctx.fill();
+                    } else if (level2.index == 1) {
+                        while (typeof a2 === 'undefined' || a == a2) {
+                            a2 = Math.floor(11 + 90 * Math.random());
+                        }
+                    } else {
+                        while (typeof a2 === 'undefined' || a == a2) {
+                            a2 = Math.floor(76 + 925 * Math.random());
+                        }
+                    }
+                    a = a2;
+                    hasil = a;
+                    // for (let a = 1; a <= 20; a++) {
+                    for (let b = 1; b <= a; b++) {
                         // ctx.arx(50*(1+(a-1)%8), 50*(1+parseInt((a-1)/8)), 5, 0, 2 * Math.Pi);
                         // ctx.fillStyle = "yellow";
                         ctx.fillStyle = "white";
-                        ctx.fillRect(37+40*(0+(a-1)%8), 37+40*(0+parseInt((a-1)/8)), 6, 6);
-                        ctx.fill();
+                        if (a <= 9*6) ctx.fillRect(37+40*(0+(b-1)%9), 37+40*(0+parseInt((b-1)/9)), 6, 6);
+                        else if (a <= 19*14) ctx.fillRect(18+20*(0+(b-1)%19), 18+20*(0+parseInt((b-1)/19)), 4, 4);
+                        else ctx.fillRect(9+10*(0+(b-1)%39), 9+10*(0+parseInt((b-1)/39)), 2, 2);
+                        // ctx.fill();
                     }
-                    ctx.clear();
-                    // ctx.fill();
                 } else if (e1_bentuk.index == 1) {
-                    soal = 'Banyaknya titik di gambar ini adalah ...';
+                    soal_teks = `
+                    <canvas id="myCanvas" width="400" height="300" style="background-color:#202020; border:1px solid gray;">
+                    Sorry, your browser does not support canvas.
+                    </canvas><br><br>
+                    `;
+                    soal_teks += 'Banyaknya titik di gambar ini adalah ...';
+                    document.getElementById('soal').innerHTML = soal_teks;
+                    const canvas = document.getElementById("myCanvas");
+                    const ctx = canvas.getContext("2d");
+                    ctx.beginPath();
+                    if (level2.index == 0) {
+                        while (typeof a2 === 'undefined' || a == a2) {
+                            a2 = Math.floor(21 * Math.random());
+                            console.log(a2);
+                        }
+                    } else if (level2.index == 1) {
+                        while (typeof a2 === 'undefined' || a == a2) {
+                            a2 = Math.floor(11 + 40 * Math.random());
+                        }
+                    } else {
+                        while (typeof a2 === 'undefined' || a == a2) {
+                            a2 = Math.floor(51 + 200 * Math.random());
+                        }
+                    }
+                    a = a2;
+                    hasil = 0;
+                    max_gap = 2 + Math.min(Math.floor(a**0.5), a-1) * Math.random();
+                    // 1 <= x <= max_gap
+                    // while (typeof b2_2 === 'undefined' || b2 == b2_2) {
+                        // b2_2 = Math.floor(1 + (max_gap-1) * Math.random());
+                    // }
+                    // b2 = b2_2;
+                    b2 = Math.floor(1 + (max_gap-1) * Math.random());
+                    for (let b = 1; b <= a; b++) {
+                        ctx.fillStyle = "white";
+                        if (b == b2) {
+                            if (a <= 9*6) ctx.fillRect(37+40*(0+(b-1)%9), 37+40*(0+parseInt((b-1)/9)), 6, 6);
+                            else ctx.fillRect(18+20*(0+(b-1)%19), 18+20*(0+parseInt((b-1)/19)), 4, 4);
+                            hasil++;
+                            b2 += Math.floor(1 + (max_gap-1) * Math.random());
+                        }
+                    }
                 } else if (e1_bentuk.index == 2) {
-                    soal = 'Banyaknya titik di gambar ini adalah ...';
+                    // soal = 'Banyaknya titik di gambar ini adalah ...';
+                    soal_teks = 'Representasi bilangan dari 20 adalah ...';
+                    document.getElementById('soal').innerHTML = soal_teks;
+                } else if (e1_bentuk.index == 3) {
+                    soal_teks = 'Nama bilangan dari 20 adalah ...';
+                    document.getElementById('soal').innerHTML = soal_teks;
                 } else {
-                    soal = 'Banyaknya titik di gambar ini adalah ...';
+                    soal_teks = 'Lambang bilangan dari dua puluh adalah ...';
+                    document.getElementById('soal').innerHTML = soal_teks;
                 }
 
             } else if (e1.index == 1) {
@@ -921,7 +993,8 @@
                 if (bs2.index == 0) soal_teks = `Hasil dari ${soal} adalah ...`;
                 else soal_teks = bersusun(a,b,tanda);
                 soal_suara = `Hasil dari ${a} ${tanda_suara} ${b} adalah ...`;
-                document.getElementById('tipe2').style.display = 'block';
+                document.getElementById('soal').innerHTML = soal_teks;
+                // document.getElementById('tipe2').style.display = 'block';
 
             } else if (e1.index == 2) {
                 document.getElementById("bentuk-sub").style.display = 'none';
@@ -945,7 +1018,7 @@
                 if (bs2.index == 0) soal_teks = `Hasil dari ${soal} adalah ...`;
                 else soal_teks = bersusun(a,b,tanda);
                 soal_suara = `Hasil dari ${a} ${tanda_suara} ${b} adalah ...`;
-                document.getElementById('tipe2').style.display = 'block';
+                document.getElementById('soal').innerHTML = soal_teks;
 
             } else if (e1.index == 3) {
                 document.getElementById("bentuk-sub").style.display = 'none';
@@ -976,7 +1049,7 @@
                 if (bs2.index == 0) soal_teks = `Hasil dari ${soal} adalah ...`;
                 else soal_teks = bersusun(a,b,tanda);
                 soal_suara = `Hasil dari ${a} ${tanda_suara} ${b} adalah ...`;
-                document.getElementById('tipe2').style.display = 'block';
+                document.getElementById('soal').innerHTML = soal_teks;
 
             } else if (e1.index == 4) {
                 document.getElementById("bentuk-sub").style.display = 'none';
@@ -1008,7 +1081,7 @@
                 if (bs2.index == 0) soal_teks = `Hasil dari ${soal} adalah ...`;
                 else soal_teks = bersusun2(a,b);
                 soal_suara = `Hasil dari ${a} ${tanda_suara} ${b} adalah ...`;
-                document.getElementById('tipe2').style.display = 'block';
+                document.getElementById('soal').innerHTML = soal_teks;
 
             } else if (e1.index == 5) {
                 // document.getElementById("bentuk-sub").style.display = 'none';
@@ -1137,7 +1210,7 @@
                 }
                 soal_teks = `Hasil dari ${soal} adalah ...`;
                 soal_suara = `Hasil dari ${soal_suara_awal} adalah ...`;
-                document.getElementById('tipe2').style.display = 'block';
+                document.getElementById('soal').innerHTML = soal_teks;
 
             } else if (e1.index == 6) {
                 document.getElementById("bentuk-sub").style.display = 'none';
@@ -1214,7 +1287,7 @@
                 }
                 soal_teks = `Hasil dari ${soal} adalah ...`;
                 soal_suara = `Hasil dari ${soal_suara} adalah ...`;
-                document.getElementById('tipe2').style.display = 'block';
+                document.getElementById('soal').innerHTML = soal_teks;
 
             } else if (e1.index == 8) {
                 if (e1_bentuk.index == 0) {
@@ -1227,6 +1300,7 @@
                 } else {
 
                 }
+                document.getElementById('soal').innerHTML = soal_teks;
 
             } else if (e1.index == 11) {
                 // document.getElementById("bentuk-sub").style.display = 'block';
@@ -1398,7 +1472,7 @@
                 }
                 // soal = 'Hasil';
                 soal_suara = soal_teks;
-                document.getElementById('tipe2').style.display = 'block';
+                document.getElementById('soal').innerHTML = soal_teks;
 
 			} else if (e1.index == 12) {
                 if (e1_bentuk.index == 0) {
@@ -1451,7 +1525,7 @@
                     }
                 }
                 soal_suara = soal_teks;
-				document.getElementById('tipe2').style.display = 'block';
+				document.getElementById('soal').innerHTML = soal_teks;
 
             } else if (e1.index == 13) {
                 if (e1_bentuk.index == 0) {
@@ -1505,7 +1579,7 @@
                 }
                 // soal_teks = `FPB dari 8 dan 12 adalah ...`;
                 soal_suara = soal_teks;
-				document.getElementById('tipe2').style.display = 'block';
+				document.getElementById('soal').innerHTML = soal_teks;
 
             } else if (e1.index == 14) {
                 if (e1_bentuk.index == 0) {
@@ -1663,7 +1737,7 @@
                 soal_check = false;
                 // soal_teks = `When /(a /ne 0/), there are three solutions to /(ax^2 + bx + c = 0/) and they are
                 // /[x = {-b /pm /sqrt{b^2-4ac} /over 2a}./]`.replaceAll("/","&#x005c");
-                document.getElementById('tipe2').style.display = 'block';
+                document.getElementById('soal').innerHTML = soal_teks;
 
             } else if (e1.index == 15) {
                 // if (Math.random() < 0.125) {b = 2;}
@@ -1692,7 +1766,7 @@
                 soal_teks += `</span>&nbsp; adalah ...`
                 soal_teks += `<br><br>- Hasil jawaban di input jawaban dikali 100 dari hasil awalnya`
                 soal_suara = `Hasil dari ${soal_suara} adalah ...`;
-                document.getElementById('tipe2').style.display = 'block';
+                document.getElementById('soal').innerHTML = soal_teks;
 
             } else if (e1.index == 17) {
                 // var a;
@@ -1733,6 +1807,7 @@
                 soal_teks = `Hasil dari &nbsp;<span style="font-size:20px">/(${a}^2/)`.replaceAll("/","&#x005c");
                 soal_teks += `</span>&nbsp; adalah ...`
                 soal_suara = `Hasil dari ${a} kuadrat adalah ...`;
+                document.getElementById('soal').innerHTML = soal_teks;
 
             } else if (e1.index == 18) {
                 // var a;
@@ -1778,6 +1853,7 @@
                     soal_suara = `Hasil dari ${a} pangkat ${pangkat} adalah ...`;
                 }
                 // soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                document.getElementById('soal').innerHTML = soal_teks;
 
             } else if (e1.index == 19) {
 			    var a2;
@@ -1797,6 +1873,7 @@
                 soal_teks = `Bentuk sederhana dari &nbsp;<span style="font-size:20px">/(/sqrt{${a3}}/)`.replaceAll("/","&#x005c");
                 soal_teks += `</span>&nbsp; adalah ...`;
                 soal_suara = `Bentuk sederhana dari akar kuadrat dari ${a3} adalah ...`;
+                document.getElementById('soal').innerHTML = soal_teks;
 
 			} else if (e1.index == 20) {
 			    var a2;
@@ -1816,6 +1893,7 @@
                 soal_teks = `Bentuk sederhana dari &nbsp;<span style="font-size:20px">/(/sqrt[3]{${a3}}/)`.replaceAll("/","&#x005c");
                 soal_teks += `</span>&nbsp; adalah ...`;
                 soal_suara = `Bentuk sederhana dari akar pangkat 3 dari ${a3} adalah ...`;
+                document.getElementById('soal').innerHTML = soal_teks;
 
             } else if (e1.index == 21) {
                 if (e1_bentuk.index == 0) {
@@ -1839,6 +1917,7 @@
                 }
                 soal_suara = soal_teks;
                 soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                document.getElementById('soal').innerHTML = soal_teks;
 
             } else if (e1.index == 22) {
                 if (e1_bentuk.index == 0) {
@@ -1881,12 +1960,14 @@
                     // soal_teks = convert_to_math(soal_teks);
                 }
                 soal_teks = convert_to_math(soal_teks);
+                document.getElementById('soal').innerHTML = soal_teks;
 
 			} else if (e1.index == 23) {
                 if (e1_bentuk.index == 0) {
                     soal_teks = `Diketahui panjang sisi kubus adalah 3 cm. Luas perseginya adalah ...`;
                     soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
                 }
+                document.getElementById('soal').innerHTML = soal_teks;
             } else if (e1.index == 24) {
 			    // ax+b=c
                 var a2;
@@ -1921,6 +2002,7 @@
                 // soal_teks = `Solusi x dari &nbsp;/(${soal_teks}/)`
                 soal_teks = convert_to_math(soal_teks);
                 // soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                document.getElementById('soal').innerHTML = soal_teks;
             } else if (e1.index == 25) {
 			    // ax+by=c, dx+ex=f
                 // var a2;
@@ -1999,6 +2081,7 @@
                 // <span style='font-size:18px'>\\begin{cases} x+2y=2 \\\\ 2x+3y=5 \\end{cases}</span>
                 // Maka solusi dari x adalah ...`;
                 // soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                document.getElementById('soal').innerHTML = soal_teks;
             } else if (e1.index == 26) {
                 if (e1_bentuk.index == 0) {
                     var a_old;
@@ -2066,6 +2149,7 @@
                     soal_teks = convert_to_math(soal_teks);
                     soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
                 }
+                document.getElementById('soal').innerHTML = soal_teks;
 			} else if (e1.index == 27) {
                 // A ∩ B
                 // function getIntersection(a, n, b, m) {
@@ -2191,6 +2275,7 @@
                     }
                     soal_teks = convert_to_math(soal_teks);
                 }
+                document.getElementById('soal').innerHTML = soal_teks;
             } else if (e1.index == 28) {
                 if (e1_bentuk.index == 0) {
                     // soal_teks = `Solusi x dari <span style='font-size:18px'>\\begin{array} x^2 \\end{array}</span>
@@ -2201,6 +2286,7 @@
                 } else {
                     soal_teks = `Misalkan akar-akar dari persamaan &nbsp;<span style="font-size:18px">/(x^2 - 4x + 1 = 0/) adalah /(a/) dan /(b/). Nilai dari /(a^2+b^2/) adalah ...`.replaceAll("/","&#x005c");
                 }
+                document.getElementById('soal').innerHTML = soal_teks;
             } else if (e1.index == 29) {
                 if (e1_bentuk.index == 0) {
                     soal_teks = `Hasil dari /(2^6/) adalah ...`
@@ -2209,6 +2295,7 @@
                     soal_teks = `Solusi x dari persamaan /(4^x+2^x=72/) adalah ...`
                     soal_teks = convert_to_math(soal_teks);
                 }
+                document.getElementById('soal').innerHTML = soal_teks;
             } else if (e1.index == 32) {
                 if (e1_bentuk.index == 0) {
                     soal_teks = `Hasil dari /(|2-3|/) adalah ...`
@@ -2219,11 +2306,13 @@
                     soal_teks = `Solusi x dari /(|3x-1|+|x+2|=8-3x/) adalah ...`
                 }
                 soal_teks = convert_to_math(soal_teks);
+                document.getElementById('soal').innerHTML = soal_teks;
             } else if (e1.index == 34) {
                 // soal_teks = `Solusi x dari &nbsp;<span style="font-size:20px">/(x^2 - 3x + 2 = 0/)`.replaceAll("/","&#x005c");
                 soal_teks = `Banyak solusi x bilangan asli sehingga /(3x+7<25/) adalah ...`
                 soal_teks = convert_to_math(soal_teks);
                 soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                document.getElementById('soal').innerHTML = soal_teks;
             } else if (e1.index == 37) {
                 if (e1_bentuk.index == 0) {
                     mathrandom = Math.random()
@@ -2285,14 +2374,17 @@
                     soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
                 }
                 // soal_teks = convert_to_math(soal_teks);
+                document.getElementById('soal').innerHTML = soal_teks;
             } else if (e1.index == 40) {
                 // soal_teks = `Diketahui fungsi linear /(f(x) = 2x+3/). Nilai dari /(f(5)/) adalah ...`.replaceAll("/","&#x005c");
                 soal_teks = `Hasil dari &nbsp;<span style="font-size:18px">/(/mathrm{sin(60°)}/)</span> adalah ...`.replaceAll("/","&#x005c").replaceAll("<&#x005cspan>","</span>");
                 soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                document.getElementById('soal').innerHTML = soal_teks;
             } else if (e1.index == 45) {
                 // soal_teks = `Diketahui fungsi linear /(f(x) = 2x+3/). Nilai dari /(f(5)/) adalah ...`.replaceAll("/","&#x005c");
                 soal_teks = `Peluang dari 2 dadu yang dilempar secara bersamaan, sehinga jumlahnya 9 adalah ...`.replaceAll("/","&#x005c").replaceAll("<&#x005cspan>","</span>");
                 soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                document.getElementById('soal').innerHTML = soal_teks;
             } else {
                 soal_teks = '<span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>';
                 document.getElementById('tipe2').style.display = 'none';
@@ -2361,8 +2453,9 @@
                     soal_teks = `Ibu memiliki ${a} buah apel dan ${b} buah jeruk. Buah-buahan tersebut akan dibagi secara rata kepada teman-teman di sekolah. Berapakah banyak anak yang mendapatkan buah-buahan tersebut secara rata?`;
                 }
                 soal_suara = soal_teks;
+                document.getElementById('soal').innerHTML = soal_teks;
             }
-            document.getElementById('soal').innerHTML = soal_teks;
+            // document.getElementById('soal').innerHTML = soal_teks;
             // MathJax.typeset();
             if (document.getElementById('suara').checked) {
                 // speak(soal_teks);
@@ -2390,6 +2483,7 @@
                 if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
                         <option>Berhitung</option>
+                        <option>Berhitung 2</option>
                         <option>Representasi bilangan</option>
                         <option>Nama bilangan</option>
                         <option>Lambang bilangan</option>
