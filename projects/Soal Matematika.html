@@ -470,7 +470,7 @@
             <option id=19>Akar Kuadrat</option>
             <option id=20>Akar Kubik dan Pangkat lebih tinggi</option>
             <option id=21 style="color:gray">Konversi Satuan</option>
-            <option id=22 style="color:gray">Bangun Datar</option>
+            <option id=22>Bangun Datar</option>
             <option id=23 style="color:gray">Bangun Ruang</option>
             <option id=24>Persamaan Linear</option>
             <option id=25>Persamaan Dua Variabel</option>
@@ -485,7 +485,7 @@
             <option id=34 style="color:gray">Pertidaksamaan</option>
             <option id=35 style="color:gray">Persamaan Diophantine</option>
             <option id=36 style="color:gray">Statistika</option>
-            <option id=37 style="color:gray">Subsitusi Fungsi</option>
+            <option id=37>Subsitusi Fungsi</option>
             <option id=38 style="color:gray">Matriks dan Determinan</option>
             <option id=39 style="color:gray">Barisan dan Deret dari Pola Bilangan</option>
             <option id=40 style="color:gray">Mencari Pola Bilangan</option>
@@ -671,7 +671,9 @@
     <!-- <p>Terakhir diupdate: 1 Oktober 2025</p> -->
     <!-- <p>Terakhir diupdate: 8 Oktober 2025</p> -->
     <!-- <p>Terakhir diupdate: 10 Oktober 2025</p> -->
-    <p>Terakhir diupdate: 15 Oktober 2025</p>
+	<!-- <p>Terakhir diupdate: 14 Oktober 2025</p> -->
+    <!-- <p>Terakhir diupdate: 15 Oktober 2025</p> -->
+	<p>Terakhir diupdate: 16 Oktober 2025</p>
 
     <script>
         // Time
@@ -930,7 +932,8 @@
                 puluhan_list = ['','x','xx','xxx','xl','l','dc','lxx','lxxx','xc'];
                 ratusan_list = ['','c','cc','ccc','cd','d','dc','dcc','dccc','cm'];
                 ribuan_list = ['','m','mm','mmm'];
-                return ribuan_list[parseInt(angka/1000)]+ratusan_list[parseInt(angka/100)%10]+puluhan_list[parseInt(angka/10)%10]+satuan_list[a%10];
+                // return ribuan_list[parseInt(angka/1000)]+ratusan_list[parseInt(angka/100)%10]+puluhan_list[parseInt(angka/10)%10]+satuan_list[a%10];
+				return ribuan_list[parseInt(angka/1000)]+ratusan_list[parseInt(angka/100)%10]+puluhan_list[parseInt(angka/10)%10]+satuan_list[angka%10];
             }
             
             if (e1.index == 0) {
@@ -1487,15 +1490,10 @@
                 }
 
             } else if (e1.index == 7) {
-                if (e1_bentuk.index == 0) {
-                    soal_teks = `Bilangan Romawi dari 124 adalah ...`;
-                    soal_suara = soal_teks;
-                } else if (e1_bentuk.index == 1) {
-                    soal_teks = `Bilangan asli dari CXXIV adalah ...`;
-                    soal_suara = soal_teks;
-                } else {
-
-                }
+                soal_teks = `Satuan puluhan dari 12345 adalah ...`;
+                soal_suara = soal_teks;
+				hasil = 4;
+				soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini masih belum lengkap</style>`;
                 document.getElementById('soal').innerHTML = soal_teks;
 
             } else if (e1.index == 8) {
@@ -1514,10 +1512,22 @@
                         }
                     }
                     a = a2;
-                    hasil = angka_romawi(a);
+                    // hasil = angka_romawi(a);
+					hasil = angka_romawi(a).toUpperCase();
                     // soal_teks = `Bilangan Romawi dari 124 adalah ...`;
                     soal_teks = `Angka Romawi dari ${a} adalah ...`;
                     soal_suara = soal_teks;
+					if (tipe2.index == 1) {
+						// for (let i = 0; i < 5; i++) {
+						for (let i = 1; i <= j_pilihan2; i++) {
+						    value_check = true;
+							while (value_check || pilihan_list.indexOf(value) > -1 || value == hasil) {
+								value = angka_romawi(Math.floor(a/2+Math.max(a,6)*Math.random())).toUpperCase();
+								value_check = false;
+							}
+							pilihan_list.push(value);
+						}
+					}
                 } else {
                     if (level2.index == 0) {
                         while (typeof a2 === 'undefined' || a == a2) {
@@ -1537,6 +1547,16 @@
                     // soal_teks = `Bilangan asli dari CXXIV adalah ...`;
                     soal_teks = `Angka biasa dari ${angka_romawi(a).toUpperCase()} adalah ...`;
                     soal_suara = soal_teks;
+					if (tipe2.index == 1) {
+						for (let i = 1; i <= j_pilihan2; i++) {
+						    value_check = true;
+							while (value_check || pilihan_list.indexOf(value) > -1 || value == hasil) {
+								value = Math.floor(a/2+Math.max(a,6)*Math.random());
+								value_check = false;
+							}
+							pilihan_list.push(value);
+						}
+					}
                 }
                 document.getElementById('soal').innerHTML = soal_teks;
 
@@ -1626,6 +1646,15 @@
                     tanda = ' : ';
                     hasil = a % b;
                     soal_teks = `Sisa pembagian dari ${a} oleh ${b} adalah ...`;
+					if (tipe2.index == 1) {
+					    for (let i = 0; i < 5; i++) {
+                            value = Math.floor(Math.max(b,6)*Math.random());
+                            while (pilihan_list.indexOf(value) > -1 | value == hasil) {
+                                value = Math.floor(Math.max(b,6)*Math.random());
+                            }
+                            pilihan_list.push(value);
+                        }
+				    }
                 } else if (e1_bentuk.index == 1) {
                     var a2;
                     while (a2 === undefined | a == a2) {
@@ -1637,6 +1666,12 @@
                     soal_teks = `Angka ${a} merupakan bilangan genap atau ganjil?`;
                     if (tipe2.index == 0) {
                         soal_teks += `<br><br>- Tulis jawaban dengan kata "Genap" atau "Ganjil"`;
+                    }
+					if (tipe2.index == 1) {
+                        pilihan_list.push("Genap");
+                        pilihan_list.push("Ganjil");
+                        random_check = false;
+                        j_pilihan2 = 2;
                     }
                 } else if (e1_bentuk.index == 2) {
                     var a2;
@@ -1682,6 +1717,23 @@
                     } else {
                         soal_teks = `Bilangan asli terkecil sehingga bersisa ${rem1} jika dibagi ${mod1}, bersisa ${rem2} jika dibagi ${mod2}, dan bersisa ${rem3} jika dibagi ${mod3} adalah ...`;
                     }
+					if (tipe2.index == 1) {
+						for (let i = 1; i <= j_pilihan2; i++) {
+						    value_check = true;
+							while (value_check || pilihan_list.indexOf(value) > -1 || value == hasil) {
+							    mathrandom = Math.random();
+                                if (mathrandom < 0.2) {
+								    value = Math.floor(hasil/2+Math.max(hasil,6)*Math.random());
+								} else if (mathrandom < 0.6) {
+								    value = Math.floor(1+9*Math.random())*mod1+rem1;
+								} else {
+								    value = Math.floor(1+9*Math.random())*mod2+rem2;
+								}
+								value_check = false;
+							}
+							pilihan_list.push(value);
+						}
+					}
                 } else if (e1_bentuk.index == 3) {
 				    // var a2;
 					var check = false;
@@ -1710,6 +1762,12 @@
                         // soal_teks += `<br><br>- Tulis jawaban dengan kata "Ya" atau "Bukan"`;
                         soal_teks += `<br><br>- Tulis jawaban dengan kata "Ya" atau "Tidak"`;
                     }
+					if (tipe2.index == 1) {
+                        pilihan_list.push("Ya");
+                        pilihan_list.push("Tidak");
+                        random_check = false;
+                        j_pilihan2 = 2;
+                    }
 			    } else if (e1_bentuk.index == 4) {
                     var a2;
                     var check = false;
@@ -1729,23 +1787,6 @@
                 // soal = 'Hasil';
                 soal_suara = soal_teks;
                 document.getElementById('soal').innerHTML = soal_teks;
-
-                if (tipe2.index == 1) {
-                    if (e1_bentuk.index == 0) {
-                        for (let i = 0; i < 5; i++) {
-                            value = Math.floor(Math.max(b,6)*Math.random());
-                            while (pilihan_list.indexOf(value) > -1 | value == hasil) {
-                                value = Math.floor(Math.max(b,6)*Math.random());
-                            }
-                            pilihan_list.push(value);
-                        }
-                    } else {
-                        pilihan_list.push("Genap");
-                        pilihan_list.push("Ganjil");
-                        random_check = false;
-                        j_pilihan2 = 2;
-                    }
-                }
 
 			} else if (e1.index == 12) {
                 if (e1_bentuk.index == 0) {
@@ -1799,6 +1840,23 @@
                 }
                 soal_suara = soal_teks;
 				document.getElementById('soal').innerHTML = soal_teks;
+				if (tipe2.index == 1) {
+					for (let i = 1; i <= j_pilihan2; i++) {
+						value_check = true;
+						while (value_check || pilihan_list.indexOf(value) > -1 || value == hasil) {
+							mathrandom = Math.random();
+							if (mathrandom < 0.2) {
+								value = Math.floor(hasil/2+Math.max(hasil,6)*Math.random());
+							} else if (mathrandom < 0.6) {
+								value = Math.floor(lcm(a,b)/a*(0.5+Math.random()))*a;
+							} else {
+								value = Math.floor(lcm(a,b)/b*(0.5+Math.random()))*b;
+							}
+							value_check = false;
+						}
+						pilihan_list.push(value);
+					}
+				}
 
             } else if (e1.index == 13) {
                 if (e1_bentuk.index == 0) {
@@ -2013,19 +2071,22 @@
                 document.getElementById('soal').innerHTML = soal_teks;
 
                 if (tipe2.index == 1) {
-                    for (let i = 0; i < 5; i++) {
+                    // for (let i = 0; i < 5; i++) {
+					for (let i = 1; i <= j_pilihan2; i++) {
                         a_3newp = a*b_2-b*a_2;
                         a_3new = Math.floor(a_3newp/2+Math.max(a_3newp,6)*Math.random());
                         b_3new = b*b_2;
                         dibagi = gcd(a_3new,b_3new);
                         if (b_3new/dibagi == 1) value = `${a_3new/dibagi}`;
                         else value = `${a_3new/dibagi}/${b_3new/dibagi}`;
-                        while (pilihan_list.indexOf(value) > -1 || value == hasil) {
+						abc = 0
+                        while (abc <= 100 && (pilihan_list.indexOf(value) > -1 || value == hasil)) {
                             a_3new = Math.floor(a_3newp/2+Math.max(a_3newp,6)*Math.random());
                             dibagi = gcd(a_3new,b_3new);
                             if (b_3new/dibagi == 1) value = `${a_3new/dibagi}`;
                             else value = `${a_3new/dibagi}/${b_3new/dibagi}`;
-                            // console.log(value);
+                            console.log(value);
+							abc++;
                         }
                         pilihan_list.push(value);
                     }
@@ -2100,6 +2161,21 @@
                 soal_teks += `</span>&nbsp; adalah ...`
                 soal_suara = `Hasil dari ${a} kuadrat adalah ...`;
                 document.getElementById('soal').innerHTML = soal_teks;
+				if (tipe2.index == 1) {
+					for (let i = 1; i <= j_pilihan2; i++) {
+						value_check = true;
+						while (value_check || pilihan_list.indexOf(value) > -1 || value == hasil) {
+							mathrandom = Math.random();
+							if (mathrandom < 0.25) {
+								value = Math.floor(a**2/2+Math.max(a**2,6)*Math.random());
+							} else {
+								value = Math.floor(a/2+Math.max(a,6)*Math.random())**2;
+							}
+							value_check = false;
+						}
+						pilihan_list.push(value);
+					}
+				}
 
             } else if (e1.index == 18) {
                 // var a;
@@ -2166,6 +2242,22 @@
                 soal_teks += `</span>&nbsp; adalah ...`;
                 soal_suara = `Bentuk sederhana dari akar kuadrat dari ${a3} adalah ...`;
                 document.getElementById('soal').innerHTML = soal_teks;
+				if (tipe2.index == 1) {
+					for (let i = 1; i <= j_pilihan2; i++) {
+						value_check = true;
+						while (value_check || pilihan_list.indexOf(value) > -1 || value == hasil) {
+							mathrandom = Math.random();
+							if (mathrandom < 0.25) {
+								// value = Math.floor(a**2/2+Math.max(a**2,6)*Math.random());
+								value = Math.floor(a/2+Math.max(a,6)*Math.random());
+							} else {
+								value = Math.floor(a/2+Math.max(a,6)*Math.random());
+							}
+							value_check = false;
+						}
+						pilihan_list.push(value);
+					}
+				}
 
 			} else if (e1.index == 20) {
 			    var a2;
@@ -2624,12 +2716,12 @@
                 }
             } else if (e1.index == 37) {
                 if (e1_bentuk.index == 0) {
-                    mathrandom = Math.random()
+                    mathrandom = Math.random();
                     if (mathrandom < 0.5) {
                         var a_old;
                         while (a_old === undefined || a == a_old || a_old == 0) {
                             // a_old = Math.floor(-10 + 21 * Math.random());
-                            a_old = Math.floor(11*Math.random()**2*(-1)**Math.floor(2*Math.random()));
+                            a_old = Math.floor(11*Math.random()**2*(-1)**Math.floor(1.5*Math.random()));
                         }
                         a = a_old;
                         if (a >= 2 || a <= -2 || a == 0) a2 = a;
@@ -2639,14 +2731,14 @@
                         if (b >= 1) b2 = `+${b}`;
                         else if (b == 0) b2 = '';
                         else b2 = `-${-b}`;
-                        c = Math.floor(11*Math.random()**2*(-1)**Math.floor(2*Math.random()));
+                        c = Math.floor(11*Math.random()**2*(-1)**Math.floor(1.5*Math.random()));
                         soal_teks = `Diketahui fungsi linear &nbsp;\\(f(x) = ${a2}x${b2}\\). Nilai dari &nbsp;\\(f(${c})\\) adalah ...`;
                         hasil = a*c+b;
-                    } else {
+                    } else if (mathrandom < 0.625) {
                         var a_old;
                         while (a_old === undefined || a == a_old || a_old == 0) {
                             // a_old = Math.floor(-10 + 21 * Math.random());
-                            a_old = Math.floor(6*Math.random()**2*(-1)**Math.floor(2*Math.random()));
+                            a_old = Math.floor(6*Math.random()**2*(-1)**Math.floor(1.5*Math.random()));
                         }
                         a = a_old;
                         if (a >= 2 || a <= -2) a2 = `${a}x^2`;
@@ -2666,20 +2758,103 @@
                         else if (c == -1) c2 = '-1';
                         else c2 = '';
                         if (c >= 1) c2 = '+' + c2;
-                        d = Math.floor(11*Math.random()**2*(-1)**Math.floor(2*Math.random()));
+                        d = Math.floor(11*Math.random()**2*(-1)**Math.floor(1.5*Math.random()));
                         soal_teks = `Diketahui fungsi kuadrat &nbsp;\\(f(x) = ${a2}${b2}${c2}\\). Nilai dari &nbsp;\\(f(${d})\\) adalah ...`;
                         hasil = a*d**2+b*d+c;
-                    }
+                    } else if (mathrandom < 0.75) {
+					    // a(x+b)(x+c)+d
+						var a_old;
+                        while (a_old === undefined || a == a_old || a_old == 0) {
+                            a_old = Math.floor(6*Math.random()**2*(-1)**Math.floor(1.5*Math.random()));
+                        }
+                        a = a_old;
+						if (a >= 2 || a == 0 || a <= -2) a2 = `${a}`;
+                        else if (a == 1) a2 = '';
+                        else a2 = '-';
+						b = Math.floor(6*Math.random()**2*(-1)**Math.floor(2*Math.random()));
+                        if (b != 0) b2 = `${b}`;
+                        else b2 = '';
+                        if (b >= 1) b2 = '+' + b2;
+						if (b != 0) b3 = `(x${b2})`;
+						else b3 = 'x';
+						while (c === undefined || c == b || c == 0) {
+						    c = Math.floor(6*Math.random()**2*(-1)**Math.floor(2*Math.random()));
+						}
+                        if (c != 0) c2 = `${c}`;
+                        else c2 = '';
+                        if (c >= 1) c2 = '+' + c2;
+						d = Math.floor(11*Math.random()**2*(-1)**Math.floor(2*Math.random()));
+                        if (d != 0) d2 = `${d}`;
+                        else d2 = '';
+                        if (d >= 1) d2 = '+' + d2;
+						x = Math.floor(11*Math.random()**2*(-1)**Math.floor(1.5*Math.random()));
+						soal_teks = `Diketahui fungsi kuadrat &nbsp;\\(f(x) = ${a2}${b3}(x${c2})${d2}\\). Nilai dari &nbsp;\\(f(${x})\\) adalah ...`;
+						hasil = a*(x+b)*(x+c)+d;
+					} else if (mathrandom < 0.875) {
+					    // a*(x+b)^c+d
+						var a_old;
+                        while (a_old === undefined || a == a_old || a_old == 0) {
+                            a_old = Math.floor(6*Math.random()**2*(-1)**Math.floor(1.5*Math.random()));
+                        }
+                        a = a_old;
+						if (a >= 2 || a == 0 || a <= -2) a2 = `${a}`;
+                        else if (a == 1) a2 = '';
+                        else a2 = '-';
+						b = Math.floor(4*Math.random()**2*(-1)**Math.floor(2*Math.random()));
+                        if (b != 0) b2 = `${b}`;
+                        else b2 = '';
+                        if (b >= 1) b2 = '+' + b2;
+						if (b != 0) b3 = `(x${b2})`;
+						else b3 = 'x';
+						c = Math.floor(2+4*Math.random()**2);
+						d = Math.floor(11*Math.random()**2*(-1)**Math.floor(2*Math.random()));
+                        if (d != 0) d2 = `${d}`;
+                        else d2 = '';
+                        if (d >= 1) d2 = '+' + d2;
+						x = Math.floor(11*Math.random()**2*(-1)**Math.floor(1.5*Math.random()));
+						if (c == 2) derajat = 'kuadrat';
+						else if (c == 3) derajat = 'kubik';
+						else if (c == 4) derajat = 'berderajat empat';
+						else derajat = 'berderajat lima';
+						soal_teks = `Diketahui fungsi ${derajat} &nbsp;\\(f(x) = ${a2}${b3}^${c}${d2}\\). Nilai dari &nbsp;\\(f(${x})\\) adalah ...`;
+						hasil = a*(x+b)**c+d;
+					} else {
+					    // a*b^(x+c)+d
+						var a_old;
+                        while (a_old === undefined || a == a_old || a_old == 0) {
+                            a_old = Math.floor(6*Math.random()**2*(-1)**Math.floor(1.5*Math.random()));
+                        }
+                        a = a_old;
+						if (a >= 2 || a == 0 || a <= -2) a2 = `${a}\\cdot`;
+                        else if (a == 1) a2 = '';
+                        else a2 = '-';
+						b = Math.floor(2+4*Math.random()**2);
+						c = Math.floor(4*Math.random()**2*(-1)**Math.floor(2*Math.random()));
+                        if (c != 0) c2 = `${c}`;
+                        else c2 = '';
+                        if (c >= 1) c2 = '+' + c2;
+						d = Math.floor(11*Math.random()**2*(-1)**Math.floor(2*Math.random()));
+                        if (d != 0) d2 = `${d}`;
+                        else d2 = '';
+                        if (d >= 1) d2 = '+' + d2;
+						x = Math.max(-c,Math.floor(6*Math.random()**2));
+						soal_teks = `Diketahui fungsi eksponensial &nbsp;\\(f(x) = ${a2}${b}^{x${c2}}${d2}\\). Nilai dari &nbsp;\\(f(${x})\\) adalah ...`;
+						hasil = a*b**(x+c)+d;
+					}
                     // soal_teks = `Diketahui fungsi linear /(f(x) = 2x+3/). Nilai dari /(f(5)/) adalah ...`.replaceAll("/","&#x005c");
-                    soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                    // soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
                 } else if (e1_bentuk.index == 1) {
-                    soal_teks = `Diketahui fungsi linear &nbsp;/(f(x) = 2x+3/). Nilai dari &nbsp;/(f^{-1}(5)/) adalah ...`;
+                    // soal_teks = `Diketahui fungsi linear &nbsp;/(f(x) = 2x+3/). Nilai dari &nbsp;/(f^{-1}(5)/) adalah ...`;
+					soal_teks = `Diketahui fungsi linear &nbsp;\\(f(x) = 2x+3\\). Nilai dari &nbsp;\\(f^{-1}(5)\\) adalah ...`;
                     soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
                 } else if (e1_bentuk.index == 2) {
-                    soal_teks = `Didefinisikan /(a*b = ab+a-b/). Nilai dari /(2*(3*4)/) adalah ...`;
+				    simbol_list = ['*','@','|','⬤','○','★','☆','■','□','▲','▼'];
+					simbol = simbol_list[Math.floor(simbol_list.length*Math.random())];
+                    // soal_teks = `Didefinisikan \\(a*b = ab+a-b\\). Nilai dari \\(2*(3*4)\\) adalah ...`;
+					soal_teks = `Didefinisikan \\(a${simbol}b = ab+a-b\\). Nilai dari \\(2${simbol}(3${simbol}4)\\) adalah ...`;
                     soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
                 } else {
-                    soal_teks = `Diketahui suatu fungsi linear /(f(x)/) dan /(g(x)/), sehingga /(f(x+g(y))=2x-3y+1/). Jika diketahui /(g^{-1}(2)=4/), maka nilai dari /(f^{-1}(1+g(5))/) adalah ...`;
+                    soal_teks = `Diketahui suatu fungsi linear \\(f(x)\\) dan \\(g(x)\\), sehingga \\(f(x+g(y))=2x-3y+m\\). Jika diketahui \\(g^{-1}(2)=4\\) dan \\(m=1\\), maka nilai dari \\(f^{-1}(1+g(5))\\) adalah ...`;
                     soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
                 }
                 // soal_teks = convert_to_math(soal_teks);
@@ -3449,7 +3624,11 @@
                 // var tanda = '';
                 // e1.index == 6 & e1_bentuk.index == 0
                 // if (e1.index <= 6 || (e1.index == 7 && (e1_bentuk.index == 0 || e1_bentuk.index == 2)) || e1.index == 8 || e1.index == 9 || e1.index == 17 || e1.index == 21 || e1.index == 32) {
-                if (([1,2,3,4,5,6,9,17,21,32].includes(e1.index)) || (e1.index == 0 && [0,1,4].includes(e1_bentuk.index)) || (e1.index == 7 && (e1_bentuk.index == 0 || e1_bentuk.index == 2)) || (e1.index == 8 && e1_bentuk.index == 1)) {
+                if ([0,1,2,3,4,5,6,7,11,12,13,14,17,18,19,20,22,23,26,37].includes(e1.index)
+				|| (e1.index == 0 && [0,1,4].includes(e1_bentuk.index))
+				|| (e1.index == 8 && [1].includes(e1_bentuk.index))
+				|| (e1.index == 11 && [0,2].includes(e1_bentuk.index))
+				){
                     angka = parseInt(angka_awal);
                     jawaban_check = angka == hasil;
                     // hasil = hasil;
