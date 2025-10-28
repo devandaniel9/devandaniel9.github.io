@@ -14,10 +14,19 @@
 </head>
 <style>
     /* Fonts */
-    /* @import url("https://fonts.googleapis.com/css?family=Inter"); */
-    @import url("https://fonts.googleapis.com/css?family=Inter:500");
+    /* @import url("https://fonts.googleapis.com/css?family=Inter");
+	@import url('https://fonts.googleapis.com/css?family=Century%20Schoolbook');
+	@import url('https://fonts.googleapis.com/css?family=Besley');
+	@import url("https://fonts.googleapis.com/css?family=Inter:500");
+	*/
+	
+	@import url("https://fonts.googleapis.com/css?family=Inter:900");
     @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
     @import url('https://fonts.googleapis.com/css?family=Rubik');
+	@import url('https://fonts.googleapis.com/css?family=Poppins');
+	@import url('https://fonts.googleapis.com/css?family=Roboto');
+	@import url('https://fonts.googleapis.com/css?family=Consolas');
+	@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
 
     html {
         --darkmode: 0;
@@ -29,7 +38,8 @@
         background-color: #a0e0d0;
         /* font-family:"Helvetica",sans-serif; */
         /* font-family:"Source Sans Pro",sans-serif; */
-        font-family:"Rubik",sans-serif;
+        font-family: "Rubik", sans-serif;
+		font-style: bold;
         font-size: 16px;
         margin: 0 auto;
         width: 85%;
@@ -216,10 +226,17 @@
 			background-size: auto 100%;
         }
 		#top-color {
-		    background-color:rgba(32,48,64,0.75);
+		    /* background-color:rgba(32,48,64,0.75); */
+			background-image: repeating-linear-gradient(90deg,rgba(0,64,128,0.5),rgba(0,64,128,0.5) 30%,rgba(128,192,255,0.5));background-repeat: no-repeat;
 		}
         .color2 {
             color: #a0e0ff;
+        }
+		.color3 {
+            color: #a0ffd0;
+        }
+		.color4 {
+            color: #ffd080;
         }
         .button {
             background-color: #404040;
@@ -348,7 +365,14 @@
 <body>
     <div id="top-color" style="position:absolute; width:100%; height:80px; left:0; top:0; z-index:-1;"></div>
     <h1 class="heading">Soal Pertanyaan Matematika</h1><br>
-    <img src="images/soal-matematika.jpg" style="background-color:white; filter:invert(0%);" width="200">
+	<div class="column" style="padding-right:50px;">
+        <img src="images/soal-matematika.jpg" style="background-color:white; filter:invert(0%);" width="200">
+	</div>
+	<div class="column" style="padding-right:50px;">
+	    <img src="images/calculator.png" style="margin-top:10px; filter:invert(0%);" width="100">
+	</div>
+	<div class="clearfix"></div>
+    <br>
 
     <div class="sidebar" id="sidebar"></div>
     <div class="backsidebar" id="backsidebar" onclick="closeNav()"></div>
@@ -386,12 +410,13 @@
             <li><a href="Soal Matematika.html">Soal Matematika</a></li>
             <li><a href="Peluang.html">Peluang</a></li>
             <li><a href="Kalkulator Sederhana.html">Kalkulator Sederhana</a></li>
+			<li><a href="javascript:void(0)" style="color:red">Tes Penglihatan Mata</a></li>
         </ul><br>
         <hr style="height:2px; border-width:0; background-color:gray">
         <span style="font-size:22px;"><b>Lainnya</b></span>
         <ul class="heading" id="myMenu" style="line-height:5px">
             <li><a href="../projects.html">Projects</a></li>
-            <li><a href="javascript:void(0)">Tentang program ini</a></li>
+            <li><a href="javascript:void(0)" style="color:red">Tentang program ini</a></li>
         </ul>
         `;
     </script>
@@ -439,8 +464,11 @@
     <select name="bentuk" id="bentuk" style="width:150px"> -->
     <!-- <option>Campuran</option> -->
     
-    <h3 class="heading">●&nbsp;&nbsp;&nbsp;<span class="color2">Mode pertanyaan</span></h2>
-    <div class="column" style="width:500px; padding-left:25px; padding-right:50px;">
+    <!-- <h3 class="heading">●&nbsp;&nbsp;&nbsp;<span class="color2">Mode pertanyaan</span></h2> -->
+    <div class="column" style="width:500px; padding-left:25px; padding-right:50px; padding-bottom:25px;">
+		<div style="margin-left:-25px; margin-top:-5px; height:35px; width:15px; background-color:gray; position:absolute;"></div>
+		<div style="margin-left:-10px; margin-top:-5px; height:35px; width:500px; background-color:rgba(128,128,128,0.25); position:absolute; z-index:-1;"></div>
+		<h3 class="heading color2" style="margin-top:0">Jenis pertanyaan</h3>
         <label>Pilih jenis pertanyaan matematika:</label><br>
         <!-- <select id="bentuk" style="width:300px" onchange="pilihan(true);clearInterval(myInterval);"> -->
         <select id="bentuk" style="width:350px" onchange="pilihan(true);clearInterval(myInterval);">
@@ -538,7 +566,11 @@
         </div>
     </div>
 
-    <div class="column" style="padding-right:50px;">
+    <!-- <div class="column" style="padding-right:50px;"> -->
+	<div class="column" style="width:500px; padding-left:25px; padding-right:50px; padding-bottom:25px;">
+	    <div style="margin-left:-25px; margin-top:-5px; height:35px; width:15px; background-color:gray; position:absolute;"></div>
+		<div style="margin-left:-10px; margin-top:-5px; height:35px; width:500px; background-color:rgba(128,128,128,0.25); position:absolute; z-index:-1;"></div>
+	    <h3 class="heading color3" style="margin-top:0">Mode pertanyaan</h3>
         <label>Pilih tingkat kesulitan:</label><br>
         <select id="level" style="width:150px">
             <option>Mudah</option>
@@ -550,13 +582,14 @@
             <label>Pilih tipe pertanyaan:</label><br>
             <!-- <select id="tipe" style="width:150px" onchange="pilihan()"> -->
             <select id="tipe" style="width:250px" onchange="pilihan();clearInterval(myInterval);">
-                <option>Isian singkat</option>
-                <option>Pilihan ganda</option>
-                <option>Pilihan ganda kompleks</option>
+                <!-- <option>Isian singkat</option> -->
+				<option value="is">Isian singkat</option>
+                <option value="pg">Pilihan ganda</option>
+                <option value="pgk">Pilihan ganda kompleks</option>
             </select>
         </div>
         <!-- <div class="column" id="pilihan" style="display:block"> -->
-        <div class="column" id="pilihan" style="display:none">
+        <div class="column" id="opsi-pilihan" style="display:none">
             <label>Jumlah pilihan:</label><br>
             <select name="jumlah-pilihan" id="jumlah-pilihan" style="width:150px" onchange="pilihan();clearInterval(myInterval);">
                 <option>3</option>
@@ -565,6 +598,28 @@
             </select>
         </div>
         <div class="clearfix"></div>
+		
+		<!-- <img src="images/timer-icon.png" id="timer-icon" style="position:absolute; left:400px;" width="60"> -->
+		<img src="images/timer-icon.png" id="timer-icon" style="position:absolute; margin-left:300px; margin-top:20px;" width="60"><br>
+		<div class="column" style="padding-right:50px;">
+			<label>Pilih waktu timer setiap soal:</label><br>
+			<select id="waktu" style="width:150px" onchange="pilihan();clearInterval(myInterval);">
+				<option value="0">Tidak ada</option>
+				<option value="5">5 detik</option>
+				<option value="10">10 detik</option>
+				<option value="15">15 detik</option>
+				<option value="30">30 detik</option>
+				<option value="60">1 menit</option>
+				<option value="1">Kustom</option>
+			</select>
+		</div>
+		<div class="column" id="waktu-timer" style="display:none">
+			<label>Waktu timer:</label><br>
+			<input type="number" id="waktu2" style="width:150px;" min="1" value="10">
+			<label>&nbsp;detik</label>
+		</div>
+		<div class="clearfix"></div>
+		<br><br>
 
         <label class="cb-container" style="width:400px;">Percobaan satu kali dalam setiap soal
             <input type="checkbox" id="check2" onclick="settings_check();tampilkan()">
@@ -590,52 +645,45 @@
             </select>
         </div>
     </div>
+	
+	<div class="column" style="width:500px; padding-left:25px; padding-right:50px; padding-bottom:25px;">
+	    <div style="margin-left:-25px; margin-top:-5px; height:35px; width:15px; background-color:gray; position:absolute;"></div>
+		<div style="margin-left:-10px; margin-top:-5px; height:35px; width:500px; background-color:rgba(128,128,128,0.25); position:absolute; z-index:-1;"></div>
+		<h3 class="heading color4" style="margin-top:0">Pengaturan lainnya</h3>
+		<img src="images/font.png" id="fonts-icon" style="position:absolute; margin-left:300px; margin-top:20px;" width="60"><br>
+		<label>Pilih font:</label><br>
+        <select id="jenis-font" style="width:150px">
+            <option>Rubik</option>
+			<option>Poppins</option>
+			<option>Roboto</option>
+			<option>Segoe UI</option>
+			<option>Consolas</option>
+			<option>Roboto Mono</option>
+        </select><br><br>
+	    <!-- <label>Dengan soal cerita:</label> -->
+		<!-- <input type="checkbox" id="check" onclick="change()"> -->
+		<!-- <input type="checkbox" id="check" onclick="tampilkan()"> -->
+		<label class="cb-container" style="width:400px;">Dengan ucapan suara
+			<input type="checkbox" id="suara" onclick="settings_check()">
+			<span class="checkmark"></span>
+		</label>
+		<label class="cb-container" style="width:400px; color:gray;">Tampilkan langkah penyelesaian (Coming Soon)
+			<input type="checkbox" id="suara" onclick="settings_check()">
+			<span class="checkmark"></span>
+		</label>
+		<label class="cb-container" style="width:400px;">Terapkan tema gelap
+			<input type="checkbox" id="tema" onclick="settings_check()">
+			<span class="checkmark"></span>
+		</label>
+		<label class="cb-container" style="width:400px;">Pertahankan pengaturan<br>
+			<span style="font-size:14px">Akan direset secara otomatis setelah 3 hari tidak digunakan</span>
+			<!-- <input type="checkbox" id="settings" checked="checked"> -->
+			<input type="checkbox" id="settings" onclick="settings_check()">
+			<span class="checkmark"></span>
+		</label>
+		<br><br>
+	</div>
     <div class="clearfix"></div>
-    <br>
-
-    <img src="images/timer-icon.png" id="timer-icon" style="position:absolute; left:400px;" width="60">
-    <div class="column" style="padding-right:50px;">
-        <label>Pilih waktu timer setiap soal:</label><br>
-        <select id="waktu" style="width:150px" onchange="pilihan();clearInterval(myInterval);">
-            <option value="0">Tidak ada</option>
-            <option value="5">5 detik</option>
-            <option value="10">10 detik</option>
-            <option value="15">15 detik</option>
-            <option value="30">30 detik</option>
-            <option value="60">1 menit</option>
-            <option value="1">Kustom</option>
-        </select>
-    </div>
-    <div class="column" id="waktu-timer" style="display:none">
-        <label>Waktu timer:</label><br>
-        <input type="number" id="waktu2" style="width:150px;" min="1" value="10">
-        <label>&nbsp;detik</label>
-    </div>
-    <div class="clearfix"></div>
-    <br><br>
-
-    <!-- <label>Dengan soal cerita:</label> -->
-    <!-- <input type="checkbox" id="check" onclick="change()"> -->
-    <!-- <input type="checkbox" id="check" onclick="tampilkan()"> -->
-	<label class="cb-container" style="width:400px;">Dengan ucapan suara
-        <input type="checkbox" id="suara" onclick="settings_check()">
-        <span class="checkmark"></span>
-    </label>
-    <label class="cb-container" style="width:400px; color:gray;">Tampilkan langkah penyelesaian (Coming Soon)
-        <input type="checkbox" id="suara" onclick="settings_check()">
-        <span class="checkmark"></span>
-    </label>
-    <label class="cb-container" style="width:400px;">Terapkan tema gelap
-        <input type="checkbox" id="tema" onclick="settings_check()">
-        <span class="checkmark"></span>
-    </label>
-    <label class="cb-container" style="width:400px;">Pertahankan pengaturan<br>
-        <span style="font-size:14px">Akan direset secara otomatis setelah 3 hari tidak digunakan</span>
-        <!-- <input type="checkbox" id="settings" checked="checked"> -->
-        <input type="checkbox" id="settings" onclick="settings_check()">
-        <span class="checkmark"></span>
-    </label>
-    <br><br>
 
     <hr style="height:2px; border-width:0; background-color:gray">
 
@@ -674,7 +722,8 @@
 	<!-- <p>Terakhir diupdate: 14 Oktober 2025</p> -->
     <!-- <p>Terakhir diupdate: 15 Oktober 2025</p> -->
 	<!-- <p>Terakhir diupdate: 16 Oktober 2025</p> -->
-    <p>Terakhir diupdate: 22 Oktober 2025</p>
+    <!-- <p>Terakhir diupdate: 22 Oktober 2025</p> -->
+	<p>Terakhir diupdate: 28 Oktober 2025</p>
 
     <script>
         // Time
@@ -885,7 +934,7 @@
 
             // if (typeof a === 'undefined') a = '';
 
-            document.getElementById("pilihan").style.display = "block";
+            // document.getElementById("pilihan").style.display = "block";
             // var e = document.getElementById("bentuk");
             // var e1 = e.options[e.selectedIndex];
             pilihan_index = Math.floor(j_pilihan2 * Math.random());
@@ -3564,12 +3613,20 @@
 
             if (waktu_timer == 1) {
                 document.getElementById('waktu-timer').style.display = 'block';
-                document.getElementById('timer-icon').style.left = '650px';
+                // document.getElementById('timer-icon').style.left = '650px';
+				document.getElementById('timer-icon').style.marginLeft = '550px';
                 waktu_timer = document.getElementById('waktu2').value;
             } else {
                 document.getElementById('waktu-timer').style.display = 'none';
-                document.getElementById('timer-icon').style.left = '400px';
+                // document.getElementById('timer-icon').style.left = '400px';
+				document.getElementById('timer-icon').style.marginLeft = '300px';
             }
+			
+			if (document.getElementById("tipe").value == 'pg') {
+			    document.getElementById('opsi-pilihan').style.display = 'block';
+			} else {
+			    document.getElementById('opsi-pilihan').style.display = 'none';
+			}
 
             // myInterval = "";
             // var myInterval;
