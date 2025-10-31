@@ -372,7 +372,7 @@
 	    <img src="images/calculator.png" style="margin-top:10px; filter:invert(0%);" width="100">
 	</div>
 	<div class="clearfix"></div>
-    <br>
+    <!-- <br> -->
 
     <div class="sidebar" id="sidebar"></div>
     <div class="backsidebar" id="backsidebar" onclick="closeNav()"></div>
@@ -652,13 +652,13 @@
 		<h3 class="heading color4" style="margin-top:0">Pengaturan lainnya</h3>
 		<img src="images/font.png" id="fonts-icon" style="position:absolute; margin-left:300px; margin-top:20px;" width="60"><br>
 		<label>Pilih font:</label><br>
-        <select id="jenis-font" style="width:150px">
-            <option>Rubik</option>
-			<option>Poppins</option>
-			<option>Roboto</option>
-			<option>Segoe UI</option>
-			<option>Consolas</option>
-			<option>Roboto Mono</option>
+        <select id="jenis-font" style="width:150px" onchange="settings_check()">
+            <option value="rubik, sans serif">Rubik</option>
+			<option value="poppins, sans serif">Poppins</option>
+			<option value="roboto, sans serif">Roboto</option>
+			<option value="segoe ui, sans serif">Segoe UI</option>
+			<option value="consolas">Consolas</option>
+			<option value="roboto mono">Roboto Mono</option>
         </select><br><br>
 	    <!-- <label>Dengan soal cerita:</label> -->
 		<!-- <input type="checkbox" id="check" onclick="change()"> -->
@@ -723,7 +723,8 @@
     <!-- <p>Terakhir diupdate: 15 Oktober 2025</p> -->
 	<!-- <p>Terakhir diupdate: 16 Oktober 2025</p> -->
     <!-- <p>Terakhir diupdate: 22 Oktober 2025</p> -->
-	<p>Terakhir diupdate: 28 Oktober 2025</p>
+	<!-- <p>Terakhir diupdate: 28 Oktober 2025</p> -->
+    <p>Terakhir diupdate: 31 Oktober 2025</p>
 
     <script>
         // Time
@@ -747,6 +748,7 @@
             soal_cerita_check_old = soal_cerita_check_old == "true"
             percobaan_check_old = localStorage.getItem("percobaan-check");
             percobaan_check_old = percobaan_check_old == "true"
+            font_index = localStorage.getItem("font-index");
 			suara_check_old = localStorage.getItem("suara-check");
             suara_check_old = suara_check_old == "true"
             theme_check_old = localStorage.getItem("tema-check");
@@ -754,6 +756,7 @@
         } else {
             soal_cerita_check_old = false;
             percobaan_check_old = false;
+            font_index = 0;
 			suara_check_old = false;
             theme_check_old = false;
             // clear_all();
@@ -761,6 +764,7 @@
 
         document.getElementById("check").checked = soal_cerita_check_old;
         document.getElementById("check2").checked = percobaan_check_old;
+        document.getElementById("jenis-font").selectedIndex = font_index;
 		document.getElementById("suara").checked = suara_check_old;
         document.getElementById("tema").checked = theme_check_old;
         document.getElementById("settings").checked = check_old;
@@ -784,6 +788,18 @@
         function settings_check() {
 			soal_cerita_check = document.getElementById("check").checked;
             percobaan_check = document.getElementById("check2").checked;
+            // console.log(document.getElementById("jenis-font").value);
+            // document.body.style.font
+            // document.getElementsByTagName("button")[0]
+            font_value = document.getElementById("jenis-font").value
+            document.body.style.fontFamily = font_value;
+            const button_font_list = document.querySelectorAll("button");
+            for (let i = 0; i < button_font_list.length; i++) button_font_list[i].style.fontFamily = font_value;
+            const input_font_list = document.querySelectorAll("input");
+            for (let i = 0; i < input_font_list.length; i++) input_font_list[i].style.fontFamily = font_value;
+            const select_font_list = document.querySelectorAll("select");
+            for (let i = 0; i < select_font_list.length; i++) select_font_list[i].style.fontFamily = font_value;
+
 			suara_check = document.getElementById("suara").checked;
             theme_check = document.getElementById("tema").checked;
             check = document.getElementById("settings").checked;
@@ -792,9 +808,12 @@
             // console.log(check);
             //console.log(unit_check);
             //console.log(digit)
+            
             if (check) {
                 localStorage.setItem("soal-cerita-check", soal_cerita_check);
                 localStorage.setItem("percobaan-check", percobaan_check);
+                jenis_font = document.getElementById("jenis-font");
+                localStorage.setItem("font-index", jenis_font.options[jenis_font.selectedIndex].index);
 				localStorage.setItem("suara-check", suara_check);
                 localStorage.setItem("tema-check", theme_check);
             }
@@ -3069,7 +3088,7 @@
             }
 
             if (tipe2.index == 0) {
-                document.getElementById("pilihan").style.display = "none";
+                // document.getElementById("pilihan").style.display = "none";
                 // <input type="number" id="angka" min="0">
                 if (e1.index == 0 && [2,3].includes(e1_bentuk.index)) {
                     document.getElementById('tipe2').innerHTML = `
