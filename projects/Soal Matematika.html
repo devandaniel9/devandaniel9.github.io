@@ -50,6 +50,12 @@
     .color2 {
         color: #002080;
     }
+	.color3 {
+        color: #208040;
+    }
+    .color4 {
+        color: #806020;
+    }
     .heading {
         font-family:"Inter",sans-serif;
     }
@@ -215,13 +221,16 @@
         body {
             /* background-color: #203040; */
             /* background-color: #a0e0d0; */
-            background-color: #183028;
+            /* background-color: #183028; */
+			background-color: black;
             color: white;
             /* background-image: repeating-linear-gradient(180deg,#203040,#203040 80%,#304860); */
             background-image: repeating-linear-gradient(0deg,#244842,#183028 200px,#183028);
             /* background-image: url("images/5570834.jpg"); */
             /* background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url("images/5570834.jpg");background-repeat: no-repeat; */
-			background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0)),url("images/5570834.jpg");background-repeat: no-repeat;
+			/* background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0)),url("images/5570834.jpg");background-repeat: no-repeat; */
+			/* https://images.pexels.com/photos/1516046/pexels-photo-1516046.jpeg */
+			background-image: linear-gradient(rgba(0,0,0,0.25),rgba(0,0,0,0.25)),url("images/pexels-souvenirpixels-1516046.jpg");background-repeat: no-repeat;
             background-position: center;
 			background-size: auto 100%;
         }
@@ -398,6 +407,7 @@
             // document.body.style.backgroundColor = "rgba(0,0,0,0)";
         }
 
+        // <li><a href="javascript:void(0)" style="color:red">Tes Penglihatan Mata</a></li>
         document.getElementById("sidebar").innerHTML = `
         <div class="closebtn" onclick="closeNav()"><img src="images/close-icon.png" width="20"></div>
         <span style="font-size:26px;"><b>Main Menu</b></span>
@@ -410,7 +420,7 @@
             <li><a href="Soal Matematika.html">Soal Matematika</a></li>
             <li><a href="Peluang.html">Peluang</a></li>
             <li><a href="Kalkulator Sederhana.html">Kalkulator Sederhana</a></li>
-			<li><a href="javascript:void(0)" style="color:red">Tes Penglihatan Mata</a></li>
+			<li><a href="Tes Kognitif dan Visual.html">Tes Kognitif dan Visual</a></li>
         </ul><br>
         <hr style="height:2px; border-width:0; background-color:gray">
         <span style="font-size:22px;"><b>Lainnya</b></span>
@@ -465,7 +475,8 @@
     <!-- <option>Campuran</option> -->
     
     <!-- <h3 class="heading">●&nbsp;&nbsp;&nbsp;<span class="color2">Mode pertanyaan</span></h2> -->
-    <div class="column" style="width:500px; padding-left:25px; padding-right:50px; padding-bottom:25px;">
+    <!-- <div class="column" style="width:500px; padding-left:25px; padding-right:25px; padding-bottom:25px;"> -->
+	<div class="column" style="width:500px; padding-left:25px; padding-right:10px; padding-bottom:25px;">
 		<div style="margin-left:-25px; margin-top:-5px; height:35px; width:15px; background-color:gray; position:absolute;"></div>
 		<div style="margin-left:-10px; margin-top:-5px; height:35px; width:500px; background-color:rgba(128,128,128,0.25); position:absolute; z-index:-1;"></div>
 		<h3 class="heading color2" style="margin-top:0">Jenis pertanyaan</h3>
@@ -501,10 +512,10 @@
             <option id=22>Bangun Datar</option>
             <option id=23 style="color:gray">Bangun Ruang</option>
             <option id=24>Persamaan Linear</option>
-            <option id=25>Persamaan Dua Variabel</option>
+            <option id=25>Persamaan Multi Variabel</option>
             <option id=26>Manipulasi Aljabar</option>
             <option id=27>Himpunan</option>
-            <option id=28 style="color:gray">Fungsi dan Persamaan Kuadrat</option>
+            <option id=28>Persamaan Kuadrat</option>
             <option id=29>Fungsi dan Persamaan Eksponensial</option>
             <option id=30>Fungsi dan Persamaan Logaritma</option>
             <option id=31 style="color:gray">Persamaan Lingkaran</option>
@@ -514,24 +525,28 @@
             <option id=35 style="color:gray">Persamaan Diophantine</option>
             <option id=36 style="color:gray">Statistika</option>
             <option id=37>Subsitusi Fungsi</option>
-            <option id=38 style="color:gray">Matriks dan Determinan</option>
-            <option id=39 style="color:gray">Barisan dan Deret dari Pola Bilangan</option>
-            <option id=40 style="color:gray">Mencari Pola Bilangan</option>
-            <option id=41 style="color:gray">Trigonometri</option>
-            <option id=42 style="color:gray">Turunan</option>
-            <option id=43 style="color:gray">Integral</option>
-            <option id=44 style="color:gray">Limit</option>
-            <option id=45 style="color:gray">Permutasi dan Kombinasi</option>
-            <option id=46 style="color:gray">Peluang</option>
-            <option id=47 style="color:gray">Berpikir Logika</option>
-            <option id=48 style="color:gray">Aljabar lanjutan</option>
-            <option id=49 style="color:gray">Teori bilangan lanjutan</option>
-            <option id=50 style="color:gray">Kombinatorika lanjutan</option>
-            <option id=51 style="color:gray">Geometri lanjutan</option>
-            <option id=52 style="color:gray">Statistika lanjutan</option>
-            <option id=53 style="color:gray">Soal dengan level tingkatan</option>
-            <option id=54 style="color:gray">Soal bersyarat</option>
-            <option id=55 style="color:gray">Soal dari internet</option>
+            <option id=39>Matriks dan Determinan</option>
+			<option id=38>Transformasi</option>
+            <option id=40>Barisan dan Deret Bilangan</option>
+            <option id=41>Mencari Pola Bilangan</option>
+			<option id=42>Notasi Sigma</option>
+			<option id=43>Faktorial dan Notasi Pi</option>
+			<option id=44>Sisa Bilangan dari Bilangan Besar</option>
+            <option id=45 style="color:gray">Trigonometri</option>
+            <option id=46 style="color:gray">Turunan</option>
+            <option id=47 style="color:gray">Integral</option>
+            <option id=48 style="color:gray">Limit</option>
+            <option id=49 style="color:gray">Permutasi dan Kombinasi</option>
+            <option id=50 style="color:gray">Peluang</option>
+            <option id=51 style="color:gray">Berpikir Logika</option>
+            <option id=52 style="color:gray">Aljabar lanjutan</option>
+            <option id=53 style="color:gray">Teori bilangan lanjutan</option>
+            <option id=54 style="color:gray">Kombinatorika lanjutan</option>
+            <option id=55 style="color:gray">Geometri lanjutan</option>
+            <option id=56 style="color:gray">Statistika lanjutan</option>
+            <option id=57 style="color:gray">Soal dengan level tingkatan</option>
+            <option id=58 style="color:gray">Soal bersyarat</option>
+            <option id=59 style="color:gray">Soal dari internet</option>
         </select><br><br>
 
         <div id="bentuk-penjelasan" style="line-height:1.5em">
@@ -567,7 +582,7 @@
     </div>
 
     <!-- <div class="column" style="padding-right:50px;"> -->
-	<div class="column" style="width:500px; padding-left:25px; padding-right:50px; padding-bottom:25px;">
+	<div class="column" style="width:500px; padding-left:25px; padding-right:10px; padding-bottom:25px;">
 	    <div style="margin-left:-25px; margin-top:-5px; height:35px; width:15px; background-color:gray; position:absolute;"></div>
 		<div style="margin-left:-10px; margin-top:-5px; height:35px; width:500px; background-color:rgba(128,128,128,0.25); position:absolute; z-index:-1;"></div>
 	    <h3 class="heading color3" style="margin-top:0">Mode pertanyaan</h3>
@@ -578,48 +593,53 @@
             <option>Sulit</option>
             <option>Kustom</option>
         </select><br><br>
-        <div class="column" style="padding-right:70px;">
-            <label>Pilih tipe pertanyaan:</label><br>
-            <!-- <select id="tipe" style="width:150px" onchange="pilihan()"> -->
-            <select id="tipe" style="width:250px" onchange="pilihan();clearInterval(myInterval);">
-                <!-- <option>Isian singkat</option> -->
-				<option value="is">Isian singkat</option>
-                <option value="pg">Pilihan ganda</option>
-                <option value="pgk">Pilihan ganda kompleks</option>
-            </select>
-        </div>
+        <!-- <div class="column" style="padding-right:70px;"> -->
+        <label>Pilih tipe pertanyaan:</label><br>
+        <!-- <select id="tipe" style="width:150px" onchange="pilihan()"> -->
+        <select id="tipe" style="width:250px" onchange="pilihan();clearInterval(myInterval);">
+            <!-- <option>Isian singkat</option> -->
+		    <option value="is">Isian singkat</option>
+            <option value="pg">Pilihan ganda</option>
+            <option value="pgk">Pilihan ganda kompleks</option>
+        </select><br><br>
         <!-- <div class="column" id="pilihan" style="display:block"> -->
-        <div class="column" id="opsi-pilihan" style="display:none">
+        <div class="column" id="opsi-pilihan" style="display:none; padding-right:70px;">
             <label>Jumlah pilihan:</label><br>
             <select name="jumlah-pilihan" id="jumlah-pilihan" style="width:150px" onchange="pilihan();clearInterval(myInterval);">
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+                <option value="3">3 (A-C)</option>
+                <option value="4">4 (A-D)</option>
+                <option value="5">5 (A-E)</option>
+				<option value="6">6 (A-F)</option>
+            </select>
+        </div>
+		<div class="column" id="opsi-pilihan2" style="display:none">
+            <label>Jumlah jawaban benar:</label><br>
+            <select name="jumlah-pilihan2" id="jumlah-pilihan2" style="width:150px" onchange="pilihan();clearInterval(myInterval);">
+                <option value="-1">Acak (2-4)</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+				<option value="4">4</option>
             </select>
         </div>
         <div class="clearfix"></div>
 		
 		<!-- <img src="images/timer-icon.png" id="timer-icon" style="position:absolute; left:400px;" width="60"> -->
 		<img src="images/timer-icon.png" id="timer-icon" style="position:absolute; margin-left:300px; margin-top:20px;" width="60"><br>
-		<div class="column" style="padding-right:50px;">
-			<label>Pilih waktu timer setiap soal:</label><br>
-			<select id="waktu" style="width:150px" onchange="pilihan();clearInterval(myInterval);">
-				<option value="0">Tidak ada</option>
-				<option value="5">5 detik</option>
-				<option value="10">10 detik</option>
-				<option value="15">15 detik</option>
-				<option value="30">30 detik</option>
-				<option value="60">1 menit</option>
-				<option value="1">Kustom</option>
-			</select>
-		</div>
-		<div class="column" id="waktu-timer" style="display:none">
+		<label>Pilih waktu timer setiap soal:</label><br>
+		<select id="waktu" style="width:150px" onchange="pilihan();clearInterval(myInterval);">
+			<option value="0">Tidak ada</option>
+			<option value="5">5 detik</option>
+			<option value="10">10 detik</option>
+			<option value="15">15 detik</option>
+			<option value="30">30 detik</option>
+			<option value="60">1 menit</option>
+			<option value="1">Kustom</option>
+		</select><br><br>
+		<div id="waktu-timer" style="display:none">
 			<label>Waktu timer:</label><br>
 			<input type="number" id="waktu2" style="width:150px;" min="1" value="10">
 			<label>&nbsp;detik</label>
-		</div>
-		<div class="clearfix"></div>
-		<br><br>
+		</div><br>
 
         <label class="cb-container" style="width:400px;">Percobaan satu kali dalam setiap soal
             <input type="checkbox" id="check2" onclick="settings_check();tampilkan()">
@@ -630,6 +650,7 @@
             <span class="checkmark"></span>
         </label><br>
 
+        <img src="images/keyboard.png" style="position:absolute; margin-left:300px; margin-top:-10px;" width="80">
         Tombol Keyboard:<br>
         - Enter = Selesaikan<br>
         - N = Buat soal baru
@@ -646,11 +667,11 @@
         </div>
     </div>
 	
-	<div class="column" style="width:500px; padding-left:25px; padding-right:50px; padding-bottom:25px;">
+	<div class="column" style="width:500px; padding-left:25px; padding-right:10px; padding-bottom:25px;">
 	    <div style="margin-left:-25px; margin-top:-5px; height:35px; width:15px; background-color:gray; position:absolute;"></div>
 		<div style="margin-left:-10px; margin-top:-5px; height:35px; width:500px; background-color:rgba(128,128,128,0.25); position:absolute; z-index:-1;"></div>
 		<h3 class="heading color4" style="margin-top:0">Pengaturan lainnya</h3>
-		<img src="images/font.png" id="fonts-icon" style="position:absolute; margin-left:300px; margin-top:20px;" width="60"><br>
+		<img src="images/font.png" id="fonts-icon" style="position:absolute; margin-left:300px; margin-top:10px;" width="60">
 		<label>Pilih font:</label><br>
         <select id="jenis-font" style="width:150px" onchange="settings_check()">
             <option value="rubik, sans serif">Rubik</option>
@@ -724,7 +745,8 @@
 	<!-- <p>Terakhir diupdate: 16 Oktober 2025</p> -->
     <!-- <p>Terakhir diupdate: 22 Oktober 2025</p> -->
 	<!-- <p>Terakhir diupdate: 28 Oktober 2025</p> -->
-    <p>Terakhir diupdate: 31 Oktober 2025</p>
+    <!-- <p>Terakhir diupdate: 31 Oktober 2025</p> -->
+	<p>Terakhir diupdate: 13 November 2025</p>
 
     <script>
         // Time
@@ -1094,12 +1116,12 @@
                     a_count2 = Math.floor(1 + (max_gap-1) * Math.random());
                     for (let a_count = 1; a_count <= a; a_count++) {
                         ctx.fillStyle = "white";
-                        if (a_count == a_count2) {
-                            if (a <= 9*6) ctx.fillRect(37+40*(0+(a_count-1)%9), 37+40*(0+parseInt((a_count-1)/9)), 6, 6);
-                            else ctx.fillRect(18+20*(0+(a_count-1)%19), 18+20*(0+parseInt((a_count-1)/19)), 4, 4);
-                            hasil++;
-                            a_count += Math.floor(1 + (max_gap-1) * Math.random());
-                        }
+                        // if (a_count == a_count2) {
+						// if (true || a_count == a_count2) {
+                        if (a <= 9*6) ctx.fillRect(37+40*(0+(a_count-1)%9), 37+40*(0+parseInt((a_count-1)/9)), 6, 6);
+                        else ctx.fillRect(18+20*(0+(a_count-1)%19), 18+20*(0+parseInt((a_count-1)/19)), 4, 4);
+                        hasil++;
+                        a_count += Math.floor(1 + (max_gap-1) * Math.random());
                     }
                     if (tipe2.index == 1) {
                         for (let i = 1; i <= j_pilihan2; i++) {
@@ -2296,35 +2318,59 @@
                 // var a;
                 var a2;
                 while (a2 === undefined || a == a2) {
-                    if (level2.index == 0) {
-                        a2 = Math.floor(1 + 10 * Math.random());
-                        hasil = a2*a2;
-                        pangkat = 2;
-                    } else if (level2.index == 1) {
-                        if (Math.random() < 0.5) {
-                            a2 = Math.floor(11 + 20 * Math.random());
-                            hasil = a2*a2;
-                            pangkat = 2;
-                        } else {
-                            a2 = Math.floor(1 + 20 * Math.random());
-                            hasil = a2*a2*a2;
-                            pangkat = 3;
-                        }
-                    } else {
-                        if (Math.random() < 1/3) {
-                            a2 = Math.floor(31 + 170 * Math.random());
-                            hasil = a2*a2;
-                            pangkat = 2;
-                        } else if (Math.random() < 2/3) {
-                            a2 = Math.floor(21 + 80 * Math.random());
-                            hasil = a2*a2*a2;
-                            pangkat = 3;
-                        } else {
-                            a2 = Math.floor(1 + 30 * Math.random());
-                            hasil = a2*a2*a2*a2;
-                            pangkat = 4;
-                        }
-                    }
+				    if (e1_bentuk.index == 0) {
+						if (level2.index == 0) {
+							a2 = Math.floor(1 + 10 * Math.random());
+							hasil = a2*a2;
+							pangkat = 2;
+						} else if (level2.index == 1) {
+							if (Math.random() < 0.5) {
+								a2 = Math.floor(11 + 20 * Math.random());
+								hasil = a2*a2;
+								pangkat = 2;
+							} else {
+								a2 = Math.floor(1 + 20 * Math.random());
+								hasil = a2*a2*a2;
+								pangkat = 3;
+							}
+						} else {
+							if (Math.random() < 1/3) {
+								a2 = Math.floor(31 + 170 * Math.random());
+								hasil = a2*a2;
+								pangkat = 2;
+							} else if (Math.random() < 2/3) {
+								a2 = Math.floor(21 + 80 * Math.random());
+								hasil = a2*a2*a2;
+								pangkat = 3;
+							} else {
+								a2 = Math.floor(1 + 30 * Math.random());
+								hasil = a2*a2*a2*a2;
+								pangkat = 4;
+							}
+						}
+					} else if (e1_bentuk.index == 1) {
+					    if (level2.index == 0) {
+					        a2 = Math.floor(1 + 20 * Math.random());
+						    hasil = a2*a2*a2;
+						    pangkat = 3;
+						} else if (level2.index == 1) {
+						    a2 = Math.floor(21 + 40 * Math.random());
+						    hasil = a2*a2*a2;
+						    pangkat = 3;
+						} else {
+						    a2 = Math.floor(51 + 150 * Math.random());
+						    hasil = a2*a2*a2;
+						    pangkat = 3;
+						}
+					} else if (e1_bentuk.index == 2) {
+					    a2 = Math.floor(1 + 20 * Math.random());
+						hasil = a2**4;
+						pangkat = 4;
+					} else {
+					    a2 = Math.floor(1 + 20 * Math.random());
+						hasil = a2**5;
+						pangkat = 5;
+					}
                 }
                 a = a2;
                 // soal_teks = `Hasil dari &nbsp;<span style="font-size:20px">/(5^2/)`.replaceAll("/","&#x005c");
@@ -2734,16 +2780,20 @@
                     }
                     // soal_teks = `Diketahui himpunan /(A = /{1,2,3,4,5/}/) dan himpunan /(B = /{2,3,6,7/}/). Jika himpunan diurutkan dari terkecil hingga terbesar, maka /(A ∩ B/) adalah ...`;
                     mathrandom = Math.random();
-                    if (mathrandom < 0.5) {
+                    if (mathrandom < 1/5) {
                         soal_teks = `Diketahui himpunan \\(A = \\{${himpunan_A_teks}\\}\\) dan himpunan \\(B = \\{${himpunan_B_teks}\\}\\). Jika himpunan diurutkan dari terkecil hingga terbesar, maka \\(A ∩ B\\) adalah ...`;
                         // console.log(intersection(himpunan_A,himpunan_B));
                         hasil = intersection(himpunan_A,himpunan_B);
-                    } else {
+                    } else if (mathrandom < 2/5) {
                         soal_teks = `Diketahui himpunan \\(A = \\{${himpunan_A_teks}\\}\\) dan himpunan \\(B = \\{${himpunan_B_teks}\\}\\). Jika himpunan diurutkan dari terkecil hingga terbesar, maka \\(A ∪ B\\) adalah ...`;
                         // console.log(intersection(himpunan_A,himpunan_B));
                         hasil = union(himpunan_A,himpunan_B);
-                    }
-                    soal_teks = `Diketahui himpunan \\(A = \\{x&nbsp\\ |\\ 1 \\leq x \\leq 30, x \\in bilangan\\ prima \\}\\) dan himpunan \\(B = \\{3,4,5,6\\}\\). Jika himpunan diurutkan dari terkecil hingga terbesar, maka \\(A ∩ B\\) adalah ...`;
+                    } else if (mathrandom < 3/5) {
+                        // soal_teks = `Diketahui himpunan \\(A = \\{x&nbsp\\ |\\ 1 \\leq x \\leq 30, x \\in bilangan\\ prima \\}\\) dan himpunan \\(B = \\{3,4,5,6\\}\\). Jika himpunan diurutkan dari terkecil hingga terbesar, maka \\(A ∩ B\\) adalah ...`;
+						soal_teks = `Diketahui himpunan \\(A = \\{x&nbsp\\ |\\ 1 \\leq x \\leq 30, x \\in bilangan\\ prima \\}\\) dan himpunan \\(B = \\{3,4,5,6\\}\\). Jika himpunan diurutkan dari terkecil hingga terbesar, maka \\(A ∩ B\\) adalah ...`;
+					} else {
+					    
+					}
                     hasil = '{' + hasil.toString() + '}';
                     // /cup (∪) /cap (∩)
                     // soal_teks = `Diketahui himpunan /(A = /{1,2,3,4,5/}/) dan himpunan /(B = /{2,3,6,7/}/). Maka /(A ∩ B/) adalah ...`
@@ -2829,6 +2879,20 @@
                     pilihan_list.push(convert_to_math("/(x<-4/)"));
                     random_check = false;
                 }
+			} else if (e1.index == 36) {
+                if (e1_bentuk.index == 0) {
+				    soal_teks = `Diketahui nilai matematika di kelas 10 masing-masing siswa adalah 75, 80, 95, 92, 85, 91, 84. Rata-rata (mean) nilai matematika di kelas 10 adalah ...`
+                    document.getElementById('soal').innerHTML = soal_teks;
+					hasil = 86;
+				} else if (e1_bentuk.index == 1) {
+				    soal_teks = `Diketahui suhu rata-rata dalam suatu hari di kota Z dalam Celsius masing-masing adalah 31, 30, 32, 28, 28, 30, 30, 30, 31, 27. Median dari data tersebut adalah ...`
+                    document.getElementById('soal').innerHTML = soal_teks;
+					hasil = 30;
+			    } else if (e1_bentuk.index == 2) {
+				    soal_teks = `Diketahui berat badan siswa di sekolah Z dalam kilogram (kg) adalah 36, 38, 40, 41, 39, 38, 38, 40, 35, 36, 37, 37, 42, 40, 40. Modus dari data tersebut adalah ...`
+                    document.getElementById('soal').innerHTML = soal_teks;
+					hasil = 40;
+				}
             } else if (e1.index == 37) {
                 if (e1_bentuk.index == 0) {
                     mathrandom = Math.random();
@@ -3000,20 +3064,26 @@
                 }
                 // soal_teks = convert_to_math(soal_teks);
                 document.getElementById('soal').innerHTML = soal_teks;
-            } else if (e1.index == 41) {
+			} else if (e1.index == 38) {
+			    if (e1_bentuk.index == 0) {
+				    soal_teks = `Diketahui matriks \\(A = \\begin{bmatrix} 1 & 2 \\\\ 3 & 4 \\end{bmatrix}\\) dan \\(B = \\begin{bmatrix} 1 & 0 \\\\ -1 & -3 \\end{bmatrix}\\). Hasil dari \\(A + B\\) adalah ...`;
+				}
+				document.getElementById('soal').innerHTML = soal_teks;
+            } else if (e1.index == 43) {
                 // soal_teks = `Diketahui fungsi linear /(f(x) = 2x+3/). Nilai dari /(f(5)/) adalah ...`.replaceAll("/","&#x005c");
                 soal_teks = `Hasil dari &nbsp;<span style="font-size:18px">/(/mathrm{sin(60°)}/)</span> adalah ...`.replaceAll("/","&#x005c").replaceAll("<&#x005cspan>","</span>");
                 soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
                 document.getElementById('soal').innerHTML = soal_teks;
-            } else if (e1.index == 46) {
+            } else if (e1.index == 48) {
                 // soal_teks = `Diketahui fungsi linear /(f(x) = 2x+3/). Nilai dari /(f(5)/) adalah ...`.replaceAll("/","&#x005c");
                 soal_teks = `Peluang dari 2 dadu yang dilempar secara bersamaan, sehinga jumlahnya 9 adalah ...`.replaceAll("/","&#x005c").replaceAll("<&#x005cspan>","</span>");
                 soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
                 document.getElementById('soal').innerHTML = soal_teks;
             } else {
                 soal_teks = '<span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>';
+				soal_suara = '';
+				document.getElementById('soal').innerHTML = soal_teks;
                 document.getElementById('tipe2').style.display = 'none';
-                soal_suara = '';
                 // document.getElementById('soal').innerHTML = `<span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
 				// document.getElementById('tipe2').style.display = 'none';
             }
@@ -3090,14 +3160,17 @@
             if (tipe2.index == 0) {
                 // document.getElementById("pilihan").style.display = "none";
                 // <input type="number" id="angka" min="0">
+				// <label>Input jawaban</label><br>
                 if (e1.index == 0 && [2,3].includes(e1_bentuk.index)) {
                     document.getElementById('tipe2').innerHTML = `
-                    <label>Input jawaban</label><br>
+					Isilah di input jawaban yang menurut Anda benar!<br><br>
+					<label><b>Input jawaban</b></label><br><br>
                     <input type="text" id="angka" min="0" style="width:400px">
                     `;
                 } else {
                     document.getElementById('tipe2').innerHTML = `
-                    <label>Input jawaban</label><br>
+                    Isilah dengan jawaban yang menurut Anda benar!<br><br>
+					<label><b>Input jawaban</b></label><br>
                     <input type="text" id="angka" min="0">
                     `;
                 }
@@ -3132,25 +3205,29 @@
 				else if (pilihan_index == 1) {hasil2 = hasil + '<br><br>B. ' + hasil;}
 				else if (pilihan_index == 2) {hasil2 = hasil + '<br><br>C. ' + hasil;}
 				else if (pilihan_index == 3) {hasil2 = hasil + '<br><br>D. ' + hasil;}
-				else {hasil2 = hasil + '<br><br>E. ' + hasil;}
+				else if (pilihan_index == 4) {hasil2 = hasil + '<br><br>E. ' + hasil;}
+				else {hasil2 = hasil + '<br><br>F. ' + hasil;}
 				
                 // <div class="column">
                 // <label class="rb-container" style="width:150px;">
+				// <input type="radio" id="pilihan1" value="${pilihan_list[0]}" name="pilihan" value="0">
+				// <span>Pilihan jawaban</span><br><br>
                 document.getElementById('tipe2').innerHTML = `
-                <span>Pilihan jawaban</span><br><br>
+				Pilihlah jawaban yang benar!<br><br>
+                <label><b>Pilihan jawaban</b></label><br><div style="padding-top:10px"></div>
                 <label class="rb-container">A. ${pilihan_list[0]}
-                    <input type="radio" id="pilihan1" value="${pilihan_list[0]}" name="pilihan" value="0">
+                    <input type="radio" id="pilihan1" value="${pilihan_list[0]}" name="pilihan">
                     <span class="checkradio"></span>
                 </label>
                 <label class="rb-container">B. ${pilihan_list[1]}
-                    <input type="radio" id="pilihan2" value="${pilihan_list[1]}" name="pilihan" value="1">
+                    <input type="radio" id="pilihan2" value="${pilihan_list[1]}" name="pilihan">
                     <span class="checkradio"></span>
                 </label>
                 `;
                 if (j_pilihan2 >= 3) {
                     document.getElementById('tipe2').innerHTML += `
                     <label class="rb-container">C. ${pilihan_list[2]}
-                        <input type="radio" id="pilihan3" value="${pilihan_list[2]}" name="pilihan" value="2">
+                        <input type="radio" id="pilihan3" value="${pilihan_list[2]}" name="pilihan">
                         <span class="checkradio"></span>
                     </label>
                     `;
@@ -3158,15 +3235,23 @@
                 if (j_pilihan2 >= 4) {
                     document.getElementById('tipe2').innerHTML += `
                     <label class="rb-container">D. ${pilihan_list[3]}
-                        <input type="radio" id="pilihan4" value="${pilihan_list[3]}" name="pilihan" value="3">
+                        <input type="radio" id="pilihan4" value="${pilihan_list[3]}" name="pilihan">
                         <span class="checkradio"></span>
                     </label>
                     `;
                 }
-                if (j_pilihan2 == 5) {
+                if (j_pilihan2 >= 5) {
                     document.getElementById('tipe2').innerHTML += `
                     <label class="rb-container">E. ${pilihan_list[4]}
-                        <input type="radio" id="pilihan5" value="${pilihan_list[4]}" name="pilihan" value="4">
+                        <input type="radio" id="pilihan5" value="${pilihan_list[4]}" name="pilihan">
+                        <span class="checkradio"></span>
+                    </label>
+                    `;
+                }
+				if (j_pilihan2 == 6) {
+                    document.getElementById('tipe2').innerHTML += `
+                    <label class="rb-container">F. ${pilihan_list[5]}
+                        <input type="radio" id="pilihan6" value="${pilihan_list[5]}" name="pilihan">
                         <span class="checkradio"></span>
                     </label>
                     <div class="clearfix"></div><br>
@@ -3321,6 +3406,7 @@
                 }
             } else if (e1.index == 17) {
                 document.getElementById("bentuk-sub").style.display = 'block';
+				document.getElementById("bentuk-penjelasan").innerHTML = `<b>Pangkat dua</b> atau <b>bilangan kuadrat</b> (bahasa Inggris: <i>square</i>) dalam matematika adalah hasil perkalian antara suatu bilangan dengan bilangan itu sendiri. Kata kerja "memangkatkan dua" atau "mengkuadratkan" merujuk kepada operasi ini. Dalam pelaksanaannya operasi ini sama dengan memangkatkan dengan bilangan 2, dan dilambangkan dengan angka 2 dalam posisi superskrip. Misalnya kuadrat dari 3 dapat ditulis \\(3^2\\), yang sama dengan bilangan 9. Dalam sejumlah kasus di mana penayangan superskrip tidak dimungkinkan, misalnya pada bahasa pemrograman atau teks biasa, notasi x^2 atau x**2 dapat digunakan untuk menggantikan \\(x^2\\).`;
                 if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
                         <option>Semua</option>
@@ -3347,7 +3433,7 @@
                     `;
                 }
             } else if (e1.index == 19) {
-                document.getElementById("bentuk-penjelasan").innerHTML = `Di dalam matematika, akar kuadrat atau akar persegi dari bilangan x sama dengan bilangan r sedemikian sehingga /(r^2 = x/), atau, di dalam perkataan lain, bilangan r yang bila dikuadratkan (hasil kali dengan bilangan itu sendiri) sama dengan x. Setiap bilangan real tak-negatif, katakanlah x memiliki akar kuadrat tak-negatif yang tunggal, disebut akar kuadrat utama, yang dilambangkan oleh akar ke-n sebagai /(/sqrt {x}/).`.replaceAll("/","&#x005c");
+                document.getElementById("bentuk-penjelasan").innerHTML = `Di dalam matematika, <b>akar kuadrat</b> atau <b>akar persegi</b> dari bilangan x sama dengan bilangan r sedemikian sehingga \\(r^2 = x\\), atau, di dalam perkataan lain, bilangan r yang bila dikuadratkan (hasil kali dengan bilangan itu sendiri) sama dengan x. Setiap bilangan real tak-negatif, katakanlah x memiliki akar kuadrat tak-negatif yang tunggal, disebut akar kuadrat utama, yang dilambangkan oleh akar ke-n sebagai \\(\\sqrt {x}\\).`;
             } else if (e1.index == 21) {
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
@@ -3377,7 +3463,7 @@
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
-                        <option style="color:gray">Kubus</option>
+					    <option style="color:gray">Kubus</option>
                         <option style="color:gray">Balok</option>
                         <option style="color:gray">Prisma</option>
                         <option style="color:gray">Limas</option>
@@ -3390,10 +3476,18 @@
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
-                        <option style="color:gray">Pemfaktoran Linear</option>
-                        <option style="color:gray">Pemfaktoran Kuadrat</option>
-                        <option style="color:gray">Pemfaktoran Derajat Tinggi</option>
-                        <option style="color:gray">Pemfaktoran Campuran</option>
+					    <option style="color:gray">Persamaan Linear</option>
+                        <option style="color:gray">Gradien Garis</option>
+                    `;
+                }
+			} else if (e1.index == 25) {
+                document.getElementById("bentuk-sub").style.display = 'block';
+                if (change) {
+                    document.getElementById("pilihan-bentuk-sub").innerHTML = `
+					    <option>Persamaan Dua Variabel</option>
+                        <option style="color:gray">Persamaan Tiga Variabel</option>
+						<option style="color:gray">Persamaan Multi Variabel Berpola</option>
+						<option style="color:gray">Persamaan Non-Linear Dua Variabel</option>
                     `;
                 }
             } else if (e1.index == 26) {
@@ -3406,6 +3500,10 @@
                         <option style="color:gray">Rasionalkan Akar Kuadrat</option>
                         <option style="color:gray">Campuran Variabel</option>
                         <option style="color:gray">Campuran Variabel 2</option>
+						<option style="color:gray">Pemfaktoran Linear</option>
+                        <option style="color:gray">Pemfaktoran Kuadrat</option>
+                        <option style="color:gray">Pemfaktoran Derajat Tinggi</option>
+                        <option style="color:gray">Pemfaktoran Campuran</option>
                     `;
                 }
             } else if (e1.index == 27) {
@@ -3420,6 +3518,17 @@
                         <option style="color:gray">Himpunan bersyarat</option>
                     `;
                 }
+				document.getElementById("bentuk-penjelasan").innerHTML = `
+				Dalam matematika, <b>himpunan</b> (bahasa Inggris: <i>set</i>) dapat <i>dibayangkan</i> sebagai kumpulan benda berbeda yang terdefinisi dengan jelas dan dipandang sebagai satu kesatuan utuh. Dengan terdefinisi yang jelas itu maka dapat ditentukan dengan tegas apakah suatu objek termasuk anggota suatu himpunan atau bukan.
+                <br><br>
+                Konsep himpunan seperti saat sekarang ini pertama kali dikemukakan oleh seorang matematikawan Jerman, Georg Cantor, pada akhir abad ke-19. Cantor mendefinisikan himpunan sebagai "Hasil usaha pengumpulan beberapa benda yang memiliki suatu ciri pembeda tertentu dan dapat-diperbedakan dalam intuisi atau pikiran kita (benda-benda itu disebut 'anggota'), menjadi suatu kesatuan".
+                <br><br>
+                Himpunan merupakan satu di antara konsep dasar matematika, karena hampir semua aspek matematika dapat dibangun dengan konsep himpunan ini. Kajian lebih lanjut mengenai himpunan dipelajari dalam teori himpunan.
+				<br><br>
+				Contoh himpunan:<br>
+				- Nama buah: \\(B = \\{apel, jeruk, mangga, pisang\\}\\)<br>
+				- Bilangan asli: \\(\\mathbb{N} = \\{1, 2, 3, 4, 5, ...\\}\\)<br>
+			    `;
             } else if (e1.index == 28) {
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
@@ -3446,14 +3555,36 @@
                         <option style="color:gray">Persamaan Mutlak Kompleks</option>
                     `;
                 }
+			} else if (e1.index == 36) {
+			    document.getElementById("bentuk-sub").style.display = 'block';
+                if (change) {
+                    document.getElementById("pilihan-bentuk-sub").innerHTML = `
+                        <option style="color:gray">Mencari Mean</option>
+                        <option style="color:gray">Mencari Median</option>
+						<option style="color:gray">Mencari Median Berkelompok</option>
+                        <option style="color:gray">Mencari Modus</option>
+						<option style="color:gray">Mencari Modus Berkelompok</option>
+						<option style="color:gray">Mencari Jangkauan</option>
+						<option style="color:gray">Mencari Kuartil dan Jangkauan Kuartil</option>
+                        <option style="color:gray">Campuran</option>
+						<option style="color:gray">Diagram Data</option>
+						<option style="color:gray">Kemungkinan Data</option>
+                    `;
+                }
+				document.getElementById("bentuk-penjelasan").innerHTML = `
+				<b>Statistika</b> adalah sebuah ilmu yang mempelajari bagaimana cara merencanakan, mengumpulkan, menganalisis, lalu menginterpretasikan, dan akhirnya mempresentasikan data. Singkatnya, statistika adalah ilmu yang bersangkutan dengan suatu data. Istilah <i>statistika</i> berbeda dengan <i>statistik</i>. Statistika pada umumnya bekerja menggunakan data numerik yang merupakan hasil cacahan maupun hasil pengkuran yang dilakukan dengan menggunakan data kategorik yang diklasifikasikan menurut sebuah kriteria tertentu.
+				<br><br>
+				Statistika merupakan ilmu yang berkaitan dengan data. Statistik adalah data itu sendiri, informasinya, atau hasil penerapan algoritme statistika pada suatu data tersebut. Dari kumpulan data, statistika dapat digunakan untuk menyimpulkan atau mendeskripsikan data; inilah yang dinamakan statistika deskriptif. Informasi kemudian dicatat sekaligus dikumpulkan baik itu dalam bentuk informasi numerik maupun informasi kategorik yang disebut sebagai suatu pengamatan. Sebagian besar konsep dasar statistika memberi asumsi mengenai teori probabilitas. Beberapa istilah statistika antara lain sebagai berikut: populasi, sampel, unit sampel, probabilitas.
+				`;
             } else if (e1.index == 37) {
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
-                        <option style="color:gray">Satu fungsi</option>
-                        <option style="color:gray">Invers fungsi</option>
-                        <option style="color:gray">Operator fungsi</option>
-                        <option style="color:gray">Campuran</option>
+                        <option>Satu fungsi</option>
+                        <option>Invers fungsi</option>
+                        <option>Operator fungsi</option>
+                        <option style="color:gray">Fungsi bersyarat</option>
+						<option style="color:gray">Campuran</option>
                     `;
                 }
             } else if (e1.index == 38) {
@@ -3461,10 +3592,50 @@
                 if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
                         <option style="color:gray">Penjumlahan dan Pengurangan Matriks</option>
-                        <option style="color:gray">Perkalian Matriks</option>
+                        <option style="color:gray">Perkalian Skalar Matriks</option>
+						<option style="color:gray">Perkalian Matriks</option>
                         <option style="color:gray">Invers Matriks</option>
+						<option style="color:gray">Perpangkatan Matriks</option>
                         <option style="color:gray">Campuran</option>
                         <option style="color:gray">Determinan</option>
+                    `;
+                }
+			} else if (e1.index == 39) {
+                document.getElementById("bentuk-sub").style.display = 'block';
+                if (change) {
+                    document.getElementById("pilihan-bentuk-sub").innerHTML = `
+                        <option style="color:gray">Translasi</option>
+                        <option style="color:gray">Refleksi</option>
+                        <option style="color:gray">Dilatasi</option>
+                        <option style="color:gray">Rotasi</option>
+                        <option style="color:gray">Campuran</option>
+						<option style="color:gray">Transformasi Bangun Datar</option>
+                    `;
+                }
+			} else if (e1.index == 40) {
+                document.getElementById("bentuk-sub").style.display = 'block';
+                if (change) {
+                    document.getElementById("pilihan-bentuk-sub").innerHTML = `
+                        <option>Barisan Aritmatika</option>
+                        <option style="color:gray">Deret Aritmatika</option>
+						<option style="color:gray">Barisan Geometri</option>
+                        <option style="color:gray">Deret Geometri</option>
+						<option style="color:gray">Deret Tak Hingga</option>
+						<option style="color:gray">Barisan Lain</option>
+						<option style="color:gray">Barisan Rekursif</option>
+						<option style="color:gray">Barisan Rekursif Dua Variabel</option>
+                    `;
+                }
+			} else if (e1.index == 42) {
+                document.getElementById("bentuk-sub").style.display = 'block';
+                if (change) {
+                    document.getElementById("pilihan-bentuk-sub").innerHTML = `
+                        <option>Barisan Aritmatika</option>
+                        <option style="color:gray">Deret Polinomial</option>
+						<option style="color:gray">Deret Tertentu</option>
+                        <option style="color:gray">Deret Tak Hingga</option>
+						<option style="color:gray">Barisan Rekursif dengan Notasi Sigma</option>
+						<option style="color:gray">Menyatakan dalam Notasi Sigma</option>
                     `;
                 }
             } else {
@@ -3611,8 +3782,9 @@
             var tipe = document.getElementById("tipe");
             var tipe2 = tipe.options[tipe.selectedIndex];
             
-            var j_pilihan = document.getElementById("jumlah-pilihan");
-            j_pilihan2 = parseInt(j_pilihan.options[j_pilihan.selectedIndex].innerHTML);
+            // var j_pilihan = document.getElementById("jumlah-pilihan");
+            // j_pilihan2 = parseInt(j_pilihan.options[j_pilihan.selectedIndex].innerHTML);
+			j_pilihan2 = parseInt(document.getElementById("jumlah-pilihan").value);
             // console.log(j_pilihan2)
 
             var waktu_timer = parseInt(document.getElementById("waktu").value);
@@ -3633,18 +3805,22 @@
             if (waktu_timer == 1) {
                 document.getElementById('waktu-timer').style.display = 'block';
                 // document.getElementById('timer-icon').style.left = '650px';
-				document.getElementById('timer-icon').style.marginLeft = '550px';
+				// document.getElementById('timer-icon').style.marginLeft = '550px';
                 waktu_timer = document.getElementById('waktu2').value;
             } else {
                 document.getElementById('waktu-timer').style.display = 'none';
                 // document.getElementById('timer-icon').style.left = '400px';
-				document.getElementById('timer-icon').style.marginLeft = '300px';
+				// document.getElementById('timer-icon').style.marginLeft = '300px';
             }
 			
-			if (document.getElementById("tipe").value == 'pg') {
-			    document.getElementById('opsi-pilihan').style.display = 'block';
-			} else {
+			// if (document.getElementById("tipe").value == 'pg') {
+			if (document.getElementById("tipe").value == 'is') {
 			    document.getElementById('opsi-pilihan').style.display = 'none';
+				document.getElementById('opsi-pilihan2').style.display = 'none';
+			} else {
+			    document.getElementById('opsi-pilihan').style.display = 'block';
+				if (document.getElementById("tipe").value == 'pgk') document.getElementById('opsi-pilihan2').style.display = 'block';
+				else document.getElementById('opsi-pilihan2').style.display = 'none';
 			}
 
             // myInterval = "";
@@ -3767,14 +3943,12 @@
                     var angka_awal = document.getElementById('pilihan2').value;
                 } else if (document.getElementById("pilihan3").checked) {
                     var angka_awal = document.getElementById('pilihan3').value;
-                } else if (j_pilihan2 >= 4) {
-                    if (document.getElementById("pilihan4").checked) {
-                        var angka_awal = document.getElementById('pilihan4').value;
-                    }
-                } else if (j_pilihan2 == 5) {
-                    if (document.getElementById("pilihan5").checked) {
-                        var angka_awal = document.getElementById('pilihan5').value;
-                    }
+                } else if (j_pilihan2 >= 4 && document.getElementById("pilihan4").checked) {
+                    var angka_awal = document.getElementById('pilihan4').value;
+                } else if (j_pilihan2 >= 5 && document.getElementById("pilihan5").checked) {
+                    var angka_awal = document.getElementById('pilihan5').value;
+				} else if (j_pilihan2 >= 6 && document.getElementById("pilihan6").checked) {
+                    var angka_awal = document.getElementById('pilihan6').value;
                 } else {
                     var angka_awal = '';
                 }
@@ -3785,7 +3959,7 @@
                 // var tanda = '';
                 // e1.index == 6 & e1_bentuk.index == 0
                 // if (e1.index <= 6 || (e1.index == 7 && (e1_bentuk.index == 0 || e1_bentuk.index == 2)) || e1.index == 8 || e1.index == 9 || e1.index == 17 || e1.index == 21 || e1.index == 32) {
-                if ([0,1,2,3,4,5,6,7,11,12,13,14,17,18,19,20,22,23,26,37].includes(e1.index)
+                if ([0,1,2,3,4,5,6,7,11,12,13,17,18,19,20,22,23,26,36,37].includes(e1.index)
 				|| (e1.index == 0 && [0,1,4].includes(e1_bentuk.index))
 				|| (e1.index == 8 && [1].includes(e1_bentuk.index))
 				|| (e1.index == 11 && [0,2].includes(e1_bentuk.index))
@@ -3799,7 +3973,7 @@
                     jawaban_check = angka == hasil;
                     // console.log(angka, hasil);
                 } else if (e1.index == 23 && e1_bentuk.index == 0) {
-                    /* if (angka_awal == '{}') {
+                    if (angka_awal == '{}') {
                         angka = [];
                     } else {
                         angka = angka_awal.toLowerCase().replaceAll('{','').replaceAll('}','').replaceAll(',',' ').split(' ');
@@ -3809,10 +3983,10 @@
                     for (let i = 0; i < hasil.length; i++) {
                         jawaban_check &= angka[i] == hasil[i];
                     }
-                    jawaban_check = angka.length == hasil.length; */
-                    angka = angka_awal.replaceAll(' ','');
+                    jawaban_check = angka.length == hasil.length;
+                    /* angka = angka_awal.replaceAll(' ','');
                     jawaban_check = angka == hasil;
-                    soal_check = false;
+                    soal_check = false; */
                 } else {
                     angka = angka_awal.toLowerCase();
                     hasil = hasil.toLowerCase();
