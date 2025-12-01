@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Soal Matematika</title>
+    <title>Tes Kognitif dan Visual</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="checkbox.css">
@@ -112,7 +112,35 @@
             <option id=0>Tes Buta Warna</option>
             <option id=1>Tes Akurasi Visual</option>
             <option id=2>Tes Pola Kognitif</option>
-        </select>
+			<option id=3>Tes Memori</option>
+        </select><br><br>
+		
+		<div id="bentuk-penjelasan" style="line-height:1.5em"></div><br><br>
+
+        <div id="bentuk-sub" style="display:none">
+            <label>Pilih jenis pertanyaan 2:</label><br>
+            <select id="pilihan-bentuk-sub" style="width:300px" onchange="pilihan();clearInterval(myInterval);"></select><br><br>
+			<div id="bentuk-penjelasan2" style="line-height:1.5em"></div><br><br>
+        </div>
+        
+        <div id="bentuk-soal" style="display:block">
+            <div class="column" style="padding-right:50px;">
+                <label>Pilih bentuk soal:</label><br>
+                <select id="pilihan-bentuk-soal" style="width:200px" onchange="pilihan();clearInterval(myInterval);">
+                    <!-- <option>Tulisan datar</option> -->
+                    <option>Tulisan Datar</option>
+                    <option>Bentuk Bersusun</option>
+                </select>
+            </div>
+            <div class="column" id="contoh-bentuk-soal">
+                <span>
+                Contoh:<br><br>
+                Hasil dari 123 + 45 adalah ...
+                </span>
+            </div>
+            <div class="clearfix"></div>
+            <br><br>
+        </div>
     </div>
 
     <!-- <div class="column" style="padding-right:50px;"> -->
@@ -125,7 +153,7 @@
             <option>Mudah</option>
             <option>Sedang</option>
             <option>Sulit</option>
-            <option>Kustom</option>
+            <option>Sangat sulit</option>
         </select><br><br>
         <!-- <div class="column" style="padding-right:70px;"> -->
         <label>Pilih tipe pertanyaan:</label><br>
@@ -248,7 +276,7 @@
     <!-- <p>Pilih pertanyaan</p> -->
     <!-- <p id="soal" style="width:500px; word-wrap:break-word;">Belum ada soal</p> -->
     <span id="soal" style="width:500px; word-wrap:break-word;">Belum ada soal</span>
-    <div id="timer" style="position:absolute; left:500px;"></div><br><br>
+    <div id="timer" style="position:absolute; left:800px;"></div><br><br>
     <!-- <div class="column" style="padding-right:50px;"></div> -->
     <button class="button" id="buat-soal" onclick="pilihan();buat();pilihan();clearInterval(myInterval);">Buat soal baru</button><br><br>
     <div id="tipe2"></div><br>
@@ -280,7 +308,8 @@
     <!-- <p>Terakhir diupdate: 22 Oktober 2025</p> -->
 	<!-- <p>Terakhir diupdate: 28 Oktober 2025</p> -->
     <!-- <p>Terakhir diupdate: 31 Oktober 2025</p> -->
-	<p>Terakhir diupdate: 13 November 2025</p>
+	<!-- <p>Terakhir diupdate: 13 November 2025</p> -->
+	<p>Terakhir diupdate: 1 Desember 2025</p>
 	
 	<script>
         // Time
@@ -387,6 +416,899 @@
                 cerita.style.display = "none";
             } else {
                 cerita.style.display = "block";
+            }
+        }
+		
+		function gcd(a, b) {
+            for (let temp = b; b !== 0;) {
+                b = a % b;
+                a = temp;
+                temp = b;
+            }
+            return a;
+        }
+
+        // function lcmFunction(a, b) { 
+        function lcm(a, b) { 
+            const gcdValue = gcd(a, b);
+            return (a * b) / gcdValue; 
+        }
+        function convert_to_math(text) {
+            // return text.replaceAll("/(","&nbsp;<span style='font-size:18px'>&#x005c(").replaceAll("/)","&#x005c)</span>")
+            // replaceAll(";","&#x005c").
+            try {MathJax.typeset();} catch(err) {}
+            return text.replaceAll("/(","<span style='font-size:18px'>&#x005c(").replaceAll("/)","/)</span>").replaceAll("/","&#x005c").replaceAll("<&#x005cspan>","</span>")
+        }
+        
+        // a = 0;
+        // a = -1;
+        var a = '';
+        var b = 0;
+        a2 = 0;
+        a3 = 0;
+        b2 = 0;
+        // a_2 = 0;
+        var a_2 = 0;
+        var b_2 = 0;
+        function buat() {
+			var bs = document.getElementById("pilihan-bentuk-soal");
+            var bs2 = bs.options[bs.selectedIndex];
+            var e = document.getElementById("bentuk");
+            var e1 = e.options[e.selectedIndex];
+            var level = document.getElementById("level");
+            var level2 = level.options[level.selectedIndex];
+            var tipe = document.getElementById("tipe");
+            var tipe2 = tipe.options[tipe.selectedIndex];
+			document.getElementById('jawaban').innerHTML = 'Belum ada jawaban';
+            document.getElementById('tipe2').style.display = 'block';
+			
+			soal = '';
+            soal_check = true;
+            document.getElementById('tipe2').style.display = 'block';
+			
+			pilihan_index = Math.floor(j_pilihan2 * Math.random());
+            pilihan_list = [];
+            random_check = true;
+			
+			if (e1.index == 0) {
+                if (e1_bentuk.index == 0) {
+			        // <canvas id="myCanvas" width="500" height="300" style="border:1px solid #000000;">, background-color:#202020
+                    soal_teks = `
+                    <canvas id="myCanvas" width="520" height="280" style="background-color:black;">
+                    Sorry, your browser does not support canvas.
+                    </canvas><br><br>
+                    `;
+                    // soal_teks += 'Banyaknya titik di gambar ini adalah ...';
+					soal_teks += 'Angka yang muncul di gambar ini adalah ...';
+                    document.getElementById('soal').innerHTML = soal_teks;
+                    const canvas = document.getElementById("myCanvas");
+                    const ctx = canvas.getContext("2d");
+                    ctx.beginPath();
+                    // hasil = 20;
+					while (typeof a2 === 'undefined' || a == a2) {
+                        a2 = Math.floor(100 + 900 * Math.random());
+                    }
+                    a = a2;
+                    hasil = a;
+					
+					color1r = Math.floor(256*Math.random());
+					color1g = Math.floor(256*Math.random());
+					color1b = Math.floor(256*Math.random());
+					
+					function color_range(num, range, range2) {
+					    if (num-range < 0) return Math.min(255, Math.floor(num+range+range2*Math.random()));
+						else if (num+range > 255) return Math.max(0, Math.floor(num-range-range2*Math.random()));
+						else if (Math.random() < 0.5) return Math.min(255, Math.floor(num+range+range2*Math.random()));
+						else return Math.max(0, Math.floor(num-range-range2*Math.random()));
+					}
+					
+					if (level2.index == 0) {
+					    color2r = color_range(color1r, 64, 32);
+						color2g = color_range(color1g, 64, 32);
+						color2b = color_range(color1b, 64, 32);
+					} else if (level2.index == 1) {
+					    color2r = color_range(color1r, 32, 16);
+						color2g = color_range(color1g, 32, 16);
+						color2b = color_range(color1b, 32, 16);
+					} else if (level2.index == 2) {
+					    color2r = color_range(color1r, 12, 12);
+						color2g = color_range(color1g, 12, 12);
+						color2b = color_range(color1b, 12, 12);
+					} else {
+					    color2r = color_range(color1r, 4, 4);
+						color2g = color_range(color1g, 4, 4);
+						color2b = color_range(color1b, 4, 4);
+					}
+					color1 = `rgb(${color1r}, ${color1g}, ${color1b})`;
+					color2 = `rgb(${color2r}, ${color2g}, ${color2b})`;
+                    // for (let a = 1; a <= 20; a++) {
+                    for (let a_count = 1; a_count <= 91; a_count++) {
+                        // ctx.fillStyle = "#ff0000";
+						// ctx.fillStyle = rgb(0,255,0);
+						ctx.fillStyle = color1;
+						// if (a <= 9*6) ctx.fillRect(37+40*(0+(a_count-1)%9), 37+40*(0+parseInt((a_count-1)/9)), 6, 6);
+                        ctx.fillRect(3+40*((a_count-1)%13), 3+40*parseInt((a_count-1)/13), 34, 34);
+                        // ctx.fill();
+                    }
+					function gambar_angka(angka, x, y) {
+					    // ctx.fillStyle = "#ff4000";
+						ctx.fillStyle = color2;
+						if (angka == 0) coordinates = [[x,y],[x+1,y],[x+2,y],[x,y+1],[x+2,y+1],[x,y+2],[x+2,y+2],[x,y+3],[x+2,y+3],[x,y+4],[x+1,y+4],[x+2,y+4]];
+						else if (angka == 1) coordinates = [[x+2,y],[x+2,y+1],[x+2,y+2],[x+2,y+3],[x+2,y+4]];
+						else if (angka == 2) coordinates = [[x,y],[x+1,y],[x+2,y],[x+2,y+1],[x,y+2],[x+1,y+2],[x+2,y+2],[x,y+3],[x,y+4],[x+1,y+4],[x+2,y+4]];
+						else if (angka == 3) coordinates = [[x,y],[x+1,y],[x+2,y],[x+2,y+1],[x,y+2],[x+1,y+2],[x+2,y+2],[x+2,y+3],[x,y+4],[x+1,y+4],[x+2,y+4]];
+						else if (angka == 4) coordinates = [[x,y],[x+2,y],[x,y+1],[x+2,y+1],[x,y+2],[x+1,y+2],[x+2,y+2],[x+2,y+3],[x+2,y+4]];
+						else if (angka == 5) coordinates = [[x,y],[x+1,y],[x+2,y],[x,y+1],[x,y+2],[x+1,y+2],[x+2,y+2],[x+2,y+3],[x,y+4],[x+1,y+4],[x+2,y+4]];
+						else if (angka == 6) coordinates = [[x,y],[x+1,y],[x+2,y],[x,y+1],[x,y+2],[x+1,y+2],[x+2,y+2],[x,y+3],[x+2,y+3],[x,y+4],[x+1,y+4],[x+2,y+4]];
+						else if (angka == 7) coordinates = [[x,y],[x+1,y],[x+2,y],[x+2,y+1],[x+2,y+2],[x+2,y+3],[x+2,y+4]];
+						else if (angka == 8) coordinates = [[x,y],[x+1,y],[x+2,y],[x,y+1],[x+2,y+1],[x,y+2],[x+1,y+2],[x+2,y+2],[x,y+3],[x+2,y+3],[x,y+4],[x+1,y+4],[x+2,y+4]];
+						else if (angka == 9) coordinates = [[x,y],[x+1,y],[x+2,y],[x,y+1],[x+2,y+1],[x,y+2],[x+1,y+2],[x+2,y+2],[x+2,y+3],[x,y+4],[x+1,y+4],[x+2,y+4]];
+						else coordinates = [];
+						for (let i = 0; i < coordinates.length; i++) {
+						    ctx.fillRect(3+40*coordinates[i][0], 3+40*coordinates[i][1], 34, 34);
+						}
+					}
+					gambar_angka(Math.floor(a/100),1,1);
+					gambar_angka(Math.floor(a/10)%10,5,1);
+					gambar_angka(a%10,9,1);
+                    if (tipe2.index == 1) {
+                        for (let i = 1; i <= j_pilihan2; i++) {
+                            value_check = true;
+                            while (value_check || pilihan_list.indexOf(value) > -1 || value == hasil) {
+                                value = Math.floor(a/2+Math.max(a,6)*Math.random());
+                                value_check = false;
+                            }
+                            pilihan_list.push(value);
+                        }
+                    }	
+				} else if (e1_bentuk.index == 1) {
+			        // <canvas id="myCanvas" width="500" height="300" style="border:1px solid #000000;">, background-color:#202020
+                    soal_teks = `
+                    <canvas id="myCanvas" width="520" height="280" style="background-color:black;">
+                    Sorry, your browser does not support canvas.
+                    </canvas><br><br>
+                    `;
+                    // soal_teks += 'Banyaknya titik di gambar ini adalah ...';
+					soal_teks += 'Angka yang muncul di gambar ini adalah ...';
+                    document.getElementById('soal').innerHTML = soal_teks;
+                    const canvas = document.getElementById("myCanvas");
+                    const ctx = canvas.getContext("2d");
+                    ctx.beginPath();
+                    // hasil = 20;
+					while (typeof a2 === 'undefined' || a == a2) {
+                        a2 = Math.floor(100 + 900 * Math.random());
+                    }
+                    a = a2;
+                    hasil = a;
+					
+					color1a = Math.floor(360*Math.random());
+					
+					function color_range(num, range, range2) {
+						if (Math.random() < 0.5) return Math.floor(num+range+range2*Math.random()) % 360;
+						else return Math.floor(num-range-range2*Math.random()) % 360;
+					}
+					
+					if (level2.index == 0) color2a = color_range(color1a, 60, 30);
+					else if (level2.index == 1) color2a = color_range(color1a, 30, 15);
+					else if (level2.index == 2) color2a = color_range(color1a, 12, 9);
+					else color2a = color_range(color1a, 6, 6);
+					
+					// color1 = `hsl(${color1h}, ${color1s}, ${color1l})`;
+					// color2 = `hsl(${color2h}, ${color2s}, ${color2l})`;
+                    // for (let a = 1; a <= 20; a++) {
+                    for (let a_count = 1; a_count <= 91; a_count++) {
+                        // ctx.fillStyle = "#ff0000";
+						// ctx.fillStyle = rgb(0,255,0);
+						color1b = Math.floor(33+34*Math.random());
+					    color1c = Math.floor(33+34*Math.random());
+						// color1 = `hsl(${color1h}, ${color1s}%, ${color1l}%)`;
+						color1 = `hsl(${color1a}, ${color1b}%, ${color1c}%)`;
+						ctx.fillStyle = color1;
+						// if (a <= 9*6) ctx.fillRect(37+40*(0+(a_count-1)%9), 37+40*(0+parseInt((a_count-1)/9)), 6, 6);
+                        ctx.fillRect(3+40*((a_count-1)%13), 3+40*parseInt((a_count-1)/13), 34, 34);
+                        // ctx.fill();
+                    }
+					function gambar_angka(angka, x, y) {
+					    // ctx.fillStyle = "#ff4000";
+						// ctx.fillStyle = color2;
+						if (angka == 0) coordinates = [[x,y],[x+1,y],[x+2,y],[x,y+1],[x+2,y+1],[x,y+2],[x+2,y+2],[x,y+3],[x+2,y+3],[x,y+4],[x+1,y+4],[x+2,y+4]];
+						else if (angka == 1) coordinates = [[x+2,y],[x+2,y+1],[x+2,y+2],[x+2,y+3],[x+2,y+4]];
+						else if (angka == 2) coordinates = [[x,y],[x+1,y],[x+2,y],[x+2,y+1],[x,y+2],[x+1,y+2],[x+2,y+2],[x,y+3],[x,y+4],[x+1,y+4],[x+2,y+4]];
+						else if (angka == 3) coordinates = [[x,y],[x+1,y],[x+2,y],[x+2,y+1],[x,y+2],[x+1,y+2],[x+2,y+2],[x+2,y+3],[x,y+4],[x+1,y+4],[x+2,y+4]];
+						else if (angka == 4) coordinates = [[x,y],[x+2,y],[x,y+1],[x+2,y+1],[x,y+2],[x+1,y+2],[x+2,y+2],[x+2,y+3],[x+2,y+4]];
+						else if (angka == 5) coordinates = [[x,y],[x+1,y],[x+2,y],[x,y+1],[x,y+2],[x+1,y+2],[x+2,y+2],[x+2,y+3],[x,y+4],[x+1,y+4],[x+2,y+4]];
+						else if (angka == 6) coordinates = [[x,y],[x+1,y],[x+2,y],[x,y+1],[x,y+2],[x+1,y+2],[x+2,y+2],[x,y+3],[x+2,y+3],[x,y+4],[x+1,y+4],[x+2,y+4]];
+						else if (angka == 7) coordinates = [[x,y],[x+1,y],[x+2,y],[x+2,y+1],[x+2,y+2],[x+2,y+3],[x+2,y+4]];
+						else if (angka == 8) coordinates = [[x,y],[x+1,y],[x+2,y],[x,y+1],[x+2,y+1],[x,y+2],[x+1,y+2],[x+2,y+2],[x,y+3],[x+2,y+3],[x,y+4],[x+1,y+4],[x+2,y+4]];
+						else if (angka == 9) coordinates = [[x,y],[x+1,y],[x+2,y],[x,y+1],[x+2,y+1],[x,y+2],[x+1,y+2],[x+2,y+2],[x+2,y+3],[x,y+4],[x+1,y+4],[x+2,y+4]];
+						else coordinates = [];
+						for (let i = 0; i < coordinates.length; i++) {
+						    color2b = Math.floor(33+34*Math.random());
+							color2c = Math.floor(33+34*Math.random());
+						    color2 = `hsl(${color2a}, ${color2b}%, ${color2c}%)`;
+						    ctx.fillStyle = color2;
+						    ctx.fillRect(3+40*coordinates[i][0], 3+40*coordinates[i][1], 34, 34);
+						}
+					}
+					gambar_angka(Math.floor(a/100),1,1);
+					gambar_angka(Math.floor(a/10)%10,5,1);
+					gambar_angka(a%10,9,1);
+                    if (tipe2.index == 1) {
+                        for (let i = 1; i <= j_pilihan2; i++) {
+                            value_check = true;
+                            while (value_check || pilihan_list.indexOf(value) > -1 || value == hasil) {
+                                value = Math.floor(a/2+Math.max(a,6)*Math.random());
+                                value_check = false;
+                            }
+                            pilihan_list.push(value);
+                        }
+                    }	
+				}
+			}
+			
+			// document.getElementById('soal').innerHTML = soal_teks;
+            // MathJax.typeset();
+            if (document.getElementById('suara').checked) {
+                // speak(soal_teks);
+                speak(soal_suara);
+            }
+
+            if (tipe2.index == 0) {
+                // document.getElementById("pilihan").style.display = "none";
+                // <input type="number" id="angka" min="0">
+				// <label>Input jawaban</label><br>
+                if (e1.index == 0 && [2,3].includes(e1_bentuk.index)) {
+                    document.getElementById('tipe2').innerHTML = `
+					Isilah di input jawaban yang menurut Anda benar!<br><br>
+					<label><b>Input jawaban</b></label><br><br>
+                    <input type="text" id="angka" min="0" style="width:400px">
+                    `;
+                } else {
+                    document.getElementById('tipe2').innerHTML = `
+                    Isilah dengan jawaban yang menurut Anda benar!<br><br>
+					<label><b>Input jawaban</b></label><br>
+                    <input type="text" id="angka" min="0">
+                    `;
+                }
+                var input = document.getElementById("angka");
+                input.addEventListener("keypress", function(event) {
+                    if (event.key === "Enter") {
+                        event.preventDefault();
+                        document.getElementById("solve").click();
+                    }
+                // var input = document.getElementById("angka");
+                // input.addEventListener("keypress", function(event) {
+                    // if (event.key === "N" || event.key === "n") {
+                    //     event.preventDefault();
+                    //     document.getElementById("buat-soal").click();
+                    // }
+                });
+                // hasil = 0;
+                // console.log(11111);
+                hasil2 = hasil;
+                // console.log(hasil2);
+
+            } else {
+                // pilihan_list = pilihan_list.sort( () => .5 - Math.random() );
+                if (random_check) {
+                    pilihan_list = pilihan_list.sort(() => .5 - Math.random());
+                    pilihan_list = pilihan_list.slice(0,j_pilihan2);
+                    pilihan_list[pilihan_index] = hasil;
+                }
+				
+				// if (pilihan_index == 0) {hasil2 = hasil + ' (A)';}
+                if (pilihan_index == 0) {hasil2 = hasil + '<br><br>A. ' + hasil;}
+				else if (pilihan_index == 1) {hasil2 = hasil + '<br><br>B. ' + hasil;}
+				else if (pilihan_index == 2) {hasil2 = hasil + '<br><br>C. ' + hasil;}
+				else if (pilihan_index == 3) {hasil2 = hasil + '<br><br>D. ' + hasil;}
+				else if (pilihan_index == 4) {hasil2 = hasil + '<br><br>E. ' + hasil;}
+				else {hasil2 = hasil + '<br><br>F. ' + hasil;}
+				
+                // <div class="column">
+                // <label class="rb-container" style="width:150px;">
+				// <input type="radio" id="pilihan1" value="${pilihan_list[0]}" name="pilihan" value="0">
+				// <span>Pilihan jawaban</span><br><br>
+                document.getElementById('tipe2').innerHTML = `
+				Pilihlah jawaban yang benar!<br><br>
+                <label><b>Pilihan jawaban</b></label><br><div style="padding-top:10px"></div>
+                <label class="rb-container">A. ${pilihan_list[0]}
+                    <input type="radio" id="pilihan1" value="${pilihan_list[0]}" name="pilihan">
+                    <span class="checkradio"></span>
+                </label>
+                <label class="rb-container">B. ${pilihan_list[1]}
+                    <input type="radio" id="pilihan2" value="${pilihan_list[1]}" name="pilihan">
+                    <span class="checkradio"></span>
+                </label>
+                `;
+                if (j_pilihan2 >= 3) {
+                    document.getElementById('tipe2').innerHTML += `
+                    <label class="rb-container">C. ${pilihan_list[2]}
+                        <input type="radio" id="pilihan3" value="${pilihan_list[2]}" name="pilihan">
+                        <span class="checkradio"></span>
+                    </label>
+                    `;
+                }
+                if (j_pilihan2 >= 4) {
+                    document.getElementById('tipe2').innerHTML += `
+                    <label class="rb-container">D. ${pilihan_list[3]}
+                        <input type="radio" id="pilihan4" value="${pilihan_list[3]}" name="pilihan">
+                        <span class="checkradio"></span>
+                    </label>
+                    `;
+                }
+                if (j_pilihan2 >= 5) {
+                    document.getElementById('tipe2').innerHTML += `
+                    <label class="rb-container">E. ${pilihan_list[4]}
+                        <input type="radio" id="pilihan5" value="${pilihan_list[4]}" name="pilihan">
+                        <span class="checkradio"></span>
+                    </label>
+                    `;
+                }
+				if (j_pilihan2 == 6) {
+                    document.getElementById('tipe2').innerHTML += `
+                    <label class="rb-container">F. ${pilihan_list[5]}
+                        <input type="radio" id="pilihan6" value="${pilihan_list[5]}" name="pilihan">
+                        <span class="checkradio"></span>
+                    </label>
+                    <div class="clearfix"></div><br>
+                    `;
+                }
+            }
+		}
+		
+		hasil = 0;
+
+        function pilihan(change=false) {
+		    var e = document.getElementById("bentuk");
+            var e1 = e.options[e.selectedIndex];
+            
+            e_bentuk = document.getElementById("pilihan-bentuk-sub");
+            e1_bentuk = e_bentuk.options[e_bentuk.selectedIndex];
+            
+            tampilkan();
+
+            if (change) hasil = 0;
+
+            document.getElementById("bentuk-penjelasan").innerHTML = '';
+            // if (e1.index <= 5) {
+            if (e1.index == 0) {
+                document.getElementById("bentuk-sub").style.display = 'block';
+				document.getElementById("bentuk-penjelasan").innerHTML = `
+				<b>Buta warna</b> adalah suatu kelainan yang disebabkan ketidakmampuan sel-sel kerucut mata untuk menangkap suatu spektrum warna tertentu (Buta warna parsial) atau bahkan seluruh spektrum warna (Buta warna total) yang disebabkan oleh faktor genetis.
+                <br><br>
+				Buta warna merupakan penyakit seumur hidup. Agar penderita dapat beradaptasi dengan kondisi ini, dokter akan memberikan penanganan sesuai dengan jenis buta warna yang diderita.
+				<br><br>
+				Sumber: Wikipedia
+				<br><br>
+				Tes Buta Warna digunakan untuk mengukur seberapa jauh mata dapat membedakan warna.
+				`;
+                if (change) {
+                    document.getElementById("pilihan-bentuk-sub").innerHTML = `
+                        <option>Tes Buta Warna</option>
+                        <option>Tes Buta Warna 2</option>
+                        <option>Perbedaan Warna</option>
+						<option>Campuran Warna</option>
+                    `;
+                }
+            } else if (e1.index == 1) {
+                document.getElementById("bentuk-sub").style.display = 'block';
+				document.getElementById("bentuk-penjelasan").innerHTML = `
+				<b>Akurasi</b> adalah ukuran yang menentukan tingkat kemiripan antara hasil pengukuran dengan nilai yang sebenarnya diukur. Dalam bidang pengukuran, akurasi lebih dikhususkan pada ketidakpastian pengukuran dari alat ukur. Akurasi ditetapkan untuk mengetahui seberapa besar tingkat kesalahan pengukuran yang dapat terjadi pada suatu alat ukur.
+				<br><br>
+				Sumber: Wikipedia
+				`;
+				if (change) {
+                    document.getElementById("pilihan-bentuk-sub").innerHTML = `
+                        <option>Perbandingan Panjang Garis</option>
+                        <option>Perbandingan Panjang Garis 2</option>
+                        <option>Perbandingan Luas Persegi Panjang</option>
+						<option>Perbandingan Sudut</option>
+						<option>Banyak Objek</option>
+						<option>Perbandingan Banyak Objek</option>
+						<option>Perbedaan Bentuk</option>
+                    `;
+                }
+            } else if (e1.index == 2) {
+                document.getElementById("bentuk-sub").style.display = 'block';
+                if (change) {
+                    document.getElementById("pilihan-bentuk-sub").innerHTML = `
+                        <option>Tabel 3x3</option>
+                        <option>Tabel 4x4</option>
+						<option>Pola dalam Matematika</option>
+						<option>Struktur DNA Asing</option>
+						<option>Bahasa Hipotesis</option>
+                    `;
+                }
+            } else {
+                document.getElementById("bentuk-sub").style.display = 'none';
+            }
+			
+            document.getElementById("bentuk-penjelasan").style.lineHeight = '1.5em';
+
+            var bs = document.getElementById("pilihan-bentuk-soal");
+            var bs2 = bs.options[bs.selectedIndex];
+
+            document.getElementById("cerita2").innerHTML = '<option>Option 1</option>';
+            // document.getElementById("bentuk-soal").style.display = 'block';
+            document.getElementById("bentuk-soal").style.display = 'none';
+
+            if (e1.index >= 1 && e1.index <= 4) {
+                if (change) {
+                    document.getElementById("pilihan-bentuk-soal").innerHTML = `
+                        <option>Tulisan Datar</option>
+                        <option>Bentuk Bersusun</option>
+                    `;
+                    if (e1.index == 1) {
+                        document.getElementById("cerita2").innerHTML = `
+                            <option>Buah</option>
+                            <option>Uang</option>
+                            <option>Option 3</option>
+                            <option>Option 4</option>
+                        `;
+                    } else if (e1.index == 2) {
+                        document.getElementById("cerita2").innerHTML = `
+                            <option>Buah</option>
+                            <option>Uang</option>
+                        `;
+                    } else if (e1.index == 3) {
+                        document.getElementById("cerita2").innerHTML = `
+                            <option>Option 1</option>
+                            <option>Option 2</option>
+                        `;
+                    } else if (e1.index == 4) {
+                        document.getElementById("cerita2").innerHTML = `
+                            <option>Option 1</option>
+                            <option>Option 2</option>
+                        `;
+                    }
+                }
+
+                // var bs = document.getElementById("pilihan-bentuk-soal");
+                // var bs2 = bs.options[bs.selectedIndex];
+
+                if (bs2.index == 0) {
+                    // \documentclass{article}
+                    // \usepackage{longdivision}
+                    // \begin{document}
+                    // \intlongdivision{12345}{13}
+                    // \end{document}
+                    document.getElementById("contoh-bentuk-soal").innerHTML = `
+                    <span>
+                    Contoh:<br><br>
+                    Hasil dari 123 + 45 adalah ...
+                    </span>
+                    `;
+                } else {
+                    document.getElementById("contoh-bentuk-soal").innerHTML = `
+                    <span>
+                    Contoh:<br><br>
+                    <div class="column" style="font-size:20px; width:15px">&nbsp;</div>
+                    <div class="column" style="font-size:20px; width:15px">1</div>
+                    <div class="column" style="font-size:20px; width:15px">2</div>
+                    <div class="column" style="font-size:20px; width:15px">3</div>
+                    <div class="clearfix"></div>
+                    <div class="column" style="font-size:20px; width:15px">+</div>
+                    <div class="column" style="font-size:20px; width:15px">&nbsp;</div>
+                    <div class="column" style="font-size:20px; width:15px">4</div>
+                    <div class="column" style="font-size:20px; width:15px">5</div>
+                    <div class="clearfix"></div>
+                    <hr style="float:left; width:90px; height:2px; border-width:0; background-color:white">
+                    </span>
+                    `;
+                }
+                document.getElementById("bentuk-soal").style.display = 'block';
+            } else if (e1.index == 5) {
+                // if (change) {
+                //     document.getElementById("cerita2").innerHTML = `
+                //         <option>Option 1</option>
+                //         <option>Option 2</option>
+                //     `;
+                // }
+                // document.getElementById("bentuk-soal").style.display = 'block';
+            } else if (e1.index == 12) {
+                if (change) {
+                    document.getElementById("pilihan-bentuk-soal").innerHTML = `
+                        <option>Tanpa kurung</option>
+                        <option>Dengan kurung</option>
+                    `;
+                    document.getElementById("cerita2").innerHTML = `
+                        <option>Option 1</option>
+                        <option>Option 2</option>
+                    `;
+                }
+                document.getElementById("bentuk-soal").style.display = 'block';
+            } else if (e1.index == 13) {
+                if (change) {
+                    document.getElementById("pilihan-bentuk-soal").innerHTML = `
+                        <option>Tanpa kurung</option>
+                        <option>Dengan kurung</option>
+                    `;
+                    document.getElementById("cerita2").innerHTML = `
+                        <option>Option 1</option>
+                        <option>Option 2</option>
+                    `;
+                }
+                document.getElementById("bentuk-soal").style.display = 'block';
+            } else if (e1.index == 14) {
+                if (change) {
+                    document.getElementById("pilihan-bentuk-soal").innerHTML = `
+                        <option>Bentuk Pecahan</option>
+                        <option>Bentuk Pembagian</option>
+                    `;
+                }
+                if (bs2.index == 0) {
+                    /* text = `
+                    Contoh:<br><br>
+                    /[x = {-b /pm /sqrt{b^2-4ac} /over 2a}./]
+                    `.replaceAll("/","&#x005c"); */
+                    soal_teks = `Contoh:<br><br>Hasil dari <span style="font-size:20px">/({1 /over 4} + {2 /over 3}/)`.replaceAll("/","&#x005c");
+                    soal_teks += `</span> adalah ...`;
+                    document.getElementById("contoh-bentuk-soal").innerHTML = soal_teks;
+                } else {
+                    document.getElementById("contoh-bentuk-soal").innerHTML = `Contoh:<br><br>Hasil dari 1/4 + 2/3 adalah ...`;;
+                }
+                document.getElementById("bentuk-soal").style.display = 'block';
+            } else {
+                document.getElementById("bentuk-soal").style.display = 'none';
+            }
+
+            
+			
+
+            // MathJax.typeset();
+            try {
+                MathJax.typeset();
+            } catch(err) {}
+            
+            var tipe = document.getElementById("tipe");
+            var tipe2 = tipe.options[tipe.selectedIndex];
+            
+            // var j_pilihan = document.getElementById("jumlah-pilihan");
+            // j_pilihan2 = parseInt(j_pilihan.options[j_pilihan.selectedIndex].innerHTML);
+			j_pilihan2 = parseInt(document.getElementById("jumlah-pilihan").value);
+            // console.log(j_pilihan2)
+
+            var waktu_timer = parseInt(document.getElementById("waktu").value);
+            // console.log(waktu_timer);
+
+            d2 = new Date();
+            time2 = d2.getTime();
+            interval = 200;
+
+            if (waktu_timer == 0) {
+                document.getElementById('timer').style.display = 'none';
+                waktu_check = true;
+            } else {
+                document.getElementById('timer').style.display = 'block';
+                waktu_check = false;
+            }
+
+            if (waktu_timer == 1) {
+                document.getElementById('waktu-timer').style.display = 'block';
+                // document.getElementById('timer-icon').style.left = '650px';
+				// document.getElementById('timer-icon').style.marginLeft = '550px';
+                waktu_timer = document.getElementById('waktu2').value;
+            } else {
+                document.getElementById('waktu-timer').style.display = 'none';
+                // document.getElementById('timer-icon').style.left = '400px';
+				// document.getElementById('timer-icon').style.marginLeft = '300px';
+            }
+			
+			// if (document.getElementById("tipe").value == 'pg') {
+			if (document.getElementById("tipe").value == 'is') {
+			    document.getElementById('opsi-pilihan').style.display = 'none';
+				document.getElementById('opsi-pilihan2').style.display = 'none';
+			} else {
+			    document.getElementById('opsi-pilihan').style.display = 'block';
+				if (document.getElementById("tipe").value == 'pgk') document.getElementById('opsi-pilihan2').style.display = 'block';
+				else document.getElementById('opsi-pilihan2').style.display = 'none';
+			}
+
+            // myInterval = "";
+            // var myInterval;
+            // clearInterval(myInterval);
+            // document.getElementById('timer').innerHTML = `${waktu_timer} detik`;
+            waktu_teks = `Sisa waktu:<br><span style="font-size:24px; line-height:40px;">`;
+
+            if (waktu_timer < 60) {
+                waktu_teks += `${waktu_timer} detik`;
+            } else if (waktu_timer % 60 < 1) {
+                waktu_teks += `${Math.floor(waktu_timer/60)} menit`;
+            } else {
+                waktu_teks += `${Math.floor(waktu_timer/60)} menit ${waktu_timer % 60} detik`;
+            }
+
+            waktu_teks += "</span><br>";
+			waktu_teks += `<div style="background-color:gray; position:absolute; width:300px; height:5px;"></div><div style="background-color:#80ff80; position:absolute; width:300px; height:5px;"></div>`;
+			
+            document.getElementById('timer').innerHTML = waktu_teks;
+
+            myInterval = setInterval(function() {
+                d3 = new Date();
+                time3 = d3.getTime();
+                waktu_timer = parseInt(document.getElementById("waktu").value);
+                // console.log(waktu_timer);
+                if (waktu_timer == 1) {
+                    waktu_timer = parseInt(document.getElementById('waktu2').value);
+                    if (isNaN(waktu_timer)) {
+                        waktu_timer = 0;
+                    }
+                    // console.log(waktu_timer);
+                }
+                // console.log(waktu_timer);
+                // console.log(time2,time3,waktu_timer);
+                waktu2 = parseInt(Math.min(waktu_timer,Math.max(0,(time2-time3)/1000+waktu_timer+1)));
+                // waktu_teks = `Waktu: ${waktu2} detik`;
+
+                waktu_teks = `Sisa waktu:<br><span style="font-size:24px; line-height:40px;">`;
+
+                if (waktu2 < 60) {
+                    waktu_teks += `${waktu2} detik`;
+                } else if (waktu2 % 60 < 1) {
+                    waktu_teks += `${Math.floor(waktu2/60)} menit`;
+                } else {
+                    waktu_teks += `${Math.floor(waktu2/60)} menit ${waktu2 % 60} detik`;
+                }
+
+                waktu_teks += "</span>";
+                waktu_teks += `<div style="background-color:gray; position:absolute; width:300px; height:5px;"></div><div style="background-color:#80ff80; position:absolute; width:${300*waktu2/waktu_timer}px; height:5px;"></div>`;
+
+                document.getElementById('timer').innerHTML = waktu_teks;
+
+                if (waktu_timer > 0 & waktu2 == 0) {
+                    console.log(13113);
+                    document.getElementById('tipe2').style.display = 'none';
+                }
+            }, interval);
+			
+			if (waktu_timer > 0 & waktu2 == 0) {
+                // console.log(1311211);
+				// document.getElementById('tipe2').style.display = 'none';
+				clearInterval(myInterval);
+				// if (document.getElementById('suara').checked) {
+					// speak("Waktunya habis");
+				// }
+			}
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i >= 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+            }
+            
+            /* if (tipe2.index == 1) {
+                document.getElementById("pilihan").style.display = "block";
+                // var e = document.getElementById("bentuk");
+                // var e1 = e.options[e.selectedIndex];
+                pilihan_index = Math.floor(j_pilihan2 * Math.random());
+                // c = Math.floor(5*Math.random());
+                pilihan_list = [12,13,14,15,16];
+                pilihan_list = [];
+                random_check = true;
+                if (e1.index == 0) {
+                } else if (e1.index == 1) {
+                    // hasil = a+b;
+                    // pilihan_list = [
+                    //     a+b+1+Math.floor(b/2*Math.random()),
+                    // for (let i = 0; i < 5; i++) {
+                    for (let i = 1; i <= j_pilihan2; i++) {
+                        value = a+b+Math.floor(-(a+b)/2+Math.max(a+b,6)*Math.random());
+                        while (pilihan_list.indexOf(value) > -1 | value == hasil) {
+                            value = a+b+Math.floor(-(a+b)/2+Math.max(a+b,6)*Math.random());
+                        }
+                        pilihan_list.push(value);
+                    }
+                    
+                } else if (e1.index == 2) {
+                    
+                try {MathJax.typeset();} catch(err) {}
+            } */
+            try {MathJax.typeset();} catch(err) {}
+        }
+
+        function selesaikan() {
+            var tipe = document.getElementById("tipe");
+            var tipe2 = tipe.options[tipe.selectedIndex];
+
+            if (document.getElementById('check2').checked) {
+                document.getElementById('tipe2').style.display = 'none';
+            }
+
+            if (tipe2.index == 0) {
+                var angka_awal = document.getElementById('angka').value;
+            } else {
+                // var angka_awal = document.getElementsByName('pilihan1').value;
+                if (document.getElementById("pilihan1").checked) {
+                    var angka_awal = document.getElementById('pilihan1').value;
+                } else if (document.getElementById("pilihan2").checked) {
+                    var angka_awal = document.getElementById('pilihan2').value;
+                } else if (document.getElementById("pilihan3").checked) {
+                    var angka_awal = document.getElementById('pilihan3').value;
+                } else if (j_pilihan2 >= 4 && document.getElementById("pilihan4").checked) {
+                    var angka_awal = document.getElementById('pilihan4').value;
+                } else if (j_pilihan2 >= 5 && document.getElementById("pilihan5").checked) {
+                    var angka_awal = document.getElementById('pilihan5').value;
+				} else if (j_pilihan2 >= 6 && document.getElementById("pilihan6").checked) {
+                    var angka_awal = document.getElementById('pilihan6').value;
+                } else {
+                    var angka_awal = '';
+                }
+            }
+            if (angka_awal != '') {
+                var e = document.getElementById("bentuk");
+                var e1 = e.options[e.selectedIndex];
+                // var tanda = '';
+                // e1.index == 6 & e1_bentuk.index == 0
+                // if (e1.index <= 6 || (e1.index == 7 && (e1_bentuk.index == 0 || e1_bentuk.index == 2)) || e1.index == 8 || e1.index == 9 || e1.index == 17 || e1.index == 21 || e1.index == 32) {
+                if ([0,1,2,3,4,5,6,7,11,12,13,17,18,19,20,22,23,26,36,37].includes(e1.index)
+				|| (e1.index == 0 && [0,1,4].includes(e1_bentuk.index))
+				|| (e1.index == 8 && [1].includes(e1_bentuk.index))
+				|| (e1.index == 11 && [0,2].includes(e1_bentuk.index))
+				){
+                    angka = parseInt(angka_awal);
+                    jawaban_check = angka == hasil;
+                    // hasil = hasil;
+                } else if (e1.index == 6 && e1_bentuk.index == 4) {
+                    angka = angka_awal.toLowerCase().replaceAll('*','x').replaceAll('.','x').replaceAll(' ','');
+                    hasil = hasil.replaceAll(' ','');
+                    jawaban_check = angka == hasil;
+                    // console.log(angka, hasil);
+                } else if (e1.index == 23 && e1_bentuk.index == 0) {
+                    if (angka_awal == '{}') {
+                        angka = [];
+                    } else {
+                        angka = angka_awal.toLowerCase().replaceAll('{','').replaceAll('}','').replaceAll(',',' ').split(' ');
+                    }
+                    // console.log(angka);
+                    jawaban_check = true;
+                    for (let i = 0; i < hasil.length; i++) {
+                        jawaban_check &= angka[i] == hasil[i];
+                    }
+                    jawaban_check = angka.length == hasil.length;
+                    /* angka = angka_awal.replaceAll(' ','');
+                    jawaban_check = angka == hasil;
+                    soal_check = false; */
+                } else {
+                    angka = angka_awal.toLowerCase();
+                    hasil = hasil.toLowerCase();
+                    jawaban_check = angka == hasil;
+                }
+                // if (e1.index == 0) {
+                //     tanda = ' + ';
+                var jawaban_teks, jawaban_teks2;
+                if (cerita_check.checked == true) {
+                    // soal = '';
+                    soal_check = false;
+                }
+                // if (soal2 = '') soal2 = soal;
+                // if (angka == hasil) {
+                if (jawaban_check) {
+                    // jawaban_teks = `Jawabannya benar<br><br> ${soal} = ${hasil2}`;
+                    if (soal_check) {
+                        jawaban_teks = `Jawabannya benar<br><br>${soal} = ${angka_awal}`;
+                    } else {
+                        jawaban_teks = `Jawabannya benar<br><br>Hasil = ${angka_awal}`;
+                    }
+                    jawaban_teks2 = 'Jawabannya benar';
+                } else {
+                    // jawaban_teks = `Jawabannya salah<br>Jawaban yang diinput: ${angka}<br><br>${soal} = ${hasil2}`;
+                    if (soal_check) {
+                        jawaban_teks = `Jawabannya salah<br>Jawaban yang diinput = ${angka_awal}<br><br>${soal} = ${hasil2}`;
+                    } else {
+                        jawaban_teks = `Jawabannya salah<br>Jawaban yang diinput = ${angka_awal}<br><br>Jawaban yang benar = ${hasil2}`;
+                    }
+                    jawaban_teks2 = 'Jawabannya salah';
+                }
+                document.getElementById('jawaban').innerHTML = jawaban_teks;
+                if (document.getElementById('suara').checked) {
+                    speak(jawaban_teks2);
+                }
+            } else {
+                document.getElementById('jawaban').innerHTML = 'Input angka harus diisi';
+            }
+        }
+		
+		function selesaikan() {
+            var tipe = document.getElementById("tipe");
+            var tipe2 = tipe.options[tipe.selectedIndex];
+
+            if (document.getElementById('check2').checked) {
+                document.getElementById('tipe2').style.display = 'none';
+            }
+
+            if (tipe2.index == 0) {
+                var angka_awal = document.getElementById('angka').value;
+            } else {
+                // var angka_awal = document.getElementsByName('pilihan1').value;
+                if (document.getElementById("pilihan1").checked) {
+                    var angka_awal = document.getElementById('pilihan1').value;
+                } else if (document.getElementById("pilihan2").checked) {
+                    var angka_awal = document.getElementById('pilihan2').value;
+                } else if (document.getElementById("pilihan3").checked) {
+                    var angka_awal = document.getElementById('pilihan3').value;
+                } else if (j_pilihan2 >= 4 && document.getElementById("pilihan4").checked) {
+                    var angka_awal = document.getElementById('pilihan4').value;
+                } else if (j_pilihan2 >= 5 && document.getElementById("pilihan5").checked) {
+                    var angka_awal = document.getElementById('pilihan5').value;
+				} else if (j_pilihan2 >= 6 && document.getElementById("pilihan6").checked) {
+                    var angka_awal = document.getElementById('pilihan6').value;
+                } else {
+                    var angka_awal = '';
+                }
+            }
+            if (angka_awal != '') {
+                var e = document.getElementById("bentuk");
+                var e1 = e.options[e.selectedIndex];
+                // var tanda = '';
+                // e1.index == 6 & e1_bentuk.index == 0
+                // if (e1.index <= 6 || (e1.index == 7 && (e1_bentuk.index == 0 || e1_bentuk.index == 2)) || e1.index == 8 || e1.index == 9 || e1.index == 17 || e1.index == 21 || e1.index == 32) {
+                /* if ([0,1,2,3,4,5,6,7,11,12,13,17,18,19,20,22,23,26,36,37].includes(e1.index)
+				|| (e1.index == 0 && [0,1,4].includes(e1_bentuk.index))
+				|| (e1.index == 8 && [1].includes(e1_bentuk.index))
+				|| (e1.index == 11 && [0,2].includes(e1_bentuk.index))
+				){ */
+				if (true) {
+                    angka = parseInt(angka_awal);
+                    jawaban_check = angka == hasil;
+                    // hasil = hasil;
+                } else if (e1.index == 6 && e1_bentuk.index == 4) {
+                    angka = angka_awal.toLowerCase().replaceAll('*','x').replaceAll('.','x').replaceAll(' ','');
+                    hasil = hasil.replaceAll(' ','');
+                    jawaban_check = angka == hasil;
+                    // console.log(angka, hasil);
+                } else if (e1.index == 23 && e1_bentuk.index == 0) {
+                    if (angka_awal == '{}') {
+                        angka = [];
+                    } else {
+                        angka = angka_awal.toLowerCase().replaceAll('{','').replaceAll('}','').replaceAll(',',' ').split(' ');
+                    }
+                    // console.log(angka);
+                    jawaban_check = true;
+                    for (let i = 0; i < hasil.length; i++) {
+                        jawaban_check &= angka[i] == hasil[i];
+                    }
+                    jawaban_check = angka.length == hasil.length;
+                    /* angka = angka_awal.replaceAll(' ','');
+                    jawaban_check = angka == hasil;
+                    soal_check = false; */
+                } else {
+                    angka = angka_awal.toLowerCase();
+                    hasil = hasil.toLowerCase();
+                    jawaban_check = angka == hasil;
+                }
+                // if (e1.index == 0) {
+                //     tanda = ' + ';
+                var jawaban_teks, jawaban_teks2;
+                // if (cerita_check.checked == true) {
+				if (true) {
+                    // soal = '';
+                    soal_check = false;
+                }
+                // if (soal2 = '') soal2 = soal;
+                // if (angka == hasil) {
+                if (jawaban_check) {
+                    // jawaban_teks = `Jawabannya benar<br><br> ${soal} = ${hasil2}`;
+                    if (soal_check) {
+                        jawaban_teks = `Jawabannya benar<br><br>${soal} = ${angka_awal}`;
+                    } else {
+                        jawaban_teks = `Jawabannya benar<br><br>Hasil = ${angka_awal}`;
+                    }
+                    jawaban_teks2 = 'Jawabannya benar';
+                } else {
+                    // jawaban_teks = `Jawabannya salah<br>Jawaban yang diinput: ${angka}<br><br>${soal} = ${hasil2}`;
+                    if (soal_check) {
+                        jawaban_teks = `Jawabannya salah<br>Jawaban yang diinput = ${angka_awal}<br><br>${soal} = ${hasil2}`;
+                    } else {
+                        jawaban_teks = `Jawabannya salah<br>Jawaban yang diinput = ${angka_awal}<br><br>Jawaban yang benar = ${hasil2}`;
+                    }
+                    jawaban_teks2 = 'Jawabannya salah';
+                }
+                document.getElementById('jawaban').innerHTML = jawaban_teks;
+                if (document.getElementById('suara').checked) {
+                    speak(jawaban_teks2);
+                }
+            } else {
+                document.getElementById('jawaban').innerHTML = 'Input angka harus diisi';
             }
         }
 	</script>
