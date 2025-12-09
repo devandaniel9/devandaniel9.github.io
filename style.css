@@ -348,7 +348,7 @@ div.desc {
     color: white;
 	border: 1px solid gray;
 	border-radius: 6px;
-	width: 200px;
+	width: 300px;
 }
 #searchbtn {
 	width: 100%;
@@ -628,7 +628,7 @@ div.desc {
 /* @media screen and (max-width: 600px) { */
 @container root style(--darkmode: 1) {
     body {
-        background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('images/dark-cubes-texture.jpg');
+        /* background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('images/dark-cubes-texture.jpg'); */
     }
     .container {
         /* background-color: #d0e0f8; */

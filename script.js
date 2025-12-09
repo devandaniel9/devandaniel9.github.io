@@ -174,36 +174,77 @@ var modal_image_desc = document.getElementById("imgdesc");
 
 // modal_image.style.display = "block";
 
-document.getElementById("img001").onclick = function() {
+digit = 3;
+
+function addzero(n) {
+	n_str = String(n);
+	while (n_str.length < digit) {
+	    n_str = "0" + n_str;
+	}
+	return n_str;
+}
+
+function modal_image_default() {
+	modal_image_content.style.display = "block";
+	modal_image.style.width = "auto";
+	modal_image.style.height = "500px";
+}
+
+/* document.getElementById("img001").onclick = function() {
     modal_image_content.style.display = "block";
 	modal_image.src = document.getElementById("img001").src;
 	modal_image.style.width = "auto";
 	modal_image.style.height = "500px";
 	modal_image_desc.innerHTML = document.getElementById("img001d").innerHTML;
+} */
+
+document.getElementById("img001").onclick = function() {
+    modal_image_default();
+	modal_image.src = document.getElementById("img001").src;
+	modal_image_desc.innerHTML = document.getElementById("img001d").innerHTML;
 }
 
 document.getElementById("img002").onclick = function() {
-    modal_image_content.style.display = "block";
+    modal_image_default();
 	modal_image.src = document.getElementById("img002").src;
-	modal_image.style.width = "auto";
-	modal_image.style.height = "500px";
 	modal_image_desc.innerHTML = document.getElementById("img002d").innerHTML;
 }
 
 document.getElementById("img003").onclick = function() {
-    modal_image_content.style.display = "block";
+    modal_image_default();
 	modal_image.src = document.getElementById("img003").src;
-	modal_image.style.width = "auto";
-	modal_image.style.height = "500px";
 	modal_image_desc.innerHTML = document.getElementById("img003d").innerHTML;
 }
 
 document.getElementById("img004").onclick = function() {
-    modal_image_content.style.display = "block";
+    modal_image_default();
 	modal_image.src = document.getElementById("img004").src;
-	modal_image.style.width = "auto";
-	modal_image.style.height = "500px";
 	modal_image_desc.innerHTML = document.getElementById("img004d").innerHTML;
+}
+
+document.getElementById("img005").onclick = function() {
+    modal_image_default();
+	modal_image.src = document.getElementById("img005").src;
+	modal_image_desc.innerHTML = document.getElementById("img005d").innerHTML;
+}
+
+document.getElementById("img006").onclick = function() {
+    modal_image_default();
+	modal_image.src = document.getElementById("img006").src;
+	modal_image_desc.innerHTML = document.getElementById("img006d").innerHTML;
+}
+
+for (let i = 5; i <= 4; i++) {
+	img_i = "img" + addzero(i);
+    img_i_d = "img" + addzero(i) + "d";
+	console.log(img_i);
+    document.getElementById(img_i).onclick = function() {
+        modal_image_content.style.display = "block";
+	    modal_image.src = document.getElementById(img_i).src;
+	    modal_image.style.width = "auto";
+	    modal_image.style.height = "500px";
+	    modal_image_desc.innerHTML = document.getElementById(img_i_d).innerHTML;
+    }
 }
 
 document.getElementById("imgclose").onclick = function() { 
