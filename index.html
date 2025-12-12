@@ -10,6 +10,31 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bebas Neue">
 </head>
 <!-- <style></style> -->
+<style>
+    /* .color001 {color: #004080;} */
+	.color001 {color: #004080}
+	.colortitle {color: #004080}
+    .color002 {color: #146480}
+    .color003 {color: #206044}
+    .color004 {color: #000080}
+    .color005 {color: darkcyan}
+    .color006 {color: darkgreen}
+	.color007 {color: #808000}
+	.color008 {color: maroon}
+	.color009 {color: #300080}
+    @container root style(--darkmode: 1) {
+	    .color001 {color: #a0d0ff}
+		.colortitle {color: white}
+        .color002 {color: #60c0ff}
+        .color003 {color: #80ffb0}
+        .color004 {color: #a0a0ff}
+        .color005 {color: #80ffff}
+        .color006 {color: #80ff80}
+		.color007 {color: yellow}
+		.color008 {color: red}
+		.color009 {color: #b080ff}
+    }
+</style>
 <body>
     <div class="top-container heading">
         <div class="top-container2" id="top-container2" style="height:46px;"></div>
@@ -17,9 +42,7 @@
         <div class="page-container">
             <a class="page-selected" href="index.html">Home</a>
             <a href="blog.html">Blog</a>
-            <a href="fakta.html">Fakta</a>
             <a href="profil.html">Profil</a>
-            <a href="portofolio.html">Portofolio</a>
             <a href="hasil-karya.html">Hasil Karya</a>
             <a href="timeline.html">Timeline</a>
             <a href="updates.html">Updates</a>
@@ -31,16 +54,16 @@
         </div>
     </div>
     <div class="title-container">
-        <br><div class="heading2" id="home" style="font-size:50px; color:#004080;"><b>DEVAN</b></div><br>
+        <div class="heading2 colortitle" id="home" style="font-size:50px;"><b>DEVAN</b></div><br>
     </div>
     <div class="container">
-        <br>
-        <!-- <font class="heading" id="home" size="7" color="#004080"><b>Website Devan</b></font> -->
+        <!-- <br> <font class="heading" id="home" size="7" color="#004080"><b>Website Devan</b></font> -->
         <!-- <div class="heading2" id="home" style="font-size:50px; color:#004080;"><b>DEVAN</b></div> -->
-
-        <p class="heading" style="font-size:25px; color:#000080;">
+        <!-- <p class="heading" style="font-size:25px; color:#000080;"> -->
+		
+		<p class="heading color001" style="font-size:25px;">
             <b>Deskripsi</b>&nbsp;
-            <img style="vertical-align:middle;" src="images/description-icon.png" alt="Link icon" width="30">
+            <img class="imginvert" style="vertical-align:middle;" src="images/description-icon.png" alt="Link icon" width="30">
         </p>
         <p>
         Ini adalah program yang sudah Devan kerjakan, jumlahnya ada 8.<br>
@@ -63,61 +86,62 @@
 		Di versi 1.9, saya menggunakan Google Search Console supaya bisa mencari website saya dengan lebih mudah. Selain itu, di versi 1.9.1, ada fitur tema gelap dan pencarian (search) Google yang baru.
         </p><br>
 
-        <p class="heading" style="font-size:25px; color:#000080;">
+        <p class="heading color001" style="font-size:25px;">
             <b>Link program:</b>&nbsp;
-            <img style="vertical-align:middle;" src="images/link.png" alt="Link icon" width="30">
+            <img class="imginvert" style="vertical-align:middle;" src="images/link.png" alt="Link icon" width="30">
         </p>
         <ul>
-            <li><a href="https://devandaniel9-equation-solver-4.streamlit.app/" target="_blank">Equation Solver</a> - Version 1.4</li>
-            <li><a href="https://devandaniel9-number-type-detection.streamlit.app/" target="_blank">Number Type Detection</a> - Version 1.2</li>
-            <li><a href="https://devandaniel9-peluang.streamlit.app/" target="_blank">Program Peluang</a> - Version 1.1</li>
-            <li><a href="https://devandaniel9-geometry-3.streamlit.app/" target="_blank">Program Geometri</a> - Version 1.5</li>
-            <li><a href="https://devandaniel9-konversi-satuan-app-gk6u34.streamlit.app/" target="_blank">Konversi Satuan</a> - Version 1.1</li>
-            <li><a href="https://devandaniel9-kalkulator-dari-teks-kalkulator-dari-teks-3-7b3xf2.streamlit.app/" target="_blank">Kalkulator Dari Teks</a> - Version 1.0</li>
-            <li><a href="https://devandaniel9-equation-solver3.streamlit.app/" target="_blank">Equation Solver Old</a> - Sudah ada program yang lebih baru</li>
-            <li><a href="https://devandaniel9-shape-program-devan-7zwso4.streamlit.app/" target="_blank">Bangun Datar dan Bangun Ruang</a> - Sudah ada Program Geometri</li>
+            <li><a class="link" href="https://devandaniel9-equation-solver-4.streamlit.app/" target="_blank">Equation Solver</a> - Version 1.4</li>
+            <li><a class="link" href="https://devandaniel9-number-type-detection.streamlit.app/" target="_blank">Number Type Detection</a> - Version 1.2</li>
+            <li><a class="link" href="https://devandaniel9-peluang.streamlit.app/" target="_blank">Program Peluang</a> - Version 1.1</li>
+            <li><a class="link" href="https://devandaniel9-geometry-3.streamlit.app/" target="_blank">Program Geometri</a> - Version 1.5</li>
+            <li><a class="link" href="https://devandaniel9-konversi-satuan-app-gk6u34.streamlit.app/" target="_blank">Konversi Satuan</a> - Version 1.1</li>
+            <li><a class="link" href="https://devandaniel9-kalkulator-dari-teks-kalkulator-dari-teks-3-7b3xf2.streamlit.app/" target="_blank">Kalkulator Dari Teks</a> - Version 1.0</li>
+            <li><a class="link" href="https://devandaniel9-equation-solver3.streamlit.app/" target="_blank">Equation Solver Old</a> - Sudah ada program yang lebih baru</li>
+            <li><a class="link" href="https://devandaniel9-shape-program-devan-7zwso4.streamlit.app/" target="_blank">Bangun Datar dan Bangun Ruang</a> - Sudah ada Program Geometri</li>
         </ul><br>
         <!-- <p>Program baru: <b>Number Type Detection</b>, <b>Peluang</b> dan <b>Geometri</b></p> -->
         <!-- <p>Website baru: <b>Portofolio</b>, <b>Fakta dan Informasi</b>, dan <b>Blog dan Cerita</b></p> -->
         <p>Website baru: <b>Updates</b>, <b>Timeline</b>, dan <b>Portofolio</b></p>
         <p>Selain itu, ada juga link yang akan kita gunakan di masa depan nanti.</p>
-        <p class="heading" style="font-size:25px; color:#000080;">
+        <p class="heading color001" style="font-size:25px;">
             <b>Link yang akan datang:</b>&nbsp;
-            <img style="vertical-align:middle;" src="images/link.png" alt="Link icon" width="30">
+            <img class="imginvert" style="vertical-align:middle;" src="images/link.png" alt="Link icon" width="30">
         </p>
         <ul>
-            <li style="color:darkgreen">
+            <!-- <li style="color:darkgreen"> -->
+			<li class="color006">
                 Pengukur (Python) - 
                 <div class="tooltip">
                 Sedang dibuat
                 <span class="tooltiptext">Sedang dibuat website nya</span>
                 </div>
             </li>
-            <li style="color:darkgreen">Fakta dan Informasi (HTML) - Sedang dibuat</li>
-            <li style="color:#808000">Foto dan Kenangan (HTML) - Mau dibuat</li>
-            <li style="color:darkgreen">Pelajaran - Sedang dibuat</li>
-            <li style="color:#808000">Labirin / Maze (Python) - Mau dibuat</li>
+            <li class="color006">Fakta dan Informasi (HTML) - Sedang dibuat</li>
+            <li class="color007">Foto dan Kenangan (HTML) - Mau dibuat</li>
+            <li class="color006">Pelajaran - Sedang dibuat</li>
+            <li class="color007">Labirin / Maze (Python) - Mau dibuat</li>
             <li>Bangun 3 Dimensi (HTML & Python)</li>
-            <li>Kalkulator Sederhana (HTML) - <span style="color:maroon">v1.8.1</span></li>
-            <li>Explore (HTML) - <span style="color:maroon">v1.8.3</span></li>
+            <li>Kalkulator Sederhana (HTML) - <span class="color008">v1.8.1</span></li>
+            <li>Explore (HTML) - <span class="color008">v1.8.3</span></li>
         </ul><br>
         <p>Link luar terdiri dari beberapa link yang mungkin suka, dan terkait di halaman ini.</p>
-        <p class="heading" style="font-size:25px; color:#000080;">
+        <p class="heading color001" style="font-size:25px;">
             <b>Link luar:</b>&nbsp;
-            <img style="vertical-align:middle;" src="images/link.png" alt="Link icon" width="30">
+            <img class="imginvert" style="vertical-align:middle;" src="images/link.png" alt="Link icon" width="30">
         </p>
         <ul>
-            <li><a href="https://www.python.org/">Website Python</a> - Bisa Download Python!</li>
-            <li><a href="https://www.geeksforgeeks.org/">Belajar Python</a></li>
-            <li><a href="https://www.w3schools.com/">Belajar HTML</a></li>
-            <li><a href="https://www.wolframalpha.com/">Website Matematika</a> - Aplikasi WolframAlpha, bisa menyelesaikan soalnya!</li>
+            <li><a class="link" href="https://www.python.org/">Website Python</a> - Bisa Download Python!</li>
+            <li><a class="link" href="https://www.geeksforgeeks.org/">Belajar Python</a></li>
+            <li><a class="link" href="https://www.w3schools.com/">Belajar HTML</a></li>
+            <li><a class="link" href="https://www.wolframalpha.com/">Website Matematika</a> - Aplikasi WolframAlpha, bisa menyelesaikan soalnya!</li>
         </ul><br>
 
         <hr style="height:2px; border-width:0; background-color:gray">
 
-        <p class="heading" style="font-size:25px; color:#300080;">
+        <p class="heading color009" style="font-size:25px;">
             <b>Informasi halaman</b>&nbsp;
-            <img style="vertical-align:middle;" src="images/page.png" alt="Page icon" width="30">
+            <img class="imginvert" style="vertical-align:middle;" src="images/page.png" alt="Page icon" width="30">
         </p>
         <p>Beberapa informasi dan deskripsi dalam masing-masing halaman</p>
         <!-- <p>
@@ -169,9 +193,9 @@
         </table>
         <br>
 
-        <p class="heading" style="font-size:25px; color:#300080;">
+        <p class="heading color009" style="font-size:25px;">
             <b>Informasi halaman selanjutnya</b>&nbsp;
-            <img style="vertical-align:middle;" src="images/page.png" alt="Page icon" width="30">
+            <img class="imginvert" style="vertical-align:middle;" src="images/page.png" alt="Page icon" width="30">
         </p>
         <table>
             <tr>
@@ -179,11 +203,11 @@
                 <th style="width:400px;">Informasi Halaman</th>
             </tr>
             <tr>
-                <td>Pertanyaan - <span style="color:maroon">v1.7.4</span></td>
+                <td>Pertanyaan - <span class="color008">v1.7.4</span></td>
                 <td>Berisi pertanyaan dan Q&A yang menarik dan berhubungan dengan website ini.</td>
             </tr>
             <tr>
-                <td>Guide - <span style="color:maroon">v1.8</span></td>
+                <td>Guide - <span class="color008">v1.8</span></td>
                 <td>Berisi pengetahuan dan caranya untuk memahami website ini dan juga yang lainnya.</td>
             </tr>
         </table>
@@ -228,8 +252,8 @@
     </div>
     <footer style="background-color:#404040; padding:10px; color:white">
         <p style="font-family:'Consolas'; margin-left:10px; line-height:1.5;">
-        Terakhir diupdate: 9 Desember 2025<br>
-        Version: 1.9.1<br>
+        Terakhir diupdate: 12 Desember 2025<br>
+        Version: 1.9.2<br>
         Copyright © 2025 by Devan
 		<!-- Terakhir diupdate: 30 Mei 2024<br>
         Version: 1.8.1<br>

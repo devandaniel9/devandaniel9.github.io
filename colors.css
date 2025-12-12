@@ -1,0 +1,27 @@
+/* Colors */
+
+/* .color001 {color: #004080;} */
+.color001 {color: #004080}
+.colortitle {color: #004080}
+.color002 {color: #146480}
+.color003 {color: #206044}
+.color004 {color: #000080}
+.color005 {color: darkcyan}
+.color006 {color: darkgreen}
+.color007 {color: #808000}
+.color008 {color: maroon}
+.color009 {color: #300080}
+
+/* Dark Mode */
+@container root style(--darkmode: 1) {
+	.color001 {color: #a0d0ff}
+	.colortitle {color: white}
+	.color002 {color: #60c0ff}
+	.color003 {color: #80ffb0}
+	.color004 {color: #a0a0ff}
+	.color005 {color: #80ffff}
+	.color006 {color: #80ff80}
+	.color007 {color: yellow}
+	.color008 {color: red}
+	.color009 {color: #b080ff}
+}

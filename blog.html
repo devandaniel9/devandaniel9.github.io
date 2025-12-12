@@ -1,46 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Website Devan</title>
+    <title>Blog dan Cerita - Website Devan</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="colors.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
 </head>
-<style>
-    .color001 {
-        color: #146480;
-    }
-    .color002 {
-        color: #206044;
-    }
-    .color003 {
-        color: #000080;
-    }
-    .color004 {
-        color: darkcyan;
-    }
-    .color005 {
-        color: darkgreen;
-    }
-    @container root style(--darkmode: 1) {
-        .color001 {
-            color: #60c0ff;
-        }
-        .color002 {
-            color: #80ffb0;
-        }
-        .color003 {
-            color: #a0a0ff;
-        }
-        .color004 {
-            color: #80ffff;
-        }
-        .color005 {
-            color: #80ff80;
-        }
-    }
-</style>
 <body>
     <div class="top-container heading">
         <div class="top-container2" id="top-container2" style="height:46px;"></div>
@@ -48,9 +15,7 @@
         <div class="page-container">
             <a href="index.html">Home</a>
             <a class="page-selected" href="blog.html">Blog</a>
-            <a href="fakta.html">Fakta</a>
             <a href="profil.html">Profil</a>
-            <a href="portofolio.html">Portofolio</a>
             <a href="hasil-karya.html">Hasil Karya</a>
             <a href="timeline.html">Timeline</a>
             <a href="updates.html">Updates</a>
@@ -61,9 +26,9 @@
         </div>
     </div>
     <div class="container">
-        <br>
         <!-- <font face="Open Sans Black" size="6" color="#002080"><b>BLOG DAN CERITA</b></font> -->
-        <div class="heading color001" id="home" style="font-size:50px;"><b>Blog dan Cerita</b></div>
+        <div class="heading color002" id="home" style="font-size:50px;"><b>Blog dan Cerita</b></div>
+		<img class="imginvert disappear" style="position:absolute; right:400px; padding-top:100px; opacity:0.2; width:400px; rotate:10deg;" src="images/blog-icon.png">
         <!-- <p style="font-size: 22px"> -->
         <p style="font-size:22px">
             <b class="heading">Halaman 1 dari 3</b>
@@ -72,10 +37,10 @@
             Dari masa lalu hingga kini, semua cerita sudah menjadi hal yang berharga.<br>
             Inilah beberapa cerita yang ada di blog ini.
         </p>
-        <p class="heading color002" style="font-size:30px;"><u><b>DAFTAR ISI</b></u></p>
-        <div class="box" style="max-width: 500px;">
+        <p class="heading color003" style="font-size:30px;"><u><b>DAFTAR ISI</b></u></p>
+        <div class="box" style="max-width:700px;">
             <p>
-            <b>Link cerita:</b><br>
+            <b>Link blog dan cerita:</b><br>
             <!-- 1. <a href="#1">Holiday to Bromo</a><br>
             2. <a href="#2">Descriptive Text</a><br>
             3. <a href="#3">Memenangkan Lomba Besar</a><br>
@@ -87,17 +52,17 @@
                 <li><a class="link" href="#3">Memenangkan Lomba Besar</a></li>
                 <li><a class="link" href="#4">Retreat Eagle School 2023</a></li>
                 <li><a class="link" href="#5">Holiday to Bali</a></li>
-                <li><a class="link" href="#6">...</a></li>
-                <li><a class="link" href="#7">...</a></li>
-                <li><a class="link" href="#8">...</a></li>
-                <li><a class="link" href="#9">...</a></li>
-                <li><a class="link" href="#10">...</a></li>
+                <li><a class="link" href="#6">Pemenang Karya Video Sekolah dari Hari Pendidikan Nasional</a></li>
+                <li><a class="link" href="#7">Cerita singkat di website lain</a></li>
+                <li><a class="link" href="#8">Sejarah selama sekolah di Eagle School</a></li>
+                <li><a class="link" href="#9">Holiday to Jakarta & Bandung</a></li>
+                <li><a class="link" href="#10">Cerita tentang Talent dengan programnya</a></li>
             </ol>
             </p>
         </div>
         <br>
         
-        <p class="heading color002" style="font-size:30px;"><u><b>BEBERAPA CERITA</b></u></p>
+        <p class="heading color003" style="font-size:30px;"><u><b>BEBERAPA CERITA</b></u></p>
         <p class="heading" id="1" style="font-size: 25px"><b>1. Holiday to Bromo</b></p>
         <div class="container2">
             <p>
@@ -121,13 +86,8 @@
                     <div id="img02c"></div>
                 </div> -->
             </div>
-			<div id="myModalImage" class="modal-image">
-				<span class="close" id="imgclose">&times;</span>
-				<img class="modal-image-content" id="imgmodal">
-				<!-- <div id="caption"></div> -->
-				<div id="imgdesc" style="color:white; text-align:center; padding-top:50px;">Bagus bagus bagus</div>
-			</div>
-            <div class="clearfix"></div>
+			
+			<div class="clearfix"></div>
             <!-- <div class="text"> <p> -->
             <span>
                 <!-- <font color="#008000">Semarang</font>, <b>Batu Malang</b>-->
@@ -149,6 +109,7 @@
                 - Batu Malang: Kota di Jawa Timur<br>
                 - Kata Coach di Eagle School, nanti akan berencana untuk retreat ke <b>Batu Malang</b>, untuk karya wisata.<br>
                 - Coach Dedie dan Nana sudah pergi ke Gunung Bromo di bulang Agustus, langit dan pemandangannya bagus.<br>
+				- Tempat Wisata ini dikunjungi tepatnya pada hari Senin, 18 Juni 2018.<br>
                 <br>
                 <b>Link:</b><br>
                 * <a class="link" href="https://id.wikipedia.org/wiki/Jawa_Timur">Wikipedia - Jawa Timur</a><br>
@@ -239,25 +200,25 @@
         <div class="container2">
             <p>
             <!-- <span style="font-size:22px; color:#000080;"><b>Kamis, 8 Sep 2023</b></span> -->
-            <b class="color003" style="font-size:23px;">Kamis, 8 Sep 2023</b>
+            <b class="color004" style="font-size:23px;">Kamis, 8 Sep 2023</b>
             <br><br>
             <!-- <b style="color:#200040">Berangkat ke Lembah Kemenangan</b><br> -->
             <b>Berangkat ke Lembah Kemenangan</b><br>
-            Lokasi: <span class="color004">Lembah Kemenangan, Ungaran, Kab. Semarang</span><br><br>
+            Lokasi: <span class="color005">Lembah Kemenangan, Ungaran, Kab. Semarang</span><br><br>
             Hari ini siswa SMA dan gurunya pergi dari sekolah naik bus, dengan membawa 2 tas yang berat, seperti tas buku dan Sekolah, lalu masukkan ke dalam bawah bus. Nanti akan ke Lembah Kemenang an melewati, Jalan Tol di Ungaran, makan siang. Ada 3 sesi hari ini.
             <br><br>
             <!-- &#8226;&#9;&#9; -->
             <!-- <b>SESI 1 ~ <span style="color:darkgreen">12:30-15:30</span></b><br> -->
-            <b>SESI 1 ~ <span class="color005">12:30-15:30</span></b><br>
+            <b>SESI 1 ~ <span class="color006">12:30-15:30</span></b><br>
             Pada sesi pertama pengenalan retreat yaitu kelompok yel-yel dan kamar, dikumpulkan hp, dan juga ibadah bersama pendeta Michael. Setelah itu, nyari kamar tapi malah ke atas jadi bingung, akhirnya ada temannya yang bantuin ke kamar, dio dalamnya ada Gilbert, dan mandi dengan membawa peralatan mandi dan bawa baju ganti, juga belum terlalu terbiasa jadi agak bingung.
             <br><br>
-            <b>SESI 2 ~ <span class="color005">16:30-18:30</span></b><br>
+            <b>SESI 2 ~ <span class="color006">16:30-18:30</span></b><br>
             Pada sesi kedua, kembali ke aula dikumpulkan hp lagi ke kotaknya, ada ibadah bersama pendeta Hengky, khotbah-nya marah-marah dan berdoanya kaut untuk menjauh dari dosa, setelah itu makan malam ada ayamnya, suasananya rame, dan melihat coach Ditus yang sedang berbicara sama Ps. Hengky.
             <br><br>
-            <b>SESI 3 ~ <span class="color005">19:15-22:00</span></b><br>
+            <b>SESI 3 ~ <span class="color006">19:15-22:00</span></b><br>
             Pada sesi ketiga, ada ibadah bersama Sr. Ditus, tentang kekudusan, juga ada sesi tanya jawab (Q&A). Dan kegiatan terakhir hari ini adalah latihan yel-yel dengan tema Be Excellent jam 10 malam, karena banyak siswa yang melanggar tata tertib, maka C. Gaby dan C. Agus S marah dan menegurnya, seperti membersihkan meja makan. Di malam hari akhirnya melihat penampilan kelompok yel-yel dekat api unggun karena abis latihan. Baru tidur di kamar Graha Gita sekiar tengah malam atau jam 12 malam, sempat main hp dan menunjukkan ke Gilbert.
             <br><br>
-            <span class="color003" style="font-size:23px;"><b>Jumat, 9 Sep 2023</b></span>
+            <span class="color004" style="font-size:23px;"><b>Jumat, 9 Sep 2023</b></span>
             <br><br>
             <b>Kegiatan Outbound</b><br>
             Di pagi hari yaitu jam setengah 6 pagi (05:30), kita akan pergi ke ruang aula untuk beribadah, dan lalu sarapan. Habis itu, ada beberapa kegiatan outbound yang menarik, sama Daniel T pada kelompok yel-yel yang sama. Yang pertama bermain bola dan pipa, agar pipa ga bocor, maka dipegang. Selanjutnya, memasukkan bola ke dalam lubangnya, dengan pegangan orang-orang dari kelompok, dan ada permainan melompat di lingkaran.
@@ -275,33 +236,45 @@
             </p>
             <div class="gallery" style="width:300px;">
                 <img class="image" id="img005" src="images/IMG_4550.JPG">
-                <div class="desc" id="img005d">Gambar 5: Sertifikat KMT PPO Jateng</div>
+                <div class="desc" id="img005d">Gambar 5: Foto Denpasar, Bali</div>
             </div>
             <div class="gallery" style="width:300px;">
                 <img class="image" id="img006" src="images/IMG_4617.JPG">
-                <div class="desc" id="img006d">Gambar 6: Foto saat lomba KMT PPO Jateng</div>
+                <div class="desc" id="img006d">Gambar 6: Foto Denpasar, Bali 2</div>
+            </div>
+			<div class="gallery" style="width:300px;">
+                <img class="image" id="img007" src="images/IMG_4714.JPG">
+                <div class="desc" id="img007d">Gambar 7: Pantai Pandawa</div>
+            </div>
+			<div class="gallery" style="width:300px;">
+                <img class="image" id="img008" src="images/IMG_4872.JPG">
+                <div class="desc" id="img008d">Gambar 8: Tanah Lot</div>
             </div>
 			<div class="clearfix"></div>
             <!-- <p> -->
             <br>
-            <span class="color003" style="font-size:23px;"><b>Hari pertama</b></span>
+            <span style="font-size:23px;"><span class="color004"><b>Hari pertama</b></span> ~ <span class="color009"><b>Sabtu, 24 Juni 2017</b></span></span>
             <br><br>
             <!-- <span style="color:red">* Untuk sementara ini, foto ini diblur terlebih dahulu.</span><br><br> -->
             Pada hari Sabtu, keluarga saya berangkat dulu dari Semarang ke Jogja naik mobil. Lalu ke bandara Adi Sucipto dengan kondisi yang rame-rame karena libur Lebaran, lalu naik pesawat selama 2 jam dari Jogja ke Bali. Akhirnya kita sampai ke Bali dengan kondisi yang selamat meskipun kondisinya ramai. Setelah itu, baru makan outdoor di dekat pantai, sebelum kita pesan hotel dan sempat foto-foto pemandangan di Bali (Gambar 5, 6).
             <!-- Lalu memesan hotel dekat pantai Kuta, dan makan malamnya dekat hotel. Lalu besoknya ke Pantai Kuta, dan kita naik kapal kecil ...<br> -->
             <!-- [Under Construction] -->
             <br><br><br>
-            <span class="color003" style="font-size:23px;"><b>Hari kedua</b></span>
+            <span style="font-size:23px;"><span class="color004"><b>Hari kedua</b></span> ~ <span class="color009"><b>Minggu, 25 Juni 2017</b></span></span>
             <br><br>
-            Hari kedua di Bali, yaitu hari Minggu. Cucu-cucu dari keluarga saya berenang di sebuah hotel dan aku sempat sarapan. Setelah itu. Di sore hari, kita ke pantai Pandawa untuk melihat sunset yang indah.
+            Hari kedua di Bali, yaitu hari Minggu. Cucu-cucu dari keluarga saya berenang di sebuah hotel dan aku sempat sarapan. Setelah itu, di sore hari, kita ke Pantai Pandawa untuk melihat sunset yang indah. (Gambar 7)
             <br><br><br>
-            <span class="color003" style="font-size:23px;"><b>Hari ketiga</b></span>
+            <span style="font-size:23px;"><span class="color004"><b>Hari ketiga</b></span> ~ <span class="color009"><b>Senin, 26 Juni 2017</b></span></span>
+			<br><br>
+			Hari ketiga di Bali, kita lanjut jalan-jalan lagi ke Wisata Monyet di Ubud. Setelah itu, di sore hari, kita pergi ke Tanah Lot, tempat wisata yang lumayan terkenal dan padat. (Gambar 8)
             <br><br><br>
-            <span class="color003" style="font-size:23px;"><b>Hari keempat</b></span>
+            <span style="font-size:23px;"><span class="color004"><b>Hari keempat</b></span> ~ <span class="color009"><b>Selasa, 27 Juni 2017</b></span></span>
+			<br><br>
+			Setelah 4 hari 3 malam di Bali, di hari terakhir di Bali, kita sempat foto sebentar di hotel, lalu pulang ke Jogja naik pesawat. Setelah itu baru balik lagi ke Semarang, dan keluarga Nainggolan lainnya juga pulang ke Jakarta.
             <br><br><br>
             <b>Catatan:</b><br>
             <!-- <ul><li> -->
-            - Rencana Karya Wisata Kelas 11 Unity ke Denpasar, Bali akan dilaksanakan sekitar bulan Juni 2025.<br>
+            - Rencana Karya Wisata Kelas 11 Unity ke Denpasar, Bali akan dilaksanakan sekitar bulan Juni 2025, tapi dibatalkan.<br>
             <br>
             <b>Link:</b><br>
             * <a class="link" href="https://id.wikipedia.org/wiki/Kota_Denpasar">Wikipedia - Kota Denpasar</a><br>
@@ -311,7 +284,7 @@
         <p class="heading" id="6" style="font-size: 25px"><b>6. Pemenang Karya Video Sekolah dari Hari Pendidikan Nasional</b></p>
         <div class="container2">            
             <!-- <p>[Under Construction]</p><br> -->
-            Link video di Youtube: <a class="link" href="https://www.youtube.com/watch?v=v1bll077CUE">Juara 1 Lomba Short Movie Competition 2024</a><br>
+            Link video di Youtube <img src="images/Youtube-Symbol-Vector.jpg" width="20" style="vertical-align:bottom; padding:2px;">: <a class="link" href="https://www.youtube.com/watch?v=v1bll077CUE">Juara 1 Lomba Short Movie Competition 2024</a><br>
             Link channel: <a class="link" href="https://www.youtube.com/@EagleSchoolSemarang">Eagle School Semarang</a>
             <br><br><br>
         </div>
@@ -372,6 +345,12 @@
         <a class="button heading" href="#home">Kembali ke awal</a>
         <br><br>
     </div>
+	<div id="myModalImage" class="modal-image">
+		<span class="close" id="imgclose">&times;</span>
+		<img class="modal-image-content" id="imgmodal">
+		<!-- <div id="caption"></div> -->
+		<div id="imgdesc" style="color:white; text-align:center; padding-top:50px;"></div>
+	</div>
     <script src="script.js"></script>
     <script src="blog-description.js"></script>
     <footer style="background-color:#404040; padding:10px; color:white;">

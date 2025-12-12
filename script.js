@@ -24,16 +24,27 @@ function closeNav() {
     // document.body.style.backgroundColor = "rgba(0,0,0,0)";
 }
 
-theme_check = false;
+// theme_check = false;
 
-function change_theme() {
+function apply_theme(theme_check) {
     if (theme_check) {
-        theme_check = false;
-        document.documentElement.style.setProperty('--darkmode', 0);
+		document.documentElement.style.setProperty('--darkmode', 1);
+		document.getElementById("theme").src = "images/light-mode.png";
+		document.getElementById("theme").title = "Ubah ke Tema Terang";
     } else {
-        theme_check = true;
-        document.documentElement.style.setProperty('--darkmode', 1);
+        document.documentElement.style.setProperty('--darkmode', 0);
+		document.getElementById("theme").src = "images/dark-mode.png";
+		document.getElementById("theme").title = "Ubah ke Tema Gelap";
     }
+	localStorage.setItem("theme_check", theme_check);
+}
+
+function change_theme(theme_check) {
+    if (theme_check) theme_check = false;
+	else theme_check = true;
+	console.log(theme_check);
+	apply_theme(theme_check);
+	return theme_check;
 }
 
 // document.getElementById("boxlink").innerHTML = `
@@ -41,11 +52,11 @@ document.getElementById("top-container2").innerHTML = `
 <div class="sidebar" id="sidebar"></div>
 <div class="backsidebar" id="backsidebar" onclick="closeNav()"></div>
 <div class="column" style="padding-right:10px;">
-    <div class="openbtn" onclick="openNav()"><img src="images/menu-icon.jpg" width="30"></div>
+    <div class="openbtn" onclick="openNav()"><img src="images/menu-icon.jpg" title="Menu" style="filter:invert(0%)" width="30"></div>
 </div>
 <!-- <div class="column" style="padding-right:30px;"> -->
 <div class="column" style="padding-right:20px;">
-    <div class="openbtn" onclick="change_theme()"><img src="images/dark-mode.png" style="filter:invert(100%)" width="30" height="30"></div>
+    <div class="openbtn" onclick="theme_check=change_theme(theme_check)"><img id="theme" src="images/dark-mode.png" title="Ubah ke Tema Gelap" style="filter:invert(100%)" width="30" height="30"></div>
 </div>
 <div class="column" style="padding-right:20px;">
     <!-- <img src="images/blank-profile.jpg" width="40" style="border-radius:50%; padding-top:2px"> -->
@@ -57,9 +68,14 @@ document.getElementById("top-container2").innerHTML = `
 <div class="clearfix"></div>
 `
 
+theme_check = localStorage.getItem("theme_check");
+if (theme_check == null) theme_check = false;
+console.log(theme_check);
+apply_theme(theme_check);
+
 // document.getElementById("boxlink").innerHTML = `
 document.getElementById("sidebar").innerHTML = `
-<div class="closebtn" onclick="closeNav()"><img src="images/close-icon.png" width="20"></div>
+<div class="closebtn" title="Close" onclick="closeNav()"><img src="images/close-icon.png" width="20"></div>
 <span style="font-size:26px;"><b>Main Menu</b></span><br>
 <span style="font-size:20px;"><b>Halaman</b></span>
 <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search..."><br>
@@ -232,6 +248,18 @@ document.getElementById("img006").onclick = function() {
     modal_image_default();
 	modal_image.src = document.getElementById("img006").src;
 	modal_image_desc.innerHTML = document.getElementById("img006d").innerHTML;
+}
+
+document.getElementById("img007").onclick = function() {
+    modal_image_default();
+	modal_image.src = document.getElementById("img007").src;
+	modal_image_desc.innerHTML = document.getElementById("img007d").innerHTML;
+}
+
+document.getElementById("img008").onclick = function() {
+    modal_image_default();
+	modal_image.src = document.getElementById("img008").src;
+	modal_image_desc.innerHTML = document.getElementById("img008d").innerHTML;
 }
 
 for (let i = 5; i <= 4; i++) {
