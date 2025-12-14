@@ -1,65 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Website Devan</title>
+    <title>Blog dan Cerita - Website Devan</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="colors.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
 </head>
 <body>
     <div class="top-container heading">
         <div class="top-container2" id="top-container2" style="height:46px;"></div>
-        <script src="script.js"></script>
         <div class="page-container">
             <a href="index.html">Home</a>
             <a class="page-selected" href="blog.html">Blog</a>
-            <a href="fakta.html">Fakta</a>
             <a href="profil.html">Profil</a>
-            <a href="portofolio.html">Portofolio</a>
             <a href="hasil-karya.html">Hasil Karya</a>
             <a href="timeline.html">Timeline</a>
             <a href="updates.html">Updates</a>
             <a href="projects.html">Projects</a>
+            <div style="float:right;" id="search"></div>
+            <script src="search.js"></script>
             <div class="clearfix"></div>
         </div>
     </div>
     <div class="container">
-        <br>
-        <!-- <font face="Open Sans Black" size="6" color="#002080"><b>BLOG DAN CERITA</b></font> -->
-        <div class="heading" id="home" style="font-size:50px; color:#146480;"><b>Blog dan Cerita</b></div>
-        <p style="font-size: 22px">
+        <div class="heading color002" id="home" style="font-size:50px;"><b>Blog dan Cerita</b></div>
+		<img class="imginvert disappear unselectable" style="position:absolute; right:200px; margin-top:250px; opacity:0.2; width:400px; rotate:10deg;" src="images/blog-icon.png">
+        <p style="font-size:22px">
             <b class="heading">Halaman 3 dari 3</b>
             <br><br>
-            Cerita dan pengalaman saya yang pernah dirasakan.<br>
-            Dari masa lalu hingga kini, semua cerita sudah menjadi hal yang berharga.<br>
-            Inilah beberapa cerita yang ada di blog ini.
+            Inilah halaman Blog dan Cerita, dimana berisi cerita dan pengalaman saya yang pernah dirasakan. Dari masa lalu hingga kini, semua cerita sudah menjadi hal yang berharga.
+			Inilah beberapa cerita dengan pengalamannya baik keluarga, teman, atau sendiri yang ada dan tertulis di blog ini.
+			Selain itu, halaman blog ini juga menyediakan fakta yang berisi informasi yang berguna terhadap pengetahuan dan wawasan untuk kedepannya, seperti fakta, cerita, berita, dan pembahasan.
         </p>
+        <p class="heading color003" style="font-size:30px;"><u><b>DAFTAR ISI</b></u></p>
+        <div class="box" style="max-width:700px;">
+            <p>
+            <b>Link blog dan cerita:</b><br>
+            <ol start="21">
+                <li><a class="link" href="#21">...</a></li>
+				<li><a class="link" href="#22">...</a></li>
+				<li><a class="link" href="#23">...</a></li>
+            </ol>
+            </p>
+        </div>
+        <br>
         
-        <p class="heading" style="font-size:30px; color:#206044;"><u><b>BEBERAPA CERITA</b></u></p>
-        <p class="heading" style="font-size:25px"><b>10. [Under Construction]</b></p>
+        <p class="heading color003" style="font-size:30px;"><u><b>BEBERAPA CERITA</b></u></p>
+		<p class="heading" id="21" style="font-size:25px"><b>21. [Under Construction]</b></p>
+		<p class="heading" id="22" style="font-size:25px"><b>22. [Under Construction]</b></p>
+		<p class="heading" id="23" style="font-size:25px"><b>23. [Under Construction]</b></p>
         <br>
 
-        <p class="heading" style="font-size:30px; color:#206044;"><u><b>BEBERAPA LINK</b></u></p>
         <p class="heading" style="font-size:22px; margin-bottom:10px;"><b>Halaman</b></p>
         <div class="pagination heading">
-            <!-- <a href="#">&laquo;</a> -->
-            <!-- <a href="javascript:void(0)">3</a> -->
-            <!-- <a>&lt;</a> -->
             <a href="blog2.html">&lt;</a>
             <a href="blog.html">1</a>
             <a href="blog2.html">2</a>
             <a class="active">3</a>
             <a class="nonclick">&gt;</a>
-            <!-- <a href="#">&raquo;</a> -->
         </div><br><br>
         <a class="button heading" href="#home">Kembali ke awal</a>
         <br><br>
     </div>
+    <script src="script.js"></script>
+    <script src="blog-description.js"></script>
     <footer style="background-color:#404040; padding:10px; color:white;">
         <p style="font-family:'Consolas'; margin-left:10px; line-height:1.5;">
-        Terakhir diupdate: 29 Mar 2024<br>
-        Copyright © 2024 by Devan
+		Terakhir diupdate: 14 Desember 2025<br>
+        Copyright © 2025 by Devan
         </p>
     </footer>
 </body>

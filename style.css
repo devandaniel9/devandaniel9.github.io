@@ -3,8 +3,14 @@
 /* Fonts */
 /* @import url("https://fonts.googleapis.com/css?family=Inter"); */
 @import url("https://fonts.googleapis.com/css?family=Inter:500");
+@import url("https://fonts.googleapis.com/css?family=Inter:700");
+@import url("https://fonts.googleapis.com/css?family=Inter:900");
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
 @import url('https://fonts.googleapis.com/css?family=Rubik');
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Consolas');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
 
 body {
     /* font-family:"Open Sans Black",sans-serif; */
@@ -93,6 +99,7 @@ html {
 	/* max-width: 80%; /* Lebar maksimal di desktop */
     padding: 20px;    /* Jarak dari pinggir layar HP */
 	box-sizing: border-box; /* Supaya padding tidak melebarkan elemen */
+	position: relative;
 }
 .title-container {
     margin: 0 auto;
@@ -105,6 +112,10 @@ html {
 /* Media queries - Responsive timeline on screens less than 600px wide */
 @media screen and (max-width: 1250px) {
     .container {
+        width: 100%;
+		max-width: 1000px;
+    }
+	.title-container {
         width: 100%;
 		max-width: 1000px;
     }
@@ -122,12 +133,19 @@ p {
 .heading {
     /* font-family:"Raleway Medium",sans-serif; */
     font-family:"Inter",sans-serif;
+	font-weight: 500;
 }
-.heading2 {
+/* .heading2 { */
+.heading-top {
+    font-family:"Inter",sans-serif;
+	letter-spacing: 5px;
+    font-weight: 700;
+}
+.heading-title {
     /* font-family:"Raleway Medium",sans-serif; */
     font-family:"Inter",sans-serif;
     letter-spacing: 10px;
-    /* font-weight: 700; */
+    font-weight: 700;
 }
 .title {
 	font-family:"Bebas Neue",sans-serif;
@@ -201,6 +219,10 @@ img {
     height: auto;    /* Tinggi menyesuaikan proporsi */
     /* display: block; */
     /* margin: 10px 0; */
+}
+img.unselectable {
+    user-select: none;
+	pointer-events: none;
 }
 
 /* Table */
@@ -568,12 +590,14 @@ div.desc {
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+	font-size: 30px;
 }
 .modal-image-content {
     margin: auto;
     display: block;
     width: 80%;
-    max-width: 700px;
+    max-width: 800px;
+	max-height: 450px;
 }
 .image {
     /* border-radius: 5px; */
@@ -581,25 +605,6 @@ div.desc {
     transition: 0.3s;
 }
 .image:hover {opacity: 0.7;}
-.modal-image {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
-}
-.modal-image-content {
-    margin: auto;
-    display: block;
-    width: 80%;
-    max-width: 700px;
-}
 #caption {
     margin: auto;
     display: block;

@@ -11,6 +11,7 @@
 .color007 {color: #808000}
 .color008 {color: maroon}
 .color009 {color: #300080}
+.color010 {color: green}
 
 /* Dark Mode */
 @container root style(--darkmode: 1) {
@@ -24,4 +25,5 @@
 	.color007 {color: yellow}
 	.color008 {color: red}
 	.color009 {color: #b080ff}
+	.color010 {color: lime}
 }

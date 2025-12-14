@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Website Devan</title>
+    <title>Profil - Website Devan</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="colors.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
 </head>
 <body>
@@ -13,9 +14,7 @@
         <div class="page-container">
             <a href="index.html">Home</a>
             <a href="blog.html">Blog</a>
-            <a href="fakta.html">Fakta</a>
             <a class="page-selected" href="profil.html">Profil</a>
-            <a href="portofolio.html">Portofolio</a>
             <a href="hasil-karya.html">Hasil Karya</a>
             <a href="timeline.html">Timeline</a>
             <a href="updates.html">Updates</a>
@@ -26,71 +25,57 @@
         </div>
     </div>
     <div class="container">
-        <br>
-        <div class="heading" id="home" style="font-size:50px; color:#146480;"><b>Profil</b></div>
-        <p style="font-size:25px; color:#000080;"><b>Gambar</b></p>
+        <div class="heading color002" id="home" style="font-size:50px;"><b>Profil</b></div>
+		<img class="imginvert disappear unselectable" style="position:absolute; right:200px; margin-top:100px; opacity:0.2; width:400px;" src="images/profile-icon.png">
+		<p>
+        Inilah profil saya.
+        </p><br>
+        <p class="heading color004" style="font-size:25px;"><b>Gambar</b></p>
         <div class="image">
             <!-- <img src="images/IMG_20200105_121417.jpg" width="150" style="border: 2px solid black; border-radius: 50%;"> -->
             <img src="images/profile.jpg" width="150" style="border: 2px solid black; border-radius: 50%;">
             <img src="images/Gambar Profil.jpg" width="150" style="border: 2px solid black; border-radius: 50%;">
         </div>
-        <p class="heading" style="font-size:25px; color:#000080;"><b>Biodata</b></p>
+        <p class="heading color004" style="font-size:25px;"><b>Biodata</b></p>
         <p style="line-height:1.7;">
         Nama: Devan Da**e* *<br>
         Tanggal lahir: 0*/0*/200*<br>
         Username: dev*ndan**l9<br>
         Lokasi: Semarang
-        </p>
-        <p class="heading" style="font-size:25px; color:#000080;"><b>Kesukaan</b></p>
+        </p><br>
+        <p class="heading color004" style="font-size:25px;"><b>Kesukaan</b></p>
         <p>
         Buka aplikasi VS Code<br>
         Mengerjakan program<br>
         Suka pelajaran Matematika dan Bahasa Inggris
-        </p>
-        <p class="heading" style="font-size:25px; color:#000080;"><b>Histori</b></p>
-        <p class="heading" style="font-size:25px; color:#000080;"><b>Social Links</b></p>
+        </p><br>
+        <p class="heading color004" style="font-size:25px;"><b>Histori</b></p>
+		<br>
+        <p class="heading color004" style="font-size:25px;"><b>Social Links</b></p>
         <p>
             <!-- https://www.instagram.com/devandaniel09 -->
             Instagram: <img src="images/instagram-icon.png" width="20" style="vertical-align:bottom; padding:2px;">
-            <a href="https://www.instagram.com/devandaniel09">Devan - Instagram</a><br>
+            <a class="link" href="https://www.instagram.com/devandaniel09">Devan - Instagram</a><br>
             YouTube: <img src="images/Youtube-Symbol-Vector.jpg" width="20" style="vertical-align:bottom; padding:2px;">
-            <a href="https://www.youtube.com/channel/UCbSs7ZjkJD3MWKt_vWyMU4Q">Devan - Youtube</a>
+            <a class="link" href="https://www.youtube.com/channel/UCbSs7ZjkJD3MWKt_vWyMU4Q">Devan - Youtube</a>
             <!-- <br><br>
             Link beberapa teman/orang:<br>
             <a href="orang.html">Daftar Teman & Orang</a> -->
-        </p>
-        <p class="heading" style="font-size:25px; color:#000080;"><b>Lihat juga / See also</b></p>
+        </p><br>
+        <p class="heading color004" style="font-size:25px;"><b>Lihat juga / See also</b></p>
         <ul>
-            <li><a href="portofolio.html">Portofolio Devan</a></li>
+            <li><a class="link" href="portofolio.html">Portofolio Devan</a></li>
         </ul>
-        <br>
-        <p class="heading" style="font-size:25px; color:#206044;"><u><b>BEBERAPA LINK:</b></u></p>
-        <div class="box heading">
-            <p style="font-size:22px; margin-bottom:5px;"><b>Link halaman:</b></p>
-            <div class="btn-group">
-                <a href="index.html">Home</a>
-                <a href="blog.html">Blog</a>
-                <a href="fakta.html">Fakta</a>
-                <a class="selected">Profil</a>
-                <a href="portofolio.html">Portofolio</a>
-                <a href="hasil-karya.html">Hasil Karya</a>
-                <a href="timeline.html">Timeline</a>
-                <a href="updates.html">Updates</a>
-                <a href="projects.html">Projects</a>
-            </div>
-            <div class="clearfix"></div><br>
-        </div>
-        <br>
+        <br><br>
         <a class="button heading" href="#home">Kembali ke awal</a>
         <br><br>
     </div>
 	<script src="script.js"></script>
-    <script src="blog-description.js"></script>
     <footer style="background-color:#404040; padding:10px; color:white;">
         <p style="font-family:'Consolas'; margin-left:10px; line-height:1.5;">
         <!-- Terakhir diupdate: 1 Okt 2023<br>
         Copyright © 2023 by Devan -->
-		Terakhir diupdate: 9 Desember 2025<br>
+		Terakhir diupdate: 14 Desember 2025<br>
         Copyright © 2025 by Devan
         </p>
     </footer>
