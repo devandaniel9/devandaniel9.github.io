@@ -174,6 +174,12 @@ a.button:hover, a.button:active {
     /* float: left; */
     /* margin: 2px;
 } */
+img.imginvertreverse {
+	filter: invert(100%);
+}
+table img {
+	margin-right: 10px;
+}
 .icon {
     width: 20px;
     vertical-align: bottom;
@@ -223,6 +229,9 @@ img {
 img.unselectable {
     user-select: none;
 	pointer-events: none;
+}
+img.rounded {
+	border-radius: 10px;
 }
 
 /* Table */
@@ -309,7 +318,8 @@ div.desc {
     top: 0;
     left: 0;
 }
-.sidebar span {
+/* .sidebar span { */
+.sidebar span.sidespan {
     /* padding: 8px 8px 8px 20px; */
     padding-left: 20px;
     padding-top: 5px;
@@ -540,7 +550,9 @@ div.desc {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    /* padding-top: 100px; /* Location of the box */
+	justify-content: center;
+    align-items: center;
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -550,12 +562,13 @@ div.desc {
     background-color: rgba(0,0,0,0.3); /* Black w/ opacity */
 }
 .modal-content {
-    background-color: #fefefe;
+    /* background-color: #fefefe; */
+	background-color: #f0f0f0;
     border-radius: 10px;
     margin: auto;
     padding-top: 15px;
     border: 1px solid #888;
-    width: 80%;
+    width: 60%;
 }
 .closebtn2 {
     background-color: #d0d0d0;
@@ -565,6 +578,9 @@ div.desc {
     margin-right: 15px;
     font-size: 0px;
     transition: 0.3s;
+}
+.closebtn2:hover {
+    background-color: #b0b0b0;
 }
 .closebtn2 img {
     padding: 8px;
@@ -698,6 +714,9 @@ div.desc {
 	img.imginvert {
 	    filter: invert(100%);
 	}
+	img.imginvertreverse {
+	    filter: invert(0%);
+	}
     /* Table */
     table, th, td {
         background-color: #20242c;
@@ -725,5 +744,38 @@ div.desc {
     }
     .pagination a:hover:not(.active,.nonclick) {
         background-color: #404040;
+    }
+	.sidebar {
+		background-color: #303030;
+		color: white;
+		box-shadow: 0px 8px 16px 0px rgba(255,255,255,0.2);
+	}
+	.sidebar a {
+		color: white;
+	}
+	.sidebar a:hover {
+		background-color: #606060;
+	}
+	.sidebar .closebtn {
+		background-color: #606060;
+	}
+	.sidebar .closebtn:hover {
+		background-color: #808080;
+	}
+	#mySearch {
+		background-color: #202020;
+        color: white;
+	}
+	/* .sidebar .closebtn img {
+		padding: 8px;
+	} */
+	.modal-content {
+		background-color: #303030;
+	}
+	.closebtn2 {
+		background-color: #606060;
+	}
+	.closebtn2:hover {
+        background-color: #808080;
     }
 }

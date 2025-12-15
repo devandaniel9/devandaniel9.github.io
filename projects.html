@@ -5,17 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
-    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato"> -->
+	<link rel="stylesheet" href="colors.css">
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bebas Neue">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bebas Neue"> -->
 </head>
 <style>
-    html {
-        /* --darkmode: 0; */
-        --darkmode: 0;
-        container-name: root;
-        container-type: normal;
-    }
+    /* }
     #home {
         color: #146480;
     }
@@ -32,7 +28,7 @@
         #heading2 {
             color: #80ffb0;
         }
-    }
+    } */
 </style>
 <body>
     <div class="top-container heading">
@@ -51,6 +47,7 @@
             <a href="timeline.html">Timeline</a>
             <a href="updates.html">Updates</a>
             <a class="page-selected" href="projects.html">Projects</a>
+			<a href="help.html">Help</a>
             <div style="float:right;" id="search"></div>
             <script src="search.js"></script>
             <div class="clearfix"></div>
@@ -58,7 +55,7 @@
     </div>
     <div class="container">
         <!-- <div class="heading" id="home" style="font-size:50px; color:#146480;"><b>Projects</b></div> -->
-        <div class="heading" id="home" style="font-size:50px;"><b>Projects</b></div>
+        <div class="heading color002" style="font-size:50px;"><b>Projects</b></div>
 		<img class="disappear unselectable" style="position:absolute; right:200px; margin-top:100px; opacity:0.2; width:400px; rotate:10deg;" src="images/project-icon.png">
         <p>
         Halaman Projects ini berisi kumpulan Project yang sudah dibuat sebelumnya, seperti program Streamlit, halaman website kecil, menghitung BMI, penghitung waktu, permainan, dan kumpulan animasi.
@@ -67,7 +64,7 @@
 		Di halaman ini terdapat 10 project nya, yang sudah ditampilkan di bawah ini:
         </p>
         <!-- <p class="heading" style="font-size:30px; color:#206044;"><u><b>DAFTAR ISI</b></u></p> -->
-        <p class="heading" id="heading2" style="font-size:30px;"><u><b>DAFTAR ISI</b></u></p>
+        <p class="heading color003" style="font-size:30px;"><u><b>DAFTAR ISI</b></u></p>
         <div class="box" style="max-width: 500px;">
             <p><b>Link program dalam projects:</b></p>
             <ol>
@@ -89,11 +86,11 @@
 		
 		<hr style="height:2px; border-width:0; background-color:gray">
 		
-        <p class="heading" id="heading2" style="font-size:30px;"><u><b>ISI HALAMAN</b></u></p>
+        <p class="heading color003" style="font-size:30px;"><u><b>ISI HALAMAN</b></u></p>
         <p class="heading" id="1" style="font-size: 25px"><b>1. Program Streamlit</b></p>
         <div class="container2">
             <!-- <div class="image"> -->
-            <img src="images/streamlit-logo.png" style="background-color:white; padding:10px;" width="150">
+            <img class="rounded" src="images/streamlit-logo.png" style="background-color:white; padding:10px;" width="150">
             <div class="clearfix"></div>
             <p>Inilah beberapa program yang sudah dibuat di Streamlit<br>Berikut ini ada 8 program yang sudah pernah buat:</p>
             <ul>
@@ -109,7 +106,7 @@
         </div><br>
         <p class="heading" id="2" style="font-size: 25px"><b>2. Bangun Datar</b></p>
         <div class="container2">
-            <img src="images/2d-shapes.png" style="background-color:white; padding:10px;" width="250">
+            <img class="rounded" src="images/2d-shapes.png" style="background-color:white; padding:10px;" width="250">
             <div class="clearfix"></div>
             <!-- <p>Ada program bangun datar, cuma bukan Streamlit.<br>Nanti akan mencoba untuk menambahkan bangun ruang di websitenya.</p> -->
             <p>Ada program Bangun Datar dan Bangun Ruang, namun versi ini bukan Streamlit. Beberapa diantaranya sedang menambahkan beberapa fiturnya, sehingga membuat program ini menjadi lebih lengkap.<br></p>
@@ -129,14 +126,14 @@
         </div><br>
         <p class="heading" id="4" style="font-size: 25px"><b>4. BMI Calculator</b></p>
         <div class="container2">
-            <img src="images/bmi-image.jpg" width="150">
+            <img class="rounded" src="images/bmi-image.jpg" width="150">
             <div class="clearfix"></div>
             <p>Ada program untuk menghitung BMI tubuh, berdasarkan berat dan tinggi badan.</p>
             <a class="link" href="projects/BMI calculator.html">BMI Calculator</a>
         </div><br>
         <p class="heading" id="5" style="font-size: 25px"><b>5. Soal Matematika</b></p>
         <div class="container2">
-			<img src="projects/images/soal-matematika.jpg" width="200">
+			<img class="rounded" src="projects/images/soal-matematika.jpg" width="200">
 			<img src="projects/images/calculator.png" style="padding-left:50px; padding-bottom:10px;" width="100">
             <div class="clearfix"></div>
             <p>Soal Pertanyaan dalam Matematika berisi beberapa jenis pertanyaan, yaitu penjumlahan, pengurangan, perkalian, pembagian, dan sebagainya. Lalu ada tingkat kesulitan yang berbeda-beda, dan terdiri dari isian dan pilihan ganda. Selain itu, ada timer untuk setiap soal pada pengaturan.</p>
@@ -169,7 +166,7 @@
         </div><br>
 		<p class="heading" id="11" style="font-size: 25px"><b>11. Tes Kognitif dan Visual</b></p>
         <div class="container2">
-		    <img src="projects/images/soal-matematika.jpg" width="200">
+		    <img class="rounded" src="projects/images/soal-matematika.jpg" width="200">
 			<img src="projects/images/visual-icon.png" class="imginvert" style="padding-left:50px;" width="120">
             <p>Tes Kognitif dan Visual<br>Bulan dibuat: November 2025</p>
             <a class="link" href="projects/Kalkulator Sederhana.html">Kalkulator Sederhana</a>
@@ -184,7 +181,7 @@
 		
 		<hr style="height:2px; border-width:0; background-color:gray">
 
-        <p class="heading" id="heading2" style="font-size:30px;"><u><b>BEBERAPA LINK:</b></u></p>
+        <p class="heading color003" style="font-size:30px;"><u><b>BEBERAPA LINK:</b></u></p>
         <div class="box heading">
             <p style="font-size:22px; margin-bottom:5px;"><b>Link halaman:</b></p>
             <div class="btn-group">
@@ -207,10 +204,10 @@
     <script src="script.js"></script>
     <!-- Terakhir diupdate: 24 Mei 2024<br> -->
     <footer style="background-color:#404040; padding:10px; color:white;">
-        <p style="font-family:'Consolas'; margin-left:10px; line-height:1.5;">
+        <p style="font-family:'Roboto Mono'; margin-left:10px; line-height:1.5;">
         <!-- Terakhir diupdate: 13 Nov 2024<br> -->
         <!-- Terakhir diupdate: 14 Feb 2025<br> -->
-        Terakhir diupdate: 14 Desember 2025<br>
+        Terakhir diupdate: 15 Desember 2025<br>
         Copyright © 2025 by Devan
         </p>
     </footer>
