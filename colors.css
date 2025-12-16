@@ -12,7 +12,7 @@
 .color008 {color: maroon}
 .color009 {color: #300080}
 .color010 {color: green}
-.color011 {color: #404040}
+.color011 {color: gray}
 .color012 {color: #c06000}
 
 /* Dark Mode */
@@ -28,6 +28,6 @@
 	.color008 {color: red}
 	.color009 {color: #b080ff}
 	.color010 {color: lime}
-	.color011 {color: gray}
+	.color011 {color: #c0c0c0}
 	.color012 {color: darkorange}
 }

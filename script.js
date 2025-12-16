@@ -60,7 +60,7 @@ document.getElementById("top-container2").innerHTML = `
 </div>
 <div class="column" style="padding-right:20px;">
     <!-- <img src="images/blank-profile.jpg" width="40" style="border-radius:50%; padding-top:2px"> -->
-    <img src="images/profile.jpg" style="height:46px; border-radius:50%;">
+    <img id="blank-profile" src="images/profile.jpg" style="height:46px; border-radius:50%;">
 </div>
 <div class="column" style="padding-right:20px;">
     <div class="heading-top" style="font-size:30px; color:white; padding-top:4px;"><b>MY WEBSITE</b></div>
@@ -121,9 +121,9 @@ document.getElementById("sidebar").innerHTML = `
 <div id="myModal" class="modal">
     <!-- Modal content -->
     <div class="modal-content">
-        <!-- <span class="close">&times;</span> -->
+        <!-- <span class="close">&times;</span> &emsp; -->
         <div class="closebtn2" onclick="closeModal()"><img class="imginvert" src="images/close-icon.png" width="20"></div>
-        <span class="sidespan" style="font-size:30px;"><img class="imginvert" style="vertical-align:middle;" src="images/info-icon.png" width="30">&emsp;<b>About Website</b></span>
+        <span class="sidespan" style="font-size:30px;"><img class="imginvert" id="info-icon" style="vertical-align:middle; margin-right:20px;" src="images/info-icon.png" width="30"><b>About Website</b></span>
         <p style="padding-left:20px">
             <!-- ..........<br>..........<br>..........<br>..........<br>..........<br><br><br> -->
 			Inilah Website Devan<br>
@@ -279,7 +279,10 @@ try {
     document.getElementById("img022").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img022").src; modal_image_desc.innerHTML = document.getElementById("img022d").innerHTML;}
     document.getElementById("img023").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img023").src; modal_image_desc.innerHTML = document.getElementById("img023d").innerHTML;}
     document.getElementById("img024").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img024").src; modal_image_desc.innerHTML = document.getElementById("img024d").innerHTML;}
+} catch(err) {
+}
 
+try {
     for (let i = 5; i <= 4; i++) {
 	    img_i = "img" + addzero(i);
         img_i_d = "img" + addzero(i) + "d";
@@ -298,3 +301,26 @@ try {
     }
 } catch(err) {
 }
+
+// Blog for description
+
+document.getElementById("desc001").innerHTML = `
+    Kota Semarang adalah ibu kota provinsi Jawa Tengah di Indonesia. Ikon kota Semarang adalah Lawang Sewu.
+`;
+document.getElementById("desc001").style.width = "300px";
+document.getElementById("desc001").style.marginLeft = "-150px";
+// document.getElementById("desc01").innerHTML
+// document.getElementById("desc02").innerHTML = "Blablabla adalah blablabla";
+
+document.getElementById("desc002").innerHTML = `
+    Kota Batu Malang adalah kota terbesar kedua di provinsi Jawa Timur setelah Kota Surabaya.
+	Kota ini tidak terlalu jauh dari pegunungan Bromo dengan wisata Bromo Tengger Semeru.
+`;
+document.getElementById("desc002").style.width = "300px";
+document.getElementById("desc002").style.marginLeft = "-150px";
+
+document.getElementById("desc003").innerHTML = `
+    Kota Denpasar adalah ibu kota provinsi Bali di Indonesia. Kota ini menjadi salah satu daya tarik orang mancanegara karena keindahannya.
+`;
+document.getElementById("desc003").style.width = "300px";
+document.getElementById("desc003").style.marginLeft = "-150px";

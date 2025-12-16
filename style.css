@@ -124,6 +124,8 @@ html {
 	}
 }
 
+
+
 p {
     /* margin-block-start: 20px;
     margin-block-end: 20px; */
@@ -221,8 +223,9 @@ table img {
     height: 100vh; /* Untuk mengisi seluruh tinggi viewport */
 }
 img {
-    max-width: 100%; /* Gambar tidak akan melebihi lebar layar */
-    height: auto;    /* Tinggi menyesuaikan proporsi */
+    /* max-width: 100%; /* Gambar tidak akan melebihi lebar layar */
+    max-width: 100%; /* Gambar tidak akan lebih lebar dari layar HP */
+    height: auto;    /* Tinggi menyesuaikan agar gambar tidak gepeng */
     /* display: block; */
     /* margin: 10px 0; */
 }
@@ -416,6 +419,10 @@ div.desc {
 #searchbtn:hover {
     background-color: #303840;
 }
+#google-search-form {
+	margin-right: 5px;
+    margin-bottom: 5px;
+}
 
 /* Style the navigation menu inside the left column */
 #myMenu {
@@ -429,11 +436,12 @@ div.desc {
 .tooltip {
     position: relative;
     display: inline-block;
-    border-bottom: 1px dotted black;
+    border-bottom: 2px dotted black;
 }
   
 .tooltip .tooltiptext {
-    visibility: hidden;
+    /* visibility: hidden; */
+	display: none;
     width: 200px;
     /* background-color: #555; */
     background-color: white;
@@ -443,7 +451,7 @@ div.desc {
     border-radius: 6px;
     box-shadow: 0px 0px 10px 10px rgba(0,0,0,0.2);
     /* padding: 5px 0; */
-    padding: 10px;
+    padding: 20px;
     position: absolute;
     z-index: 1;
     bottom: 125%;
@@ -465,7 +473,8 @@ div.desc {
 }
   
 .tooltip:hover .tooltiptext {
-    visibility: visible;
+    /* visibility: visible; */
+	display: block;
     opacity: 1;
 }
 
@@ -569,6 +578,7 @@ div.desc {
     padding-top: 15px;
     border: 1px solid #888;
     width: 60%;
+	white-space: initial;
 }
 .closebtn2 {
     background-color: #d0d0d0;
@@ -663,6 +673,38 @@ div.desc {
     cursor: pointer;
 }
 
+
+/* Small devices */
+
+@media screen and (max-width: 850px) {
+	.page-container a {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 600px) {
+    #blank-profile {
+	    display: none;
+	}
+	#top-container2 div {
+		letter-spacing: 0px;
+		font-weight: 500;
+	}
+	.page-container a {
+		display: none;
+	}
+	.page-container input {
+		width: auto;
+	}
+    .modal-content {
+	    width: 90%;
+		/* white-space: normal; */
+		white-space: initial;
+	}
+	.modal-content #info-icon {
+		display: none;
+	}
+}
 
 /* Dark Mode */
 /* @media screen and (max-width: 600px) { */
@@ -769,6 +811,9 @@ div.desc {
 	/* .sidebar .closebtn img {
 		padding: 8px;
 	} */
+	.tooltip {
+	    border-bottom: 2px dotted white;	
+	}
 	.modal-content {
 		background-color: #303030;
 	}
@@ -778,4 +823,8 @@ div.desc {
 	.closebtn2:hover {
         background-color: #808080;
     }
+	.modal-image-content {
+		max-width: 80%;
+		object-fit: contain;
+	}
 }
