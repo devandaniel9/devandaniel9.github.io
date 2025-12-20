@@ -1,19 +1,10 @@
 // Script
 
-// function w3_open() {
-//     document.getElementById("mySidebar").style.display = "block";
-// }
-
-// function w3_close() {
-//     document.getElementById("mySidebar").style.display = "none";
-// }
-
 function openNav() {
     document.getElementById("sidebar").style.width = "300px";
     document.getElementById("backsidebar").style.display = "block";
     document.getElementById("backsidebar").style.width = "100%";
     document.getElementById("backsidebar").style.height = "100%";
-    // document.body.style.backgroundColor = "rgba(0,0,0,0.5)";
 }
 
 function closeNav() {
@@ -21,7 +12,6 @@ function closeNav() {
     document.getElementById("backsidebar").style.display = "none";
     document.getElementById("backsidebar").style.width = "0";
     document.getElementById("backsidebar").style.height = "0";
-    // document.body.style.backgroundColor = "rgba(0,0,0,0)";
 }
 
 // theme_check = false;
@@ -37,17 +27,16 @@ function apply_theme(theme_check) {
 		document.getElementById("theme").title = "Ubah ke Tema Gelap";
     }
 	localStorage.setItem("theme_check", theme_check);
+	// console.log(theme_check);
 }
 
 function change_theme(theme_check) {
     if (theme_check) theme_check = false;
 	else theme_check = true;
-	console.log(theme_check);
 	apply_theme(theme_check);
 	return theme_check;
 }
 
-// document.getElementById("boxlink").innerHTML = `
 document.getElementById("top-container2").innerHTML = `
 <div class="sidebar" id="sidebar"></div>
 <div class="backsidebar" id="backsidebar" onclick="closeNav()"></div>
@@ -68,40 +57,14 @@ document.getElementById("top-container2").innerHTML = `
 <div class="clearfix"></div>
 `
 
-theme_check = localStorage.getItem("theme_check");
+theme_check = localStorage.getItem("theme_check") == "true";
 if (theme_check == null) theme_check = false;
-console.log(theme_check);
 apply_theme(theme_check);
 
-/*
-<ul class="heading" id="myMenu">
-    <li><a href="index.html"><img style="vertical-align:middle;" src="images/home-icon.png" width="20">&emsp;Home</a></li>
-    <li><a href="blog.html">Blog</a></li>
-    <li><a href="fakta.html">Fakta</a></li>
-    <li><a href="profil.html"><img style="vertical-align:middle;" src="images/profile-icon.png" width="20">&emsp;Profil</a></li>
-    <li><a href="portofolio.html">Portofolio</a></li>
-    <li><a href="hasil-karya.html">Hasil Karya</a></li>
-    <li><a href="timeline.html"><img style="vertical-align:middle;" src="images/history-icon.png" width="20">&emsp;Timeline</a></li>
-    <li><a href="updates.html"><img style="vertical-align:middle;" src="images/update-icon.png" width="20">&emsp;Updates</a></li>
-    <li><a href="projects.html">Projects</a></li>
-    <li><a style="color:red">Pertanyaan</a></li>
-    <li><a style="color:red">Guide</a></li>
-    <li><a style="color:red">Explore</a></li>
-</ul>
-
-<li><a style="color:red">Pertanyaan</a></li>
-<li><a style="color:red">Guide</a></li>
-<li><a style="color:red">Explore</a></li>
-*/
-
-// document.getElementById("boxlink").innerHTML = `
-// <a style="font-size:20px; color:red; width:100%; position:absolute; bottom:25px;" onclick="openModal()">About Website</a>
-// <span style="font-size:26px;">
 document.getElementById("sidebar").innerHTML = `
 <div class="closebtn" title="Close" onclick="closeNav()"><img class="imginvert" src="images/close-icon.png" width="20"></div>
-<span class="sidespan" style="font-size:26px;"><b>Main Menu</b></span><br>
-<span class="sidespan" style="font-size:20px;"><b>Halaman</b></span>
-<input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search..."><br>
+<span class="sidespan" style="font-size:30px;"><b>Main Menu</b></span><br>
+<span class="sidespan" style="font-size:24px;"><b>Halaman</b></span>
 <hr style="height:2px; border-width:0; background-color:gray">
 
 <ul class="heading" id="myMenu">
@@ -127,36 +90,20 @@ document.getElementById("sidebar").innerHTML = `
         <p style="padding-left:20px">
             <!-- ..........<br>..........<br>..........<br>..........<br>..........<br><br><br> -->
 			Inilah Website Devan<br>
-			Dibuat dari Github<br>
+			Dibuat di Github<br>
 			Website ini pertama kali dibuat tahun 2023
 			<br><br>
 			Sekian dari saya, terimakasih yang sudah menggunakan website ini.
 			<br><br>
 			<span id="version-sidebar"></span>
 			<br><br>
-			Copyright © 2025 by Devan
+			Copyright © 2023 - 2025 by Devan Daniel
             <!-- Terakhir diupdate: 11 Mei 2024 -->
         </p>
     </div>
+	<div class="back-modal-content" id="back-modal-content" onclick="closeModal()"></div>
 </div>
 `;
-// <span style="font-size:20px; color:gray; position:absolute; bottom:16px">About Website</span>
-
-function myFunction() {
-    var input, filter, ul, li, a, i;
-    input = document.getElementById("mySearch");
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("myMenu");
-    li = ul.getElementsByTagName("li");
-    for (i = 0; i < li.length; i++) {
-        a = li[i].getElementsByTagName("a")[0];
-        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-        } else {
-            li[i].style.display = "none";
-        }
-    }
-}
 
 // Get the modal
 var modal = document.getElementById("myModal");
@@ -170,12 +117,14 @@ function openModal() {
 		document.getElementById("version-sidebar").innerHTML = '';
 	}
 	modal.style.display = "flex";
+	document.getElementById("back-modal-content").style.display = "block";
 }
 
 // When the user clicks on <span> (x), close the modal
 // When the user clicks anywhere outside of the modal, close it
 function closeModal() {
     modal.style.display = "none";
+	document.getElementById("back-modal-content").style.display = "none";
 }
 
 function get_image_modal(modal_image, img, modalImg, imgdesc, captionText) {
@@ -201,28 +150,6 @@ var modal_image_content = document.getElementById("myModalImage");
 var modal_image = document.getElementById("imgmodal");
 var modal_image_desc = document.getElementById("imgdesc");
 
-// Get the image and insert it inside the modal - use its "alt" text as a caption
-// var img = document.getElementById("img01");
-// console.log(img);
-// var modalImg = document.getElementById("img01m");
-// console.log(modalImg);
-// var imgdesc = document.getElementById("img01d").innerHTML;
-// console.log(imgdesc);
-// var captionText = document.getElementById("img01c").innerHTML;
-// console.log(captionText);
-
-// get_image_modal(modal_image, img, modalImg, imgdesc, captionText);
-
-// var modal_image = document.getElementById("myModalImage2");
-// var img = document.getElementById("img02");
-// var modalImg = document.getElementById("img02m");
-// var imgdesc = document.getElementById("img02d");
-// var captionText = document.getElementById("img02c");
-
-// get_image_modal(modal_image, img, modalImg, imgdesc, captionText);
-
-// modal_image.style.display = "block";
-
 digit = 3;
 
 function addzero(n) {
@@ -239,48 +166,56 @@ function modal_image_default() {
 	modal_image.style.height = "500px";
 }
 
-/* document.getElementById("img001").onclick = function() {
-    modal_image_content.style.display = "block";
-	modal_image.src = document.getElementById("img001").src;
-	modal_image.style.width = "auto";
-	modal_image.style.height = "500px";
-	modal_image_desc.innerHTML = document.getElementById("img001d").innerHTML;
-} */
-
-/* document.getElementById("img001").onclick = function() {
-    modal_image_default();
-	modal_image.src = document.getElementById("img001").src;
-	modal_image_desc.innerHTML = document.getElementById("img001d").innerHTML;
-} */
-
 // try {MathJax.typeset();} catch(err) {}
-try {
-	document.getElementById("img001").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img001").src; modal_image_desc.innerHTML = document.getElementById("img001d").innerHTML;}
-    document.getElementById("img002").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img002").src; modal_image_desc.innerHTML = document.getElementById("img002d").innerHTML;}
-    document.getElementById("img003").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img003").src; modal_image_desc.innerHTML = document.getElementById("img003d").innerHTML;}
-    document.getElementById("img004").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img004").src; modal_image_desc.innerHTML = document.getElementById("img004d").innerHTML;}
-    document.getElementById("img005").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img005").src; modal_image_desc.innerHTML = document.getElementById("img005d").innerHTML;}
-    document.getElementById("img006").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img006").src; modal_image_desc.innerHTML = document.getElementById("img006d").innerHTML;}
-    document.getElementById("img007").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img007").src; modal_image_desc.innerHTML = document.getElementById("img007d").innerHTML;}
-    document.getElementById("img008").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img008").src; modal_image_desc.innerHTML = document.getElementById("img008d").innerHTML;}
-    document.getElementById("img009").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img009").src; modal_image_desc.innerHTML = document.getElementById("img009d").innerHTML;}
-    document.getElementById("img010").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img010").src; modal_image_desc.innerHTML = document.getElementById("img010d").innerHTML;}
-    document.getElementById("img011").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img011").src; modal_image_desc.innerHTML = document.getElementById("img011d").innerHTML;}
-    document.getElementById("img012").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img012").src; modal_image_desc.innerHTML = document.getElementById("img012d").innerHTML;}
-    document.getElementById("img013").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img013").src; modal_image_desc.innerHTML = document.getElementById("img013d").innerHTML;}
-    document.getElementById("img014").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img014").src; modal_image_desc.innerHTML = document.getElementById("img014d").innerHTML;}
-    document.getElementById("img015").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img015").src; modal_image_desc.innerHTML = document.getElementById("img015d").innerHTML;}
-    document.getElementById("img016").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img016").src; modal_image_desc.innerHTML = document.getElementById("img016d").innerHTML;}
-    document.getElementById("img017").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img017").src; modal_image_desc.innerHTML = document.getElementById("img017d").innerHTML;}
-    document.getElementById("img018").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img018").src; modal_image_desc.innerHTML = document.getElementById("img018d").innerHTML;}
-    document.getElementById("img019").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img019").src; modal_image_desc.innerHTML = document.getElementById("img019d").innerHTML;}
-    document.getElementById("img020").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img020").src; modal_image_desc.innerHTML = document.getElementById("img020d").innerHTML;}
-    document.getElementById("img021").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img021").src; modal_image_desc.innerHTML = document.getElementById("img021d").innerHTML;}
-    document.getElementById("img022").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img022").src; modal_image_desc.innerHTML = document.getElementById("img022d").innerHTML;}
-    document.getElementById("img023").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img023").src; modal_image_desc.innerHTML = document.getElementById("img023d").innerHTML;}
-    document.getElementById("img024").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img024").src; modal_image_desc.innerHTML = document.getElementById("img024d").innerHTML;}
-} catch(err) {
-}
+try {document.getElementById("img001").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img001").src; modal_image_desc.innerHTML = document.getElementById("img001d").innerHTML;}} catch(err) {}
+try {document.getElementById("img002").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img002").src; modal_image_desc.innerHTML = document.getElementById("img002d").innerHTML;}} catch(err) {}
+try {document.getElementById("img003").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img003").src; modal_image_desc.innerHTML = document.getElementById("img003d").innerHTML;}} catch(err) {}
+try {document.getElementById("img004").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img004").src; modal_image_desc.innerHTML = document.getElementById("img004d").innerHTML;}} catch(err) {}
+try {document.getElementById("img005").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img005").src; modal_image_desc.innerHTML = document.getElementById("img005d").innerHTML;}} catch(err) {}
+try {document.getElementById("img006").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img006").src; modal_image_desc.innerHTML = document.getElementById("img006d").innerHTML;}} catch(err) {}
+try {document.getElementById("img007").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img007").src; modal_image_desc.innerHTML = document.getElementById("img007d").innerHTML;}} catch(err) {}
+try {document.getElementById("img008").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img008").src; modal_image_desc.innerHTML = document.getElementById("img008d").innerHTML;}} catch(err) {}
+try {document.getElementById("img009").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img009").src; modal_image_desc.innerHTML = document.getElementById("img009d").innerHTML;}} catch(err) {}
+try {document.getElementById("img010").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img010").src; modal_image_desc.innerHTML = document.getElementById("img010d").innerHTML;}} catch(err) {}
+try {document.getElementById("img011").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img011").src; modal_image_desc.innerHTML = document.getElementById("img011d").innerHTML;}} catch(err) {}
+try {document.getElementById("img012").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img012").src; modal_image_desc.innerHTML = document.getElementById("img012d").innerHTML;}} catch(err) {}
+try {document.getElementById("img013").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img013").src; modal_image_desc.innerHTML = document.getElementById("img013d").innerHTML;}} catch(err) {}
+try {document.getElementById("img014").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img014").src; modal_image_desc.innerHTML = document.getElementById("img014d").innerHTML;}} catch(err) {}
+try {document.getElementById("img015").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img015").src; modal_image_desc.innerHTML = document.getElementById("img015d").innerHTML;}} catch(err) {}
+try {document.getElementById("img016").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img016").src; modal_image_desc.innerHTML = document.getElementById("img016d").innerHTML;}} catch(err) {}
+try {document.getElementById("img017").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img017").src; modal_image_desc.innerHTML = document.getElementById("img017d").innerHTML;}} catch(err) {}
+try {document.getElementById("img018").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img018").src; modal_image_desc.innerHTML = document.getElementById("img018d").innerHTML;}} catch(err) {}
+try {document.getElementById("img019").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img019").src; modal_image_desc.innerHTML = document.getElementById("img019d").innerHTML;}} catch(err) {}
+try {document.getElementById("img020").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img020").src; modal_image_desc.innerHTML = document.getElementById("img020d").innerHTML;}} catch(err) {}
+try {document.getElementById("img021").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img021").src; modal_image_desc.innerHTML = document.getElementById("img021d").innerHTML;}} catch(err) {}
+try {document.getElementById("img022").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img022").src; modal_image_desc.innerHTML = document.getElementById("img022d").innerHTML;}} catch(err) {}
+try {document.getElementById("img023").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img023").src; modal_image_desc.innerHTML = document.getElementById("img023d").innerHTML;}} catch(err) {}
+try {document.getElementById("img024").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img024").src; modal_image_desc.innerHTML = document.getElementById("img024d").innerHTML;}} catch(err) {}
+try {document.getElementById("img025").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img025").src; modal_image_desc.innerHTML = document.getElementById("img025d").innerHTML;}} catch(err) {}
+try {document.getElementById("img026").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img026").src; modal_image_desc.innerHTML = document.getElementById("img026d").innerHTML;}} catch(err) {}
+try {document.getElementById("img027").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img027").src; modal_image_desc.innerHTML = document.getElementById("img027d").innerHTML;}} catch(err) {}
+try {document.getElementById("img028").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img028").src; modal_image_desc.innerHTML = document.getElementById("img028d").innerHTML;}} catch(err) {}
+try {document.getElementById("img029").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img029").src; modal_image_desc.innerHTML = document.getElementById("img029d").innerHTML;}} catch(err) {}
+try {document.getElementById("img030").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img030").src; modal_image_desc.innerHTML = document.getElementById("img030d").innerHTML;}} catch(err) {}
+try {document.getElementById("img031").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img031").src; modal_image_desc.innerHTML = document.getElementById("img031d").innerHTML;}} catch(err) {}
+try {document.getElementById("img032").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img032").src; modal_image_desc.innerHTML = document.getElementById("img032d").innerHTML;}} catch(err) {}
+try {document.getElementById("img033").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img033").src; modal_image_desc.innerHTML = document.getElementById("img033d").innerHTML;}} catch(err) {}
+try {document.getElementById("img034").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img034").src; modal_image_desc.innerHTML = document.getElementById("img034d").innerHTML;}} catch(err) {}
+try {document.getElementById("img035").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img035").src; modal_image_desc.innerHTML = document.getElementById("img035d").innerHTML;}} catch(err) {}
+try {document.getElementById("img036").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img036").src; modal_image_desc.innerHTML = document.getElementById("img036d").innerHTML;}} catch(err) {}
+try {document.getElementById("img037").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img037").src; modal_image_desc.innerHTML = document.getElementById("img037d").innerHTML;}} catch(err) {}
+try {document.getElementById("img038").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img038").src; modal_image_desc.innerHTML = document.getElementById("img038d").innerHTML;}} catch(err) {}
+try {document.getElementById("img039").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img039").src; modal_image_desc.innerHTML = document.getElementById("img039d").innerHTML;}} catch(err) {}
+try {document.getElementById("img040").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img040").src; modal_image_desc.innerHTML = document.getElementById("img040d").innerHTML;}} catch(err) {}
+try {document.getElementById("img041").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img041").src; modal_image_desc.innerHTML = document.getElementById("img041d").innerHTML;}} catch(err) {}
+try {document.getElementById("img042").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img042").src; modal_image_desc.innerHTML = document.getElementById("img042d").innerHTML;}} catch(err) {}
+try {document.getElementById("img043").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img043").src; modal_image_desc.innerHTML = document.getElementById("img043d").innerHTML;}} catch(err) {}
+try {document.getElementById("img044").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img044").src; modal_image_desc.innerHTML = document.getElementById("img044d").innerHTML;}} catch(err) {}
+try {document.getElementById("img045").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img045").src; modal_image_desc.innerHTML = document.getElementById("img045d").innerHTML;}} catch(err) {}
+try {document.getElementById("img046").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img046").src; modal_image_desc.innerHTML = document.getElementById("img046d").innerHTML;}} catch(err) {}
+try {document.getElementById("img047").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img047").src; modal_image_desc.innerHTML = document.getElementById("img047d").innerHTML;}} catch(err) {}
+try {document.getElementById("img048").onclick = function() {modal_image_default(); modal_image.src = document.getElementById("img048").src; modal_image_desc.innerHTML = document.getElementById("img048d").innerHTML;}} catch(err) {}
+
 
 try {
     for (let i = 5; i <= 4; i++) {
@@ -304,23 +239,30 @@ try {
 
 // Blog for description
 
-document.getElementById("desc001").innerHTML = `
-    Kota Semarang adalah ibu kota provinsi Jawa Tengah di Indonesia. Ikon kota Semarang adalah Lawang Sewu.
-`;
-document.getElementById("desc001").style.width = "300px";
-document.getElementById("desc001").style.marginLeft = "-150px";
-// document.getElementById("desc01").innerHTML
-// document.getElementById("desc02").innerHTML = "Blablabla adalah blablabla";
+try {
+    document.getElementById("desc001").innerHTML = `
+        Kota Semarang adalah ibu kota provinsi Jawa Tengah di Indonesia. Ikon kota Semarang adalah Lawang Sewu.
+    `;
+    document.getElementById("desc001").style.width = "300px";
+    document.getElementById("desc001").style.marginLeft = "-150px";
+} catch(err) {
+}
 
-document.getElementById("desc002").innerHTML = `
-    Kota Batu Malang adalah kota terbesar kedua di provinsi Jawa Timur setelah Kota Surabaya.
-	Kota ini tidak terlalu jauh dari pegunungan Bromo dengan wisata Bromo Tengger Semeru.
-`;
-document.getElementById("desc002").style.width = "300px";
-document.getElementById("desc002").style.marginLeft = "-150px";
+try {
+    document.getElementById("desc002").innerHTML = `
+        Kota Batu Malang adalah kota terbesar kedua di provinsi Jawa Timur setelah Kota Surabaya.
+	    Kota ini tidak terlalu jauh dari pegunungan Bromo dengan wisata Bromo Tengger Semeru.
+    `;
+    document.getElementById("desc002").style.width = "300px";
+    document.getElementById("desc002").style.marginLeft = "-150px";
+} catch(err) {
+}
 
-document.getElementById("desc003").innerHTML = `
-    Kota Denpasar adalah ibu kota provinsi Bali di Indonesia. Kota ini menjadi salah satu daya tarik orang mancanegara karena keindahannya.
-`;
-document.getElementById("desc003").style.width = "300px";
-document.getElementById("desc003").style.marginLeft = "-150px";
+try {
+    document.getElementById("desc003").innerHTML = `
+        Kota Denpasar adalah ibu kota provinsi Bali di Indonesia. Kota ini menjadi salah satu daya tarik orang mancanegara karena keindahannya.
+    `;
+    document.getElementById("desc003").style.width = "300px";
+    document.getElementById("desc003").style.marginLeft = "-150px";
+} catch(err) {
+}
