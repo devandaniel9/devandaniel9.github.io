@@ -3,7 +3,7 @@
 <head>
     <title>Tes Kognitif dan Visual</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="checkbox.css">
     <link rel="stylesheet" href="radio-buttons.css">
     <link rel="stylesheet" href="sidebar.css">
@@ -206,10 +206,6 @@
         <label class="cb-container" style="width:400px;">Percobaan satu kali dalam setiap soal
             <input type="checkbox" id="check2" onclick="settings_check();tampilkan()">
             <span class="checkmark"></span>
-        </label>
-        <label class="cb-container" style="width:400px;">Dengan soal cerita
-            <input type="checkbox" id="check" onclick="settings_check();tampilkan()">
-            <span class="checkmark"></span>
         </label><br>
 
         <img src="images/keyboard.png" style="position:absolute; margin-left:300px; margin-top:-10px;" width="80">
@@ -309,7 +305,8 @@
 	<!-- <p>Terakhir diupdate: 28 Oktober 2025</p> -->
     <!-- <p>Terakhir diupdate: 31 Oktober 2025</p> -->
 	<!-- <p>Terakhir diupdate: 13 November 2025</p> -->
-	<p>Terakhir diupdate: 1 Desember 2025</p>
+	<!-- <p>Terakhir diupdate: 1 Desember 2025</p> -->
+	<p>Terakhir diupdate: 22 Desember 2025</p>
 	
 	<script>
         // Time
@@ -346,8 +343,7 @@
             theme_check_old = false;
             // clear_all();
         }
-
-        document.getElementById("check").checked = soal_cerita_check_old;
+        
         document.getElementById("check2").checked = percobaan_check_old;
         document.getElementById("jenis-font").selectedIndex = font_index;
 		document.getElementById("suara").checked = suara_check_old;
@@ -371,7 +367,7 @@
         // pilihan(true);
 
         function settings_check() {
-			soal_cerita_check = document.getElementById("check").checked;
+			// soal_cerita_check = document.getElementById("check").checked;
             percobaan_check = document.getElementById("check2").checked;
             // console.log(document.getElementById("jenis-font").value);
             // document.body.style.font
@@ -395,7 +391,7 @@
             //console.log(digit)
             
             if (check) {
-                localStorage.setItem("soal-cerita-check", soal_cerita_check);
+                // localStorage.setItem("soal-cerita-check", soal_cerita_check);
                 localStorage.setItem("percobaan-check", percobaan_check);
                 jenis_font = document.getElementById("jenis-font");
                 localStorage.setItem("font-index", jenis_font.options[jenis_font.selectedIndex].index);
@@ -406,16 +402,6 @@
                 document.documentElement.style.setProperty('--darkmode', 1);
             } else {
                 document.documentElement.style.setProperty('--darkmode', 0);
-            }
-        }
-
-        function tampilkan() {
-            var cerita_check = document.getElementById("check");
-            var cerita = document.getElementById("cerita");
-            if (cerita_check.checked == false) {
-                cerita.style.display = "none";
-            } else {
-                cerita.style.display = "block";
             }
         }
 		
@@ -460,12 +446,11 @@
             var tipe = document.getElementById("tipe");
             var tipe2 = tipe.options[tipe.selectedIndex];
 			document.getElementById('jawaban').innerHTML = 'Belum ada jawaban';
+			document.getElementById('solve').style.display = 'block';
             document.getElementById('tipe2').style.display = 'block';
 			
 			soal = '';
             soal_check = true;
-            document.getElementById('tipe2').style.display = 'block';
-			
 			pilihan_index = Math.floor(j_pilihan2 * Math.random());
             pilihan_list = [];
             random_check = true;
@@ -473,8 +458,11 @@
 			if (e1.index == 0) {
                 if (e1_bentuk.index == 0) {
 			        // <canvas id="myCanvas" width="500" height="300" style="border:1px solid #000000;">, background-color:#202020
+					// if (theme_check) background_color = 'black'; else background_color = 'white';
+					if (theme_check) background_color = 'rgba(0,0,0,0.2)'; else background_color = 'rgba(255,255,255,0.2)';
+					// background_color = 'none';
                     soal_teks = `
-                    <canvas id="myCanvas" width="520" height="280" style="background-color:black;">
+                    <canvas id="myCanvas" width="520" height="280" style="background-color:${background_color};">
                     Sorry, your browser does not support canvas.
                     </canvas><br><br>
                     `;
@@ -561,10 +549,12 @@
                             pilihan_list.push(value);
                         }
                     }	
+					
 				} else if (e1_bentuk.index == 1) {
 			        // <canvas id="myCanvas" width="500" height="300" style="border:1px solid #000000;">, background-color:#202020
+                    if (theme_check) background_color = 'rgba(0,0,0,0.2)'; else background_color = 'rgba(255,255,255,0.2)';
                     soal_teks = `
-                    <canvas id="myCanvas" width="520" height="280" style="background-color:black;">
+                    <canvas id="myCanvas" width="520" height="280" style="background-color:${background_color};">
                     Sorry, your browser does not support canvas.
                     </canvas><br><br>
                     `;
@@ -642,7 +632,214 @@
                             }
                             pilihan_list.push(value);
                         }
-                    }	
+                    }
+					
+				} else if (e1_bentuk.index == 2) {
+				    if (theme_check) background_color = 'rgba(0,0,0,0.2)'; else background_color = 'rgba(255,255,255,0.2)';
+                    soal_teks = `
+                    <canvas id="myCanvas" width="520" height="280" style="background-color:${background_color};">
+                    Sorry, your browser does not support canvas.
+                    </canvas><br><br>
+                    `;
+					soal_teks += 'Klik warna yang berbeda!';
+                    document.getElementById('soal').innerHTML = soal_teks;
+                    const canvas = document.getElementById("myCanvas");
+                    const ctx = canvas.getContext("2d");
+                    ctx.beginPath();
+					
+					color1r = Math.floor(256*Math.random());
+					color1g = Math.floor(256*Math.random());
+					color1b = Math.floor(256*Math.random());
+					
+					function color_range(num, range, range2) {
+					    if (num-range < 0) return Math.min(255, Math.floor(num+range+range2*Math.random()));
+						else if (num+range > 255) return Math.max(0, Math.floor(num-range-range2*Math.random()));
+						else if (Math.random() < 0.5) return Math.min(255, Math.floor(num+range+range2*Math.random()));
+						else return Math.max(0, Math.floor(num-range-range2*Math.random()));
+					}
+					
+					if (level2.index == 0) {
+					    color2r = color_range(color1r, 64, 32);
+						color2g = color_range(color1g, 64, 32);
+						color2b = color_range(color1b, 64, 32);
+					} else if (level2.index == 1) {
+					    color2r = color_range(color1r, 32, 16);
+						color2g = color_range(color1g, 32, 16);
+						color2b = color_range(color1b, 32, 16);
+					} else if (level2.index == 2) {
+					    color2r = color_range(color1r, 12, 12);
+						color2g = color_range(color1g, 12, 12);
+						color2b = color_range(color1b, 12, 12);
+					} else {
+					    color2r = color_range(color1r, 4, 4);
+						color2g = color_range(color1g, 4, 4);
+						color2b = color_range(color1b, 4, 4);
+					}
+					color1 = `rgb(${color1r}, ${color1g}, ${color1b})`;
+					color2 = `rgb(${color2r}, ${color2g}, ${color2b})`;
+					
+					a = parseInt(1+91*Math.random());
+					function squares_color() {
+						for (let a_count = 1; a_count <= 91; a_count++) {
+							ctx.fillStyle = color1;
+							ctx.fillRect(3+40*((a_count-1)%13), 3+40*parseInt((a_count-1)/13), 34, 34);
+							if (a_count == a) {
+								ctx.fillStyle = color2;
+								ctx.fillRect(3+40*((a_count-1)%13), 3+40*parseInt((a_count-1)/13), 34, 34);
+								correct_x_min = 40*((a_count-1)%13);
+								correct_x_max = 40*((a_count-1)%13)+39;
+								correct_y_min = 40*parseInt((a_count-1)/13);
+								correct_y_max = 40*parseInt((a_count-1)/13)+39;
+							}
+						}
+					}
+					squares_color();
+					document.getElementById('solve').style.display = 'none';
+				    document.getElementById('tipe2').style.display = 'none';
+					attempt_check = true;
+					off_check = false;
+					var x = -40;
+					var y = 0;
+					
+					canvas.addEventListener('click', function(event) {
+					    if (attempt_check) {
+							const rect = canvas.getBoundingClientRect();
+							// Position on canvas
+							if (event.clientX > 0 || event.clientY > 0) {
+								x = event.clientX - parseInt(rect.left);
+								y = event.clientY - parseInt(rect.top);
+							}
+							// console.log(rect.left,rect.top,parseInt(rect.left),parseInt(rect.top),x,y);
+							// if (x > 100 && x < 200) {
+							if (x >= correct_x_min && x <= correct_x_max && y >= correct_y_min && y <= correct_y_max) {
+								jawaban_teks = 'Jawabannya benar';
+							} else if (x > 0 || y > 0) {
+								jawaban_teks = 'Jawabannya salah';
+							} else {
+							    jawaban_teks = 'Soal ini tidak dijawab';
+							}
+							jawaban_teks2 = jawaban_teks;
+							document.getElementById('jawaban').innerHTML = jawaban_teks;
+							if (document.getElementById('suara').checked) {
+								speak(jawaban_teks2);
+							}
+							clicked_num = 1+parseInt(x/40)+13*parseInt(y/40);
+							ctx.clearRect(0, 0, canvas.width, canvas.height);
+							// ctx.reset();
+							if (document.getElementById('check2').checked || off_check) {
+								ctx.fillStyle = 'red';
+								ctx.fillRect(40*((clicked_num-1)%13), 40*parseInt((clicked_num-1)/13), 40, 40);
+								ctx.fillStyle = 'lime';
+								ctx.fillRect(40*((a-1)%13), 40*parseInt((a-1)/13), 40, 40);
+								attempt_check = false;
+							} else {
+								ctx.fillStyle = 'yellow';
+								ctx.fillRect(40*((clicked_num-1)%13), 40*parseInt((clicked_num-1)/13), 40, 40);
+							}
+							squares_color();
+						}
+					});
+				
+				} else if (e1_bentuk.index == 3) {
+				    if (theme_check) background_color = 'rgba(0,0,0,0.2)'; else background_color = 'rgba(255,255,255,0.2)';
+                    soal_teks = `
+                    <canvas id="myCanvas" width="520" height="280" style="background-color:${background_color};">
+                    Sorry, your browser does not support canvas.
+                    </canvas><br><br>
+                    `;
+					soal_teks += 'Klik warna yang paling berbeda!';
+                    document.getElementById('soal').innerHTML = soal_teks;
+                    const canvas = document.getElementById("myCanvas");
+                    const ctx = canvas.getContext("2d");
+                    ctx.beginPath();
+					
+					color1a = Math.floor(360*Math.random());
+					
+					function color_range(num, range, range2) {
+						if (Math.random() < 0.5) return Math.floor(num+range+range2*Math.random()) % 360;
+						else return Math.floor(num-range-range2*Math.random()) % 360;
+					}
+					
+					if (level2.index == 0) color2a = color_range(color1a, 60, 30);
+					else if (level2.index == 1) color2a = color_range(color1a, 30, 15);
+					else if (level2.index == 2) color2a = color_range(color1a, 12, 9);
+					else color2a = color_range(color1a, 6, 6);
+					
+					a = parseInt(1+91*Math.random());
+					coor_colors_list = [];
+					
+					for (let a_count = 1; a_count <= 91; a_count++) {
+						color1b = Math.floor(33+34*Math.random());
+						color1c = Math.floor(33+34*Math.random());
+						color1 = `hsl(${color1a}, ${color1b}%, ${color1c}%)`;
+						if (a_count == a) {
+							color2b = Math.floor(33+34*Math.random());
+							color2c = Math.floor(33+34*Math.random());
+							color2 = `hsl(${color2a}, ${color2b}%, ${color2c}%)`;
+							coor_colors_list.push(color2);
+						} else {
+							coor_colors_list.push(color1);
+						}
+					}
+					
+					function squares_color() {
+						for (let a_count = 1; a_count <= 91; a_count++) {
+							ctx.fillStyle = coor_colors_list[a_count-1];
+							ctx.fillRect(3+40*((a_count-1)%13), 3+40*parseInt((a_count-1)/13), 34, 34);
+							if (a_count == a) {
+								correct_x_min = 40*((a_count-1)%13);
+								correct_x_max = 40*((a_count-1)%13)+39;
+								correct_y_min = 40*parseInt((a_count-1)/13);
+								correct_y_max = 40*parseInt((a_count-1)/13)+39;
+							}
+						}
+					}
+					squares_color();
+					document.getElementById('solve').style.display = 'none';
+				    document.getElementById('tipe2').style.display = 'none';
+					attempt_check = true;
+					off_check = false;
+					var x = -40;
+					var y = 0;
+					
+					canvas.addEventListener('click', function(event) {
+					    if (attempt_check) {
+							const rect = canvas.getBoundingClientRect();
+							// Position on canvas
+							if (event.clientX > 0 || event.clientY > 0) {
+								x = event.clientX - parseInt(rect.left);
+								y = event.clientY - parseInt(rect.top);
+							}
+							// console.log(rect.left,rect.top,parseInt(rect.left),parseInt(rect.top),x,y);
+							// if (x > 100 && x < 200) {
+							if (x >= correct_x_min && x <= correct_x_max && y >= correct_y_min && y <= correct_y_max) {
+								jawaban_teks = 'Jawabannya benar';
+							} else if (x > 0 || y > 0) {
+								jawaban_teks = 'Jawabannya salah';
+							} else {
+							    jawaban_teks = 'Soal ini tidak dijawab';
+							}
+							jawaban_teks2 = jawaban_teks;
+							document.getElementById('jawaban').innerHTML = jawaban_teks;
+							if (document.getElementById('suara').checked) {
+								speak(jawaban_teks2);
+							}
+							clicked_num = 1+parseInt(x/40)+13*parseInt(y/40);
+							ctx.clearRect(0, 0, canvas.width, canvas.height);
+							// ctx.reset();
+							if (document.getElementById('check2').checked || off_check) {
+								ctx.fillStyle = 'red';
+								ctx.fillRect(40*((clicked_num-1)%13), 40*parseInt((clicked_num-1)/13), 40, 40);
+								ctx.fillStyle = 'lime';
+								ctx.fillRect(40*((a-1)%13), 40*parseInt((a-1)/13), 40, 40);
+								attempt_check = false;
+							} else {
+								ctx.fillStyle = 'yellow';
+								ctx.fillRect(40*((clicked_num-1)%13), 40*parseInt((clicked_num-1)/13), 40, 40);
+							}
+							squares_color();
+						}
+					});
 				}
 			}
 			
@@ -764,8 +961,6 @@
             
             e_bentuk = document.getElementById("pilihan-bentuk-sub");
             e1_bentuk = e_bentuk.options[e_bentuk.selectedIndex];
-            
-            tampilkan();
 
             if (change) hasil = 0;
 
@@ -784,9 +979,10 @@
 				`;
                 if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
-                        <option>Tes Buta Warna</option>
-                        <option>Tes Buta Warna 2</option>
+                        <option>Tes Buta Warna Angka</option>
+                        <option>Tes Buta Warna Angka 2</option>
                         <option>Perbedaan Warna</option>
+						<option>Perbedaan Warna 2</option>
 						<option>Campuran Warna</option>
                     `;
                 }
@@ -1056,8 +1252,12 @@
                 document.getElementById('timer').innerHTML = waktu_teks;
 
                 if (waktu_timer > 0 & waktu2 == 0) {
-                    console.log(13113);
                     document.getElementById('tipe2').style.display = 'none';
+					// attempt_check = false;
+					off_check = true;
+					try {
+						document.getElementById("myCanvas").click();
+					} catch(err) {}
                 }
             }, interval);
 			
@@ -1104,108 +1304,6 @@
                 try {MathJax.typeset();} catch(err) {}
             } */
             try {MathJax.typeset();} catch(err) {}
-        }
-
-        function selesaikan() {
-            var tipe = document.getElementById("tipe");
-            var tipe2 = tipe.options[tipe.selectedIndex];
-
-            if (document.getElementById('check2').checked) {
-                document.getElementById('tipe2').style.display = 'none';
-            }
-
-            if (tipe2.index == 0) {
-                var angka_awal = document.getElementById('angka').value;
-            } else {
-                // var angka_awal = document.getElementsByName('pilihan1').value;
-                if (document.getElementById("pilihan1").checked) {
-                    var angka_awal = document.getElementById('pilihan1').value;
-                } else if (document.getElementById("pilihan2").checked) {
-                    var angka_awal = document.getElementById('pilihan2').value;
-                } else if (document.getElementById("pilihan3").checked) {
-                    var angka_awal = document.getElementById('pilihan3').value;
-                } else if (j_pilihan2 >= 4 && document.getElementById("pilihan4").checked) {
-                    var angka_awal = document.getElementById('pilihan4').value;
-                } else if (j_pilihan2 >= 5 && document.getElementById("pilihan5").checked) {
-                    var angka_awal = document.getElementById('pilihan5').value;
-				} else if (j_pilihan2 >= 6 && document.getElementById("pilihan6").checked) {
-                    var angka_awal = document.getElementById('pilihan6').value;
-                } else {
-                    var angka_awal = '';
-                }
-            }
-            if (angka_awal != '') {
-                var e = document.getElementById("bentuk");
-                var e1 = e.options[e.selectedIndex];
-                // var tanda = '';
-                // e1.index == 6 & e1_bentuk.index == 0
-                // if (e1.index <= 6 || (e1.index == 7 && (e1_bentuk.index == 0 || e1_bentuk.index == 2)) || e1.index == 8 || e1.index == 9 || e1.index == 17 || e1.index == 21 || e1.index == 32) {
-                if ([0,1,2,3,4,5,6,7,11,12,13,17,18,19,20,22,23,26,36,37].includes(e1.index)
-				|| (e1.index == 0 && [0,1,4].includes(e1_bentuk.index))
-				|| (e1.index == 8 && [1].includes(e1_bentuk.index))
-				|| (e1.index == 11 && [0,2].includes(e1_bentuk.index))
-				){
-                    angka = parseInt(angka_awal);
-                    jawaban_check = angka == hasil;
-                    // hasil = hasil;
-                } else if (e1.index == 6 && e1_bentuk.index == 4) {
-                    angka = angka_awal.toLowerCase().replaceAll('*','x').replaceAll('.','x').replaceAll(' ','');
-                    hasil = hasil.replaceAll(' ','');
-                    jawaban_check = angka == hasil;
-                    // console.log(angka, hasil);
-                } else if (e1.index == 23 && e1_bentuk.index == 0) {
-                    if (angka_awal == '{}') {
-                        angka = [];
-                    } else {
-                        angka = angka_awal.toLowerCase().replaceAll('{','').replaceAll('}','').replaceAll(',',' ').split(' ');
-                    }
-                    // console.log(angka);
-                    jawaban_check = true;
-                    for (let i = 0; i < hasil.length; i++) {
-                        jawaban_check &= angka[i] == hasil[i];
-                    }
-                    jawaban_check = angka.length == hasil.length;
-                    /* angka = angka_awal.replaceAll(' ','');
-                    jawaban_check = angka == hasil;
-                    soal_check = false; */
-                } else {
-                    angka = angka_awal.toLowerCase();
-                    hasil = hasil.toLowerCase();
-                    jawaban_check = angka == hasil;
-                }
-                // if (e1.index == 0) {
-                //     tanda = ' + ';
-                var jawaban_teks, jawaban_teks2;
-                if (cerita_check.checked == true) {
-                    // soal = '';
-                    soal_check = false;
-                }
-                // if (soal2 = '') soal2 = soal;
-                // if (angka == hasil) {
-                if (jawaban_check) {
-                    // jawaban_teks = `Jawabannya benar<br><br> ${soal} = ${hasil2}`;
-                    if (soal_check) {
-                        jawaban_teks = `Jawabannya benar<br><br>${soal} = ${angka_awal}`;
-                    } else {
-                        jawaban_teks = `Jawabannya benar<br><br>Hasil = ${angka_awal}`;
-                    }
-                    jawaban_teks2 = 'Jawabannya benar';
-                } else {
-                    // jawaban_teks = `Jawabannya salah<br>Jawaban yang diinput: ${angka}<br><br>${soal} = ${hasil2}`;
-                    if (soal_check) {
-                        jawaban_teks = `Jawabannya salah<br>Jawaban yang diinput = ${angka_awal}<br><br>${soal} = ${hasil2}`;
-                    } else {
-                        jawaban_teks = `Jawabannya salah<br>Jawaban yang diinput = ${angka_awal}<br><br>Jawaban yang benar = ${hasil2}`;
-                    }
-                    jawaban_teks2 = 'Jawabannya salah';
-                }
-                document.getElementById('jawaban').innerHTML = jawaban_teks;
-                if (document.getElementById('suara').checked) {
-                    speak(jawaban_teks2);
-                }
-            } else {
-                document.getElementById('jawaban').innerHTML = 'Input angka harus diisi';
-            }
         }
 		
 		function selesaikan() {
