@@ -307,7 +307,8 @@
     <!-- <p>Terakhir diupdate: 31 Oktober 2025</p> -->
 	<!-- <p>Terakhir diupdate: 13 November 2025</p> -->
 	<!-- <p>Terakhir diupdate: 1 Desember 2025</p> -->
-	<p>Terakhir diupdate: 24 Desember 2025</p>
+	<!-- <p>Terakhir diupdate: 24 Desember 2025</p> -->
+    <p>Terakhir diupdate: 14 Januari 2026</p>
 	
 	<script>
         // Time
@@ -1098,7 +1099,100 @@
 						}
 					});
 				}
-			}
+                
+			} else if (e1.index == 2) {
+                if (e1_bentuk.index == 0 || e1_bentuk.index == 1) {
+                    // <canvas id="myCanvas" width="500" height="300" style="border:1px solid #000000;">
+                    soal_teks = `
+                    <canvas id="myCanvas" width="500" height="300" style="background-color:#202020; border:1px solid gray;">
+                    Sorry, your browser does not support canvas.
+                    </canvas><br><br>
+                    `;
+                    if (e1_bentuk.index == 0) soal_teks += 'Batang terpanjang ada di nomor ...';
+                    else soal_teks += 'Garis terpanjang ada di nomor ...';
+                    document.getElementById('soal').innerHTML = soal_teks;
+                    const canvas = document.getElementById("myCanvas");
+                    const ctx = canvas.getContext("2d");
+                    ctx.beginPath();
+                    tinggi_list = [];
+                    if (level2.index == 0) {
+                        jumlah_batang = 5;
+                        ukuran_batang = 40;
+                        for (let i = 1; i <= jumlah_batang; i++) {
+                            if (i == 1) tinggi = Math.floor(60 + 20 * Math.random());
+                            else tinggi += Math.floor(20 + 10 * Math.random());
+                            tinggi_list.push(tinggi);
+                        }
+                        console.log(tinggi_list);
+                        ctx.font = "24px arial";
+                    } else if (level2.index == 1) {
+                        jumlah_batang = 10;
+                        ukuran_batang = 20;
+                        for (let i = 1; i <= jumlah_batang; i++) {
+                            if (i == 1) tinggi = Math.floor(60 + 20 * Math.random());
+                            else if (i <= jumlah_batang-1) tinggi += Math.floor(10 * Math.random());
+                            else tinggi += Math.floor(5 + 5 * Math.random());
+                            tinggi_list.push(tinggi);
+                        }
+                        ctx.font = "24px arial";
+                    } else if (level2.index == 2) {
+                        jumlah_batang = 15;
+                        ukuran_batang = 15;
+                        for (let i = 1; i <= jumlah_batang; i++) {
+                            if (i == 1) tinggi = Math.floor(60 + 20 * Math.random());
+                            else if (i <= jumlah_batang-1) tinggi += Math.floor(6 * Math.random());
+                            else tinggi += Math.floor(3 + 3 * Math.random());
+                            tinggi_list.push(tinggi);
+                        }
+                        ctx.font = "16px arial";
+                    } else {
+                        jumlah_batang = 20;
+                        ukuran_batang = 15;
+                        for (let i = 1; i <= jumlah_batang; i++) {
+                            if (i == 1) tinggi = Math.floor(60 + 20 * Math.random());
+                            else if (i <= jumlah_batang-1) tinggi += Math.floor(4 * Math.random());
+                            else tinggi += Math.floor(2 + 2 * Math.random());
+                            tinggi_list.push(tinggi);
+                        }
+                        ctx.font = "16px arial";
+                    }
+                    tinggi_list = tinggi_list.sort(() => .5 - Math.random());
+                    tinggi_list = tinggi_list.slice(0,jumlah_batang);
+                    console.log(tinggi_list);
+                    hasil = 1+tinggi_list.indexOf(tinggi);
+                    ctx.fillStyle = "#404040";
+                    ctx.fillRect(0, 260, 500, 40);
+                    ctx.textAlign = "center";
+					ctx.textBaseline = "middle";
+                    for (let i = 1; i <= jumlah_batang; i++) {
+                        // ctx.beginPath();
+                        ctx.fillStyle = "white";
+                        if (e1_bentuk.index == 0) {
+                            ctx.fillRect(parseInt(500*i/(jumlah_batang+1)-ukuran_batang/2), 260-tinggi_list[i-1], ukuran_batang, tinggi_list[i-1]);
+                        } else {
+                            ctx.beginPath();
+                            ctx.fillStyle = "white";
+                            ctx.moveTo(parseInt(500*i/(jumlah_batang+1)),260);
+                            ctx.lineTo(parseInt(500*i/(jumlah_batang+1)),260-tinggi_list[i-1]);
+                            ctx.lineWidth = 5;
+                            ctx.strokeStyle = "white";
+                            ctx.stroke();
+                        }
+                        ctx.fillText(i,parseInt(500*i/(jumlah_batang+1)),280);
+                        // ctx.fill();
+                    }
+                    if (tipe2.index == 1) {
+                        for (let i = 1; i <= j_pilihan2; i++) {
+                            value_check = true;
+                            while (value_check || pilihan_list.indexOf(value) > -1 || value == hasil) {
+                                value = Math.floor(a/2+Math.max(a,6)*Math.random());
+                                value_check = false;
+                            }
+                            pilihan_list.push(value);
+                        }
+                    }
+                }
+            }
 			
 			// document.getElementById('soal').innerHTML = soal_teks;
             // MathJax.typeset();
@@ -1272,6 +1366,7 @@
 				`;
 				if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
+                        <option>Perbandingan Panjang Batang</option>
                         <option>Perbandingan Panjang Garis</option>
                         <option>Perbandingan Panjang Garis 2</option>
                         <option>Perbandingan Luas Persegi Panjang</option>
@@ -1521,7 +1616,7 @@
                 var e = document.getElementById("bentuk");
                 var e1 = e.options[e.selectedIndex];
 				// if (true) {
-				if (e1.index == 0 && [0,1,2,3].includes(e1_bentuk.index)) {
+				if ((e1.index == 0 && [0,1,2,3].includes(e1_bentuk.index)) || (e1.index == 1 && [0,1].includes(e1_bentuk.index)) || e1.index == 2) {
                     angka = parseInt(angka_awal);
                     jawaban_check = angka == hasil;
                 } else if (e1.index == 0 && e1_bentuk.index == 4) {
