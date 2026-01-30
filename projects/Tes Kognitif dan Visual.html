@@ -47,6 +47,15 @@
 		0%, 100% {opacity: 0.75;}
 		50% {opacity: 0.95;}
 	}
+	@keyframes flash {
+		0% {background-color: #400000;}
+		16.6667% {background-color: #404000;}
+		33.3333% {background-color: #004000;}
+		50% {background-color: #004040;}
+		66.6667% {background-color: #000040;}
+		83.3333% {background-color: #400040;}
+		100% {background-color: #400000;}
+	}
 </style>
 <body>
 	<div id="background-index3">
@@ -66,6 +75,7 @@
 		</video>
 		<div style="position:fixed; width:100%; height:100%; left:0; top:0; background-color:rgba(0,0,0,0.5); z-index:-2;"></div>
 	</div>
+	<div id="background-index5" style="position:fixed; width:100%; height:100%; left:0; top:0; background-color:rgba(0,0,0,1); z-index:-2; animation: flash 30s infinite;"></div>
     <div id="top-color" style="position:absolute; width:100%; height:80px; left:0; top:0; z-index:-1;"></div>
 	<h1 class="heading">Tes Kognitif dan Visual</h1><br>
 	<div class="column" style="padding-right:50px;">
@@ -291,6 +301,7 @@
 			<option value="2">Foto pemandangan</option>
 			<option value="3">Animasi</option>
 			<option value="4">Video Bumi</option>
+			<option value="5">Flash</option>
         </select><br><br>
 	    <!-- <label>Dengan soal cerita:</label> -->
 		<!-- <input type="checkbox" id="check" onclick="change()"> -->
@@ -355,7 +366,7 @@
     <!-- <p>Terakhir diupdate: 14 Januari 2026</p> -->
 	<!-- <p>Terakhir diupdate: 23 Januari 2026</p> -->
 	<!-- <p>Terakhir diupdate: 24 Januari 2026</p> -->
-	<p>Terakhir diupdate: 28 Januari 2026</p>
+	<p>Terakhir diupdate: 30 Januari 2026</p>
 	
 	<script>
         // Time
@@ -450,9 +461,6 @@
 			} else if (background_index == 2) {
 				document.documentElement.style.setProperty('--darkmode', 1);
 				document.body.style.backgroundImage = "linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0)),url('images/pexels-souvenirpixels-1516046.jpg')";
-			} else if (background_index == 3) {
-				document.documentElement.style.setProperty('--darkmode', 1);
-				document.body.style.backgroundImage = "none";
 			} else {
 				document.documentElement.style.setProperty('--darkmode', 1);
 				document.body.style.backgroundImage = "none";
@@ -461,6 +469,8 @@
 			else document.getElementById('background-index3').style.display = "none";
 			if (background_index == 4) document.getElementById('background-index4').style.display = "block";
 			else document.getElementById('background-index4').style.display = "none";
+			if (background_index == 5) document.getElementById('background-index5').style.display = "block";
+			else document.getElementById('background-index5').style.display = "none";
             /* if (theme_check) {
                 document.documentElement.style.setProperty('--darkmode', 1);
             } else {
@@ -1584,6 +1594,46 @@
                         // ctx.fill();
                     }
 				} else {
+					if (background_index == 0) background_color = 'white'; else background_color = '#202020';
+                    soal_teks = `
+                    <canvas id="myCanvas" width="500" height="300" style="background-color:${background_color}; border:1px solid gray;">
+                    Sorry, your browser does not support canvas.
+                    </canvas><br><br>
+                    `;
+					if (level2.index == 0) {length_scale = Math.floor(20+20*Math.random()); line_min_length = 3;}
+					else if (level2.index == 1) {length_scale = Math.floor(10+10*Math.random()); line_min_length = 5;}
+					else if (level2.index == 2) {length_scale = Math.floor(6+4*Math.random()); line_min_length = 7;}
+					else {length_scale = Math.floor(3+3*Math.random()); line_min_length = 10;}
+					line_max_length = Math.floor(400/length_scale);
+					while (typeof a2 === 'undefined' || a == a2) {
+						a2 = Math.floor(line_min_length+(line_max_length-line_min_length)*Math.random());
+					}
+					a = a2;
+					line_length = a2;
+                    if (background_index == 0) soal_teks += 'Jika panjang garis hitam adalah '; else soal_teks += 'Jika panjang garis putih adalah ';
+					soal_teks += `${line_length} satuan, maka panjang garis merah dalam bilangan bulat adalah ... satuan`;
+                    document.getElementById('soal').innerHTML = soal_teks;
+                    const canvas = document.getElementById("myCanvas");
+                    const ctx = canvas.getContext("2d");
+                    // ctx.beginPath();
+					line2_min_length = line_min_length;
+					line2_max_length = Math.floor(400/length_scale);
+					line2_length = Math.floor(line2_min_length+(line2_max_length-line2_min_length)*Math.random());
+                    hasil = line2_length;
+					ctx.beginPath();
+					if (background_index == 0) ctx.fillStyle = "black"; else ctx.fillStyle = "white";
+					ctx.moveTo(50,50);
+					ctx.lineTo(50+length_scale*line_length,50);
+					ctx.lineWidth = 5;
+					ctx.strokeStyle = ctx.fillStyle;
+					ctx.stroke();
+					ctx.beginPath();
+					ctx.fillStyle = "red";
+					ctx.moveTo(50,150);
+					ctx.lineTo(50+length_scale*line2_length,150);
+					ctx.lineWidth = 5;
+					ctx.strokeStyle = ctx.fillStyle;
+					ctx.stroke();
 				}
             }
 			
