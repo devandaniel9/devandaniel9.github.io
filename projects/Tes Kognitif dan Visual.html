@@ -366,7 +366,7 @@
     <!-- <p>Terakhir diupdate: 14 Januari 2026</p> -->
 	<!-- <p>Terakhir diupdate: 23 Januari 2026</p> -->
 	<!-- <p>Terakhir diupdate: 24 Januari 2026</p> -->
-	<p>Terakhir diupdate: 30 Januari 2026</p>
+	<p>Terakhir diupdate: 4 Februari 2026</p>
 	
 	<script>
         // Time
@@ -637,7 +637,119 @@
                         }
                     }
 				} else if (e1_bentuk.index == 2) {
-				
+					// soal = 'Banyaknya titik di gambar ini adalah ...';
+                    if (level2.index == 0) {
+                        while (typeof a2 === 'undefined' || a == a2) {
+                            a2 = Math.floor(1 + 20 * Math.random());
+                        }
+                    } else if (level2.index == 1) {
+                        while (typeof a2 === 'undefined' || a == a2) {
+                            a2 = Math.floor(11 + 40 * Math.random());
+                        }
+                    } else {
+                        while (typeof a2 === 'undefined' || a == a2) {
+                            a2 = Math.floor(31 + 170 * Math.random());
+                        }
+                    }
+                    a = a2;
+					if (background_index == 0) background_color = 'white'; else background_color = '#202020';
+                    soal_teks = `
+                    <canvas id="myCanvas" width="520" height="280" style="background-color:${background_color}; border:1px solid gray;">
+                    Sorry, your browser does not support canvas.
+                    </canvas><br><br>
+                    `;
+                    soal_teks += `Representasi bilangan dari ${a} adalah ...`;
+					document.getElementById('soal').innerHTML = soal_teks;
+					const canvas = document.getElementById("myCanvas");
+                    const ctx = canvas.getContext("2d");
+                    ctx.beginPath();
+					
+					color1r = Math.floor(256*Math.random());
+					color1g = Math.floor(256*Math.random());
+					color1b = Math.floor(256*Math.random());
+					
+					function color_range(num, range, range2) {
+					    if (num-range < 0) return Math.min(255, Math.floor(num+range+range2*Math.random()));
+						else if (num+range > 255) return Math.max(0, Math.floor(num-range-range2*Math.random()));
+						else if (Math.random() < 0.5) return Math.min(255, Math.floor(num+range+range2*Math.random()));
+						else return Math.max(0, Math.floor(num-range-range2*Math.random()));
+					}
+					
+					if (level2.index == 0) {
+					    color2r = color_range(color1r, 64, 32);
+						color2g = color_range(color1g, 64, 32);
+						color2b = color_range(color1b, 64, 32);
+					} else if (level2.index == 1) {
+					    color2r = color_range(color1r, 32, 16);
+						color2g = color_range(color1g, 32, 16);
+						color2b = color_range(color1b, 32, 16);
+					} else if (level2.index == 2) {
+					    color2r = color_range(color1r, 12, 12);
+						color2g = color_range(color1g, 12, 12);
+						color2b = color_range(color1b, 12, 12);
+					} else {
+					    color2r = color_range(color1r, 4, 4);
+						color2g = color_range(color1g, 4, 4);
+						color2b = color_range(color1b, 4, 4);
+					}
+					color1 = `rgb(${color1r}, ${color1g}, ${color1b})`;
+					color2 = `rgb(${color2r}, ${color2g}, ${color2b})`;
+					
+					a = parseInt(1+91*Math.random());
+					function squares_color() {
+						for (let a_count = 1; a_count <= 91; a_count++) {
+							ctx.fillStyle = 'white';
+							ctx.fillRect(3+40*((a_count-1)%13), 3+40*parseInt((a_count-1)/13), 34, 34);
+						}
+					}
+					squares_color();
+					document.getElementById('solve').style.display = 'none';
+				    document.getElementById('tipe2').style.display = 'none';
+					document.getElementById('myCanvas').style.cursor = 'pointer';
+					attempt_check = true;
+					off_check = false;
+					var x = -40;
+					var y = 0;
+					
+					canvas.addEventListener('click', function(event) {
+					    if (attempt_check) {
+							const rect = canvas.getBoundingClientRect();
+							// Position on canvas
+							if (event.clientX > 0 || event.clientY > 0) {
+								x = event.clientX - parseInt(rect.left);
+								y = event.clientY - parseInt(rect.top);
+							}
+							// console.log(rect.left,rect.top,parseInt(rect.left),parseInt(rect.top),x,y);
+							// if (x > 100 && x < 200) {
+							if (x >= correct_x_min && x <= correct_x_max && y >= correct_y_min && y <= correct_y_max) {
+								jawaban_teks = 'Jawabannya benar';
+							} else if (x > 0 || y > 0) {
+								jawaban_teks = 'Jawabannya salah';
+							} else {
+							    jawaban_teks = 'Soal ini tidak dijawab';
+							}
+							jawaban_teks2 = jawaban_teks;
+							document.getElementById('jawaban').innerHTML = jawaban_teks;
+							if (document.getElementById('suara').checked) {
+								speak(jawaban_teks2);
+							}
+							clicked_num = 1+parseInt(x/40)+13*parseInt(y/40);
+							ctx.clearRect(0, 0, canvas.width, canvas.height);
+							// ctx.reset();
+							if (document.getElementById('check2').checked || off_check) {
+								ctx.fillStyle = 'red';
+								ctx.fillRect(40*((clicked_num-1)%13), 40*parseInt((clicked_num-1)/13), 40, 40);
+								ctx.fillStyle = 'lime';
+								ctx.fillRect(40*((a-1)%13), 40*parseInt((a-1)/13), 40, 40);
+								attempt_check = false;
+								document.getElementById('myCanvas').style.cursor = 'default';
+							} else {
+								ctx.fillStyle = 'yellow';
+								ctx.fillRect(40*((clicked_num-1)%13), 40*parseInt((clicked_num-1)/13), 40, 40);
+							}
+							squares_color();
+						}
+					});
 				} else if (e1_bentuk.index == 3 || e1_bentuk.index == 4) {
 				    // if (theme_check) background_color = 'rgba(0,0,0,0.2)'; else background_color = 'rgba(255,255,255,0.2)';
                     soal_teks = `
@@ -1667,13 +1779,15 @@
                         event.preventDefault();
                         document.getElementById("solve").click();
                     }
-                // var input = document.getElementById("angka");
-                // input.addEventListener("keypress", function(event) {
-                    // if (event.key === "N" || event.key === "n") {
-                    //     event.preventDefault();
-                    //     document.getElementById("buat-soal").click();
-                    // }
                 });
+				/* var input2 = document;
+				input2.addEventListener("keypress", function(event) {
+                    if (event.key === "N" || event.key === "n") {
+						console.log(100);
+                        event.preventDefault();
+                        document.getElementById("buat-soal").click();
+                    }
+                }); */
                 // hasil = 0;
                 // console.log(11111);
                 hasil2 = hasil;
@@ -1763,13 +1877,11 @@
             if (e1.index == 0) {
 			    document.getElementById("bentuk-sub").style.display = 'block';
 				document.getElementById("bentuk-penjelasan").innerHTML = `
-				<b>Buta warna</b> adalah suatu kelainan yang disebabkan ketidakmampuan sel-sel kerucut mata untuk menangkap suatu spektrum warna tertentu (Buta warna parsial) atau bahkan seluruh spektrum warna (Buta warna total) yang disebabkan oleh faktor genetis.
+				Mata adalah organ penglihatan. Mata mendeteksi cahaya dan mengubahnya menjadi impuls elektrokimia pada sel saraf.
                 <br><br>
-				Buta warna merupakan penyakit seumur hidup. Agar penderita dapat beradaptasi dengan kondisi ini, dokter akan memberikan penanganan sesuai dengan jenis buta warna yang diderita.
+				Penglihatan (bahasa Inggris: sight, vision) adalah kemampuan untuk mengenali cahaya dan menafsirkannya, salah satu dari indra.
 				<br><br>
 				Sumber: Wikipedia
-				<br><br>
-				Tes Buta Warna digunakan untuk mengukur seberapa jauh mata dapat membedakan warna.
 				`;
                 if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
@@ -1778,6 +1890,8 @@
 						<option>Representasi bilangan</option>
                         <option>Melihat angka yang tersembunyi</option>
 						<option>Melihat huruf yang tersembunyi</option>
+						<option>Perbedaan Gambar</option>
+						<option>Perbedaan Gambar 2</option>
                     `;
                 }
 			} else if (e1.index == 1) {
