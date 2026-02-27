@@ -367,7 +367,8 @@
 	<!-- <p>Terakhir diupdate: 23 Januari 2026</p> -->
 	<!-- <p>Terakhir diupdate: 24 Januari 2026</p> -->
 	<!-- <p>Terakhir diupdate: 4 Februari 2026</p> -->
-	<p>Terakhir diupdate: 11 Februari 2026</p>
+	<!-- <p>Terakhir diupdate: 11 Februari 2026</p> -->
+	<p>Terakhir diupdate: 27 Februari 2026</p>
 	
 	<script>
         // Time
@@ -892,6 +893,68 @@
                             pilihan_list.push(value);
                         }
                     }
+				} else if (e1_bentuk.index == 5) {
+					if (level2.index == 0) angka = Math.floor(5 + 4 * Math.random());
+					else if (level2.index == 1) angka = Math.floor(9 + 7 * Math.random());
+					else if (level2.index == 2) angka = Math.floor(16 + 15 * Math.random());
+					else angka = Math.floor(31 + 20 * Math.random());
+					
+					daftar_angka = [];
+					for (let i = 1; i <= angka; i++) {
+					    daftar_angka.push(i);
+					}
+					daftar_angka = daftar_angka.sort(() => .5 - Math.random());
+                    daftar_angka = daftar_angka.slice(0,angka);
+					hasil = daftar_angka[angka-1];
+					daftar_angka.pop();
+					daftar_teks = daftar_angka[0];
+					for (let i = 1; i <= angka-2; i++) {
+					    daftar_teks += ', ' + daftar_angka[i];
+					}
+					
+					// 120% 125% sampai 10
+					// <span style="font-size:120%">1, 10, 2, 9, 3, 8, 4, 7, 5</span><br>
+				    soal_teks = `
+					Diketahui daftar bilangan asli sampai ${angka} disusun secara acak dengan menghapus salah satu angka adalah sebagai berikut:<br>
+					<br>
+					<span style="font-size:120%">${daftar_teks}</span><br>
+					<br>
+					Angka yang dihapus atau hilang dari daftar adalah ...
+					`;
+					document.getElementById('soal').innerHTML = soal_teks;
+				} else if (e1_bentuk.index == 6) {
+					if (level2.index == 0) angka = Math.floor(5 + 4 * Math.random());
+					else if (level2.index == 1) angka = Math.floor(9 + 7 * Math.random());
+					else if (level2.index == 2) angka = Math.floor(16 + 15 * Math.random());
+					else angka = Math.floor(31 + 20 * Math.random());
+					angka2 = Math.floor(1+Math.min(angka-4,3)*Math.random());
+					
+					daftar_angka = [];
+					for (let i = 1; i <= angka; i++) {
+					    daftar_angka.push(i);
+					}
+					daftar_angka = daftar_angka.sort(() => .5 - Math.random());
+                    daftar_angka = daftar_angka.slice(0,angka);
+					hasil = 0;
+					for (let i = 1; i <= angka2; i++) {
+						hasil += daftar_angka[angka-i];
+						daftar_angka.pop();
+					}
+					daftar_teks = daftar_angka[0];
+					for (let i = 1; i <= angka-angka2-1; i++) {
+					    daftar_teks += ', ' + daftar_angka[i];
+					}
+					
+					// 120% 125% sampai 10
+					// <span style="font-size:120%">1, 10, 2, 9, 3, 8, 4, 7, 5</span><br>
+				    soal_teks = `
+					Diketahui daftar bilangan asli sampai ${angka} disusun secara acak dengan menghapus beberapa angka adalah sebagai berikut:<br>
+					<br>
+					<span style="font-size:120%">${daftar_teks}</span><br>
+					<br>
+					Jumlah semua angka yang dihapus atau hilang dari daftar adalah ...
+					`;
+					document.getElementById('soal').innerHTML = soal_teks;
 				}
 				
 			} else if (e1.index == 1) {
@@ -1925,6 +1988,8 @@
 						<option>Representasi bilangan</option>
                         <option>Melihat angka yang tersembunyi</option>
 						<option>Melihat huruf yang tersembunyi</option>
+						<option>Mencari angka yang hilang</option>
+						<option>Mencari angka yang hilang 2</option>
 						<option>Perbedaan Gambar</option>
 						<option>Perbedaan Gambar 2</option>
                     `;
@@ -2212,7 +2277,7 @@
                 var e = document.getElementById("bentuk");
                 var e1 = e.options[e.selectedIndex];
 				// if (true) {
-				if ((e1.index == 0 && [0,1,2,3].includes(e1_bentuk.index)) || (e1.index == 1 && [0,1,4,5].includes(e1_bentuk.index)) || e1.index == 2) {
+				if ((e1.index == 0 && [0,1,2,3,5,6].includes(e1_bentuk.index)) || (e1.index == 1 && [0,1,4,5].includes(e1_bentuk.index)) || e1.index == 2) {
                     angka = parseInt(angka_awal);
                     jawaban_check = angka == hasil;
                 } else if (e1.index == 0 && e1_bentuk.index == 4) {
