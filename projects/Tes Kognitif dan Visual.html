@@ -368,7 +368,8 @@
 	<!-- <p>Terakhir diupdate: 24 Januari 2026</p> -->
 	<!-- <p>Terakhir diupdate: 4 Februari 2026</p> -->
 	<!-- <p>Terakhir diupdate: 11 Februari 2026</p> -->
-	<p>Terakhir diupdate: 27 Februari 2026</p>
+	<!-- <p>Terakhir diupdate: 27 Februari 2026</p> -->
+	<p>Terakhir diupdate: 11 Maret 2026</p>
 	
 	<script>
         // Time
@@ -1791,7 +1792,7 @@
 						pilihan_list.sort(function(a, b){return a - b});
 						random_check = false;
                     }
-				} else {
+				} else if (e1_bentuk.index == 5) {
 					if (background_index == 0) background_color = 'white'; else background_color = '#202020';
                     soal_teks = `
                     <canvas id="myCanvas" width="500" height="300" style="background-color:${background_color}; border:1px solid gray;">
@@ -1844,6 +1845,162 @@
 						pilihan_list.sort(function(a, b){return a - b});
 						random_check = false;
                     }
+				} else if (e1_bentuk.index == 6) {
+				    if (background_index == 0) background_color = 'white'; else background_color = '#202020';
+                    soal_teks = `
+                    <canvas id="myCanvas" width="550" height="300" style="background-color:${background_color}; border:1px solid gray;">
+                    Sorry, your browser does not support canvas.
+                    </canvas><br><br>
+                    `;
+					if (level2.index == 0) {length_scale = Math.floor(20+20*Math.random()); min_length = 3;}
+					else if (level2.index == 1) {length_scale = Math.floor(10+10*Math.random()); min_length = 5;}
+					else if (level2.index == 2) {length_scale = Math.floor(6+4*Math.random()); min_length = 7;}
+					else {length_scale = Math.floor(3+3*Math.random()); min_length = 10;}
+					max_length = Math.floor(200/length_scale);
+					while (typeof a2 === 'undefined' || a == a2) {
+						a2 = Math.floor(min_length+(max_length-min_length)*Math.random());
+					}
+					a = a2;
+					a_length = a2;
+					while (typeof a2 === 'undefined' || a == a2) {
+						a2 = Math.floor(min_length+(max_length-min_length)*Math.random());
+					}
+					a = a2;
+					b_length = a2;
+                    if (background_index == 0) soal_teks += 'Jika luas persegi panjang hitam adalah '; else soal_teks += 'Jika luas persegi panjang putih adalah ';
+					soal_teks += `${a_length*b_length} satuan kuadrat, maka luas persegi panjang merah dalam bilangan bulat adalah ... satuan kuadrat`;
+                    document.getElementById('soal').innerHTML = soal_teks;
+					
+                    const canvas = document.getElementById("myCanvas");
+                    const ctx = canvas.getContext("2d");
+					
+					a2_length = Math.floor(min_length+(max_length-min_length)*Math.random());
+					b2_length = Math.floor(min_length+(max_length-min_length)*Math.random());
+					
+                    hasil = a2_length*b2_length;
+					// ctx.beginPath();
+					if (background_index == 0) ctx.fillStyle = "black"; else ctx.fillStyle = "white";
+					ctx.fillRect(50, 50, length_scale*a_length, length_scale*b_length);
+					ctx.fillStyle = "red";
+					ctx.fillRect(300, 50, length_scale*a2_length, length_scale*b2_length);
+				} else if (e1_bentuk.index == 7) {
+					if (level2.index == 0) width = 450;
+					else if (level2.index == 1) width = 600;
+					else if (level2.index == 2) width = 750;
+					else width = 750;
+					if (background_index == 0) background_color = 'white'; else background_color = '#202020';
+					soal_teks = `
+					<canvas id="myCanvas" width="${width}" height="360" style="background-color:${background_color}; border:1px solid gray;">
+					Sorry, your browser does not support canvas.
+					</canvas><br><br>
+					`;
+					soal_teks += `Persegi panjang terluas ada di nomor ...`;
+                    document.getElementById('soal').innerHTML = soal_teks;
+                    const canvas = document.getElementById("myCanvas");
+                    const ctx = canvas.getContext("2d");
+                    ctx.beginPath();
+                    panjang_list = [];
+					lebar_list = [];
+                    if (level2.index == 0) {
+                        jumlah_garis = 6;
+                        for (let i = 1; i <= jumlah_garis; i++) {
+							if (i == 1) {panjang = Math.floor(40 + 10 * Math.random()); lebar = Math.floor(40 + 10 * Math.random());}
+							else {panjang += Math.floor(10 + 5 * Math.random()); lebar += Math.floor(10 + 5 * Math.random());}
+							panjang_list.push(panjang);
+							lebar_list.push(lebar);
+                        }
+                    } else if (level2.index == 1) {
+                        jumlah_garis = 8;
+                        for (let i = 1; i <= jumlah_garis; i++) {
+							if (i == 1) {panjang = Math.floor(50 + 20 * Math.random()); lebar = Math.floor(50 + 20 * Math.random());}
+							else {panjang += Math.floor(5 + 5 * Math.random()); lebar += Math.floor(5 + 5 * Math.random());}
+							panjang_list.push(panjang);
+							lebar_list.push(lebar);
+                        }
+                    } else if (level2.index == 2) {
+                        jumlah_garis = 10;
+                        for (let i = 1; i <= jumlah_garis; i++) {
+							if (i == 1) {panjang = Math.floor(60 + 20 * Math.random()); lebar = Math.floor(60 + 20 * Math.random());}
+							else {panjang += Math.floor(3 + 3 * Math.random()); lebar += Math.floor(3 + 3 * Math.random());}
+							panjang_list.push(panjang);
+							lebar_list.push(lebar);
+                        }
+                    } else {
+                        jumlah_garis = 10;
+                        for (let i = 1; i <= jumlah_garis; i++) {
+							if (i == 1) {panjang = Math.floor(60 + 20 * Math.random()); lebar = Math.floor(60 + 20 * Math.random());}
+							else {panjang += Math.floor(2 + 2 * Math.random()); lebar += Math.floor(2 + 2 * Math.random());}
+							panjang_list.push(panjang);
+							lebar_list.push(lebar);
+                        }
+                    }
+					ctx.font = "24px arial";
+                    tinggi_list = tinggi_list.sort(() => .5 - Math.random());
+                    tinggi_list = tinggi_list.slice(0,jumlah_garis);
+                    console.log(tinggi_list);
+                    hasil = 1+tinggi_list.indexOf(tinggi);
+                    if (background_index == 0) ctx.fillStyle = "#c0c0c0"; else ctx.fillStyle = "#404040";
+                    ctx.fillRect(0, 150, 750, 30);
+					ctx.fillRect(0, 330, 750, 30);
+                    ctx.textAlign = "center";
+					ctx.textBaseline = "middle";
+                    for (let i = 1; i <= jumlah_garis; i++) {
+						// ctx.moveTo(parseInt(75+150*((i-1)%parseInt(jumlah_garis/2))+tinggi_list[i-1]/2*Math.cos(radian)),parseInt(75+180*parseInt((2*i-2)/jumlah_garis)+tinggi_list[i-1]/2*Math.sin(radian)));
+						if (background_index == 0) ctx.fillStyle = "#404040"; else ctx.fillStyle = "white";
+						ctx.fillRect(parseInt(75+150*((i-1)%parseInt(jumlah_garis/2))-tinggi_list[i-1]/2),parseInt(75+180*parseInt((2*i-2)/jumlah_garis)-tinggi_list[i-1]/2), tinggi_list[i-1], tinggi_list[i-1]);
+						if (background_index == 0) ctx.fillStyle = "black"; else ctx.fillStyle = "white";
+						ctx.fillText(i,parseInt(75+150*((i-1)%parseInt(jumlah_garis/2))),parseInt(165+180*parseInt((2*i-2)/jumlah_garis)));
+                        // ctx.fill();
+                    }
+					if (tipe2.index == 1) {
+                        for (let i = 1; i <= j_pilihan2; i++) {
+                            value_check = true;
+                            while (value_check || pilihan_list.indexOf(value) > -1 || value == hasil) {
+                                value = Math.floor(1+jumlah_garis*Math.random());
+                                value_check = false;
+                            }
+                            pilihan_list.push(value);
+                        }
+						pilihan_list.sort(function(a, b){return a - b});
+						random_check = false;
+                    }
+				} else if (e1_bentuk.index == 8) {
+				    if (background_index == 0) background_color = 'white'; else background_color = '#202020';
+                    soal_teks = `
+                    <canvas id="myCanvas" width="500" height="300" style="background-color:${background_color}; border:1px solid gray;">
+                    Sorry, your browser does not support canvas.
+                    </canvas><br><br>
+                    `;
+					while (typeof a2 === 'undefined' || a == a2) {
+						a2 = Math.floor(10+161*Math.random());
+					}
+					a = a2;
+                    soal_teks += `Besar sudut di gambar ini adalah ... derajat`;
+                    document.getElementById('soal').innerHTML = soal_teks;
+					
+                    const canvas = document.getElementById("myCanvas");
+                    const ctx = canvas.getContext("2d");
+					
+					sudut = a;
+                    hasil = sudut;
+					ctx.beginPath();
+					if (background_index == 0) ctx.fillStyle = "black"; else ctx.fillStyle = "white";
+					ctx.moveTo(250,250);
+					ctx.lineTo(450,250);
+					ctx.lineWidth = 5;
+					ctx.strokeStyle = ctx.fillStyle;
+					ctx.stroke();
+					
+					ctx.beginPath();
+					ctx.moveTo(250,250);
+					ctx.lineTo(250+200*Math.cos(Math.PI*sudut/180),250-200*Math.sin(Math.PI*sudut/180));
+					ctx.lineWidth = 5;
+					ctx.strokeStyle = ctx.fillStyle;
+					ctx.stroke();
+					ctx.beginPath();
+					
+					ctx.arc(250,250,10,0,2*Math.PI);
+					ctx.fill();
 				}
             }
 			
