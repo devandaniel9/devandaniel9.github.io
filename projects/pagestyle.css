@@ -13,7 +13,8 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins');
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 @import url('https://fonts.googleapis.com/css?family=Consolas');
-@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono'); /* previous */
+@import url('https://fonts.googleapis.com/css?family=Cascadia+Mono'); /* new */
 
 html {
 	--darkmode: 0;
