@@ -57,6 +57,32 @@
 		83.3333% {background-color: #400040;}
 		100% {background-color: #400000;}
 	}
+	.hasil-tabel-wrap { width: 100%; overflow-x: auto; margin: 10px 0; border-radius: 7px; }
+	.hasil-tabel { width: max-content; min-width: min(100%, 320px); max-width: 100%; border-collapse: collapse; background: #f7fcff; color: #17212b; line-height: 1.35; font-size: .9em; }
+	.hasil-tabel caption { padding: 7px 9px; background: #8bea78; color: #173b12; font-weight: bold; text-align: left; }
+	.hasil-tabel th, .hasil-tabel td { padding: 5px 8px; border: 1px solid rgba(23,107,135,.2); text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+	.hasil-tabel thead th { background: #d9f1f8; color: #123d4c; }
+	.hasil-tabel tbody tr:nth-child(even) { background: #edf8fb; }
+	.hasil-tabel tbody tr:hover { background: #d8f0f7; }
+	.kalender-scroll { max-height: 50vh; overflow-y: auto; overflow-x: hidden; padding: 8px; border: 1px solid rgba(23,107,135,.35); border-radius: 8px; background: rgba(247,252,255,.9); }
+	.kalender-bulan { margin: 0 0 14px; padding: 8px; border: 1px solid rgba(23,107,135,.2); border-radius: 7px; background: rgba(255,255,255,.75); }
+	.kalender-grid { display: grid; grid-template-columns: repeat(7, minmax(30px, 1fr)); gap: 4px; text-align: center; }
+	.kalender-grid button { min-height: 34px; padding: 4px; border: 1px solid rgba(23,107,135,.2); border-radius: 5px; background: #eaf6fb; color: #17212b; cursor: pointer; }
+	.kalender-grid button:hover, .kalender-grid button.terpilih { background: #8bea78; color: #173b12; font-weight: bold; }
+	.kalender-grid button.tanggal-menu-kedua { background: #ffbf47; border-color: #b87500; color: #382300; font-weight: bold; }
+	.kalender-grid .kalender-hari { font-weight: bold; background: #d9f1f8; }
+	@container root style(--darkmode: 1) {
+		.hasil-tabel { background: rgba(25,30,38,.96); color: #edf2f7; }
+		.hasil-tabel caption { background: #174b2b; color: #fff; }
+		.hasil-tabel th, .hasil-tabel td { border-color: rgba(210,220,235,.2); }
+		.hasil-tabel thead th { background: #424b5a; color: #f1f4f8; }
+		.hasil-tabel tbody tr:nth-child(even) { background: #303743; }
+		.hasil-tabel tbody tr:hover { background: #414b5a; }
+		.kalender-scroll, .kalender-bulan { background: rgba(25,30,38,.96); color: #edf2f7; }
+		.kalender-grid button { background: #303743; color: #edf2f7; border-color: rgba(210,220,235,.2); }
+		.kalender-grid button.tanggal-menu-kedua { background: #a96800; border-color: #ffd27a; color: #fff; }
+		.kalender-grid .kalender-hari { background: #424b5a; }
+	}
 </style>
 <body>
 	<div id="background-index3">
@@ -93,10 +119,68 @@
     <div class="column" style="padding-right:30px; position:fixed; left:10px; top:10px;">
         <!-- border: 2px solid white; -->
         <!-- <div class="openbtn" style="border:2px solid #c0c0c0;" onclick="openNav()"><img src="images/menu-icon.jpg" style="filter:invert(0%)" width="30"></div> -->
-        <div class="openbtn" onclick="openNav()"><img src="images/menu-icon.jpg" width="30"></div>
+		<div class="openbtn" onclick="openNav()"><img src="images/menu-icon.jpg" width="30"></div>
     </div><br>
 
     <script>
+		let tanggalFormatPanjang = false;
+		const namaBulanTanggal = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+
+		function ubahFormatTanggalTeks(teks) {
+			if (tanggalFormatPanjang) {
+				return teks.replace(/\b(\d{2})\/(\d{2})\/(\d{4})\b/g, (tanggal, hari, bulan, tahun) => {
+					const h = Number(hari), b = Number(bulan), t = Number(tahun);
+					const valid = new Date(t, b - 1, h);
+					return b >= 1 && b <= 12 && valid.getFullYear() === t && valid.getMonth() === b - 1 && valid.getDate() === h
+						? `${h} ${namaBulanTanggal[b - 1]} ${t}` : tanggal;
+				});
+			}
+			const polaBulan = namaBulanTanggal.join("|");
+			return teks.replace(new RegExp(`\\b(\\d{1,2}) (${polaBulan}) (\\d{4})\\b`, "g"), (tanggal, hari, namaBulan, tahun) => {
+				const bulan = namaBulanTanggal.indexOf(namaBulan) + 1;
+				const h = Number(hari), t = Number(tahun), valid = new Date(t, bulan - 1, h);
+				return valid.getFullYear() === t && valid.getMonth() === bulan - 1 && valid.getDate() === h
+					? `${String(h).padStart(2, "0")}/${String(bulan).padStart(2, "0")}/${t}` : tanggal;
+			});
+		}
+
+		function formatTanggalPadaHalaman(root = document.body) {
+			const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+				acceptNode(node) {
+					return node.parentElement && !node.parentElement.closest("script, style, textarea, input, select")
+						? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+				}
+			});
+			const nodes = [];
+			while (walker.nextNode()) nodes.push(walker.currentNode);
+			for (const node of nodes) {
+				const teksBaru = ubahFormatTanggalTeks(node.nodeValue);
+				if (teksBaru !== node.nodeValue) node.nodeValue = teksBaru;
+			}
+		}
+
+		function toggleFormatTanggal() {
+			tanggalFormatPanjang = !tanggalFormatPanjang;
+			document.getElementById("format-tanggal-toggle").textContent = tanggalFormatPanjang ? "Tanggal pendek" : "Tanggal panjang";
+			formatTanggalPadaHalaman();
+		}
+
+		new MutationObserver(perubahan => {
+			for (const perubahanNode of perubahan) {
+				if (perubahanNode.type === "childList") {
+					for (const node of perubahanNode.addedNodes) {
+						if (node.nodeType === Node.TEXT_NODE) {
+							const teksBaru = ubahFormatTanggalTeks(node.nodeValue);
+							if (teksBaru !== node.nodeValue) node.nodeValue = teksBaru;
+						} else if (node.nodeType === Node.ELEMENT_NODE) formatTanggalPadaHalaman(node);
+					}
+				} else if (perubahanNode.type === "characterData") {
+					const teksBaru = ubahFormatTanggalTeks(perubahanNode.target.nodeValue);
+					if (teksBaru !== perubahanNode.target.nodeValue) perubahanNode.target.nodeValue = teksBaru;
+				}
+			}
+		}).observe(document.body, { childList: true, characterData: true, subtree: true });
+
         function openNav() {
             document.getElementById("sidebar").style.width = "300px";
             document.getElementById("backsidebar").style.display = "block";
@@ -282,10 +366,9 @@
 	<label>Pilih jenis pertanyaan tes ini:</label><br>
 	<select id="bentuk" style="width:350px" onchange="pilihan(true);clearInterval(myInterval);">
 		<option id=0>Mencari hari dalam tanggal</option>
-		<option id=1>Tanggal dalam Kalender</option>
-		<option id=2>Tanggal Matematika dan kustomisasi</option>
+		<option id=1>Tanggal Matematika dan kustomisasi</option>
+        <option id=2>Tanggal dalam Kalender</option>
 	</select><br><br>
-	
 	<div id="bentuk-penjelasan" style="line-height:1.5em"></div><br><br>
 	
     <!-- <button class="button" id="solve" onclick="selesaikan()">Selesaikan</button>
@@ -328,7 +411,8 @@
 	<!-- <p>Terakhir diupdate: 11 Maret 2026</p> -->
 	<!-- <p>Terakhir diupdate: 22 April 2026</p> -->
 	<!-- <p>Terakhir diupdate: 24 April 2026</p> -->
-	<p>Terakhir diupdate: 8 Juni 2026</p>
+	<!-- <p>Terakhir diupdate: 8 Juni 2026</p> -->
+	<p>Terakhir diupdate: 2 November 2026</p>
 	
 	<script>
         // Time
@@ -389,6 +473,7 @@
             percobaan_check = document.getElementById("check2").checked;
             font_value = document.getElementById("jenis-font").value;
 			background_index = document.getElementById("jenis-background").value;
+			aturTombolHapus();
             document.body.style.fontFamily = font_value;
             const button_font_list = document.querySelectorAll("button");
             for (let i = 0; i < button_font_list.length; i++) button_font_list[i].style.fontFamily = font_value;
@@ -439,6 +524,15 @@
                 document.documentElement.style.setProperty('--darkmode', 0);
             } */
         }
+
+		function aturTombolHapus() {
+			const temaTerang = document.getElementById("jenis-background").value == 0;
+			for (const tombol of document.querySelectorAll(".hapus-button")) {
+				tombol.style.backgroundColor = temaTerang ? "#ff8080" : "#800000";
+				tombol.style.color = temaTerang ? "black" : "white";
+				tombol.style.textShadow = "none";
+			}
+		}
 		
 		function gcd(a, b) {
             for (let temp = b; b !== 0;) {
@@ -474,7 +568,10 @@
 		
 		hasil = 0;
 
-        function pilihan(change=false) {
+		let tanggalKalenderTerpilih = null;
+		let tanggalMenuKeduaDiKalender = new Set();
+
+		function pilihan(change=false) {
 		    var e = document.getElementById("bentuk");
             var e1 = e.options[e.selectedIndex];
 
@@ -483,7 +580,7 @@
             document.getElementById("bentuk-penjelasan").innerHTML = '';
             // if (e1.index <= 5) {
             if (e1.index == 0) {
-			    // document.getElementById("bentuk-sub").style.display = 'block';
+				// document.getElementById("bentuk-sub").style.display = 'block';
 				// <input type="text" id="angka" min="0" style="width:400px">
 				// document.getElementById("bentuk-sub").style.display = 'none';
 				document.getElementById("bentuk-penjelasan").innerHTML = `
@@ -528,50 +625,737 @@
 				<button class="button" style="margin-bottom:20px" onclick="change_date(8)">Ubah ke tanggal sekarang</button>
 				<button class="button" id="solve" onclick="selesaikan()">Cek tanggal dan nama hari</button>
 				`;
-			} else if (e1.index == 1) {
-                document.getElementById("bentuk-sub").style.display = 'none';
-				document.getElementById("bentuk-penjelasan").innerHTML = `
-				<b>Buta warna</b> adalah suatu kelainan yang disebabkan ketidakmampuan sel-sel kerucut mata untuk menangkap suatu spektrum warna tertentu (Buta warna parsial) atau bahkan seluruh spektrum warna (Buta warna total) yang disebabkan oleh faktor genetis.
-                <br><br>
-				Buta warna merupakan penyakit seumur hidup. Agar penderita dapat beradaptasi dengan kondisi ini, dokter akan memberikan penanganan sesuai dengan jenis buta warna yang diderita.
+            } else if (e1.index == 1) {
+                document.getElementById("bentuk-penjelasan").innerHTML = `
+				<button type="button" class="button" id="format-tanggal-toggle" onclick="toggleFormatTanggal()">Tanggal panjang</button><br><br>
+				<b>Tanggal palindrom</b> tetap sama jika angka pada format tanggal dibaca dari kiri ke kanan maupun dari kanan ke kiri. Format yang diperiksa mencakup susunan hari-bulan atau bulan-hari, dengan atau tanpa nol di depan. Format tahun dua digit (yy) hanya diperiksa jika opsi dicentang. Atur rentang tahun untuk mencari tanggal-tanggal tersebut.
 				<br><br>
-				Sumber: Wikipedia
+				<div class="column">Tahun awal<br><input type="number" id="palindrom-awal" min="1601" max="2200" value="2001" style="width:100px"></div>
+				<div class="column">Tahun akhir<br><input type="number" id="palindrom-akhir" min="1601" max="2200" value="2030" style="width:100px"></div>
+				<div class="clearfix"></div><br>
+				<label class="cb-container" style="width:400px;">Sertakan format tahun dua digit (yy)
+					<input type="checkbox" id="palindrom-yy">
+					<span class="checkmark"></span>
+				</label>
+				<label class="cb-container" style="width:400px;">Sertakan tanggal yang digitnya dapat disusun menjadi palindrome (anagram palindrom)
+					<input type="checkbox" id="palindrom-anagram">
+					<span class="checkmark"></span>
+				</label>
+				<button class="button" onclick="cariTanggalPalindrom()">Cari tanggal palindrom</button>
+				<button class="button hapus-button" style="background-color:red" onclick="document.getElementById('hasil-palindrom').innerHTML = ''">Hapus</button>
+				<div id="hasil-palindrom" style="margin-top:20px"></div>
 				<br><br>
-				Tes Buta Warna digunakan untuk mengukur seberapa jauh mata dapat membedakan warna.
+				<b>Tanggal kuadrat</b> adalah tanggal yang susunan digitnya membentuk bilangan kuadrat sempurna. Contoh: 27/9/2025 menjadi 27092025 = 5205², 21/11/2015 menjadi 20151121 = 4489², dan 21/11/2026 menjadi 261121 = 511². Atur rentang tahun dan pilihan format tahun untuk mencari tanggal-tanggal tersebut.
+				<br><br>
+				<div class="column">Tahun awal<br><input type="number" id="kuadrat-awal" min="1601" max="2200" value="2001" style="width:100px"></div>
+				<div class="column">Tahun akhir<br><input type="number" id="kuadrat-akhir" min="1601" max="2200" value="2030" style="width:100px"></div>
+				<div class="clearfix"></div><br>
+				<label class="cb-container" style="width:400px;">Sertakan format tahun dua digit (yy)
+					<input type="checkbox" id="kuadrat-yy">
+					<span class="checkmark"></span>
+				</label>
+				<label class="cb-container" style="width:400px;">Sertakan format langka dengan tahun di tengah (hari-tahun-bulan atau bulan-tahun-hari)
+					<input type="checkbox" id="kuadrat-tahun-tengah">
+					<span class="checkmark"></span>
+				</label>
+				<button class="button" onclick="cariTanggalKuadrat()">Cari tanggal kuadrat</button>
+				<button class="button hapus-button" style="background-color:red" onclick="document.getElementById('hasil-kuadrat').innerHTML = ''">Hapus</button>
+				<div id="hasil-kuadrat" style="margin-top:20px"></div>
+				<br><br>
+				<b>Tanggal kubik</b> adalah tanggal yang susunan digitnya membentuk bilangan kubik sempurna. Susunan hari-bulan dan bulan-hari, termasuk format dengan nol di depan dan pilihan tahun di tengah, diperiksa bersama tahun empat digit maupun dua digit (hingga 24 format). Contoh: 24/08/2057 dapat ditulis 20570824 = 274³.
+				<br><br>
+				<div class="column">Tahun awal<br><input type="number" id="kubik-awal" min="1601" max="2200" value="2001" style="width:100px"></div>
+				<div class="column">Tahun akhir<br><input type="number" id="kubik-akhir" min="1601" max="2200" value="2030" style="width:100px"></div>
+				<div class="clearfix"></div><br>
+				<label class="cb-container" style="width:400px;">Sertakan format langka dengan tahun di tengah (hari-tahun-bulan atau bulan-tahun-hari)
+					<input type="checkbox" id="kubik-tahun-tengah">
+					<span class="checkmark"></span>
+				</label>
+				<button class="button" onclick="cariTanggalKubik()">Cari tanggal kubik</button>
+				<button class="button hapus-button" style="background-color:red" onclick="document.getElementById('hasil-kubik').innerHTML = ''">Hapus</button>
+				<div id="hasil-kubik" style="margin-top:20px"></div>
+				<br><br>
+				<b>Tanggal sekuensial</b> memiliki angka hari, bulan, dan dua digit terakhir tahun yang membentuk barisan aritmetika dalam urutan apa pun. Contoh: 6 Desember 2018 (6, 12, 18) dan 19 Desember 2026 (12, 19, 26). Atur rentang tahun untuk mencari tanggal-tanggal tersebut.
+				<br><br>
+				<div class="column">Tahun awal<br><input type="number" id="sekuensial-awal" min="1601" max="2200" value="2001" style="width:100px"></div>
+				<div class="column">Tahun akhir<br><input type="number" id="sekuensial-akhir" min="1601" max="2200" value="2030" style="width:100px"></div>
+				<div class="clearfix"></div><br>
+				<button class="button" onclick="cariTanggalSekuensial()">Cari tanggal sekuensial</button>
+				<button class="button hapus-button" style="background-color:red" onclick="document.getElementById('hasil-sekuensial').innerHTML = ''">Hapus</button>
+				<div id="hasil-sekuensial" style="margin-top:20px"></div>
+				<br><br>
+				<b>Tanggal dan bilangan irasional</b> dapat memiliki pola angka yang sama saat ditulis dengan format tertentu. Contohnya, 14 Maret 2015 dapat ditulis 3/14/15, yang cocok dengan awalan π = 3.1415; 15 September 2026 dapat ditulis 15/9/26, yang muncul pada π = 3.1415926. Hari π biasa dirayakan pada 14 Maret (3/14), sedangkan Hari τ pada 28 Juni (6/28). Masukkan tanggal untuk mencocokkan beberapa format angka dengan digit π, τ, e, √2, √3, dan φ.
+				<br><br>
+				<div class="column">Tahun awal<br><input type="number" id="irasional-awal" min="1601" max="2200" value="2001" style="width:100px"></div>
+				<div class="column">Tahun akhir<br><input type="number" id="irasional-akhir" min="1601" max="2200" value="2030" style="width:100px"></div>
+				<div class="clearfix"></div><br>
+				<label class="cb-container" style="width:400px;">Sertakan perayaan tahunan (Hari Pi, Hari Tau, dan aproksimasi Pi)
+					<input type="checkbox" id="irasional-perayaan" checked>
+					<span class="checkmark"></span>
+				</label>
+				<button class="button" onclick="cariTanggalIrasional()">Cek hubungan irasional</button>
+				<button class="button hapus-button" style="background-color:red" onclick="document.getElementById('hasil-irasional').innerHTML = ''">Hapus</button>
+				<div id="hasil-irasional" style="margin-top:20px"></div>
+				<br><br>
+				<b>Tanggal Pythagoras</b> memiliki tiga komponen angka yang dapat disusun menjadi tripel Pythagoras: a² + b² = c². Urutan hari, bulan, dan tahun (dua atau empat digit) dapat berbeda. Contoh: 3/4/2005 menghasilkan 3, 4, 5; 5/12/2013 menghasilkan 5, 12, 13; dan 16/9/2025 menghasilkan 9, 16, 25.
+				<br><br>
+				<div class="column">Tahun awal<br><input type="number" id="pythagoras-awal" min="1601" max="2200" value="2001" style="width:100px"></div>
+				<div class="column">Tahun akhir<br><input type="number" id="pythagoras-akhir" min="1601" max="2200" value="2030" style="width:100px"></div>
+				<div class="clearfix"></div><br>
+				<button class="button" onclick="cariTanggalPythagoras()">Cari tanggal Pythagoras</button>
+				<button class="button hapus-button" style="background-color:red" onclick="document.getElementById('hasil-pythagoras').innerHTML = ''">Hapus</button>
+				<div id="hasil-pythagoras" style="margin-top:20px"></div>
+				<br><br>
+				<b>Tanggal cantik</b> memiliki angka hari dan bulan yang jika dijumlahkan atau dikalikan menghasilkan dua digit terakhir tahun (yy). Contoh: 21/05/2026 karena 21 + 5 = 26, serta 05/05/2025 karena 5 × 5 = 25. Centang opsi untuk menyertakan tanggal dengan dd = mm, dd = yy, dan/atau mm = yy, termasuk dd = mm = yy seperti 12 Desember 2012. Atur rentang tahun untuk mencari tanggal-tanggal tersebut.
+				<br><br>
+				<div class="column">Tahun awal<br><input type="number" id="cantik-awal" min="1601" max="2200" value="2001" style="width:100px"></div>
+				<div class="column">Tahun akhir<br><input type="number" id="cantik-akhir" min="1601" max="2200" value="2030" style="width:100px"></div>
+				<div class="clearfix"></div><br>
+				<label class="cb-container" style="width:400px;">Sertakan tanggal dengan dd = mm, dd = yy, dan/atau mm = yy
+					<input type="checkbox" id="cantik-kesamaan">
+					<span class="checkmark"></span>
+				</label>
+				<button class="button" onclick="cariTanggalCantik()">Cari tanggal cantik</button>
+				<button class="button hapus-button" style="background-color:red" onclick="document.getElementById('hasil-cantik').innerHTML = ''">Hapus</button>
+				<div id="hasil-cantik" style="margin-top:20px"></div>
+				<br><br>
+				<b>Cari tanggal kustom</b> masukkan hari dan bulan yang diinginkan. Hasil menampilkan tahun yang membuat tanggal tersebut memenuhi minimal satu kriteria matematika di atas.
+				<br><br>
+				<div class="column">Hari<br><input type="number" id="kustom-hari" min="1" max="31" value="1" style="width:75px"></div>
+				<div class="column">Bulan<br><input type="number" id="kustom-bulan" min="1" max="12" value="7" style="width:75px"></div>
+				<div class="column">Tahun awal<br><input type="number" id="kustom-awal" min="1601" max="2200" value="2001" style="width:100px"></div>
+				<div class="column">Tahun akhir<br><input type="number" id="kustom-akhir" min="1601" max="2200" value="2030" style="width:100px"></div>
+				<div class="clearfix"></div><br>
+				<button class="button" onclick="cariTanggalKustom()">Cari tanggal kustom</button>
+				<button class="button hapus-button" style="background-color:red" onclick="document.getElementById('hasil-kustom').innerHTML = ''">Hapus</button>
+				<div id="hasil-kustom" style="margin-top:20px"></div>
+				<br><br>
+				<b>Tanggal langka (gabungan kriteria)</b> mencari tanggal yang memenuhi sedikitnya beberapa kriteria matematika sekaligus, misalnya palindrome dan kuadrat.
+				<br><br>
+				<div class="column">Tahun awal<br><input type="number" id="langka-awal" min="1601" max="2200" value="2001" style="width:100px"></div>
+				<div class="column">Tahun akhir<br><input type="number" id="langka-akhir" min="1601" max="2200" value="2030" style="width:100px"></div>
+				<div class="column">Minimal kriteria<br><input type="number" id="langka-minimal" min="2" max="5" value="2" style="width:100px"></div>
+				<div class="clearfix"></div><br>
+				<label class="cb-container" style="width:400px;">Tanggal palindrome<input type="checkbox" id="langka-palindrom" checked><span class="checkmark"></span></label>
+				<label class="cb-container" style="width:400px;">Tanggal anagram palindrom<input type="checkbox" id="langka-anagram" checked><span class="checkmark"></span></label>
+				<label class="cb-container" style="width:400px;">Tanggal kuadrat<input type="checkbox" id="langka-kuadrat" checked><span class="checkmark"></span></label>
+				<label class="cb-container" style="width:400px;">Tanggal terkait bilangan irasional<input type="checkbox" id="langka-irasional" checked><span class="checkmark"></span></label>
+				<label class="cb-container" style="width:400px;">Tanggal Pythagoras<input type="checkbox" id="langka-pythagoras" checked><span class="checkmark"></span></label>
+				<label class="cb-container" style="width:400px;">Tanggal cantik<input type="checkbox" id="langka-cantik" checked><span class="checkmark"></span></label>
+				<label class="cb-container" style="width:400px;">Sertakan format tahun dua digit (yy) untuk palindrome dan kuadrat<input type="checkbox" id="langka-yy"><span class="checkmark"></span></label>
+				<label class="cb-container" style="width:400px;">Sertakan kesamaan dd = mm, dd = yy, atau mm = yy<input type="checkbox" id="langka-kesamaan"><span class="checkmark"></span></label>
+				<button class="button" onclick="cariTanggalLangka()">Cari tanggal langka</button>
+				<button class="button hapus-button" style="background-color:red" onclick="document.getElementById('hasil-langka').innerHTML = ''">Hapus</button>
+				<div id="hasil-langka" style="margin-top:20px"></div>
 				`;
-            } else if (e1.index == 2) {
-                document.getElementById("bentuk-sub").style.display = 'block';
+			} else if (e1.index == 2) {
+				const tahunSekarang = new Date().getFullYear();
 				document.getElementById("bentuk-penjelasan").innerHTML = `
-				<b>Akurasi</b> adalah ukuran yang menentukan tingkat kemiripan antara hasil pengukuran dengan nilai yang sebenarnya diukur. Dalam bidang pengukuran, akurasi lebih dikhususkan pada ketidakpastian pengukuran dari alat ukur. Akurasi ditetapkan untuk mengetahui seberapa besar tingkat kesalahan pengukuran yang dapat terjadi pada suatu alat ukur.
+				<b>Kalender tahunan</b> menampilkan semua bulan dalam satu tahun. Pilih tanggal, lalu gunakan tahun tersebut sebagai rentang pencarian pada menu kedua (Tanggal Matematika dan kustomisasi).
 				<br><br>
-				Sumber: Wikipedia
+				<label for="kalender-tahun">Tahun:</label>
+				<input type="number" id="kalender-tahun" min="1601" max="2200" value="${tahunSekarang}" style="width:100px" onchange="renderKalender()">
+				<button class="button" onclick="ubahTahunKalender(-1)">Tahun sebelumnya</button>
+				<button class="button" onclick="ubahTahunKalender(1)">Tahun berikutnya</button>
+				<br><br>
+				<label for="kalender-jenis-tanggal">Tanggal dari menu kedua:</label>
+				<select id="kalender-jenis-tanggal" style="width:220px">
+					<option value="palindrom">Tanggal palindrom</option>
+					<option value="kuadrat">Tanggal kuadrat</option>
+					<option value="irasional">Tanggal irasional</option>
+					<option value="pythagoras">Tanggal Pythagoras</option>
+					<option value="cantik">Tanggal cantik</option>
+				</select>
+				<button class="button" onclick="tampilkanTanggalMenuKeduaDiKalender()">Tampilkan dengan warna</button>
+				<p id="kalender-hasil-warna" aria-live="polite">Tanggal yang cocok akan diberi warna oranye.</p>
+				<p id="kalender-pilihan" aria-live="polite">Pilih tanggal pada kalender.</p>
+				<div id="kalender-tahunan" class="kalender-scroll"></div>
+				<button class="button" id="kalender-ke-menu-kedua" onclick="gunakanTahunKalenderDiMenuKedua()" disabled>Gunakan tahun ini di menu kedua</button>
 				`;
-            } else {
-                document.getElementById("bentuk-sub").style.display = 'none';
+				tanggalKalenderTerpilih = null;
+				renderKalender();
+			} else {
+				document.getElementById("bentuk-penjelasan").innerHTML = '';
             }
 			
             document.getElementById("bentuk-penjelasan").style.lineHeight = '1.5em';
+			aturTombolHapus();
             
             try {MathJax.typeset();} catch(err) {}
         }
-		
-		function change_date(index) {
-			const months = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
-			const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
-			const num_dd_in_mm = [31,28,31,30,31,30,31,31,30,31,30,31];
-			yyyy = parseInt(document.getElementById("yyyy").value);
-			if (yyyy % 4 == 0 && (yyyy % 100 != 0 || yyyy % 400 == 0)) num_dd_in_mm[1] = 29;
-			mm = parseInt(document.getElementById("mm").value);
-			dd = parseInt(document.getElementById("dd").value);
-			if (index == 0) {
-				dd += 1;
-				if (dd > num_dd_in_mm[mm-1]) {dd -= num_dd_in_mm[mm-1]; mm += 1};
-				if (mm >= 13) {mm = 1; yyyy += 1};
-			} else if (index == 1) {
-				dd -= 1;
-				if (dd <= 0) {dd += num_dd_in_mm[(12+mm-2)%12]; mm -= 1};
-				if (mm == 0) {mm = 12; yyyy -= 1};
-			} else if (index == 2) {
+
+		function ubahTahunKalender(perubahan) {
+			const input = document.getElementById("kalender-tahun");
+			input.value = Math.max(1601, Math.min(2200, Number(input.value) + perubahan));
+			tanggalKalenderTerpilih = null;
+			document.getElementById("kalender-pilihan").textContent = "Pilih tanggal pada kalender.";
+			document.getElementById("kalender-ke-menu-kedua").disabled = true;
+			renderKalender();
+		}
+
+		function renderKalender() {
+			const input = document.getElementById("kalender-tahun");
+			const wadah = document.getElementById("kalender-tahunan");
+			if (!input || !wadah) return;
+			const tahun = Number(input.value);
+			if (!Number.isInteger(tahun) || tahun < 1601 || tahun > 2200) {
+				wadah.textContent = "Masukkan tahun antara 1601 dan 2200.";
+				return;
+			}
+			const namaBulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+			const namaHari = ["Sen", "Sel", "Rab", "Kam", "Jum", "Sab", "Min"];
+			wadah.innerHTML = namaBulan.map((bulanNama, bulan) => {
+				const awal = (new Date(tahun, bulan, 1).getDay() + 6) % 7;
+				const jumlahHari = new Date(tahun, bulan + 1, 0).getDate();
+				const header = namaHari.map(hari => `<span class="kalender-hari">${hari}</span>`).join("");
+				const kosong = Array(awal).fill("<span></span>").join("");
+				const hariHTML = Array.from({ length: jumlahHari }, (_, i) => {
+					const hari = i + 1;
+					const dipilih = tanggalKalenderTerpilih && tanggalKalenderTerpilih.tahun === tahun && tanggalKalenderTerpilih.bulan === bulan + 1 && tanggalKalenderTerpilih.hari === hari;
+					const tanggalKunci = `${tahun}-${bulan + 1}-${hari}`;
+					const ditandai = tanggalMenuKeduaDiKalender.has(tanggalKunci);
+					return `<button type="button" class="${ditandai ? "tanggal-menu-kedua" : dipilih ? "terpilih" : ""}" aria-label="Pilih ${hari} ${bulanNama} ${tahun}" onclick="pilihTanggalKalender(${hari}, ${bulan + 1}, ${tahun})">${hari}</button>`;
+				}).join("");
+				return `<section class="kalender-bulan"><b>${bulanNama} ${tahun}</b><div class="kalender-grid">${header}${kosong}${hariHTML}</div></section>`;
+			}).join("");
+		}
+
+		function tampilkanTanggalMenuKeduaDiKalender() {
+			const tahun = Number(document.getElementById("kalender-tahun").value);
+			const jenis = document.getElementById("kalender-jenis-tanggal").value;
+			const status = document.getElementById("kalender-hasil-warna");
+			if (!Number.isInteger(tahun) || tahun < 1601 || tahun > 2200) {
+				status.textContent = "Masukkan tahun antara 1601 dan 2200.";
+				return;
+			}
+			/* const konstanta = [
+				"314159265358979323846264338327950288419716939937510",
+				"628318530717958647692528676655900576839433879875021",
+				"271828182845904523536028747135266249775724709369995",
+				"141421356237309504880168872420969807856967187537694",
+				"161803398874989484820458683436563811772030917980576"
+			]; */
+			const konstanta = [
+				"3141592653",
+				"6283185307",
+				"2718281828",
+				"1414213562",
+				"1618033988"
+			];
+			const tanggalCocok = new Set();
+			for (let bulan = 1; bulan <= 12; bulan++) {
+				for (let hari = 1; hari <= new Date(tahun, bulan, 0).getDate(); hari++) {
+					const yy = tahun % 100;
+					let cocok = false;
+					if (jenis === "palindrom") {
+						for (const tahunFormat of [String(tahun), String(yy).padStart(2, "0")]) {
+							for (const [d, m] of [[String(hari), String(bulan)], [String(bulan), String(hari)]]) {
+								for (const hariFormat of [d, d.padStart(2, "0")]) {
+									for (const bulanFormat of [m, m.padStart(2, "0")]) {
+										const angka = `${hariFormat}${bulanFormat}${tahunFormat}`;
+										if (angka === [...angka].reverse().join("")) cocok = true;
+									}
+								}
+							}
+						}
+					} else if (jenis === "kuadrat") {
+						for (const tahunFormat of [String(tahun), String(yy).padStart(2, "0")]) {
+							for (const d of [String(hari), String(hari).padStart(2, "0")]) {
+								for (const m of [String(bulan), String(bulan).padStart(2, "0")]) {
+									for (const angka of [`${d}${m}${tahunFormat}`, `${m}${d}${tahunFormat}`, `${tahunFormat}${m}${d}`, `${tahunFormat}${d}${m}`]) {
+										const n = Number(angka), akar = Math.floor(Math.sqrt(n));
+										if (akar * akar === n) cocok = true;
+									}
+								}
+							}
+						}
+					} else if (jenis === "irasional") {
+						const dd = String(hari).padStart(2, "0"), mm = String(bulan).padStart(2, "0");
+						const pola = [...new Set([`${bulan}${hari}${yy}`, `${hari}${bulan}${yy}`, `${mm}${dd}${yy}`, `${dd}${mm}${yy}`, `${hari}${bulan}${tahun}`, `${bulan}${hari}${tahun}`])];
+						cocok = (bulan === 3 && hari === 14) || (bulan === 6 && hari === 28) || (bulan === 7 && hari === 22) || konstanta.some(digit => pola.some(item => digit.includes(item)));
+					} else if (jenis === "pythagoras") {
+						for (const nilaiTahun of [tahun, yy]) {
+							const sisi = [hari, bulan, nilaiTahun].sort((a, b) => a - b);
+							if (sisi[0] ** 2 + sisi[1] ** 2 === sisi[2] ** 2) cocok = true;
+						}
+					} else if (jenis === "cantik") {
+						cocok = hari + bulan === yy || hari * bulan === yy || hari === yy || bulan === yy;
+					}
+					if (cocok) tanggalCocok.add(`${tahun}-${bulan}-${hari}`);
+				}
+			}
+			tanggalMenuKeduaDiKalender = tanggalCocok;
+			status.textContent = `${tanggalCocok.size} tanggal ${document.getElementById("kalender-jenis-tanggal").selectedOptions[0].text.toLowerCase()} ditandai warna oranye pada tahun ${tahun}.`;
+			renderKalender();
+		}
+
+		function pilihTanggalKalender(hari, bulan, tahun) {
+			tanggalKalenderTerpilih = { hari, bulan, tahun };
+			const namaBulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+			document.getElementById("kalender-pilihan").textContent = `Tanggal dipilih: ${hari} ${namaBulan[bulan - 1]} ${tahun}. Tahun ini dapat dipakai untuk pencarian tanggal matematika.`;
+			document.getElementById("kalender-ke-menu-kedua").disabled = false;
+			renderKalender();
+		}
+
+		function gunakanTahunKalenderDiMenuKedua() {
+			if (!tanggalKalenderTerpilih) return;
+			document.getElementById("bentuk").selectedIndex = 1;
+			pilihan(true);
+			const tahun = tanggalKalenderTerpilih.tahun;
+			for (const id of ["palindrom", "kuadrat", "irasional", "pythagoras", "cantik"]) {
+				document.getElementById(`${id}-awal`).value = tahun;
+				document.getElementById(`${id}-akhir`).value = tahun;
+			}
+		}
+
+		function cariTanggalPalindrom() {
+			const awal = Number(document.getElementById("palindrom-awal").value);
+			const akhir = Number(document.getElementById("palindrom-akhir").value);
+			const hasil = document.getElementById("hasil-palindrom");
+			if (!Number.isInteger(awal) || !Number.isInteger(akhir) || awal < 1601 || akhir > 2200 || awal > akhir) {
+				hasil.textContent = "Masukkan rentang tahun yang valid (1601–2200).";
+				return;
+			}
+			const tanggal = [];
+			const sertakanTahunDuaDigit = document.getElementById("palindrom-yy").checked;
+			const sertakanAnagramPalindrom = document.getElementById("palindrom-anagram").checked;
+			for (let tahun = awal; tahun <= akhir; tahun++) {
+				for (let bulan = 1; bulan <= 12; bulan++) {
+					const jumlahHari = new Date(tahun, bulan, 0).getDate();
+					for (let hari = 1; hari <= jumlahHari; hari++) {
+						const formatTahun = [`${tahun}`];
+						if (sertakanTahunDuaDigit) formatTahun.push(String(tahun).slice(-2));
+						const komponenTanggal = [
+							{ nilai: hari, simbol: "d" },
+							{ nilai: bulan, simbol: "m" }
+						];
+						const format = [];
+						for (const urutan of [komponenTanggal, [...komponenTanggal].reverse()]) {
+							for (const nolHari of [false, true]) {
+								for (const nolBulan of [false, true]) {
+									const bagian = urutan.map(item => {
+										const nol = item.simbol === "d" ? nolHari : nolBulan;
+										return `${nol ? String(item.nilai).padStart(2, "0") : item.nilai}`;
+									});
+									const labelTanggal = urutan.map(item => item.simbol.repeat(item.simbol === "d" ? (nolHari ? 2 : 1) : (nolBulan ? 2 : 1))).join("");
+									for (const tahunFormat of formatTahun) {
+										format.push({ angka: `${bagian.join("")}${tahunFormat}`, label: `${labelTanggal}${tahunFormat.length === 4 ? "yyyy" : "yy"}` });
+									}
+								}
+							}
+						}
+						let cocok = format.find(item => item.angka === item.angka.split("").reverse().join(""));
+						if (!cocok && sertakanAnagramPalindrom) {
+							cocok = format.find(item => {
+								const frekuensi = {};
+								for (const digit of item.angka) frekuensi[digit] = (frekuensi[digit] || 0) + 1;
+								return Object.values(frekuensi).filter(jumlah => jumlah % 2 !== 0).length <= 1;
+							});
+							if (cocok) cocok = { ...cocok, label: `${cocok.label} (anagram palindrom)` };
+						}
+						if (cocok) {
+							tanggal.push({ tanggal: `${String(hari).padStart(2, "0")}/${String(bulan).padStart(2, "0")}/${tahun}`, format: cocok.label });
+						}
+					}
+                }
+            }
+            hasil.innerHTML = tanggal.length
+				? `<div class="hasil-tabel-wrap"><table class="hasil-tabel"><caption>${tanggal.length} tanggal palindrom ditemukan</caption><thead><tr><th>Tanggal</th><th>Format palindrom</th></tr></thead><tbody>${tanggal.map(item => `<tr><td>${item.tanggal}</td><td>${item.format}</td></tr>`).join("")}</tbody></table></div>`
+				: "Tidak ada tanggal palindrom pada rentang tahun tersebut.";
+        }
+
+        function cariTanggalKuadrat() {
+            const awal = Number(document.getElementById("kuadrat-awal").value);
+            const akhir = Number(document.getElementById("kuadrat-akhir").value);
+            const hasil = document.getElementById("hasil-kuadrat");
+			if (!Number.isInteger(awal) || !Number.isInteger(akhir) || awal < 1601 || akhir > 2200 || awal > akhir) {
+				hasil.textContent = "Masukkan rentang tahun yang valid (1601–2200).";
+                return;
+            }
+            const tanggal = [];
+			const sertakanTahunDuaDigit = document.getElementById("kuadrat-yy").checked;
+			const sertakanTahunTengah = document.getElementById("kuadrat-tahun-tengah").checked;
+            for (let tahun = awal; tahun <= akhir; tahun++) {
+                for (let bulan = 1; bulan <= 12; bulan++) {
+                    const jumlahHari = new Date(tahun, bulan, 0).getDate();
+                    for (let hari = 1; hari <= jumlahHari; hari++) {
+						const tanggalFormat = `${String(hari).padStart(2, "0")}/${String(bulan).padStart(2, "0")}/${tahun}`;
+						const dd = String(hari).padStart(2, "0");
+						const mm = String(bulan).padStart(2, "0");
+						const variasi = [];
+						const formatTahun = [[String(tahun), "yyyy"]];
+						if (sertakanTahunDuaDigit) formatTahun.push([String(tahun).slice(-2), "yy"]);
+						for (const [tahunTanggal, labelTahun] of formatTahun) {
+							variasi.push(
+								{ format: `dm${labelTahun}`, angka: `${hari}${bulan}${tahunTanggal}` },
+								{ format: `ddmm${labelTahun}`, angka: `${dd}${mm}${tahunTanggal}` },
+								{ format: `md${labelTahun}`, angka: `${bulan}${hari}${tahunTanggal}` },
+								{ format: `mmdd${labelTahun}`, angka: `${mm}${dd}${tahunTanggal}` },
+								{ format: `${labelTahun}md`, angka: `${tahunTanggal}${bulan}${hari}` },
+								{ format: `${labelTahun}mmdd`, angka: `${tahunTanggal}${mm}${dd}` },
+								{ format: `${labelTahun}dm`, angka: `${tahunTanggal}${hari}${bulan}` },
+								{ format: `${labelTahun}ddmm`, angka: `${tahunTanggal}${dd}${mm}` }
+							);
+							if (sertakanTahunTengah) {
+								variasi.push(
+									{ format: `d${labelTahun}m`, angka: `${hari}${tahunTanggal}${bulan}` },
+									{ format: `dd${labelTahun}mm`, angka: `${dd}${tahunTanggal}${mm}` },
+									{ format: `m${labelTahun}d`, angka: `${bulan}${tahunTanggal}${hari}` },
+									{ format: `mm${labelTahun}dd`, angka: `${mm}${tahunTanggal}${dd}` }
+								);
+							}
+						}
+                        for (const variasiTanggal of variasi) {
+                            const angkaTanggal = Number(variasiTanggal.angka);
+                            const akar = Math.floor(Math.sqrt(angkaTanggal));
+                            if (akar * akar === angkaTanggal) {
+								tanggal.push({ tanggal: tanggalFormat, format: variasiTanggal.format, kuadrat: `${angkaTanggal} = ${akar}²` });
+                            }
+                        }
+                    }
+                }
+            }
+            hasil.innerHTML = tanggal.length
+				? `<div class="hasil-tabel-wrap"><table class="hasil-tabel"><caption>${tanggal.length} tanggal kuadrat ditemukan</caption><thead><tr><th>Tanggal</th><th>Format angka</th><th>Bilangan kuadrat</th></tr></thead><tbody>${tanggal.map(item => `<tr><td>${item.tanggal}</td><td>${item.format}</td><td>${item.kuadrat}</td></tr>`).join("")}</tbody></table></div>`
+				: "Tidak ada tanggal kuadrat pada rentang tahun tersebut.";
+        }
+
+		function cariTanggalKubik() {
+			const awal = Number(document.getElementById("kubik-awal").value);
+			const akhir = Number(document.getElementById("kubik-akhir").value);
+			const hasil = document.getElementById("hasil-kubik");
+			if (!Number.isInteger(awal) || !Number.isInteger(akhir) || awal < 1601 || akhir > 2200 || awal > akhir) {
+				hasil.textContent = "Masukkan rentang tahun yang valid (1601–2200).";
+				return;
+			}
+			const tanggal = [];
+			const sertakanTahunTengah = document.getElementById("kubik-tahun-tengah").checked;
+			for (let tahun = awal; tahun <= akhir; tahun++) {
+				for (let bulan = 1; bulan <= 12; bulan++) {
+					const jumlahHari = new Date(tahun, bulan, 0).getDate();
+					for (let hari = 1; hari <= jumlahHari; hari++) {
+						const tanggalFormat = `${String(hari).padStart(2, "0")}/${String(bulan).padStart(2, "0")}/${tahun}`;
+						const dd = String(hari).padStart(2, "0"), mm = String(bulan).padStart(2, "0");
+						const variasi = [];
+						for (const [tahunTanggal, labelTahun] of [[String(tahun), "yyyy"], [String(tahun).slice(-2), "yy"]]) {
+							variasi.push(
+								{ format: `dm${labelTahun}`, angka: `${hari}${bulan}${tahunTanggal}` },
+								{ format: `ddmm${labelTahun}`, angka: `${dd}${mm}${tahunTanggal}` },
+								{ format: `md${labelTahun}`, angka: `${bulan}${hari}${tahunTanggal}` },
+								{ format: `mmdd${labelTahun}`, angka: `${mm}${dd}${tahunTanggal}` },
+								{ format: `${labelTahun}md`, angka: `${tahunTanggal}${bulan}${hari}` },
+								{ format: `${labelTahun}mmdd`, angka: `${tahunTanggal}${mm}${dd}` },
+								{ format: `${labelTahun}dm`, angka: `${tahunTanggal}${hari}${bulan}` },
+								{ format: `${labelTahun}ddmm`, angka: `${tahunTanggal}${dd}${mm}` }
+							);
+							if (sertakanTahunTengah) {
+								variasi.push(
+									{ format: `d${labelTahun}m`, angka: `${hari}${tahunTanggal}${bulan}` },
+									{ format: `dd${labelTahun}mm`, angka: `${dd}${tahunTanggal}${mm}` },
+									{ format: `m${labelTahun}d`, angka: `${bulan}${tahunTanggal}${hari}` },
+									{ format: `mm${labelTahun}dd`, angka: `${mm}${tahunTanggal}${dd}` }
+								);
+							}
+						}
+						for (const variasiTanggal of variasi) {
+							const angkaTanggal = Number(variasiTanggal.angka);
+							const akar = Math.round(Math.cbrt(angkaTanggal));
+							if (akar ** 3 === angkaTanggal) {
+								tanggal.push({ tanggal: tanggalFormat, format: variasiTanggal.format, kubik: `${angkaTanggal} = ${akar}³` });
+							}
+						}
+					}
+				}
+			}
+			hasil.innerHTML = tanggal.length
+				? `<div class="hasil-tabel-wrap"><table class="hasil-tabel"><caption>${tanggal.length} tanggal kubik ditemukan</caption><thead><tr><th>Tanggal</th><th>Format angka</th><th>Bilangan kubik</th></tr></thead><tbody>${tanggal.map(item => `<tr><td>${item.tanggal}</td><td>${item.format}</td><td>${item.kubik}</td></tr>`).join("")}</tbody></table></div>`
+				: "Tidak ada tanggal kubik pada rentang tahun tersebut.";
+		}
+
+		function cariTanggalSekuensial() {
+			const awal = Number(document.getElementById("sekuensial-awal").value);
+			const akhir = Number(document.getElementById("sekuensial-akhir").value);
+			const hasil = document.getElementById("hasil-sekuensial");
+			if (!Number.isInteger(awal) || !Number.isInteger(akhir) || awal < 1601 || akhir > 2200 || awal > akhir) {
+				hasil.textContent = "Masukkan rentang tahun yang valid (1601–2200).";
+				return;
+			}
+			const tanggal = [];
+			for (let tahun = awal; tahun <= akhir; tahun++) {
+				const yy = tahun % 100;
+				for (let bulan = 1; bulan <= 12; bulan++) {
+					const jumlahHari = new Date(tahun, bulan, 0).getDate();
+					for (let hari = 1; hari <= jumlahHari; hari++) {
+						const angka = [hari, bulan, yy].sort((a, b) => a - b);
+						if (angka[0] + angka[2] === 2 * angka[1]) {
+							tanggal.push({ tanggal: `${String(hari).padStart(2, "0")}/${String(bulan).padStart(2, "0")}/${tahun}`, pola: `${angka.join(", ")} (beda ${angka[1] - angka[0]})` });
+						}
+					}
+				}
+			}
+			hasil.innerHTML = tanggal.length
+				? `<div class="hasil-tabel-wrap"><table class="hasil-tabel"><caption>${tanggal.length} tanggal sekuensial ditemukan</caption><thead><tr><th>Tanggal</th><th>Barisan angka (hari, bulan, yy)</th></tr></thead><tbody>${tanggal.map(item => `<tr><td>${item.tanggal}</td><td>${item.pola}</td></tr>`).join("")}</tbody></table></div>`
+				: "Tidak ada tanggal sekuensial pada rentang tahun tersebut.";
+		}
+
+        function cariTanggalIrasional() {
+            const awal = Number(document.getElementById("irasional-awal").value);
+            const akhir = Number(document.getElementById("irasional-akhir").value);
+            const hasil = document.getElementById("hasil-irasional");
+			if (!Number.isInteger(awal) || !Number.isInteger(akhir) || awal < 1601 || akhir > 2200 || awal > akhir) {
+				hasil.textContent = "Masukkan rentang tahun yang valid (1601–2200).";
+                return;
+            }
+            const konstanta = [
+                { nama: "π (pi)", digit: "3141592653" },
+                { nama: "τ (tau)", digit: "6283185307" },
+                { nama: "e", digit: "2718281828" },
+                { nama: "√2", digit: "1414213562" },
+				{ nama: "√3", digit: "1732050807" },
+                { nama: "φ (rasio emas)", digit: "1618033988" }
+            ];
+            const tanggalCocok = [];
+			const sertakanPerayaan = document.getElementById("irasional-perayaan").checked;
+            for (let tahun = awal; tahun <= akhir; tahun++) {
+                for (let bulan = 1; bulan <= 12; bulan++) {
+                    const jumlahHari = new Date(tahun, bulan, 0).getDate();
+                    for (let hari = 1; hari <= jumlahHari; hari++) {
+                        const yy = String(tahun).slice(-2);
+                        const dd = String(hari).padStart(2, "0");
+                        const mm = String(bulan).padStart(2, "0");
+                        const pola = [...new Set([`${bulan}${hari}${yy}`, `${hari}${bulan}${yy}`, `${mm}${dd}${yy}`, `${dd}${mm}${yy}`, `${hari}${bulan}${tahun}`, `${bulan}${hari}${tahun}`])];
+                        const cocok = [];
+                        for (const nilai of konstanta) {
+                            const polaCocok = pola.filter(item => nilai.digit.includes(item));
+                            if (polaCocok.length) cocok.push(`${nilai.nama}: pola ${polaCocok.join(", ")}`);
+                        }
+						if (sertakanPerayaan) {
+							if (bulan === 3 && hari === 14) cocok.push("Hari Pi (π): 14 Maret (3/14)");
+							if (bulan === 6 && hari === 28) cocok.push("Hari Tau (τ): 28 Juni (6/28)");
+							if (bulan === 7 && hari === 22) cocok.push("Hari aproksimasi Pi (π): 22 Juli (22/7)");
+						}
+						if (cocok.length) tanggalCocok.push({ tanggal: `${dd}/${mm}/${tahun}`, kecocokan: cocok.join("; ") });
+                    }
+                }
+            }
+            hasil.innerHTML = tanggalCocok.length
+				? `<div class="hasil-tabel-wrap"><table class="hasil-tabel"><caption>${tanggalCocok.length} tanggal dengan kecocokan ditemukan</caption><thead><tr><th>Tanggal</th><th>Hubungan dengan konstanta / hari khusus</th></tr></thead><tbody>${tanggalCocok.map(item => `<tr><td>${item.tanggal}</td><td>${item.kecocokan}</td></tr>`).join("")}</tbody></table></div><small>Pencocokan memakai susunan digit tanggal yang berurutan pada awalan digit konstanta; ini pola angka, bukan kesetaraan matematis.</small>`
+                : "Tidak ditemukan kecocokan pada pola tanggal dan digit konstanta dalam rentang tahun tersebut.";
+        }
+
+		function cariTanggalPythagoras() {
+			const awal = Number(document.getElementById("pythagoras-awal").value);
+			const akhir = Number(document.getElementById("pythagoras-akhir").value);
+			const hasil = document.getElementById("hasil-pythagoras");
+			if (!Number.isInteger(awal) || !Number.isInteger(akhir) || awal < 1601 || akhir > 2200 || awal > akhir) {
+				hasil.textContent = "Masukkan rentang tahun yang valid (1601–2200).";
+				return;
+			}
+			const tanggalCocok = [];
+			const sertakanKesamaan = document.getElementById("cantik-kesamaan").checked;
+			for (let tahun = awal; tahun <= akhir; tahun++) {
+				for (let bulan = 1; bulan <= 12; bulan++) {
+					const jumlahHari = new Date(tahun, bulan, 0).getDate();
+					for (let hari = 1; hari <= jumlahHari; hari++) {
+						const komponen = [hari, bulan];
+						const format = [`d=${hari}`, `m=${bulan}`];
+						const variasiTahun = [[tahun, "yyyy"], [tahun % 100, "yy"]];
+						let cocok = null;
+						for (const [nilaiTahun, labelTahun] of variasiTahun) {
+							const angka = [...komponen, nilaiTahun];
+							const label = [...format, `tahun(${labelTahun})`];
+							for (let i = 0; i < 3 && !cocok; i++) {
+								for (let j = 0; j < 3 && !cocok; j++) {
+									if (j === i) continue;
+									const k = 3 - i - j;
+									const sisi = [angka[i], angka[j], angka[k]].sort((a, b) => a - b);
+									if (sisi[0] > 0 && sisi[0] ** 2 + sisi[1] ** 2 === sisi[2] ** 2) {
+										cocok = `${label[i]}, ${label[j]}, ${label[k]}: ${sisi[0]}² + ${sisi[1]}² = ${sisi[2]}²`;
+									}
+								}
+							}
+							if (cocok) break;
+						}
+						if (cocok) tanggalCocok.push({ tanggal: `${String(hari).padStart(2, "0")}/${String(bulan).padStart(2, "0")}/${tahun}`, pola: cocok });
+					}
+				}
+			}
+			hasil.innerHTML = tanggalCocok.length
+				? `<div class="hasil-tabel-wrap"><table class="hasil-tabel"><caption>${tanggalCocok.length} tanggal Pythagoras ditemukan</caption><thead><tr><th>Tanggal</th><th>Format dan tripel</th></tr></thead><tbody>${tanggalCocok.map(item => `<tr><td>${item.tanggal}</td><td>${item.pola}</td></tr>`).join("")}</tbody></table></div>`
+				: "Tidak ada tanggal Pythagoras pada rentang tahun tersebut.";
+		}
+
+		function cariTanggalCantik() {
+			const awal = Number(document.getElementById("cantik-awal").value);
+			const akhir = Number(document.getElementById("cantik-akhir").value);
+			const hasil = document.getElementById("hasil-cantik");
+			if (!Number.isInteger(awal) || !Number.isInteger(akhir) || awal < 1601 || akhir > 2200 || awal > akhir) {
+				hasil.textContent = "Masukkan rentang tahun yang valid (1601–2200).";
+				return;
+			}
+			const tanggalCocok = [];
+			const sertakanKesamaan = document.getElementById("cantik-kesamaan").checked;
+			for (let tahun = awal; tahun <= akhir; tahun++) {
+				const yy = tahun % 100;
+				for (let bulan = 1; bulan <= 12; bulan++) {
+					const jumlahHari = new Date(tahun, bulan, 0).getDate();
+					for (let hari = 1; hari <= jumlahHari; hari++) {
+						const pola = [];
+						if (hari + bulan === yy) pola.push(`${hari} + ${bulan} = ${yy}`);
+						if (hari * bulan === yy) pola.push(`${hari} × ${bulan} = ${yy}`);
+						const yyDuaDigit = String(yy).padStart(2, "0");
+						if (`${hari}${bulan}` === yyDuaDigit) pola.push(`d${hari}m${bulan} (digabung) = yy${yyDuaDigit}`);
+						if (`${bulan}${hari}` === yyDuaDigit) pola.push(`m${bulan}d${hari} (digabung) = yy${yyDuaDigit}`);
+						if (sertakanKesamaan) {
+							if (hari === bulan) pola.push(`dd = mm = ${hari}`);
+							if (hari === yy) pola.push(`dd = yy = ${yy}`);
+							if (bulan === yy) pola.push(`mm = yy = ${yy}`);
+						}
+						if (pola.length) tanggalCocok.push({ tanggal: `${String(hari).padStart(2, "0")}/${String(bulan).padStart(2, "0")}/${tahun}`, pola: pola.join("; ") });
+					}
+				}
+			}
+			hasil.innerHTML = tanggalCocok.length
+				? `<div class="hasil-tabel-wrap"><table class="hasil-tabel"><caption>${tanggalCocok.length} tanggal cantik ditemukan</caption><thead><tr><th>Tanggal</th><th>Pola</th></tr></thead><tbody>${tanggalCocok.map(item => `<tr><td>${item.tanggal}</td><td>${item.pola}</td></tr>`).join("")}</tbody></table></div>`
+				: "Tidak ada tanggal cantik pada rentang tahun tersebut.";
+		}
+
+		function cariTanggalKustom() {
+			const hari = Number(document.getElementById("kustom-hari").value);
+			const bulan = Number(document.getElementById("kustom-bulan").value);
+			const awal = Number(document.getElementById("kustom-awal").value);
+			const akhir = Number(document.getElementById("kustom-akhir").value);
+			const hasil = document.getElementById("hasil-kustom");
+			if (!Number.isInteger(hari) || !Number.isInteger(bulan) || hari < 1 || hari > 31 || bulan < 1 || bulan > 12 || !Number.isInteger(awal) || !Number.isInteger(akhir) || awal < 1601 || akhir > 2200 || awal > akhir) {
+				hasil.textContent = "Masukkan tanggal yang valid dan rentang tahun 1601–2200.";
+				return;
+			}
+			const konstanta = ["3141592653", "6283185307", "2718281828", "1414213562", "1732050807", "1618033988"];
+			const tanggalCocok = [];
+			for (let tahun = awal; tahun <= akhir; tahun++) {
+				if (hari > new Date(tahun, bulan, 0).getDate()) continue;
+				const yy = tahun % 100;
+				const dd = String(hari).padStart(2, "0"), mm = String(bulan).padStart(2, "0");
+				const formatTanggal = `${dd}/${mm}/${tahun}`;
+				const kriteria = [];
+				const formatTahun = [String(tahun), String(yy).padStart(2, "0")];
+				const formatAngka = [];
+				for (const tahunFormat of formatTahun) {
+					for (const [d, m] of [[String(hari), String(bulan)], [dd, mm]]) {
+						for (const angka of [`${d}${m}${tahunFormat}`, `${m}${d}${tahunFormat}`, `${tahunFormat}${d}${m}`, `${tahunFormat}${m}${d}`]) formatAngka.push(angka);
+					}
+				}
+				if (formatAngka.some(angka => angka === [...angka].reverse().join(""))) kriteria.push("palindrom");
+				if (formatAngka.some(angka => { const n = Number(angka), a = Math.floor(Math.sqrt(n)); return a * a === n; })) kriteria.push("kuadrat");
+				if (formatAngka.some(angka => { const n = Number(angka), a = Math.round(Math.cbrt(n)); return a ** 3 === n; })) kriteria.push("kubik");
+				const barisan = [hari, bulan, yy].sort((a, b) => a - b);
+				if (barisan[0] + barisan[2] === 2 * barisan[1]) kriteria.push("sekuensial");
+				const polaIrasional = [...new Set([`${bulan}${hari}${yy}`, `${hari}${bulan}${yy}`, `${mm}${dd}${yy}`, `${dd}${mm}${yy}`, `${hari}${bulan}${tahun}`, `${bulan}${hari}${tahun}`])];
+				if (konstanta.some(digit => polaIrasional.some(pola => digit.includes(pola))) || (bulan === 3 && hari === 14) || (bulan === 6 && hari === 28) || (bulan === 7 && hari === 22)) kriteria.push("irasional/perayaan");
+				let pythagoras = false;
+				for (const nilaiTahun of [tahun, yy]) {
+					const sisi = [hari, bulan, nilaiTahun].sort((a, b) => a - b);
+					if (sisi[0] ** 2 + sisi[1] ** 2 === sisi[2] ** 2) pythagoras = true;
+				}
+				if (pythagoras) kriteria.push("Pythagoras");
+			if (hari + bulan === yy || hari * bulan === yy || `${hari}${bulan}` === String(yy).padStart(2, "0") || `${bulan}${hari}` === String(yy).padStart(2, "0")) kriteria.push("cantik");
+				if (kriteria.length) tanggalCocok.push({ tanggal: formatTanggal, kriteria: kriteria.join(", ") });
+			}
+			hasil.innerHTML = tanggalCocok.length
+				? `<div class="hasil-tabel-wrap"><table class="hasil-tabel"><caption>${tanggalCocok.length} tahun cocok untuk ${String(hari).padStart(2, "0")}/${String(bulan).padStart(2, "0")}</caption><thead><tr><th>Tanggal</th><th>Kriteria yang dipenuhi</th></tr></thead><tbody>${tanggalCocok.map(item => `<tr><td>${item.tanggal}</td><td>${item.kriteria}</td></tr>`).join("")}</tbody></table></div>`
+				: "Tidak ada tahun dalam rentang tersebut yang memenuhi kriteria untuk tanggal ini.";
+		}
+
+		function cariTanggalLangka() {
+			const awal = Number(document.getElementById("langka-awal").value);
+			const akhir = Number(document.getElementById("langka-akhir").value);
+			const minimal = Number(document.getElementById("langka-minimal").value);
+			const hasil = document.getElementById("hasil-langka");
+			const pilihanKriteria = [
+				["palindrom", "Palindrome"], ["anagram", "Anagram palindrom"], ["kuadrat", "Kuadrat"], ["irasional", "Irasional"],
+				["pythagoras", "Pythagoras"], ["cantik", "Cantik"]
+			].filter(([id]) => document.getElementById(`langka-${id}`).checked);
+			if (!Number.isInteger(awal) || !Number.isInteger(akhir) || awal < 1601 || akhir > 2200 || awal > akhir || !Number.isInteger(minimal) || minimal < 2 || minimal > pilihanKriteria.length) {
+				hasil.textContent = "Masukkan rentang tahun yang valid dan minimal kriteria antara 2 hingga jumlah kriteria terpilih.";
+				return;
+			}
+			const konstanta = [
+				"314159265358979323846264338327950288419716939937510", "628318530717958647692528676655900576839433879875021",
+				"271828182845904523536028747135266249775724709369995", "141421356237309504880168872420969807856967187537694",
+				"161803398874989484820458683436563811772030917980576"
+			];
+			const hasilTanggal = [];
+			const pakaiYY = document.getElementById("langka-yy").checked;
+			const pakaiKesamaan = document.getElementById("langka-kesamaan").checked;
+			for (let tahun = awal; tahun <= akhir; tahun++) {
+				for (let bulan = 1; bulan <= 12; bulan++) {
+					for (let hari = 1; hari <= new Date(tahun, bulan, 0).getDate(); hari++) {
+						const yy = tahun % 100;
+						const tahunFormat = [String(tahun)];
+						if (pakaiYY) tahunFormat.push(String(yy).padStart(2, "0"));
+						const dd = String(hari).padStart(2, "0"), mm = String(bulan).padStart(2, "0");
+						const cocok = {};
+						if (pilihanKriteria.some(([id]) => id === "palindrom")) {
+							cocok.Palindrome = tahunFormat.some(tf => [String(hari), dd].some(d => [String(bulan), mm].some(m =>
+								[`${d}${m}${tf}`, `${m}${d}${tf}`].some(angka => angka === [...angka].reverse().join(""))
+							)));
+						}
+						if (pilihanKriteria.some(([id]) => id === "anagram")) {
+							cocok["Anagram palindrom"] = tahunFormat.some(tf => [String(hari), dd].some(d => [String(bulan), mm].some(m =>
+								[`${d}${m}${tf}`, `${m}${d}${tf}`].some(angka => {
+									const ganjil = [...angka].reduce((jumlah, digit, _, semua) => jumlah + (semua.filter(item => item === digit).length % 2), 0);
+									return ganjil <= 1;
+								})
+							)));
+						}
+						if (pilihanKriteria.some(([id]) => id === "kuadrat")) {
+							cocok.Kuadrat = tahunFormat.some(tf => [String(hari), dd].some(d => [String(bulan), mm].some(m =>
+								[`${d}${m}${tf}`, `${m}${d}${tf}`, `${tf}${m}${d}`, `${tf}${d}${m}`].some(angka => {
+									const nilai = Number(angka), akar = Math.floor(Math.sqrt(nilai));
+									return akar * akar === nilai;
+								})
+							)));
+						}
+						if (pilihanKriteria.some(([id]) => id === "irasional")) {
+							const pola = [`${bulan}${hari}${yy}`, `${hari}${bulan}${yy}`, `${mm}${dd}${yy}`, `${dd}${mm}${yy}`, `${hari}${bulan}${tahun}`, `${bulan}${hari}${tahun}`];
+							cocok.Irasional = (bulan === 3 && hari === 14) || (bulan === 6 && hari === 28) || (bulan === 7 && hari === 22) || konstanta.some(digit => pola.some(item => digit.includes(item)));
+						}
+						if (pilihanKriteria.some(([id]) => id === "pythagoras")) {
+							cocok.Pythagoras = [tahun, yy].some(nilaiTahun => {
+								const sisi = [hari, bulan, nilaiTahun].sort((a, b) => a - b);
+								return sisi[0] ** 2 + sisi[1] ** 2 === sisi[2] ** 2;
+							});
+						}
+						if (pilihanKriteria.some(([id]) => id === "cantik")) {
+							cocok.Cantik = hari + bulan === yy || hari * bulan === yy || (pakaiKesamaan && (hari === bulan || hari === yy || bulan === yy));
+						}
+						const namaCocok = pilihanKriteria.map(([, nama]) => nama).filter(nama => cocok[nama]);
+						if (namaCocok.length >= minimal) hasilTanggal.push({ tanggal: `${dd}/${mm}/${tahun}`, kriteria: namaCocok.join(", ") });
+					}
+				}
+			}
+			hasil.innerHTML = hasilTanggal.length
+				? `<div class="hasil-tabel-wrap"><table class="hasil-tabel"><caption>${hasilTanggal.length} tanggal memenuhi minimal ${minimal} kriteria</caption><thead><tr><th>Tanggal</th><th>Kriteria yang terpenuhi</th></tr></thead><tbody>${hasilTanggal.map(item => `<tr><td>${item.tanggal}</td><td>${item.kriteria}</td></tr>`).join("")}</tbody></table></div>`
+				: "Tidak ditemukan tanggal yang memenuhi jumlah kriteria tersebut.";
+		}
+        
+        function change_date(index) {
+            const months = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+            const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+            const num_dd_in_mm = [31,28,31,30,31,30,31,31,30,31,30,31];
+            yyyy = parseInt(document.getElementById("yyyy").value);
+            if (yyyy % 4 == 0 && (yyyy % 100 != 0 || yyyy % 400 == 0)) num_dd_in_mm[1] = 29;
+            mm = parseInt(document.getElementById("mm").value);
+            dd = parseInt(document.getElementById("dd").value);
+            if (index == 0) {
+                dd += 1;
+                if (dd > num_dd_in_mm[mm-1]) {dd -= num_dd_in_mm[mm-1]; mm += 1};
+                if (mm >= 13) {mm = 1; yyyy += 1};
+            } else if (index == 1) {
+                dd -= 1;
+                if (dd <= 0) {dd += num_dd_in_mm[(12+mm-2)%12]; mm -= 1};
+                if (mm == 0) {mm = 12; yyyy -= 1};
+            } else if (index == 2) {
 				dd += 7;
 				if (dd > num_dd_in_mm[mm-1]) {dd -= num_dd_in_mm[mm-1]; mm += 1};
 				if (mm >= 13) {mm = 1; yyyy += 1};
