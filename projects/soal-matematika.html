@@ -414,9 +414,9 @@
 </style>
 <body>
 	<div id="background-index3">
-		<video autoplay muted loop id="myVideo" style="filter:invert(100%);>
-			<!-- <source src="rain.mp4" type="video/mp4">
-			<source src="C:\Users\Lenovo\Downloads\Video\vecteezy_texture-stock-background_49474463.mp4" type="video/mp4"> -->
+		<video autoplay muted loop id="myVideo" style="filter:invert(100%);">
+            <!-- <source src="rain.mp4" type="video/mp4"> -->
+			<!-- <source src="C:\Users\Lenovo\Downloads\Video\vecteezy_texture-stock-background_49474463.mp4" type="video/mp4"> -->
 			<source src="videos/vecteezy_animation-background-grid-black-and-white-looping_8661326.mp4" type="video/mp4">
 			Your browser does not support HTML5 video.
 		</video>
@@ -567,7 +567,7 @@
             <option id=18>Bilangan Kubik dan Pangkat lebih tinggi</option>
             <option id=19>Akar Kuadrat</option>
             <option id=20>Akar Kubik dan Pangkat lebih tinggi</option>
-            <option id=21 style="color:gray">Konversi Satuan</option>
+            <option id=21>Konversi Satuan</option>
             <option id=22>Bangun Datar</option>
             <option id=23 style="color:gray">Bangun Ruang</option>
             <option id=24>Persamaan Linear</option>
@@ -591,12 +591,12 @@
 			<option id=42>Notasi Sigma</option>
 			<option id=43>Faktorial dan Notasi Pi</option>
 			<option id=44>Sisa Bilangan dari Bilangan Besar</option>
-            <option id=45 style="color:gray">Trigonometri</option>
-            <option id=46 style="color:gray">Turunan</option>
+            <option id=45>Trigonometri</option>
+            <option id=46>Turunan</option>
             <option id=47 style="color:gray">Integral</option>
             <option id=48 style="color:gray">Limit</option>
-            <option id=49 style="color:gray">Permutasi dan Kombinasi</option>
-            <option id=50 style="color:gray">Peluang</option>
+            <option id=49 style="color:gray">Peluang</option>
+            <option id=50>Permutasi dan Kombinasi</option>
             <option id=51 style="color:gray">Berpikir Logika</option>
             <option id=52 style="color:gray">Aljabar lanjutan</option>
             <option id=53 style="color:gray">Teori bilangan lanjutan</option>
@@ -607,6 +607,15 @@
             <option id=58 style="color:gray">Soal bersyarat</option>
             <option id=59 style="color:gray">Soal dari internet</option>
         </select><br><br>
+        <div id="opsi-simbol" style="display:none; margin-bottom:15px;">
+            <label for="jumlah-simbol">Jumlah simbol yang digunakan:</label>
+            <input type="number" id="jumlah-simbol" min="1" max="111" value="111" style="width:80px" oninput="ubahJumlahSimbol()">
+            <span id="jumlah-simbol-label">111 simbol</span><br>
+            <label class="cb-container" style="width:400px;">Soal berurutan (bukan acak)
+                <input type="checkbox" id="simbol-berurutan" checked onchange="symbolSoalIndex=0;settings_check()">
+                <span class="checkmark"></span>
+            </label>
+        </div>
 
         <div id="bentuk-penjelasan" style="line-height:1.5em">
             <img src="images/Addition01.svg.png" style="filter:invert(0%); padding-right:50px;" width="50">
@@ -815,7 +824,8 @@
 	<!-- <p>Terakhir diupdate: 28 Oktober 2025</p> -->
     <!-- <p>Terakhir diupdate: 31 Oktober 2025</p> -->
 	<!-- <p>Terakhir diupdate: 13 November 2025</p> -->
-	<p>Terakhir diupdate: 4 Februari 2026</p>
+	<!-- <p>Terakhir diupdate: 4 Februari 2026</p> -->
+    <p>Terakhir diupdate: 6 November 2026</p>
 
     <script>
         // Time
@@ -863,6 +873,12 @@
 		document.getElementById("jenis-background").selectedIndex = background_index_old;
         document.getElementById("jenis-font").selectedIndex = font_index;
 		document.getElementById("suara").checked = suara_check_old;
+        const jumlahSimbolTersimpan = parseInt(localStorage.getItem("jumlah-simbol"), 10);
+        if (check_old && Number.isFinite(jumlahSimbolTersimpan)) {
+            document.getElementById("jumlah-simbol").value = Math.max(1, Math.min(111, jumlahSimbolTersimpan));
+            document.getElementById("simbol-berurutan").checked = localStorage.getItem("simbol-berurutan") !== "false";
+        }
+        ubahJumlahSimbol();
         document.getElementById("settings").checked = check_old;
         settings_check();
         // pilihan(); // On off
@@ -898,7 +914,7 @@
             for (let i = 0; i < select_font_list.length; i++) select_font_list[i].style.fontFamily = font_value;
 
 			suara_check = document.getElementById("suara").checked;
-            // theme_check = document.getElementById("tema").checked;
+            theme_check = background_index != 0;
             check = document.getElementById("settings").checked;
             localStorage.setItem("settings-check", check);
             // console.log(theme_check);
@@ -909,9 +925,12 @@
             if (check) {
                 localStorage.setItem("soal-cerita-check", soal_cerita_check);
                 localStorage.setItem("percobaan-check", percobaan_check);
+                localStorage.setItem("jumlah-simbol", document.getElementById("jumlah-simbol").value);
+                localStorage.setItem("simbol-berurutan", document.getElementById("simbol-berurutan").checked);
                 jenis_font = document.getElementById("jenis-font");
                 localStorage.setItem("font-index", jenis_font.options[jenis_font.selectedIndex].index);
 				localStorage.setItem("suara-check", suara_check);
+                localStorage.setItem("background-index", background_index);
                 localStorage.setItem("tema-check", theme_check);
             }
             if (background_index == 0) {
@@ -938,6 +957,16 @@
             } else {
                 document.documentElement.style.setProperty('--darkmode', 0);
             } */
+        }
+
+        function ubahJumlahSimbol() {
+            const input = document.getElementById("jumlah-simbol");
+            const jumlahMaksimal = Number(input.max) || 111;
+            const jumlah = Math.max(1, Math.min(jumlahMaksimal, parseInt(input.value, 10) || 1));
+            input.value = jumlah;
+            document.getElementById("jumlah-simbol-label").textContent = `${jumlah} simbol`;
+            symbolSoalIndex = 0;
+            if (document.getElementById("settings").checked) settings_check();
         }
 
         function tampilkan() {
@@ -974,6 +1003,7 @@
         // a = 0;
         // a = -1;
         var a = '';
+        var symbolSoalIndex = 0;
         var b = 0;
         a2 = 0;
         a3 = 0;
@@ -1124,8 +1154,9 @@
             if (e1.index == 0) {
                 if (e1_bentuk.index == 0) {
                     // <canvas id="myCanvas" width="500" height="300" style="border:1px solid #000000;">
+                    if (background_index == 0) background_color = 'white'; else background_color = '#202020';
                     soal_teks = `
-                    <canvas id="myCanvas" width="400" height="300" style="background-color:#202020; border:1px solid gray;">
+                    <canvas id="myCanvas" width="400" height="300" style="background-color:${background_color}; border:1px solid gray;">
                     Sorry, your browser does not support canvas.
                     </canvas><br><br>
                     `;
@@ -1159,7 +1190,7 @@
                     for (let a_count = 1; a_count <= a; a_count++) {
                         // ctx.arx(50*(1+(a-1)%8), 50*(1+parseInt((a-1)/8)), 5, 0, 2 * Math.Pi);
                         // ctx.fillStyle = "yellow";
-                        ctx.fillStyle = "white";
+                        if (background_index == 0) ctx.fillStyle = "black"; else ctx.fillStyle = "white";
                         if (a <= 9*6) ctx.fillRect(37+40*(0+(a_count-1)%9), 37+40*(0+parseInt((a_count-1)/9)), 6, 6);
                         else if (a <= 19*14) ctx.fillRect(18+20*(0+(a_count-1)%19), 18+20*(0+parseInt((a_count-1)/19)), 4, 4);
                         else ctx.fillRect(9+10*(0+(a_count-1)%39), 9+10*(0+parseInt((a_count-1)/39)), 2, 2);
@@ -1176,8 +1207,9 @@
                         }
                     }
                 } else if (e1_bentuk.index == 1) {
+                    if (background_index == 0) background_color = 'white'; else background_color = '#202020';
                     soal_teks = `
-                    <canvas id="myCanvas" width="400" height="300" style="background-color:#202020; border:1px solid gray;">
+                    <canvas id="myCanvas" width="400" height="300" style="background-color:${background_color}; border:1px solid gray;">
                     Sorry, your browser does not support canvas.
                     </canvas><br><br>
                     `;
@@ -1209,7 +1241,7 @@
                     // b2 = b2_2;
                     a_count2 = Math.floor(1 + (max_gap-1) * Math.random());
                     for (let a_count = 1; a_count <= a; a_count++) {
-                        ctx.fillStyle = "white";
+                        if (background_index == 0) ctx.fillStyle = "black"; else ctx.fillStyle = "white";
                         // if (a_count == a_count2) {
 						// if (true || a_count == a_count2) {
                         if (a <= 9*6) ctx.fillRect(37+40*(0+(a_count-1)%9), 37+40*(0+parseInt((a_count-1)/9)), 6, 6);
@@ -1709,10 +1741,50 @@
                 }
 
             } else if (e1.index == 7) {
-                soal_teks = `Satuan puluhan dari 12345 adalah ...`;
+                const digitCount = [4, 6, 8][level2.index] || 4;
+                const digitPool = [1,2,3,4,5,6,7,8,9];
+                for (let i = digitPool.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [digitPool[i], digitPool[j]] = [digitPool[j], digitPool[i]];
+                }
+                const digits = digitPool.slice(0, digitCount);
+                const number = Number(digits.join(''));
+                const placeNames = ['satuan','puluhan','ratusan','ribuan','puluh ribuan','ratus ribuan','jutaan','puluh jutaan'];
+                const targetIndex = Math.floor(Math.random() * digits.length);
+                const power = digits.length - targetIndex - 1;
+                const targetDigit = digits[targetIndex];
+                const placeName = placeNames[power];
+                const questionStyle = Math.floor(Math.random() * 3);
+
+                if (questionStyle == 0) {
+                    soal_teks = `Pada bilangan ${number}, angka pada tempat ${placeName} adalah ...`;
+                    hasil = targetDigit;
+                } else if (questionStyle == 1) {
+                    soal_teks = `Berapakah nilai tempat angka ${targetDigit} pada bilangan ${number}?`;
+                    hasil = targetDigit * (10 ** power);
+                } else {
+                    const expanded = digits.map((digit, index) => {
+                        const placePower = digits.length - index - 1;
+                        return index == targetIndex ? '...' : `${digit * (10 ** placePower)}`;
+                    }).join(' + ');
+                    soal_teks = `Bilangan ${number} dapat diuraikan menjadi ${expanded}. Angka yang hilang adalah ...`;
+                    hasil = targetDigit * (10 ** power);
+                }
                 soal_suara = soal_teks;
-				hasil = 4;
-				soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini masih belum lengkap</style>`;
+
+                if (tipe2.index == 1) {
+                    const distractors = questionStyle == 0
+                        ? digits.filter(digit => digit != hasil)
+                        : [targetDigit, targetDigit * (10 ** Math.max(0, power - 1)), targetDigit * (10 ** (power + 1)), (targetDigit % 9 + 1) * (10 ** power), hasil + (10 ** power), Math.max(0, hasil - (10 ** power))];
+                    for (const candidate of distractors) {
+                        if (pilihan_list.length >= j_pilihan2) break;
+                        if (candidate != hasil && !pilihan_list.includes(candidate)) pilihan_list.push(candidate);
+                    }
+                    for (let candidate = 0; pilihan_list.length < j_pilihan2; candidate++) {
+                        const value = questionStyle == 0 ? candidate % 10 : (candidate + 1) * (10 ** power);
+                        if (value != hasil && !pilihan_list.includes(value)) pilihan_list.push(value);
+                    }
+                }
                 document.getElementById('soal').innerHTML = soal_teks;
 
             } else if (e1.index == 8) {
@@ -1790,10 +1862,135 @@
                 document.getElementById('soal').innerHTML = soal_teks;
 
             } else if (e1.index == 10) {
-                if (e1_bentuk.index == 0) {
-                    soal_teks = `Bilangan Romawi dari 124 adalah ...`;
-                    soal_suara = soal_teks;
-                    document.getElementById('tipe2').style.display = 'block';
+                const simbolMatematika = [
+                    { simbol: '+', arti: 'penjumlahan' },
+                    { simbol: '−', arti: 'pengurangan' },
+                    { simbol: '×', arti: 'perkalian' },
+                    { simbol: '÷', arti: 'pembagian' },
+                    { simbol: '=', arti: 'sama dengan' },
+                    { simbol: '≠', arti: 'tidak sama dengan' },
+                    { simbol: '<', arti: 'lebih kecil dari' },
+                    { simbol: '>', arti: 'lebih besar dari' },
+                    { simbol: '≤', arti: 'kurang dari atau sama dengan' },
+                    { simbol: '≥', arti: 'lebih dari atau sama dengan' },
+                    { simbol: '%', arti: 'persen' },
+                    { simbol: '√', arti: 'akar kuadrat' },
+                    { simbol: '∛', arti: 'akar pangkat tiga' },
+                    { simbol: '∑', arti: 'sumasi atau penjumlahan berurutan' },
+                    { simbol: '∫', arti: 'integral' },
+                    { simbol: 'd/dx', arti: 'turunan terhadap x' },
+                    { simbol: 'dx', arti: 'diferensial atau perubahan kecil pada x' },
+                    { simbol: '·', arti: 'perkalian titik atau dot product' },
+                    { simbol: '[ ]', arti: 'matriks atau susunan bilangan dalam baris dan kolom' },
+                    { simbol: 'det(A)', arti: 'determinan matriks A' },
+                    { simbol: 'lim', arti: 'limit atau nilai yang didekati' },
+                    { simbol: '¬', arti: 'negasi atau bukan dalam logika' },
+                    { simbol: '→', arti: 'panah atau implikasi dalam logika' },
+                    { simbol: '^', arti: 'pangkat' },
+                    { simbol: 'π', arti: 'pi' },
+                    { simbol: 'τ', arti: 'tau, konstanta lingkaran yang bernilai 2π' },
+                    { simbol: 'e', arti: 'bilangan Euler, basis logaritma natural' },
+                    { simbol: 'α', arti: 'alfa' },
+                    { simbol: 'β', arti: 'beta' },
+                    { simbol: 'γ', arti: 'gamma' },
+                    { simbol: 'δ', arti: 'delta' },
+                    { simbol: 'ε', arti: 'epsilon' },
+                    { simbol: 'ζ', arti: 'zeta' },
+                    { simbol: 'η', arti: 'eta' },
+                    { simbol: 'θ', arti: 'theta' },
+                    { simbol: 'ι', arti: 'iota' },
+                    { simbol: 'κ', arti: 'kappa' },
+                    { simbol: 'λ', arti: 'lambda' },
+                    { simbol: 'μ', arti: 'mu' },
+                    { simbol: 'ν', arti: 'nu' },
+                    { simbol: 'ξ', arti: 'xi' },
+                    { simbol: 'ο', arti: 'omikron' },
+                    { simbol: 'ρ', arti: 'rho' },
+                    { simbol: 'σ', arti: 'sigma' },
+                    { simbol: 'ς', arti: 'sigma akhir' },
+                    { simbol: 'υ', arti: 'upsilon' },
+                    { simbol: 'φ', arti: 'phi' },
+                    { simbol: 'χ', arti: 'chi' },
+                    { simbol: 'ψ', arti: 'psi' },
+                    { simbol: 'ω', arti: 'omega' },
+                    { simbol: 'sin(x)', arti: 'sinus dari x' },
+                    { simbol: 'cos(x)', arti: 'kosinus dari x' },
+                    { simbol: 'tan(x)', arti: 'tangen dari x' },
+                    { simbol: 'cot(x)', arti: 'kotangen dari x' },
+                    { simbol: 'sec(x)', arti: 'sekan dari x' },
+                    { simbol: 'csc(x)', arti: 'kosekan dari x' },
+                    { simbol: 'arcsin(x)', arti: 'invers sinus dari x' },
+                    { simbol: 'arccos(x)', arti: 'invers kosinus dari x' },
+                    { simbol: 'arctan(x)', arti: 'invers tangen dari x' },
+                    { simbol: 'arccot(x)', arti: 'invers kotangen dari x' },
+                    { simbol: 'arcsec(x)', arti: 'invers sekan dari x' },
+                    { simbol: 'arccsc(x)', arti: 'invers kosekan dari x' },
+                    { simbol: 'sinh(x)', arti: 'sinus hiperbolik dari x' },
+                    { simbol: 'cosh(x)', arti: 'kosinus hiperbolik dari x' },
+                    { simbol: 'tanh(x)', arti: 'tangen hiperbolik dari x' },
+                    { simbol: 'coth(x)', arti: 'kotangen hiperbolik dari x' },
+                    { simbol: 'sech(x)', arti: 'sekan hiperbolik dari x' },
+                    { simbol: 'csch(x)', arti: 'kosekan hiperbolik dari x' },
+                    { simbol: 'arsinh(x)', arti: 'invers sinus hiperbolik dari x' },
+                    { simbol: 'arcosh(x)', arti: 'invers kosinus hiperbolik dari x' },
+                    { simbol: 'artanh(x)', arti: 'invers tangen hiperbolik dari x' },
+                    { simbol: 'arcoth(x)', arti: 'invers kotangen hiperbolik dari x' },
+                    { simbol: 'arsech(x)', arti: 'invers sekan hiperbolik dari x' },
+                    { simbol: 'arcsch(x)', arti: 'invers kosekan hiperbolik dari x' },
+                    { simbol: 'log(x)', arti: 'logaritma x' },
+                    { simbol: 'logₐ(x)', arti: 'logaritma x dengan basis a' },
+                    { simbol: 'ln(x)', arti: 'logaritma natural dari x' },
+                    { simbol: 'exp(x)', arti: 'fungsi eksponensial e pangkat x' },
+                    { simbol: 'eˣ', arti: 'e pangkat x' },
+                    { simbol: '⌊x⌋', arti: 'fungsi lantai, bilangan bulat terbesar yang tidak melebihi x' },
+                    { simbol: '⌈x⌉', arti: 'fungsi plafon, bilangan bulat terkecil yang tidak kurang dari x' },
+                    { simbol: '|x|', arti: 'nilai mutlak x' },
+                    { simbol: '!', arti: 'faktorial' },
+                    { simbol: '∞', arti: 'tak terhingga' },
+                    { simbol: '≈', arti: 'kira-kira sama dengan' },
+                    { simbol: '∝', arti: 'sebanding dengan' },
+                    { simbol: '½', arti: 'pecahan setengah' },
+                    { simbol: '⁄', arti: 'garis pecahan' },
+                    { simbol: '²', arti: 'pangkat dua atau kuadrat' },
+                    { simbol: '³', arti: 'pangkat tiga atau kubik' },
+                    { simbol: '{ }', arti: 'kurung kurawal untuk menyatakan himpunan' },
+                    { simbol: '∈', arti: 'anggota dari suatu himpunan' },
+                    { simbol: '∉', arti: 'bukan anggota dari suatu himpunan' },
+                    { simbol: '∋', arti: 'memuat sebagai anggota' },
+                    { simbol: '⊂', arti: 'himpunan bagian sejati' },
+                    { simbol: '⊆', arti: 'himpunan bagian atau sama dengan' },
+                    { simbol: '⊄', arti: 'bukan himpunan bagian' },
+                    { simbol: '⊃', arti: 'superset atau memuat himpunan lain' },
+                    { simbol: '⊇', arti: 'superset atau sama dengan' },
+                    { simbol: '∪', arti: 'gabungan himpunan' },
+                    { simbol: '∩', arti: 'irisan himpunan' },
+                    { simbol: '∖', arti: 'selisih himpunan' },
+                    { simbol: '∅', arti: 'himpunan kosong' },
+                    { simbol: 'U', arti: 'himpunan semesta' },
+                    { simbol: 'Aᶜ', arti: 'komplemen himpunan A' },
+                    { simbol: '|A|', arti: 'banyaknya anggota himpunan A' },
+                    { simbol: 'ℕ', arti: 'himpunan bilangan asli' },
+                    { simbol: 'ℤ', arti: 'himpunan bilangan bulat' },
+                    { simbol: 'ℚ', arti: 'himpunan bilangan rasional' },
+                    { simbol: 'ℝ', arti: 'himpunan bilangan real' },
+                    { simbol: 'ℂ', arti: 'himpunan bilangan kompleks' }
+                ];
+                const jumlahSimbol = Math.max(1, Math.min(simbolMatematika.length, parseInt(document.getElementById("jumlah-simbol").value, 10) || 1));
+                const simbolBerurutan = document.getElementById("simbol-berurutan").checked;
+                const indeksSimbol = simbolBerurutan
+                    ? symbolSoalIndex % jumlahSimbol
+                    : Math.floor(Math.random() * jumlahSimbol);
+                const soalSimbol = simbolMatematika[indeksSimbol];
+                if (simbolBerurutan) symbolSoalIndex = (symbolSoalIndex + 1) % jumlahSimbol;
+                hasil = soalSimbol.arti;
+                soal_teks = `Apa arti simbol matematika “${soalSimbol.simbol}”?`;
+                soal_suara = `Apa arti simbol matematika ${soalSimbol.simbol}?`;
+                if (tipe2.index == 1) {
+                    for (const pilihanArti of simbolMatematika.map(item => item.arti)) {
+                        if (pilihanArti != hasil && !pilihan_list.includes(pilihanArti)) pilihan_list.push(pilihanArti);
+                    }
+                } else {
+                    soal_teks += `<br><br>- Tulis arti simbol dengan kata-kata`;
                 }
                 document.getElementById('soal').innerHTML = soal_teks;
 
@@ -2480,6 +2677,9 @@
 
             } else if (e1.index == 19) {
 			    var a2;
+            } else if (e1.index == 10) {
+                document.getElementById("bentuk-sub").style.display = 'none';
+                document.getElementById("bentuk-penjelasan").innerHTML = `Latihan mengenali arti simbol dan tanda matematika, seperti + (penjumlahan), − (pengurangan), = (sama dengan), < (lebih kecil dari), dan ≥ (lebih dari atau sama dengan).`;
                 while (a2 === undefined | a == a2) {
                     if (level2.index == 0) {
                         a2 = Math.floor(1 + 20 * Math.random());
@@ -2535,68 +2735,139 @@
                 document.getElementById('soal').innerHTML = soal_teks;
 
             } else if (e1.index == 21) {
+                var konversi_list;
                 if (e1_bentuk.index == 0) {
-                    // soal_teks = `Jarak dari kota A ke C melalui kota B adalah 280 km, sedangkan jarak dari kota A ke B adalah 110 km. Jarak dari kota B ke C adalah ...`;
-                    satuan_list = ['mm','dm','cm','m','dam','hm','km'];
-                    angka_satuan_list = [1,10,100,1000,10000,100000,1000000];
-                    // soal_teks = `1 m = _____ cm`;
-                    soal_teks = `1 m = ..... cm`;
+                    konversi_list = [
+                        {dari: 'mm', ke: 'cm', faktor: 0.1, min: 10, max: 900, langkah: 10},
+                        {dari: 'cm', ke: 'm', faktor: 0.01, min: 100, max: 9000, langkah: 100},
+                        {dari: 'm', ke: 'km', faktor: 0.001, min: 1000, max: 9000, langkah: 1000},
+                        {dari: 'km', ke: 'm', faktor: 1000, min: 1, max: 9, langkah: 1},
+                        {dari: 'dm', ke: 'cm', faktor: 10, min: 1, max: 99, langkah: 1},
+                        {dari: 'm', ke: 'cm', faktor: 100, min: 1, max: 99, langkah: 1}
+                    ];
                 } else if (e1_bentuk.index == 1) {
-                    // soal_teks = `Waktu 3 menit berapa detik?`;
-                    soal_teks = `1 menit = ..... detik`;
+                    konversi_list = [
+                        {dari: 'menit', ke: 'detik', faktor: 60, min: 1, max: 59, langkah: 1},
+                        {dari: 'jam', ke: 'menit', faktor: 60, min: 1, max: 23, langkah: 1},
+                        {dari: 'jam', ke: 'detik', faktor: 3600, min: 1, max: 12, langkah: 1},
+                        {dari: 'hari', ke: 'jam', faktor: 24, min: 1, max: 30, langkah: 1},
+                        {dari: 'detik', ke: 'menit', faktor: 1 / 60, min: 60, max: 3540, langkah: 60}
+                    ];
                 } else if (e1_bentuk.index == 2) {
-                    // soal_teks = `Sebuah mobil menempuh jarak 120 km dalam waktu 3 jam. Kecepatan mobil tersebut dalam km/jam adalah ...`;
-                    soal_teks = `10 m/detik = ..... km/jam`;
+                    konversi_list = [
+                        {dari: 'm/detik', ke: 'km/jam', faktor: 3.6, min: 5, max: 100, langkah: 5},
+                        {dari: 'km/jam', ke: 'm/detik', faktor: 5 / 18, min: 18, max: 180, langkah: 18}
+                    ];
                 } else if (e1_bentuk.index == 3) {
-                    soal_teks = `1 kg = ..... g`;
+                    konversi_list = [
+                        {dari: 'kg', ke: 'g', faktor: 1000, min: 1, max: 99, langkah: 1},
+                        {dari: 'g', ke: 'kg', faktor: 0.001, min: 1000, max: 99000, langkah: 1000},
+                        {dari: 'g', ke: 'mg', faktor: 1000, min: 1, max: 999, langkah: 1},
+                        {dari: 'ton', ke: 'kg', faktor: 1000, min: 1, max: 99, langkah: 1},
+                        {dari: 'kg', ke: 'ton', faktor: 0.001, min: 1000, max: 99000, langkah: 1000}
+                    ];
                 } else if (e1_bentuk.index == 4) {
-                    soal_teks = `25 C = ..... F`;
+                    konversi_list = [
+                        {dari: '°C', ke: '°F', min: 0, max: 100, langkah: 5, hitung: function(nilai) { return nilai * 9 / 5 + 32; }},
+                        {dari: '°F', ke: '°C', min: 32, max: 212, langkah: 9, hitung: function(nilai) { return (nilai - 32) * 5 / 9; }}
+                    ];
+                } else {
+                    konversi_list = [];
+                }
+                if (konversi_list.length > 0) {
+                    var konversi = konversi_list[Math.floor(Math.random() * konversi_list.length)];
+                    var nilai_konversi = konversi.min + konversi.langkah * Math.floor(Math.random() * ((konversi.max - konversi.min) / konversi.langkah + 1));
+                    hasil = konversi.hitung ? konversi.hitung(nilai_konversi) : nilai_konversi * konversi.faktor;
+                    hasil = Number(hasil.toFixed(2));
+                    soal_teks = `${nilai_konversi} ${konversi.dari} = ..... ${konversi.ke}`;
                 } else {
                     soal_teks = ``;
                 }
                 soal_suara = soal_teks;
-                soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
                 document.getElementById('soal').innerHTML = soal_teks;
 
             } else if (e1.index == 22) {
                 if (e1_bentuk.index == 0) {
-                    // soal_teks = `Diketahui panjang sisi persegi adalah 4 cm. Luas perseginya adalah ...`;
-                    // soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
-                    // var s_old;
-                    // s = 0;
-                    var a_old;
-                    while (a_old === undefined || a == a_old) {
-                        a_old = Math.floor(1 + 10 * Math.random());
-                    }
-                    a = a_old;
+                    a = Math.floor(2 + 11 * Math.random());
                     mathrandom = Math.random();
                     if (mathrandom < 0.25) {
-                        soal_teks = `Diketahui panjang sisi persegi adalah ${a} satuan. Luas perseginya adalah ...`; 
+                        soal_teks = `Persegi memiliki sisi ${a} cm. Berapakah luasnya dalam cm persegi?`;
                         hasil = a**2;
                     } else if (mathrandom < 0.5) {
-                        soal_teks = `Diketahui panjang sisi persegi adalah ${a} satuan. Keliling perseginya adalah ...`;
+                        soal_teks = `Persegi memiliki sisi ${a} cm. Berapakah kelilingnya dalam cm?`;
                         hasil = 4*a;
                     } else if (mathrandom < 0.75) {
-                        soal_teks = `Diketahui luas persegi adalah ${a**2} satuan kuadrat. Panjang sisi perseginya adalah ...`;
+                        soal_teks = `Luas sebuah persegi adalah ${a**2} cm persegi. Berapakah panjang sisinya dalam cm?`;
                         hasil = a;
                     } else {
-                        soal_teks = `Diketahui keliling persegi adalah ${4*a} satuan. Panjang sisi perseginya adalah ...`;
+                        soal_teks = `Keliling sebuah persegi adalah ${4*a} cm. Berapakah panjang sisinya dalam cm?`;
                         hasil = a;
                     }
                 } else if (e1_bentuk.index == 1) {
-                    soal_teks = `Diberikan suatu persegi panjang dengan panjang 6 cm dan lebar 4 cm. Luas persegi panjang dalam cm kuadrat adalah ...`;
-                    soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                    a = Math.floor(3 + 10 * Math.random());
+                    b = Math.floor(2 + (a - 2) * Math.random());
+                    mathrandom = Math.random();
+                    if (mathrandom < 0.4) {
+                        soal_teks = `Persegi panjang memiliki panjang ${a} cm dan lebar ${b} cm. Berapakah luasnya dalam cm persegi?`;
+                        hasil = a*b;
+                    } else if (mathrandom < 0.8) {
+                        soal_teks = `Persegi panjang memiliki panjang ${a} cm dan lebar ${b} cm. Berapakah kelilingnya dalam cm?`;
+                        hasil = 2*(a+b);
+                    } else if (Math.random() < 0.5) {
+                        soal_teks = `Luas persegi panjang adalah ${a*b} cm persegi dan lebarnya ${b} cm. Berapakah panjangnya dalam cm?`;
+                        hasil = a;
+                    } else {
+                        soal_teks = `Keliling persegi panjang adalah ${2*(a+b)} cm dan panjangnya ${a} cm. Berapakah lebarnya dalam cm?`;
+                        hasil = b;
+                    }
                 } else if (e1_bentuk.index == 2) {
-                    soal_teks = `Diberikan suatu segitiga dengan alas 20 cm dan tinggi 12 cm. Luas segitiga dalam cm kuadrat adalah ...`;
-                    soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                    a = 2 * Math.floor(2 + 10 * Math.random());
+                    b = Math.floor(2 + 11 * Math.random());
+                    soal_teks = `Segitiga memiliki alas ${a} cm dan tinggi ${b} cm. Berapakah luasnya dalam cm persegi?`;
+                    hasil = a * b / 2;
                 } else if (e1_bentuk.index == 3) {
-                    soal_teks = `Diberikan trapesium siku-siku /(ABCD/), dimana siku-sikunya di /(D/). Jika diketahui panjang /(AB = 13/), /(DC = 11/), dan /(AD = 7/), maka luas trapesium adalah ...`;
-                    soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                    a = 2 * Math.floor(2 + 10 * Math.random());
+                    b = Math.floor(2 + 11 * Math.random());
+                    soal_teks = `Segitiga siku-siku memiliki panjang alas ${a} cm dan tinggi ${b} cm. Berapakah luasnya dalam cm persegi?`;
+                    hasil = a * b / 2;
                 } else if (e1_bentuk.index == 4) {
-                    soal_teks = `Diberikan sesuatu segitiga dengan alas 20 cm dan tinggi 12 cm. Luas segitiga dalam cm kuadrat adalah ...`;
-                    soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                    a = Math.floor(3 + 10 * Math.random());
+                    b = Math.floor(2 + 8 * Math.random());
+                    c = 2 * Math.floor(2 + 6 * Math.random());
+                    soal_teks = `Trapesium memiliki sisi sejajar ${a} cm dan ${b} cm, serta tinggi ${c} cm. Berapakah luasnya dalam cm persegi?`;
+                    hasil = (a + b) * c / 2;
+                } else if (e1_bentuk.index == 5) {
+                    a = Math.floor(3 + 10 * Math.random());
+                    b = Math.floor(2 + 11 * Math.random());
+                    soal_teks = `Jajar genjang memiliki alas ${a} cm dan tinggi ${b} cm. Berapakah luasnya dalam cm persegi?`;
+                    hasil = a * b;
+                } else if (e1_bentuk.index == 6) {
+                    a = 2 * Math.floor(2 + 10 * Math.random());
+                    b = Math.floor(2 + 11 * Math.random());
+                    soal_teks = `Belah ketupat memiliki diagonal ${a} cm dan ${b} cm. Berapakah luasnya dalam cm persegi?`;
+                    hasil = a * b / 2;
+                } else if (e1_bentuk.index == 7) {
+                    a = 2 * Math.floor(2 + 10 * Math.random());
+                    b = Math.floor(2 + 11 * Math.random());
+                    soal_teks = `Layang-layang memiliki diagonal ${a} cm dan ${b} cm. Berapakah luasnya dalam cm persegi?`;
+                    hasil = a * b / 2;
                 } else {
                     // soal_teks = convert_to_math(soal_teks);
+                }
+                if (e1_bentuk.index <= 7) {
+                    soal_check = false;
+                    soal_suara = soal_teks;
+                    if (tipe2.index == 1) {
+                        for (let i = 1; i <= j_pilihan2; i++) {
+                            let offset = Math.ceil(i / 2) * (i % 2 == 1 ? 1 : -1);
+                            let value = hasil + offset;
+                            while (value < 0 || pilihan_list.includes(value) || value == hasil) {
+                                offset += offset > 0 ? 1 : -1;
+                                value = hasil + offset;
+                            }
+                            pilihan_list.push(value);
+                        }
+                    }
                 }
                 soal_teks = convert_to_math(soal_teks);
                 document.getElementById('soal').innerHTML = soal_teks;
@@ -2795,151 +3066,160 @@
                 }
                 document.getElementById('soal').innerHTML = soal_teks;
 			} else if (e1.index == 27) {
-                // A ∩ B
-                // function getIntersection(a, n, b, m) {
-                function intersection(a, b) {
-                    let unionSet = new Set();
-                    let intersectionSet = new Set();
-                    for (let i = 0; i < a.length; i++)
-                        unionSet.add(a[i]);
-                    // console.log("Intersection:");
-                    for (let i = 0; i < b.length; i++) {
-                        if (unionSet.has(b[i])) {
-                            intersectionSet.add(b[i]);
-                        }
-                    }
-                    let ans = [];
-                    for (let k of intersectionSet) {
-                        ans.push(k);
-                    }
-                    // console.log(ans);
-                    return ans;
+                function gabungHimpunan(...daftar) {
+                    return [...new Set(daftar.flat())].sort((x, y) => x - y);
                 }
-                // A ∪ B
-                // function getUnion(a, n, b, m) {
-                function union(a, b) {
-                    let s = new Set();
-                    for (let i = 0; i < a.length; i++)
-                        s.add(a[i]);
-                    for (let i = 0; i < b.length; i++)
-                        s.add(b[i]);
-                    let arr = [];
-                    for (let itr of s)
-                        arr.push(itr);
-                    arr.sort(function (a, b) {return a - b;})
-                    // console.log("union:");
-                    // console.log(arr);
-                    return arr;
+                function tulisHimpunan(anggota) {
+                    anggota = [...new Set(anggota)].sort((x, y) => x - y);
+                    return anggota.length ? `{${anggota.join(', ')}}` : '∅';
                 }
-                if (e1_bentuk.index == 0) {
-                    // console.log(intersection([1,2,3,7],[2,3,5]));
-                    // console.log(union([1,2,3,7],[2,3,5]));
-                    // console.log(union([1,2,3,7],[2,3,5]) == [1,2,3,5,7]);
-                    // console.log([1,2,3,5,7] == [1,2,3,5,7]);
-                    prime_list = [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97];
-                    mathrandom = Math.random();
-                    if (mathrandom < 1.1) {
-                        himpunan_A = [];
-                        himpunan_A_teks = '';
-                        himpunan_A_length = Math.floor(2+5*Math.random()**2);
-                        while (himpunan_A.length < himpunan_A_length) {
-                            himpunan_angka = 0;
-                            while (himpunan_angka == 0 || himpunan_A.includes(himpunan_angka)) {
-                                himpunan_angka = Math.floor(1+(himpunan_A_length+3)*Math.random());
-                            }
-                            // if (himpunan_A.length >= 1) himpunan_A_teks += ',';
-                            himpunan_A.push(himpunan_angka);
-                            // himpunan_A_teks += himpunan_angka;
+                function buatDistraktorHimpunan(jawaban, jenis) {
+                    let kandidat = [];
+                    if (jenis == 'set') {
+                        const benar = jawaban.slice();
+                        for (let angka = 1; angka <= 12 && kandidat.length < j_pilihan2 - 1; angka++) {
+                            let alternatif = benar.includes(angka) ? benar.filter(x => x != angka) : [...benar, angka];
+                            const teks = tulisHimpunan(alternatif);
+                            if (teks != tulisHimpunan(benar) && !kandidat.includes(teks)) kandidat.push(teks);
                         }
-                        himpunan_A.sort();
-                        for (let i = 0; i < himpunan_A.length; i++) {
-                            if (i == 0) {himpunan_A_teks += himpunan_A[i];}
-                            else {himpunan_A_teks += (',' + himpunan_A[i]);}
-                        }
-                        himpunan_B = [];
-                        himpunan_B_teks = '';
-                        himpunan_B_length = Math.floor(2+5*Math.random()**2);
-                        while (himpunan_B.length < himpunan_B_length) {
-                            himpunan_angka = 0;
-                            while (himpunan_angka == 0 || himpunan_B.includes(himpunan_angka)) {
-                                himpunan_angka = Math.floor(1+(himpunan_B_length+3)*Math.random());
-                            }
-                            himpunan_B.push(himpunan_angka);
-                        }
-                        himpunan_B.sort();
-                        for (let i = 0; i < himpunan_B.length; i++) {
-                            if (i == 0) {himpunan_B_teks += himpunan_B[i];}
-                            else {himpunan_B_teks += (',' + himpunan_B[i]);}
-                        }
-                    }
-                    // soal_teks = `Diketahui himpunan /(A = /{1,2,3,4,5/}/) dan himpunan /(B = /{2,3,6,7/}/). Jika himpunan diurutkan dari terkecil hingga terbesar, maka /(A ∩ B/) adalah ...`;
-                    mathrandom = Math.random();
-                    if (mathrandom < 1/5) {
-                        soal_teks = `Diketahui himpunan \\(A = \\{${himpunan_A_teks}\\}\\) dan himpunan \\(B = \\{${himpunan_B_teks}\\}\\). Jika himpunan diurutkan dari terkecil hingga terbesar, maka \\(A ∩ B\\) adalah ...`;
-                        // console.log(intersection(himpunan_A,himpunan_B));
-                        hasil = intersection(himpunan_A,himpunan_B);
-                    } else if (mathrandom < 2/5) {
-                        soal_teks = `Diketahui himpunan \\(A = \\{${himpunan_A_teks}\\}\\) dan himpunan \\(B = \\{${himpunan_B_teks}\\}\\). Jika himpunan diurutkan dari terkecil hingga terbesar, maka \\(A ∪ B\\) adalah ...`;
-                        // console.log(intersection(himpunan_A,himpunan_B));
-                        hasil = union(himpunan_A,himpunan_B);
-                    } else if (mathrandom < 3/5) {
-                        // soal_teks = `Diketahui himpunan \\(A = \\{x&nbsp\\ |\\ 1 \\leq x \\leq 30, x \\in bilangan\\ prima \\}\\) dan himpunan \\(B = \\{3,4,5,6\\}\\). Jika himpunan diurutkan dari terkecil hingga terbesar, maka \\(A ∩ B\\) adalah ...`;
-						soal_teks = `Diketahui himpunan \\(A = \\{x&nbsp\\ |\\ 1 \\leq x \\leq 30, x \\in bilangan\\ prima \\}\\) dan himpunan \\(B = \\{3,4,5,6\\}\\). Jika himpunan diurutkan dari terkecil hingga terbesar, maka \\(A ∩ B\\) adalah ...`;
-					} else {
-					    
-					}
-                    hasil = '{' + hasil.toString() + '}';
-                    // /cup (∪) /cap (∩)
-                    // soal_teks = `Diketahui himpunan /(A = /{1,2,3,4,5/}/) dan himpunan /(B = /{2,3,6,7/}/). Maka /(A ∩ B/) adalah ...`
-                    soal_teks = convert_to_math(soal_teks);
-                } else if (e1_bentuk.index == 1) {
-                    soal_teks = convert_to_math(soal_teks);
-                } else if (e1_bentuk.index == 2) {
-                    // nama_tempat_list = ['toko buah','pasar','supermarket'];
-                    mathrandom = Math.random()
-                    if (mathrandom < 0.25) {
-                        soal_teks = `Ada 2 himpunan, yaitu himpunan A dan himpunan B. Banyaknya anggota di himpunan A adalah 20, sedangkan banyaknya anggota di himpunan B adalah 30. Jika banyaknya anggota di himpunan A dan B adalah 5, maka banyaknya anggota A atau B adalah ...`;
-                    } else if (mathrandom < 0.5) {
-                        mathrandom = Math.random()
-                        if (mathrandom < 0.25) {
-                            nama1_list = ['matematika','Bahasa Indonesia','Bahasa Inggris','fisika','kimia','biologi'];
-                        } else if (mathrandom < 0.5) {
-                            nama1_list = ['menggambar','melukis','mewarnai','main piano','main gitar'];
-                        } else if (mathrandom < 0.75) {
-                            nama1_list = ['berenang','sepak bola','basket','futsal','tenis'];
-                        } else {
-                            nama1_list = ['berenang','sepak bola','basket','futsal','tenis'];
-                        }
-                        nama2_list = ['bisa','suka','jago','gemar','hobi','pintar'];
-                        nama1a = nama1_list[parseInt(nama1_list.length*Math.random())];
-                        nama1b = nama1_list[parseInt(nama1_list.length*Math.random())];
-                        nama2 = nama2_list[parseInt(nama1_list.length*Math.random())];
-                        while (nama1a == nama1b) {
-                            nama1b = nama1_list[parseInt(nama1_list.length*Math.random())];
-                        }
-                        soal_teks = `Di sekolah X, jumlah siswanya adalah 140 siswa. Banyaknya siswa yang ${nama2} ${nama1a} adalah 40 siswa, sedangkan banyaknya siswa yang ${nama2} ${nama1b} adalah 70 siswa. Jika banyaknya siswa yang ${nama2} kedua-duanya adalah 25 siswa, maka banyaknya siswa yang ${nama2} suka kedua-duanya adalah ...`;
-                    } else if (mathrandom < 0.75) {
+                    } else if (jenis == 'boolean') {
+                        kandidat = [jawaban == 'Ya' ? 'Tidak' : 'Ya'];
                     } else {
+                        for (let selisih = 1; kandidat.length < j_pilihan2 - 1; selisih++) {
+                            for (const nilai of [jawaban + selisih, Math.max(0, jawaban - selisih)]) {
+                                if (nilai !== jawaban && !kandidat.includes(nilai)) kandidat.push(nilai);
+                                if (kandidat.length >= j_pilihan2 - 1) break;
+                            }
+                        }
                     }
-                    soal_teks = convert_to_math(soal_teks);
+                    pilihan_list.push(...kandidat.slice(0, j_pilihan2 - 1));
                 }
-                document.getElementById('soal').innerHTML = soal_teks;
-                if (tipe2.index == 1) {
-                    pilihan_list.push(convert_to_math("/(/{1,2,3/}/)"));
-                    pilihan_list.push(convert_to_math("/(/{2,3/}/)"));
-                    pilihan_list.push(convert_to_math("/(/{1,4/}/)"));
-                    random_check = false;
-                }
-            } else if (e1.index == 28) {
+                const acakAnggota = (maksimum) => Math.floor(1 + maksimum * Math.random());
+                const himpunanA = gabungHimpunan(acakAnggota(10), acakAnggota(10), acakAnggota(10), acakAnggota(10));
+                const himpunanB = gabungHimpunan(acakAnggota(10), acakAnggota(10), acakAnggota(10), acakAnggota(10));
+                const irisanAB = himpunanA.filter(x => himpunanB.includes(x));
+                const gabunganAB = gabungHimpunan(himpunanA, himpunanB);
+                let jawabanHimpunan = [];
+                let jenisJawaban = 'set';
+
                 if (e1_bentuk.index == 0) {
-                    // soal_teks = `Solusi x dari <span style='font-size:18px'>\\begin{array} x^2 \\end{array}</span>
-                    // Maka solusi dari x adalah ...`;
-                    soal_teks = `Solusi x dari persamaan &nbsp;<span style="font-size:18px">/(x^2 - 3x + 2 = 0/)`.replaceAll("/","&#x005c");
+                    const operasi = ['irisan', 'gabungan', 'selisih', 'beda setangkup'][Math.floor(4 * Math.random())];
+                    if (operasi == 'irisan') {
+                        jawabanHimpunan = irisanAB;
+                        soal_teks = `Diketahui \(A=${tulisHimpunan(himpunanA)}\) dan \(B=${tulisHimpunan(himpunanB)}\). Tentukan \(A \\cap B\) (irisan A dan B).`;
+                    } else if (operasi == 'gabungan') {
+                        jawabanHimpunan = gabunganAB;
+                        soal_teks = `Diketahui \(A=${tulisHimpunan(himpunanA)}\) dan \(B=${tulisHimpunan(himpunanB)}\). Tentukan \(A \\cup B\) (gabungan A dan B).`;
+                    } else if (operasi == 'selisih') {
+                        jawabanHimpunan = himpunanA.filter(x => !himpunanB.includes(x));
+                        soal_teks = `Diketahui \(A=${tulisHimpunan(himpunanA)}\) dan \(B=${tulisHimpunan(himpunanB)}\). Tentukan \(A \\setminus B\), yaitu anggota A yang bukan anggota B.`;
+                    } else {
+                        jawabanHimpunan = gabunganAB.filter(x => !(himpunanA.includes(x) && himpunanB.includes(x)));
+                        soal_teks = `Diketahui \(A=${tulisHimpunan(himpunanA)}\) dan \(B=${tulisHimpunan(himpunanB)}\). Tentukan anggota yang berada tepat di salah satu dari A atau B.`;
+                    }
+                    hasil = tulisHimpunan(jawabanHimpunan);
                 } else if (e1_bentuk.index == 1) {
-                    soal_teks = `Diskriminan dari persamaan &nbsp;<span style="font-size:18px">/(x^2 - 3x + 2 = 0/)`.replaceAll("/","&#x005c");
+                    const himpunanC = gabungHimpunan(acakAnggota(10), acakAnggota(10), acakAnggota(10));
+                    const cariIrisan = Math.random() < 0.5;
+                    jawabanHimpunan = cariIrisan
+                        ? himpunanA.filter(x => himpunanB.includes(x) && himpunanC.includes(x))
+                        : gabungHimpunan(himpunanA, himpunanB, himpunanC);
+                    soal_teks = cariIrisan
+                        ? `Diketahui \(A=${tulisHimpunan(himpunanA)}\), \(B=${tulisHimpunan(himpunanB)}\), dan \(C=${tulisHimpunan(himpunanC)}\). Tentukan \(A \\cap B \\cap C\).`
+                        : `Diketahui \(A=${tulisHimpunan(himpunanA)}\), \(B=${tulisHimpunan(himpunanB)}\), dan \(C=${tulisHimpunan(himpunanC)}\). Tentukan \(A \\cup B \\cup C\).`;
+                    hasil = tulisHimpunan(jawabanHimpunan);
+                } else if (e1_bentuk.index == 2) {
+                    const banyakA = Math.floor(20 + 31 * Math.random());
+                    const banyakB = Math.floor(20 + 31 * Math.random());
+                    const banyakIrisan = Math.floor(Math.random() * (Math.min(banyakA, banyakB) + 1));
+                    hasil = banyakA + banyakB - banyakIrisan;
+                    soal_teks = `Dalam sebuah kelas, ${banyakA} siswa menyukai matematika dan ${banyakB} siswa menyukai IPA. Jika ${banyakIrisan} siswa menyukai keduanya, berapa siswa yang menyukai matematika atau IPA?`;
+                    jenisJawaban = 'angka';
+                } else if (e1_bentuk.index == 3) {
+                    const anggota = acakAnggota(12);
+                    const diA = himpunanA.includes(anggota);
+                    const diB = himpunanB.includes(anggota);
+                    const tanyaKeduanya = Math.random() < 0.5;
+                    hasil = (tanyaKeduanya ? diA && diB : diA || diB) ? 'Ya' : 'Tidak';
+                    soal_teks = tanyaKeduanya
+                        ? `Diketahui \(A=${tulisHimpunan(himpunanA)}\) dan \(B=${tulisHimpunan(himpunanB)}\). Apakah \(${anggota}\) merupakan anggota A sekaligus B?`
+                        : `Diketahui \(A=${tulisHimpunan(himpunanA)}\) dan \(B=${tulisHimpunan(himpunanB)}\). Apakah \(${anggota}\) merupakan anggota A atau B?`;
+                    jenisJawaban = 'boolean';
+                } else if (e1_bentuk.index == 4) {
+                    const himpunanKecil = gabungHimpunan(1, 2, 3).filter(() => Math.random() < 0.7);
+                    const himpunanBesar = Math.random() < 0.5
+                        ? gabungHimpunan(himpunanKecil, 4, 5, 6)
+                        : gabungHimpunan(4, 5, 6, 7);
+                    hasil = himpunanKecil.every(x => himpunanBesar.includes(x)) ? 'Ya' : 'Tidak';
+                    soal_teks = `Diketahui \(A=${tulisHimpunan(himpunanKecil)}\) dan \(B=${tulisHimpunan(himpunanBesar)}\). Apakah \(A \\subseteq B\)?`;
+                    jenisJawaban = 'boolean';
+                } else if (e1_bentuk.index == 5) {
+                    const banyakAnggota = Math.floor(3 + 6 * Math.random());
+                    const anggota = Array.from({length: banyakAnggota}, (_, index) => index + 1);
+                    hasil = 2 ** banyakAnggota;
+                    soal_teks = `Jika \(A=${tulisHimpunan(anggota)}\), berapa banyak himpunan bagian dari A?`;
+                    jenisJawaban = 'angka';
                 } else {
-                    soal_teks = `Misalkan akar-akar dari persamaan &nbsp;<span style="font-size:18px">/(x^2 - 4x + 1 = 0/) adalah /(a/) dan /(b/). Nilai dari /(a^2+b^2/) adalah ...`.replaceAll("/","&#x005c");
+                    const semesta = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+                    const kelipatanDua = semesta.filter(x => x % 2 == 0);
+                    const kelipatanTiga = semesta.filter(x => x % 3 == 0);
+                    jawabanHimpunan = Math.random() < 0.5
+                        ? kelipatanDua.filter(x => kelipatanTiga.includes(x))
+                        : gabungHimpunan(kelipatanDua, kelipatanTiga);
+                    const cariIrisan = jawabanHimpunan.length == 2;
+                    soal_teks = cariIrisan
+                        ? `Diberikan \(U=${tulisHimpunan(semesta)}\), \(A=\\{x \\in U \\mid x\\text{ kelipatan 2}\\}\), dan \(B=\\{x \\in U \\mid x\\text{ kelipatan 3}\\}\). Tentukan \(A \\cap B\).`
+                        : `Diberikan \(U=${tulisHimpunan(semesta)}\), \(A=\\{x \\in U \\mid x\\text{ kelipatan 2}\\}\), dan \(B=\\{x \\in U \\mid x\\text{ kelipatan 3}\\}\). Tentukan \(A \\cup B\).`;
+                    hasil = tulisHimpunan(jawabanHimpunan);
                 }
+                if (tipe2.index == 1) buatDistraktorHimpunan(jawabanHimpunan, jenisJawaban);
+                document.getElementById('soal').innerHTML = soal_teks;
+            } else if (e1.index == 28) {
+                // Bentuk persamaan dari akar bilangan bulat agar solusi dan distraktornya konsisten.
+                var akar1 = Math.floor(-6 + 13 * Math.random());
+                var akar2 = Math.floor(-6 + 13 * Math.random());
+                while (akar2 === akar1) akar2 = Math.floor(-6 + 13 * Math.random());
+                var koefA = Math.floor(1 + 4 * Math.random()) * (Math.random() < 0.5 ? -1 : 1);
+                var koefB = -koefA * (akar1 + akar2);
+                var koefC = koefA * akar1 * akar2;
+                function sukuKuadrat(koef, variabel) {
+                    if (koef === 0) return '';
+                    var nilai = Math.abs(koef);
+                    var isi = (variabel && nilai === 1 ? '' : nilai) + (variabel || '');
+                    return koef < 0 ? '-' + isi : '+' + isi;
+                }
+                var persamaanKuadrat = sukuKuadrat(koefA, 'x^2') + sukuKuadrat(koefB, 'x') + sukuKuadrat(koefC, '');
+                if (persamaanKuadrat.charAt(0) === '+') persamaanKuadrat = persamaanKuadrat.slice(1);
+                var akarKecil = Math.min(akar1, akar2);
+                var akarBesar = Math.max(akar1, akar2);
+                var jawabanKuadrat;
+                if (e1_bentuk.index == 0) {
+                    jawabanKuadrat = `${akarKecil}, ${akarBesar}`;
+                    soal_teks = `Tentukan kedua solusi x dari persamaan \\(${persamaanKuadrat}=0\\). Tuliskan dari yang terkecil, dipisahkan koma.`;
+                } else if (e1_bentuk.index == 1) {
+                    jawabanKuadrat = koefB ** 2 - 4 * koefA * koefC;
+                    soal_teks = `Tentukan diskriminan dari persamaan \\(${persamaanKuadrat}=0\\).`;
+                } else {
+                    jawabanKuadrat = akar1 ** 2 + akar2 ** 2;
+                    soal_teks = `Jika akar-akar persamaan \\(${persamaanKuadrat}=0\\) adalah \\(r_1\\) dan \\(r_2\\), tentukan nilai \\(r_1^2+r_2^2\\).`;
+                }
+                hasil = jawabanKuadrat;
+                if (tipe2.index == 1) {
+                    var distraktorKuadrat = [];
+                    if (e1_bentuk.index == 0) {
+                        for (var geser = 1; distraktorKuadrat.length < j_pilihan2; geser++) {
+                            var pasanganSalah = `${akarKecil + geser}, ${akarBesar}`;
+                            if (pasanganSalah !== jawabanKuadrat && !distraktorKuadrat.includes(pasanganSalah)) distraktorKuadrat.push(pasanganSalah);
+                        }
+                    } else {
+                        for (var geser = 1; distraktorKuadrat.length < j_pilihan2; geser++) {
+                            var nilaiSalah = jawabanKuadrat + (geser % 2 ? geser : -geser);
+                            if (!distraktorKuadrat.includes(nilaiSalah) && nilaiSalah !== jawabanKuadrat) distraktorKuadrat.push(nilaiSalah);
+                        }
+                    }
+                    pilihan_list.push(...distraktorKuadrat);
+                }
+                soal_teks = convert_to_math(soal_teks);
                 document.getElementById('soal').innerHTML = soal_teks;
             } else if (e1.index == 29) {
                 if (e1_bentuk.index == 0) {
@@ -2952,41 +3232,115 @@
                 document.getElementById('soal').innerHTML = soal_teks;
             } else if (e1.index == 32) {
                 if (e1_bentuk.index == 0) {
-                    soal_teks = `Hasil dari /(|2-3|/) adalah ...`
+                    var koefMutlak = Math.floor(1 + 5 * Math.random());
+                    var konstMutlak = Math.floor(-12 + 25 * Math.random());
+                    var nilaiXMutlak = Math.floor(-10 + 21 * Math.random());
+                    var sukuMutlak = koefMutlak == 1 ? 'x' : `${koefMutlak}x`;
+                    if (konstMutlak > 0) sukuMutlak += `+${konstMutlak}`;
+                    else if (konstMutlak < 0) sukuMutlak += `${konstMutlak}`;
+                    hasil = Math.abs(koefMutlak * nilaiXMutlak + konstMutlak);
+                    soal_teks = `Diberikan fungsi nilai mutlak \\(f(x)=|${sukuMutlak}|\\). Tentukan nilai \\(f(${nilaiXMutlak})\\).`;
+                    if (tipe2.index == 1) {
+                        for (var selisihMutlak = 1; pilihan_list.length < j_pilihan2 - 1; selisihMutlak++) {
+                            var pilihanMutlak = hasil + (selisihMutlak % 2 ? selisihMutlak : -selisihMutlak);
+                            if (pilihanMutlak >= 0 && pilihanMutlak != hasil && !pilihan_list.includes(pilihanMutlak)) pilihan_list.push(pilihanMutlak);
+                        }
+                    }
                 } else if (e1_bentuk.index == 1) {
-                    soal_teks = `Solusi x dari /(|2x+1|=3/) adalah ...`
+                    var koefPersMutlak = Math.floor(1 + 5 * Math.random());
+                    var geserPersMutlak = Math.floor(-8 + 17 * Math.random());
+                    var jarakPersMutlak = Math.floor(1 + 8 * Math.random());
+                    var sukuPersMutlak = koefPersMutlak == 1 ? 'x' : `${koefPersMutlak}x`;
+                    if (geserPersMutlak > 0) sukuPersMutlak += `+${koefPersMutlak * geserPersMutlak}`;
+                    else if (geserPersMutlak < 0) sukuPersMutlak += `${koefPersMutlak * geserPersMutlak}`;
+                    var akarPersMutlak1 = -geserPersMutlak - jarakPersMutlak;
+                    var akarPersMutlak2 = -geserPersMutlak + jarakPersMutlak;
+                    hasil = `${akarPersMutlak1}, ${akarPersMutlak2}`;
+                    soal_teks = `Tentukan semua solusi real \\(x\\) dari persamaan \\(|${sukuPersMutlak}|=${koefPersMutlak * jarakPersMutlak}\\). Tuliskan kedua nilai \\(x\\), dipisahkan dengan koma.`;
+                    if (tipe2.index == 1) {
+                        for (var geserJawabanMutlak = 1; pilihan_list.length < j_pilihan2 - 1; geserJawabanMutlak++) {
+                            var akarSalahMutlak = akarPersMutlak1 + geserJawabanMutlak;
+                            var pilihanPersMutlak = `${Math.min(akarSalahMutlak, akarPersMutlak2)}, ${Math.max(akarSalahMutlak, akarPersMutlak2)}`;
+                            if (pilihanPersMutlak != hasil && !pilihan_list.includes(pilihanPersMutlak)) pilihan_list.push(pilihanPersMutlak);
+                        }
+                    }
                 } else {
-                    // soal_teks = `Solusi x dari /(|3x-1|+|x+2|=5-2/lfloor x /rfloor/) adalah ...`
-                    soal_teks = `Solusi x dari /(|3x-1|+|x+2|=8-3x/) adalah ...`
+                    var koefKompleksMutlak = Math.floor(1 + 4 * Math.random());
+                    var nilaiKompleksMutlak = Math.floor(-6 + 13 * Math.random());
+                    hasil = Math.abs(koefKompleksMutlak * nilaiKompleksMutlak - 1) + Math.abs(nilaiKompleksMutlak + 2);
+                    soal_teks = `Jika \\(f(x)=|${koefKompleksMutlak}x-1|+|x+2|\\), tentukan nilai \\(f(${nilaiKompleksMutlak})\\).`;
+                    if (tipe2.index == 1) {
+                        for (var selisihKompleksMutlak = 1; pilihan_list.length < j_pilihan2 - 1; selisihKompleksMutlak++) {
+                            var pilihanKompleksMutlak = hasil + (selisihKompleksMutlak % 2 ? selisihKompleksMutlak : -selisihKompleksMutlak);
+                            if (pilihanKompleksMutlak >= 0 && pilihanKompleksMutlak != hasil && !pilihan_list.includes(pilihanKompleksMutlak)) pilihan_list.push(pilihanKompleksMutlak);
+                        }
+                    }
                 }
                 soal_teks = convert_to_math(soal_teks);
                 document.getElementById('soal').innerHTML = soal_teks;
             } else if (e1.index == 34) {
-                // soal_teks = `Solusi x dari &nbsp;<span style="font-size:20px">/(x^2 - 3x + 2 = 0/)`.replaceAll("/","&#x005c");
-                soal_teks = `Banyak solusi x bilangan asli sehingga /(3x+7<25/) adalah ...`
+                var koefPertidaksamaan = Math.floor(1 + 5 * Math.random());
+                var konstantaPertidaksamaan = Math.floor(11 * Math.random());
+                var banyakSolusiPertidaksamaan = Math.floor(2 + 9 * Math.random());
+                var batasPertidaksamaan = koefPertidaksamaan * banyakSolusiPertidaksamaan + konstantaPertidaksamaan + 1;
+                var bentukPertidaksamaan = koefPertidaksamaan == 1 ? 'x' : `${koefPertidaksamaan}x`;
+                if (konstantaPertidaksamaan > 0) bentukPertidaksamaan += `+${konstantaPertidaksamaan}`;
+                hasil = banyakSolusiPertidaksamaan;
+                soal_teks = `Banyak solusi \(x\) bilangan asli (\(x=1,2,3,\ldots\)) yang memenuhi pertidaksamaan /(${bentukPertidaksamaan}<${batasPertidaksamaan}/) adalah ...`;
                 soal_teks = convert_to_math(soal_teks);
-                soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
                 document.getElementById('soal').innerHTML = soal_teks;
                 if (tipe2.index == 1) {
-                    pilihan_list.push(convert_to_math("/(x<2/)"));
-                    pilihan_list.push(convert_to_math("/(x>3/)"));
-                    pilihan_list.push(convert_to_math("/(x<-4/)"));
-                    random_check = false;
+                    for (var selisihPertidaksamaan = 1; pilihan_list.length < j_pilihan2 - 1; selisihPertidaksamaan++) {
+                        var pilihanPertidaksamaan = hasil + (selisihPertidaksamaan % 2 ? selisihPertidaksamaan : -selisihPertidaksamaan);
+                        if (pilihanPertidaksamaan >= 0 && pilihanPertidaksamaan != hasil && !pilihan_list.includes(pilihanPertidaksamaan)) pilihan_list.push(pilihanPertidaksamaan);
+                    }
                 }
 			} else if (e1.index == 36) {
+                const buatDataStatistika = (jumlah, min, max) => Array.from({ length: jumlah }, () => Math.floor(min + (max - min + 1) * Math.random()));
+                const rataRata = (data) => data.reduce((total, nilai) => total + nilai, 0) / data.length;
+                const medianData = (data) => {
+                    const urut = [...data].sort((a, b) => a - b);
+                    const tengah = Math.floor(urut.length / 2);
+                    return urut.length % 2 === 0 ? (urut[tengah - 1] + urut[tengah]) / 2 : urut[tengah];
+                };
+                const modusData = (data) => {
+                    const frekuensi = {};
+                    data.forEach((nilai) => {
+                        frekuensi[nilai] = (frekuensi[nilai] || 0) + 1;
+                    });
+                    const nilaiTerbanyak = Math.max(...Object.values(frekuensi));
+                    const modus = Object.keys(frekuensi).find((nilai) => frekuensi[nilai] === nilaiTerbanyak);
+                    return Number(modus);
+                };
+
                 if (e1_bentuk.index == 0) {
-				    soal_teks = `Diketahui nilai matematika di kelas 10 masing-masing siswa adalah 75, 80, 95, 92, 85, 91, 84. Rata-rata (mean) nilai matematika di kelas 10 adalah ...`
-                    document.getElementById('soal').innerHTML = soal_teks;
-					hasil = 86;
-				} else if (e1_bentuk.index == 1) {
-				    soal_teks = `Diketahui suhu rata-rata dalam suatu hari di kota Z dalam Celsius masing-masing adalah 31, 30, 32, 28, 28, 30, 30, 30, 31, 27. Median dari data tersebut adalah ...`
-                    document.getElementById('soal').innerHTML = soal_teks;
-					hasil = 30;
-			    } else if (e1_bentuk.index == 2) {
-				    soal_teks = `Diketahui berat badan siswa di sekolah Z dalam kilogram (kg) adalah 36, 38, 40, 41, 39, 38, 38, 40, 35, 36, 37, 37, 42, 40, 40. Modus dari data tersebut adalah ...`
-                    document.getElementById('soal').innerHTML = soal_teks;
-					hasil = 40;
-				}
+                    const data = buatDataStatistika(7, 60, 100);
+                    const rata = rataRata(data);
+                    soal_teks = `Data nilai ulangan matematika siswa adalah ${data.join(', ')}. Rata-rata (mean) nilai tersebut adalah ...`;
+                    hasil = Number(rata.toFixed(2));
+                } else if (e1_bentuk.index == 1) {
+                    const data = buatDataStatistika(9, 20, 50);
+                    soal_teks = `Diketahui data suhu harian dalam derajat Celsius adalah ${data.join(', ')}. Median dari data tersebut adalah ...`;
+                    hasil = medianData(data);
+                } else if (e1_bentuk.index == 2) {
+                    const data = buatDataStatistika(12, 30, 45);
+                    const nilaiModus = modusData(data);
+                    soal_teks = `Berat badan siswa (kg) adalah ${data.join(', ')}. Modus dari data tersebut adalah ...`;
+                    hasil = nilaiModus;
+                } else if (e1_bentuk.index == 3) {
+                    const data = buatDataStatistika(8, 10, 90);
+                    const jangkauan = Math.max(...data) - Math.min(...data);
+                    soal_teks = `Data usia peserta lomba adalah ${data.join(', ')}. Jangkauan data tersebut adalah ...`;
+                    hasil = jangkauan;
+                } else {
+                    const data = buatDataStatistika(11, 10, 50);
+                    const rata = rataRata(data);
+                    const med = medianData(data);
+                    const mod = modusData(data);
+                    soal_teks = `Diketahui data: ${data.join(', ')}. Nilai rata-rata, median, dan modus dari data tersebut berturut-turut adalah ...`;
+                    hasil = `${rata.toFixed(2)}, ${med}, ${mod}`;
+                }
+                document.getElementById('soal').innerHTML = soal_teks;
             } else if (e1.index == 37) {
                 if (e1_bentuk.index == 0) {
                     mathrandom = Math.random();
@@ -3117,41 +3471,44 @@
                     // soal_teks = `Diketahui fungsi linear /(f(x) = 2x+3/). Nilai dari /(f(5)/) adalah ...`.replaceAll("/","&#x005c");
                     // soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
                 } else if (e1_bentuk.index == 1) {
-                    // soal_teks = `Diketahui fungsi linear &nbsp;/(f(x) = 2x+3/). Nilai dari &nbsp;/(f^{-1}(5)/) adalah ...`;
-					soal_teks = `Diketahui fungsi linear &nbsp;\\(f(x) = 2x+3\\). Nilai dari &nbsp;\\(f^{-1}(5)\\) adalah ...`;
-                    soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
+                    // Pilih koefisien bukan nol dan nilai x agar inversnya selalu bulat.
+                    a = Math.floor(2 + 9 * Math.random()) * (Math.random() < 0.5 ? -1 : 1);
+                    b = Math.floor(-10 + 21 * Math.random());
+                    x = Math.floor(-10 + 21 * Math.random());
+                    c = a * x + b;
+                    a2 = a === 1 ? '' : a === -1 ? '-' : `${a}`;
+                    b2 = b > 0 ? `+${b}` : `${b}`;
+                    hasil = x;
+                    soal_teks = `Diketahui fungsi linear \\(f(x) = ${a2}x${b2}\\). Nilai dari \\(f^{-1}(${c})\\) adalah ...`;
                 } else if (e1_bentuk.index == 2) {
                     mulvar_list = [['a','b'],['x','y'],['m','n']]
                     mulvar = mulvar_list[Math.floor(mulvar_list.length*Math.random())];
 				    simbol_list = ['*','@','|','⬤','○','★','☆','■','□','▲','▼'];
 					simbol = simbol_list[Math.floor(simbol_list.length*Math.random())];
                     fungsi_index = Math.floor(5*Math.random());
-                    // soal_teks = `Didefinisikan \\(a*b = ab+a-b\\). Nilai dari \\(2*(3*4)\\) adalah ...`;
                     function fungsi_list(fungsi_index,var_a,var_b,val_a,val_b) {
-                        mathrandom = Math.random();
                         if (fungsi_index == 0) {
                             fungsi = `${var_a}${var_b}+${var_a}+${var_b}`;
-                            hasil = a*b+a+b;
+                            nilai = val_a*val_b+val_a+val_b;
                         } else if (fungsi_index == 1) {
                             fungsi = `${var_a}${var_b}+${var_a}-${var_b}`;
-                            hasil = a*b+a-b;
+                            nilai = val_a*val_b+val_a-val_b;
                         } else if (fungsi_index == 2) {
                             fungsi = `${var_a}^2+${var_b}^2`;
-                            hasil = a**2+b**2;
+                            nilai = val_a**2+val_b**2;
                         } else if (fungsi_index == 3) {
                             fungsi = `${var_a}(${var_a}+${var_b})`;
-                            hasil = a*(a+b);
+                            nilai = val_a*(val_a+val_b);
                         } else {
                             fungsi = `{1\\over${var_a}}+{1\\over${var_b}}`;
-                            hasil = 1/a+1/b;
+                            nilai = 1/val_a+1/val_b;
                         }
-                        return [fungsi, hasil]
+                        return [fungsi, nilai]
                     }
-                    a = 2;
-                    b = 3;
-                    grup_fungsi = fungsi_list(fungsi_index,mulvar[0],mulvar[1],a,b);
+                    grup_fungsi = fungsi_list(fungsi_index,mulvar[0],mulvar[1],0,0);
+                    bagianDalam = fungsi_list(fungsi_index,mulvar[0],mulvar[1],3,4)[1];
+                    hasil = fungsi_list(fungsi_index,mulvar[0],mulvar[1],2,bagianDalam)[1];
 					soal_teks = `Didefinisikan \\(${mulvar[0]}${simbol}${mulvar[1]} = ${grup_fungsi[0]}\\). Nilai dari \\(2${simbol}(3${simbol}4)\\) adalah ...`;
-                    soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
                 } else {
                     soal_teks = `Diketahui suatu fungsi linear \\(f(x)\\) dan \\(g(x)\\), sehingga \\(f(x+g(y))=2x-3y+m\\). Jika diketahui \\(g^{-1}(2)=4\\) dan \\(m=1\\), maka nilai dari \\(f^{-1}(1+g(5))\\) adalah ...`;
                     soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
@@ -3159,16 +3516,314 @@
                 // soal_teks = convert_to_math(soal_teks);
                 document.getElementById('soal').innerHTML = soal_teks;
 			} else if (e1.index == 38) {
-			    if (e1_bentuk.index == 0) {
-				    soal_teks = `Diketahui matriks \\(A = \\begin{bmatrix} 1 & 2 \\\\ 3 & 4 \\end{bmatrix}\\) dan \\(B = \\begin{bmatrix} 1 & 0 \\\\ -1 & -3 \\end{bmatrix}\\). Hasil dari \\(A + B\\) adalah ...`;
-				}
-				document.getElementById('soal').innerHTML = soal_teks;
+                const rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+                const formatMatrix = (M) => `\\begin{bmatrix} ${M[0][0]} & ${M[0][1]} \\\\ ${M[1][0]} & ${M[1][1]} \\end{bmatrix}`;
+                if (e1_bentuk.index == 0) {
+                    const matrixOps = ['A + B', 'A - B', '2A + B', 'A + 2B'];
+                    const op = matrixOps[Math.floor(Math.random() * matrixOps.length)];
+                    const makeMatrix = (rows, cols, min = -5, max = 5) => {
+                        return Array.from({ length: rows }, () =>
+                            Array.from({ length: cols }, () => rand(min, max))
+                        );
+                    };
+                    let A, B, C;
+                    const rows = 2, cols = 2;
+                    do {
+                        A = makeMatrix(rows, cols, -4, 5);
+                        B = makeMatrix(rows, cols, -4, 5);
+                    } while (A.every((row, i) => row.every((val, j) => val === B[i][j])));
+                    if (op === 'A + B') {
+                        C = A.map((row, i) => row.map((val, j) => val + B[i][j]));
+                        soal_teks = `Diketahui matriks \\(A = ${formatMatrix(A)}\\) dan \\(B = ${formatMatrix(B)}\\). Hasil dari \\(A + B\\) adalah ...`;
+                    } else if (op === 'A - B') {
+                        C = A.map((row, i) => row.map((val, j) => val - B[i][j]));
+                        soal_teks = `Diketahui matriks \\(A = ${formatMatrix(A)}\\) dan \\(B = ${formatMatrix(B)}\\). Hasil dari \\(A - B\\) adalah ...`;
+                    } else if (op === '2A + B') {
+                        C = A.map((row, i) => row.map((val, j) => 2 * val + B[i][j]));
+                        soal_teks = `Diketahui matriks \\(A = ${formatMatrix(A)}\\) dan \\(B = ${formatMatrix(B)}\\). Hasil dari \\(2A + B\\) adalah ...`;
+                    } else if (op === 'A + 2B') {
+                        C = A.map((row, i) => row.map((val, j) => val + 2 * B[i][j]));
+                        soal_teks = `Diketahui matriks \\(A = ${formatMatrix(A)}\\) dan \\(B = ${formatMatrix(B)}\\). Hasil dari \\(A + 2B\\) adalah ...`;
+                    }
+                    hasil = C;
+                } else if (e1_bentuk.index == 1) {
+                    const scalar = rand(2, 5);
+                    const A = Array.from({ length: 2 }, () => Array.from({ length: 2 }, () => rand(-4, 5)));
+                    hasil = A.map(row => row.map(value => scalar * value));
+                    soal_teks = `Diketahui matriks \\(A = ${formatMatrix(A)}\\). Hasil dari \\(${scalar}A\\) adalah ...`;
+                } else if (e1_bentuk.index == 2) {
+                    const makeMatrix = () => Array.from({ length: 2 }, () => Array.from({ length: 2 }, () => rand(-4, 5)));
+                    const A = makeMatrix();
+                    const B = makeMatrix();
+                    hasil = A.map(row => B[0].map((_, j) => row[0] * B[0][j] + row[1] * B[1][j]));
+                    soal_teks = `Diketahui matriks \\(A = ${formatMatrix(A)}\\) dan \\(B = ${formatMatrix(B)}\\). Hasil dari \\(A \\times B\\) adalah ...`;
+                } else if (e1_bentuk.index == 3) {
+                    let A;
+                    do {
+                        A = [
+                            [rand(-5, 5), rand(-5, 5)],
+                            [rand(-5, 5), rand(-5, 5)]
+                        ];
+                    } while (A[0][0] * A[1][1] - A[0][1] * A[1][0] === 0);
+                    const det = A[0][0] * A[1][1] - A[0][1] * A[1][0];
+                    hasil = [
+                        [A[1][1] / det, -A[0][1] / det],
+                        [-A[1][0] / det, A[0][0] / det]
+                    ];
+                    soal_teks = `Diketahui matriks \\(A = ${formatMatrix(A)}\\). Invers matriks \\(A\\) adalah ...`;
+                } else if (e1_bentuk.index == 4) {
+                    const makeMatrix = () => Array.from({ length: 2 }, () => Array.from({ length: 2 }, () => rand(-4, 5)));
+                    const A = makeMatrix();
+                    const B = makeMatrix()
+                    do {
+                        A = [
+                            [rand(-5, 5), rand(-5, 5)],
+                            [rand(-5, 5), rand(-5, 5)]
+                        ];
+                    } while (A[0][0] * A[1][1] - A[0][1] * A[1][0] === 0);
+                    const det = A[0][0] * A[1][1] - A[0][1] * A[1][0];
+                    hasil = [
+                        [A[1][1] / det, -A[0][1] / det],
+                        [-A[1][0] / det, A[0][0] / det]
+                    ];
+                    soal_teks = `Diketahui matriks \\(A = ${formatMatrix(A)}\\). Invers matriks \\(A\\) adalah ...`;
+                } else {
+                    const makeMatrix = () => Array.from({ length: 2 }, () => Array.from({ length: 2 }, () => rand(-4, 5)));
+                    const A = makeMatrix();
+                    const B = makeMatrix();
+                    hasil = A.map(row => B[0].map((_, j) => row[0] * B[0][j] + row[1] * B[1][j]));
+                    soal_teks = `Diketahui matriks \\(A = ${formatMatrix(A)}\\) dan \\(B = ${formatMatrix(B)}\\). Hasil dari \\(A \\times B\\) adalah ...`;
+                }
+                document.getElementById('soal').innerHTML = soal_teks;
+            } else if (e1.index == 40) {
+                const sukuAwal = Math.floor(Math.random() * 21) - 10;
+                let beda = Math.floor(Math.random() * 11) - 5;
+                if (beda == 0) beda = 1;
+                const sukuKe = Math.floor(Math.random() * 8) + 3;
+                if (e1_bentuk.index == 2 || e1_bentuk.index == 3) {
+                    const sukuPertamaGeometri = Math.floor(Math.random() * 5) + 1;
+                    const rasioGeometri = [2, 3, -2][Math.floor(Math.random() * 3)];
+                    const banyakSukuGeometri = Math.floor(Math.random() * 3) + 3;
+                    const tigaSukuPertama = Array.from(
+                        { length: 3 },
+                        (_, indeks) => sukuPertamaGeometri * rasioGeometri ** indeks
+                    );
+                    if (e1_bentuk.index == 2) {
+                        hasil = sukuPertamaGeometri * rasioGeometri ** (banyakSukuGeometri - 1);
+                        soal_teks = `Tentukan suku ke-${banyakSukuGeometri} dari barisan geometri ${tigaSukuPertama.join(', ')}, ...`;
+                    } else {
+                        hasil = sukuPertamaGeometri * (rasioGeometri ** banyakSukuGeometri - 1) / (rasioGeometri - 1);
+                        soal_teks = `Hitung jumlah ${banyakSukuGeometri} suku pertama dari deret geometri ${tigaSukuPertama.join(' + ')} + ...`;
+                    }
+                } else if (e1_bentuk.index == 0) {
+                    if (Math.random() < 0.5) {
+                        const posisi1 = Math.floor(Math.random() * 4) + 1;
+                        const posisi2 = posisi1 + Math.floor(Math.random() * 5) + 2;
+                        const nilai1 = sukuAwal + (posisi1 - 1) * beda;
+                        const nilai2 = sukuAwal + (posisi2 - 1) * beda;
+                        hasil = beda;
+                        soal_teks = `Diketahui barisan aritmatika dengan suku ke-${posisi1} adalah ${nilai1} dan suku ke-${posisi2} adalah ${nilai2}. Berapakah beda barisan tersebut?`;
+                    } else {
+                        const banyakSuku = Math.floor(Math.random() * 8) + 3;
+                        hasil = sukuAwal + (banyakSuku - 1) * beda;
+                        soal_teks = `Tentukan suku ke-${banyakSuku} dari barisan aritmatika ${sukuAwal}, ${sukuAwal + beda}, ${sukuAwal + 2 * beda}, ...`;
+                    }
+                } else if (e1_bentuk.index == 1) {
+                    hasil = sukuKe * (2 * sukuAwal + (sukuKe - 1) * beda) / 2;
+                    soal_teks = `Hitung jumlah ${sukuKe} suku pertama dari deret aritmatika ${sukuAwal} + ${sukuAwal + beda} + ${sukuAwal + 2 * beda} + ...`;
+                } else {
+                    hasil = sukuAwal + (sukuKe - 1) * beda;
+                    soal_teks = `Barisan aritmatika dimulai dengan ${sukuAwal} dan memiliki beda ${beda}. Berapakah suku ke-${sukuKe}?`;
+                }
+                if (tipe2.index == 1) {
+                    for (let selisihBarisan = 1; pilihan_list.length < j_pilihan2 - 1; selisihBarisan++) {
+                        const pilihanBarisan = hasil + (selisihBarisan % 2 ? selisihBarisan : -selisihBarisan);
+                        if (pilihanBarisan != hasil && !pilihan_list.includes(pilihanBarisan)) pilihan_list.push(pilihanBarisan);
+                    }
+                }
+                document.getElementById('soal').innerHTML = soal_teks;
             } else if (e1.index == 43) {
                 // soal_teks = `Diketahui fungsi linear /(f(x) = 2x+3/). Nilai dari /(f(5)/) adalah ...`.replaceAll("/","&#x005c");
                 soal_teks = `Hasil dari &nbsp;<span style="font-size:18px">/(/mathrm{sin(60°)}/)</span> adalah ...`.replaceAll("/","&#x005c").replaceAll("<&#x005cspan>","</span>");
                 soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
                 document.getElementById('soal').innerHTML = soal_teks;
+            } else if (e1.index == 45) {
+                const sudutIstimewa = [0, 30, 45, 60, 90];
+                const nilaiTrig = {
+                    sin: ['0', '\\frac{1}{2}', '\\frac{\\sqrt{2}}{2}', '\\frac{\\sqrt{3}}{2}', '1'],
+                    cos: ['1', '\\frac{\\sqrt{3}}{2}', '\\frac{\\sqrt{2}}{2}', '\\frac{1}{2}', '0'],
+                    tan: ['0', '\\frac{\\sqrt{3}}{3}', '1', '\\text{tidak terdefinisi}']
+                };
+                let namaTrig, sudut, nilai;
+                if (e1_bentuk.index == 3) {
+                    namaTrig = ['sin', 'cos', 'tan'][Math.floor(3 * Math.random())];
+                    const indexSudut = Math.floor((namaTrig == 'tan' ? 4 : 5) * Math.random());
+                    sudut = sudutIstimewa[indexSudut];
+                    nilai = nilaiTrig[namaTrig][indexSudut];
+                    hasil = `${sudut}°`;
+                    soal_teks = `Jika \\(${namaTrig}(\\theta) = ${nilai}\\) dan \\(\\theta\\) adalah sudut istimewa antara \\(0^\\circ\\) hingga \\(90^\\circ\\), nilai \\(\\theta\\) adalah ...`;
+                } else {
+                    namaTrig = ['sin', 'cos', 'tan'][e1_bentuk.index];
+                    const jumlahSudut = namaTrig == 'tan' ? 4 : 5;
+                    const indexSudut = Math.floor(jumlahSudut * Math.random());
+                    sudut = sudutIstimewa[indexSudut];
+                    hasil = nilaiTrig[namaTrig][indexSudut];
+                    soal_teks = `Nilai \\(${namaTrig}(${sudut}^\\circ)\\) adalah ...`;
+                }
+                soal_suara = soal_teks;
+                document.getElementById('soal').innerHTML = soal_teks;
+                if (tipe2.index == 1) {
+                    let kandidat = e1_bentuk.index == 3
+                        ? ['0°', '15°', '30°', '45°', '60°', '75°', '90°', '120°', '180°']
+                        : ['0', '1/2', '√2/2', '√3/2', '1', '√3/3', '1', '√3', '2', '2√3/3', '1/√3'];
+                    kandidat = kandidat.filter((opsi, index) => opsi != hasil && kandidat.indexOf(opsi) == index);
+                    while (pilihan_list.length < j_pilihan2 - 1 && kandidat.length) {
+                        const indexAcak = Math.floor(kandidat.length * Math.random());
+                        pilihan_list.push(kandidat.splice(indexAcak, 1)[0]);
+                    }
+                }
+            } else if (e1.index == 46) {
+                if (e1_bentuk.index == 5) {
+                    const koefEksponensial = Math.floor(Math.random() * 5) + 1;
+                    let lajuEksponensial = Math.floor(Math.random() * 9) - 4;
+                    while (lajuEksponensial == 0) lajuEksponensial = Math.floor(Math.random() * 9) - 4;
+                    const tampilanKoef = koefEksponensial == 1 ? '' : koefEksponensial;
+                    const tampilanLaju = lajuEksponensial == 1 ? '' : lajuEksponensial == -1 ? '-' : lajuEksponensial;
+                    hasil = koefEksponensial * lajuEksponensial;
+                    soal_teks = `Diberikan fungsi eksponensial \\(f(x)=${tampilanKoef}e^{${tampilanLaju}x}\\). Jika \\(f'(x)\\) adalah turunan pertama \\(f(x)\\), tentukan nilai \\(f'(0)\\).`;
+                } else {
+                    const derajatTurunan = [2, 3, 4, 1, 0][e1_bentuk.index] ?? 2;
+                    const koefTurunan = [];
+                    for (let pangkat = 0; pangkat <= derajatTurunan; pangkat++) {
+                        koefTurunan[pangkat] = Math.floor(Math.random() * 9) - 4;
+                    }
+                    while (koefTurunan[derajatTurunan] == 0) {
+                        koefTurunan[derajatTurunan] = Math.floor(Math.random() * 9) - 4;
+                    }
+                    const nilaiXTurunan = Math.floor(Math.random() * 7) - 3;
+                    const sukuTurunan = [];
+                    for (let pangkat = derajatTurunan; pangkat >= 0; pangkat--) {
+                        const koef = koefTurunan[pangkat];
+                        if (koef == 0) continue;
+                        const nilaiKoef = Math.abs(koef);
+                        let suku = pangkat == 0 ? `${nilaiKoef}` : `${nilaiKoef == 1 ? '' : nilaiKoef}x${pangkat > 1 ? `^${pangkat}` : ''}`;
+                        if (sukuTurunan.length == 0) sukuTurunan.push(koef < 0 ? `-${suku}` : suku);
+                        else sukuTurunan.push(`${koef < 0 ? '-' : '+'}${suku}`);
+                    }
+                    hasil = 0;
+                    for (let pangkat = 1; pangkat <= derajatTurunan; pangkat++) {
+                        hasil += pangkat * koefTurunan[pangkat] * nilaiXTurunan ** (pangkat - 1);
+                    }
+                    soal_teks = `Diberikan fungsi \\(f(x)=${sukuTurunan.join('')}\\). Tentukan nilai turunan \\(f'(${nilaiXTurunan})\\).`;
+                }
+                if (tipe2.index == 1) {
+                    for (let selisihTurunan = 1; pilihan_list.length < j_pilihan2 - 1; selisihTurunan++) {
+                        const pilihanTurunan = hasil + (selisihTurunan % 2 ? selisihTurunan : -selisihTurunan);
+                        if (pilihanTurunan != hasil && !pilihan_list.includes(pilihanTurunan)) pilihan_list.push(pilihanTurunan);
+                    }
+                }
+                document.getElementById('soal').innerHTML = soal_teks;
+            } else if (e1.index == 47) {
+                const batasIntegralBawah = Math.floor(Math.random() * 5) - 2;
+                let batasIntegralAtas = Math.floor(Math.random() * 5) - 2;
+                while (batasIntegralAtas == batasIntegralBawah) batasIntegralAtas = Math.floor(Math.random() * 5) - 2;
+                if (e1_bentuk.index <= 3) {
+                    const derajatIntegral = [0, 1, 2, 3][e1_bentuk.index] ?? 2;
+                    const koefIntegral = [];
+                    for (let pangkat = 0; pangkat <= derajatIntegral; pangkat++) {
+                        koefIntegral[pangkat] = (pangkat + 1) * (Math.floor(Math.random() * 5) + 1);
+                    }
+                    const sukuIntegral = [];
+                    hasil = 0;
+                    for (let pangkat = derajatIntegral; pangkat >= 0; pangkat--) {
+                        const koef = koefIntegral[pangkat];
+                        hasil += koef / (pangkat + 1) * (batasIntegralAtas ** (pangkat + 1) - batasIntegralBawah ** (pangkat + 1));
+                        const variabel = pangkat == 0 ? '' : `x${pangkat > 1 ? `^{${pangkat}}` : ''}`;
+                        sukuIntegral.push(`${koef}${variabel}`);
+                    }
+                    // soal_teks = `Hitung nilai \\(\\int_{${batasIntegralBawah}}^{${batasIntegralAtas}} (${sukuIntegral.join(' + ')})\\,dx\\).`;
+                    soal_teks = `Hitung nilai \\(\\int_{${batasIntegralBawah}}^{${batasIntegralAtas}} ${sukuIntegral.join(' + ')}\\,dx\\).`;
+                } else if (e1_bentuk.index == 4) {
+                    const lajuIntegral = Math.floor(Math.random() * 4) + 1;
+                    const faktorIntegral = Math.floor(Math.random() * 5) + 1;
+                    const koefIntegral = lajuIntegral * faktorIntegral;
+                    const tampilanKoefIntegral = koefIntegral == 1 ? '' : koefIntegral;
+                    hasil = faktorIntegral * (Math.exp(lajuIntegral * batasIntegralAtas) - Math.exp(lajuIntegral * batasIntegralBawah));
+                    soal_teks = `Hitung nilai \\(\\int_{${batasIntegralBawah}}^{${batasIntegralAtas}} ${tampilanKoefIntegral}e^{${lajuIntegral}x}\\,dx\\).`;
+                } else if (e1_bentuk.index == 5) {
+                    const faktorPangkatIntegral = Math.floor(Math.random() * 5) + 1;
+                    let koefLinearIntegral = Math.floor(Math.random() * 7) - 3;
+                    while (koefLinearIntegral == 0) koefLinearIntegral = Math.floor(Math.random() * 7) - 3;
+                    const konstantaLinearIntegral = Math.floor(Math.random() * 7) - 3;
+                    const pangkatIntegral = Math.floor(Math.random() * 4) + 1;
+                    const tampilanLinearIntegral = `${koefLinearIntegral == 1 ? '' : koefLinearIntegral == -1 ? '-' : koefLinearIntegral}x${konstantaLinearIntegral < 0 ? konstantaLinearIntegral : `+${konstantaLinearIntegral}`}`;
+                    hasil = faktorPangkatIntegral / (koefLinearIntegral * (pangkatIntegral + 1)) * ((koefLinearIntegral * batasIntegralAtas + konstantaLinearIntegral) ** (pangkatIntegral + 1) - (koefLinearIntegral * batasIntegralBawah + konstantaLinearIntegral) ** (pangkatIntegral + 1));
+                    soal_teks = `Hitung nilai \\(\\int_{${batasIntegralBawah}}^{${batasIntegralAtas}} ${faktorPangkatIntegral}\\left(${tampilanLinearIntegral}\\right)^{${pangkatIntegral}}\\,dx\\).`;
+                }
+                if (tipe2.index == 1) {
+                    for (let selisihIntegral = 1; pilihan_list.length < j_pilihan2 - 1; selisihIntegral++) {
+                        const pilihanIntegral = hasil + (selisihIntegral % 2 ? selisihIntegral : -selisihIntegral);
+                        if (pilihanIntegral != hasil && !pilihan_list.includes(pilihanIntegral)) pilihan_list.push(pilihanIntegral);
+                    }
+                }
+                document.getElementById('soal').innerHTML = soal_teks;
             } else if (e1.index == 48) {
+                if (e1_bentuk.index == 0) {
+                    const titikLimit = Math.floor(Math.random() * 7) - 3;
+                    let koefLimitTakTentu = Math.floor(Math.random() * 7) - 3;
+                    while (koefLimitTakTentu == 0) koefLimitTakTentu = Math.floor(Math.random() * 7) - 3;
+                    const konstantaLimitTakTentu = Math.floor(Math.random() * 11) - 5;
+                    hasil = koefLimitTakTentu * titikLimit + konstantaLimitTakTentu;
+                    const faktorLinear = `${koefLimitTakTentu == 1 ? '' : koefLimitTakTentu == -1 ? '-' : koefLimitTakTentu}x${konstantaLimitTakTentu < 0 ? konstantaLimitTakTentu : `+${konstantaLimitTakTentu}`}`;
+                    soal_teks = `Nilai \\(\\lim_{x \\to ${titikLimit}} \\frac{(x-${titikLimit})(${faktorLinear})}{x-${titikLimit}}\\) adalah ...`;
+                    soal_suara = soal_teks;
+                    document.getElementById('soal').innerHTML = soal_teks;
+                    if (tipe2.index == 1) {
+                        for (let selisihLimit = 1; pilihan_list.length < j_pilihan2 - 1; selisihLimit++) {
+                            const pilihanLimit = hasil + (selisihLimit % 2 ? selisihLimit : -selisihLimit);
+                            if (!pilihan_list.includes(pilihanLimit)) pilihan_list.push(pilihanLimit);
+                        }
+                    }
+                } else {
+                    const derajatLimit = [2, 3, 4, 1, 0][e1_bentuk.index] ?? 2;
+                    const koefLimit = [];
+                    for (let pangkat = 0; pangkat <= derajatLimit; pangkat++) {
+                        koefLimit[pangkat] = Math.floor(Math.random() * 7) - 3;
+                    }
+                    while (koefLimit[derajatLimit] == 0) {
+                        koefLimit[derajatLimit] = Math.floor(Math.random() * 7) - 3;
+                    }
+                    const nilaiCLimit = Math.floor(Math.random() * 5) - 2;
+                    const sukuLimit = [];
+                    for (let pangkat = derajatLimit; pangkat >= 0; pangkat--) {
+                        const koef = koefLimit[pangkat];
+                        if (koef == 0) continue;
+                        const nilaiKoef = Math.abs(koef);
+                        let suku = pangkat == 0 ? `${nilaiKoef}` : `${nilaiKoef == 1 ? '' : nilaiKoef}x${pangkat > 1 ? `^{${pangkat}}` : ''}`;
+                        if (sukuLimit.length == 0) sukuLimit.push(koef < 0 ? `-${suku}` : suku);
+                        else sukuLimit.push(`${koef < 0 ? '-' : '+'}${suku}`);
+                    }
+                    let konstantaPenyebut = Math.floor(Math.random() * 7) - 3;
+                    while (nilaiCLimit + konstantaPenyebut == 0) {
+                        konstantaPenyebut = Math.floor(Math.random() * 7) - 3;
+                    }
+                    const penyebutLimit = `x${konstantaPenyebut < 0 ? konstantaPenyebut : `+${konstantaPenyebut}`}`;
+                    hasil = 0;
+                    for (let pangkat = 0; pangkat <= derajatLimit; pangkat++) {
+                        hasil += koefLimit[pangkat] * nilaiCLimit ** pangkat;
+                    }
+                    hasil /= nilaiCLimit + konstantaPenyebut;
+                    soal_teks = `Nilai \\(\\lim_{x \\to ${nilaiCLimit}} \\frac{(${sukuLimit.join('')})}{(${penyebutLimit})}\\) adalah ...`;
+                    soal_suara = soal_teks;
+                    document.getElementById('soal').innerHTML = soal_teks;
+                    if (tipe2.index == 1) {
+                        for (let selisihLimit = 1; pilihan_list.length < j_pilihan2 - 1; selisihLimit++) {
+                            const pilihanLimit = hasil + (selisihLimit % 2 ? selisihLimit : -selisihLimit);
+                            if (!pilihan_list.includes(pilihanLimit)) pilihan_list.push(pilihanLimit);
+                        }
+                    }
+                }
+            } else if (e1.index == 49) {
                 // soal_teks = `Diketahui fungsi linear /(f(x) = 2x+3/). Nilai dari /(f(5)/) adalah ...`.replaceAll("/","&#x005c");
                 soal_teks = `Peluang dari 2 dadu yang dilempar secara bersamaan, sehinga jumlahnya 9 adalah ...`.replaceAll("/","&#x005c").replaceAll("<&#x005cspan>","</span>");
                 soal_teks += `<br><br><span style="color:yellow">Jenis pertanyaan ini belum tersedia</style>`;
@@ -3289,7 +3944,10 @@
             } else {
                 // pilihan_list = pilihan_list.sort( () => .5 - Math.random() );
                 if (random_check) {
-                    pilihan_list = pilihan_list.sort(() => .5 - Math.random());
+                    for (let i = pilihan_list.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [pilihan_list[i], pilihan_list[j]] = [pilihan_list[j], pilihan_list[i]];
+                    }
                     pilihan_list = pilihan_list.slice(0,j_pilihan2);
                     pilihan_list[pilihan_index] = hasil;
                 }
@@ -3359,6 +4017,9 @@
         function pilihan(change=false) {
             var e = document.getElementById("bentuk");
             var e1 = e.options[e.selectedIndex];
+
+            document.getElementById("opsi-simbol").style.display = e1.index == 10 ? 'block' : 'none';
+            if (change) symbolSoalIndex = 0;
             
             e_bentuk = document.getElementById("pilihan-bentuk-sub");
             e1_bentuk = e_bentuk.options[e_bentuk.selectedIndex];
@@ -3532,25 +4193,61 @@
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
-                        <option style="color:gray">Jarak</option>
-                        <option style="color:gray">Waktu</option>
-                        <option style="color:gray">Kecepatan</option>
-                        <option style="color:gray">Berat</option>
-                        <option style="color:gray">Suhu</option>
-                        <option style="color:gray">Energi</option>
+                        <option>Jarak</option>
+                        <option>Waktu</option>
+                        <option>Kecepatan</option>
+                        <option>Berat</option>
+                        <option>Suhu</option>
+                        <option>Luas</option>
+                        <option>Volume</option>
+                        <option>Energi</option>
                     `;
+                }
+                document.getElementById("bentuk-penjelasan").innerHTML = `Latihan mengubah satuan jarak, berat, waktu, volume, luas, dan suhu. Masukkan nilai hasil konversi dalam satuan yang diminta.`;
+            } else if (e1.index == 21) {
+                const kelompokSatuan = [
+                    { nama: 'jarak', unit: ['mm', 'cm', 'm', 'km'], faktor: [0.001, 0.01, 1, 1000] },
+                    { nama: 'berat', unit: ['mg', 'g', 'kg', 'ton'], faktor: [0.000001, 0.001, 1, 1000] },
+                    { nama: 'waktu', unit: ['detik', 'menit', 'jam', 'hari'], faktor: [1, 60, 3600, 86400] },
+                    { nama: 'volume', unit: ['mL', 'L', 'kL'], faktor: [0.001, 1, 1000] },
+                    { nama: 'luas', unit: ['cm²', 'm²', 'km²'], faktor: [0.0001, 1, 1000000] },
+                    { nama: 'suhu', unit: ['°C', '°F'], keBase: [nilai => nilai, nilai => (nilai - 32) * 5 / 9], dariBase: [nilai => nilai, nilai => nilai * 9 / 5 + 32] }
+                ];
+                const satuan = kelompokSatuan[e1_bentuk.index];
+                let indeksAsal = Math.floor(Math.random() * satuan.unit.length);
+                let indeksTujuan = Math.floor(Math.random() * satuan.unit.length);
+                while (indeksTujuan == indeksAsal) indeksTujuan = Math.floor(Math.random() * satuan.unit.length);
+                const nilaiAwal = e1_bentuk.index == 5
+                    ? Math.floor(-20 + 121 * Math.random())
+                    : Math.floor(1 + 100 * Math.random());
+                let nilaiKonversi;
+                if (e1_bentuk.index == 5) {
+                    const base = satuan.keBase[indeksAsal](nilaiAwal);
+                    nilaiKonversi = satuan.dariBase[indeksTujuan](base);
+                } else {
+                    nilaiKonversi = nilaiAwal * satuan.faktor[indeksAsal] / satuan.faktor[indeksTujuan];
+                }
+                hasil = Number(nilaiKonversi.toFixed(4));
+                soal_teks = `Ubahlah ${nilaiAwal} ${satuan.unit[indeksAsal]} menjadi ${satuan.unit[indeksTujuan]}.`;
+                document.getElementById('soal').innerHTML = soal_teks;
+                if (tipe2.index == 1) {
+                    for (let selisih = 1; pilihan_list.length < j_pilihan2 - 1; selisih++) {
+                        const kandidat = Number((hasil + (selisih % 2 ? selisih : -selisih) * Math.max(1, Math.abs(hasil) * 0.1)).toFixed(4));
+                        if (!pilihan_list.includes(kandidat) && kandidat != hasil) pilihan_list.push(kandidat);
+                    }
                 }
             } else if (e1.index == 22) {
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
-                        <option style="color:gray">Persegi</option>
-                        <option style="color:gray">Persegi Panjang</option>
-                        <option style="color:gray">Segitiga</option>
-                        <option style="color:gray">Segiempat</option>
-                        <option style="color:gray">Lingkaran</option>
-                        <option style="color:gray">Campuran</option>
-                        <option style="color:gray">Gabungan</option>
+                        <option>Persegi</option>
+                        <option>Persegi Panjang</option>
+                        <option>Segitiga</option>
+                        <option>Segitiga Siku-siku</option>
+                        <option>Trapesium</option>
+                        <option>Jajar Genjang</option>
+                        <option>Belah Ketupat</option>
+                        <option>Layang-layang</option>
                     `;
                 }
             } else if (e1.index == 23) {
@@ -3609,6 +4306,7 @@
                         <option style="color:gray">Anggota dalam dua himpunan</option>
                         <option style="color:gray">Anggota dalam tiga himpunan</option>
                         <option style="color:gray">Himpunan bagian</option>
+                        <option>Banyaknya himpunan bagian</option>
                         <option style="color:gray">Himpunan bersyarat</option>
                     `;
                 }
@@ -3627,11 +4325,12 @@
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
-                        <option style="color:gray">Solusi</option>
-                        <option style="color:gray">Diskriminan</option>
-                        <option style="color:gray">Banyaknya Solusi</option>
+                        <option>Menentukan solusi</option>
+                        <option>Menentukan diskriminan</option>
+                        <option>Jumlah kuadrat akar</option>
                     `;
                 }
+                document.getElementById("bentuk-penjelasan").innerHTML = `Soal persamaan kuadrat dibuat dengan koefisien dan akar yang bervariasi. Pilih apakah ingin mencari solusi, diskriminan, atau jumlah kuadrat akar; soal dapat dikerjakan sebagai isian maupun pilihan ganda.`;
             } else if (e1.index == 29) {
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
@@ -3685,10 +4384,10 @@
                 document.getElementById("bentuk-sub").style.display = 'block';
                 if (change) {
                     document.getElementById("pilihan-bentuk-sub").innerHTML = `
-                        <option style="color:gray">Penjumlahan dan Pengurangan Matriks</option>
-                        <option style="color:gray">Perkalian Skalar Matriks</option>
-						<option style="color:gray">Perkalian Matriks</option>
-                        <option style="color:gray">Invers Matriks</option>
+                        <option>Penjumlahan dan Pengurangan Matriks</option>
+                        <option>Perkalian Skalar Matriks</option>
+						<option>Perkalian Matriks</option>
+                        <option>Invers Matriks</option>
 						<option style="color:gray">Perpangkatan Matriks</option>
                         <option style="color:gray">Campuran</option>
                         <option style="color:gray">Determinan</option>
@@ -3732,6 +4431,73 @@
 						<option style="color:gray">Menyatakan dalam Notasi Sigma</option>
                     `;
                 }
+            } else if (e1.index == 44) {
+                document.getElementById("bentuk-sub").style.display = 'block';
+                if (change) {
+                    document.getElementById("pilihan-bentuk-sub").innerHTML = `
+                        <option>Menentukan nilai</option>
+                        <option>Menentukan rumus</option>
+                    `;
+                }
+                document.getElementById("bentuk-penjelasan").innerHTML = `Latihan barisan dan deret aritmatika. Pilih jenis soal untuk menentukan nilai dari suatu barisan atau deret aritmatika, atau menentukan rumus dari suatu barisan atau deret aritmatika.`;
+            } else if (e1.index == 45) {
+                document.getElementById("bentuk-sub").style.display = 'block';
+                if (change) {
+                    document.getElementById("pilihan-bentuk-sub").innerHTML = `
+                        <option>Nilai sinus</option>
+                        <option>Nilai cosinus</option>
+                        <option>Nilai tangen</option>
+                        <option>Menentukan sudut</option>
+                    `;
+                }
+                document.getElementById("bentuk-penjelasan").innerHTML = `Latihan trigonometri ini menggunakan sudut istimewa 0°, 30°, 45°, 60°, dan 90°. Pilih jenis soal untuk menghitung sinus, cosinus, tangen, atau menentukan sudut dari nilai perbandingan trigonometri.`;
+            } else if (e1.index == 46) {
+                document.getElementById("bentuk-sub").style.display = 'block';
+                if (change) {
+                    document.getElementById("pilihan-bentuk-sub").innerHTML = `
+                        <option>Turunan polinomial kuadrat</option>
+                        <option>Turunan polinomial kubik</option>
+                        <option>Turunan polinomial pangkat empat</option>
+                        <option>Turunan fungsi linear</option>
+                        <option>Turunan fungsi konstanta</option>
+                        <option>Turunan fungsi eksponensial</option>
+                    `;
+                }
+                document.getElementById("bentuk-penjelasan").innerHTML = `Latihan turunan menggunakan aturan pangkat dan aturan turunan eksponensial: turunan \(ax^n\) adalah \(anx^{n-1}\), sedangkan turunan \(ae^{kx}\) adalah \(ak e^{kx}\). Soal mencakup polinomial, fungsi linear, fungsi konstanta, dan fungsi eksponensial.`;
+            } else if (e1.index == 47) {
+                document.getElementById("bentuk-sub").style.display = 'block';
+                if (change) {
+                    document.getElementById("pilihan-bentuk-sub").innerHTML = `
+                        <option>Integral fungsi konstanta</option>
+                        <option>Integral fungsi linear</option>
+                        <option>Integral fungsi kuadrat</option>
+                        <option>Integral fungsi kubik</option>
+                        <option>Integral fungsi eksponensial</option>
+                        <option>Integral fungsi polinomial kurung</option>
+                    `;
+                }
+                document.getElementById("bentuk-penjelasan").innerHTML = `Latihan integral menggunakan aturan pangkat dan aturan integral eksponensial: integral \(ax^n\) adalah \(\frac{ax^{n+1}}{n+1}\), sedangkan integral \(ae^{kx}\) adalah \(\frac{a}{k} e^{kx}\). Soal mencakup polinomial, fungsi linear, fungsi konstanta, dan fungsi eksponensial.`;
+            } else if (e1.index == 48) {
+                document.getElementById("bentuk-sub").style.display = 'block';
+                if (change) {
+                    document.getElementById("pilihan-bentuk-sub").innerHTML = `
+                        <option>Menentukan nilai limit</option>
+                        <option>Limit tak hingga</option>
+                        <option>Limit tak tentu</option>
+                        <option>Limit fungsi trigonometri</option>
+                    `;
+                }
+                document.getElementById("bentuk-penjelasan").innerHTML = `Latihan limit fungsi aljabar dan trigonometri. Soal dapat berupa limit tak hingga, limit tak tentu, dan limit fungsi trigonometri.`;
+            } else if (e1.index == 50) {
+                document.getElementById("bentuk-sub").style.display = 'block';
+                if (change) {
+                    document.getElementById("pilihan-bentuk-sub").innerHTML = `
+                        <option>Permutasi</option>
+                        <option>Kombinasi</option>
+                        <option>Permutasi atau kombinasi</option>
+                    `;
+                }
+                document.getElementById("bentuk-penjelasan").innerHTML = `Permutasi memperhatikan urutan, sedangkan kombinasi tidak memperhatikan urutan. Untuk memilih r objek dari n objek, gunakan P(n,r)=n!/(n-r)! atau C(n,r)=n!/(r!(n-r)!).`;
             } else {
                 document.getElementById("bentuk-sub").style.display = 'none';
             }
@@ -3763,6 +4529,31 @@
                             <option>Buah</option>
                             <option>Uang</option>
                         `;
+                    } else if (e1.index == 50) {
+                        const jenis = e1_bentuk.index == 2
+                            ? (Math.random() < 0.5 ? 'permutasi' : 'kombinasi')
+                            : e1_bentuk.index == 0 ? 'permutasi' : 'kombinasi';
+                        const n = Math.floor(Math.random() * 6) + 5;
+                        const r = Math.floor(Math.random() * (n - 1)) + 2;
+                        const faktorial = (bilangan) => {
+                            let nilai = 1;
+                            for (let i = 2; i <= bilangan; i++) nilai *= i;
+                            return nilai;
+                        };
+                        hasil = jenis == 'permutasi'
+                            ? faktorial(n) / faktorial(n - r)
+                            : faktorial(n) / (faktorial(r) * faktorial(n - r));
+                        soal_teks = jenis == 'permutasi'
+                            ? `Dari ${n} peserta, akan dipilih ${r} orang untuk mengisi posisi berbeda. Berapa banyak susunan yang mungkin?`
+                            : `Dari ${n} peserta, akan dipilih ${r} orang untuk membentuk sebuah tim. Berapa banyak pilihan tim yang mungkin?`;
+                        soal_suara = soal_teks;
+                        document.getElementById('soal').innerHTML = soal_teks;
+                        if (tipe2.index == 1) {
+                            for (let selisih = 1; pilihan_list.length < j_pilihan2 - 1; selisih++) {
+                                const pilihanSalah = hasil + (selisih % 2 ? selisih : -selisih);
+                                if (pilihanSalah >= 0 && pilihanSalah != hasil && !pilihan_list.includes(pilihanSalah)) pilihan_list.push(pilihanSalah);
+                            }
+                        }
                     } else if (e1.index == 3) {
                         document.getElementById("cerita2").innerHTML = `
                             <option>Option 1</option>
@@ -4053,7 +4844,13 @@
                 // var tanda = '';
                 // e1.index == 6 & e1_bentuk.index == 0
                 // if (e1.index <= 6 || (e1.index == 7 && (e1_bentuk.index == 0 || e1_bentuk.index == 2)) || e1.index == 8 || e1.index == 9 || e1.index == 17 || e1.index == 21 || e1.index == 32) {
-                if ([0,1,2,3,4,5,6,7,11,12,13,17,18,19,20,22,23,26,36,37].includes(e1.index)
+                if (e1.index == 32 && e1_bentuk.index == 1) {
+                    const normalkanSolusiMutlak = teks => teks.toLowerCase().replaceAll('x=', '').replaceAll(' ', '').split(',').map(nilai => Number(nilai)).sort((a, b) => a - b).join(',');
+                    jawaban_check = normalkanSolusiMutlak(angka_awal) == normalkanSolusiMutlak(hasil);
+                } else if (e1.index == 21) {
+                    const nilaiJawaban = Number(angka_awal);
+                    jawaban_check = Number.isFinite(nilaiJawaban) && Math.abs(nilaiJawaban - Number(hasil)) < 0.0001;
+                } else if ([0,1,2,3,4,5,6,7,11,12,13,17,18,19,20,22,23,26,32,36,37,40,46,47,48].includes(e1.index)
 				|| (e1.index == 0 && [0,1,4].includes(e1_bentuk.index))
 				|| (e1.index == 8 && [1].includes(e1_bentuk.index))
 				|| (e1.index == 11 && [0,2].includes(e1_bentuk.index))
@@ -4122,3 +4919,4 @@
         }
     </script>
 </body>
+</html>
